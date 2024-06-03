@@ -1,15 +1,15 @@
 # Title
 
-Please make sure you start your title with one of the following options: chore:, bug:, feature:, er
-[Link to conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+Please make sure you start your title following [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 
-Remove this part after that.
+E.g. `chore: Added file x`, `fix: Fixed error caused by: x`, `feat: Added google auth`
+
+>[!CAUTION]
+>Remove this title section after that.
 
 # Description
 
 Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context.
-
-Fixes # (issue)
 
 ## Type of change
 
