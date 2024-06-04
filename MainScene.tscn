@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbmbpj31n8dea"]
+
+[ext_resource type="Script" path="res://MainScene.gd" id="1_h7nld"]
+[ext_resource type="PackedScene" uid="uid://cmk1a2a8fxnu" path="res://Pillar.tscn" id="2_8eydq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_u634v"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_h7nld")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.244681, 0.969604, 0, -0.969604, -0.244681, 0, 47.6593, -53.8035)
+light_color = Color(0.838857, 1, 0.632735, 1)
+light_energy = 0.934
+light_indirect_energy = 1.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)
+mesh = SubResource("QuadMesh_u634v")
+
+[node name="Menu" type="MenuBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Join" type="Button" parent="Menu"]
+layout_mode = 0
+offset_right = 49.0
+offset_bottom = 13.0
+text = "Join"
+
+[node name="Host" type="Button" parent="Menu"]
+layout_mode = 0
+offset_top = 34.0
+offset_right = 50.0
+offset_bottom = 63.0
+text = "Host"
+
+[node name="Port" type="LineEdit" parent="Menu"]
+layout_mode = 0
+offset_top = 67.0
+offset_right = 67.0625
+offset_bottom = 98.0
+text = "9999"
+placeholder_text = "Port"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[node name="Pillar" parent="." instance=ExtResource("2_8eydq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5604, 0, 0.013361)
+
+[connection signal="pressed" from="Menu/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Menu/Host" to="." method="_on_host_pressed"]
