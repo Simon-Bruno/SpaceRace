@@ -43,6 +43,14 @@ offset_bottom = 98.0
 text = "9999"
 placeholder_text = "Port"
 
+[node name="IP" type="LineEdit" parent="Menu"]
+layout_mode = 0
+offset_top = 110.0
+offset_right = 67.0625
+offset_bottom = 141.0
+text = "127.0.0.1"
+placeholder_text = "IP"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player.tscn")
 spawn_path = NodePath("..")
