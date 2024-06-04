@@ -63,6 +63,21 @@ offset_top = 3.0
 offset_right = 193.0
 offset_bottom = 26.0
 
+[node name="HostList" type="ItemList" parent="Menu"]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 8.0
+offset_right = 372.0
+offset_bottom = 74.0
+
+[node name="Scan" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = -1.0
+offset_right = 223.0
+offset_bottom = 30.0
+text = "Scan for hosts"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player.tscn")
 spawn_path = NodePath("..")
@@ -72,3 +87,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5604, 0, 0.013361)
 
 [connection signal="pressed" from="Menu/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Menu/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Menu/Scan" to="." method="_on_scan_pressed"]
