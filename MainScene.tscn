@@ -50,5 +50,21 @@ spawn_path = NodePath("..")
 [node name="Pillar" parent="." instance=ExtResource("2_8eydq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5604, 0, 0.013361)
 
+[node name="LoadingText" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="Menu/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Menu/Host" to="." method="_on_host_pressed"]
