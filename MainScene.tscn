@@ -24,32 +24,44 @@ offset_bottom = 40.0
 
 [node name="Join" type="Button" parent="Menu"]
 layout_mode = 0
-offset_right = 49.0
-offset_bottom = 13.0
+offset_left = -1.0
+offset_top = 36.0
+offset_right = 48.0
+offset_bottom = 67.0
 text = "Join"
 
 [node name="Host" type="Button" parent="Menu"]
 layout_mode = 0
-offset_top = 34.0
-offset_right = 50.0
-offset_bottom = 63.0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 51.0
+offset_bottom = 29.0
 text = "Host"
 
 [node name="Port" type="LineEdit" parent="Menu"]
 layout_mode = 0
-offset_top = 67.0
-offset_right = 67.0625
-offset_bottom = 98.0
+offset_left = 196.0
+offset_top = 35.0
+offset_right = 263.062
+offset_bottom = 66.0
 text = "9999"
 placeholder_text = "Port"
 
 [node name="IP" type="LineEdit" parent="Menu"]
 layout_mode = 0
-offset_top = 110.0
-offset_right = 67.0625
-offset_bottom = 141.0
+offset_left = 59.0
+offset_top = 36.0
+offset_right = 186.0
+offset_bottom = 67.0
 text = "127.0.0.1"
 placeholder_text = "IP"
+
+[node name="IPLabel" type="Label" parent="Menu"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 3.0
+offset_right = 193.0
+offset_bottom = 26.0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player.tscn")

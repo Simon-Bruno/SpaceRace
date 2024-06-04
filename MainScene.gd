@@ -4,25 +4,22 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 var max_client_connections = 3
 
 @onready var menu = $Menu
+@onready var ip_label = $Menu/IPLabel
 
 var ip_address: String = "127.0.0.1"  # Default IP address
 
-# Detect and set the local IP address based on the OS
+# Detect and set the local IP address
 func _ready():
-	if OS.has_feature("windows"):
-		if OS.has_environment("COMPUTERNAME"):
-			ip_address = IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")), 1)
-	elif OS.has_feature("x11"):
-		if OS.has_environment("HOSTNAME"):
-			ip_address = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")), 1)
-	elif OS.has_feature("OSX"):
-		if OS.has_environment("HOSTNAME"):
-			ip_address = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")), 1)
-	print("Resolved Local IP Address: ", ip_address)
+	var local_addresses = IP.get_local_addresses()
+	for address in local_addresses:
+		if address.split('.').size() == 4:  #TODO: Better IP format check (Regex?)
+			ip_address = address
+			break
+	ip_label.text = "Your IP: " + ip_address 
 
 # Called when the join button is pressed
 func _on_join_pressed():
-	var ip = $Menu/IP.text  # Use the IP address input by the user
+	var ip = $Menu/IP.text 
 	var port = str($Menu/Port.text).to_int()
 	multiplayer_peer.create_client(ip, port)
 	multiplayer.multiplayer_peer = multiplayer_peer
