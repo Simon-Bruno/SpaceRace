@@ -67,15 +67,15 @@ offset_bottom = 26.0
 layout_mode = 0
 offset_left = 284.0
 offset_top = 8.0
-offset_right = 372.0
+offset_right = 399.0
 offset_bottom = 74.0
 
 [node name="Scan" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 106.0
-offset_top = -1.0
-offset_right = 223.0
-offset_bottom = 30.0
+offset_left = 283.0
+offset_top = 81.0
+offset_right = 400.0
+offset_bottom = 112.0
 text = "Scan for hosts"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
