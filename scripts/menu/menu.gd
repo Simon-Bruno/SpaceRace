@@ -87,3 +87,6 @@ func _on_close_host_button_pressed():
 func _on_close_join_button_pressed():
 	$Join.visible = false
 	$Holder.visible = true
+
+func _on_quit_button_pressed():
+	get_tree().quit()

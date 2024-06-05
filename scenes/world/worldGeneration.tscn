@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcnypvhw5skwe"]
+[gd_scene load_steps=3 format=3 uid="uid://btxasx3bw2gsj"]
 
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
 

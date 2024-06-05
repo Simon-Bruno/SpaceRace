@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://1kabkw5fs4e8"]
+[gd_scene load_steps=3 format=3 uid="uid://1kabkw5fs4e8"]
 
 [ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_5vnje"]
+[ext_resource type="Texture2D" uid="uid://bis8yamj1e4iv" path="res://assets/menu/BackgroundImage.png" id="2_dtmi5"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -12,9 +13,13 @@ grow_vertical = 2
 script = ExtResource("1_5vnje")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_dtmi5")
 
 [node name="Holder" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -204,6 +209,7 @@ text = "X"
 
 [connection signal="pressed" from="Holder/HostButton" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Holder/JoinButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Holder/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Join/Holder/Button" to="." method="_on_join_menu_pressed"]
 [connection signal="pressed" from="Join/Button" to="." method="_on_close_join_button_pressed"]
 [connection signal="pressed" from="Host/Holder/Button" to="." method="_on_host_menu_pressed"]
