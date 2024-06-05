@@ -29,11 +29,12 @@ func _on_host_menu_pressed():
 		set_notification_and_show("You need to fill in a port!", $Host)
 		return 
 		
+	$Host.visible = false
+	$Holder.visible = true
+	
 	if !Network._on_host_pressed(port):
 		set_notification_and_show("Could not create game!", $Host)
 		
-	$Host.visible = false
-	$Holder.visible = true
 	print("Hosting game")
 	
 func _on_join_pressed():
@@ -63,12 +64,12 @@ func _on_join_menu_pressed():
 		set_notification_and_show("You need to fill in a port!",$Join)
 		return 
 		
+	$Join.visible = false
+	$Holder.visible = true
+	
 	if !Network._on_join_pressed(ip, port):
 		set_notification_and_show("Could not join game", $Join)
 		
-	$Join.visible = false
-	$Holder.visible = true
-
 var last_parent
 func set_notification_and_show(text, parent):
 	$DialogMessage/Text.text = text
@@ -87,3 +88,6 @@ func _on_close_host_button_pressed():
 func _on_close_join_button_pressed():
 	$Join.visible = false
 	$Holder.visible = true
+
+func _on_quit_button_pressed():
+	get_tree().quit()
