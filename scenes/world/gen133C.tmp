@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ow6qehi850w8"]
+
+[ext_resource type="Script" path="res://scripts/world/generateHallway.gd" id="1_6dkuy"]
+[ext_resource type="MeshLibrary" uid="uid://bd5ijil2011kt" path="res://assets/world/meshlibrary.tres" id="1_fw4vw"]
+
+[node name="hallway" type="GridMap"]
+mesh_library = ExtResource("1_fw4vw")
+script = ExtResource("1_6dkuy")

@@ -19,9 +19,7 @@ func _ready():
 	
 		var exit = roomInstance.exit * i * Vector3i(room_width, 0, 0) + i * Vector3i(room_margin, 0, 0)
 		var start = roomInstance.start * i * Vector3i(room_width, 0, 0) + i * Vector3i(room_margin, 0, 0)
-		hallwayInstance.change_start(start)
-		hallwayInstance.change_exit(exit)
-		
+		hallwayInstance.generate(start, exit)
 		roomInstance.position = i * Vector3i(room_width, 0, 0) + i * Vector3i(room_margin, 0, 0)
 
 
