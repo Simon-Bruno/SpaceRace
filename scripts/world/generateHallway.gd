@@ -1,7 +1,7 @@
 @tool extends GridMap
 
-const FLOOR = 2
-const HEIGHT = 3
+const FLOOR = 16
+const HEIGHT = 0
 #var start_location = Vector3i(0, 0, 0)
 #var end_location = Vector3i(10, 0, 4)
 
@@ -26,10 +26,13 @@ func generate(start_location, end_location):
 		self.set_cell_item(end_location - Vector3i(i + 1, HEIGHT, 0), FLOOR)
 		
 	for i in opposite - direction:
-		set_cell_item(end_location - Vector3i(i + 1, HEIGHT, -1), FLOOR)
+		self.set_cell_item(end_location - Vector3i(i + 1, HEIGHT, -1), FLOOR)
 	
 	for i in abs(relative_distance.z):
 		i = i * (-1 if direction == 0 else 1)
 		var offset = 2 if direction == 0 else 0
-		set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR)
-		set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR)
+		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR)
+		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR)
+		
+	print(start_location)
+	print(end_location)
