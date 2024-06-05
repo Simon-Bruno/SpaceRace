@@ -10,7 +10,7 @@ signal server_disconnected
 var max_client_connections = 1
 
 #Username van de speler, moet veranderbaar zijn in game
-@export var playername = "Piet"
+var playername
 
 var players_connected = 0 
 var players = {}
@@ -35,7 +35,7 @@ func _on_host_pressed(port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		get_tree().change_scene_to_file("res://scenes/main.tscn")
+		get_tree().change_scene_to_file("res://scenes/world.tscn")
 		add_player_character()
 		players[1] = playername
 		player_connected.emit(1, playername)
@@ -66,12 +66,11 @@ func _on_player_disconnected(id):
 		player_node.queue_free()
 	
 func _on_leave_button_pressed():
-	print("Leaving")
 	var id = multiplayer_peer.get_unique_id()
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
 	
 	
 func _on_server_disconnected():

@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="PSE"
-run/main_scene="res://scenes/menu.tscn"
+run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://assets/menu/icon.svg"
 
 [autoload]
 
 Network="*res://scripts/network/Network.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray()

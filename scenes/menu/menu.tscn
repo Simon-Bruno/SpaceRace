@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bxttao2mguk5n"]
+[gd_scene load_steps=2 format=3 uid="uid://1kabkw5fs4e8"]
+
+[ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_5vnje"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -7,8 +9,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5vnje")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Holder" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,19 +30,182 @@ offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+[node name="UsernameField" type="LineEdit" parent="Holder"]
 layout_mode = 2
 placeholder_text = "Username"
 alignment = 1
+max_length = 15
 
-[node name="HostButton" type="Button" parent="VBoxContainer"]
+[node name="HostButton" type="Button" parent="Holder"]
 layout_mode = 2
 text = "Host"
 
-[node name="JoinButton" type="Button" parent="VBoxContainer"]
+[node name="JoinButton" type="Button" parent="Holder"]
 layout_mode = 2
 text = "Join"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Holder"]
 layout_mode = 2
 text = "Quit"
+
+[node name="Join" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -105.0
+offset_right = 128.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Holder" type="VBoxContainer" parent="Join"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="Join/Holder"]
+layout_mode = 2
+text = "Enter IP address"
+horizontal_alignment = 1
+
+[node name="IP" type="LineEdit" parent="Join/Holder"]
+layout_mode = 2
+placeholder_text = "xxx.xxx.xx.xx"
+alignment = 1
+max_length = 5
+
+[node name="Label" type="Label" parent="Join/Holder"]
+layout_mode = 2
+text = "Enter port"
+horizontal_alignment = 1
+
+[node name="Port" type="LineEdit" parent="Join/Holder"]
+layout_mode = 2
+text = "9999"
+placeholder_text = "Enter port"
+alignment = 1
+max_length = 5
+
+[node name="Button" type="Button" parent="Join/Holder"]
+layout_mode = 2
+text = "Join the game"
+
+[node name="Button" type="Button" parent="Join"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "X"
+
+[node name="Host" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -82.0
+offset_right = 130.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Holder" type="VBoxContainer" parent="Host"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Host/Holder"]
+layout_mode = 2
+text = "Enter port"
+horizontal_alignment = 1
+
+[node name="Port" type="LineEdit" parent="Host/Holder"]
+layout_mode = 2
+text = "9999"
+placeholder_text = "Enter port"
+alignment = 1
+max_length = 5
+
+[node name="Button" type="Button" parent="Host/Holder"]
+layout_mode = 2
+text = "Host the game"
+
+[node name="Button" type="Button" parent="Host"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "X"
+
+[node name="DialogMessage" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 451.0
+offset_top = 240.0
+offset_right = 707.0
+offset_bottom = 417.0
+
+[node name="Label2" type="Label" parent="DialogMessage"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 9.0
+offset_right = 50.0
+offset_bottom = 32.0
+text = "Error"
+
+[node name="Text" type="Label" parent="DialogMessage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 47.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cant join game because of ooopsie"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="DialogMessage"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -34.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = 38.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="pressed" from="Holder/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Holder/JoinButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Join/Holder/Button" to="." method="_on_join_menu_pressed"]
+[connection signal="pressed" from="Join/Button" to="." method="_on_close_join_button_pressed"]
+[connection signal="pressed" from="Host/Holder/Button" to="." method="_on_host_menu_pressed"]
+[connection signal="pressed" from="Host/Button" to="." method="_on_close_host_button_pressed"]
+[connection signal="pressed" from="DialogMessage/Button" to="." method="_on_close_dialog_pressed"]
