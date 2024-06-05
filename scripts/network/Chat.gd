@@ -24,6 +24,9 @@ func new_timestamp():
 	var timestamp = "[color=beige]" + "[" + hour + ":" + minute + ":" + second +"]" + "[/color]"
 	return timestamp
 
+func _on_leave_button_pressed():
+	Network._on_leave_button_pressed()
+
 @rpc("any_peer", "call_local")
 func msg_rpc(sender, message):
 	var colored_sender_id = "[color=red]" + str(sender) + "[/color]"

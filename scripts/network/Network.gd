@@ -9,13 +9,6 @@ signal server_disconnected
 # Excluding host
 var max_client_connections = 1
 
-@onready var loadingText = $LoadingText
-@onready var menu = $Menu
-#@onready var ip_label = $Menu/IPLabel
-@onready var host_list_node = $Menu/HostList
-
-var ip_address: String = "127.0.0.1"  # Default IP address
-
 #Username van de speler, moet veranderbaar zijn in game
 @export var playername = "Piet"
 
@@ -23,7 +16,6 @@ var players_connected = 0
 var players = {}
 
 func _ready():
-	
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_ok)
@@ -31,29 +23,26 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 func _on_connection_failed():
-	loadingText.text = "Couldn't connect to game"
-	menu.visible = true
 	remove_multiplayer_peer()
 
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
 	players[peer_id] = playername
 	player_connected.emit(peer_id, playername)
-	loadingText.queue_free()
 
 # Called when the host button is pressed
-func _on_host_pressed():
-	var port = str($Menu/Port.text).to_int()
-	print("Using Local IP Address for hosting: ", ip_address)
+func _on_host_pressed(port):
+	port = str(port).to_int()
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		menu.visible = false
+		get_tree().change_scene_to_file("res://scenes/main.tscn")
 		add_player_character()
 		players[1] = playername
 		player_connected.emit(1, playername)
 	else:
-		loadingText.text = "Failed to start server"
-		loadingText.visible = true
+		return false
+	return true
+	
 
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
@@ -82,7 +71,7 @@ func _on_leave_button_pressed():
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
-	get_tree().change_scene_to_file("res://MainScene.tscn") #Veranderen naar goed menu scene
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 	
 	
 func _on_server_disconnected():
@@ -91,13 +80,10 @@ func _on_server_disconnected():
 	server_disconnected.emit()
 
 # Called when the join button is pressed
-func _on_join_pressed():
-	var ip = $Menu/IP.text  # Use the IP address input by the user
-	var port = str($Menu/Port.text).to_int()
+func _on_join_pressed(ip, port):
+	port = str(port).to_int()
 	multiplayer_peer.create_client(ip, port)
 	multiplayer.multiplayer_peer = multiplayer_peer
-	menu.visible = false
-	loadingText.text = "Joining game..."
 
 # Function to add a new player character to the scene
 func add_player_character(id=1):

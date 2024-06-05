@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d3rv6ajd0fueq"]
 
-[ext_resource type="Script" path="res://Chat.gd" id="1_bt6a5"]
+[ext_resource type="Script" path="res://scripts/network/Chat.gd" id="1_as2nd"]
 
 [node name="Chat" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bt6a5")
+script = ExtResource("1_as2nd")
 
 [node name="MessageDisplay" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -44,3 +44,4 @@ offset_bottom = 62.0
 text = "Leave Game"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SendButton" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
