@@ -1,20 +1,28 @@
 extends GridMap
 
-var locationRoom = Vector3(20, 0, 0)
+var locationRoom = Vector3i(20, 0, 0)
 
 @export var room_amount = 15
 @export var room_width = 20
 @export var room_height = 20
 @export var room_margin = 7
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var hallway = load("res://scenes/world/generateHallway.tscn")
+	var hallwayInstance = hallway.instantiate()
+	
 	for i in room_amount:
-		var scene = load("res://scenes/world/generate.tscn")
-		var instance = scene.instantiate()
-		add_child(instance)
-		instance.position = i * Vector3(room_width, 0, 0) + i * Vector3(room_margin, 0, 0)
+		var room = load("res://scenes/world/generateRoom.tscn")
+		var roomInstance = room.instantiate()
+		add_child(roomInstance)
+	
+		var exit = roomInstance.exit * i * Vector3i(room_width, 0, 0) + i * Vector3i(room_margin, 0, 0)
+		var start = roomInstance.start * i * Vector3i(room_width, 0, 0) + i * Vector3i(room_margin, 0, 0)
+		hallwayInstance.change_start(start)
+		hallwayInstance.change_exit(exit)
+		
+		roomInstance.position = i * Vector3i(room_width, 0, 0) + i * Vector3i(room_margin, 0, 0)
 
 
 

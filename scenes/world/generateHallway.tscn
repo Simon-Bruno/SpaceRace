@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cul75bbrftb57"]
+
+[ext_resource type="Script" path="res://scripts/world/generateHallway.gd" id="1_otmmu"]
+[ext_resource type="MeshLibrary" uid="uid://bd5ijil2011kt" path="res://assets/world/meshlibrary.tres" id="2_x7s52"]
+
+[node name="GenerateHallway" type="Node3D"]
+script = ExtResource("1_otmmu")
+start_location = Vector3i(2, 0, 0)
+end_location = Vector3i(16, 0, 4)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_x7s52")
