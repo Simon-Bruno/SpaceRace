@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
-[ext_resource type="PackedScene" path="res://scenes/world/worldGeneration.tscn" id="3_d8f1h"]
+[ext_resource type="PackedScene" uid="uid://btxasx3bw2gsj" path="res://scenes/world/worldGeneration.tscn" id="3_d8f1h"]
 
-[node name="Main" type="Node3D"]
+[node name="World" type="Node3D"]
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
 

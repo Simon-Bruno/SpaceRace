@@ -35,7 +35,7 @@ func _on_host_pressed(port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = preload("res://scenes/world/worldGeneration.tscn").instantiate()
+		var world = preload("res://scenes/world.tscn").instantiate()
 		get_node("/root/Main/Menu").queue_free()
 		get_node("/root/Main").add_child(world)
 		await get_tree().create_timer(0.4).timeout
@@ -74,7 +74,9 @@ func _on_leave_button_pressed():
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
-	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
+	var menu = preload("res://scenes/menu/menu.tscn").instantiate()
+	get_node("/root/Main/World").queue_free()
+	get_node("/root/Main").add_child(menu)
 	
 	
 func _on_server_disconnected():
@@ -87,7 +89,7 @@ func _on_join_pressed(ip, port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_client(ip, port) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = preload("res://scenes/world/worldGeneration.tscn").instantiate()
+		var world = preload("res://scenes/world.tscn").instantiate()
 		get_node("/root/Main/Menu").queue_free()
 		get_node("/root/Main").add_child(world)
 		return true

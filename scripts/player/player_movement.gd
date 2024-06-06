@@ -14,6 +14,7 @@ var speed = 0
 var direction = Vector2.ZERO
 
 func _ready():
+	print(name)
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
 func _horizontal_movement(delta):
