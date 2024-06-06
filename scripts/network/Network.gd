@@ -5,7 +5,7 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
-
+signal player_added(id)
 # Excluding host
 var max_client_connections = 1
 
@@ -36,7 +36,7 @@ func _on_host_pressed(port):
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
 		get_tree().change_scene_to_file("res://scenes/world.tscn")
-		add_player_character()
+		player_added.emit(1)
 		players[1] = playername
 		player_connected.emit(1, playername)
 	else:
@@ -49,7 +49,7 @@ func remove_multiplayer_peer():
 
 func _on_player_connected(id):
 	_register_player.rpc_id(id, playername)
-	add_player_character(id)
+	player_added.emit(id)
 
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info):
@@ -83,9 +83,3 @@ func _on_join_pressed(ip, port):
 	port = str(port).to_int()
 	multiplayer_peer.create_client(ip, port)
 	multiplayer.multiplayer_peer = multiplayer_peer
-
-# Function to add a new player character to the scene
-func add_player_character(id=1):
-	var character = preload("res://scenes/camera.tscn").instantiate()
-	character.name = str(id)
-	add_child(character)
