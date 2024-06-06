@@ -12,6 +12,8 @@ environment = SubResource("Environment_mgk52")
 
 [node name="WorldGeneration" type="GridMap" parent="."]
 mesh_library = ExtResource("1_yntpb")
+cell_size = Vector3(1, 1, 1)
+cell_scale = 0.625
 script = ExtResource("1_een4t")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
