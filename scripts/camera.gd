@@ -12,20 +12,14 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_pressed("MoveCamUp"):
 		position.y += PanSpeedKey
-		print("MoveCamUp")
 	if Input.is_action_pressed("MoveCamDown"):
 		position.y -= PanSpeedKey
-		print("MoveCamDown")
 	if Input.is_action_pressed("MoveCamLeft"):
-		print("MoveCamLeft")
 		position.x -= PanSpeedKey
 	if Input.is_action_pressed("MoveCamRight"):
 		position.x += PanSpeedKey
-		print("MoveCamRight")
 	if Input.is_action_pressed("MoveCamForward"):
 		position.z -= PanSpeedKey
-		print("MoveCamUp")
 	if Input.is_action_pressed("MoveCamBackward"):
 		position.z += PanSpeedKey
-		print("MoveCamDown")
 	pass

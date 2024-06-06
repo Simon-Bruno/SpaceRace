@@ -38,7 +38,7 @@ func make_room(start : Vector3i) -> void:
 # Draws a 2 wide path between two given vectors, the given point will be the top
 # of the path.
 func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
-	print("making wall between:" + str(start_location) + str(end_location))
+	#print("making wall between:" + str(start_location) + str(end_location))
 	var relative_distance = end_location - start_location
 	var direction = 0 if relative_distance.z > 0 else 1
 
