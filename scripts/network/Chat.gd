@@ -10,10 +10,10 @@ func _on_send_pressed():
 		msg_rpc.rpc(Network.playername, msg)
 		message_input.text = ""
 
-func pad_left(value, length, char="0"):
+func pad_left(value, length, character="0"):
 	var str_value = str(value)
 	while str_value.length() < length:
-		str_value = char + str_value
+		str_value = character + str_value
 	return str_value
 
 func new_timestamp():

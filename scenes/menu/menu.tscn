@@ -85,7 +85,7 @@ horizontal_alignment = 1
 layout_mode = 2
 placeholder_text = "xxx.xxx.xx.xx"
 alignment = 1
-max_length = 5
+max_length = 20
 
 [node name="Label" type="Label" parent="Join/Holder"]
 layout_mode = 2

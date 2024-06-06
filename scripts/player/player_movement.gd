@@ -13,6 +13,12 @@ extends CharacterBody3D
 var speed = 0
 var direction = Vector2.ZERO
 
+func _enter_tree():
+	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+
+func _ready():
+	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
+
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 
@@ -53,5 +59,6 @@ func _player_movement(delta):
 	velocity = h + v
 
 func _physics_process(delta):	
-	_player_movement(delta)
-	move_and_slide()
+	if $MultiplayerSynchronizer.is_multiplayer_authority():
+		_player_movement(delta)
+		move_and_slide()

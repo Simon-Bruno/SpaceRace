@@ -5,7 +5,7 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
-
+signal player_added(id)
 # Excluding host
 var max_client_connections = 1
 
@@ -35,8 +35,11 @@ func _on_host_pressed(port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		get_tree().change_scene_to_file("res://scenes/world.tscn")
-		add_player_character()
+		var world = preload("res://scenes/world.tscn").instantiate()
+		get_node("/root/Main/Menu").queue_free()
+		get_node("/root/Main").add_child(world)
+		await get_tree().create_timer(0.4).timeout
+		player_added.emit(1)
 		players[1] = playername
 		player_connected.emit(1, playername)
 	else:
@@ -48,14 +51,14 @@ func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
 
 func _on_player_connected(id):
-	_register_player.rpc_id(id, playername)
-	add_player_character(id)
+	if multiplayer.is_server():
+		_register_player.rpc(id, playername)
+		player_added.emit(id)
 
-@rpc("any_peer", "reliable")
-func _register_player(new_player_info):
-	var new_player_id = multiplayer.get_remote_sender_id()
-	players[new_player_id] = new_player_info
-	player_connected.emit(new_player_id, new_player_info)
+@rpc("any_peer","call_local", "reliable")
+func _register_player(id, new_player_info):
+	players[id] = new_player_info
+	player_connected.emit(id, new_player_info)
 
 func _on_player_disconnected(id):
 	players.erase(id)
@@ -70,7 +73,9 @@ func _on_leave_button_pressed():
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
-	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
+	var menu = preload("res://scenes/menu/menu.tscn").instantiate()
+	get_node("/root/Main/World").queue_free()
+	get_node("/root/Main").add_child(menu)
 	
 	
 func _on_server_disconnected():
@@ -81,11 +86,10 @@ func _on_server_disconnected():
 # Called when the join button is pressed
 func _on_join_pressed(ip, port):
 	port = str(port).to_int()
-	multiplayer_peer.create_client(ip, port)
-	multiplayer.multiplayer_peer = multiplayer_peer
-
-# Function to add a new player character to the scene
-func add_player_character(id=1):
-	var character = preload("res://scenes/camera.tscn").instantiate()
-	character.name = str(id)
-	add_child(character)
+	if multiplayer_peer.create_client(ip, port) == OK:
+		multiplayer.multiplayer_peer = multiplayer_peer
+		var world = preload("res://scenes/world.tscn").instantiate()
+		get_node("/root/Main/Menu").queue_free()
+		get_node("/root/Main").add_child(world)
+		return true
+	return false

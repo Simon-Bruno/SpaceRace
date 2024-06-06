@@ -29,12 +29,12 @@ func _on_host_menu_pressed():
 		set_notification_and_show("You need to fill in a port!", $Host)
 		return 
 		
-	if !Network._on_host_pressed(port):
+	var hosting = await Network._on_host_pressed(port)
+	if !hosting:
 		set_notification_and_show("Could not create game!", $Host)
 		
 	$Host.visible = false
 	$Holder.visible = true
-	print("Hosting game")
 	
 func _on_join_pressed():
 	var username = $Holder/UsernameField.text 
@@ -62,7 +62,7 @@ func _on_join_menu_pressed():
 	if port == "":
 		set_notification_and_show("You need to fill in a port!",$Join)
 		return 
-		
+
 	if !Network._on_join_pressed(ip, port):
 		set_notification_and_show("Could not join game", $Join)
 		

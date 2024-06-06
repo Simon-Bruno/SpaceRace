@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdh7l0lt65ro4"]
+[gd_scene load_steps=5 format=3 uid="uid://bdh7l0lt65ro4"]
 
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
+[ext_resource type="Script" path="res://scenes/world/character_spawner.gd" id="1_ulv8m"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
-[ext_resource type="PackedScene" path="res://scenes/world/worldGeneration.tscn" id="3_d8f1h"]
+[ext_resource type="PackedScene" uid="uid://btxasx3bw2gsj" path="res://scenes/world/worldGeneration.tscn" id="3_d8f1h"]
 
-[node name="Main" type="Node3D"]
+[node name="World" type="Node3D"]
+script = ExtResource("1_ulv8m")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
 
 [node name="Camera" parent="." instance=ExtResource("2_x5d8x")]
 
 [node name="world" parent="." instance=ExtResource("3_d8f1h")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
+spawn_path = NodePath("..")
