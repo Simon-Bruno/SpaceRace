@@ -22,18 +22,21 @@ func _horizontal_movement(delta):
 	# accelerate if moving
 	if current_direction != Vector2.ZERO:
 		speed = min(walk_speed, speed + walk_acceleration * delta)
+		$AnimationPlayer.stop()
 	# decelerate
 	else:
 		speed = max(0, speed - walk_deceleration  * delta)
-
+	
+	wobble_animation(current_direction)
 	direction = (direction + current_direction).normalized()
 
-	$Pivot.basis = Basis.looking_at(Vector3(direction[0] or 0.001, 0, direction[1]))
+	$Pivot.basis = Basis.looking_at(Vector3(direction[0] if direction[0] else 0.001, 0, direction[1]))
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed
 
 	return vel
+
 
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
@@ -45,7 +48,24 @@ func _vertical_movement(delta):
 		vel.y = velocity.y - (fall_acceleration * delta)
 		
 	return vel
-		
+
+
+func wobble_animation(direction):
+	if is_on_floor():
+		if direction.x != 0: 
+			$AnimationPlayer.play("WobbleX")
+		if  direction.z != 0:
+			$AnimationPlayer.play("WobbleZ")
+		if direction.x > 0 and direction.z > 0:
+			$AnimationPlayer.play("Wobble_bottomright")
+		if direction.x > 0 and direction.z < 0:
+			$AnimationPlayer.play("Wobble_topright")
+		if direction.x < 0 and direction.z > 0:
+			$AnimationPlayer.play("Wobble_bottomleft")
+		if direction.x < 0 and direction.z < 0:
+			$AnimationPlayer.play("Wobble_topleft")
+
+
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)

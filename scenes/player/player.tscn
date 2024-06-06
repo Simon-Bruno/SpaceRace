@@ -1,24 +1,152 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxnsgqthgkbxc"]
+[gd_scene load_steps=12 format=3 uid="uid://cfrr2je54urip"]
 
-[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="1_1we6x"]
+[ext_resource type="PackedScene" uid="uid://kx1ag7kby5td" path="res://assets/player/player.glb" id="1_k288h"]
+[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="1_x6xel"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oikiw"]
-albedo_color = Color(0.608341, 0.465065, 0.736269, 1)
-roughness = 0.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_iip8u"]
+radius = 0.8
 
-[sub_resource type="BoxMesh" id="BoxMesh_17as0"]
-material = SubResource("StandardMaterial3D_oikiw")
+[sub_resource type="Animation" id="Animation_30vuf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_r4bp7"]
+[sub_resource type="Animation" id="Animation_ntf50"]
+resource_name = "WobbleX"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.174533, 0, 0), Vector3(-0.174533, 0, 0), Vector3(0.174533, 0, 0), Vector3(-0.174533, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_83mwg"]
+resource_name = "WobbleZ"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.174533), Vector3(0, 0, -0.174533), Vector3(0, 0, 0.174533), Vector3(0, 0, -0.174533), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c7eik"]
+resource_name = "Wobble_bottomleft"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.122173, 0, 0.122173), Vector3(0.122173, 0, -0.122173), Vector3(-0.122173, 0, 0.122173), Vector3(0.122173, 0, -0.122173), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_820qk"]
+resource_name = "Wobble_bottomright"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.122173, 0, 0.122173), Vector3(-0.122173, 0, -0.122173), Vector3(0.122173, 0, 0.122173), Vector3(-0.122173, 0, -0.122173), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lul1o"]
+resource_name = "Wobble_topleft"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.122173, 0, -0.122173), Vector3(0.122173, 0, 0.122173), Vector3(-0.122173, 0, -0.122173), Vector3(0.122173, 0, 0.122173), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cmknv"]
+resource_name = "Wobble_topright"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.122173, 0, -0.122173), Vector3(-0.122173, 0, 0.122173), Vector3(0.122173, 0, -0.122173), Vector3(-0.122173, 0, 0.122173), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5d0v"]
+_data = {
+"RESET": SubResource("Animation_30vuf"),
+"WobbleX": SubResource("Animation_ntf50"),
+"WobbleZ": SubResource("Animation_83mwg"),
+"Wobble_bottomleft": SubResource("Animation_c7eik"),
+"Wobble_bottomright": SubResource("Animation_820qk"),
+"Wobble_topleft": SubResource("Animation_lul1o"),
+"Wobble_topright": SubResource("Animation_cmknv")
+}
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_1we6x")
+collision_mask = 6
+script = ExtResource("1_x6xel")
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
-mesh = SubResource("BoxMesh_17as0")
-skeleton = NodePath("../../CollisionShape3D")
+[node name="Character" parent="Pivot" instance=ExtResource("1_k288h")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_r4bp7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("SphereShape3D_iip8u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w5d0v")
+}
