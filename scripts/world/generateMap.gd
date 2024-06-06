@@ -1,19 +1,53 @@
 extends GridMap
 
-var locationRoom = Vector3i(20, 0, 0)
-#enum {BANNER, BARREL, CHEST, COIN, COLUMN, DIRT, FLOOR, FLOOR_DETAIL, ROCKS, STAIRS, STONES, TRAP, WALL=15}
 enum {GFLOOR, LDOORO, RDOORO, LDOOR, RDOOR, WALLSOFF, WALLSON, WALLB, WFLOOR, FLOOR, WALLFA, WALLD, WALLC, WINDOWL, WALL, WALLT, WALLL, WALLFU, WINDOWR, EMPTY=-1}
-const HEIGHT = 0
 
-@export var room_amount = 15
-@export var room_width = 20
-@export var room_height = 20
-@export var room_margin = 7
+# At what y level is the floor
+const HEIGHT : int = 0
 
-var room_edges = []
+@export var room_amount : int = 15
+@export var room_width  : int = 20
+@export var room_height : int = 20
+@export var room_margin : int = 7
+
+# Stores game seed, which will be randomized at start of game, can be set to 
+# a custom value useing set_seed()
+@export var game_seed : int = 0
+
+
+# Generates a news seed that is stored in the game_seed variable.
+func new_seed() -> void:
+	randomize()
+	var random_seed = randi()
+	seed(random_seed)
+	game_seed = random_seed
+
+
+# Sets seed, and builds a new map based on that seed.
+func set_seed(new_seed : int) -> void:
+	seed(new_seed)
+	build_map()
+
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
+	new_seed()
+	build_map()
+
+
+# Main function that builds the map. Clears the map first to stop overlap.
+# TODO: Expand with all generation layers.
+func build_map() -> void:
+	self.clear()
+	draw_rooms()
+	draw_walls()
+
+
+# Draws the full floorplan by:
+# 1. Place first room of x * z size.
+# 2. Place a path between the first room and a random point at an x offset.
+# 3. Place second room on same x-axis
+func draw_rooms() -> void:
 	for i in room_amount:
 		var room_start = (room_width + room_margin) * i - 1
 		make_room(Vector3i(room_start, 0, 0))
@@ -26,14 +60,13 @@ func _ready():
 		
 		if i != room_amount - 1:
 			make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
-			
-	draw_walls()
 
-
+# Places floor grid of x * z size
 func make_room(start : Vector3i) -> void:
 	for h in room_height:
 		for w in room_width:
 			self.set_cell_item(start + Vector3i(h, HEIGHT, w), FLOOR)
+
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
 # of the path.
