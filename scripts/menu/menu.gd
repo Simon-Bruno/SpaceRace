@@ -62,7 +62,7 @@ func _on_join_menu_pressed():
 	if port == "":
 		set_notification_and_show("You need to fill in a port!",$Join)
 		return 
-		
+
 	if !Network._on_join_pressed(ip, port):
 		set_notification_and_show("Could not join game", $Join)
 		

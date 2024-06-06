@@ -81,5 +81,8 @@ func _on_server_disconnected():
 # Called when the join button is pressed
 func _on_join_pressed(ip, port):
 	port = str(port).to_int()
-	multiplayer_peer.create_client(ip, port)
-	multiplayer.multiplayer_peer = multiplayer_peer
+	if multiplayer_peer.create_client(ip, port) == OK:
+		multiplayer.multiplayer_peer = multiplayer_peer
+		get_tree().change_scene_to_file("res://scenes/world.tscn")
+		return true
+	return false
