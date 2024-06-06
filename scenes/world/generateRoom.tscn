@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://rqdott5434h8"]
+[gd_scene load_steps=3 format=3 uid="uid://wu75x3bskngk"]
 
 [ext_resource type="MeshLibrary" uid="uid://bd5ijil2011kt" path="res://assets/world/meshlibrary.tres" id="1_ohjty"]
 [ext_resource type="Script" path="res://scripts/world/generateRoom.gd" id="2_k1yps"]

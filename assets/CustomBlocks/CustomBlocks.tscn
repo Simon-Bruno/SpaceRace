@@ -1,0 +1,196 @@
+[gd_scene load_steps=45 format=3 uid="uid://dx4024j2rn76k"]
+
+[ext_resource type="ArrayMesh" uid="uid://gmireg6phsqh" path="res://assets/CustomBlocks/Static Objects-0.obj" id="1_gtonh"]
+[ext_resource type="Texture2D" uid="uid://cvimio73ujye7" path="res://assets/CustomBlocks/Static Objects.png" id="2_ay47a"]
+[ext_resource type="ArrayMesh" uid="uid://w4wubl6e38mi" path="res://assets/CustomBlocks/Static Objects-1.obj" id="3_dn0f3"]
+[ext_resource type="ArrayMesh" uid="uid://cloddu6dlxvy0" path="res://assets/CustomBlocks/Static Objects-2.obj" id="4_fignv"]
+[ext_resource type="ArrayMesh" uid="uid://dnpspqig0mq2y" path="res://assets/CustomBlocks/Static Objects-3.obj" id="5_qv62t"]
+[ext_resource type="ArrayMesh" uid="uid://cy133bqm7dsh4" path="res://assets/CustomBlocks/Static Objects-4.obj" id="6_abr8r"]
+[ext_resource type="ArrayMesh" uid="uid://dui6bm8c7xug2" path="res://assets/CustomBlocks/Static Objects-5.obj" id="7_mp7k4"]
+[ext_resource type="ArrayMesh" uid="uid://bja7ox40v5brt" path="res://assets/CustomBlocks/Static Objects-6.obj" id="8_1lrnb"]
+[ext_resource type="ArrayMesh" uid="uid://d0ukc63b4i1o1" path="res://assets/CustomBlocks/Static Objects-7.obj" id="9_7xk7a"]
+[ext_resource type="ArrayMesh" uid="uid://c154c3q20h51t" path="res://assets/CustomBlocks/Static Objects-8.obj" id="10_k3ami"]
+[ext_resource type="ArrayMesh" uid="uid://s20odjxlwq56" path="res://assets/CustomBlocks/Static Objects-9.obj" id="11_82w8f"]
+[ext_resource type="ArrayMesh" uid="uid://iu6ct6mv1om3" path="res://assets/CustomBlocks/Static Objects-10.obj" id="12_2scsv"]
+[ext_resource type="ArrayMesh" uid="uid://c3r282rk1ifmb" path="res://assets/CustomBlocks/Static Objects-11.obj" id="13_ffy78"]
+[ext_resource type="ArrayMesh" uid="uid://c3psu85xcqaq2" path="res://assets/CustomBlocks/Static Objects-12.obj" id="14_kgfrm"]
+[ext_resource type="ArrayMesh" uid="uid://cspvoxm3cs3hq" path="res://assets/CustomBlocks/Static Objects-13.obj" id="15_50soe"]
+[ext_resource type="ArrayMesh" uid="uid://57ktsjqbd1ln" path="res://assets/CustomBlocks/Static Objects-14.obj" id="16_kk65b"]
+[ext_resource type="ArrayMesh" uid="uid://xtcfovx3xb8p" path="res://assets/CustomBlocks/Static Objects-15.obj" id="17_dxpcw"]
+[ext_resource type="ArrayMesh" uid="uid://bwhkt4228yq5p" path="res://assets/CustomBlocks/Static Objects-16.obj" id="18_kffvs"]
+[ext_resource type="ArrayMesh" uid="uid://dr08ur6mgwkjb" path="res://assets/CustomBlocks/Static Objects-17.obj" id="19_08ypj"]
+[ext_resource type="ArrayMesh" uid="uid://dt1yesmyoiikj" path="res://assets/CustomBlocks/Static Objects-18.obj" id="20_mj8xf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3sd6"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lo21"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwrff"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70otg"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yclxn"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ou56v"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qmgq"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ka0j"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gloa5"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqtls"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_erqyb"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3m4ym"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igdg1"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lhj2"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lugxy"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iudmh"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivitc"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nq58"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqimo"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2n4f3"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iy8wo"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bu2d"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2hj8"]
+albedo_texture = ExtResource("2_ay47a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gem53"]
+albedo_texture = ExtResource("2_ay47a")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticObjects-0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("1_gtonh")
+surface_material_override/0 = SubResource("StandardMaterial3D_q3sd6")
+
+[node name="DoorLeftOpen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("3_dn0f3")
+surface_material_override/0 = SubResource("StandardMaterial3D_3lo21")
+
+[node name="DoorRightOpen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("4_fignv")
+surface_material_override/0 = SubResource("StandardMaterial3D_dwrff")
+
+[node name="DoorLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("5_qv62t")
+surface_material_override/0 = SubResource("StandardMaterial3D_70otg")
+
+[node name="DoorRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+material_override = SubResource("StandardMaterial3D_yclxn")
+mesh = ExtResource("6_abr8r")
+surface_material_override/0 = SubResource("StandardMaterial3D_ou56v")
+
+[node name="WallSwitchOff" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("7_mp7k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_3qmgq")
+
+[node name="WallSwitchOn" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("8_1lrnb")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ka0j")
+
+[node name="WallButton" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("9_7xk7a")
+surface_material_override/0 = SubResource("StandardMaterial3D_gloa5")
+
+[node name="FloorWater" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("10_k3ami")
+surface_material_override/0 = SubResource("StandardMaterial3D_uqtls")
+
+[node name="FloorDefault" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+material_override = SubResource("StandardMaterial3D_erqyb")
+mesh = ExtResource("11_82w8f")
+surface_material_override/0 = SubResource("StandardMaterial3D_3m4ym")
+
+[node name="WallFan" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+material_override = SubResource("StandardMaterial3D_igdg1")
+mesh = ExtResource("12_2scsv")
+surface_material_override/0 = SubResource("StandardMaterial3D_6lhj2")
+
+[node name="WallDesk" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+material_override = SubResource("StandardMaterial3D_lugxy")
+mesh = ExtResource("13_ffy78")
+surface_material_override/0 = SubResource("StandardMaterial3D_iudmh")
+
+[node name="WallCorner" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+material_override = SubResource("StandardMaterial3D_ivitc")
+mesh = ExtResource("14_kgfrm")
+surface_material_override/0 = SubResource("StandardMaterial3D_4nq58")
+
+[node name="WindowLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("15_50soe")
+surface_material_override/0 = SubResource("StandardMaterial3D_qqimo")
+
+[node name="WallStraight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("16_kk65b")
+surface_material_override/0 = SubResource("StandardMaterial3D_2n4f3")
+
+[node name="WallTerminal" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("17_dxpcw")
+surface_material_override/0 = SubResource("StandardMaterial3D_iy8wo")
+
+[node name="WallLight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("18_kffvs")
+surface_material_override/0 = SubResource("StandardMaterial3D_2bu2d")
+
+[node name="WallFuse" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("19_08ypj")
+surface_material_override/0 = SubResource("StandardMaterial3D_l2hj8")
+
+[node name="WindowRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581214, 0, -1.1825)
+mesh = ExtResource("20_mj8xf")
+surface_material_override/0 = SubResource("StandardMaterial3D_gem53")

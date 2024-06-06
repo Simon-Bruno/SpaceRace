@@ -14,8 +14,7 @@ func generate(start_location, end_location):
 	var vertical_start_main = middle + direction - 1
 	var vertical_start_secondary = middle - direction
 	
-	
-	for i in vertical_start_main:
+		for i in vertical_start_main:
 		self.set_cell_item(start_location + Vector3i(i + 1, HEIGHT, 1), FLOOR)
 		
 	for i in vertical_start_secondary:

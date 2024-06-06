@@ -11,7 +11,6 @@ var room_positions : PackedVector3Array = []
 
 enum {BANNER, BARREL, CHEST, COIN, COLUMN, DIRT, FLOOR, FLOOR_DETAIL, ROCKS, STAIRS, STONES, TRAP, WALL=15, EMPTY=-1}
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	make_room(parentNode.room_width, parentNode.room_height)
@@ -42,7 +41,7 @@ func make_room(width, height):
 	for r in height:
 		for c in width:
 			var pos : Vector3i = Vector3i(c,0,r)
-			self.set_cell_item(pos, FLOOR_DETAIL)
+			
 
 	make_walls(width, height, wall_thickness)
 

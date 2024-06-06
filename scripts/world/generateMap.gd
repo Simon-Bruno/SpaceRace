@@ -1,7 +1,8 @@
 extends GridMap
 
 var locationRoom = Vector3i(20, 0, 0)
-enum {BANNER, BARREL, CHEST, COIN, COLUMN, DIRT, FLOOR, FLOOR_DETAIL, ROCKS, STAIRS, STONES, TRAP, WALL=15, EMPTY=-1}
+#enum {BANNER, BARREL, CHEST, COIN, COLUMN, DIRT, FLOOR, FLOOR_DETAIL, ROCKS, STAIRS, STONES, TRAP, WALL=15}
+enum {GFLOOR, LDOORO, RDOORO, LDOOR, RDOOR, WALLSOFF, WALLSON, WALLB, WFLOOR, FLOOR, WALLFA, WALLD, WALLC, WINDOWL, WALL, WALLT, WALLL, WALLFU, WINDOWR, EMPTY=-1}
 const HEIGHT = 0
 
 @export var room_amount = 15
@@ -32,10 +33,10 @@ func _ready():
 func make_room(start : Vector3i) -> void:
 	for h in room_height:
 		for w in room_width:
-			print(w, h)
 			self.set_cell_item(start + Vector3i(h, HEIGHT, w), FLOOR)
 
-
+# Draws a 2 wide path between two given vectors, the given point will be the top
+# of the path.
 func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 	print("making wall between:" + str(start_location) + str(end_location))
 	var relative_distance = end_location - start_location
@@ -46,7 +47,6 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 	
 	var vertical_start_main = middle + direction - 1
 	var vertical_start_secondary = middle - direction
-	
 	
 	for i in vertical_start_main:
 		self.set_cell_item(start_location + Vector3i(i + 1, HEIGHT, 1), FLOOR)
@@ -95,14 +95,14 @@ func draw_walls() -> void:
 			surround.append((1 if self.get_cell_item(neighbor) != -1 else 0))
 
 		var idx = -1
-		var type = BARREL
+		var type = WALL
 		
 		# Checks which type of wall, then finds the needed orientation.
 		if sum_array(surround) == 3:
 			idx = walls.find(surround)
 		elif sum_array(surround) == 2:
 			idx = corner.find(surround)
-			type = DIRT
+			type = WALLC
 
 		# If unknown orientation, skip.
 		if idx == -1:

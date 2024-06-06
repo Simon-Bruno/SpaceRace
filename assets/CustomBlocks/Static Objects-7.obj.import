@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d0ukc63b4i1o1"
+path="res://.godot/imported/Static Objects-7.obj-8de86659bd8c40dcdc5934a6825bd33c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Static Objects-7.obj-8de86659bd8c40dcdc5934a6825bd33c.mesh"]
+
+source_file="res://assets/CustomBlocks/Static Objects-7.obj"
+dest_files=["res://.godot/imported/Static Objects-7.obj-8de86659bd8c40dcdc5934a6825bd33c.mesh", "res://.godot/imported/Static Objects-7.obj-8de86659bd8c40dcdc5934a6825bd33c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
