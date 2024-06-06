@@ -12,11 +12,12 @@ func _ready():
 	pass
 
 func _process(_delta):
-	enemy_attack()
-	attack()
 	if health <= 0:
 		player_alive = false
 		health = 0
+
+	enemy_attack()
+	player_attack()
 
 func player():
 	# Nodig om te identifien wat de player is
@@ -37,21 +38,26 @@ func enemy_attack():
 		health -= 20
 		if health < 0:
 			health = 0
+		print("Player got hit, health: ", health)
 		enemy_attack_cooldown = false
 		$AttackCooldown.start()
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
 
-func attack():
+func player_attack():
 	if Input.is_action_just_pressed("attack"):
 		Global.player_attacking = true
 		attack_in_progress = true
+		apply_damage_to_enemy()
 		$DealAttackTimer.start()
 
 func _on_deal_attack_timer_timeout():
 	Global.player_attacking = false
 	attack_in_progress = false
 	$DealAttackTimer.stop()
+
+func apply_damage_to_enemy():
 	if enemy_in_range and enemy:
 		enemy.take_damage(20)
+		print("Enemy took damage, health: ", enemy.health)
