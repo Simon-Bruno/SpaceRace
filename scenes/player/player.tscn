@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://kx1ag7kby5td" path="res://assets/player/player.glb" id="1_k288h"]
 [ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="1_x6xel"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_iip8u"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_xhgtu"]
 radius = 0.8
 
 [sub_resource type="Animation" id="Animation_30vuf"]
@@ -144,7 +144,7 @@ script = ExtResource("1_x6xel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-shape = SubResource("SphereShape3D_iip8u")
+shape = SubResource("SphereShape3D_xhgtu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

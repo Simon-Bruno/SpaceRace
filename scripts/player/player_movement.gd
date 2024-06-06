@@ -50,7 +50,6 @@ func _vertical_movement(delta):
 
 
 func wobble_animation(direction):
-	print(direction.x, direction.y)
 	if is_on_floor():
 		if direction.x != 0: 
 			$AnimationPlayer.play("WobbleX")
