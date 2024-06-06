@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsyyqedsi8il8"]
+
+[ext_resource type="Script" path="res://scripts/interactables/button.gd" id="1_rlorl"]
+[ext_resource type="PackedScene" uid="uid://ckl8ocde3h7p8" path="res://scenes/interactables/door.tscn" id="2_s0dhi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eflyr"]
+albedo_color = Color(0.306699, 0.531991, 0.331917, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wlcrg"]
+material = SubResource("StandardMaterial3D_eflyr")
+size = Vector3(0.5, 0.2, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vr0lf"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_drfv7"]
+viewport_path = NodePath("ButtonText/SubViewport2")
+
+[node name="ButtonActivate" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.97042)
+script = ExtResource("1_rlorl")
+
+[node name="Button" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.1)
+mesh = SubResource("BoxMesh_wlcrg")
+metadata/_edit_group_ = true
+
+[node name="Area3D" type="Area3D" parent="Button"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button/Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+shape = SubResource("BoxShape3D_vr0lf")
+
+[node name="ButtonText" type="Sprite3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 2.62369, -9.03655)
+visible = false
+billboard = 1
+texture = SubResource("ViewportTexture_drfv7")
+metadata/_edit_group_ = true
+
+[node name="SubViewport2" type="SubViewport" parent="ButtonText"]
+transparent_bg = true
+size = Vector2i(63, 25)
+
+[node name="Label" type="Label" parent="ButtonText/SubViewport2"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = " Press E "
+
+[node name="Door" parent="." instance=ExtResource("2_s0dhi")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -5.45907, -15.653)
+
+[connection signal="body_entered" from="Button/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Button/Area3D" to="." method="_on_area_3d_body_exited"]
