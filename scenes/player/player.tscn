@@ -36,8 +36,13 @@ shape = SubResource("BoxShape3D_2c3c3")
 [node name="PlayerCombat" type="Node3D" parent="."]
 script = ExtResource("2_wfppx")
 
+[node name="DealAttackTimer" type="Timer" parent="PlayerCombat"]
+wait_time = 0.5
+
 [node name="AttackCooldown" type="Timer" parent="PlayerCombat"]
+wait_time = 0.5
 
 [connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="PlayerCombat/DealAttackTimer" to="PlayerCombat" method="_on_deal_attack_timer_timeout"]
 [connection signal="timeout" from="PlayerCombat/AttackCooldown" to="PlayerCombat" method="_on_attack_cooldown_timeout"]

@@ -8,9 +8,12 @@ extends CharacterBody3D
 var player_chase = false
 var player = null
 
+var health = 100
+var player_in_attack_zone = false
+
 func _ready():
-	$DetectionArea.body_entered.connect(_on_detection_area_body_entered)
-	$DetectionArea.body_exited.connect(_on_detection_area_body_exited)
+	$DetectionArea.body_entered.connect(Callable(self, "_on_detection_area_body_entered"))
+	$DetectionArea.body_exited.connect(Callable(self, "_on_detection_area_body_exited"))
 
 func _process(delta):
 	if player_chase and player:
@@ -36,8 +39,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 			velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-	
-	#TODO: Hier animaties instellen
+
 	move_and_slide()
 
 func _on_detection_area_body_entered(body):
@@ -51,5 +53,19 @@ func _on_detection_area_body_exited(body):
 		player_chase = false
 
 func enemy():
-	# Function to identify what is an enemy (See player_combat.gd)
+	# Nodig om te identifien wat een enemy is
 	pass
+
+func _on_enemy_hitbox_body_entered(body):
+	if body.has_method("player"):
+		player_in_attack_zone = true
+
+func _on_enemy_hitbox_body_exited(body):
+	if body.has_method("player"):
+		player_in_attack_zone = false
+
+func take_damage(damage):
+	health -= damage
+	print("Enemy health: ", health)
+	if health <= 0:
+		queue_free()

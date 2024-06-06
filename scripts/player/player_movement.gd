@@ -56,7 +56,3 @@ func _physics_process(delta):
 	_player_movement(delta)
 	move_and_slide()
 
-
-func _on_player_hitbox_body_entered(body):
-	pass # Replace with function body.
-
