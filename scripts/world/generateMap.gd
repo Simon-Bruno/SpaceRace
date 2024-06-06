@@ -8,7 +8,6 @@ var locationRoom = Vector3(20, 0, 0)
 @export var room_margin = 7
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in room_amount:
 		var scene = load("res://scenes/world/generate.tscn")
