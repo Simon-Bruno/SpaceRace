@@ -18,7 +18,7 @@ func _ready():
 		make_room(Vector3i(room_start, 0, 0))
 		
 		var zstart = randi_range(1, room_height - 2)
-		var zend = randi_range(1, room_height - 2)
+		var zend = randi_range(1, room_height - 3)
 		
 		var xstart = room_start + room_width - 1
 		var xend = xstart + room_margin + 1
