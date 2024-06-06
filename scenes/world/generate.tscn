@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://rqdott5434h8"]
 
-[ext_resource type="MeshLibrary" uid="uid://4ol8fmtevd2s" path="res://assets/world/collisionLibrary.tres" id="1_o7tur"]
+[ext_resource type="MeshLibrary" uid="uid://b46tsfdpyvoum" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_o7tur"]
 [ext_resource type="Script" path="res://scripts/world/GridMap.gd" id="2_xodrq"]
 
 [node name="GridMap" type="GridMap"]
