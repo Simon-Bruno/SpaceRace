@@ -37,7 +37,6 @@ func enemy_attack():
 		health -= 20
 		if health < 0:
 			health = 0
-		print("Player got hit, health: ", health)
 		enemy_attack_cooldown = false
 		$AttackCooldown.start()
 

@@ -41,6 +41,10 @@ func _horizontal_movement(delta):
 
 	return vel
 
+# KEEP! IMPORTANT TO IDENTIFY PLAYER
+func player():
+	pass
+	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 	

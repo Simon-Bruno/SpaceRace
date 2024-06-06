@@ -42,7 +42,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_detection_area_body_entered(body):
-	if body.name == "Player":
+	if body.has_method("player"):
 		player = body
 		player_chase = true
 
