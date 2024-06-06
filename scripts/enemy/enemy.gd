@@ -12,8 +12,7 @@ var health = 100
 var player_in_attack_zone = false
 
 func _ready():
-	$DetectionArea.body_entered.connect(Callable(self, "_on_detection_area_body_entered"))
-	$DetectionArea.body_exited.connect(Callable(self, "_on_detection_area_body_exited"))
+	pass
 
 func _process(delta):
 	if player_chase and player:

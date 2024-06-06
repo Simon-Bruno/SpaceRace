@@ -9,8 +9,7 @@ var player_movement_script = null
 var enemy = null 
 
 func _ready():
-	$AttackCooldown.connect("timeout", Callable(self, "_on_attack_cooldown_timeout"))
-	$DealAttackTimer.connect("timeout", Callable(self, "_on_deal_attack_timer_timeout"))
+	pass
 
 func _process(_delta):
 	enemy_attack()

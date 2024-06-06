@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfcjq8a6jlnnp"]
+
+[ext_resource type="PackedScene" uid="uid://1kabkw5fs4e8" path="res://scenes/menu/menu.tscn" id="1_01i3d"]
+
+[node name="Main" type="Node"]
+
+[node name="Menu" parent="." instance=ExtResource("1_01i3d")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/world.tscn")
+spawn_path = NodePath("..")
