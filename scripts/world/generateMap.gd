@@ -25,6 +25,8 @@ func _ready():
 		
 		if i != room_amount - 1:
 			make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+			
+	draw_walls()
 
 
 func make_room(start : Vector3i) -> void:
@@ -63,6 +65,53 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 		var offset = 2 if direction == 0 else 0
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR)
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR)
+
+
+# Sums the integers in an array
+static func sum_array(array):
+	var sum = 0
+	for element in array:
+		sum += element
+	return sum
+
+
+# Draws all walls by finding all floors and check if a wall needs to be added.
+func draw_walls() -> void:
+	var neighbors = [Vector3i(0, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i(-1, 0, 0)]
+	
+	# Defining the different floor layouts, and their corresponding orientation.
+	var walls = [[0, 1, 1, 1], [1, 0, 1, 1], [1, 1, 0, 1], [1, 1, 1, 0]]
+	var corner = [[0, 1, 1, 0], [0, 0, 1, 1], [1, 0, 0, 1], [1, 1, 0, 0]]
+	var orientations = [0, 22, 10, 16]
+	
+	# Get all floors in grid.
+	var floors = self.get_used_cells_by_item(FLOOR)
+	
+	# Go trough all floor items, and check if wall is needed.
+	for floor in floors:
+		var surround = []
+		for i in neighbors:
+			var neighbor = floor + i
+			surround.append((1 if self.get_cell_item(neighbor) != -1 else 0))
+
+		var idx = -1
+		var type = BARREL
+		
+		# Checks which type of wall, then finds the needed orientation.
+		if sum_array(surround) == 3:
+			idx = walls.find(surround)
+		elif sum_array(surround) == 2:
+			idx = corner.find(surround)
+			type = DIRT
+
+		# If unknown orientation, skip.
+		if idx == -1:
+			continue
+
+		# Place wall.
+		var orientation = orientations[idx]
+		self.set_cell_item(floor + Vector3i(0, 1, 0), type, orientation)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
