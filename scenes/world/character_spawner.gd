@@ -8,7 +8,7 @@ func _ready():
 func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	var camera = preload("res://scenes/camera.tscn").instantiate()
-	add_child(camera)
+	character.add_child(camera)
 	
 	character.name = str(id)
 	add_child(character)

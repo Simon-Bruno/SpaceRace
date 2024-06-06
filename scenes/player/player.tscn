@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxnsgqthgkbxc"]
+[gd_scene load_steps=6 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="1_1we6x"]
 
@@ -11,6 +11,14 @@ material = SubResource("StandardMaterial3D_oikiw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r4bp7"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v5bfw"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_1we6x")
 
@@ -22,3 +30,6 @@ skeleton = NodePath("../../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_r4bp7")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v5bfw")
