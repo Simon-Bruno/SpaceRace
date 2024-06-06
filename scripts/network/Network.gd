@@ -40,7 +40,6 @@ func _on_host_pressed(port):
 		get_node("/root/Main").add_child(world)
 		await get_tree().create_timer(0.4).timeout
 		player_added.emit(1)
-		print("after event")
 		players[1] = playername
 		player_connected.emit(1, playername)
 	else:
@@ -52,14 +51,13 @@ func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
 
 func _on_player_connected(id):
-	_register_player.rpc_id(id, playername)
+	_register_player.rpc(id, playername)
 	player_added.emit(id)
 
-@rpc("any_peer", "reliable")
-func _register_player(new_player_info):
-	var new_player_id = multiplayer.get_remote_sender_id()
-	players[new_player_id] = new_player_info
-	player_connected.emit(new_player_id, new_player_info)
+@rpc("any_peer","call_local", "reliable")
+func _register_player(id, new_player_info):
+	players[id] = new_player_info
+	player_connected.emit(id, new_player_info)
 
 func _on_player_disconnected(id):
 	players.erase(id)

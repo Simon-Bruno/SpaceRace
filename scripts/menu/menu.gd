@@ -35,7 +35,6 @@ func _on_host_menu_pressed():
 		
 	$Host.visible = false
 	$Holder.visible = true
-	print("Hosting game")
 	
 func _on_join_pressed():
 	var username = $Holder/UsernameField.text 

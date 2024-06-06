@@ -7,5 +7,5 @@
 [node name="Menu" parent="." instance=ExtResource("1_01i3d")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/world/worldGeneration.tscn", "res://scenes/player/player.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/world.tscn", "res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
