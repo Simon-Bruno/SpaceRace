@@ -41,6 +41,10 @@ func _horizontal_movement(delta):
 
 	return vel
 
+# KEEP! IMPORTANT TO IDENTIFY PLAYER
+func player():
+	pass
+	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 	
@@ -58,7 +62,7 @@ func _player_movement(delta):
 	
 	velocity = h + v
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority():
 		_player_movement(delta)
 		move_and_slide()

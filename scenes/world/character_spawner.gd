@@ -9,3 +9,9 @@ func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	add_child(character)
+	
+	#TODO: Remove hardcode enemy
+	var enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
+	enemy.position = Vector3(2,20,4)
+	add_child(enemy)
+	
