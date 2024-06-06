@@ -16,10 +16,6 @@ enum {BANNER, BARREL, CHEST, COIN, COLUMN, DIRT, FLOOR, FLOOR_DETAIL, ROCKS, STA
 func _ready():
 	make_room(parentNode.room_width, parentNode.room_height)
 
-func _process(delta):
-	pass
-
-
 func make_walls(width, height, wall_thickness):
 	for r in range(-wall_thickness, height + wall_thickness):
 		var pos: Vector3i = Vector3i(-1, 0, r)

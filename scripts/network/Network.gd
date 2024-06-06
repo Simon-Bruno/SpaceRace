@@ -51,8 +51,9 @@ func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
 
 func _on_player_connected(id):
-	_register_player.rpc(id, playername)
-	player_added.emit(id)
+	if multiplayer.is_server():
+		_register_player.rpc(id, playername)
+		player_added.emit(id)
 
 @rpc("any_peer","call_local", "reliable")
 func _register_player(id, new_player_info):
