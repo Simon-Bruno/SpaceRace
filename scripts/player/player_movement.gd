@@ -15,7 +15,6 @@ var direction = Vector2.ZERO
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
-	#$Camera3D.current = $MultiplayerSynchronizer.is_multiplayer_authority()
 
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO

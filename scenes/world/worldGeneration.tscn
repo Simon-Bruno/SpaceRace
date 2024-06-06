@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://btxasx3bw2gsj"]
+[gd_scene load_steps=4 format=3 uid="uid://btxasx3bw2gsj"]
 
 [ext_resource type="Script" path="res://scenes/world/character_spawner.gd" id="1_c7xee"]
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
-[ext_resource type="PackedScene" uid="uid://bxnsgqthgkbxc" path="res://scenes/player/player.tscn" id="3_n2yam"]
 
 [sub_resource type="Environment" id="Environment_mgk52"]
 
@@ -14,13 +13,6 @@ environment = SubResource("Environment_mgk52")
 
 [node name="WorldGeneration" type="GridMap" parent="."]
 script = ExtResource("1_een4t")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
-spawn_path = NodePath("..")
-
-[node name="Player" parent="." instance=ExtResource("3_n2yam")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.64614, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.79673, 0.604335, 0, -0.604335, -0.79673, 0, 0, 0, 1, 0, 133.512, 0)

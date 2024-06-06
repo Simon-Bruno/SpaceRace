@@ -35,8 +35,12 @@ func _on_host_pressed(port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		get_tree().change_scene_to_file("res://scenes/world.tscn")
+		var world = preload("res://scenes/world/worldGeneration.tscn").instantiate()
+		get_node("/root/Main/Menu").queue_free()
+		get_node("/root/Main").add_child(world)
+		await get_tree().create_timer(0.4).timeout
 		player_added.emit(1)
+		print("after event")
 		players[1] = playername
 		player_connected.emit(1, playername)
 	else:
@@ -83,6 +87,8 @@ func _on_join_pressed(ip, port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_client(ip, port) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		get_tree().change_scene_to_file("res://scenes/world.tscn")
+		var world = preload("res://scenes/world/worldGeneration.tscn").instantiate()
+		get_node("/root/Main/Menu").queue_free()
+		get_node("/root/Main").add_child(world)
 		return true
 	return false
