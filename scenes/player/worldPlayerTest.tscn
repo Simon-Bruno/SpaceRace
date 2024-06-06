@@ -12,3 +12,5 @@
 
 [node name="Player" parent="." instance=ExtResource("3_dh2ra")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
+disable_mode = 1
+collision_mask = 1
