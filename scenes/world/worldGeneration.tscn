@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://btxasx3bw2gsj"]
+[gd_scene load_steps=5 format=3 uid="uid://btxasx3bw2gsj"]
 
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
 [ext_resource type="MeshLibrary" uid="uid://b46tsfdpyvoum" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_yntpb"]
 
 [sub_resource type="Environment" id="Environment_mgk52"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hh1hr"]
+properties/0/path = NodePath("WorldGeneration:game_seed")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="WorldGeneration" type="Node3D"]
 
@@ -18,3 +23,6 @@ script = ExtResource("1_een4t")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.79673, 0.604335, 0, -0.604335, -0.79673, 0, 0, 0, 1, 0, 133.512, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hh1hr")

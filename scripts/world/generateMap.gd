@@ -14,6 +14,18 @@ const HEIGHT : int = 0
 # a custom value useing set_seed()
 @export var game_seed : int = 0
 
+# Called when the object is created in the scene
+func _enter_tree():
+	if multiplayer.is_server():
+		$"../MultiplayerSynchronizer".set_multiplayer_authority(multiplayer.get_unique_id())
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	if game_seed == 0:
+		new_seed()
+		build_map()
+	else:
+		set_seed(game_seed)
 
 # Generates a news seed that is stored in the game_seed variable.
 func new_seed() -> void:
@@ -27,13 +39,6 @@ func new_seed() -> void:
 func set_seed(new_seed : int) -> void:
 	seed(new_seed)
 	build_map()
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	new_seed()
-	build_map()
-
 
 # Main function that builds the map. Clears the map first to stop overlap.
 # TODO: Expand with all generation layers.
@@ -121,10 +126,10 @@ func draw_walls() -> void:
 	var floors = self.get_used_cells_by_item(FLOOR)
 	
 	# Go trough all floor items, and check if wall is needed.
-	for floor in floors:
+	for floor_item in floors:
 		var surround = []
 		for i in neighbors:
-			var neighbor = floor + i
+			var neighbor = floor_item + i
 			surround.append((1 if self.get_cell_item(neighbor) != -1 else 0))
 
 		var idx = -1
@@ -143,7 +148,7 @@ func draw_walls() -> void:
 
 		# Place wall.
 		var orientation = orientations[idx]
-		self.set_cell_item(floor + Vector3i(0, 1, 0), type, orientation)
+		self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

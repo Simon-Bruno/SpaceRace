@@ -83,6 +83,7 @@ horizontal_alignment = 1
 
 [node name="IP" type="LineEdit" parent="Join/Holder"]
 layout_mode = 2
+text = "localhost"
 placeholder_text = "xxx.xxx.xx.xx"
 alignment = 1
 max_length = 20
