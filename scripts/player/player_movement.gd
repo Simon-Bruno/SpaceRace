@@ -5,9 +5,17 @@ extends CharacterBody3D
 @export var walk_deceleration = 50
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
+var getHitCooldown = true
+var health = 100
 
 var speed = 0
 var direction = Vector2.ZERO
+
+func take_damage(damage):
+	health = max(0, health-damage)
+	getHitCooldown = false
+	print("took damaga", health)
+	$PlayerCombat/GetHitCooldown.start()
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
@@ -40,13 +48,10 @@ func _horizontal_movement(delta):
 	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
-	
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		vel.y = jump_impulse
-		
 	if not is_on_floor():
-		vel.y = velocity.y - (fall_acceleration * delta)
-		
+		vel.y = velocity.y - (fall_acceleration * delta)	
 	return vel
 		
 func _player_movement(delta):

@@ -1,21 +1,22 @@
-extends Node
+extends Node3D
 
 var enemy_in_range = false
-var enemy_attack_cooldown = true
 var health = 100
 var player_alive = true
 var attack_in_progress = false
 var player_movement_script = null
 var targeted_enemy = null 
 
+
+
 func die():
 	player_alive = false
 
 func _process(_delta):
-	if health <= 0:
+	if get_parent().health <= 0:
 		die()
 
-	enemy_attack()
+	#enemy_attack()
 	player_attack()
 
 func _on_player_hitbox_body_entered(body):
@@ -29,15 +30,12 @@ func _on_player_hitbox_body_exited(body):
 		enemy_in_range = false
 		targeted_enemy = null 
 
-func enemy_attack():
-	if enemy_in_range and enemy_attack_cooldown:
-		health = max(0, health-20)
-		print("Player got hit by," + str(targeted_enemy) + " health: " + str(health))
-		enemy_attack_cooldown = false
-		$AttackCooldown.start()
-
-func _on_attack_cooldown_timeout():
-	enemy_attack_cooldown = true
+#func enemy_attack():
+	#if enemy_in_range and getHitCooldown:
+		#take_damage(20)
+		#print("Player got hit by," + str(targeted_enemy) + " health: " + str(health))
+		#getHitCooldown = false
+		#$GetHitCooldown.start()
 
 func player_attack():
 	if Input.is_action_just_pressed("attack"):
@@ -51,7 +49,15 @@ func _on_deal_attack_timer_timeout():
 	attack_in_progress = false
 	$DealAttackTimer.stop()
 
+#func take_damage(damage):
+	#health = max(0, health-damage)
+	#getHitCooldown = false
+	#$GetHitCooldown.start()
+
 func apply_damage_to_enemy():
 	if enemy_in_range and targeted_enemy:
 		targeted_enemy.take_damage(20)
 		print("Enemy took damage, health: ", targeted_enemy.health)
+
+func _on_GetHitCooldown_timeout():
+	get_parent().getHitCooldown = true

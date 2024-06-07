@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_pccks"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jx3wm"]
-radius = 3.0
+radius = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_k2tf3"]
 
