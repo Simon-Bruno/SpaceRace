@@ -35,7 +35,7 @@ func _horizontal_movement(delta):
 
 	direction = (direction + current_direction).normalized()
 
-	$Pivot.basis = Basis.looking_at(Vector3(direction[0] or 0.001, 0, direction[1]))
+	$Pivot.basis = Basis.looking_at(Vector3(direction[0] if direction[0] else 0.001, 0, direction[1]))
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed
