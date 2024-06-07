@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
-size = Vector3(1000, 1, 1000)
+size = Vector3(1991.92, 1, 1000)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_cc0sq")
@@ -19,7 +19,8 @@ _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn", "res://
 spawn_path = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, -500)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 2, 500)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 425.538, 2, 500)
 shape = SubResource("BoxShape3D_afshc")
