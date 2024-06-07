@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cds22hi7osiev"]
+[gd_scene load_steps=7 format=3 uid="uid://cds22hi7osiev"]
 
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_pccks"]
 
@@ -9,6 +9,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_pbp3d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c22be"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ocmc4"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_pccks")
@@ -34,6 +42,9 @@ shape = SubResource("BoxShape3D_pbp3d")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_c22be")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ocmc4")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

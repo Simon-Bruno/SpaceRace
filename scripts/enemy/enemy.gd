@@ -11,8 +11,9 @@ var player = null
 var health = 100
 var player_in_attack_zone = false
 
-func _ready():
-	pass
+func _enter_tree():
+	if multiplayer.is_server():
+		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 
 func _process(delta):
 	if player_chase and player:

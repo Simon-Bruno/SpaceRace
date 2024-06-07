@@ -18,6 +18,7 @@ func _enter_tree():
 
 func _ready():
 	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
+	$FloatingName.text = Network.playername
 
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
