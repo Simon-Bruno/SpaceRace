@@ -28,7 +28,7 @@ material = SubResource("StandardMaterial3D_oikiw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2c3c3"]
 
-[node name="Player" type="CharacterBody3D" groups=["Players"]]
+[node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 script = ExtResource("1_1we6x")
 

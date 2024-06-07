@@ -43,7 +43,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_detection_area_body_entered(body):
-	if body.has_method("player"):
+	if body.is_in_group("Players"):
+		print("player ented detection area enemy")
 		player = body
 		player_chase = true
 
@@ -52,20 +53,19 @@ func _on_detection_area_body_exited(body):
 		player = null
 		player_chase = false
 
-func enemy():
-	# Nodig om te identifien wat een enemy is
-	pass
-
 func _on_enemy_hitbox_body_entered(body):
-	if body.has_method("player"):
+	if body.is_in_group("Players"):
 		player_in_attack_zone = true
 
 func _on_enemy_hitbox_body_exited(body):
-	if body.has_method("player"):
+	if body.is_in_group("Players"):
 		player_in_attack_zone = false
 
 func take_damage(damage):
 	health -= damage
-	print("Enemy health: ", health)
+	print("Zombie health: ", health)
 	if health <= 0:
-		queue_free()
+		pass
+
+func die():
+	queue_free()

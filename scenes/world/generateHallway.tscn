@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dae1bw58vyt7d"]
+
+[node name="hallway" type="GridMap"]

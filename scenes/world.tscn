@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdh7l0lt65ro4"]
+[gd_scene load_steps=4 format=3 uid="uid://n62snpmyadi0"]
 
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
 [ext_resource type="Script" path="res://scenes/world/character_spawner.gd" id="1_ulv8m"]

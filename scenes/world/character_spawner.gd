@@ -23,3 +23,7 @@ func add_player_character(id):
 	enemy.position = Vector3(2,20,4)
 	add_child(enemy, true)
 	
+	var enemy2 = preload("res://scenes/enemy/enemy.tscn").instantiate()
+	enemy2.position = Vector3(8,20,4)
+	add_child(enemy2, true)
+	

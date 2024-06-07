@@ -3,10 +3,6 @@ extends CharacterBody3D
 @export var walk_speed = 15
 @export var walk_acceleration = 40
 @export var walk_deceleration = 50
-#@export var sprint_speed = 25
-#@export var sprint_acceleration = 80
-#@export var sprint_deceleration = 160
-
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 
@@ -41,10 +37,6 @@ func _horizontal_movement(delta):
 	vel.z = direction.y * speed
 
 	return vel
-
-# KEEP! IMPORTANT TO IDENTIFY PLAYER
-func player():
-	pass
 	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
@@ -60,7 +52,6 @@ func _vertical_movement(delta):
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
-	
 	velocity = h + v
 
 func _physics_process(delta):
