@@ -104,6 +104,7 @@ func draw_rooms() -> void:
 
 		make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
 
+
 # Places floor grid of x * z size based on room array
 func make_room(room : Array) -> void:
 	var start = Vector3i(room[2], 0, 0)
@@ -143,6 +144,15 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR)
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR)
 
+	place_doors(start_location, end_location)
+
+
+func place_doors(start_location : Vector3i, end_location : Vector3i) -> void:
+	self.set_cell_item(start_location + Vector3i(0, 1, 0), LDOORO, 22)
+	self.set_cell_item(start_location + Vector3i(0, 1, 1), RDOORO, 22)
+	
+	self.set_cell_item(end_location + Vector3i(0, 1, 0), RDOORO, 16)
+	self.set_cell_item(end_location + Vector3i(0, 0, 1), LDOORO, 16)
 
 # Sums the integers in an array
 static func sum_array(array):
