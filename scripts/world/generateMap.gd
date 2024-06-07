@@ -6,9 +6,16 @@ enum {GFLOOR, LDOORO, RDOORO, LDOOR, RDOOR, WALLSOFF, WALLSON, WALLB, WFLOOR, FL
 const HEIGHT : int = 0
 
 @export var room_amount : int = 15
-@export var room_width  : int = 20
-@export var room_height : int = 20
+@export var room_width  : int = 10
+@export var room_height : int = 10
 @export var room_margin : int = 7
+
+# How much the room size can variate
+var room_variation_x : int = 3
+var room_variation_y : int = 1
+
+# Stores the locations of the rooms. Each entry is: [width, height, startX]
+@export var rooms : Array = [] 
 
 # Stores game seed, which will be randomized at start of game, can be set to 
 # a custom value useing set_seed()
@@ -19,6 +26,7 @@ func _enter_tree():
 	if multiplayer.is_server():
 		$"../MultiplayerSynchronizer".set_multiplayer_authority(multiplayer.get_unique_id())
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if game_seed == 0:
@@ -26,6 +34,7 @@ func _ready() -> void:
 		build_map()
 	else:
 		set_seed(game_seed)
+
 
 # Generates a news seed that is stored in the game_seed variable.
 func new_seed() -> void:
@@ -44,8 +53,36 @@ func set_seed(new_seed : int) -> void:
 # TODO: Expand with all generation layers.
 func build_map() -> void:
 	self.clear()
+	define_rooms()
 	draw_rooms()
 	draw_walls()
+
+
+static func sumXValues(rooms : Array) -> int:
+	if rooms.is_empty():
+		return 0
+	var sum = 0
+	for i in rooms:
+		sum += i[0]
+	return sum
+
+
+# Builds the rooms e.g: width, height, startX
+func define_rooms() -> void:
+	var xMax = room_width + room_variation_x
+	var xMin = room_width - room_variation_x
+	
+	var yMax = room_width + room_variation_y
+	var yMin = room_width - room_variation_y
+	
+	for i in room_amount:
+		var x = randi_range(xMin, xMax)
+		var y = randi_range(yMin, yMax)
+		var start = sumXValues(rooms) + room_margin * i
+		
+		rooms.append([x, y, start])
+	
+	print(rooms)
 
 
 # Draws the full floorplan by:
@@ -54,23 +91,26 @@ func build_map() -> void:
 # 3. Place second room on same x-axis
 func draw_rooms() -> void:
 	for i in room_amount:
-		var room_start = (room_width + room_margin) * i - 1
-		make_room(Vector3i(room_start, 0, 0))
+		make_room(rooms[i])
 		
-		var zstart = randi_range(1, room_height - 2)
-		var zend = randi_range(1, room_height - 3)
+		if i == room_amount - 1:
+			break
 		
-		var xstart = room_start + room_width - 1
-		var xend = xstart + room_margin + 1
+		var zstart = randi_range(1, rooms[i][1] - 3)
+		var zend = randi_range(1, rooms[i + 1][1] - 3)
 		
-		if i != room_amount - 1:
-			make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+		var xstart = rooms[i][2] + rooms[i][0] - 1
+		var xend = rooms[i + 1][2]
 
-# Places floor grid of x * z size
-func make_room(start : Vector3i) -> void:
-	for h in room_height:
-		for w in room_width:
-			self.set_cell_item(start + Vector3i(h, HEIGHT, w), FLOOR)
+		make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+
+
+# Places floor grid of x * z size based on room array
+func make_room(room : Array) -> void:
+	var start = Vector3i(room[2], 0, 0)
+	for h in room[1]:
+		for w in room[0]:
+			self.set_cell_item(start + Vector3i(w, HEIGHT, h), FLOOR)
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
@@ -104,6 +144,15 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR)
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR)
 
+	place_doors(start_location, end_location)
+
+
+func place_doors(start_location : Vector3i, end_location : Vector3i) -> void:
+	self.set_cell_item(start_location + Vector3i(0, 1, 0), LDOORO, 22)
+	self.set_cell_item(start_location + Vector3i(0, 1, 1), RDOORO, 22)
+	
+	self.set_cell_item(end_location + Vector3i(0, 1, 0), RDOORO, 16)
+	self.set_cell_item(end_location + Vector3i(0, 0, 1), LDOORO, 16)
 
 # Sums the integers in an array
 static func sum_array(array):
