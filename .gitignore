@@ -3,7 +3,7 @@
 .env.example
 .env.local
 .env.staging
-.tres
+*/CustomBlocks/CustomBlocks.tres
 
 # Godot-specific ignores
 .import/
