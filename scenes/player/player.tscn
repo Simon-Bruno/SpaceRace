@@ -13,6 +13,9 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("Pivot:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("FloatingName:text")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oikiw"]
 albedo_color = Color(0.608341, 0.465065, 0.736269, 1)
@@ -55,6 +58,12 @@ wait_time = 0.5
 
 [node name="AttackCooldown" type="Timer" parent="PlayerCombat"]
 wait_time = 0.5
+
+[node name="FloatingName" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
+billboard = 1
+text = "placeholder"
+font_size = 100
 
 [connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]
