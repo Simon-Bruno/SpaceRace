@@ -308,7 +308,7 @@ mesh = SubResource("TextMesh_8f32b")
 skeleton = NodePath("../..")
 
 [node name="TeamA_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -21.8696, 3.40613, -18.9429)
+transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.0698, 2.40501, -18.9429)
 material_override = SubResource("StandardMaterial3D_r0207")
 mesh = SubResource("BoxMesh_186s4")
 skeleton = NodePath("../..")
@@ -320,7 +320,7 @@ outline_modulate = Color(0.751835, 0.46022, 1, 1)
 text = "TEAM A"
 
 [node name="TeamB_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.4148, 3.26258, -0.939115)
+transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.615, 2.26146, -0.939115)
 material_override = SubResource("StandardMaterial3D_r0207")
 mesh = SubResource("BoxMesh_186s4")
 skeleton = NodePath("../..")
@@ -333,7 +333,7 @@ text = "TEAM B
 "
 
 [node name="TeamX_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.5174, 3.26257, 17.5285)
+transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.7176, 2.26145, 17.5285)
 material_override = SubResource("StandardMaterial3D_r0207")
 mesh = SubResource("BoxMesh_186s4")
 skeleton = NodePath("../..")
@@ -346,7 +346,7 @@ text = "RANDOM
 "
 
 [node name="Quit_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 24.2082, 3.26257, 19.7239)
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 24.008, 2.26145, 19.7239)
 material_override = SubResource("StandardMaterial3D_r0207")
 mesh = SubResource("BoxMesh_186s4")
 skeleton = NodePath("../..")
@@ -381,6 +381,12 @@ shape = SubResource("CylinderShape3D_3uonl")
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5425, 1.36794, 17.7647)
 shape = SubResource("CylinderShape3D_66t8f")
 
+[node name="AreaQuit" type="Area3D" parent="."]
+
+[node name="CollisionShapeQuit" type="CollisionShape3D" parent="AreaQuit"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 23.9979, 1.36794, 19.7498)
+shape = SubResource("CylinderShape3D_66t8f")
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
@@ -391,3 +397,5 @@ spawn_path = NodePath("..")
 [connection signal="body_exited" from="Area3D2" to="." method="_on_team2_body_exited"]
 [connection signal="body_entered" from="Area3D3" to="." method="_on_random_body_entered"]
 [connection signal="body_exited" from="Area3D3" to="." method="_on_random_body_exited"]
+[connection signal="body_entered" from="AreaQuit" to="." method="_on_random_body_entered"]
+[connection signal="body_exited" from="AreaQuit" to="." method="_on_random_body_exited"]

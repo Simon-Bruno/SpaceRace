@@ -1,6 +1,7 @@
 extends Node
 
 @onready var start_timer = Timer.new()
+@onready var quit_button_area = $AreaQuit
 
 var world = preload("res://scenes/world.tscn")
 
@@ -16,6 +17,7 @@ func _ready():
 		start_timer.wait_time = 10.0
 		start_timer.one_shot = true
 		start_timer.connect("timeout", Callable(self, "_on_start_timer_timeout"))
+		quit_button_area.connect("body_entered", Callable(self, "_on_quit_button_body_entered"))  # Connect the signal
 
 func _on_start_timer_timeout():
 	_on_game_start.rpc()
@@ -107,3 +109,10 @@ func check_start_conditions():
 		if not start_timer.is_stopped():
 			start_timer.stop()
 			print("timer stop")
+
+func _on_quit_button_body_entered(body):
+	if body is CharacterBody3D:
+		_on_quit_button_pressed()
+
+func _on_quit_button_pressed():
+	get_tree().quit()
