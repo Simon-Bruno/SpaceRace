@@ -1,0 +1,197 @@
+[gd_scene load_steps=10 format=3 uid="uid://baog8vucx61nn"]
+
+[ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
+albedo_color = Color(0.973094, 0.666402, 0.526047, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m1p0p"]
+material = SubResource("StandardMaterial3D_xrsps")
+
+[sub_resource type="TextMesh" id="TextMesh_8f32b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0207"]
+albedo_color = Color(1, 0.168627, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo0dd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_186s4"]
+material = SubResource("ShaderMaterial_oo0dd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_63ka3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3dbk"]
+albedo_color = Color(1, 0.290196, 1, 1)
+
+[node name="Lobby" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0760918, 0.196878, -0.278904)
+script = ExtResource("1_a0um3")
+
+[node name="Assets" type="Node" parent="."]
+
+[node name="floors" type="Node" parent="Assets"]
+
+[node name="Floor3" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, 11.8425, 0.196878, 42.0535)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor4" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(20, 0, 0, 0, 5, 0, 0, 0, 20, -22.3279, 0.196878, 42.0535)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor5" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, -41.5165, 0.196878, 33.3337)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor6" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, -34.9384, 0.196878, 39.6127)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor7" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 41.0084, 0.196878, 39.6127)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor8" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 26.6563, 0.196878, -42.6131)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor9" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 35.9253, 0.196878, -33.045)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor10" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 35.9253, 0.196878, -33.045)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor11" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 35.9253, 0.196878, -33.045)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor12" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, -32.2474, 0.196878, -40.2211)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor13" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(25, 0, 0, 0, 5, 0, 0, 0, 20, 58.0516, 0.196878, -27.3639)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor14" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 15, 69.5898, 0.196878, -27.3171)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor15" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 15, 52.5007, 0.196878, -15.8081)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor16" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 40, 48.6643, 0.196878, 9.6512)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor17" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 60, -48.6389, 0.196878, -3.95034)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor18" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 55, -51.0802, 0.196878, -3.25282)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor19" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 45, -53.5215, 0.196878, -5.34537)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor20" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 35, 53.5469, 0.196878, 7.20987)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, -0.0760918, 0.196878, -0.278904)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Floor_text" type="Label3D" parent="Assets/floors/Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0607237, 0.58613, -0.430689)
+outline_modulate = Color(0.53259, 0.0341948, 0.59166, 1)
+text = "Multiplayer"
+font_size = 19
+
+[node name="Floor2" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="Head_text" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
+mesh = SubResource("TextMesh_8f32b")
+skeleton = NodePath("../..")
+
+[node name="TeamA_plate" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -21.8696, 3.40613, -18.9429)
+material_override = SubResource("StandardMaterial3D_r0207")
+mesh = SubResource("BoxMesh_186s4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_63ka3")
+
+[node name="TeamA_text" type="Label3D" parent="Assets/TeamA_plate"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.00695843, 1.08251, 0)
+outline_modulate = Color(0.751835, 0.46022, 1, 1)
+text = "TEAM A"
+
+[node name="TeamB_plate" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.4148, 3.26258, -0.939115)
+material_override = SubResource("StandardMaterial3D_r0207")
+mesh = SubResource("BoxMesh_186s4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
+
+[node name="TeamB_text" type="Label3D" parent="Assets/TeamB_plate"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.025104, 1.22606, -0.0242982)
+outline_modulate = Color(0.751835, 0.46022, 1, 1)
+text = "TEAM B
+"
+
+[node name="TeamX_plate" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.5174, 3.26257, 17.5285)
+material_override = SubResource("StandardMaterial3D_r0207")
+mesh = SubResource("BoxMesh_186s4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
+
+[node name="TeamX_text" type="Label3D" parent="Assets/TeamX_plate"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00870228, 1.22606, 0.0340403)
+outline_modulate = Color(0.751835, 0.46022, 1, 1)
+text = "RANDOM
+"
+
+[node name="Quit_plate" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 24.2082, 3.26257, 19.7239)
+material_override = SubResource("StandardMaterial3D_r0207")
+mesh = SubResource("BoxMesh_186s4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
+
+[node name="Quit_text" type="Label3D" parent="Assets/Quit_plate"]
+transform = Transform3D(1.25, 0, 0, 0, -4.37114e-08, 1, 0, -1.3, -5.68248e-08, -0.00546348, 1.22606, -0.0214792)
+outline_modulate = Color(0.873681, 0.267208, 0.398246, 1)
+text = "EXIT :(
+"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 80, 50)
