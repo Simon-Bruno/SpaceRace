@@ -12,6 +12,7 @@ var max_client_connections = 1
 
 #Username van de speler, moet veranderbaar zijn in game
 var playername
+var player_nodes = {}
 
 var players_connected = 0 
 var player_names = {}
@@ -94,3 +95,8 @@ func _on_join_pressed(ip, port):
 		get_node("/root/Main").add_child(world)
 		return true
 	return false
+
+
+@rpc("authority", "call_remote", "reliable")
+func _update_player_node_dict(dict):
+	player_nodes = dict
