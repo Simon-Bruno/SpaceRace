@@ -53,18 +53,28 @@ func build_map() -> void:
 # 2. Place a path between the first room and a random point at an x offset.
 # 3. Place second room on same x-axis
 func draw_rooms() -> void:
+	var xstart
+	var zstart
+	var xend
+	var zend
 	for i in room_amount:
 		var room_start = (room_width + room_margin) * i - 1
 		make_room(Vector3i(room_start, 0, 0))
 		
-		var zstart = randi_range(1, room_height - 2)
-		var zend = randi_range(1, room_height - 3)
+		zstart = randi_range(1, room_height - 2)
+		zend = randi_range(1, room_height - 3)
 		
-		var xstart = room_start + room_width - 1
-		var xend = xstart + room_margin + 1
+		xstart = room_start + room_width - 1
+		xend = xstart + room_margin + 1
 		
 		if i != room_amount - 1:
 			make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+			
+	var control_room = preload("res://scenes/world/end_room.tscn").instantiate()
+	control_room.position = Vector3i((room_width + room_margin) * room_amount - 1 , 0, 0)
+	add_child(control_room, true)
+	
+	make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, (room_height / 2)))
 
 # Places floor grid of x * z size
 func make_room(start : Vector3i) -> void:
