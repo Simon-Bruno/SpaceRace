@@ -8,13 +8,15 @@ signal server_disconnected
 signal player_added(id)
 signal player_spawned(object, id)
 # Excluding host
-var max_client_connections = 1
+var max_client_connections = 3
 
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
 
 #Username van de speler, moet veranderbaar zijn in game
 var playername
 var player_nodes = {}
+
+var player_teams = {}
 
 var players_connected = 0 
 var player_names = {}
