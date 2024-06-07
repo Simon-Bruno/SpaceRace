@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://bdh7l0lt65ro4"]
 
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
-[ext_resource type="Script" path="res://scenes/world/character_spawner.gd" id="1_ulv8m"]
+[ext_resource type="Script" path="res://scripts/world/world_spawner.gd" id="1_cc0sq"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1000, 1, 1000)
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_ulv8m")
+script = ExtResource("1_cc0sq")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
 
