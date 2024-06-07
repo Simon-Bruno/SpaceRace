@@ -17,7 +17,7 @@ size = Vector3(2, 1, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.97042)
 script = ExtResource("1_p0lul")
 
-[node name="PressurePlate" type="Node" parent="."]
+[node name="PressurePlate" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PressurePlate"]
 mesh = SubResource("BoxMesh_wlcrg")

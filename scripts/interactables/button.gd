@@ -30,5 +30,3 @@ func _process(delta):
 	if Input.is_action_just_pressed("object") and $ButtonText.is_visible():
 		print('Nu kan er iets gebeuren... Voeg hiervoor de betreffende scene toe als subnode van ButtonActivate')
 		$Door/AnimationPlayer.play("Door Sliding")
-		scale_door(2)
-		transform_door(2, 2, 2)
