@@ -8,11 +8,15 @@ signal server_disconnected
 signal player_added(id)
 signal player_spawned(object, id)
 # Excluding host
-var max_client_connections = 1
+var max_client_connections = 3
+
+var loaded_world = preload("res://scenes/lobby/lobby.tscn")
 
 #Username van de speler, moet veranderbaar zijn in game
 var playername
 var player_nodes = {}
+
+var player_teams = {}
 
 var players_connected = 0 
 var player_names = {}
@@ -37,7 +41,7 @@ func _on_host_pressed(port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = preload("res://scenes/world.tscn").instantiate()
+		var world = loaded_world.instantiate()
 		get_node("/root/Main/Menu").queue_free()
 		get_node("/root/Main").add_child(world)
 		await get_tree().create_timer(0.4).timeout
@@ -90,7 +94,7 @@ func _on_join_pressed(ip, port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_client(ip, port) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = preload("res://scenes/world.tscn").instantiate()
+		var world = loaded_world.instantiate()
 		get_node("/root/Main/Menu").queue_free()
 		get_node("/root/Main").add_child(world)
 		return true
