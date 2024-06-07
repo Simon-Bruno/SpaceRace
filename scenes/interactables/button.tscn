@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ckl8ocde3h7p8" path="res://scenes/interactables/door.tscn" id="2_s0dhi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eflyr"]
-albedo_color = Color(0.306699, 0.531991, 0.331917, 1)
+albedo_color = Color(0.346627, 0.429115, 0.833765, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wlcrg"]
 material = SubResource("StandardMaterial3D_eflyr")
