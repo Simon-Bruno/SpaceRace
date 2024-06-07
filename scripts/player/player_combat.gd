@@ -49,14 +49,9 @@ func _on_deal_attack_timer_timeout():
 	attack_in_progress = false
 	$DealAttackTimer.stop()
 
-#func take_damage(damage):
-	#health = max(0, health-damage)
-	#getHitCooldown = false
-	#$GetHitCooldown.start()
-
 func apply_damage_to_enemy():
 	if enemy_in_range and targeted_enemy:
-		targeted_enemy.take_damage(20)
+		targeted_enemy.take_damage(20, self)
 		print("Enemy took damage, health: ", targeted_enemy.health)
 
 func _on_GetHitCooldown_timeout():

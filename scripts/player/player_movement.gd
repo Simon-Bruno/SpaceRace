@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export var jump_impulse = 20
 var getHitCooldown = true
 var health = 100
+var points = 0
 
 var speed = 0
 var direction = Vector2.ZERO
@@ -33,8 +34,7 @@ func _horizontal_movement(delta):
 	# accelerate if moving
 	if current_direction != Vector2.ZERO:
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-	# decelerate
-	else:
+	else: 	# decelerate
 		speed = max(0, speed - walk_deceleration  * delta)
 
 	direction = (direction + current_direction).normalized()
@@ -43,7 +43,6 @@ func _horizontal_movement(delta):
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed
-
 	return vel
 	
 func _vertical_movement(delta):

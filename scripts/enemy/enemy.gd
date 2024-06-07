@@ -8,6 +8,8 @@ extends CharacterBody3D
 var player_chase = false
 var targeted_player = null
 
+var last_damaged_by = null
+
 var health = 100
 var player_in_attack_zone = false
 
@@ -26,6 +28,9 @@ func _process(delta):
 		
 	if player_in_attack_zone and targeted_player.getHitCooldown:
 		targeted_player.take_damage(20)
+	
+	if health <= 0:
+		die() 
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -63,8 +68,11 @@ func _on_enemy_hitbox_body_exited(body):
 	if body.is_in_group("Players"):
 		player_in_attack_zone = false
 		
-func take_damage(damage):
+func take_damage(damage, source):
 	health = max(0, health-damage)
+	last_damaged_by = source
 
 func die():
+	if last_damaged_by.is_in_group("Players"):
+		last_damaged_by.points += 5
 	queue_free()
