@@ -20,17 +20,20 @@ viewport_path = NodePath("ButtonText/SubViewport2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.97042)
 script = ExtResource("1_rlorl")
 
-[node name="Button" type="Node" parent="."]
+[node name="Button" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38419e-07, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
-transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 2.08165e-12, 0.5, 0.110023)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.07419, 0.1)
+layers = 4
 mesh = SubResource("BoxMesh_wlcrg")
-metadata/_edit_group_ = true
 
 [node name="Area3D" type="Area3D" parent="Button"]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Button/Area3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.206048, 0.724766, 0.5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.01053, 0.5)
 shape = SubResource("BoxShape3D_vr0lf")
 
 [node name="ButtonText" type="Sprite3D" parent="."]
@@ -38,7 +41,6 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 2.62369, -9.03655)
 visible = false
 billboard = 1
 texture = SubResource("ViewportTexture_drfv7")
-metadata/_edit_group_ = true
 
 [node name="SubViewport2" type="SubViewport" parent="ButtonText"]
 transparent_bg = true

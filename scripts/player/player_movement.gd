@@ -15,13 +15,6 @@ extends CharacterBody3D
 var speed = 0
 var direction = Vector2.ZERO
 
-func _enter_tree():
-	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
-
-func _ready():
-	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
-	$FloatingName.text = Network.playername
-
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 
@@ -44,10 +37,6 @@ func _horizontal_movement(delta):
 
 	return vel
 
-# KEEP! IMPORTANT TO IDENTIFY PLAYER
-func player():
-	pass
-	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 	
@@ -64,13 +53,15 @@ func _player_movement(delta):
 	var v = _vertical_movement(delta)
 	
 	velocity = h + v
-
-func _physics_process(delta):	
-	if $MultiplayerSynchronizer.is_multiplayer_authority():
-		_player_movement(delta)
-		move_and_slide()
-
+	
+func move_object():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
+
+func _physics_process(delta):	
+	_player_movement(delta)
+	move_and_slide()
+	move_object()
+	
