@@ -12,7 +12,7 @@ const HEIGHT : int = 0
 
 # How much the room size can variate
 var room_variation_x : int = 3
-var room_variation_y : int = 3
+var room_variation_y : int = 1
 
 # Stores the locations of the rooms. Each entry is: [width, height, startX]
 @export var rooms : Array = [] 
