@@ -4,6 +4,8 @@ enum {GFLOOR, LDOORO, RDOORO, LDOOR, RDOOR, WALLSOFF, WALLSON, WALLB, WFLOOR, FL
 
 # At what y level is the floor
 const HEIGHT : int = 0
+const ROTATIONS : Array = [0, 16, 10, 22]
+const PAIRS = {LDOORO: RDOORO, RDOORO: LDOORO, LDOOR: RDOOR, RDOOR:LDOOR, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 @export var room_amount : int = 15
 @export var room_width  : int = 10
@@ -56,6 +58,40 @@ func build_map() -> void:
 	define_rooms()
 	draw_rooms()
 	draw_walls()
+	draw_windows()
+	mirror_world()
+	
+
+static func new_orientation(item : int, orientation : int) -> int:
+	match item:
+		WALLC:
+			var new_rotation = [16, 0, 22, 10]
+			orientation = new_rotation[ROTATIONS.find(orientation)]
+		_:
+			if orientation == 0:
+				orientation = 10
+			elif orientation == 10:
+				orientation = 0
+
+	return orientation
+	
+static func new_item(item : int) -> int:
+	return PAIRS[item] if PAIRS.has(item) else item
+
+func mirror_world() -> void:
+	for x in self.get_used_cells():
+		var item = self.get_cell_item(x)
+		var orientation = self.get_cell_item_orientation(x)
+
+		orientation = new_orientation(item, orientation)
+		item = new_item(item)
+
+		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
+		self.set_cell_item(new_location, item, orientation)
+	
+	
+func draw_windows() -> void:
+	print("Draw Windows")
 
 
 static func sumXValues(rooms : Array) -> int:
