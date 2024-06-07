@@ -13,7 +13,7 @@ func _ready():
 		Network.player_added.connect(Callable(self, "add_player_character"))
 		add_child(start_timer)
 		start_timer.stop()
-		start_timer.wait_time = 10.0
+		start_timer.wait_time = 0.0
 		start_timer.one_shot = true
 		start_timer.connect("timeout", Callable(self, "_on_start_timer_timeout"))
 

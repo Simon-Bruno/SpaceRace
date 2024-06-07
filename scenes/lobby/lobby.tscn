@@ -358,6 +358,12 @@ outline_modulate = Color(0.873681, 0.267208, 0.398246, 1)
 text = "EXIT :(
 "
 
+[node name="Press K to start" type="Label3D" parent="Assets"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.454, 3, 34.397)
+pixel_size = 0.1285
+text = "Press 'K' to play
+"
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 80, 50)
 
