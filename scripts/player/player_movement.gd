@@ -10,6 +10,8 @@ extends CharacterBody3D
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 
+@export var push_force = 1
+
 var speed = 0
 var direction = Vector2.ZERO
 
@@ -55,3 +57,8 @@ func _player_movement(delta):
 func _physics_process(delta):	
 	_player_movement(delta)
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
