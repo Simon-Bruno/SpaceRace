@@ -6,6 +6,7 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
+signal player_nodes_changed()
 signal player_spawned(object, id)
 # Excluding host
 var max_client_connections = 1
@@ -100,3 +101,4 @@ func _on_join_pressed(ip, port):
 @rpc("authority", "call_remote", "reliable")
 func _update_player_node_dict(dict):
 	player_nodes = dict
+	player_nodes_changed.emit()

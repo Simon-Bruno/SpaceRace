@@ -16,6 +16,7 @@ func add_player_character(id):
 	add_child(character)
 	Network.player_nodes[id] = character
 	Network.player_spawned.emit(character, id)
+	Network.player_nodes_changed.emit()
 	Network._update_player_node_dict.rpc(Network.player_nodes)
 	
 	#TODO: Remove hardcode enemy
