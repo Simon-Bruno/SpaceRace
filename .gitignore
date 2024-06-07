@@ -3,6 +3,7 @@
 .env.example
 .env.local
 .env.staging
+.tres
 
 # Godot-specific ignores
 .import/
