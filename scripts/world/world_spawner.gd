@@ -13,7 +13,9 @@ func _ready():
 		add_child(enemy, true)
 		Network.player_added.connect(add_player_character)
 
+
 func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	add_child(character)
+
