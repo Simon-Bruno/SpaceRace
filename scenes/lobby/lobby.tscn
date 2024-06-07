@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=33 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 
@@ -83,9 +83,11 @@ material = SubResource("ShaderMaterial_oo0dd")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3dbk"]
 albedo_color = Color(1, 0.290196, 1, 1)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0vp51"]
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3uonl"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0vp51"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_66t8f"]
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
@@ -363,15 +365,21 @@ transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, 0.000473022, -1.1218)
-shape = SubResource("CylinderShape3D_3uonl")
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, 1.00047, -18.0948)
+shape = SubResource("CylinderShape3D_0vp51")
 
 [node name="Area3D2" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.973)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, 0.000473022, -1.1218)
-shape = SubResource("CylinderShape3D_0vp51")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, -0.999527, 15.8512)
+shape = SubResource("CylinderShape3D_3uonl")
+
+[node name="Area3D3" type="Area3D" parent="."]
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D3"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5425, 1.36794, 17.7647)
+shape = SubResource("CylinderShape3D_66t8f")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
@@ -381,3 +389,5 @@ spawn_path = NodePath("..")
 [connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
 [connection signal="body_entered" from="Area3D2" to="." method="_on_team2_body_entered"]
 [connection signal="body_exited" from="Area3D2" to="." method="_on_team2_body_exited"]
+[connection signal="body_entered" from="Area3D3" to="." method="_on_random_body_entered"]
+[connection signal="body_exited" from="Area3D3" to="." method="_on_random_body_exited"]
