@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxnsgqthgkbxc"]
+
+[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="1_1we6x"]
+[ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v5bfw"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Pivot:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("FloatingName:text")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oikiw"]
+albedo_color = Color(0.608341, 0.465065, 0.736269, 1)
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_17as0"]
+material = SubResource("StandardMaterial3D_oikiw")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4bp7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2c3c3"]
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_1we6x")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v5bfw")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+mesh = SubResource("BoxMesh_17as0")
+skeleton = NodePath("../../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_r4bp7")
+
+[node name="PlayerHitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_2c3c3")
+
+[node name="PlayerCombat" type="Node3D" parent="."]
+script = ExtResource("2_wfppx")
+
+[node name="DealAttackTimer" type="Timer" parent="PlayerCombat"]
+wait_time = 0.5
+
+[node name="AttackCooldown" type="Timer" parent="PlayerCombat"]
+wait_time = 0.5
+
+[node name="FloatingName" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
+billboard = 1
+text = "placeholder"
+font_size = 100
+
+[connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
+[connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="PlayerCombat/DealAttackTimer" to="PlayerCombat" method="_on_deal_attack_timer_timeout"]
+[connection signal="timeout" from="PlayerCombat/AttackCooldown" to="PlayerCombat" method="_on_attack_cooldown_timeout"]
