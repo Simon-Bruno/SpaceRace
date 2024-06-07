@@ -7,7 +7,6 @@ extends CharacterBody3D
 
 var player_chase = false
 var targeted_player = null
-
 var last_damaged_by = null
 
 var health = 100
@@ -73,6 +72,7 @@ func take_damage(damage, source):
 	last_damaged_by = source
 
 func die():
-	if last_damaged_by.is_in_group("Players"):
-		last_damaged_by.points += 5
+	print(last_damaged_by)
+	if last_damaged_by.get_parent().is_in_group("Players"):
+		last_damaged_by.get_parent().points += 5
 	queue_free()

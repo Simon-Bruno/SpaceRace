@@ -12,12 +12,6 @@ var points = 0
 var speed = 0
 var direction = Vector2.ZERO
 
-func take_damage(damage):
-	health = max(0, health-damage)
-	getHitCooldown = false
-	print("took damaga", health)
-	$PlayerCombat/GetHitCooldown.start()
-
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
@@ -27,18 +21,14 @@ func _ready():
 
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
-
-	# horizontal movement
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
-	# accelerate if moving
-	if current_direction != Vector2.ZERO:
+	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
 	else: 	# decelerate
 		speed = max(0, speed - walk_deceleration  * delta)
 
 	direction = (direction + current_direction).normalized()
-
 	$Pivot.basis = Basis.looking_at(Vector3(direction[0] or 0.001, 0, direction[1]))
 
 	vel.x = direction.x * speed
@@ -62,3 +52,9 @@ func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority():
 		_player_movement(delta)
 		move_and_slide()
+
+# Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
+func take_damage(damage):
+	health = max(0, health-damage)
+	getHitCooldown = false
+	$PlayerCombat/GetHitCooldown.start()

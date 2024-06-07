@@ -7,21 +7,32 @@ var attack_in_progress = false
 var player_movement_script = null
 var targeted_enemy = null 
 
+@onready var player_node = get_parent()
+@onready var grandparent = player_node.get_parent()
 
 
 func die():
 	player_alive = false
+	grandparent.remove_child(player_node)
+	print($RespawnTimer)
+	$RespawnTimer.start()
+
+func _on_respawn_timer_timeout():
+	print("timer timeout!")
+	respawn()
+	
+func respawn():
+	print("respawning")
+	grandparent.add_child(player_node)
 
 func _process(_delta):
-	if get_parent().health <= 0:
+	if get_parent().health <= 0 and player_alive:
 		die()
-
-	#enemy_attack()
 	player_attack()
+	print($RespawnTimer.time_left)
 
 func _on_player_hitbox_body_entered(body):
 	if body.is_in_group("Enemies"):
-		print("enemy entered player hitbox")
 		enemy_in_range = true
 		targeted_enemy = body 
 
@@ -30,29 +41,20 @@ func _on_player_hitbox_body_exited(body):
 		enemy_in_range = false
 		targeted_enemy = null 
 
-#func enemy_attack():
-	#if enemy_in_range and getHitCooldown:
-		#take_damage(20)
-		#print("Player got hit by," + str(targeted_enemy) + " health: " + str(health))
-		#getHitCooldown = false
-		#$GetHitCooldown.start()
-
 func player_attack():
 	if Input.is_action_just_pressed("attack"):
-		Global.player_attacking = true
 		attack_in_progress = true
 		apply_damage_to_enemy()
 		$DealAttackTimer.start()
 
 func _on_deal_attack_timer_timeout():
-	Global.player_attacking = false
 	attack_in_progress = false
 	$DealAttackTimer.stop()
 
 func apply_damage_to_enemy():
 	if enemy_in_range and targeted_enemy:
 		targeted_enemy.take_damage(20, self)
-		print("Enemy took damage, health: ", targeted_enemy.health)
 
 func _on_GetHitCooldown_timeout():
 	get_parent().getHitCooldown = true
+
