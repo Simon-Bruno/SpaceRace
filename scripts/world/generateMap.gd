@@ -4,14 +4,17 @@ enum {GFLOOR, LDOORO, RDOORO, LDOOR, RDOOR, WALLSOFF, WALLSON, WALLB, WFLOOR, FL
 
 # At what y level is the floor
 const HEIGHT : int = 0
+const ROTATIONS : Array = [0, 16, 10, 22]
+const PAIRS = {LDOORO: RDOORO, RDOORO: LDOORO, LDOOR: RDOOR, RDOOR:LDOOR, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 @export var room_amount : int = 15
 @export var room_width  : int = 10
 @export var room_height : int = 10
 @export var room_margin : int = 7
 
-# How much the room size can variate
-var room_variation_x : int = 3
+# How much the room size can variate in incraments of 2. e.g 10 with variation 1
+# can return 8, 10, or 12.
+var room_variation_x : int = 1
 var room_variation_y : int = 1
 
 # Stores the locations of the rooms. Each entry is: [width, height, startX]
@@ -20,6 +23,7 @@ var room_variation_y : int = 1
 # Stores game seed, which will be randomized at start of game, can be set to 
 # a custom value useing set_seed()
 @export var game_seed : int = 0
+
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -49,6 +53,7 @@ func set_seed(new_seed : int) -> void:
 	seed(new_seed)
 	build_map()
 
+
 # Main function that builds the map. Clears the map first to stop overlap.
 # TODO: Expand with all generation layers.
 func build_map() -> void:
@@ -56,8 +61,58 @@ func build_map() -> void:
 	define_rooms()
 	draw_rooms()
 	draw_walls()
+	draw_windows()
+	
+	mirror_world()
 
 
+# Rotates function to new 
+static func new_orientation(item : int, orientation : int) -> int:
+	var new_rotation = []
+	match item:
+		WALLC:
+			new_rotation = [16, 0, 22, 10]
+		_:
+			new_rotation = [10, 16, 0, 22]
+
+	return new_rotation[ROTATIONS.find(orientation)]
+
+
+# Checks if item needs to be switched. For multi item tiles.
+static func new_item(item : int) -> int:
+	return PAIRS[item] if PAIRS.has(item) else item
+
+
+# This function mirrors all item in the world and copies them to the -z axis.
+# It checks if an item needs to be rotated and, in case of a multi-block item,
+# if it needs to be swapped.
+func mirror_world() -> void:
+	for x in self.get_used_cells():
+		var item = self.get_cell_item(x)
+		var orientation = self.get_cell_item_orientation(x)
+
+		orientation = new_orientation(item, orientation)
+		item = new_item(item)
+
+		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
+		self.set_cell_item(new_location, item, orientation)
+
+
+# Draws windows with 2 normal walls in between and centers it on the middle of the wall.
+# Only works on the connecting walls.
+func draw_windows() -> void:
+	for room in rooms:
+		var start = room[2] + 1 if (room[0] / 2) % 2 == 0 else room[2] + 2
+
+		self.set_cell_item(Vector3i(start, 1, 0), WINDOWL)
+		self.set_cell_item(Vector3i(start + 1, 1, 0), WINDOWR)
+		while start < room[2] + room[0] - 4:
+			start += 4
+			self.set_cell_item(Vector3i(start, 1, 0), WINDOWL)
+			self.set_cell_item(Vector3i(start + 1, 1, 0), WINDOWR)
+
+
+# Summs all x values in an array based on the rooms variable.
 static func sumXValues(rooms : Array) -> int:
 	if rooms.is_empty():
 		return 0
@@ -76,8 +131,8 @@ func define_rooms() -> void:
 	var yMin = room_width - room_variation_y
 	
 	for i in room_amount:
-		var x = randi_range(xMin, xMax)
-		var y = randi_range(yMin, yMax)
+		var x = randi_range(xMin / 2, xMax / 2 + 1) * 2
+		var y = randi_range(yMin / 2, yMax / 2 + 1) * 2
 		var start = sumXValues(rooms) + room_margin * i
 		
 		rooms.append([x, y, start])

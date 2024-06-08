@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://btxasx3bw2gsj"]
 
-[ext_resource type="MeshLibrary" uid="uid://ds40u72ta4rhu" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_eeej6"]
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
+[ext_resource type="MeshLibrary" uid="uid://caegouni4r05v" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_fwh37"]
 
 [sub_resource type="Environment" id="Environment_mgk52"]
 
@@ -16,9 +16,13 @@ properties/0/replication_mode = 2
 environment = SubResource("Environment_mgk52")
 
 [node name="WorldGeneration" type="GridMap" parent="."]
-mesh_library = ExtResource("1_eeej6")
+mesh_library = ExtResource("1_fwh37")
 cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(0, 0, 9, 1, 0, 9, 2, 0, 9, 3, 0, 9, 3, 1, 9, 2, 1, 9, 1, 1, 9, 0, 1, 9, 0, 2, 9, 1, 2, 9, 2, 2, 9, 3, 2, 9, 4, 0, 9, 5, 0, 9, 6, 0, 9, 7, 0, 9, 8, 0, 9, 7, 1, 9, 7, 2, 9, 6, 2, 9, 6, 1, 9, 5, 1, 9, 5, 2, 9, 4, 2, 9, 4, 1, 9, 8, 1, 9, 8, 2, 9, 65537, 0, 13, 65538, 0, 18, 65536, 0, 12, 65539, 0, 14, 65541, 0, 13, 65542, 0, 18, 65543, 0, 14, 65540, 0, 14, 65544, 0, 1441804, 65541, 65535, 655378, 65542, 65535, 655373)
+}
 script = ExtResource("1_een4t")
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.79673, 0.604335, 0, -0.604335, -0.79673, 0, 0, 0, 1, 0, 133.512, 0)
