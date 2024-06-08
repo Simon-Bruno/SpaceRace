@@ -12,8 +12,9 @@ const PAIRS = {LDOORO: RDOORO, RDOORO: LDOORO, LDOOR: RDOOR, RDOOR:LDOOR, WINDOW
 @export var room_height : int = 10
 @export var room_margin : int = 7
 
-# How much the room size can variate
-var room_variation_x : int = 3
+# How much the room size can variate in incraments of 2. e.g 10 with variation 1
+# can return 8, 10, or 12.
+var room_variation_x : int = 1
 var room_variation_y : int = 1
 
 # Stores the locations of the rooms. Each entry is: [width, height, startX]
@@ -22,6 +23,7 @@ var room_variation_y : int = 1
 # Stores game seed, which will be randomized at start of game, can be set to 
 # a custom value useing set_seed()
 @export var game_seed : int = 0
+
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -51,6 +53,7 @@ func set_seed(new_seed : int) -> void:
 	seed(new_seed)
 	build_map()
 
+
 # Main function that builds the map. Clears the map first to stop overlap.
 # TODO: Expand with all generation layers.
 func build_map() -> void:
@@ -59,25 +62,30 @@ func build_map() -> void:
 	draw_rooms()
 	draw_walls()
 	draw_windows()
-	mirror_world()
 	
+	mirror_world()
 
+
+# Rotates function to new 
 static func new_orientation(item : int, orientation : int) -> int:
+	var new_rotation = []
 	match item:
 		WALLC:
-			var new_rotation = [16, 0, 22, 10]
-			orientation = new_rotation[ROTATIONS.find(orientation)]
+			new_rotation = [16, 0, 22, 10]
 		_:
-			if orientation == 0:
-				orientation = 10
-			elif orientation == 10:
-				orientation = 0
+			new_rotation = [10, 16, 0, 22]
 
-	return orientation
-	
+	return new_rotation[ROTATIONS.find(orientation)]
+
+
+# Checks if item needs to be switched. For multi item tiles.
 static func new_item(item : int) -> int:
 	return PAIRS[item] if PAIRS.has(item) else item
 
+
+# This function mirrors all item in the world and copies them to the -z axis.
+# It checks if an item needs to be rotated and, in case of a multi-block item,
+# if it needs to be swapped.
 func mirror_world() -> void:
 	for x in self.get_used_cells():
 		var item = self.get_cell_item(x)
@@ -88,12 +96,14 @@ func mirror_world() -> void:
 
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		self.set_cell_item(new_location, item, orientation)
-	
-	
+
+
 func draw_windows() -> void:
-	print("Draw Windows")
+	for room in rooms:
+		var usable = room[0] - 2
 
 
+# Summs all x values in an array based on the rooms variable.
 static func sumXValues(rooms : Array) -> int:
 	if rooms.is_empty():
 		return 0
@@ -112,8 +122,8 @@ func define_rooms() -> void:
 	var yMin = room_width - room_variation_y
 	
 	for i in room_amount:
-		var x = randi_range(xMin, xMax)
-		var y = randi_range(yMin, yMax)
+		var x = randi_range(xMin / 2, xMax / 2 + 1) * 2
+		var y = randi_range(yMin / 2, yMax / 2 + 1) * 2
 		var start = sumXValues(rooms) + room_margin * i
 		
 		rooms.append([x, y, start])
