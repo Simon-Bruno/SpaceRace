@@ -4,13 +4,14 @@ extends Control
 @onready var leave_button = $LeaveButton
 @onready var send_button = $SendButton
 @onready var message_input = $MessageInput
-
+@onready var message_timer = $MessageTimer
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed or Input.is_key_pressed(KEY_ESCAPE):
 		Global.in_chat = false
 		message_input.release_focus()
 		send_button.release_focus()
+		message_timer.start(10.0)
 
 
 # Handle send button pressed for chat functionality
@@ -46,7 +47,13 @@ func msg_rpc(sender, message):
 	message_display.bbcode_enabled = true
 	message_display.text += str(new_timestamp())
 	message_display.text += " " + colored_sender_id + ": " + message + "\n"
+	message_display.set_scroll_follow(true)
+	message_display.visible = true
 
+
+func leave_game():
+	if message_input.text == "/leave":
+		_on_leave_button_pressed()
 
 func _on_message_input_text_submitted(new_text):
 	_on_send_pressed()
@@ -55,3 +62,8 @@ func _on_message_input_text_submitted(new_text):
 func _on_message_input_focus_entered():
 	message_input.set_max_length(1024)
 	Global.in_chat = true
+	message_display.visible = true
+
+
+func _on_message_timer_timeout():
+	message_display.visible = false

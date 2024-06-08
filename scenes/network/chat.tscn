@@ -42,7 +42,18 @@ offset_right = 219.0
 offset_bottom = 647.0
 text = "Send"
 
+[node name="MessageTimer" type="Timer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
 [connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="focus_entered" from="MessageInput" to="." method="_on_message_input_focus_entered"]
 [connection signal="text_submitted" from="MessageInput" to="." method="_on_message_input_text_submitted"]
 [connection signal="pressed" from="SendButton" to="." method="_on_send_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
