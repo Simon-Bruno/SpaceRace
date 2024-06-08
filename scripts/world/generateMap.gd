@@ -98,9 +98,18 @@ func mirror_world() -> void:
 		self.set_cell_item(new_location, item, orientation)
 
 
+# Draws windows with 2 normal walls in between and centers it on the middle of the wall.
+# Only works on the connecting walls.
 func draw_windows() -> void:
 	for room in rooms:
-		var usable = room[0] - 2
+		var start = room[2] + 1 if (room[0] / 2) % 2 == 0 else room[2] + 2
+
+		self.set_cell_item(Vector3i(start, 1, 0), WINDOWL)
+		self.set_cell_item(Vector3i(start + 1, 1, 0), WINDOWR)
+		while start < room[2] + room[0] - 4:
+			start += 4
+			self.set_cell_item(Vector3i(start, 1, 0), WINDOWL)
+			self.set_cell_item(Vector3i(start + 1, 1, 0), WINDOWR)
 
 
 # Summs all x values in an array based on the rooms variable.
