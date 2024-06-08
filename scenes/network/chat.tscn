@@ -13,29 +13,9 @@ script = ExtResource("1_as2nd")
 
 [node name="MessageDisplay" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 323.0
-offset_right = 212.0
-offset_bottom = 523.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -34.0
-offset_right = 233.0
-grow_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="MessageInput" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="SendButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Send"
+offset_top = 417.0
+offset_right = 217.0
+offset_bottom = 617.0
 
 [node name="LeaveButton" type="Button" parent="."]
 layout_mode = 1
@@ -47,5 +27,22 @@ offset_bottom = 53.0
 grow_horizontal = 0
 text = "Leave Game"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/SendButton" to="." method="_on_send_pressed"]
+[node name="MessageInput" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 616.0
+offset_right = 171.0
+offset_bottom = 647.0
+
+[node name="SendButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 172.0
+offset_top = 616.0
+offset_right = 219.0
+offset_bottom = 647.0
+text = "Send"
+
 [connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
+[connection signal="focus_entered" from="MessageInput" to="." method="_on_message_input_focus_entered"]
+[connection signal="text_submitted" from="MessageInput" to="." method="_on_message_input_text_submitted"]
+[connection signal="pressed" from="SendButton" to="." method="_on_send_pressed"]

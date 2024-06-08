@@ -20,6 +20,7 @@ func _ready():
 	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
 	$FloatingName.text = Network.playername
 
+
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 
@@ -64,6 +65,6 @@ func _player_movement(delta):
 	velocity = h + v
 
 func _physics_process(delta):
-	if $MultiplayerSynchronizer.is_multiplayer_authority():
+	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		_player_movement(delta)
 		move_and_slide()
