@@ -18,7 +18,7 @@ config/icon="res://assets/menu/icon.svg"
 [autoload]
 
 Network="*res://scripts/network/Network.gd"
-Global="*res://scripts/global.gd"
+Global="*res://scripts/Global.gd"
 
 [editor_plugins]
 
