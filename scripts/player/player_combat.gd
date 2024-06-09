@@ -17,7 +17,12 @@ func die():
 func _process(_delta):
 	if get_parent().health <= 0:
 		die()
-	player_attack()
+	
+func _input(event):
+	if event.is_action_pressed("attack"):
+		attack_in_progress = true
+		apply_damage_to_enemy()
+		$DealAttackTimer.start()
 
 func _on_player_hitbox_body_entered(body):
 	if body.is_in_group("Enemies"):
@@ -28,12 +33,6 @@ func _on_player_hitbox_body_exited(body):
 	if body.is_in_group("Enemies"):
 		enemy_in_range = false
 		targeted_enemy = null 
-
-func player_attack():
-	if Input.is_action_just_pressed("attack"):
-		attack_in_progress = true
-		apply_damage_to_enemy()
-		$DealAttackTimer.start()
 
 func _on_deal_attack_timer_timeout():
 	attack_in_progress = false
