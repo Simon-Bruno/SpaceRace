@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://o2hliiwxaov7"
+path="res://.godot/imported/wallDesk.obj-25b22e64844e1a916ff54656f64b2470.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wallDesk.obj-25b22e64844e1a916ff54656f64b2470.mesh"]
+
+source_file="res://assets/CustomBlocks/walls/wallDesk.obj"
+dest_files=["res://.godot/imported/wallDesk.obj-25b22e64844e1a916ff54656f64b2470.mesh", "res://.godot/imported/wallDesk.obj-25b22e64844e1a916ff54656f64b2470.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
