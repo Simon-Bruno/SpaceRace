@@ -6,3 +6,5 @@
 script = ExtResource("1_h54ip")
 
 [node name="RespawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

@@ -59,9 +59,6 @@ wait_time = 0.5
 [node name="GetHitCooldown" type="Timer" parent="PlayerCombat"]
 wait_time = 0.5
 
-[node name="RespawnTimer" type="Timer" parent="PlayerCombat"]
-wait_time = 0.5
-
 [node name="FloatingName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
 billboard = 1
@@ -72,4 +69,3 @@ font_size = 100
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="PlayerCombat/DealAttackTimer" to="PlayerCombat" method="_on_deal_attack_timer_timeout"]
 [connection signal="timeout" from="PlayerCombat/GetHitCooldown" to="PlayerCombat" method="_on_GetHitCooldown_timeout"]
-[connection signal="timeout" from="PlayerCombat/RespawnTimer" to="PlayerCombat" method="_on_respawn_timer_timeout"]

@@ -8,28 +8,17 @@ var player_movement_script = null
 var targeted_enemy = null 
 
 @onready var player_node = get_parent()
-@onready var grandparent = player_node.get_parent()
+@onready var player_spawner_node = player_node.get_parent()
 
 
 func die():
-	player_alive = false
-	grandparent.remove_child(player_node)
-	print($RespawnTimer)
-	$RespawnTimer.start()
-
-func _on_respawn_timer_timeout():
-	print("timer timeout!")
-	respawn()
-	
-func respawn():
-	print("respawning")
-	grandparent.add_child(player_node)
+	player_spawner_node.player_died(player_node)
+	print("player died in player combat node")
 
 func _process(_delta):
-	if get_parent().health <= 0 and player_alive:
+	if get_parent().health <= 0:
 		die()
 	player_attack()
-	print($RespawnTimer.time_left)
 
 func _on_player_hitbox_body_entered(body):
 	if body.is_in_group("Enemies"):

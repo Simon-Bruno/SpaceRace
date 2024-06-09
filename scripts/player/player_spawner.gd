@@ -22,11 +22,17 @@ func add_player_character(id):
 	var enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
 	enemy.position = Vector3(2,20,4)
 	add_child(enemy, true)
-	
-	var enemy2 = preload("res://scenes/enemy/enemy.tscn").instantiate()
-	enemy2.position = Vector3(8,20,4)
-	add_child(enemy2, true)
 
-func respawn_player():
-	pass
+var player = null
+func player_died(dead_player):
+	player = dead_player
+	self.remove_child(dead_player)
+	$RespawnTimer.start()
 	
+func respawn_player():
+	player.health = 40
+	add_child(player)
+
+
+func _on_respawn_timer_timeout():
+	respawn_player()
