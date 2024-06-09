@@ -136,8 +136,6 @@ func define_rooms() -> void:
 		var start = sumXValues(rooms) + room_margin * i
 		
 		rooms.append([x, y, start])
-	
-	print(rooms)
 
 
 # Draws the full floorplan by:

@@ -7,10 +7,11 @@ var world = preload("res://scenes/world.tscn")
 var team1 = []
 var team2 = []
 var random = []
+var player_id = null
 
 func _ready():
 	if multiplayer.is_server():
-		Network.player_added.connect(Callable(self, "add_player_character"))
+		Network.player_added.connect(Callable(self, "lobby_add_player_character"))
 		add_child(start_timer)
 		start_timer.stop()
 		start_timer.wait_time = 0.0
@@ -35,19 +36,25 @@ func _on_start_timer_timeout():
 
 func _process(_delta):
 	if multiplayer.is_server():
-		print(team1.size(), " : ", team2.size(), " : ", random.size())
 		if ((team1.size() == 2 and team2.size() == 2) or random.size() == 4 or Input.is_action_just_pressed("StartGame")) and start_timer.is_stopped():
 			start_timer.start()
 			print("timer start")
 
-func add_player_character(id):
+func lobby_add_player_character(id):
+	player_id = id
+	print("lobby script add player character id: ", id)
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
+	Network.player_nodes[id] = character
+	Network.player_spawned.emit(character, id)
+	Network._update_player_node_dict.rpc(Network.player_nodes)
 	add_child(character)
 
 @rpc("authority", "call_local", "reliable")
 func _on_game_start():
 	get_node("/root/Main/Lobby").queue_free()
+	Network.player_added.emit(1)
+
 	
 func assign_teams():
 	random.shuffle()

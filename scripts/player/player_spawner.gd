@@ -1,22 +1,17 @@
-extends Node3D
-
-
-# Called when the node enters the scene tree for the first time.
+extends Node3D	
+		
 func _ready():
-	if multiplayer.is_server():
-		Network.player_added.connect(add_player_character)
-		var world = preload("res://scenes/world/worldGeneration.tscn").instantiate()
-		add_child(world)
-		world.name = "world"
+	print(Network.player_nodes)
+	for id in Network.player_nodes:
+		add_player_character(id)
 		
 func add_player_character(id):
+	print("player_spawner script add player character id: ", id)
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	add_child(character)
-	Network.player_nodes[id] = character
-	Network.player_spawned.emit(character, id)
-	Network._update_player_node_dict.rpc(Network.player_nodes)
 
+	
 var player = null
 func player_died(dead_player):
 	player = dead_player
