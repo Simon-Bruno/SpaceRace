@@ -13,7 +13,6 @@ var targeted_enemy = null
 
 func die():
 	player_spawner_node.player_died(player_node)
-	print("player died in player combat node")
 
 func _process(_delta):
 	if get_parent().health <= 0:

@@ -9,7 +9,6 @@ func _ready():
 		add_child(world)
 		world.name = "world"
 		
-
 func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
@@ -17,7 +16,6 @@ func add_player_character(id):
 	Network.player_nodes[id] = character
 	Network.player_spawned.emit(character, id)
 	Network._update_player_node_dict.rpc(Network.player_nodes)
-	
 
 var player = null
 func player_died(dead_player):
@@ -28,7 +26,6 @@ func player_died(dead_player):
 func respawn_player():
 	player.health = 40
 	add_child(player)
-
 
 func _on_respawn_timer_timeout():
 	respawn_player()
