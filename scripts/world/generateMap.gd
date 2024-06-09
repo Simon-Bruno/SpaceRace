@@ -71,7 +71,7 @@ func draw_rooms() -> void:
 			make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
 			
 	var control_room = preload("res://scenes/world/end_room.tscn").instantiate()
-	control_room.position = Vector3i((room_width + room_margin) * room_amount - 1 , 0, 0)
+	control_room.position = Vector3i((room_width + room_margin) * room_amount - 1 , 0, 10)
 	add_child(control_room, true)
 	
 	make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, (room_height / 2)))
