@@ -1,6 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=37 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
+[ext_resource type="ArrayMesh" uid="uid://dvkd2wvrkw47u" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
+[ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
+[ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
+[ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.973094, 0.666402, 0.526047, 1)
@@ -358,12 +362,6 @@ outline_modulate = Color(0.873681, 0.267208, 0.398246, 1)
 text = "EXIT :(
 "
 
-[node name="Press K to start" type="Label3D" parent="Assets"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.454, 3, 34.397)
-pixel_size = 0.1285
-text = "Press 'K' to play
-"
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 80, 50)
 
@@ -396,6 +394,30 @@ shape = SubResource("CylinderShape3D_66t8f")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
+
+[node name="VeryLargeArrayAntennaV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, -42.8846, 2.10618, -14.8404)
+mesh = ExtResource("2_78cdj")
+
+[node name="SpaceshuttlelaneV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.1117, 2.69688, -38.9534)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttlelaneV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.3991, 2.69688, 1.06824)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttlelaneV3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.3991, 2.69688, 40.7845)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttleV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.19249e-07, 0, -10, 0, 10, 0, 10, 0, 1.19249e-07, 11.1301, -4.27141, 30.7123)
+mesh = ExtResource("4_2ubwl")
+
+[node name="HighResAntennaV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(8.66592, 0, -4.99017, 0, 10, 0, 4.99017, 0, 8.66592, 43.3987, 2.75507, -32.792)
+mesh = ExtResource("5_qwdf3")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
