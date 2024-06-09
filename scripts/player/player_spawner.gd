@@ -18,10 +18,6 @@ func add_player_character(id):
 	Network.player_spawned.emit(character, id)
 	Network._update_player_node_dict.rpc(Network.player_nodes)
 	
-	#TODO: Remove hardcode enemy
-	var enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
-	enemy.position = Vector3(2,20,4)
-	add_child(enemy, true)
 
 var player = null
 func player_died(dead_player):
