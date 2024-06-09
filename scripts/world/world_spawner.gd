@@ -15,6 +15,11 @@ func _ready():
 		enemy.position = Vector3(2,20,4)
 		add_child(enemy, true)
 		
+		#TODO: Remove hardcode item
+		var item = preload("res://scenes/item/item.tscn").instantiate()
+		item.position = Vector3(4,5,4)
+		add_child(item, true)
+		
 
 
 func add_player_character(id):
