@@ -9,13 +9,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 1
 script = ExtResource("1_as2nd")
 
 [node name="MessageDisplay" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_top = 417.0
-offset_right = 217.0
-offset_bottom = 617.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.639
+anchor_right = 0.189
+anchor_bottom = 0.948
+offset_left = 1.0
+offset_top = -0.072052
+offset_right = 0.271988
+offset_bottom = -1.0
+bbcode_enabled = true
+scroll_following = true
 
 [node name="LeaveButton" type="Button" parent="."]
 layout_mode = 1
@@ -28,32 +36,43 @@ grow_horizontal = 0
 text = "Leave Game"
 
 [node name="MessageInput" type="LineEdit" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.952
+anchor_right = 0.148
+anchor_bottom = 1.0
 offset_left = 1.0
-offset_top = 616.0
-offset_right = 171.0
-offset_bottom = 647.0
+offset_top = -0.895996
+offset_right = 0.503998
+offset_bottom = -1.0
 
 [node name="SendButton" type="Button" parent="."]
-layout_mode = 2
-offset_left = 172.0
-offset_top = 616.0
-offset_right = 219.0
-offset_bottom = 647.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.148
+anchor_top = 0.952
+anchor_right = 0.189
+anchor_bottom = 1.0
+offset_left = 0.503998
+offset_top = -0.895996
+offset_right = 0.272003
+offset_bottom = -1.0
+disabled = true
 text = "Send"
 
 [node name="MessageTimer" type="Timer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
+[connection signal="mouse_entered" from="MessageDisplay" to="." method="_on_message_display_mouse_entered"]
+[connection signal="mouse_exited" from="MessageDisplay" to="." method="_on_message_display_mouse_exited"]
 [connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="focus_entered" from="MessageInput" to="." method="_on_message_input_focus_entered"]
+[connection signal="focus_exited" from="MessageInput" to="." method="_on_message_input_focus_exited"]
+[connection signal="gui_input" from="MessageInput" to="." method="_on_message_input_gui_input"]
 [connection signal="text_submitted" from="MessageInput" to="." method="_on_message_input_text_submitted"]
 [connection signal="pressed" from="SendButton" to="." method="_on_send_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
