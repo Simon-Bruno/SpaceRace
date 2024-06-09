@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3rv6ajd0fueq"]
+[gd_scene load_steps=3 format=3 uid="uid://d3rv6ajd0fueq"]
 
 [ext_resource type="Script" path="res://scripts/network/Chat.gd" id="1_as2nd"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_1svpq"]
+file = "res://assets/easteregg/easteregg.ogg"
 
 [node name="Chat" type="Control"]
 layout_mode = 3
@@ -64,8 +67,10 @@ text = "Send"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 267.0
+offset_bottom = 157.0
+stream = SubResource("VideoStreamTheora_1svpq")
+expand = true
 
 [connection signal="mouse_entered" from="MessageDisplay" to="." method="_on_message_display_mouse_entered"]
 [connection signal="mouse_exited" from="MessageDisplay" to="." method="_on_message_display_mouse_exited"]

@@ -5,6 +5,7 @@ extends Control
 @onready var send_button = $SendButton
 @onready var message_input = $MessageInput
 @onready var message_timer = $MessageTimer
+@onready var video_stream_player = $VideoStreamPlayer
 
 func _input(event):
 	if Input.is_action_just_pressed("chat_command"):
@@ -24,12 +25,12 @@ func _input(event):
 # Handle send button pressed for chat functionality
 func _on_send_pressed():
 	var msg = message_input.text
-	if msg != "":
+	if msg != "" and not commands():
 		msg_rpc.rpc(Network.playername, msg)
 		message_display.visible = true
 		send_button.disabled = true
-		message_input.text = ""
 		start_message_timer()
+	message_input.text = ""
 
 
 func pad_left(value, length, character="0"):
@@ -66,8 +67,9 @@ func msg_rpc(sender, message):
 
 
 func _on_message_input_text_submitted(_new_text):
-	if not commands():
-		_on_send_pressed()
+	#message_input.clear()
+	#if not commands():
+	_on_send_pressed()
 
 
 # This function sets the caret to the correct position based on the length
@@ -102,7 +104,7 @@ func _on_message_input_gui_input(_event):
 
 #TODO add more commands (respawn, etc)
 func commands():
-	if leave_game() or easter_egg():
+	if leave_game() or easter_egg() or stop_easter_egg():
 		return true
 
 
@@ -116,7 +118,14 @@ func leave_game():
 
 func easter_egg():
 	if message_input.text == "/easteregg":
-		pass
+		video_stream_player
+		video_stream_player.play()
+		return true
+
+
+func stop_easter_egg():
+	if message_input.text == "/stop_easteregg":
+		video_stream_player.stop()
 		return true
 
 
