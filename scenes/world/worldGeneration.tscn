@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://btxasx3bw2gsj"]
 
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
-[ext_resource type="MeshLibrary" uid="uid://ml1j4bmu30li" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_yntpb"]
+[ext_resource type="MeshLibrary" uid="uid://ml1j4bmu30li" path="res://files/correctTexturepack/CustomBlocks.tres" id="1_yntpb"]
 
 [sub_resource type="Environment" id="Environment_mgk52"]
 
