@@ -6,14 +6,20 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
+signal player_spawned(object, id)
 # Excluding host
-var max_client_connections = 1
+var max_client_connections = 3
+
+var loaded_world = preload("res://scenes/lobby/lobby.tscn")
 
 #Username van de speler, moet veranderbaar zijn in game
 var playername
+var player_nodes = {}
+
+var player_teams = {}
 
 var players_connected = 0 
-var players = {}
+var player_names = {}
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -27,7 +33,7 @@ func _on_connection_failed():
 
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
-	players[peer_id] = playername
+	player_names[peer_id] = playername
 	player_connected.emit(peer_id, playername)
 
 # Called when the host button is pressed
@@ -35,12 +41,12 @@ func _on_host_pressed(port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = preload("res://scenes/world.tscn").instantiate()
+		var world = loaded_world.instantiate()
 		get_node("/root/Main/Menu").queue_free()
 		get_node("/root/Main").add_child(world)
 		await get_tree().create_timer(0.4).timeout
 		player_added.emit(1)
-		players[1] = playername
+		player_names[1] = playername
 		player_connected.emit(1, playername)
 	else:
 		return false
@@ -57,11 +63,11 @@ func _on_player_connected(id):
 
 @rpc("any_peer","call_local", "reliable")
 func _register_player(id, new_player_info):
-	players[id] = new_player_info
+	player_names[id] = new_player_info
 	player_connected.emit(id, new_player_info)
 
 func _on_player_disconnected(id):
-	players.erase(id)
+	player_names.erase(id)
 	player_disconnected.emit(id)
 	if has_node(str(id)):
 		var player_node = get_node(str(id))
@@ -80,7 +86,7 @@ func _on_leave_button_pressed():
 	
 func _on_server_disconnected():
 	remove_multiplayer_peer()
-	players.clear()
+	player_names.clear()
 	server_disconnected.emit()
 
 # Called when the join button is pressed
@@ -88,8 +94,13 @@ func _on_join_pressed(ip, port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_client(ip, port) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = preload("res://scenes/world.tscn").instantiate()
+		var world = loaded_world.instantiate()
 		get_node("/root/Main/Menu").queue_free()
 		get_node("/root/Main").add_child(world)
 		return true
 	return false
+
+
+@rpc("authority", "call_remote", "reliable")
+func _update_player_node_dict(dict):
+	player_nodes = dict
