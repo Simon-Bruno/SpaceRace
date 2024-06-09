@@ -44,6 +44,8 @@ func set_seed(new_seed : int) -> void:
 # TODO: Expand with all generation layers.
 func build_map() -> void:
 	self.clear()
+	
+	
 	draw_rooms()
 	draw_walls()
 
