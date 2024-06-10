@@ -10,6 +10,8 @@ var targeted_enemy = null
 @onready var player_node = get_parent()
 @onready var player_spawner_node = player_node.get_parent()
 
+signal player_died(player)
+
 
 func die():
 	player_spawner_node.player_died(player_node)

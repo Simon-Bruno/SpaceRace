@@ -29,8 +29,9 @@ func get_player_count():
 # calculate the total x-values of the players in a team
 func calc_total_x(player_count):
 	var total_x: float = 0.0
-	total_x += player.global_transform.origin.x
-	if player_count == 2:
+	if  is_instance_valid(player) and player.get_parent() != null:
+		total_x += player.global_transform.origin.x
+	if  is_instance_valid(player2) and player2.get_parent() != null:
 		total_x += player2.global_transform.origin.x
 	return total_x        
 
