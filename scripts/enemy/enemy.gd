@@ -10,7 +10,10 @@ var targeted_player = null
 var last_damaged_by = null
 
 var health = 100
+var max_health: int = 100
 var player_in_attack_zone = false
+
+@onready var HpBar = $SubViewport/HpBar
 
 func _enter_tree():
 	if multiplayer.is_server():
@@ -67,9 +70,11 @@ func _on_enemy_hitbox_body_exited(body):
 	if body.is_in_group("Players"):
 		player_in_attack_zone = false
 		
+# Used in player script when attacking an enemy, apply_damage_to_enemy
 func take_damage(damage, source):
 	health = max(0, health-damage)
 	last_damaged_by = source
+	HpBar.value = float(health) / max_health * 100
 
 func die():
 	print(last_damaged_by)
