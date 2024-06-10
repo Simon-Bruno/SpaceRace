@@ -62,7 +62,7 @@ func remove_multiplayer_peer():
 
 func _on_player_connected(id):
 	if multiplayer.is_server():
-		rpc_id(id, "_send_player_info", playername)
+		_send_player_info.rpc(playername)
 		player_added.emit(id)
 		rpc_id(id, "_sync_player_names", player_names) # Send updated player_names to new client
 
