@@ -64,8 +64,7 @@ func move_object():
 func activate_door_open():
 	get_parent().get_node('Door').open_door()
 
-func _physics_process(delta):	
-	_player_movement(delta)
-	move_and_slide()
-	move_object()
-
+func _physics_process(delta):
+	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
+		_player_movement(delta)
+		move_and_slide()
