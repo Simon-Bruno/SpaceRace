@@ -12,11 +12,11 @@ func get_player_count():
 	if player:
 		playercount += 1
 	else: 
-		player = get_node("/root/Main/SpawnedItems/World").get_node_or_null(str(multiplayer.get_unique_id()))
+		player = get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node_or_null(str(multiplayer.get_unique_id()))
 	if player2:
 		playercount += 1
 	else:
-		player2 = get_node("/root/Main/SpawnedItems/World").get_node_or_null(str(Network.other_team_member_id))
+		player2 = get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node_or_null(str(Network.other_team_member_id))
 		Network.other_team_member_node = player2
 	
 	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
