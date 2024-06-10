@@ -28,6 +28,7 @@ material = SubResource("StandardMaterial3D_oikiw")
 [sub_resource type="BoxShape3D" id="BoxShape3D_r4bp7"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2fdg3"]
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sjmiw"]
 height = 0.001
 radius = 0.75

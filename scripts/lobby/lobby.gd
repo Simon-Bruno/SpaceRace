@@ -25,6 +25,11 @@ func _ready():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 		Network.player_added.connect(add_player_character)
 		init_timer()
+		
+func add_player_character(id):
+	var character = preload("res://scenes/player/player.tscn").instantiate()
+	character.name = str(id)
+	add_child(character)
 
 func init_timer():
 		add_child(start_timer)

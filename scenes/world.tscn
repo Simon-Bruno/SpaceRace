@@ -14,14 +14,22 @@ script = ExtResource("1_25n6l")
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("1_fahhe")]
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="PlayerSpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
+spawn_path = NodePath("..")
+
 [node name="EnemySpawner" parent="." instance=ExtResource("3_bij7o")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="EnemySpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/enemy/enemy.tscn")
+spawn_path = NodePath("..")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
 
 [node name="Camera" parent="." instance=ExtResource("2_x5d8x")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn", "res://scenes/world/worldGeneration.tscn", "res://scenes/enemy/enemy.tscn", "res://scenes/item/item.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/world/worldGeneration.tscn", "res://scenes/item/item.tscn")
 spawn_path = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
