@@ -1,11 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://bfcjq8a6jlnnp"]
 
-[ext_resource type="PackedScene" uid="uid://1kabkw5fs4e8" path="res://scenes/menu/menu.tscn" id="1_01i3d"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_58kw5"]
 
 [node name="Main" type="Node"]
-
-[node name="Menu" parent="." instance=ExtResource("1_01i3d")]
+script = ExtResource("1_58kw5")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/world.tscn")
-spawn_path = NodePath("..")
+_spawnable_scenes = PackedStringArray("res://scenes/world.tscn", "res://scenes/lobby/lobby.tscn")
+spawn_path = NodePath("../SpawnedItems")
+
+[node name="SpawnedItems" type="Node" parent="."]
+
+[node name="MusicController" type="AudioStreamPlayer" parent="."]
+autoplay = true

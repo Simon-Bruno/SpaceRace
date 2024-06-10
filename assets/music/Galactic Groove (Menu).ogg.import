@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dr5h0murxqmhq"
+path="res://.godot/imported/Galactic Groove (Menu).ogg-f411950f6abf64519efbe5b46e527b5b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Galactic Groove (Menu).ogg"
+dest_files=["res://.godot/imported/Galactic Groove (Menu).ogg-f411950f6abf64519efbe5b46e527b5b.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
