@@ -183,6 +183,7 @@ func draw_rooms() -> Array:
 
 func make_endroom(room : Array) -> void:
 	var startpos = Vector3i(room[2], 0, 0)
+	self.set_cell_item(startpos + Vector3i(0, HEIGHT + 1, 0), WALL)
 	for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:
 		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 0), FLOOR1)
 		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 1), FLOOR1)

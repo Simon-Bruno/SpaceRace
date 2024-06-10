@@ -33,7 +33,7 @@ environment = SubResource("Environment_mgk52")
 mesh_library = ExtResource("1_bwbkc")
 cell_scale = 1.25
 script = ExtResource("1_een4t")
-room_amount = 3
+room_amount = 5
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
