@@ -204,9 +204,10 @@ func make_endroom(room : Array) -> void:
 		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 7), FLOOR1)
 	for x in [7, 8, 9, 10]:
 		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 8), FLOOR1)
-		
+	
+#	Load in Pressure plate to finish game!
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
-	plate.position = Vector3i(5, 2, 6)
+	plate.position = map_to_local(startpos + Vector3i(12, 1, 0))
 	plate.activate("Finish")
 	add_child(plate, true)
 	#var loaded_item = preload("res://scenes/interactables/pressure_plate.tscn")
