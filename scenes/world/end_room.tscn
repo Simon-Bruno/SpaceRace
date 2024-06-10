@@ -1,15 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8sga6mavm8ct"]
 
-[ext_resource type="MeshLibrary" uid="uid://b46tsfdpyvoum" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_sb3lg"]
+[ext_resource type="MeshLibrary" uid="uid://6qi0wcwtxe3q" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_4p8ec"]
 
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(2.59603, 0, 0, 0, 2.59603, 0, 0, 0, 2.59603, 0, 0, 0)
 
 [node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("1_sb3lg")
+mesh_library = ExtResource("1_4p8ec")
 cell_size = Vector3(1, 1, 1)
 cell_scale = 0.625
-data = {
-"cells": PackedInt32Array(-65536, 0, 1441801, -65536, 1, 1441801, -65535, 1, 1441801, -65535, 0, 1441801, -65535, 65535, 1441801, -65536, 65535, 1441801, -65536, 65534, 1441801, -65535, 65534, 1441801, -65536, 2, 1441801, -65535, 2, 1441801, 1, 0, 1441803, 1, 1, 1441803, 1, 65535, 1441803, 1, 65534, 1441804, 0, 65534, 12, 1, 2, 655372, 0, 2, 1048588, 0, 65535, 1048593, 0, 1, 1048593)
-}
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+metadata/_editor_floor_ = Vector3(0, -1, 0)

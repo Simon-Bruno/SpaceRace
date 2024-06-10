@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-@export var walk_speed = 15
+# Walk_speed original = 15
+@export var walk_speed = 30
 @export var walk_acceleration = 40
 @export var walk_deceleration = 50
 #@export var sprint_speed = 25
@@ -35,7 +36,7 @@ func _horizontal_movement(delta):
 
 	direction = (direction + current_direction).normalized()
 
-	$Pivot.basis = Basis.looking_at(Vector3(direction[0] or 0.001, 0, direction[1]))
+	$Pivot.basis = Basis.looking_at(Vector3(direction[0] if direction[0] else 0.001, 0, direction[1]))
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed
