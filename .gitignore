@@ -4,6 +4,7 @@
 .env.local
 .env.staging
 */CustomBlocks/CustomBlocks.tres
+CustomBlocks.tres
 
 # Godot-specific ignores
 .import/
