@@ -241,6 +241,13 @@ func random_floor(floor : Vector3i) -> void:
 		self.set_cell_item(floor, walls[randi() % walls.size()], rotation)
 	else:
 		self.set_cell_item(floor, special[randi() % special.size()], rotation)
+		
+func random_wall() -> int:
+	var walls = [WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLTERMINAL]
+	
+	if randi_range(1, 100) >= 96:
+		return walls[randi() % walls.size()]
+	return WALL
 
 
 # Draws all walls by finding all floors and check if a wall needs to be added.
@@ -271,6 +278,8 @@ func draw_walls() -> void:
 		# Checks which type of wall, then finds the needed orientation.
 		if sum_array(surround) == 3:
 			idx = walls.find(surround)
+			# Get a random item to put on the wall
+			type = random_wall()
 		elif sum_array(surround) == 2:
 			idx = corner.find(surround)
 			type = WALLCORNER
