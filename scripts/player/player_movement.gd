@@ -84,7 +84,7 @@ func check_distance(target_velocity):
 	return target_velocity.x
 
 func _physics_process(delta):
-	if $MultiplayerSynchronizer.is_multiplayer_authority():
+	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
