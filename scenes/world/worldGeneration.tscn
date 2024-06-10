@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://btxasx3bw2gsj"]
 
+[ext_resource type="MeshLibrary" uid="uid://c4k26j1umcyb4" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_bwbkc"]
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
-[ext_resource type="MeshLibrary" uid="uid://by3ihe30pgwmg" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_u7wpp"]
 
 [sub_resource type="Environment" id="Environment_mgk52"]
 
@@ -16,7 +16,7 @@ properties/0/replication_mode = 2
 environment = SubResource("Environment_mgk52")
 
 [node name="WorldGeneration" type="GridMap" parent="."]
-mesh_library = ExtResource("1_u7wpp")
+mesh_library = ExtResource("1_bwbkc")
 cell_scale = 1.25
 script = ExtResource("1_een4t")
 metadata/_editor_floor_ = Vector3(0, 0, 0)

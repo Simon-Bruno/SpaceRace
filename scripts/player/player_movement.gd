@@ -60,6 +60,6 @@ func _player_movement(delta):
 	velocity = h + v
 
 func _physics_process(delta):
-	if $MultiplayerSynchronizer.is_multiplayer_authority():
+	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		_player_movement(delta)
 		move_and_slide()

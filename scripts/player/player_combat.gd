@@ -46,7 +46,7 @@ func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
 
 func player_attack():
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and not Global.in_chat:
 		Global.player_attacking = true
 		attack_in_progress = true
 		apply_damage_to_enemy()
