@@ -149,6 +149,8 @@ func define_rooms() -> void:
 func draw_rooms() -> void:
 	for i in room_amount:
 		make_room(rooms[i])
+
+		fill_room(rooms[i])
 		
 		if i == room_amount - 1:
 			break
@@ -161,6 +163,11 @@ func draw_rooms() -> void:
 
 		make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
 
+
+func fill_room(room_dim: Array) -> void:
+	var room = preload("res://scenes/world/roomGeneration.tscn").instantiate()
+	room.position = Vector3i(room_dim[2], 0, 0)
+	add_child(room)
 
 # Places floor grid of x * z size based on room array
 func make_room(room : Array) -> void:
