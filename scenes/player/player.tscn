@@ -34,8 +34,8 @@ height = 0.001
 radius = 0.75
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_c8kx5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -51,6 +51,8 @@ skeleton = NodePath("../../CollisionShape3D")
 shape = SubResource("BoxShape3D_r4bp7")
 
 [node name="PlayerHitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
 transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, 0, 0)
@@ -76,7 +78,7 @@ script = ExtResource("3_yvrqa")
 
 [node name="Area3D" type="Area3D" parent="PlayerItem"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerItem/Area3D"]
 shape = SubResource("CylinderShape3D_sjmiw")

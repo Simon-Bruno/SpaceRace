@@ -7,7 +7,6 @@ var laser_scene = preload("res://scenes/interactables/laser_beam.tscn")
 var item_scene = preload("res://scenes/item/item.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_items.tscn")
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if world.generate_room:

@@ -29,7 +29,7 @@ properties/2/replication_mode = 1
 script = ExtResource("1_o5cad")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-collision_layer = 4
+collision_layer = 8
 physics_material_override = SubResource("PhysicsMaterial_r6fdv")
 gravity_scale = 0.5
 lock_rotation = true
