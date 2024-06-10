@@ -1,14 +1,12 @@
 extends CharacterBody3D
 
 @export var walk_speed = 15
-@export var walk_acceleration = 40
-@export var walk_deceleration = 50
-#@export var sprint_speed = 25
-#@export var sprint_acceleration = 80
-#@export var sprint_deceleration = 160
-
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
+
+var walk_acceleration = 40
+var walk_deceleration = 50
+var rotation_smoothing = 10
 
 var speed = 0
 var direction = Vector2.ZERO
@@ -20,32 +18,29 @@ func _ready():
 	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
 	$FloatingName.text = Network.playername
 
-
+# KEEP! IMPORTANT TO IDENTIFY PLAYER
+func player():
+	pass
+	
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
-
-	# horizontal movement
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
 	# accelerate if moving
 	if current_direction != Vector2.ZERO:
 		speed = min(walk_speed, speed + walk_acceleration * delta)
+		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
+		
 	# decelerate
 	else:
 		speed = max(0, speed - walk_deceleration  * delta)
-
-	direction = (direction + current_direction).normalized()
-
-	$Pivot.basis = Basis.looking_at(Vector3(direction[0] if direction[0] else 0.001, 0, direction[1]))
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed
 
 	return vel
 
-# KEEP! IMPORTANT TO IDENTIFY PLAYER
-func player():
-	pass
 	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
