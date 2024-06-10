@@ -54,8 +54,8 @@ func new_seed() -> void:
 
 
 # Sets seed, and builds a new map based on that seed.
-func set_seed(new_seed : int) -> void:
-	seed(new_seed)
+func set_seed(given_seed : int) -> void:
+	seed(given_seed)
 	build_map()
 
 
@@ -118,11 +118,11 @@ func draw_windows() -> void:
 
 
 # Summs all x values in an array based on the rooms variable.
-static func sumXValues(rooms : Array) -> int:
-	if rooms.is_empty():
+static func sumXValues(the_rooms : Array) -> int:
+	if the_rooms.is_empty():
 		return 0
 	var sum = 0
-	for i in rooms:
+	for i in the_rooms:
 		sum += i[0]
 	return sum
 

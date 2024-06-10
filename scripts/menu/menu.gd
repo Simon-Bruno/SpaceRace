@@ -2,7 +2,7 @@ extends Control
 
 func _ready():
 	multiplayer.connection_failed.connect(_on_connection_failed)
-	
+
 func _on_connection_failed():
 	set_notification_and_show("Could not connect to the game", $Holder)
 

@@ -11,13 +11,24 @@ var rotation_smoothing = 10
 var speed = 0
 var direction = Vector2.ZERO
 
+var max_dist: float = 25.0  # max distance between players
+
+var lobby_spawn = Vector3(0, 10, 20)
+var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
+
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
 func _ready():
-	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
 	$FloatingName.text = Network.playername
-
+	if Network.player_teams.size() == 0:
+		position = lobby_spawn
+	elif multiplayer.get_peers().size() > 0:
+		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
+		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
+	else:	
+		position = game_spawn[1][0]
+		
 # KEEP! IMPORTANT TO IDENTIFY PLAYER
 func player():
 	pass
@@ -36,8 +47,8 @@ func _horizontal_movement(delta):
 	else:
 		speed = max(0, speed - walk_deceleration  * delta)
 
-	vel.x = direction.x * speed
-	vel.z = direction.y * speed
+	vel.x = direction.x * speed * Network.inverted
+	vel.z = direction.y * speed * Network.inverted
 
 	return vel
 
@@ -57,9 +68,24 @@ func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
 	
-	velocity = h + v
+	return h + v
+
+func check_distance(target_velocity):
+	if Network.other_team_member_node != null:
+		var player_pos = global_transform.origin
+		var player2_pos = Network.other_team_member_node.global_transform.origin
+
+		var x_distance = abs(player_pos.x - player2_pos.x)
+		if x_distance > max_dist:  # check distance
+			if player_pos.x > player2_pos.x and target_velocity.x > 0:  # if player trying to walk further
+				target_velocity.x = 0
+			elif player_pos.x < player2_pos.x and target_velocity.x < 0:  # if player trying to walk further
+				target_velocity.x = 0
+	return target_velocity.x
 
 func _physics_process(delta):
-	if $MultiplayerSynchronizer.is_multiplayer_authority():
-		_player_movement(delta)
+	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
+		var target_velocity = _player_movement(delta)
+		target_velocity.x = check_distance(target_velocity)
+		velocity = target_velocity
 		move_and_slide()
