@@ -16,7 +16,7 @@ var inverted = 1
 var other_team_member_id = null
 var other_team_member_node = null
 
-# Username of the player, should be changeable in game
+#Username van de speler, moet veranderbaar zijn in game
 var playername
 
 var player_teams = {}
