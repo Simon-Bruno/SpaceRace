@@ -24,7 +24,7 @@ func _ready():
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		position = lobby_spawn
-	elif multiplayer.get_peers().size() > 0:
+	elif multiplayer.get_peers().size() > 0 and Network.other_team_member_id != null:
 		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
 	else:

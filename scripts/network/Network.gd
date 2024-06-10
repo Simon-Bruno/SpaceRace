@@ -70,13 +70,24 @@ func _register_player(id, new_player_info):
 	player_names[id] = new_player_info
 	player_connected.emit(id, new_player_info)
 
+@rpc("authority", "call_local", "reliable")
+func _hard_reset_to_lobby():
+	other_team_member_id = null
+	other_team_member_node = null
+	player_teams.clear()
+	inverted = 1
+
 func _on_player_disconnected(id):
 	player_names.erase(id)
+	if multiplayer.is_server():
+		var world = get_node_or_null("/root/Main/SpawnedItems/World")
+		if world != null:
+			world.queue_free()
+			_hard_reset_to_lobby.rpc()
+			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
+			for player_id in player_names.keys():
+				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
 	player_disconnected.emit(id)
-	if has_node(str(id)):
-		var player_node = get_node(str(id))
-		remove_child(player_node)
-		player_node.queue_free()
 	
 func _on_leave_button_pressed():
 	var id = multiplayer_peer.get_unique_id()
