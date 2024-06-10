@@ -3,7 +3,9 @@ extends CharacterBody3D
 @export var speed = 7
 @export var acceleration = 2
 @export var fall_acceleration = 60.0
-@export var stopping_distance = 1.5 
+@export var stopping_distance = 1.5
+
+var knockback_strength = 25.0
 
 var player_chase = false
 var targeted_player = null
@@ -72,9 +74,13 @@ func _on_enemy_hitbox_body_exited(body):
 		
 # Used in player script when attacking an enemy, apply_damage_to_enemy
 func take_damage(damage, source):
-	health = max(0, health-damage)
+	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
+
+	var knockback_direction = (global_transform.origin - source.global_transform.origin).normalized()
+	velocity.x += knockback_direction.x * knockback_strength
+	velocity.z += knockback_direction.z * knockback_strength
 
 func die():
 	print(last_damaged_by)
