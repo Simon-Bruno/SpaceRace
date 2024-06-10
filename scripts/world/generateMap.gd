@@ -63,11 +63,16 @@ func set_seed(given_seed : int) -> void:
 func build_map() -> void:
 	self.clear()
 	define_rooms()
-	draw_rooms()
+	var vals = draw_rooms()
 	draw_walls()
 	draw_windows()
 	
+	#Last endroom has a path of 10
+	var xend = vals[0] + 10
+#	height, width, startpos in X direction
+	make_endroom([5, 6, xend - 1])
 	mirror_world()
+	endroom_walls(xend - 2)
 
 
 # Rotates function to new 
@@ -146,7 +151,7 @@ func define_rooms() -> void:
 # 1. Place first room of x * z size.
 # 2. Place a path between the first room and a random point at an x offset.
 # 3. Place second room on same x-axis
-func draw_rooms() -> void:
+func draw_rooms() -> Array:
 	var xstart
 	var zstart
 	var xend
@@ -155,6 +160,7 @@ func draw_rooms() -> void:
 		make_room(rooms[i])
 		
 		if i == room_amount - 1:
+			xstart = rooms[i][2] + rooms[i][0] - 1
 			break
 		
 		zstart = randi_range(1, rooms[i][1] - 3)
@@ -163,18 +169,76 @@ func draw_rooms() -> void:
 		xstart = rooms[i][2] + rooms[i][0] - 1
 		xend = rooms[i + 1][2]
 		
-		#print("zend: "+  str(zend) + "xend" +  str(xend))ds   s d
-			
+		
 		make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
-			
-			
-	make_endroom(Vector3i(xend, HEIGHT, zend))
-	make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+		
+##	Last endroom has a path of 10
+	xend = xstart + 10
+##	height, width, startpos in X direction
+	#make_endroom([5, 6, xend - 1])
+	make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, 0))
+	#self.set_cell_item(Vector3i(xend , HEIGHT, 0), FLOOR1)
+	return [xstart, zstart]
 
 
-func make_endroom(start_location : Vector3i) -> void:
-	var startroom = start_location
-	make_room(startroom)
+func make_endroom(room : Array) -> void:
+	var startpos = Vector3i(room[2], 0, 0)
+	for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 0), FLOOR1)
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 1), FLOOR1)
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 2), FLOOR1)
+	for x in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 3), FLOOR1)
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 4), FLOOR1)
+	for x in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]:
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 5), FLOOR1)
+	for x in [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]:
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 6), FLOOR1)
+	for x in [5, 6, 7, 8, 9, 10, 11, 12]:
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 7), FLOOR1)
+	for x in [7, 8, 9, 10]:
+		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 8), FLOOR1)
+
+func endroom_walls(x: int) -> void:
+	var neighbors = [Vector3i(0, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i(-1, 0, 0)]
+	
+	# Defining the different floor layouts, and their corresponding orientation.
+	var walls = [[0, 1, 1, 1], [1, 0, 1, 1], [1, 1, 0, 1], [1, 1, 1, 0]]
+	var corner = [[0, 1, 1, 0], [0, 0, 1, 1], [1, 0, 0, 1], [1, 1, 0, 0]]
+	var orientations = [0, 22, 10, 16]
+	
+	# Get all floors in grid.
+	var floors = self.get_used_cells_by_item(FLOOR1)
+	
+	print(floors)
+	# Go trough all floor items, check if past last room (only control room), and check if wall is needed.
+	for floor_item in floors:
+		if floor_item[0] > x:
+			var surround = []
+			for i in neighbors:
+				var neighbor = floor_item + i
+				surround.append((1 if self.get_cell_item(neighbor) != -1 else 0))
+
+			random_floor(floor_item)
+
+			var idx = -1
+			var type = WALL
+			
+			# Checks which type of wall, then finds the needed orientation.
+			if sum_array(surround) == 3:
+				idx = walls.find(surround)
+			elif sum_array(surround) == 2:
+				idx = corner.find(surround)
+				type = WALLCORNER
+
+			# If unknown orientation, skip.
+			if idx == -1:
+				continue
+
+			# Place wall.
+			var orientation = orientations[idx]
+			self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
+
 
 
 # Places floor grid of x * z size based on room array
@@ -183,7 +247,8 @@ func make_room(room : Array) -> void:
 	print(room[2])
 	for h in room[1]:
 		for w in room[0]:
-			self.set_cell_item(start + Vector3i(w, HEIGHT, h), FLOOR1)
+			self.set_cell_item(start + Vector3i(w , HEIGHT, h), FLOOR1)
+
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
