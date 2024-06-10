@@ -5,19 +5,34 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5 
 
-var player_chase = false
 var targeted_player = null
 var last_damaged_by = null
 
 var health = 100
 var player_in_attack_zone = false
 
+var closest_target_node = null
+var nodes_in_area : Array = []
+
+# Function to find the closest node from an array of nodes
+func find_closest_player_in_range(nodes_array: Array):
+	var min_distance = 0
+	
+	for node in nodes_in_area:
+		var distance = (self.global_transform.origin - node.global_transform.origin).length()
+		if distance < min_distance:
+			min_distance = distance
+			closest_target_node = node
+
+
 func _enter_tree():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 
 func _process(delta):
-	if player_chase and targeted_player:
+	find_closest_player_in_range(nodes_in_area)
+	
+	if targeted_player:
 		var target_direction = (targeted_player.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
@@ -26,10 +41,9 @@ func _process(delta):
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
 		
 	if player_in_attack_zone and targeted_player.getHitCooldown:
-		targeted_player.take_damage(20)
+		if !targeted_player.respawn_immunity:
+			targeted_player.take_damage(20)
 	
-	if health <= 0:
-		die() 
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -37,7 +51,7 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0.0
 
-	if player_chase and targeted_player:
+	if targeted_player:
 		var distance_to_player = global_transform.origin.distance_to(targeted_player.global_transform.origin)
 		if distance_to_player > stopping_distance:
 			var target_direction = (targeted_player.global_transform.origin - global_transform.origin).normalized()
@@ -51,13 +65,20 @@ func _physics_process(delta):
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
-		targeted_player = body
-		player_chase = true
+		nodes_in_area.append(body)
+		#print("body entered: ", body)
+		#print("array:", nodes_in_area)
 
 func _on_detection_area_body_exited(body):
-	if body == targeted_player:
-		targeted_player = null
-		player_chase = false
+	print(targeted_player)
+	if body.is_in_group("Players"):
+		#nodes_in_area.erase(body)
+		var index = nodes_in_area.find(body)
+		#print("index:", index)
+		if index:
+			nodes_in_area.remove_at(index)
+		#print("body exited: ", body)
+		#print("array:", nodes_in_area)
 
 func _on_enemy_hitbox_body_entered(body):
 	if body.is_in_group("Players"):
@@ -70,6 +91,9 @@ func _on_enemy_hitbox_body_exited(body):
 func take_damage(damage, source):
 	health = max(0, health-damage)
 	last_damaged_by = source
+		
+	if health <= 0:
+		die() 
 
 func die():
 	print(last_damaged_by)

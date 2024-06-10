@@ -7,6 +7,8 @@ var getHitCooldown = true
 var health = Global.player_max_health
 var points = 0
 @export var push_force = 1
+var alive = true
+var respawn_immunity : bool = false
 
 var walk_acceleration = 40
 var walk_deceleration = 50
@@ -32,10 +34,6 @@ func _ready():
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
 	else:
 		position = game_spawn[1][0]
-
-# KEEP! IMPORTANT TO IDENTIFY PLAYER
-func player():
-	pass
 
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
@@ -101,10 +99,22 @@ func _physics_process(delta):
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
-		move_and_slide()
+		if alive:
+			move_and_slide()
 	move_object()
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
-	health = max(0, health-damage)
-	getHitCooldown = false
-	$PlayerCombat/GetHitCooldown.start()
+	if !respawn_immunity and alive:
+		health = max(0, health-damage)
+		getHitCooldown = false
+		$PlayerCombat/GetHitCooldown.start()
+
+	if health <= 0 and alive:
+		print("health < 0")
+		die()
+		
+func die():
+	get_parent().player_died(self)
+
+func _on_respawn_immunity_timeout():
+	respawn_immunity = false
