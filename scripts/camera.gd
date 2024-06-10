@@ -4,27 +4,27 @@ extends Camera3D
 var player: Node = null
 var player2: Node = null
 
-func _ready():
-	# Ensure the player nodes are assigned
-	if multiplayer.is_server():
-		Network.player_spawned.connect(add_new_player)
-		$"../MultiplayerSynchronizer".set_multiplayer_authority(multiplayer.get_unique_id())
-	
-func add_new_player(object, id):
-	if not player:
-		player = object
-	else:
-		player2 = object
+var other_player_id = null
 
 # calculate how many players are in the team
 func get_player_count():
 	var playercount: int = 0
 	if player:
 		playercount += 1
+	else: 
+		player = get_node("/root/Main/SpawnedItems/World").get_node_or_null(str(multiplayer.get_unique_id()))
 	if player2:
 		playercount += 1
+	else:
+		player2 = get_node("/root/Main/SpawnedItems/World").get_node_or_null(str(Network.other_team_member_id))
+		Network.other_team_member_node = player2
+	
+	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
+		global_transform.origin = Vector3(9, 20, -26)
+		global_transform.basis = Basis.looking_at(Vector3(0, -9, 10))
+		$"../../world/DirectionalLight3D".basis = Basis.looking_at(Vector3(0, 0, 37.2))
+		Network.inverted = -1
 	return playercount
-
 
 # calculate the total x-values of the players in a team
 func calc_total_x(player_count):
@@ -33,8 +33,6 @@ func calc_total_x(player_count):
 	if player_count == 2:
 		total_x += player2.global_transform.origin.x
 	return total_x        
-
-
 
 # modify the current camera position
 func modify_camera_pos(average_x):
