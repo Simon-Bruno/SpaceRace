@@ -24,6 +24,7 @@ func get_player_count():
 		global_transform.basis = Basis.looking_at(Vector3(0, -9, 10))
 		$"../../world/DirectionalLight3D".basis = Basis.looking_at(Vector3(0, 0, 37.2))
 		Network.inverted = -1
+		get_viewport().render_target_v_flip = true
 	return playercount
 
 # calculate the total x-values of the players in a team

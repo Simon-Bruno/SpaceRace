@@ -1,8 +1,8 @@
 extends Node
 
-var menu = preload("res://assets/music/Galactic Groove (Menu).wav")
-var lobby = preload("res://assets/music/Galactic Showdown (Lobby).wav")
-var game = preload("res://assets/music/Galactic Battle (In Game).wav")
+var menu = preload("res://assets/music/Galactic Groove (Menu).ogg")
+var lobby = preload("res://assets/music/Galactic Showdown (Lobby).ogg")
+var game = preload("res://assets/music/Galactic Battle (In Game).ogg")
 
 func _ready():
 	play_menu_music()

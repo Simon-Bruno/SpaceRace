@@ -43,7 +43,6 @@ func _on_start_timer_timeout():
 		Network.player_teams[character.name] = 2
 		
 	_on_game_start.rpc(Network.player_teams)
-	await get_tree().create_timer(1).timeout
 	get_parent().add_child(world.instantiate())
 	queue_free()
 
