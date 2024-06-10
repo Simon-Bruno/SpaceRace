@@ -168,10 +168,7 @@ func draw_rooms() -> void:
 
 func fill_room(room_dim: Array) -> void:
 	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
-	print(room_dim)
-	print(room_dim[2])
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
-	print(room_scene.position)
 	add_child(room_scene, true)
 
 # Places floor grid of x * z size based on room array

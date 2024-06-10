@@ -10,15 +10,11 @@ var targeted_enemy = null
 @onready var player_node = get_parent()
 @onready var player_spawner_node = player_node.get_parent()
 
-signal player_died(player)
-
-
 func die():
 	player_spawner_node.player_died(player_node)
 
 func _process(_delta):
 	if get_parent().health <= 0:
-		print("health < 0")
 		die()
 
 func _input(event):
@@ -47,4 +43,3 @@ func apply_damage_to_enemy():
 
 func _on_GetHitCooldown_timeout():
 	get_parent().getHitCooldown = true
-

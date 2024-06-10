@@ -17,6 +17,8 @@ var direction = Vector2.ZERO
 
 var max_dist: float = 25.0  # max distance between players
 
+@onready var HpBar = $PlayerCombat/SubViewport/HpBar
+
 var lobby_spawn = Vector3(0, 10, 20)
 var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
 
@@ -103,8 +105,13 @@ func _physics_process(delta):
 		velocity = target_velocity
 		move_and_slide()
 	move_object()
+	
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
 	health = max(0, health-damage)
+	print(health)
+	print('hier')
+	print(Global.player_max_health)
+	HpBar.value = float(health) / Global.player_max_health * 100
 	getHitCooldown = false
 	$PlayerCombat/GetHitCooldown.start()
