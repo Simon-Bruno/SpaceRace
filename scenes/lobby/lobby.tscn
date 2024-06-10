@@ -1,7 +1,6 @@
-[gd_scene load_steps=70 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=37 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
-[ext_resource type="ArrayMesh" uid="uid://j1652dsjp1kp" path="res://assets/lobby/rocket_platform.obj" id="2_8k7pi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.973094, 0.666402, 0.526047, 1)
@@ -94,112 +93,9 @@ albedo_color = Color(1, 0.290196, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxf8t"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh5nd"]
-albedo_color = Color(0.487671, 0.397349, 0.245734, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x70g3"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01asd"]
-transparency = 1
-albedo_color = Color(0.0588235, 0.396078, 0.65098, 0.827451)
-metallic = 1.0
-metallic_specular = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2los"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 0.86
-metallic_specular = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dj81r"]
-albedo_color = Color(0.156863, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_squfd"]
-albedo_color = Color(0.226707, 0.226707, 0.226707, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nxg3"]
-albedo_color = Color(0.286275, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vg844"]
-albedo_color = Color(0.286275, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5s7ig"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd5dn"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awmqi"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdb65"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtgdp"]
-albedo_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elloe"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p2f6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0atqx"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_esn1j"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7rej"]
-cull_mode = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dysa"]
-cull_mode = 2
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_1i4c5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smiup"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ricc2"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pienk"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gb64g"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm7aj"]
-cull_mode = 2
-albedo_color = Color(1, 0, 0, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_sltl1"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weul7"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfgm4"]
-albedo_color = Color(0, 0, 0.286275, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oau3f"]
-albedo_color = Color(0, 0, 0.286275, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkus3"]
-albedo_color = Color(0, 0, 0.286275, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tabxa"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ek84v"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyoog"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2xme"]
-cull_mode = 2
-albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jbwpq"]
 properties/0/path = NodePath("../BlueTeam/AmountText:text")
@@ -483,26 +379,6 @@ shape = SubResource("BoxShape3D_jxf8t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RandomTeam"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-mesh = ExtResource("2_8k7pi")
-surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
-surface_material_override/1 = SubResource("StandardMaterial3D_x70g3")
-surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
-surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
-surface_material_override/4 = SubResource("StandardMaterial3D_dj81r")
-surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
-surface_material_override/6 = SubResource("StandardMaterial3D_1nxg3")
-surface_material_override/7 = SubResource("StandardMaterial3D_vg844")
-surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
-surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
-surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
-surface_material_override/11 = SubResource("StandardMaterial3D_xdb65")
-surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
-surface_material_override/13 = SubResource("StandardMaterial3D_elloe")
-surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
-surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
-surface_material_override/16 = SubResource("StandardMaterial3D_esn1j")
-surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
-surface_material_override/18 = SubResource("StandardMaterial3D_0dysa")
 
 [node name="AmountText" type="Label3D" parent="RandomTeam"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -12.5, -0.99, 5)
@@ -519,26 +395,6 @@ shape = SubResource("BoxShape3D_1i4c5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RedTeam"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-mesh = ExtResource("2_8k7pi")
-surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
-surface_material_override/1 = SubResource("StandardMaterial3D_smiup")
-surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
-surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
-surface_material_override/4 = SubResource("StandardMaterial3D_dj81r")
-surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
-surface_material_override/6 = SubResource("StandardMaterial3D_1nxg3")
-surface_material_override/7 = SubResource("StandardMaterial3D_vg844")
-surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
-surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
-surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
-surface_material_override/11 = SubResource("StandardMaterial3D_ricc2")
-surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
-surface_material_override/13 = SubResource("StandardMaterial3D_pienk")
-surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
-surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
-surface_material_override/16 = SubResource("StandardMaterial3D_gb64g")
-surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
-surface_material_override/18 = SubResource("StandardMaterial3D_qm7aj")
 
 [node name="AmountText" type="Label3D" parent="RedTeam"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -12.5, -0.99, 5)
@@ -555,26 +411,6 @@ shape = SubResource("BoxShape3D_sltl1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BlueTeam"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-mesh = ExtResource("2_8k7pi")
-surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
-surface_material_override/1 = SubResource("StandardMaterial3D_weul7")
-surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
-surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
-surface_material_override/4 = SubResource("StandardMaterial3D_yfgm4")
-surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
-surface_material_override/6 = SubResource("StandardMaterial3D_oau3f")
-surface_material_override/7 = SubResource("StandardMaterial3D_qkus3")
-surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
-surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
-surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
-surface_material_override/11 = SubResource("StandardMaterial3D_tabxa")
-surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
-surface_material_override/13 = SubResource("StandardMaterial3D_ek84v")
-surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
-surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
-surface_material_override/16 = SubResource("StandardMaterial3D_gyoog")
-surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
-surface_material_override/18 = SubResource("StandardMaterial3D_r2xme")
 
 [node name="AmountText" type="Label3D" parent="BlueTeam"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 12.5, -0.99, 5)

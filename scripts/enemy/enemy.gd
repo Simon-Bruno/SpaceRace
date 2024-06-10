@@ -5,7 +5,6 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5 
 
-var targeted_player = null
 var last_damaged_by = null
 
 var health = 100
@@ -16,7 +15,7 @@ var nodes_in_area : Array = []
 
 # Function to find the closest node from an array of nodes
 func find_closest_player_in_range(nodes_array: Array):
-	var min_distance = 0
+	var min_distance = INF
 	
 	for node in nodes_in_area:
 		var distance = (self.global_transform.origin - node.global_transform.origin).length()
@@ -32,17 +31,17 @@ func _enter_tree():
 func _process(delta):
 	find_closest_player_in_range(nodes_in_area)
 	
-	if targeted_player:
-		var target_direction = (targeted_player.global_transform.origin - global_transform.origin).normalized()
+	if closest_target_node:
+		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
 		
-	if player_in_attack_zone and targeted_player.getHitCooldown:
-		if !targeted_player.respawn_immunity:
-			targeted_player.take_damage(20)
+	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
+		if !closest_target_node.respawn_immunity:
+			closest_target_node.take_damage(20)
 	
 
 func _physics_process(delta):
@@ -51,10 +50,10 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0.0
 
-	if targeted_player:
-		var distance_to_player = global_transform.origin.distance_to(targeted_player.global_transform.origin)
+	if closest_target_node:
+		var distance_to_player = global_transform.origin.distance_to(closest_target_node.global_transform.origin)
 		if distance_to_player > stopping_distance:
-			var target_direction = (targeted_player.global_transform.origin - global_transform.origin).normalized()
+			var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 			velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 			velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
 		else:
@@ -70,15 +69,10 @@ func _on_detection_area_body_entered(body):
 		#print("array:", nodes_in_area)
 
 func _on_detection_area_body_exited(body):
-	print(targeted_player)
 	if body.is_in_group("Players"):
-		#nodes_in_area.erase(body)
-		var index = nodes_in_area.find(body)
-		#print("index:", index)
-		if index:
-			nodes_in_area.remove_at(index)
-		#print("body exited: ", body)
-		#print("array:", nodes_in_area)
+		if body == closest_target_node:
+			closest_target_node = null
+		nodes_in_area.erase(body)
 
 func _on_enemy_hitbox_body_entered(body):
 	if body.is_in_group("Players"):

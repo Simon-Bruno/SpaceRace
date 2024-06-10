@@ -23,5 +23,6 @@ func respawn_player():
 	player.visible = true
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
 	print("player respawned")
+	
 func _on_respawn_timer_timeout():
 	respawn_player()
