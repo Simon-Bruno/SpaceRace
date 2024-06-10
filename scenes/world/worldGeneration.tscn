@@ -30,7 +30,11 @@ material = SubResource("StandardMaterial3D_gwrri")
 environment = SubResource("Environment_mgk52")
 
 [node name="WorldGeneration" type="GridMap" parent="."]
+<<<<<<< HEAD
 mesh_library = ExtResource("1_mh53a")
+=======
+mesh_library = ExtResource("1_u7wpp")
+>>>>>>> main
 cell_scale = 1.25
 script = ExtResource("1_een4t")
 metadata/_editor_floor_ = Vector3(0, 0, 0)
