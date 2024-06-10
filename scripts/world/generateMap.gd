@@ -29,6 +29,8 @@ var room_variation_y : int = 1
 # a custom value useing set_seed()
 @export var game_seed : int = 0
 
+@export var generate_room : bool = true
+
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -168,11 +170,13 @@ func draw_rooms() -> void:
 
 func fill_room(room_dim: Array) -> void:
 	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
-	print(room_dim)
-	print(room_dim[2])
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
-	print(room_scene.position)
 	add_child(room_scene, true)
+	generate_room = not generate_room
+	room_scene = room_scene.duplicate(5)
+	room_scene.scale.z = -1
+	add_child(room_scene)
+	generate_room = not generate_room
 
 # Places floor grid of x * z size based on room array
 func make_room(room : Array) -> void:
