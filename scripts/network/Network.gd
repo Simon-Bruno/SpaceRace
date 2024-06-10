@@ -6,15 +6,18 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
-signal player_spawned(object, id)
 # Excluding host
 var max_client_connections = 3
 
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
+var loaded_menu = preload("res://scenes/menu/menu.tscn")
+
+var inverted = 1
+var other_team_member_id = null
+var other_team_member_node = null
 
 #Username van de speler, moet veranderbaar zijn in game
 var playername
-var player_nodes = {}
 
 var player_teams = {}
 
@@ -42,12 +45,13 @@ func _on_host_pressed(port):
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
 		var world = loaded_world.instantiate()
-		get_node("/root/Main/Menu").queue_free()
-		get_node("/root/Main").add_child(world)
+		get_node("/root/Main/SpawnedItems/Menu").queue_free()
+		get_node("/root/Main/SpawnedItems").add_child(world)
 		await get_tree().create_timer(0.4).timeout
 		player_added.emit(1)
 		player_names[1] = playername
 		player_connected.emit(1, playername)
+		Audiocontroller.play_lobby_music()
 	else:
 		return false
 	return true
@@ -79,12 +83,19 @@ func _on_leave_button_pressed():
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
-	var menu = preload("res://scenes/menu/menu.tscn").instantiate()
-	get_node("/root/Main/World").queue_free()
-	get_node("/root/Main").add_child(menu)
+	get_node("/root/Main/SpawnedItems/World").queue_free()
+	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 	
 	
 func _on_server_disconnected():
+	print("Server disconnect")
+	var world = get_node_or_null("/root/Main/SpawnedItems/World")
+	if world:
+		world.queue_free()
+	var lobby = get_node_or_null("/root/Main/SpawnedItems/Lobby")
+	if lobby:
+		lobby.queue_free()
+	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 	remove_multiplayer_peer()
 	player_names.clear()
 	server_disconnected.emit()
@@ -94,13 +105,7 @@ func _on_join_pressed(ip, port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_client(ip, port) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = loaded_world.instantiate()
-		get_node("/root/Main/Menu").queue_free()
-		get_node("/root/Main").add_child(world)
+		get_node("/root/Main/SpawnedItems/Menu").queue_free()
+		Audiocontroller.play_lobby_music()
 		return true
 	return false
-
-
-@rpc("authority", "call_remote", "reliable")
-func _update_player_node_dict(dict):
-	player_nodes = dict

@@ -19,6 +19,7 @@ config/icon="res://assets/menu/icon.svg"
 
 Network="*res://scripts/network/Network.gd"
 Global="*res://scripts/global.gd"
+Audiocontroller="*res://scripts/audiocontroller.gd"
 
 [editor_plugins]
 
