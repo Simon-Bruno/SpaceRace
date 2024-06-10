@@ -34,13 +34,13 @@ func _find_best_candidate():
 func _hold_item(item):
 	""" Hold item """
 	
-	item.owned = true
+	item.get_parent().owned = true
 	holding = item
 	
 func _drop_item():
 	""" Drop the item """
 	
-	holding.owned = false
+	holding.get_parent().owned = false
 	holding = null	
 
 func _item_follow_player(delta):
@@ -58,7 +58,7 @@ func _process(delta):
 			_drop_item()
 		else:
 			var candidate = _find_best_candidate()
-			if candidate and not candidate.owned: _hold_item(candidate)
+			if candidate and not candidate.get_parent().owned: _hold_item(candidate)
 		
 	if holding:
 		_item_follow_player(delta)
