@@ -83,6 +83,7 @@ func _on_player_disconnected(id):
 		var world = get_node_or_null("/root/Main/SpawnedItems/World")
 		if world != null:
 			world.queue_free()
+			get_node("/root/Main/SpawnedItems").remove_child(world)
 			_hard_reset_to_lobby.rpc()
 			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
 			for player_id in player_names.keys():
@@ -95,7 +96,9 @@ func _on_leave_button_pressed():
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
 	multiplayer_peer.close()
-	get_node("/root/Main/SpawnedItems/World").queue_free()
+	var world = get_node("/root/Main/SpawnedItems/World")
+	world.queue_free()
+	get_node("/root/Main/SpawnedItems").remove_child(world)
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 	
 	
