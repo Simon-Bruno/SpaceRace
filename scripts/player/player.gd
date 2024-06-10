@@ -102,9 +102,10 @@ func _physics_process(delta):
 		if alive:
 			move_and_slide()
 	move_object()
+	
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
-	if !respawn_immunity and alive:
+	if !respawn_immunity and alive and getHitCooldown:
 		health = max(0, health-damage)
 		getHitCooldown = false
 		$PlayerCombat/GetHitCooldown.start()
