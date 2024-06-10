@@ -5,7 +5,7 @@ var health = 100
 var player_alive = true
 var attack_in_progress = false
 var player_movement_script = null
-var targeted_enemy = null 
+var targeted_enemy = null
 
 @onready var player_node = get_parent()
 @onready var player_spawner_node = player_node.get_parent()
@@ -18,7 +18,7 @@ func _process(_delta):
 	if get_parent().health <= 0:
 		print("health < 0")
 		die()
-	
+
 func _input(event):
 	if event.is_action_pressed("attack"):
 		attack_in_progress = true
@@ -28,12 +28,12 @@ func _input(event):
 func _on_player_hitbox_body_entered(body):
 	if body.is_in_group("Enemies"):
 		enemy_in_range = true
-		targeted_enemy = body 
+		targeted_enemy = body
 
 func _on_player_hitbox_body_exited(body):
 	if body.is_in_group("Enemies"):
 		enemy_in_range = false
-		targeted_enemy = null 
+		targeted_enemy = null
 
 func _on_deal_attack_timer_timeout():
 	attack_in_progress = false

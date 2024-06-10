@@ -4,6 +4,7 @@
 .env.local
 .env.staging
 */CustomBlocks/CustomBlocks.tres
+CustomBlocks.tres
 
 # Godot-specific ignores
 .import/
@@ -17,3 +18,7 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Temp files
+*.tmp
+.tmp

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvpv3erxu7lf2"
+path="res://.godot/imported/Galactic Showdown (Lobby).ogg-c019c85fdf85ea52e1eb365837486f10.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Galactic Showdown (Lobby).ogg"
+dest_files=["res://.godot/imported/Galactic Showdown (Lobby).ogg-c019c85fdf85ea52e1eb365837486f10.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

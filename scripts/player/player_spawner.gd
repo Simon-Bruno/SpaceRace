@@ -1,4 +1,4 @@
-extends Node3D	
+extends Node3D
 
 
 func add_player_character(id):
@@ -6,13 +6,13 @@ func add_player_character(id):
 	character.name = str(id)
 	add_child(character)
 
-	
+
 var dead_player = null
 func player_died(player_to_die):
 	dead_player = player_to_die
 	self.remove_child(player_to_die)
 	$RespawnTimer.start()
-	
+
 func respawn_player():
 	dead_player.health = Global.player_max_health
 	print(dead_player.health)

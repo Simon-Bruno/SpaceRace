@@ -33,10 +33,10 @@ material = SubResource("StandardMaterial3D_oikiw")
 height = 0.001
 radius = 0.75
 
-[node name="Player" type="CharacterBody3D"]
-collision_layer = 2
+[node name="Player" type="CharacterBody3D" groups=["Players"]]
+collision_layer = 3
 collision_mask = 3
-script = ExtResource("1_1we6x")
+script = ExtResource("1_c8kx5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_v5bfw")
@@ -84,6 +84,6 @@ shape = SubResource("CylinderShape3D_sjmiw")
 [connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="PlayerCombat/DealAttackTimer" to="PlayerCombat" method="_on_deal_attack_timer_timeout"]
-[connection signal="timeout" from="PlayerCombat/AttackCooldown" to="PlayerCombat" method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="PlayerCombat/GetHitCooldown" to="PlayerCombat" method="_on_GetHitCooldown_timeout"]
 [connection signal="body_entered" from="PlayerItem/Area3D" to="PlayerItem" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="PlayerItem/Area3D" to="PlayerItem" method="_on_area_3d_body_exited"]

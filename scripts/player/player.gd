@@ -1,8 +1,6 @@
 extends CharacterBody3D
 
 @export var walk_speed = 15
-@export var walk_acceleration = 40
-@export var walk_deceleration = 50
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 var getHitCooldown = true
@@ -16,31 +14,44 @@ var rotation_smoothing = 10
 var speed = 0
 var direction = Vector2.ZERO
 
+var max_dist: float = 25.0  # max distance between players
+
+var lobby_spawn = Vector3(0, 10, 20)
+var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
+
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
 func _ready():
-	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
 	$FloatingName.text = Network.playername
+	if Network.player_teams.size() == 0:
+		position = lobby_spawn
+	elif multiplayer.get_peers().size() > 0:
+		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
+		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
+	else:
+		position = game_spawn[1][0]
 
 # KEEP! IMPORTANT TO IDENTIFY PLAYER
 func player():
 	pass
-	
+
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
 	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-	else: 	# decelerate
+		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
+
+	# decelerate
+	else:
 		speed = max(0, speed - walk_deceleration  * delta)
 
-	direction = (direction + current_direction).normalized()
-	$Pivot.basis = Basis.looking_at(Vector3(direction[0] or 0.001, 0, direction[1]))
+	vel.x = direction.x * speed * Network.inverted
+	vel.z = direction.y * speed * Network.inverted
 
-	vel.x = direction.x * speed
-	vel.z = direction.y * speed
 	return vel
 	
 func _vertical_movement(delta):
@@ -48,17 +59,33 @@ func _vertical_movement(delta):
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		vel.y = jump_impulse
 	if not is_on_floor():
-		vel.y = velocity.y - (fall_acceleration * delta)	
+		vel.y = velocity.y - (fall_acceleration * delta)
 	return vel
-		
+
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
-	velocity = h + v
+
+	return h + v
+
+func check_distance(target_velocity):
+	if Network.other_team_member_node != null:
+		var player_pos = global_transform.origin
+		var player2_pos = Network.other_team_member_node.global_transform.origin
+
+		var x_distance = abs(player_pos.x - player2_pos.x)
+		if x_distance > max_dist:  # check distance
+			if player_pos.x > player2_pos.x and target_velocity.x > 0:  # if player trying to walk further
+				target_velocity.x = 0
+			elif player_pos.x < player2_pos.x and target_velocity.x < 0:  # if player trying to walk further
+				target_velocity.x = 0
+	return target_velocity.x
 
 func _physics_process(delta):
-	if $MultiplayerSynchronizer.is_multiplayer_authority():
-		_player_movement(delta)
+	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
+		var target_velocity = _player_movement(delta)
+		target_velocity.x = check_distance(target_velocity)
+		velocity = target_velocity
 		move_and_slide()
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
