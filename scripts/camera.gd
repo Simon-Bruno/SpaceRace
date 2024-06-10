@@ -19,12 +19,11 @@ func get_player_count():
 		player2 = get_node("/root/Main/SpawnedItems/World").get_node_or_null(str(Network.other_team_member_id))
 		Network.other_team_member_node = player2
 	
-	if Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
+	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
 		global_transform.origin = Vector3(9, 20, -26)
 		global_transform.basis = Basis.looking_at(Vector3(0, -9, 10))
 		$"../../world/DirectionalLight3D".basis = Basis.looking_at(Vector3(0, 0, 37.2))
 		Network.inverted = -1
-		get_viewport().render_target_v_flip = true
 	return playercount
 
 # calculate the total x-values of the players in a team
