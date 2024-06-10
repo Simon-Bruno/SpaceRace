@@ -9,9 +9,11 @@ func add_player_character(id):
 
 var dead_player = null
 func player_died(player_to_die):
-	dead_player = player_to_die
-	player_to_die.queue_free()
-	$RespawnTimer.start()
+	print('died')
+	player_to_die.health = 100
+	# dead_player = player_to_die
+	#player_to_die.queue_free()
+	#$RespawnTimer.start()
 
 func respawn_player():
 	var player = dead_player.instantiate()
