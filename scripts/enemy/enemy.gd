@@ -6,7 +6,8 @@ extends CharacterBody3D
 @export var stopping_distance = 1.5 
 
 var player_chase = false
-var player = null
+var targeted_player = null
+var last_damaged_by = null
 
 var health = 100
 var player_in_attack_zone = false
@@ -16,13 +17,19 @@ func _enter_tree():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 
 func _process(delta):
-	if player_chase and player:
-		var target_direction = (player.global_transform.origin - global_transform.origin).normalized()
+	if player_chase and targeted_player:
+		var target_direction = (targeted_player.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
+		
+	if player_in_attack_zone and targeted_player.getHitCooldown:
+		targeted_player.take_damage(20)
+	
+	if health <= 0:
+		die() 
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -30,10 +37,10 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0.0
 
-	if player_chase and player:
-		var distance_to_player = global_transform.origin.distance_to(player.global_transform.origin)
+	if player_chase and targeted_player:
+		var distance_to_player = global_transform.origin.distance_to(targeted_player.global_transform.origin)
 		if distance_to_player > stopping_distance:
-			var target_direction = (player.global_transform.origin - global_transform.origin).normalized()
+			var target_direction = (targeted_player.global_transform.origin - global_transform.origin).normalized()
 			velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 			velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
 		else:
@@ -43,29 +50,29 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_detection_area_body_entered(body):
-	if body.has_method("player"):
-		player = body
+	if body.is_in_group("Players"):
+		targeted_player = body
 		player_chase = true
 
 func _on_detection_area_body_exited(body):
-	if body == player:
-		player = null
+	if body == targeted_player:
+		targeted_player = null
 		player_chase = false
 
-func enemy():
-	# Nodig om te identifien wat een enemy is
-	pass
-
 func _on_enemy_hitbox_body_entered(body):
-	if body.has_method("player"):
+	if body.is_in_group("Players"):
 		player_in_attack_zone = true
 
 func _on_enemy_hitbox_body_exited(body):
-	if body.has_method("player"):
+	if body.is_in_group("Players"):
 		player_in_attack_zone = false
+		
+func take_damage(damage, source):
+	health = max(0, health-damage)
+	last_damaged_by = source
 
-func take_damage(damage):
-	health -= damage
-	print("Enemy health: ", health)
-	if health <= 0:
-		queue_free()
+func die():
+	print(last_damaged_by)
+	if last_damaged_by.get_parent().is_in_group("Players"):
+		last_damaged_by.get_parent().points += 5
+	queue_free()
