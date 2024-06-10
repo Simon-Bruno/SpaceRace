@@ -6,7 +6,6 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
-signal player_spawned(object, id)
 # Excluding host
 var max_client_connections = 3
 
@@ -52,6 +51,7 @@ func _on_host_pressed(port):
 		player_added.emit(1)
 		player_names[1] = playername
 		player_connected.emit(1, playername)
+		Audiocontroller.play_lobby_music()
 	else:
 		return false
 	return true
@@ -106,5 +106,6 @@ func _on_join_pressed(ip, port):
 	if multiplayer_peer.create_client(ip, port) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
 		get_node("/root/Main/SpawnedItems/Menu").queue_free()
+		Audiocontroller.play_lobby_music()
 		return true
 	return false

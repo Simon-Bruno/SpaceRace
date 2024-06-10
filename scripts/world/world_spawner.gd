@@ -16,14 +16,13 @@ func _ready():
 		
 		for id in Network.player_names.keys():
 			add_player_character(id)
-		
+			
 		#TODO: Remove hardcode enemy
 		var enemy = loaded_enemy.instantiate()
 		enemy.position = Vector3(2,20,4)
 		add_child(enemy, true)
 		
-		await get_tree().create_timer(2).timeout
-		
+		#BUG: Item currently isnt synced and floods console with errors (whywhywhy)
 		#TODO: Remove hardcode item
 		var item = loaded_item.instantiate()
 		item.position = Vector3(4,5,4)
@@ -34,5 +33,4 @@ func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	add_child(character)
-	Network.player_spawned.emit(character, id)
 

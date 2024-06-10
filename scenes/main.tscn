@@ -10,3 +10,6 @@ _spawnable_scenes = PackedStringArray("res://scenes/world.tscn", "res://scenes/l
 spawn_path = NodePath("../SpawnedItems")
 
 [node name="SpawnedItems" type="Node" parent="."]
+
+[node name="MusicController" type="AudioStreamPlayer" parent="."]
+autoplay = true

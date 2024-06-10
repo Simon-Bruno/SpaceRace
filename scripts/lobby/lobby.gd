@@ -43,6 +43,7 @@ func _on_start_timer_timeout():
 		Network.player_teams[character.name] = 2
 		
 	_on_game_start.rpc(Network.player_teams)
+	await get_tree().create_timer(1).timeout
 	get_parent().add_child(world.instantiate())
 	queue_free()
 
@@ -66,6 +67,7 @@ func add_player_character(id):
 @rpc("authority", "call_local", "reliable")
 func _on_game_start(player_teams):
 	Network.player_teams = player_teams
+	Audiocontroller.play_game_music()
 	var myteam = player_teams[str(multiplayer.get_unique_id())]
 	for player_id in player_teams.keys():
 		if player_id == str(multiplayer.get_unique_id()):
