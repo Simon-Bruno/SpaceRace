@@ -30,6 +30,8 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	#rpc_config("_update_player_info", MultiplayerAPI.RPC_MODE_AUTHORITY)
+	#rpc_config("_request_player_infoc", MultiplayerAPI.RPC_MODE_AUTHORITY)
 
 func _on_connection_failed():
 	remove_multiplayer_peer()
@@ -38,6 +40,7 @@ func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
 	player_names[peer_id] = playername
 	player_connected.emit(peer_id, playername)
+	rpc_id(1, "_register_player_rpc", peer_id, playername)
 
 # Called when the host button is pressed
 func _on_host_pressed(port):
@@ -67,8 +70,22 @@ func _on_player_connected(id):
 
 @rpc("any_peer","call_local", "reliable")
 func _register_player(id, new_player_info):
+	rpc_id(id, "_request_player_info_rpc", id)
 	player_names[id] = new_player_info
 	player_connected.emit(id, new_player_info)
+
+@rpc("any_peer", "reliable")
+func _register_player_rpc(id, new_player_info):
+	_register_player(id, new_player_info)
+
+func _send_player_info(new_player_info):
+	var id = multiplayer.get_unique_id()
+	rpc_id(1, "_register_player_rpc", id, new_player_info)	
+
+func _request_player_info_rpc(id):
+	if multiplayer.is_server():
+		return
+	_send_player_info(playername)
 
 func _on_player_disconnected(id):
 	player_names.erase(id)

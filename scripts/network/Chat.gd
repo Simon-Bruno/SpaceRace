@@ -31,6 +31,7 @@ func _input(event):
 
 # Handle send button pressed for chat functionality
 func _on_send_pressed():
+	print(Network.player_names)
 	var msg = message_input.text
 	if msg != "" and not commands():
 		msg_rpc.rpc(Network.playername, msg)
@@ -63,10 +64,11 @@ func new_timestamp():
 func _on_leave_button_pressed():
 	Network._on_leave_button_pressed()
 
-
 # Remote procedure call (RPC) for sending messages between players
 @rpc("any_peer", "call_local")
 func msg_rpc(sender, message):
+	print(Network.player_teams)
+	print(Network.player_names)			
 	var colored_sender_id = "[color=red]" + str(sender) + "[/color]"
 	message_display.append_text(str(new_timestamp()))
 	message_display.append_text(" " + colored_sender_id + ": " + message + "\n")
