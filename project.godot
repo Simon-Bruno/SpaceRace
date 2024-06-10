@@ -18,12 +18,8 @@ config/icon="res://assets/menu/icon.svg"
 [autoload]
 
 Network="*res://scripts/network/Network.gd"
-<<<<<<< HEAD
-Global="*res://scripts/Global.gd"
-=======
 Global="*res://scripts/global.gd"
 Audiocontroller="*res://scripts/audiocontroller.gd"
->>>>>>> main
 
 [editor_plugins]
 
