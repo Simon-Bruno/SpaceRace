@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckl8ocde3h7p8"]
+
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_sm1kj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r25il"]
+size = Vector3(1, 1, 0.223152)
+
+[sub_resource type="Animation" id="Animation_liulv"]
+resource_name = "Door Sliding"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3uoop"]
+resource_name = "Door sliding"
+
+[sub_resource type="Animation" id="Animation_ccr4b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sq34j"]
+_data = {
+"Door Sliding": SubResource("Animation_liulv"),
+"Door sliding": SubResource("Animation_3uoop"),
+"RESET": SubResource("Animation_ccr4b")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wcjvv"]
+size = Vector3(1, 1, 0.221268)
+
+[node name="Door" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45471, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_sm1kj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.0691872)
+shape = SubResource("BoxShape3D_r25il")
+
+[node name="Doorframe" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.0716553)
+size = Vector3(1, 1, 0.218506)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Doorframe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0231934, -0.0737915, -0.000106834)
+operation = 2
+size = Vector3(0.678955, 0.852417, 0.225494)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sq34j")
+}
+
+[node name="Door" type="CharacterBody3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0207281, 1, 0.071)
+size = Vector3(0.696411, 1, 0.217773)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.0703689)
+shape = SubResource("BoxShape3D_wcjvv")

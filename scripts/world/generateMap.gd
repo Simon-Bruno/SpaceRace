@@ -1,6 +1,6 @@
 extends GridMap
 
-enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL, 
+enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL,
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF, WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR}
 
 
@@ -22,11 +22,13 @@ var room_variation_x : int = 1
 var room_variation_y : int = 1
 
 # Stores the locations of the rooms. Each entry is: [width, height, startX]
-@export var rooms : Array = [] 
+@export var rooms : Array = []
+@export var room : Array = []
 
-# Stores game seed, which will be randomized at start of game, can be set to 
+# Stores game seed, which will be randomized at start of game, can be set to
 # a custom value useing set_seed()
 @export var game_seed : int = 0
+
 
 
 # Called when the object is created in the scene
@@ -66,7 +68,7 @@ func build_map() -> void:
 	var vals = draw_rooms()
 	draw_walls()
 	draw_windows()
-	
+
 	#Last endroom has a path of 10
 	var xend = vals[0] + 10
 #	height, width, startpos in X direction
@@ -75,7 +77,7 @@ func build_map() -> void:
 	endroom_walls(xend - 2)
 
 
-# Rotates function to new 
+# Rotates function to new
 static func new_orientation(item : int, orientation : int) -> int:
 	var new_rotation = []
 	match item:
@@ -135,15 +137,15 @@ static func sumXValues(the_rooms : Array) -> int:
 func define_rooms() -> void:
 	var xMax = room_width + room_variation_x
 	var xMin = room_width - room_variation_x
-	
+
 	var yMax = room_width + room_variation_y
 	var yMin = room_width - room_variation_y
-	
+
 	for i in room_amount:
 		var x = randi_range(xMin / 2, xMax / 2 + 1) * 2
 		var y = randi_range(yMin / 2, yMax / 2 + 1) * 2
 		var start = sumXValues(rooms) + room_margin * i
-		
+
 		rooms.append([x, y, start])
 
 
@@ -157,21 +159,24 @@ func draw_rooms() -> Array:
 	var xend
 	var zend
 	for i in room_amount:
-		make_room(rooms[i])
-		
+		room = rooms[i]
+
+		make_room(room)
+		fill_room(room)
+
 		if i == room_amount - 1:
 			xstart = rooms[i][2] + rooms[i][0] - 1
 			break
-		
+
 		zstart = randi_range(1, rooms[i][1] - 3)
 		zend = randi_range(1, rooms[i + 1][1] - 3)
-		
+
 		xstart = rooms[i][2] + rooms[i][0] - 1
 		xend = rooms[i + 1][2]
-		
-		
+
+
 		make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
-		
+
 ##	Last endroom has a path of 10
 	xend = xstart + 10
 ##	height, width, startpos in X direction
@@ -199,19 +204,27 @@ func make_endroom(room : Array) -> void:
 		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 7), FLOOR1)
 	for x in [7, 8, 9, 10]:
 		self.set_cell_item(startpos + Vector3i(x , HEIGHT, 8), FLOOR1)
+		
+	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
+	plate.position = Vector3i(5, 2, 6)
+	plate.activate("Finish")
+	add_child(plate, true)
+	#var loaded_item = preload("res://scenes/interactables/pressure_plate.tscn")
+#var item = loaded_item.instantiate()
+#item.position = Vector3(4,5,4)
+#add_child(item, true)
 
 func endroom_walls(x: int) -> void:
 	var neighbors = [Vector3i(0, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i(-1, 0, 0)]
-	
+
 	# Defining the different floor layouts, and their corresponding orientation.
 	var walls = [[0, 1, 1, 1], [1, 0, 1, 1], [1, 1, 0, 1], [1, 1, 1, 0]]
 	var corner = [[0, 1, 1, 0], [0, 0, 1, 1], [1, 0, 0, 1], [1, 1, 0, 0]]
 	var orientations = [0, 22, 10, 16]
-	
+
 	# Get all floors in grid.
 	var floors = self.get_used_cells_by_item(FLOOR1)
-	
-	print(floors)
+
 	# Go trough all floor items, check if past last room (only control room), and check if wall is needed.
 	for floor_item in floors:
 		if floor_item[0] > x:
@@ -224,7 +237,7 @@ func endroom_walls(x: int) -> void:
 
 			var idx = -1
 			var type = WALL
-			
+
 			# Checks which type of wall, then finds the needed orientation.
 			if sum_array(surround) == 3:
 				idx = walls.find(surround)
@@ -242,10 +255,17 @@ func endroom_walls(x: int) -> void:
 
 
 
+func fill_room(room_dim: Array) -> void:
+	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
+	#print(room_dim)
+	#print(room_dim[2])
+	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
+	#print(room_scene.position)
+	add_child(room_scene, true)
+
 # Places floor grid of x * z size based on room array
 func make_room(room : Array) -> void:
 	var start = Vector3i(room[2], 0, 0)
-	print(room[2])
 	for h in room[1]:
 		for w in room[0]:
 			self.set_cell_item(start + Vector3i(w , HEIGHT, h), FLOOR1)
@@ -255,28 +275,27 @@ func make_room(room : Array) -> void:
 # Draws a 2 wide path between two given vectors, the given point will be the top
 # of the path.
 func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
-	#print("making wall between:" + str(start_location) + str(end_location))
 	var relative_distance = end_location - start_location
 	var direction = 0 if relative_distance.z > 0 else 1
 
 	var middle = (relative_distance.x - 1) / 2
 	var opposite = relative_distance.x - middle
-	
+
 	var vertical_start_main = middle + direction - 1
 	var vertical_start_secondary = middle - direction
-	
+
 	for i in vertical_start_main:
 		self.set_cell_item(start_location + Vector3i(i + 1, HEIGHT, 1), FLOOR1)
-		
+
 	for i in vertical_start_secondary:
 		self.set_cell_item(start_location + Vector3i(i + 1, HEIGHT, 0), FLOOR1)
-		
+
 	for i in opposite + direction - 1:
 		self.set_cell_item(end_location - Vector3i(i + 1, HEIGHT, 0), FLOOR1)
-		
+
 	for i in opposite - direction:
 		self.set_cell_item(end_location - Vector3i(i + 1, HEIGHT, -1), FLOOR1)
-	
+
 	for i in abs(relative_distance.z):
 		i = i * (-1 if direction == 0 else 1)
 		var offset = 2 if direction == 0 else 0
@@ -289,7 +308,7 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 func place_doors(start_location : Vector3i, end_location : Vector3i) -> void:
 	self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENL, 22)
 	self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENR, 22)
-	
+
 	self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENR, 16)
 	self.set_cell_item(end_location + Vector3i(0, 0, 1), DOOROPENL, 16)
 
@@ -304,7 +323,7 @@ static func sum_array(array):
 func random_floor(floor : Vector3i) -> void:
 	var walls = [FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5]
 	var special = [FLOORVENT, FLOORWATER]
-	
+
 	var rotation = ROTATIONS[randi() % ROTATIONS.size()]
 
 	if randi_range(1, 100) < 96:
@@ -317,15 +336,15 @@ func random_floor(floor : Vector3i) -> void:
 # It also randomised the floor grid.
 func draw_walls() -> void:
 	var neighbors = [Vector3i(0, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i(-1, 0, 0)]
-	
+
 	# Defining the different floor layouts, and their corresponding orientation.
 	var walls = [[0, 1, 1, 1], [1, 0, 1, 1], [1, 1, 0, 1], [1, 1, 1, 0]]
 	var corner = [[0, 1, 1, 0], [0, 0, 1, 1], [1, 0, 0, 1], [1, 1, 0, 0]]
 	var orientations = [0, 22, 10, 16]
-	
+
 	# Get all floors in grid.
 	var floors = self.get_used_cells_by_item(FLOOR1)
-	
+
 	# Go trough all floor items, and check if wall is needed.
 	for floor_item in floors:
 		var surround = []
@@ -337,7 +356,7 @@ func draw_walls() -> void:
 
 		var idx = -1
 		var type = WALL
-		
+
 		# Checks which type of wall, then finds the needed orientation.
 		if sum_array(surround) == 3:
 			idx = walls.find(surround)
