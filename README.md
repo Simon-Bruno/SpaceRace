@@ -50,5 +50,3 @@ To install and play Space Race, follow these steps:
 ---
 
 We hope you enjoy playing Space Race as much as we enjoyed creating it! For any questions or feedback, feel free to contact any of the team members.
-
-Happy racing! 🚀
