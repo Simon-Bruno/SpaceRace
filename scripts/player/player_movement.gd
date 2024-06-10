@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var walk_speed = 15
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
+@export var push_force = 1
 
 var walk_acceleration = 40
 var walk_deceleration = 50
@@ -26,15 +27,16 @@ func _ready():
 	elif multiplayer.get_peers().size() > 0:
 		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
-	else:	
+	else:
 		position = game_spawn[1][0]
-		
+
 # KEEP! IMPORTANT TO IDENTIFY PLAYER
 func player():
 	pass
-	
+
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
+
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
 	# accelerate if moving
@@ -42,7 +44,7 @@ func _horizontal_movement(delta):
 		speed = min(walk_speed, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
 		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
-		
+
 	# decelerate
 	else:
 		speed = max(0, speed - walk_deceleration  * delta)
@@ -52,22 +54,21 @@ func _horizontal_movement(delta):
 
 	return vel
 
-	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
-	
+
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		vel.y = jump_impulse
-		
+
 	if not is_on_floor():
 		vel.y = velocity.y - (fall_acceleration * delta)
-		
+
 	return vel
-		
+
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
-	
+
 	return h + v
 
 func check_distance(target_velocity):
@@ -83,9 +84,22 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
+func move_object():
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
+
+# Action executed when button is pressed
+func activate_door_open():
+	get_parent().get_node('Door').open_door()
+
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
 		move_and_slide()
+
+		# might not work for multiplayer
+		move_object()
