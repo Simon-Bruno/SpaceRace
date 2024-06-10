@@ -12,11 +12,11 @@ func get_player_count():
 	if player:
 		playercount += 1
 	else: 
-		player = get_node("/root/Main/SpawnedItems/World").get_node_or_null(str(multiplayer.get_unique_id()))
+		player = get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node_or_null(str(multiplayer.get_unique_id()))
 	if player2:
 		playercount += 1
 	else:
-		player2 = get_node("/root/Main/SpawnedItems/World").get_node_or_null(str(Network.other_team_member_id))
+		player2 = get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node_or_null(str(Network.other_team_member_id))
 		Network.other_team_member_node = player2
 	
 	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
@@ -29,8 +29,9 @@ func get_player_count():
 # calculate the total x-values of the players in a team
 func calc_total_x(player_count):
 	var total_x: float = 0.0
-	total_x += player.global_transform.origin.x
-	if player_count == 2:
+	if  is_instance_valid(player) and player.get_parent() != null:
+		total_x += player.global_transform.origin.x
+	if  is_instance_valid(player2) and player2.get_parent() != null:
 		total_x += player2.global_transform.origin.x
 	return total_x        
 
@@ -47,7 +48,7 @@ func modify_camera_pos(average_x):
 
 
 # Make sure the camera only moves in the X-axis
-func _process(_delta):
+func _physics_process(delta):
 	var player_count: int = get_player_count()
 
 	# Calculate the average x position if there are players in the team

@@ -22,11 +22,14 @@ var room_variation_x : int = 1
 var room_variation_y : int = 1
 
 # Stores the locations of the rooms. Each entry is: [width, height, startX]
-@export var rooms : Array = [] 
+@export var rooms : Array = []
+@export var room : Array = []
 
 # Stores game seed, which will be randomized at start of game, can be set to 
 # a custom value useing set_seed()
 @export var game_seed : int = 0
+
+@export var generate_room : bool = true
 
 
 # Called when the object is created in the scene
@@ -148,19 +151,32 @@ func define_rooms() -> void:
 # 3. Place second room on same x-axis
 func draw_rooms() -> void:
 	for i in room_amount:
-		make_room(rooms[i])
-		
+		room = rooms[i]
+
+		make_room(room)
+		fill_room(room)
+
 		if i == room_amount - 1:
 			break
-		
+
 		var zstart = randi_range(1, rooms[i][1] - 3)
 		var zend = randi_range(1, rooms[i + 1][1] - 3)
-		
+
 		var xstart = rooms[i][2] + rooms[i][0] - 1
 		var xend = rooms[i + 1][2]
 
 		make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
 
+
+func fill_room(room_dim: Array) -> void:
+	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
+	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
+	add_child(room_scene, true)
+	generate_room = not generate_room
+	room_scene = room_scene.duplicate(5)
+	room_scene.scale.z = -1
+	add_child(room_scene)
+	generate_room = not generate_room
 
 # Places floor grid of x * z size based on room array
 func make_room(room : Array) -> void:

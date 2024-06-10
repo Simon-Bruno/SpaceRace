@@ -87,20 +87,35 @@ func _sync_player_names(names_dict):
 	for id in player_names.keys():
 		player_connected.emit(id, player_names[id])
 
+@rpc("authority", "call_local", "reliable")
+func _hard_reset_to_lobby():
+	other_team_member_id = null
+	other_team_member_node = null
+	player_teams.clear()
+	inverted = 1
+
 func _on_player_disconnected(id):
 	player_names.erase(id)
-	player_disconnected.emit(id)
-	if has_node(str(id)):
-		var player_node = get_node(str(id))
-		remove_child(player_node)
-		player_node.queue_free()
+	if multiplayer.is_server():
+		var world = get_node_or_null("/root/Main/SpawnedItems/World")
+		if world != null:
+			world.queue_free()
+			get_node("/root/Main/SpawnedItems").remove_child(world)
+			_hard_reset_to_lobby.rpc()
+			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
+			for player_id in player_names.keys():
+				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
+	player_disconnected.emit(id)	
 
 func _on_leave_button_pressed():
 	var id = multiplayer.get_unique_id()
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
-	get_node("/root/Main/SpawnedItems/World").queue_free()
+	multiplayer_peer.close()
+	var world = get_node("/root/Main/SpawnedItems/World")
+	world.queue_free()
+	get_node("/root/Main/SpawnedItems").remove_child(world)
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 
 func _on_server_disconnected():
