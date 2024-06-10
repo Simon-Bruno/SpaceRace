@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckl8ocde3h7p8"]
+[gd_scene load_steps=8 format=3 uid="uid://ckl8ocde3h7p8"]
+
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_sm1kj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r25il"]
 size = Vector3(1, 1, 0.223152)
@@ -50,6 +52,7 @@ size = Vector3(1, 1, 0.221268)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45471, 0)
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("1_sm1kj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.0691872)

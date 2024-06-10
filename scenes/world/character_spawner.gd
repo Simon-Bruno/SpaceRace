@@ -13,6 +13,7 @@ func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	add_child(character)
+	character.position = Vector3(0,10,0)
 	
 	#TODO: Remove hardcode enemy
 	var enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
@@ -22,6 +23,7 @@ func add_player_character(id):
 	var button = preload("res://scenes/interactables/button.tscn").instantiate()
 	button.position = Vector3(3,1,10)
 	add_child(button, true)
+	button.scale_button(10)
 	
 	var item = preload("res://scenes/interactables/moveable_items.tscn").instantiate()
 	item.position = Vector3(5,1.5,5)

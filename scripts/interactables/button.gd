@@ -1,9 +1,12 @@
 extends Node3D
 
+var player = null
+
 # Detect when body entered the area
 func _on_area_3d_body_entered(body):
 	if body is CharacterBody3D:
 		$ButtonText.show()
+		player = body
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body):
@@ -18,15 +21,8 @@ func scale_button(scaling_factor):
 func transform_button(x, y, z):
 	$Button.position = Vector3(x, y, z)
 
-# Change the scale of the door
-func scale_door(scaling_factor):
-	$Door.scale *= scaling_factor
-
-# Change to position of the door
-func transform_door(x, y, z):
-	$Door.position = Vector3(x, y, z)
-
+# Activate when button is pressed
 func _process(delta):
 	if Input.is_action_just_pressed("object") and $ButtonText.is_visible():
-		print('Nu kan er iets gebeuren... Voeg hiervoor de betreffende scene toe als subnode van ButtonActivate')
-		$Door/AnimationPlayer.play("Door Sliding")
+		if player != null:
+			player.activate_door_open()
