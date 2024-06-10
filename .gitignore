@@ -5,6 +5,7 @@
 .env.staging
 */CustomBlocks/CustomBlocks.tres
 CustomBlocks.tres
+.tres
 **.DS_Store
 
 # Godot-specific ignores
@@ -20,3 +21,7 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 .DS_Store
+
+# Temp
+.tmp
+*.tmp

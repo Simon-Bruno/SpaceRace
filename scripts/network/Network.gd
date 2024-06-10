@@ -83,6 +83,7 @@ func _on_leave_button_pressed():
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
+	multiplayer_peer.close()
 	get_node("/root/Main/SpawnedItems/World").queue_free()
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 	
