@@ -7,6 +7,7 @@ var world = preload("res://scenes/world.tscn")
 var team1 = []
 var team2 = []
 var random = []
+var player_id = null
 
 var waittime = 3.0
 
@@ -24,6 +25,11 @@ func _ready():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 		Network.player_added.connect(add_player_character)
 		init_timer()
+		
+func add_player_character(id):
+	var character = preload("res://scenes/player/player.tscn").instantiate()
+	character.name = str(id)
+	add_child(character)
 
 func init_timer():
 		add_child(start_timer)
@@ -31,7 +37,7 @@ func init_timer():
 		start_timer.wait_time = waittime
 		start_timer.one_shot = true
 		start_timer.connect("timeout", _on_start_timer_timeout)
-		
+
 func _on_start_timer_timeout():
 	if not multiplayer.is_server():
 		return
@@ -41,7 +47,7 @@ func _on_start_timer_timeout():
 		Network.player_teams[character.name] = 1
 	for character in team2:
 		Network.player_teams[character.name] = 2
-		
+
 	_on_game_start.rpc(Network.player_teams)
 	get_parent().add_child(world.instantiate())
 	queue_free()
@@ -58,11 +64,16 @@ func check_start_conditions():
 			$Sprite3D.visible = false
 
 
-func add_player_character(id):
+func lobby_add_player_character(id):
+	player_id = id
+	print("lobby script add player character id: ", id)
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
+	Network.player_nodes[id] = character
+	Network.player_spawned.emit(character, id)
+	Network._update_player_node_dict.rpc(Network.player_nodes)
 	add_child(character)
-	
+
 @rpc("authority", "call_local", "reliable")
 func _on_game_start(player_teams):
 	Network.player_teams = player_teams
@@ -73,7 +84,7 @@ func _on_game_start(player_teams):
 			continue
 		if Network.player_teams[player_id] == myteam:
 			Network.other_team_member_id = player_id
-	
+
 func assign_teams():
 	random.shuffle()
 	for i in range(random.size()):
@@ -83,7 +94,7 @@ func assign_teams():
 			team2.append(random[i])
 
 func _on_team1_body_entered(body):
-	if multiplayer.is_server() and body is CharacterBody3D and not team1.has(body):	
+	if multiplayer.is_server() and body is CharacterBody3D and not team1.has(body):
 		team1.append(body)
 		$RedTeam/AmountText.text = str(team1.size()) + "/2"
 		check_start_conditions()
@@ -105,13 +116,13 @@ func _on_team2_body_exited(body):
 		team2.erase(body)
 		$BlueTeam/AmountText.text = str(team2.size()) + "/2"
 		check_start_conditions()
-		
+
 func _on_random_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not random.has(body):
 		random.append(body)
 		$RandomTeam/AmountText.text = str(random.size()) + "/4"
 		check_start_conditions()
-		
+
 func _on_random_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
 		random.erase(body)

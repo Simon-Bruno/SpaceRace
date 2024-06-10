@@ -19,4 +19,8 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Temp files
+*.tmp
+.tmp
 .DS_Store

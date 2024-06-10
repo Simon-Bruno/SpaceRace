@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=56 format=3 uid="uid://dfiq0iiffyb4h"]
 
 [ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
