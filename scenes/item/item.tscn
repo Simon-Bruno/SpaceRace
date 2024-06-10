@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bej2ury5pyyei"]
+
+[ext_resource type="Script" path="res://scripts/item/item.gd" id="1_o5cad"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r6fdv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rni41"]
+albedo_color = Color(0.919564, 0.734757, 3.85046e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_75n6s"]
+material = SubResource("StandardMaterial3D_rni41")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_473qe"]
+height = 1.0
+
+[node name="Item" type="RigidBody3D"]
+collision_layer = 4
+physics_material_override = SubResource("PhysicsMaterial_r6fdv")
+gravity_scale = 0.5
+lock_rotation = true
+script = ExtResource("1_o5cad")
+
+[node name="MeshOrigin" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshOrigin"]
+mesh = SubResource("BoxMesh_75n6s")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_473qe")

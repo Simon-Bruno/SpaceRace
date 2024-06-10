@@ -9,6 +9,10 @@ var getHitCooldown = true
 var health = Global.player_max_health
 var points = 0
 
+var walk_acceleration = 40
+var walk_deceleration = 50
+var rotation_smoothing = 10
+
 var speed = 0
 var direction = Vector2.ZERO
 
@@ -19,6 +23,10 @@ func _ready():
 	position += Vector3(randf()*4 + 1, 10, randf()*4+1)
 	$FloatingName.text = Network.playername
 
+# KEEP! IMPORTANT TO IDENTIFY PLAYER
+func player():
+	pass
+	
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
