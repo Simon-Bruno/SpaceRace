@@ -56,13 +56,17 @@ func draw_rooms() -> void:
 	for i in room_amount:
 		var room_start = (room_width + room_margin) * i - 1
 		make_room(Vector3i(room_start, 0, 0))
-		
+
+		var room = preload("res://scenes/world/roomGeneration.tscn").instantiate()
+		room.position = Vector3i(room_start, 0, 0)
+		add_child(room)
+
 		var zstart = randi_range(1, room_height - 2)
 		var zend = randi_range(1, room_height - 3)
-		
+
 		var xstart = room_start + room_width - 1
 		var xend = xstart + room_margin + 1
-		
+
 		if i != room_amount - 1:
 			make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
 
