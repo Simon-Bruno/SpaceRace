@@ -6,6 +6,7 @@ extends CharacterBody3D
 var getHitCooldown = true
 var health = Global.player_max_health
 var points = 0
+@export var push_force = 1
 
 var walk_acceleration = 40
 var walk_deceleration = 50
@@ -38,6 +39,7 @@ func player():
 
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
+
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
 	if current_direction != Vector2.ZERO:	# accelerate if moving
@@ -53,13 +55,16 @@ func _horizontal_movement(delta):
 	vel.z = direction.y * speed * Network.inverted
 
 	return vel
-	
+
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
+
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		vel.y = jump_impulse
+
 	if not is_on_floor():
 		vel.y = velocity.y - (fall_acceleration * delta)
+
 	return vel
 
 func _player_movement(delta):
@@ -81,13 +86,23 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
+func move_object():
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
+
+# Action executed when button is pressed
+func activate_door_open():
+	get_parent().get_node('Door').open_door()
+
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
 		move_and_slide()
-
+	move_object()
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
 	health = max(0, health-damage)

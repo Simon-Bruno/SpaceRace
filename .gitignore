@@ -5,6 +5,7 @@
 .env.staging
 */CustomBlocks/CustomBlocks.tres
 CustomBlocks.tres
+**.DS_Store
 
 # Godot-specific ignores
 .import/
@@ -22,3 +23,4 @@ mono_crash.*.json
 # Temp files
 *.tmp
 .tmp
+.DS_Store
