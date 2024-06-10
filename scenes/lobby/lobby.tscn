@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=70 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
+[ext_resource type="ArrayMesh" uid="uid://j1652dsjp1kp" path="res://assets/lobby/rocket_platform.obj" id="2_8k7pi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.973094, 0.666402, 0.526047, 1)
@@ -68,7 +69,17 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1s5wb"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yogj"]
+albedo_color = Color(0.509286, 0.509286, 0.509286, 1)
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.0425102, 0, 0.46695, 1)
+emission_energy_multiplier = 28.4
+
 [sub_resource type="TextMesh" id="TextMesh_8f32b"]
+material = SubResource("StandardMaterial3D_5yogj")
+text = "Space Race"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0207"]
 albedo_color = Color(1, 0.168627, 1, 1)
@@ -78,16 +89,148 @@ albedo_color = Color(1, 0.168627, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_186s4"]
 material = SubResource("ShaderMaterial_oo0dd")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_63ka3"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3dbk"]
 albedo_color = Color(1, 0.290196, 1, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0vp51"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jxf8t"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_3uonl"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh5nd"]
+albedo_color = Color(0.487671, 0.397349, 0.245734, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_66t8f"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x70g3"]
+albedo_color = Color(0.498039, 0.498039, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01asd"]
+transparency = 1
+albedo_color = Color(0.0588235, 0.396078, 0.65098, 0.827451)
+metallic = 1.0
+metallic_specular = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2los"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.86
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dj81r"]
+albedo_color = Color(0.156863, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_squfd"]
+albedo_color = Color(0.226707, 0.226707, 0.226707, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nxg3"]
+albedo_color = Color(0.286275, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vg844"]
+albedo_color = Color(0.286275, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5s7ig"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd5dn"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awmqi"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdb65"]
+albedo_color = Color(0.498039, 0.498039, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtgdp"]
+albedo_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elloe"]
+albedo_color = Color(0.498039, 0.498039, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p2f6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0atqx"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_esn1j"]
+albedo_color = Color(0.498039, 0.498039, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7rej"]
+cull_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dysa"]
+cull_mode = 2
+albedo_color = Color(0.498039, 0.498039, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1i4c5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smiup"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ricc2"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pienk"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gb64g"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm7aj"]
+cull_mode = 2
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sltl1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weul7"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfgm4"]
+albedo_color = Color(0, 0, 0.286275, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oau3f"]
+albedo_color = Color(0, 0, 0.286275, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkus3"]
+albedo_color = Color(0, 0, 0.286275, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tabxa"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ek84v"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyoog"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2xme"]
+cull_mode = 2
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jbwpq"]
+properties/0/path = NodePath("../BlueTeam/AmountText:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("../RedTeam/AmountText:text")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("../RandomTeam/AmountText:text")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("../SubViewport/ProgressBar:value")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("../Sprite3D:visible")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gsbe"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gdyv"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 20
+border_width_right = 1
+border_width_bottom = 20
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hiim5"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
@@ -283,6 +426,7 @@ skeleton = NodePath("../../..")
 
 [node name="Floor_text" type="Label3D" parent="Assets/floors/Floor"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0607237, 0.58613, -0.430689)
+visible = false
 outline_modulate = Color(0.53259, 0.0341948, 0.59166, 1)
 text = "Multiplayer"
 font_size = 19
@@ -303,97 +447,182 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConcavePolygonShape3D_1s5wb")
 
 [node name="Head_text" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
+transform = Transform3D(79.2259, 0, 0, 0, 30.0812, 24.4244, 0, -42.177, 17.4198, -1.50678, 5.06902, -45.5789)
 mesh = SubResource("TextMesh_8f32b")
 skeleton = NodePath("../..")
 
-[node name="TeamA_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -21.8696, 3.40613, -18.9429)
-material_override = SubResource("StandardMaterial3D_r0207")
-mesh = SubResource("BoxMesh_186s4")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_63ka3")
-
-[node name="TeamA_text" type="Label3D" parent="Assets/TeamA_plate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.00695843, 1.08251, 0)
-outline_modulate = Color(0.751835, 0.46022, 1, 1)
-text = "TEAM A"
-
-[node name="TeamB_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.4148, 3.26258, -0.939115)
-material_override = SubResource("StandardMaterial3D_r0207")
-mesh = SubResource("BoxMesh_186s4")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
-
-[node name="TeamB_text" type="Label3D" parent="Assets/TeamB_plate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.025104, 1.22606, -0.0242982)
-outline_modulate = Color(0.751835, 0.46022, 1, 1)
-text = "TEAM B
-"
-
-[node name="TeamX_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.5174, 3.26257, 17.5285)
-material_override = SubResource("StandardMaterial3D_r0207")
-mesh = SubResource("BoxMesh_186s4")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
-
-[node name="TeamX_text" type="Label3D" parent="Assets/TeamX_plate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00870228, 1.22606, 0.0340403)
-outline_modulate = Color(0.751835, 0.46022, 1, 1)
-text = "RANDOM
-"
-
 [node name="Quit_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 24.2082, 3.26257, 19.7239)
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 24.208, 2.2, 19.724)
 material_override = SubResource("StandardMaterial3D_r0207")
 mesh = SubResource("BoxMesh_186s4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
 
 [node name="Quit_text" type="Label3D" parent="Assets/Quit_plate"]
-transform = Transform3D(1.25, 0, 0, 0, -4.37114e-08, 1, 0, -1.3, -5.68248e-08, -0.00546348, 1.22606, -0.0214792)
-outline_modulate = Color(0.873681, 0.267208, 0.398246, 1)
-text = "EXIT :(
+transform = Transform3D(1.25, 0, 0, 0, -4.37114e-08, 1, 0, -1.3, -5.68248e-08, -0.236, 0.6, -0.293)
+text = "EXIT
 "
+outline_size = 7
 
 [node name="Press K to start" type="Label3D" parent="Assets"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.454, 3, 34.397)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -9.23112, 3, 16.1352)
 pixel_size = 0.1285
 text = "Press 'K' to play
 "
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 80, 50)
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 9.81035, 40, 41.3175)
 
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="RandomTeam" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.482, 3.75, -21.332)
+collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, 1.00047, -18.0948)
-shape = SubResource("CylinderShape3D_0vp51")
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="RandomTeam"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -14, -1, 0)
+shape = SubResource("BoxShape3D_jxf8t")
 
-[node name="Area3D2" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.973)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RandomTeam"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("2_8k7pi")
+surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
+surface_material_override/1 = SubResource("StandardMaterial3D_x70g3")
+surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
+surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
+surface_material_override/4 = SubResource("StandardMaterial3D_dj81r")
+surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
+surface_material_override/6 = SubResource("StandardMaterial3D_1nxg3")
+surface_material_override/7 = SubResource("StandardMaterial3D_vg844")
+surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
+surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
+surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
+surface_material_override/11 = SubResource("StandardMaterial3D_xdb65")
+surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
+surface_material_override/13 = SubResource("StandardMaterial3D_elloe")
+surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
+surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
+surface_material_override/16 = SubResource("StandardMaterial3D_esn1j")
+surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
+surface_material_override/18 = SubResource("StandardMaterial3D_0dysa")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D2"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, -0.999527, 15.8512)
-shape = SubResource("CylinderShape3D_3uonl")
+[node name="AmountText" type="Label3D" parent="RandomTeam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -12.5, -0.99, 5)
+text = "0/4"
+font_size = 600
 
-[node name="Area3D3" type="Area3D" parent="."]
+[node name="RedTeam" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.327, 3.75, 0)
+collision_mask = 3
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D3"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5425, 1.36794, 17.7647)
-shape = SubResource("CylinderShape3D_66t8f")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RedTeam"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -14, -1, 0)
+shape = SubResource("BoxShape3D_1i4c5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RedTeam"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("2_8k7pi")
+surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
+surface_material_override/1 = SubResource("StandardMaterial3D_smiup")
+surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
+surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
+surface_material_override/4 = SubResource("StandardMaterial3D_dj81r")
+surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
+surface_material_override/6 = SubResource("StandardMaterial3D_1nxg3")
+surface_material_override/7 = SubResource("StandardMaterial3D_vg844")
+surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
+surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
+surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
+surface_material_override/11 = SubResource("StandardMaterial3D_ricc2")
+surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
+surface_material_override/13 = SubResource("StandardMaterial3D_pienk")
+surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
+surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
+surface_material_override/16 = SubResource("StandardMaterial3D_gb64g")
+surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
+surface_material_override/18 = SubResource("StandardMaterial3D_qm7aj")
+
+[node name="AmountText" type="Label3D" parent="RedTeam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -12.5, -0.99, 5)
+text = "0/2"
+font_size = 600
+
+[node name="BlueTeam" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.064, 3.75, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BlueTeam"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 14, -1, 0)
+shape = SubResource("BoxShape3D_sltl1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlueTeam"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("2_8k7pi")
+surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
+surface_material_override/1 = SubResource("StandardMaterial3D_weul7")
+surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
+surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
+surface_material_override/4 = SubResource("StandardMaterial3D_yfgm4")
+surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
+surface_material_override/6 = SubResource("StandardMaterial3D_oau3f")
+surface_material_override/7 = SubResource("StandardMaterial3D_qkus3")
+surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
+surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
+surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
+surface_material_override/11 = SubResource("StandardMaterial3D_tabxa")
+surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
+surface_material_override/13 = SubResource("StandardMaterial3D_ek84v")
+surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
+surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
+surface_material_override/16 = SubResource("StandardMaterial3D_gyoog")
+surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
+surface_material_override/18 = SubResource("StandardMaterial3D_r2xme")
+
+[node name="AmountText" type="Label3D" parent="BlueTeam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 12.5, -0.99, 5)
+text = "0/2"
+font_size = 600
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
-[connection signal="body_entered" from="Area3D2" to="." method="_on_team2_body_entered"]
-[connection signal="body_exited" from="Area3D2" to="." method="_on_team2_body_exited"]
-[connection signal="body_entered" from="Area3D3" to="." method="_on_random_body_entered"]
-[connection signal="body_exited" from="Area3D3" to="." method="_on_random_body_exited"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../Camera3D")
+replication_config = SubResource("SceneReplicationConfig_jbwpq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42.2136, 0)
+light_energy = 2.33
+omni_range = 100.0
+omni_attenuation = 0.258816
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_1gsbe")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0gdyv")
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(14.4639, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5.345, 2.7, 11.1548)
+visible = false
+texture = SubResource("ViewportTexture_hiim5")
+
+[connection signal="body_entered" from="RandomTeam" to="." method="_on_random_body_entered"]
+[connection signal="body_exited" from="RandomTeam" to="." method="_on_random_body_exited"]
+[connection signal="body_entered" from="RedTeam" to="." method="_on_team1_body_entered"]
+[connection signal="body_exited" from="RedTeam" to="." method="_on_team1_body_exited"]
+[connection signal="body_entered" from="BlueTeam" to="." method="_on_team2_body_entered"]
+[connection signal="body_exited" from="BlueTeam" to="." method="_on_team2_body_exited"]
