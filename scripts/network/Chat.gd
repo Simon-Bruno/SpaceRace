@@ -67,8 +67,6 @@ func _on_leave_button_pressed():
 func msg_rpc(sender, message):	
 	var peer_id = _get_key(sender)
 	var team = Network.player_teams[peer_id]
-	#var colored_sender_id = _customized_player_label(sender, peer_id)
-	#var colored_sender_id = "[color=red]" + str(sender) + "[/color]"
 	message_display.append_text(str(new_timestamp()))
 	if str(team) == "1":
 		var colored_sender_id = "[color=red]" + str(team) + " - " + str(sender) + "[/color]"
@@ -90,6 +88,7 @@ func _get_key(sender):
 	for key in players.keys():
 		if players[key] == sender:
 			return str(key)
+	return 0
 
 
 # To handle when text is submitted with the enter key

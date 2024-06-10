@@ -6,7 +6,7 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
-# Excluding host
+
 var max_client_connections = 3
 
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
@@ -16,7 +16,7 @@ var inverted = 1
 var other_team_member_id = null
 var other_team_member_node = null
 
-#Username van de speler, moet veranderbaar zijn in game
+# Username of the player, should be changeable in game
 var playername
 
 var player_teams = {}
@@ -30,8 +30,6 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	#rpc_config("_update_player_info", MultiplayerAPI.RPC_MODE_AUTHORITY)
-	#rpc_config("_request_player_infoc", MultiplayerAPI.RPC_MODE_AUTHORITY)
 
 func _on_connection_failed():
 	remove_multiplayer_peer()
@@ -58,34 +56,36 @@ func _on_host_pressed(port):
 	else:
 		return false
 	return true
-	
 
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
 
 func _on_player_connected(id):
 	if multiplayer.is_server():
-		_register_player.rpc(id, playername)
+		rpc_id(id, "_send_player_info", playername)
 		player_added.emit(id)
+		rpc_id(id, "_sync_player_names", player_names) # Send updated player_names to new client
 
-@rpc("any_peer","call_local", "reliable")
-func _register_player(id, new_player_info):
-	rpc_id(id, "_request_player_info_rpc", id)
+@rpc("any_peer", "reliable")
+func _send_player_info(new_player_info):
+	var id = multiplayer.get_unique_id()
 	player_names[id] = new_player_info
 	player_connected.emit(id, new_player_info)
+	if multiplayer.is_server():
+		rpc("_sync_player_names", player_names)
 
 @rpc("any_peer", "reliable")
 func _register_player_rpc(id, new_player_info):
-	_register_player(id, new_player_info)
-
-func _send_player_info(new_player_info):
-	var id = multiplayer.get_unique_id()
-	rpc_id(1, "_register_player_rpc", id, new_player_info)	
-
-func _request_player_info_rpc(id):
+	player_names[id] = new_player_info
+	player_connected.emit(id, new_player_info)
 	if multiplayer.is_server():
-		return
-	_send_player_info(playername)
+		rpc("_sync_player_names", player_names)
+
+@rpc("any_peer", "reliable")
+func _sync_player_names(names_dict):
+	player_names = names_dict.duplicate()
+	for id in player_names.keys():
+		player_connected.emit(id, player_names[id])
 
 func _on_player_disconnected(id):
 	player_names.erase(id)
@@ -94,16 +94,15 @@ func _on_player_disconnected(id):
 		var player_node = get_node(str(id))
 		remove_child(player_node)
 		player_node.queue_free()
-	
+
 func _on_leave_button_pressed():
-	var id = multiplayer_peer.get_unique_id()
+	var id = multiplayer.get_unique_id()
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
 	get_node("/root/Main/SpawnedItems/World").queue_free()
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
-	
-	
+
 func _on_server_disconnected():
 	print("Server disconnect")
 	var world = get_node_or_null("/root/Main/SpawnedItems/World")
