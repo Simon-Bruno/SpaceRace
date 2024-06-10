@@ -103,8 +103,10 @@ func _physics_process(delta):
 		velocity = target_velocity
 		move_and_slide()
 	move_object()
+
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
 	health = max(0, health-damage)
+	print('health', health)
 	getHitCooldown = false
 	$PlayerCombat/GetHitCooldown.start()

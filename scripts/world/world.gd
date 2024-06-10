@@ -1,6 +1,6 @@
 extends Node3D
 
-var loaded_item = preload("res://scenes/item/item.tscn")
+var loaded_item = preload("res://scenes/interactables/laser_beam.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,5 +15,5 @@ func _ready():
 		#BUG: Item currently isnt synced and floods console with errors (whywhywhy)
 		#TODO: Remove hardcode item
 		var item = loaded_item.instantiate()
-		item.position = Vector3(4,5,4)
+		item.position = Vector3(4,2.5,20)
 		add_child(item, true)
