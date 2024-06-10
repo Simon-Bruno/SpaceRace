@@ -3,7 +3,7 @@ extends Node3D
 @onready var world = get_parent()
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
-var laser_scene = preload("res://scenes/interactables/laserbeam.tscn")
+var laser_scene = preload("res://scenes/interactables/laser_beam.tscn")
 var item_scene = preload("res://scenes/item/item.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_items.tscn")
 

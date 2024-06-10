@@ -48,7 +48,7 @@ func modify_camera_pos(average_x):
 
 
 # Make sure the camera only moves in the X-axis
-func _process(_delta):
+func _physics_process(delta):
 	var player_count: int = get_player_count()
 
 	# Calculate the average x position if there are players in the team
