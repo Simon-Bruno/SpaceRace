@@ -3,6 +3,9 @@ extends CharacterBody3D
 @export var walk_speed = 15
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
+var getHitCooldown = true
+var health = Global.player_max_health
+var points = 0
 @export var push_force = 1
 
 var walk_acceleration = 40
@@ -39,8 +42,7 @@ func _horizontal_movement(delta):
 
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
-	# accelerate if moving
-	if current_direction != Vector2.ZERO:
+	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
 		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
@@ -100,6 +102,11 @@ func _physics_process(delta):
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
 		move_and_slide()
+	move_object()
 
-		# might not work for multiplayer
-		move_object()
+# Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
+func take_damage(damage):
+	health = max(0, health-damage)
+	print('health', health)
+	getHitCooldown = false
+	$PlayerCombat/GetHitCooldown.start()

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b47e0ly4dll8p"]
+
+[ext_resource type="Script" path="res://scripts/player/player_spawner.gd" id="1_h54ip"]
+
+[node name="PlayerSpawner" type="Node3D"]
+script = ExtResource("1_h54ip")
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
