@@ -3,18 +3,24 @@ extends GridMap
 enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL, 
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF, WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR}
 
+@onready var customRooms : GridMap = get_node("../CustomRooms")
 
 # At what y level is the floor
 const HEIGHT : int = 0
 const ROTATIONS : Array = [0, 16, 10, 22]
 
 # Defines what blocks are associated together.
-const PAIRS = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSEDL: DOORCLOSEDR, DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
+const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSEDL: DOORCLOSEDR, 
+							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
-@export var room_amount : int = 15
-@export var room_width  : int = 10
-@export var room_height : int = 10
-@export var room_margin : int = 7
+# What percentage of the rooms should be custom.
+const CUSTOMROOMPERCENTAGE : float = 0.4
+
+# General room parameters
+const room_amount : int = 15
+const room_width  : int = 10
+const room_height : int = 10
+const room_margin : int = 7
 
 # How much the room size can variate in incraments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
@@ -57,16 +63,59 @@ func new_seed() -> void:
 func set_seed(given_seed : int) -> void:
 	seed(given_seed)
 	build_map()
+	
+
+# Randomly picks n unique indexes.
+func random_picks(total_picks : int, max_value : int) -> Array:
+	var all_options = []
+	for i in range(max_value):
+		all_options.append(i)
+
+	var picks = []
+	for i in total_picks:
+		picks.append(all_options.pop_at(randi_range(0, all_options.size() - 1)))
+
+	return picks
+
+
+# Randomly picks some rooms and corresponding custom rooms, edits the floorplan
+# and returns an array containing the pairs [original, new].
+# TODO: Breaks room margins a bit, might need to be changed.
+func get_custom_rooms() -> Array:
+	var total_picks = int(min(room_amount * CUSTOMROOMPERCENTAGE, customRooms.rooms.size()))
+	
+	var originals = random_picks(total_picks, room_amount)
+	var customs = random_picks(total_picks, customRooms.rooms.size())
+	
+	# Creates index pairs between the generated floorplan and the custom floorplan.
+	var pairs = []
+	for i in total_picks:
+		pairs.append([originals[i], customs[i]])
+
+	for i in pairs:
+		rooms[i[0]][0] = customRooms.rooms[i[1]][0]
+		rooms[i[0]][1] = customRooms.rooms[i[1]][1]
+
+	return pairs
+
+
+# Function gets an Array containing the custom rooms that have been assigned, 
+# and places their content on the correct location in the grid.
+func place_custom_room(pairs : Array) -> void:
+	pass
 
 
 # Main function that builds the map. Clears the map first to stop overlap.
 # TODO: Expand with all generation layers.
 func build_map() -> void:
 	self.clear()
+	
 	define_rooms()
+	var pairs : Array = get_custom_rooms()
 	draw_rooms()
 	draw_walls()
 	draw_windows()
+	place_custom_room(pairs)
 	
 	mirror_world()
 
@@ -168,11 +217,9 @@ func draw_rooms() -> void:
 
 func fill_room(room_dim: Array) -> void:
 	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
-	print(room_dim)
-	print(room_dim[2])
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
-	print(room_scene.position)
 	add_child(room_scene, true)
+
 
 # Places floor grid of x * z size based on room array
 func make_room(room : Array) -> void:
