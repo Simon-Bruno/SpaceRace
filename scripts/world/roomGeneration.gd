@@ -19,7 +19,7 @@ func fill_room():
 	enemy.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1))
 	add_child(enemy, true)
 	var laser = laser_scene.instantiate()
-	laser.position = Vector3i(2, 3, 5)
+	laser.position = Vector3i(1, 3, 5)
 	add_child(laser, true)
 	var item = item_scene.instantiate()
 	item.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
