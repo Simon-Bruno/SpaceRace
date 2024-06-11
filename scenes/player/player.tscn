@@ -99,6 +99,9 @@ wait_time = 0.5
 [node name="GetHitCooldown" type="Timer" parent="PlayerCombat"]
 wait_time = 0.5
 
+[node name="RespawnImmunity" type="Timer" parent="PlayerCombat"]
+one_shot = true
+
 [node name="FloatingName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
 billboard = 1
@@ -124,5 +127,6 @@ texture = SubResource("ViewportTexture_ucjvb")
 [connection signal="value_changed" from="PlayerCombat/SubViewport/HpBar" to="PlayerCombat/SubViewport/HpBar" method="_on_value_changed"]
 [connection signal="timeout" from="PlayerCombat/DealAttackTimer" to="PlayerCombat" method="_on_deal_attack_timer_timeout"]
 [connection signal="timeout" from="PlayerCombat/GetHitCooldown" to="PlayerCombat" method="_on_GetHitCooldown_timeout"]
+[connection signal="timeout" from="PlayerCombat/RespawnImmunity" to="." method="_on_respawn_immunity_timeout"]
 [connection signal="body_entered" from="PlayerItem/Area3D" to="PlayerItem" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="PlayerItem/Area3D" to="PlayerItem" method="_on_area_3d_body_exited"]

@@ -10,12 +10,6 @@ var targeted_enemy = null
 @onready var player_node = get_parent()
 @onready var player_spawner_node = player_node.get_parent()
 
-func die():
-	player_spawner_node.player_died(player_node)
-
-func _process(_delta):
-	if get_parent().health <= 0:
-		die()
 
 func _input(event):
 	if event.is_action_pressed("attack"):
