@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://8gurumik6vsg"]
+
+[ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_2s1ek"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mj71s"]
+albedo_color = Color(0.822335, 0.0526998, 4.81307e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_muaet"]
+material = SubResource("StandardMaterial3D_mj71s")
+size = Vector3(5, 0.2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u6b37"]
+size = Vector3(5, 0.2, 0.2)
+
+[node name="Laser" type="Node3D"]
+script = ExtResource("1_2s1ek")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_muaet")
+
+[node name="LaserRange" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LaserRange"]
+shape = SubResource("BoxShape3D_u6b37")
+
+[connection signal="body_entered" from="LaserRange" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="LaserRange" to="." method="_on_area_3d_body_exited"]
