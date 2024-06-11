@@ -21,6 +21,10 @@ Network="*res://scripts/network/Network.gd"
 Global="*res://scripts/global.gd"
 Audiocontroller="*res://scripts/audiocontroller.gd"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/BasGe/OneDrive/Documents/godot_clips/godot_temp_video.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray()

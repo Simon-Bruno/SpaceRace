@@ -2,6 +2,7 @@ extends RigidBody3D
 
 @export var lifespan : float = 5.0
 @export var speed : float = 30.0
+var damage : int = 50
 
 var direction: Vector3
 
@@ -19,10 +20,10 @@ func _physics_process(delta):
 		print("Collision detected")
 		if collision.get_collider().is_in_group("Players"):
 			print("Hit player: ", collision.get_collider().name)
-			collision.get_collider().take_damage(10)
+			collision.get_collider().take_damage(damage)
 		if collision.get_collider().is_in_group("Enemies"):
 			print("Hit Enemy: ", collision.get_collider().name)
 			if collision.get_collider().has_method("take_damage"):
-				collision.get_collider().take_damage(10, self)
+				collision.get_collider().take_damage(damage, self)
 		queue_free()
 
