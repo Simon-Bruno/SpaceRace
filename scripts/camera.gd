@@ -50,7 +50,7 @@ func modify_camera_pos(average_x, delta):
 	camera_position.x = average_x
 
 	# Set the new position back to the camera
-	global_transform.origin = global_transform.origin.lerp(camera_position, move_speed * delta)
+	global_transform.origin = lerp(global_transform.origin, camera_position, move_speed * delta)
 
 
 # Make sure the camera only moves in the X-axis
