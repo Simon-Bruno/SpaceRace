@@ -33,14 +33,20 @@ func fill_room():
 	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	add_child(box)
 	
-	var button = button_scene.instantiate()
-	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(button)
-	
 	var door = door_scene.instantiate()
 	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
 	add_child(door)
+	door.activation_count = 2
+	
+	var button = button_scene.instantiate()
+	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	add_child(button)
 	button.interactable = door
+	
+	var button2 = button_scene.instantiate()
+	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	add_child(button2)
+	button2.interactable = door
 
 #func _process(delta):
 	#pass
