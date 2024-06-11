@@ -16,14 +16,12 @@ func find_closest_enemy_in_range(nodes_array: Array):
 			min_distance = distance
 			closest_target_node = enemy
 
-func _process(delta):
-	find_closest_enemy_in_range(enemies_in_weapon_range)
-
 func attack():
 	var player_node = get_parent().get_parent()
-	print(closest_target_node)
+	find_closest_enemy_in_range(enemies_in_weapon_range)
 	if closest_target_node:
 		closest_target_node.take_damage(damage, player_node)
+	closest_target_node = null
 
 func _on_range_body_entered(body):
 	if body.is_in_group("Enemies"):
