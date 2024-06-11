@@ -45,7 +45,7 @@ func _horizontal_movement(delta):
 	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
-		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
+		basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
 	else:

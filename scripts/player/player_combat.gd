@@ -1,39 +1,18 @@
 extends Node3D
 
-var enemy_in_range = false
-var health = 100
-var player_alive = true
-var attack_in_progress = false
-var player_movement_script = null
-var targeted_enemy = null
+var enemies_in_weapon_range : Array = []
+var able_to_attack : bool = true
 
 @onready var player_node = get_parent()
-@onready var player_spawner_node = player_node.get_parent()
-
 
 func _input(event):
-	if event.is_action_pressed("attack"):
-		attack_in_progress = true
-		apply_damage_to_enemy()
+	if event.is_action_pressed("attack") and able_to_attack and player_node.alive:
+		$Weapon.attack()
+		able_to_attack = false
 		$DealAttackTimer.start()
 
-func _on_player_hitbox_body_entered(body):
-	if body.is_in_group("Enemies"):
-		enemy_in_range = true
-		targeted_enemy = body
-
-func _on_player_hitbox_body_exited(body):
-	if body.is_in_group("Enemies"):
-		enemy_in_range = false
-		targeted_enemy = null
-
 func _on_deal_attack_timer_timeout():
-	attack_in_progress = false
-	$DealAttackTimer.stop()
-
-func apply_damage_to_enemy():
-	if enemy_in_range and targeted_enemy:
-		targeted_enemy.take_damage(20, self)
+	able_to_attack = true
 
 func _on_GetHitCooldown_timeout():
-	get_parent().getHitCooldown = true
+	player_node.getHitCooldown = true
