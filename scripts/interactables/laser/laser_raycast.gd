@@ -5,7 +5,7 @@ var init_pos = null
 var init_scale = null
 
 func _ready():
-	laser = $"../Origin"
+	laser = $"../Beam"
 	init_pos = laser.position
 	init_scale = laser.scale
 

@@ -20,7 +20,7 @@ func fill_room():
 	add_child(enemy, true)
 	
 	var laser = laser_scene.instantiate()
-	laser.position = Vector3i(1, 3, 5)
+	laser.position = Vector3i(1, 2, 5)
 	add_child(laser, true)
 	
 	var item = item_scene.instantiate()

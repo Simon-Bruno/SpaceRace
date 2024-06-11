@@ -16,16 +16,16 @@ size = Vector3(0.2, 0.2, 0.2)
 [node name="Laser" type="Node3D"]
 script = ExtResource("1_fimeb")
 
-[node name="Origin" type="Node3D" parent="."]
+[node name="Beam" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Origin"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Beam"]
 mesh = SubResource("BoxMesh_muaet")
 
-[node name="LaserRange" type="Area3D" parent="Origin"]
+[node name="LaserRange" type="Area3D" parent="Beam"]
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/LaserRange"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Beam/LaserRange"]
 shape = SubResource("BoxShape3D_u6b37")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
@@ -33,5 +33,5 @@ target_position = Vector3(48, 0, 0)
 collision_mask = 9
 script = ExtResource("2_tgb42")
 
-[connection signal="body_entered" from="Origin/LaserRange" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Origin/LaserRange" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Beam/LaserRange" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Beam/LaserRange" to="." method="_on_area_3d_body_exited"]
