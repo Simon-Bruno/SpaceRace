@@ -175,7 +175,7 @@ func fill_room(room_dim: Array) -> void:
 	generate_room = not generate_room
 	room_scene = room_scene.duplicate(5)
 	room_scene.scale.z = -1
-	add_child(room_scene)
+	add_child(room_scene, true)
 	generate_room = not generate_room
 
 # Places floor grid of x * z size based on room array
