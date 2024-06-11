@@ -21,21 +21,21 @@ func _on_area_3d_body_exited(body):
 		player = null
 		activate_text = false
 
-# Activate switch
+# Activate switch and call the interactable activation.
 func _activate_switch():
 	if customRooms is GridMap:
 		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(customRooms.WALLSWITCHON)
 	interactable.activated()
 	activate = true
 
-# Deactivate the switch
+# Deactivate the switch and call the interactable deactivation.
 func _deactivate_switch():
 	if customRooms is GridMap:
 		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(customRooms.WALLSWITCHOFF)
 	interactable.deactivated()
 	activate = false
 
-# Activate when button is pressed
+# Activate when button is pressed. Change the mesh to activate or deactivate.
 func _process(delta):
 	if Input.is_action_just_pressed("interact") and activate_text:
 		if player != null and interactable != null:
@@ -44,6 +44,7 @@ func _process(delta):
 			else:
 				_deactivate_switch()
 
+# Called when button is placed in world. Sets the mesh instance to off.
 func _ready():
 	customRooms = get_parent().get_parent()
 	if customRooms is GridMap:

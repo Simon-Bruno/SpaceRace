@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
-@export var push_force = 0.5
+@export var push_force = 1.0
 
 var walk_acceleration = 40
 var walk_deceleration = 50
@@ -87,6 +87,7 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
+# Lets the player moves object in the room.
 func move_object():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
@@ -101,7 +102,6 @@ func _physics_process(delta):
 		move_and_slide()
 
 	move_object()
-
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
