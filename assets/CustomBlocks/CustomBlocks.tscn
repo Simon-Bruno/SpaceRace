@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=59 format=3 uid="uid://cehfbggdu6pms"]
 
 [ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
@@ -24,6 +24,8 @@
 [ext_resource type="ArrayMesh" uid="uid://b5tvom7iqe4um" path="res://assets/CustomBlocks/walls/wallLight.obj" id="18_kffvs"]
 [ext_resource type="ArrayMesh" uid="uid://m7y3p5a06wfv" path="res://assets/CustomBlocks/walls/wallFuse.obj" id="19_08ypj"]
 [ext_resource type="ArrayMesh" uid="uid://c4thxn35mjcc8" path="res://assets/CustomBlocks/walls/wallWindowR.obj" id="20_mj8xf"]
+[ext_resource type="ArrayMesh" uid="uid://0esprmopx1uc" path="res://assets/CustomBlocks/misc/customEnd.obj" id="25_q6iur"]
+[ext_resource type="ArrayMesh" uid="uid://dwq82es06u5fu" path="res://assets/CustomBlocks/misc/customStart.obj" id="26_u2x3f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
 albedo_texture = ExtResource("1_c8374")
@@ -116,6 +118,9 @@ albedo_texture = ExtResource("1_c8374")
 albedo_texture = ExtResource("1_c8374")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qk48"]
+albedo_texture = ExtResource("1_c8374")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hw6gx"]
 albedo_texture = ExtResource("1_c8374")
 
 [node name="Node3D" type="Node3D"]
@@ -340,3 +345,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0qk48")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallWindowR/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
+
+[node name="CustomEnd" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00332773, 0, 0.00183892)
+mesh = ExtResource("25_q6iur")
+surface_material_override/0 = SubResource("StandardMaterial3D_hw6gx")
+
+[node name="CustomStart" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00332773, 0, 0.00183892)
+mesh = ExtResource("26_u2x3f")
+surface_material_override/0 = SubResource("StandardMaterial3D_hw6gx")
