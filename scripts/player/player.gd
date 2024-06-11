@@ -51,7 +51,7 @@ func _horizontal_movement(delta):
 	else:
 		speed = max(0, speed - walk_deceleration  * delta)
 
-	vel.x = direction.x * speed
+	vel.x = direction.x * speed * Network.inverted
 	vel.z = direction.y * speed * Network.inverted
 
 	return vel
