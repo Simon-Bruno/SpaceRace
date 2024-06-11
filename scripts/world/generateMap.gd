@@ -3,7 +3,6 @@ extends GridMap
 enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL, 
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF, WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR}
 
-
 # At what y level is the floor
 const HEIGHT : int = 0
 const ROTATIONS : Array = [0, 16, 10, 22]
@@ -295,6 +294,7 @@ func draw_walls() -> void:
 		# Place wall.
 		var orientation = orientations[idx]
 		self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
+			
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

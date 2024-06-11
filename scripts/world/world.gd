@@ -1,7 +1,7 @@
 extends Node3D
 
 var loaded_item = preload("res://scenes/interactables/button.tscn")
-var loaded_item2 = preload("res://scenes/interactables/door.tscn")
+var loaded_door = preload("res://scenes/interactables/door.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,11 +16,9 @@ func _ready():
 		#BUG: Item currently isnt synced and floods console with errors (whywhywhy)
 		#TODO: Remove hardcode item
 		var item = loaded_item.instantiate()
-		item.position = Vector3(4,2.5,20)
+		item.position = Vector3(4,2.5,6)
 		add_child(item, true)
-
-		var item2 = loaded_item2.instantiate()
-		item2.position = Vector3(10,2.5,20)
-		add_child(item2, true)
-		
-		item.interactable = item2
+		var door = loaded_door.instantiate()
+		door.position = Vector3(4,2.5,2)
+		add_child(door, true)
+		item.interactable = door

@@ -25,14 +25,14 @@ func _ready():
 		
 		#BUG: Item currently isnt synced and floods console with errors (whywhywhy)
 		#TODO: Remove hardcode item
-		var item = loaded_item.instantiate()
-		item.position = Vector3(4,5,4)
-		add_child(item, true)
-		
-		#TODO: Remove hardcode item
-		var box = loaded_box.instantiate()
-		box.position = Vector3(4,2,4)
-		add_child(box, true)
+		#var item = loaded_item.instantiate()
+		#item.position = Vector3(4,5,4)
+		#add_child(item, true)
+		#
+		##TODO: Remove hardcode item
+		#var box = loaded_box.instantiate()
+		#box.position = Vector3(4,2,4)
+		#add_child(box, true)
 
 
 func add_player_character(id):
