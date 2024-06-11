@@ -5,14 +5,16 @@ extends Control
 #func on_exit_options_menu() -> void:
 	#pass
 
+
 func _ready():
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	settings.visible = false
 	settings.exit_options_menu.connect(on_exit_options_menu)
-	
+
 
 func _on_connection_failed():
 	set_notification_and_show("Could not connect to the game", $Holder)
+
 
 # Called when the node enters the scene tree for the first time.
 func _on_host_pressed():

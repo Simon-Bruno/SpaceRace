@@ -6,6 +6,8 @@ extends Control
 @onready var message_input = $MessageInput
 @onready var message_timer = $MessageTimer
 @onready var video_stream_player = $VideoStreamPlayer
+@onready var fps_meter = $FPS_Meter
+
 
 # Enable BBCode parsing and text selection
 func _ready():
@@ -27,6 +29,10 @@ func _input(event):
 		and not message_input.get_rect().has_point(get_local_mouse_position()) \
 		and not send_button.get_rect().has_point(get_local_mouse_position()):
 			message_display.visible = false
+
+
+func _process(delta):
+	fps_meter.text = "FPS: " + str(Engine.get_frames_per_second())
 
 
 # Handle send button pressed for chat functionality
@@ -119,6 +125,7 @@ func _on_message_input_gui_input(_event):
 # Check for special commands in the input field
 func commands():
 	if leave_game() or easter_egg() or stop_easter_egg():
+	#or mute_master() or mute_music() or mute_sfx():
 		return true
 
 
@@ -144,6 +151,31 @@ func stop_easter_egg():
 	if message_input.text == "/stop_easteregg":
 		video_stream_player.stop()
 		return true
+
+
+#func mute_master():
+	#if message_input.text == "/mute_master":
+##func set_slider_value():
+	##h_slider.value = db_to_linear(AudioServer.get_bus_volume_db(0))
+	##set_audio_num_label_text()
+		#return true
+#
+#
+#func mute_music():
+	#if message_input.text == "/mute_music":
+		##func set_slider_value():
+	##h_slider.value = db_to_linear(AudioServer.get_bus_volume_db(1))
+	##set_audio_num_label_text()
+		#return true
+#
+#
+#func mute_sfx():
+	#if message_input.text == "/mute_sfx":
+		#pass
+				##func set_slider_value():
+	##h_slider.value = db_to_linear(AudioServer.get_bus_volume_db(2))
+	##set_audio_num_label_text()
+		#return 
 
 
 # Called when the message timer times out, hides the message display if the

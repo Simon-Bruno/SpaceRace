@@ -6,6 +6,8 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
+signal on_fps_toggled(value : bool)
+
 # Excluding host
 var max_client_connections = 3
 
@@ -31,6 +33,10 @@ func _ready():
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
+
+func emit_on_fps_toggled(value : bool):
+	on_fps_toggled.emit(value)
+
 func _on_connection_failed():
 	remove_multiplayer_peer()
 
@@ -55,7 +61,7 @@ func _on_host_pressed(port):
 	else:
 		return false
 	return true
-	
+
 
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
