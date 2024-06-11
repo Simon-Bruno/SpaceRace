@@ -1,16 +1,21 @@
 extends StaticBody3D
 
-var switch_open_r: Mesh = load('res://assets/CustomBlocks/doors/doorOpenL.obj')
-var switch_open_l: Mesh = load('res://assets/CustomBlocks/doors/doorOpenR.obj')
-var switch_closed_r: Mesh = load('res://assets/CustomBlocks/doors/doorClosedL.obj')
-var switch_closed_l: Mesh = load('res://assets/CustomBlocks/doors/doorClosedR.obj')
+var customRooms = null
 
 func activated():
 	$AnimationPlayer.play("Door Sliding")
-	$MeshInstance3DL.mesh = switch_open_l
-	$MeshInstance3DR.mesh = switch_open_r
+	if customRooms is GridMap:
+		$MeshInstance3DL.mesh = customRooms.mesh_library.get_item_mesh(customRooms.DOOROPENL)
+		$MeshInstance3DR.mesh = customRooms.mesh_library.get_item_mesh(customRooms.DOOROPENR)
 	
 func deactivated():
 	$AnimationPlayer.play_backwards("Door Sliding")
-	$MeshInstance3DL.mesh = switch_closed_l
-	$MeshInstance3DR.mesh = switch_closed_r
+	if customRooms is GridMap:
+		$MeshInstance3DL.mesh = customRooms.mesh_library.get_item_mesh(customRooms.DOORCLOSEDL)
+		$MeshInstance3DR.mesh = customRooms.mesh_library.get_item_mesh(customRooms.DOORCLOSEDR)
+
+func _ready():
+	customRooms = get_parent().get_parent()
+	if customRooms is GridMap:
+		$MeshInstance3DR.mesh = customRooms.mesh_library.get_item_mesh(customRooms.DOORCLOSEDR)
+		$MeshInstance3DL.mesh = customRooms.mesh_library.get_item_mesh(customRooms.DOORCLOSEDL)

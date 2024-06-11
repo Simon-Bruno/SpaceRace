@@ -1,15 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckl8ocde3h7p8"]
+[gd_scene load_steps=7 format=3 uid="uid://ckl8ocde3h7p8"]
 
 [ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_sm1kj"]
-[ext_resource type="ArrayMesh" uid="uid://ccd0q27uv0njb" path="res://assets/CustomBlocks/doors/doorClosedL.obj" id="2_u12n0"]
-[ext_resource type="ArrayMesh" uid="uid://b0qffqe60h7bs" path="res://assets/CustomBlocks/doors/doorClosedR.obj" id="3_peixn"]
 
 [sub_resource type="Animation" id="Animation_liulv"]
 resource_name = "Door Sliding"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape3DR:shape:size")
+tracks/0/path = NodePath("CollisionShape3DL:shape:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +19,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3DR:position")
+tracks/1/path = NodePath("CollisionShape3DL:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -33,7 +31,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape3DL:shape:size")
+tracks/2/path = NodePath("CollisionShape3DR:shape:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -45,7 +43,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape3DL:position")
+tracks/3/path = NodePath("CollisionShape3DR:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -63,7 +61,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape3DR:shape:size")
+tracks/0/path = NodePath("CollisionShape3DL:shape:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,7 +73,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3DR:position")
+tracks/1/path = NodePath("CollisionShape3DL:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -87,7 +85,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape3DL:shape:size")
+tracks/2/path = NodePath("CollisionShape3DR:shape:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -99,7 +97,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CollisionShape3DL:position")
+tracks/3/path = NodePath("CollisionShape3DR:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -130,20 +128,18 @@ libraries = {
 "": SubResource("AnimationLibrary_sq34j")
 }
 
-[node name="CollisionShape3DR" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3DL" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.811082, 1.25584, 0.145597)
 shape = SubResource("BoxShape3D_37ekf")
 
-[node name="MeshInstance3DR" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.810823, 1.25338, 0.799294)
-mesh = ExtResource("3_peixn")
-skeleton = NodePath("../..")
-
 [node name="MeshInstance3DL" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.786043, 1.25338, 0.799294)
-mesh = ExtResource("2_u12n0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.810823, 1.25338, 0.799294)
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3DL" type="CollisionShape3D" parent="."]
+[node name="MeshInstance3DR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.786043, 1.25338, 0.799294)
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3DR" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.787573, 1.25584, 0.145597)
 shape = SubResource("BoxShape3D_37ekf")

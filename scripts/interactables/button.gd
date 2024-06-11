@@ -1,13 +1,11 @@
 extends Node3D
 
 @export var interactable : Node
-var customRooms = null
 
+var customRooms = null
 var player = null
 var activate_text: bool = false
 var activate: bool = false
-var WALLSWITCHOFF = 18
-var WALLSWITCHON = 19
 
 # Detect when body entered the area
 func _on_area_3d_body_entered(body):
@@ -26,14 +24,14 @@ func _on_area_3d_body_exited(body):
 # Activate switch
 func _activate_switch():
 	if customRooms is GridMap:
-		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(WALLSWITCHON)
+		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(customRooms.WALLSWITCHON)
 	interactable.activated()
 	activate = true
 
 # Deactivate the switch
 func _deactivate_switch():
 	if customRooms is GridMap:
-		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(WALLSWITCHOFF)
+		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(customRooms.WALLSWITCHOFF)
 	interactable.deactivated()
 	activate = false
 
@@ -49,4 +47,4 @@ func _process(delta):
 func _ready():
 	customRooms = get_parent().get_parent()
 	if customRooms is GridMap:
-		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(WALLSWITCHOFF)
+		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(customRooms.WALLSWITCHOFF)
