@@ -19,6 +19,8 @@ var direction = Vector2.ZERO
 
 var max_dist: float = 25.0  # max distance between players
 
+@onready var HpBar = $PlayerCombat/SubViewport/HpBar
+
 var lobby_spawn = Vector3(0, 10, 20)
 var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
 
@@ -109,6 +111,7 @@ func take_damage(damage):
 		health = max(0, health-damage)
 		getHitCooldown = false
 		$PlayerCombat/GetHitCooldown.start()
+	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive:
 		print("health < 0")

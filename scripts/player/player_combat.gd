@@ -37,4 +37,3 @@ func apply_damage_to_enemy():
 
 func _on_GetHitCooldown_timeout():
 	get_parent().getHitCooldown = true
-
