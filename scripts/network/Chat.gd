@@ -62,6 +62,7 @@ func new_timestamp():
 # Allows the player to leave the game when the leave button is pressed
 func _on_leave_button_pressed():
 	Network._on_leave_button_pressed()
+	Audiocontroller.play_menu_music()
 
 
 # Remote procedure call (RPC) for sending messages between players

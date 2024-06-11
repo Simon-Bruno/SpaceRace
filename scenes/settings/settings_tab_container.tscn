@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7gby45kucwu1"]
+[gd_scene load_steps=6 format=3 uid="uid://c7gby45kucwu1"]
 
 [ext_resource type="PackedScene" uid="uid://dv00ksl0ghger" path="res://scenes/settings/hotkey_rebind_button.tscn" id="1_ihlwt"]
 [ext_resource type="PackedScene" uid="uid://ujhcgcqdabo2" path="res://scenes/settings/window_mode_button.tscn" id="1_spgoq"]
 [ext_resource type="PackedScene" uid="uid://bayqhaym7gnnb" path="res://scenes/settings/resolution_mode_button.tscn" id="2_lk0ev"]
+[ext_resource type="PackedScene" uid="uid://do81fkwqnn6en" path="res://scenes/settings/audio_slider_settings.tscn" id="3_smwpi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7s54q"]
 
@@ -26,8 +27,10 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
+current_tab = 1
 
 [node name="Graphics" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
@@ -56,7 +59,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Audio" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Audio"]
@@ -77,6 +79,17 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Audio/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
+
+[node name="Audio_Slider_Settings" parent="TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_smwpi")]
+layout_mode = 2
+
+[node name="Audio_Slider_Settings2" parent="TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_smwpi")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="Audio_Slider_Settings3" parent="TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_smwpi")]
+layout_mode = 2
+bus_name = "Sfx"
 
 [node name="Controls" type="TabBar" parent="TabContainer"]
 visible = false
