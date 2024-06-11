@@ -3,16 +3,21 @@ extends Node3D
 @export var interactable : Node
 
 var customRooms = null
+var bodies_on_plate: Array = []
 
 # Detect when body entered the area
 func _on_area_3d_body_entered(body):
-	if body is CharacterBody3D and body.is_in_group("Players"):
-		interactable.activated()
+	if body.is_in_group("Players") or body is RigidBody3D:
+		if bodies_on_plate.is_empty():
+			interactable.activated()
+		bodies_on_plate.append(body)
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body):
-	if body is CharacterBody3D and body.is_in_group("Players"):
-		interactable.deactivated()
+	if body.is_in_group("Players") or body is RigidBody3D:
+		bodies_on_plate.erase(body)
+		if bodies_on_plate.is_empty():
+			interactable.deactivated()
 
 # Called when button is placed in world. Sets the mesh instance to off.
 #func _ready():

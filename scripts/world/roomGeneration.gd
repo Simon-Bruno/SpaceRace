@@ -7,6 +7,7 @@ var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/item.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
+var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")
 
 func _ready():
