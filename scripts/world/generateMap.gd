@@ -35,6 +35,8 @@ var room_variation_y : int = 1
 # a custom value useing set_seed()
 @export var game_seed : int = 0
 
+@export var generate_room : bool = true
+
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -74,7 +76,7 @@ func build_map() -> void:
 	var pairs : Array = get_custom_rooms()
 	
 	draw_rooms()
-	place_custom_room(pairs)	
+	place_custom_room(pairs)
 	draw_paths()
 	
 	draw_windows()
@@ -181,7 +183,7 @@ func mirror_world() -> void:
 
 # Places a window on the given coords, except for when there already is an item.
 func place_window(location : Vector3i) -> void:
-	if get_cell_item(location) == -1 or get_cell_item(location + Vector3i(1, 0, 0)):
+	if get_cell_item(location) != -1 or get_cell_item(location + Vector3i(1, 0, 0)) != -1:
 		return
 
 	self.set_cell_item(location, WINDOWL)
@@ -191,6 +193,7 @@ func place_window(location : Vector3i) -> void:
 # Draws windows with 2 normal walls in between and centers it on the middle of the wall.
 # Only works on the connecting walls.
 func draw_windows() -> void:
+	print(rooms)
 	for room in rooms:
 		var start = room[2] + 1 if (room[0] / 2) % 2 == 0 else room[2] + 2
 
@@ -254,6 +257,11 @@ func fill_room(room_dim: Array) -> void:
 	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
 	add_child(room_scene, true)
+	generate_room = not generate_room
+	room_scene = room_scene.duplicate(5)
+	room_scene.scale.z = -1
+	add_child(room_scene)
+	generate_room = not generate_room
 
 
 # Places floor grid of x * z size based on room array
@@ -346,6 +354,13 @@ func random_floor(floor : Vector3i) -> void:
 		self.set_cell_item(floor, walls[randi() % walls.size()], rotation)
 	else:
 		self.set_cell_item(floor, special[randi() % special.size()], rotation)
+		
+func random_wall() -> int:
+	var walls = [WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLTERMINAL]
+	
+	if randi_range(1, 100) >= 96:
+		return walls[randi() % walls.size()]
+	return WALL
 
 
 # Draws all walls by finding all floors and check if a wall needs to be added.
@@ -378,6 +393,8 @@ func draw_walls() -> void:
 			idx = -1
 		elif sum_array(surround) == 3:
 			idx = walls.find(surround)
+			# Get a random item to put on the wall
+			type = random_wall()
 		elif sum_array(surround) == 2:
 			idx = corner.find(surround)
 			type = WALLCORNER

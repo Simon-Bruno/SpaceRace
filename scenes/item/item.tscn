@@ -16,13 +16,13 @@ height = 1.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lkux1"]
 properties/0/path = NodePath("MeshOrigin:position")
-properties/0/spawn = false
+properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath("MeshOrigin:rotation")
-properties/1/spawn = false
+properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath(".:position")
-properties/2/spawn = false
+properties/2/path = NodePath("RigidBody3D:position")
+properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [node name="Item" type="Node3D"]
@@ -31,7 +31,6 @@ script = ExtResource("1_o5cad")
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 collision_layer = 4
 physics_material_override = SubResource("PhysicsMaterial_r6fdv")
-gravity_scale = 0.5
 lock_rotation = true
 
 [node name="MeshOrigin" type="Node3D" parent="RigidBody3D"]
@@ -43,8 +42,7 @@ skeleton = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("CylinderShape3D_473qe")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="RigidBody3D"]
-root_path = NodePath("../..")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lkux1")
 visibility_update_mode = 2
 public_visibility = false

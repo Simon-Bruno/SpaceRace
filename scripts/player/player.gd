@@ -1,16 +1,20 @@
 extends CharacterBody3D
 
-@export var walk_speed = 15
+@export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
-@export var push_force = 1
+@export var push_force = 4
 
 var walk_acceleration = 40
 var walk_deceleration = 50
-var rotation_smoothing = 10
+var rotation_speed = 10	
 
 var speed = 0
 var direction = Vector2.ZERO
+
+var getHitCooldown = true
+var health = Global.player_max_health
+var points = 0
 
 var max_dist: float = 25.0  # max distance between players
 
@@ -24,7 +28,7 @@ func _ready():
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		position = lobby_spawn
-	elif multiplayer.get_peers().size() > 0:
+	elif multiplayer.get_peers().size() > 0 and Network.other_team_member_id != null:
 		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
 	else:
@@ -39,10 +43,9 @@ func _horizontal_movement(delta):
 
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
-	# accelerate if moving
-	if current_direction != Vector2.ZERO:
+	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		direction = lerp(direction, current_direction, rotation_speed * delta)
 		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
@@ -94,12 +97,20 @@ func move_object():
 func activate_door_open():
 	get_parent().get_node('Door').open_door()
 
+
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
-		move_and_slide()
-
-		# might not work for multiplayer
-		move_object()
+		
+		if move_and_slide():
+			move_object()
+	
+	
+# Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
+func take_damage(damage):
+	health = max(0, health-damage)
+	print('health', health)
+	getHitCooldown = false
+	$PlayerCombat/GetHitCooldown.start()

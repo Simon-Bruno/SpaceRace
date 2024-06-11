@@ -1,7 +1,7 @@
 extends StaticBody3D
 
-func open_door():
+func activated():
 	$AnimationPlayer.play("Door Sliding")
 	
-func close_door():
+func deactivated():
 	$AnimationPlayer.play_backwards("Door Sliding")
