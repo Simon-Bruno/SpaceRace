@@ -55,7 +55,7 @@ func _ready() -> void:
 func new_seed() -> void:
 	randomize()
 	var random_seed = randi()
-	seed(random_seed)
+	seed(random_seed)	
 	game_seed = random_seed
 
 
@@ -102,9 +102,27 @@ func get_custom_rooms() -> Array:
 # Function gets an Array containing the custom rooms that have been assigned, 
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
-	pass
+	var MAX_HEIGHT = 4
+	
+	for pair in pairs:
+		var orig = rooms[pair[0]]
+		var custom = customRooms.rooms[pair[1]]
 
+		print(orig[2])
+		print(custom[2])
 
+		var ori_start = orig[2]
+		var custom_start = custom[2]
+		for y in MAX_HEIGHT:
+			for x in orig[0]:
+				for z in orig[1]:
+					var item = customRooms.get_cell_item(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
+					var orientation = customRooms.get_cell_item_orientation(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
+					
+					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
+
+	customRooms.clear()
+	
 # Main function that builds the map. Clears the map first to stop overlap.
 # TODO: Expand with all generation layers.
 func build_map() -> void:
