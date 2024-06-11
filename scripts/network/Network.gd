@@ -124,7 +124,3 @@ func _on_join_pressed(ip, port):
 		Audiocontroller.play_lobby_music()
 		return true
 	return false
-
-
-func get_player_node_by_id(id):
-	return get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node(str(id))
