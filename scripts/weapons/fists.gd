@@ -15,7 +15,6 @@ func _on_range_body_entered(body):
 	if body.is_in_group("Enemies"):
 		enemies_in_weapon_range.append(body)
 
-
 func _on_range_body_exited(body):
 	if body.is_in_group("Enemies"):
 		enemies_in_weapon_range.erase(body)

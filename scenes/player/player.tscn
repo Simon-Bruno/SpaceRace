@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
 [ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="3_p004k"]
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
-[ext_resource type="PackedScene" uid="uid://b88dvh1fk5f62" path="res://scenes/weapons/fists.tscn" id="4_ro68m"]
+[ext_resource type="PackedScene" uid="uid://b1sppkmxnnog5" path="res://scenes/weapons/pistol.tscn" id="4_6681e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r4bp7"]
 
@@ -96,7 +96,7 @@ wait_time = 0.5
 [node name="RespawnImmunity" type="Timer" parent="PlayerCombat"]
 one_shot = true
 
-[node name="Weapon" parent="PlayerCombat" instance=ExtResource("4_ro68m")]
+[node name="Weapon" parent="PlayerCombat" instance=ExtResource("4_6681e")]
 
 [node name="FloatingName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
