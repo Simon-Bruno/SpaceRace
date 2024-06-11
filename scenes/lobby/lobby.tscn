@@ -1,11 +1,13 @@
-[gd_scene load_steps=43 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=46 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
+[ext_resource type="Shader" path="res://shaders/hologram.gdshader" id="2_s4kni"]
 [ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
 [ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
 [ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]
 [ext_resource type="ArrayMesh" uid="uid://ii8ibgyrjxqh" path="res://assets/lobby/little_sat/little_satelite.obj" id="6_jkbmt"]
+[ext_resource type="Material" uid="uid://demnrs8sun55r" path="res://shaders/hologram_shader_material.tres" id="8_ahi1r"]
 [ext_resource type="ArrayMesh" uid="uid://t0gxr68td25" path="res://assets/lobby/griffen_station/power_room/room/power_room_griffin_station_v1.obj" id="8_jiux7"]
 [ext_resource type="ArrayMesh" uid="uid://ccxkqj7nv7uf0" path="res://assets/lobby/griffen_station/power_room/pillars/pillar_griffin_station_v1.obj" id="8_kywwj"]
 [ext_resource type="ArrayMesh" uid="uid://3jw0ui0pnhmc" path="res://assets/lobby/fuel_tanks/fuel_tanks.obj" id="9_5q0np"]
@@ -92,6 +94,15 @@ material = SubResource("ShaderMaterial_oo0dd")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3dbk"]
 albedo_color = Color(1, 0.290196, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftol1"]
+render_priority = 0
+shader = ExtResource("2_s4kni")
+shader_parameter/color = Color(0, 0.823529, 0.65098, 1)
+shader_parameter/lines1 = 160.0
+shader_parameter/lines2 = 90.0
+shader_parameter/_emission = 4.516
+shader_parameter/_fresnel = 2.238
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0vp51"]
 
@@ -385,11 +396,10 @@ text = "TEAM B
 "
 
 [node name="TeamX_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.7176, 2.26145, 17.5285)
-material_override = SubResource("StandardMaterial3D_r0207")
+transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.7176, 8.26145, 17.5285)
 mesh = SubResource("BoxMesh_186s4")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
+surface_material_override/0 = SubResource("ShaderMaterial_ftol1")
 
 [node name="TeamX_text" type="Label3D" parent="Assets/TeamX_plate"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00870228, 1.22606, 0.0340403)
@@ -486,6 +496,7 @@ mesh = ExtResource("6_jkbmt")
 [node name="SpaceshuttleV2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 9.68716, -4.097, 32.8715)
 mesh = ExtResource("4_2ubwl")
+surface_material_override/0 = ExtResource("8_ahi1r")
 
 [node name="PillarGriffinStationV1" type="MeshInstance3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 135.145, 2.64817, -23.2764)
@@ -505,6 +516,7 @@ mesh = ExtResource("8_kywwj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71, 0)
+visible = false
 light_energy = 2.333
 shadow_enabled = true
 

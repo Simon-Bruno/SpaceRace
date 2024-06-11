@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://demnrs8sun55r"]
+
+[ext_resource type="Shader" path="res://shaders/hologram.gdshader" id="1_1sn3x"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1sn3x")
+shader_parameter/color = Color(0.172549, 1, 0.627451, 1)
+shader_parameter/lines1 = 2.0
+shader_parameter/lines2 = 2.0
+shader_parameter/_emission = 5.194
+shader_parameter/_fresnel = 1.806
