@@ -3,7 +3,7 @@ extends Node3D
 @onready var world = get_parent()
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
-var laser_scene = preload("res://scenes/interactables/laser_beam.tscn")
+var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/item.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
@@ -22,7 +22,7 @@ func fill_room():
 	add_child(enemy, true)
 
 	var laser = laser_scene.instantiate()
-	laser.position = Vector3i(2, 3, 5)
+	laser.position = Vector3i(1, 3, 5)
 	add_child(laser, true)
 
 	var item = item_scene.instantiate()
