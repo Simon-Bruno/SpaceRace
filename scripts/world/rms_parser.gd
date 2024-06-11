@@ -1,15 +1,16 @@
 extends Node
 
 
-var wall_test = { 1: { "set_min_distance": "5", "set_max_distance": "8", "length": "6", "length_variation": "2" }, 2: { "set_min_distance": "4", "set_max_distance": "6", "length": "3", "length_variation": "1" } }
-var object_test = {1: { "set_min_distance": "8", "set_max_distance": "10", "set_length": "3", "type": "LASER" } }
+var wall_test = [ {"set_min_distance": "5", "set_max_distance": "8", "length": "6", "length_variation": "2" }, { "set_min_distance": "4", "set_max_distance": "6", "length": "3", "length_variation": "1" } ]
+var object_test = { 1: { "set_min_distance": "8", "set_max_distance": "10", "set_length": "3", "type": "LASER" }, 2: { "set_min_distance": "17", "set_max_distance": "20", "type": "ITEM" }, 3: { "set_min_distance": "4", "set_max_distance": "9", "type": "ITEM" } }
 var enemy_test = { 1: { "set_min_distance": "5", "set_max_distance": "8", "set_group_size": "3", "loose_grouping": true } }
 
 func _ready():
 	var rms_dict = parse_file("res://files/random_map_scripts/test.rms")
+	print(rms_dict)
 	assert(rms_dict['walls'] == wall_test)
 	print("The walls get parsed correctly")
-	assert(rms_dict['objects'] == object_test)
+	assert(rms_dict['objects'] == object_test, "The objects were not parsed correctly")
 	print("The objects get parsed correctly")
 	assert(rms_dict['enemies'] == enemy_test)
 	print("The enemies got parsed correctly")
@@ -24,7 +25,7 @@ func parse_file(filepath : String) -> Dictionary:
 	var sections = data.split("<", false)
 	for section in sections:
 		if section.begins_with("WALL_SETUP"):
-			dict['walls'] = {}
+			dict['walls'] = []
 			wall_parser(section, dict['walls'])
 		elif section.begins_with("OBJECTS_GENERATION"):
 			dict['objects'] = {}
@@ -50,14 +51,14 @@ func segment_to_dict(segment : String):
 			dict['loose_grouping'] = true
 	return dict
 
-func wall_parser(section: String, wall_dict : Dictionary) -> void:
+func wall_parser(section: String, wall_dict : Array) -> void:
 	var walls = section.split("create_wall")
 	for i in walls.size():
 		var wall = walls[i].strip_edges()
 		var parsed_wall : Dictionary = segment_to_dict(wall)
 		if parsed_wall == {}:
 			continue
-		wall_dict[i] = parsed_wall
+		wall_dict.append(parsed_wall)
 		
 func object_parser(section: String, object_dict : Dictionary) -> void:
 	var objects = section.split('create_object')

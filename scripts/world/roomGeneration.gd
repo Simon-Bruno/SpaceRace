@@ -13,10 +13,22 @@ func _ready():
 	if world.generate_room:
 		var filename = "res://files/random_map_scripts/test.rms"
 		var world_dict : Dictionary = parser.parse_file(filename)
-		fill_room()
+		fill_room(world_dict)
+		
+func add_walls(wall_list : Array):
+	for wall in wall_list:
+		var length : int = int(wall['length'])
+		var variation : int = int(wall['length_variation'])
+		length += randi_range(-variation, variation)
+		print(length)
+		
+		
+func add_objects(objects_list):
+	pass
+	
 
-
-func fill_room():
+func fill_room(world_dict: Dictionary):
+	add_walls(world_dict['walls'])
 	var room = world.room
 	
 	var enemy = enemy_scene.instantiate()
