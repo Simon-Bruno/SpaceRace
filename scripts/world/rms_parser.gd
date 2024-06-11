@@ -2,20 +2,19 @@ extends Node
 
 
 var wall_test = [ {"set_min_distance": "5", "set_max_distance": "8", "length": "6", "length_variation": "2" }, { "set_min_distance": "4", "set_max_distance": "6", "length": "3", "length_variation": "1" } ]
-var object_test = { 1: { "set_min_distance": "8", "set_max_distance": "10", "set_length": "3", "type": "LASER" }, 2: { "set_min_distance": "17", "set_max_distance": "20", "type": "ITEM" }, 3: { "set_min_distance": "4", "set_max_distance": "9", "type": "ITEM" } }
-var enemy_test = { 1: { "set_min_distance": "5", "set_max_distance": "8", "set_group_size": "3", "loose_grouping": true } }
+var object_test = [ { "set_min_distance": "8", "set_max_distance": "10", "set_length": "3", "type": "LASER" }, { "set_min_distance": "17", "set_max_distance": "20", "type": "ITEM" }, { "set_min_distance": "4", "set_max_distance": "9", "type": "ITEM" } ]
+var enemy_test = [ { "set_min_distance": "5", "set_max_distance": "8", "set_group_size": "3", "loose_grouping": true } ]
 
 func _ready():
 	var rms_dict = parse_file("res://files/random_map_scripts/test.rms")
 	print(rms_dict)
-	assert(rms_dict['walls'] == wall_test)
+	assert(rms_dict['walls'] == wall_test, "The walls were not parsed correctly")
 	print("The walls get parsed correctly")
 	assert(rms_dict['objects'] == object_test, "The objects were not parsed correctly")
 	print("The objects get parsed correctly")
-	assert(rms_dict['enemies'] == enemy_test)
+	assert(rms_dict['enemies'] == enemy_test, "The enemies were not parsed correctly")
 	print("The enemies got parsed correctly")
 	print("All tests passed")
-
 
 # Called when the node enters the scene tree for the first time.
 func parse_file(filepath : String) -> Dictionary:
@@ -28,14 +27,14 @@ func parse_file(filepath : String) -> Dictionary:
 			dict['walls'] = []
 			wall_parser(section, dict['walls'])
 		elif section.begins_with("OBJECTS_GENERATION"):
-			dict['objects'] = {}
+			dict['objects'] = []
 			object_parser(section, dict['objects'])
 		elif section.begins_with("ENEMY_GENERATION"):
-			dict['enemies'] = {}
+			dict['enemies'] = []
 			enemies_parser(section, dict['enemies'])
 	return dict
-	
-func segment_to_dict(segment : String):
+
+func segment_to_dict(segment : String) -> Dictionary:
 	var dict = {}
 	if not segment.begins_with("{"):
 		return {}
@@ -60,7 +59,7 @@ func wall_parser(section: String, wall_dict : Array) -> void:
 			continue
 		wall_dict.append(parsed_wall)
 		
-func object_parser(section: String, object_dict : Dictionary) -> void:
+func object_parser(section: String, object_dict : Array) -> void:
 	var objects = section.split('create_object')
 	for i in objects.size():
 		# Get an object from the list
@@ -80,14 +79,13 @@ func object_parser(section: String, object_dict : Dictionary) -> void:
 		# Set the type of object
 		parsed_object['type'] = type
 		# Set the object in the dictionary of objects
-		object_dict[i] = parsed_object
+		object_dict.append(parsed_object)
 
-func enemies_parser(section : String, enemy_dict : Dictionary) -> void:
+func enemies_parser(section : String, enemy_dict : Array) -> void:
 	var mobs = section.split('create_mob')
 	for i in mobs.size():
 		var mob : String = mobs[i].strip_edges()
 		if mob.begins_with("ENEMY_GENERATION"):
 			continue
 		var parsed_mob : Dictionary = segment_to_dict(mob)
-		enemy_dict[i] = parsed_mob
-
+		enemy_dict.append(parsed_mob)
