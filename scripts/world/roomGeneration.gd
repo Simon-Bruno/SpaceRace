@@ -11,9 +11,9 @@ var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 
 func _ready():
 	if world.generate_room:
-		fill_room()
 		var filename = "res://files/random_map_scripts/test.rms"
-		parser.parse_file(filename)
+		var world_dict : Dictionary = parser.parse_file(filename)
+		fill_room()
 
 
 func fill_room():
