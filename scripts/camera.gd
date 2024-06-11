@@ -27,7 +27,7 @@ func get_player_count():
 		global_transform.basis = Basis.looking_at(Vector3(0, -9, 10))
 		$"../../world/DirectionalLight3D".basis = Basis.looking_at(Vector3(0, 0, 37.2))
 		Network.inverted = -1
-    var transform = global_transform
+		var transform = global_transform
 		transform.basis.x = -transform.basis.x
 		global_transform = transform
 	return playercount
