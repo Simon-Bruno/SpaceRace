@@ -72,11 +72,9 @@ func build_map() -> void:
 	
 	define_rooms()
 	var pairs : Array = get_custom_rooms()
+	
 	draw_rooms()
-	place_custom_room(pairs)
-	
-	print(rooms)
-	
+	place_custom_room(pairs)	
 	draw_paths()
 	
 	draw_windows()
@@ -98,6 +96,12 @@ func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
 	return picks
 
 
+# Forces room margins.
+func reset_room_spacing() -> void:
+	for i in range(1, room_amount):
+		rooms[i][2] = rooms[i - 1][0] + rooms[i - 1][2] + room_margin
+
+
 # Randomly picks some rooms and corresponding custom rooms, edits the floorplan
 # and returns an array containing the pairs [original, new].
 # TODO: Breaks room margins a bit, might need to be changed.
@@ -117,6 +121,8 @@ func get_custom_rooms() -> Array:
 		rooms[i[0]][0] = customRooms.rooms[i[1]][0]
 		rooms[i[0]][1] = customRooms.rooms[i[1]][1]
 
+	reset_room_spacing()
+
 	return pairs
 
 
@@ -124,9 +130,7 @@ func get_custom_rooms() -> Array:
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
 	var MAX_HEIGHT = 4
-	
-	print(pairs)
-	
+
 	for pair in pairs:
 		var orig = rooms[pair[0]]
 		var custom = customRooms.rooms[pair[1]]
@@ -280,9 +284,6 @@ func draw_paths() -> void:
 			starts.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-			
-	print(starts)
-	print(ends)
 
 	for i in starts.size():
 		make_path(starts[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
