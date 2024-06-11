@@ -545,6 +545,9 @@ lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_nlcyh")
 draw_pass_1 = ExtResource("4_2a2jn")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Assets/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.3171, 0)
+
 [node name="Head_text" type="MeshInstance3D" parent="Assets"]
 transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
 mesh = SubResource("TextMesh_8f32b")
