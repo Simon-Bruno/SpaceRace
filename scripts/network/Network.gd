@@ -97,7 +97,8 @@ func _on_leave_button_pressed():
 	remove_multiplayer_peer()
 	multiplayer_peer.close()
 	var world = get_node("/root/Main/SpawnedItems/World")
-	world.queue_free()
+	if world:
+		world.queue_free()
 	get_node("/root/Main/SpawnedItems").remove_child(world)
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 	

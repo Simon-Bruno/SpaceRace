@@ -1,19 +1,24 @@
 extends Control
 
+var game_status = false # Is true when game is paused, otherwise false
+
+func _ready():
+	var status = false 
+
 func _process(delta):
-	if Input.is_action_pressed("pause") and !get_tree().paused:
+	if Input.is_action_pressed("pause") and !game_status:
 		_pause_game()
-	elif Input.is_action_pressed("pause") and get_tree().paused:
+	elif Input.is_action_pressed("pause") and game_status:
 		_resume_game()
 
 func _pause_game():
-	get_tree().paused = true
 	self.visible = true
+	game_status = true
 	print("Pausing game")
 
 func _resume_game():
-	get_tree().paused = false
 	self.visible = false
+	game_status = false
 	print("Resuming game")
 
 func _on_resume_button_pressed():
