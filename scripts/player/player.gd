@@ -3,11 +3,11 @@ extends CharacterBody3D
 @export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
-@export var push_force = 4
+@export var push_force = 0.5
 
 var walk_acceleration = 40
 var walk_deceleration = 50
-var rotation_speed = 10	
+var rotation_speed = 10
 
 var speed = 0
 var direction = Vector2.ZERO
@@ -98,11 +98,11 @@ func _physics_process(delta):
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
-		
-		if move_and_slide():
-			move_object()
-	
-	
+		move_and_slide()
+
+	move_object()
+
+
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
 	health = max(0, health-damage)
