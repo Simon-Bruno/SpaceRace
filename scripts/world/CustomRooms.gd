@@ -3,14 +3,41 @@ extends GridMap
 # Defines the room types
 enum {ROOM1, ROOM2, ROOM3, ROOM4}
 
+static var START = 24
+static var END = 23
+
 # Define the widths of the rooms.
 @export var room_types = {ROOM1:[0]}
-@export var rooms = [[8, 8, 0], [8, 8, 0], [8, 8, 0], [8, 8, 0], [8, 8, 0]]
+@export var rooms = []
+
+
+# Sorts vectors based on x value.
+func sort_vector(a : Vector3i, b : Vector3i):
+	if a.x < b.x:
+		return true
+	return false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var starts = self.get_used_cells_by_item(START)
+	var ends = self.get_used_cells_by_item(END)
+	
+	starts.sort_custom(sort_vector)
+	ends.sort_custom(sort_vector)
+	
+	print(starts)
+	print(ends)
+	
+	for i in starts.size():
+		var start = starts[i].x + 1
+		var width = ends[i].x - starts[i].x - 1
+		var height = ends[i].z - starts[i].z + 1
+		rooms.append([width, height, start])
+	
+	print(rooms)
+	
+	self.clear()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

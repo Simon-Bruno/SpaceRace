@@ -120,8 +120,7 @@ func place_custom_room(pairs : Array) -> void:
 					var orientation = customRooms.get_cell_item_orientation(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
-
-	customRooms.clear()
+					
 	
 # Main function that builds the map. Clears the map first to stop overlap.
 # TODO: Expand with all generation layers.
