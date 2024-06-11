@@ -1,21 +1,26 @@
-[gd_scene load_steps=46 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=57 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
-[ext_resource type="Shader" path="res://shaders/hologram.gdshader" id="2_s4kni"]
+[ext_resource type="Shader" uid="uid://cy6ch5g6pr81v" path="res://shaders/s_dynamic_shader.tres" id="2_jhfyb"]
 [ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
+[ext_resource type="Texture2D" uid="uid://bo38py7b0g4ut" path="res://assets/lobby/laser_beam/T_VFX_Noise_9.PNG" id="3_ijbb2"]
+[ext_resource type="ArrayMesh" uid="uid://cfv3e04julldf" path="res://assets/lobby/telepath/telepath.obj" id="4_2a2jn"]
 [ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
+[ext_resource type="Texture2D" uid="uid://cypenukx706yr" path="res://assets/lobby/laser_beam/Noise1_tiled.png" id="4_7fblf"]
+[ext_resource type="Texture2D" uid="uid://dp70b1b5w8ndg" path="res://assets/lobby/laser_beam/T_VFX_Noise_4.PNG" id="4_r3l3u"]
 [ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]
-[ext_resource type="ArrayMesh" uid="uid://ii8ibgyrjxqh" path="res://assets/lobby/little_sat/little_satelite.obj" id="6_jkbmt"]
 [ext_resource type="Material" uid="uid://demnrs8sun55r" path="res://shaders/hologram_shader_material.tres" id="8_ahi1r"]
 [ext_resource type="ArrayMesh" uid="uid://t0gxr68td25" path="res://assets/lobby/griffen_station/power_room/room/power_room_griffin_station_v1.obj" id="8_jiux7"]
 [ext_resource type="ArrayMesh" uid="uid://ccxkqj7nv7uf0" path="res://assets/lobby/griffen_station/power_room/pillars/pillar_griffin_station_v1.obj" id="8_kywwj"]
 [ext_resource type="ArrayMesh" uid="uid://3jw0ui0pnhmc" path="res://assets/lobby/fuel_tanks/fuel_tanks.obj" id="9_5q0np"]
-[ext_resource type="ArrayMesh" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/balkon_power_room_griffin_station_v1.obj" id="10_8da88"]
+[ext_resource type="ArrayMesh" uid="uid://e0tuqxiew5x0" path="res://assets/lobby/death_ray/death_ray.obj" id="10_2jxae"]
 [ext_resource type="ArrayMesh" uid="uid://c0r04e8lkblwi" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/stair_case/stair_case.obj" id="11_bv6il"]
+[ext_resource type="ArrayMesh" uid="uid://bgib0f2687iao" path="res://assets/lobby/death_ray/death_ray_monitor.obj" id="11_cnme7"]
+[ext_resource type="ArrayMesh" uid="uid://d02orydh5ukim" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/room_w_balkon/balkon_power_room_griffin_station_v1.obj" id="14_1qpjt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
-albedo_color = Color(0.973094, 0.666402, 0.526047, 1)
+albedo_color = Color(0.71, 0.71, 0.71, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m1p0p"]
 material = SubResource("StandardMaterial3D_xrsps")
@@ -80,35 +85,87 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1s5wb"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrpni"]
+render_priority = 0
+shader = ExtResource("2_jhfyb")
+shader_parameter/Speed = Vector2(5, -1)
+shader_parameter/Texture_Power = 1.3
+shader_parameter/Gradient_Power = 1.0
+shader_parameter/Energy_Texture = ExtResource("3_ijbb2")
+
+[sub_resource type="Curve" id="Curve_14g4b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5h8ep"]
+max_value = 8.0
+_data = [Vector2(0, 2.98901), 0.0, 0.0, 0, 0, Vector2(1, 8), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_p3neh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gkojr"]
+curve_x = SubResource("Curve_14g4b")
+curve_y = SubResource("Curve_5h8ep")
+curve_z = SubResource("Curve_p3neh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjmpr"]
+emission_shape_offset = Vector3(0, -8, 0)
+angle_max = 694.3
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_gkojr")
+color = Color(1.2, 0.5, 2.5, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v3oi4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6grmh"]
+render_priority = 0
+shader = ExtResource("2_jhfyb")
+shader_parameter/Speed = Vector2(2, -1)
+shader_parameter/Texture_Power = 2.0
+shader_parameter/Gradient_Power = 1.0
+shader_parameter/Energy_Texture = ExtResource("4_7fblf")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_wo2p0"]
+curve_x = SubResource("Curve_14g4b")
+curve_y = SubResource("Curve_5h8ep")
+curve_z = SubResource("Curve_p3neh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tsht1"]
+emission_shape_offset = Vector3(0, -8, 0)
+angle_max = 694.3
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.9
+scale_max = 1.5
+scale_curve = SubResource("CurveXYZTexture_wo2p0")
+color = Color(1, 1, 3, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jr2h5"]
+render_priority = 0
+shader = ExtResource("2_jhfyb")
+shader_parameter/Speed = Vector2(1.5, 2)
+shader_parameter/Texture_Power = 1.5
+shader_parameter/Gradient_Power = 1.0
+shader_parameter/Energy_Texture = ExtResource("4_r3l3u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nlcyh"]
+gravity = Vector3(0, 0, 0)
+color = Color(1.2, 0.5, 2.5, 1)
+
 [sub_resource type="TextMesh" id="TextMesh_8f32b"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0207"]
-albedo_color = Color(1, 0.168627, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo0dd"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_186s4"]
-material = SubResource("ShaderMaterial_oo0dd")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_63ka3"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3dbk"]
-albedo_color = Color(1, 0.290196, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftol1"]
-render_priority = 0
-shader = ExtResource("2_s4kni")
-shader_parameter/color = Color(0, 0.823529, 0.65098, 1)
-shader_parameter/lines1 = 160.0
-shader_parameter/lines2 = 90.0
-shader_parameter/_emission = 4.516
-shader_parameter/_fresnel = 2.238
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0vp51"]
+radius = 0.686439
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3uonl"]
+radius = 0.711841
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_66t8f"]
+radius = 0.686213
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
@@ -303,18 +360,18 @@ mesh = SubResource("BoxMesh_m1p0p")
 skeleton = NodePath("../../..")
 
 [node name="Floor_text" type="Label3D" parent="Assets/floors/Floor"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0607237, 0.58613, -0.430689)
-outline_modulate = Color(0.53259, 0.0341948, 0.59166, 1)
-text = "Multiplayer"
+transform = Transform3D(1, 0, 0, 0, 0.0537999, 0.998551, 0, -0.998551, 0.0537999, -0.06087, 0.58613, -0.515601)
+text = "SPACERACE"
 font_size = 19
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor21" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, 86.5572, 0.19687, 16.4502)
+transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, 83.6365, 0.19687, 25.6296)
 mesh = SubResource("BoxMesh_m1p0p")
 skeleton = NodePath("../../..")
 
@@ -327,8 +384,50 @@ shape = SubResource("ConcavePolygonShape3D_trlb1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
+[node name="Floor24" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(99.9997, 0, -0.201062, 0, 5, 0, 0.251327, 0, 79.9997, -60.3133, 0.19687, 23.9606)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor24"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor24/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_trlb1")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor24/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_trlb1")
+
+[node name="Floor26" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, 13.122, 0.19687, 24.7951)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor26"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor26/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_trlb1")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor26/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_trlb1")
+
+[node name="Floor25" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, -60.3133, 0.19687, -36.9573)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor25"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor25/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_trlb1")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor25/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_trlb1")
+
 [node name="Floor22" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, 158.688, 0.19687, 16.0984)
+transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, 84.0008, 0.19687, -36.0573)
 mesh = SubResource("BoxMesh_m1p0p")
 skeleton = NodePath("../../..")
 
@@ -342,7 +441,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor23" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, 118.61, 0.196868, -39.8738)
+transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, -8.65013, 0.196868, -37.3703)
 mesh = SubResource("BoxMesh_m1p0p")
 skeleton = NodePath("../../..")
 
@@ -365,88 +464,149 @@ skeleton = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_1s5wb")
 
+[node name="death_ray_beam" type="Node3D" parent="Assets/floors"]
+transform = Transform3D(-0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, -0.819152, 103.599, 20.2817, 34.6581)
+
+[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_wrpni")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_fjmpr")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_6grmh")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_tsht1")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
+material_override = SubResource("ShaderMaterial_jr2h5")
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_nlcyh")
+draw_pass_1 = ExtResource("4_2a2jn")
+
+[node name="death_ray_beam2" type="Node3D" parent="Assets/floors"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -132.525, 20.2817, 3.91461)
+
+[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_wrpni")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_fjmpr")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_6grmh")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_tsht1")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
+material_override = SubResource("ShaderMaterial_jr2h5")
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_nlcyh")
+draw_pass_1 = ExtResource("4_2a2jn")
+
+[node name="death_ray_beam3" type="Node3D" parent="Assets/floors"]
+transform = Transform3D(0.707107, -0.164135, -0.687793, 0, 0.972687, -0.232121, 0.707107, 0.164135, 0.687793, 18.5631, 26.7566, -98.6825)
+
+[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_wrpni")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_fjmpr")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_6grmh")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_tsht1")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
+material_override = SubResource("ShaderMaterial_jr2h5")
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_nlcyh")
+draw_pass_1 = ExtResource("4_2a2jn")
+
 [node name="Head_text" type="MeshInstance3D" parent="Assets"]
 transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
 mesh = SubResource("TextMesh_8f32b")
 skeleton = NodePath("../..")
 
-[node name="TeamA_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.0698, 2.40501, -18.9429)
-material_override = SubResource("StandardMaterial3D_r0207")
-mesh = SubResource("BoxMesh_186s4")
+[node name="TeamA_plate3" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 16.7057, 3, -11.4601)
+mesh = ExtResource("4_2a2jn")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_63ka3")
 
-[node name="TeamA_text" type="Label3D" parent="Assets/TeamA_plate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.00695843, 1.08251, 0)
-outline_modulate = Color(0.751835, 0.46022, 1, 1)
-text = "TEAM A"
+[node name="TeamA_text" type="Label3D" parent="Assets/TeamA_plate3"]
+transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, 3.50474, 0.280173, 1.59984)
+text = "TEAM A
+"
 
-[node name="TeamB_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.615, 2.26146, -0.939115)
-material_override = SubResource("StandardMaterial3D_r0207")
-mesh = SubResource("BoxMesh_186s4")
+[node name="TeamB_plate2" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -31.2536, 3, -11.1025)
+mesh = ExtResource("4_2a2jn")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
 
-[node name="TeamB_text" type="Label3D" parent="Assets/TeamB_plate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.025104, 1.22606, -0.0242982)
-outline_modulate = Color(0.751835, 0.46022, 1, 1)
+[node name="TeamB_text" type="Label3D" parent="Assets/TeamB_plate2"]
+transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, -3.43042, 0.280173, 1.57022)
 text = "TEAM B
 "
 
-[node name="TeamX_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(25, 0, 0, 0, 1, 0, 0, 0, 13, -22.7176, 8.26145, 17.5285)
-mesh = SubResource("BoxMesh_186s4")
+[node name="Telepath" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -5.44242, 3, 37.7421)
+mesh = ExtResource("4_2a2jn")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ftol1")
 
-[node name="TeamX_text" type="Label3D" parent="Assets/TeamX_plate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00870228, 1.22606, 0.0340403)
-outline_modulate = Color(0.751835, 0.46022, 1, 1)
+[node name="TeamX_text" type="Label3D" parent="Assets/Telepath"]
+transform = Transform3D(5, 0, 0, 0, -8.74229e-09, 0.2, 0, -2.6, -1.1365e-07, -0.0512348, 0.280173, 2.36814)
 text = "RANDOM
 "
 
-[node name="Quit_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 24.008, 2.26145, 19.7239)
-material_override = SubResource("StandardMaterial3D_r0207")
-mesh = SubResource("BoxMesh_186s4")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
-
-[node name="Quit_text" type="Label3D" parent="Assets/Quit_plate"]
-transform = Transform3D(1.25, 0, 0, 0, -4.37114e-08, 1, 0, -1.3, -5.68248e-08, -0.00546348, 1.22606, -0.0214792)
-outline_modulate = Color(0.873681, 0.267208, 0.398246, 1)
-text = "EXIT :(
-"
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.764314, 0.644845, 0, -0.644845, 0.764314, -1.43051e-05, 59.949, 77.1119)
+transform = Transform3D(1, 0, 0, 0, 0.764314, 0.644845, 0, -0.644845, 0.764314, -1.43051e-05, 60.2119, 69.7497)
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, 1.00047, -18.0948)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 16.9882, 14.27, -11.2987)
 shape = SubResource("CylinderShape3D_0vp51")
 
 [node name="Area3D2" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.973)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D2"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5972, -0.999527, 15.8512)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -31.0671, 12.27, 6.02709)
 shape = SubResource("CylinderShape3D_3uonl")
 
 [node name="Area3D3" type="Area3D" parent="."]
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D3"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -21.5425, 1.36794, 17.7647)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -5.4137, 14.6375, 37.7954)
 shape = SubResource("CylinderShape3D_66t8f")
 
 [node name="AreaQuit" type="Area3D" parent="."]
 
 [node name="CollisionShapeQuit" type="CollisionShape3D" parent="AreaQuit"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 23.9979, 1.36794, 19.7498)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 55.5114, 14.6375, 39.2751)
 shape = SubResource("CylinderShape3D_66t8f")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -454,65 +614,29 @@ _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
 
 [node name="SpaceshuttlelaneV1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.1117, 2.69688, -38.9534)
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, 6.46725, 2.69688, 14.5439)
 mesh = ExtResource("3_74055")
 
 [node name="SpaceshuttlelaneV2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.3991, 2.69688, 1.06824)
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, -33.5387, 2.69688, 14.5439)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttlelaneV5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, -73.3513, 2.69688, 14.5439)
 mesh = ExtResource("3_74055")
 
 [node name="SpaceshuttlelaneV3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.3991, 2.69688, 40.7845)
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, 85.7061, 2.69688, 14.5439)
 mesh = ExtResource("3_74055")
 
-[node name="HighResAntennaV1" type="MeshInstance3D" parent="."]
-transform = Transform3D(8.66592, 0, -4.99017, 0, 10, 0, 4.99017, 0, 8.66592, 43.3987, 2.75507, -32.792)
-mesh = ExtResource("5_qwdf3")
-
-[node name="VeryLargeArrayAntennaV1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-9.81985, 0, -1.88958, 0, 10, 0, 1.88958, 0, -9.81985, -46.8487, 3.20301, -27.8226)
-mesh = ExtResource("2_78cdj")
-
-[node name="LittleSatelite" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.49944, 0, 5.80962, 0, 6, 0, -5.80962, 0, -1.49944, -5.522, 3.07424, -24.48)
-mesh = ExtResource("6_jkbmt")
-
-[node name="LittleSatelite2" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -5.77868, 3.07424, -6.25441)
-mesh = ExtResource("6_jkbmt")
-
-[node name="LittleSatelite3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.399211, 0, 5.9867, 0, 6, 0, -5.9867, 0, -0.399211, -6.03537, 3.07424, 16.0783)
-mesh = ExtResource("6_jkbmt")
-
-[node name="LittleSatelite4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.29833, 0, 5.85784, 0, 6, 0, -5.85784, 0, 1.29833, 31.956, 3.07424, 39.1811)
-mesh = ExtResource("6_jkbmt")
-
-[node name="LittleSatelite5" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -7.57554, 3.07424, 38.1543)
-mesh = ExtResource("6_jkbmt")
+[node name="SpaceshuttlelaneV4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, 45.7002, 2.69688, 14.5439)
+mesh = ExtResource("3_74055")
 
 [node name="SpaceshuttleV2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-07, 0, -10, 0, 10, 0, 10, 0, -4.37114e-07, 9.68716, -4.097, 32.8715)
+transform = Transform3D(9.99988, 0, -0.0486954, 0, 10, 0, 0.0486954, 0, 9.99988, -8.36224, -4.097, 13.9343)
 mesh = ExtResource("4_2ubwl")
 surface_material_override/0 = ExtResource("8_ahi1r")
-
-[node name="PillarGriffinStationV1" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 135.145, 2.64817, -23.2764)
-mesh = ExtResource("8_kywwj")
-
-[node name="PillarGriffinStationV2" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 125.572, 2.51217, -11.4278)
-mesh = ExtResource("8_kywwj")
-
-[node name="PillarGriffinStationV3" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 134.705, 2.51217, 1.1965)
-mesh = ExtResource("8_kywwj")
-
-[node name="PillarGriffinStationV4" type="MeshInstance3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 125.841, 2.51217, 12.4778)
-mesh = ExtResource("8_kywwj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71, 0)
@@ -520,29 +644,100 @@ visible = false
 light_energy = 2.333
 shadow_enabled = true
 
-[node name="PowerRoomGriffinStationV1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.62268e-07, 0, -6, 0, 6, 0, 6, 0, -2.62268e-07, 122.235, 15.0895, -9.00209)
-mesh = ExtResource("8_jiux7")
+[node name="DeathRay" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, 14.7263, 2.61437, 40.3339)
+mesh = ExtResource("10_2jxae")
 
-[node name="PowerRoomGriffinStationV2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.62268e-07, 0, -6, 0, 6, 0, 6, 0, -2.62268e-07, 122.235, 15.0895, -9.00209)
-mesh = ExtResource("8_jiux7")
+[node name="DeathRay2" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.65685, 0, 5.65685, 0, 8, 0, -5.65685, 0, 5.65685, 34.3969, 2.61437, -17.5052)
+mesh = ExtResource("10_2jxae")
+
+[node name="DeathRay3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.65685, 0, 5.65685, 0, 8, 0, -5.65685, 0, -5.65685, -51.4942, 2.61437, -12.2914)
+mesh = ExtResource("10_2jxae")
+
+[node name="DeathRayMonitor" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8, -6.99382e-07, 3.49691e-07, 3.49691e-07, 1.52855e-14, 8, -6.99382e-07, 8, 1.52855e-14, 17.0138, 13.7824, 42.766)
+mesh = ExtResource("11_cnme7")
+surface_material_override/0 = ExtResource("8_ahi1r")
+
+[node name="DeathRayMonitor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.65685, 5.65685, 2.47269e-07, 0, -3.49691e-07, 8, 5.65685, 5.65685, 2.47269e-07, -48.25, 13.7824, -12.2966)
+mesh = ExtResource("11_cnme7")
+surface_material_override/0 = ExtResource("8_ahi1r")
+
+[node name="DeathRayMonitor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.65685, -5.65685, -2.47269e-07, 0, -3.49691e-07, 8, -5.65685, 5.65685, 2.47269e-07, 34.905, 13.7824, -13.7187)
+mesh = ExtResource("11_cnme7")
+surface_material_override/0 = ExtResource("8_ahi1r")
 
 [node name="FuelTanks" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 125.78, 0.07341, 44.4876)
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -70.9408, 0.00697434, 34.3549)
 mesh = ExtResource("9_5q0np")
 
 [node name="FuelTanks2" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 113.29, 0.0734024, 44.5117)
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -71.0433, 0.00697434, 43.6769)
 mesh = ExtResource("9_5q0np")
 
+[node name="PowerRoomGriffinStationV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, -52.7433, 9.18146, 54.079)
+mesh = ExtResource("8_jiux7")
+
+[node name="PowerRoomGriffinStationV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 57.4234, 19.4727, -19.3436)
+mesh = ExtResource("8_jiux7")
+
 [node name="BalkonPowerRoomGriffinStationV1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.62268e-07, 0, -6, 0, 6, 0, 6, 0, -2.62268e-07, 122.281, 15.0756, 14.9731)
-mesh = ExtResource("10_8da88")
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, -52.7257, 9.48459, 38.1129)
+mesh = ExtResource("14_1qpjt")
+
+[node name="BalkonPowerRoomGriffinStationV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 57.4133, 11.1043, -19.3143)
+mesh = ExtResource("14_1qpjt")
 
 [node name="StairCase" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.62268e-07, 0, -6, 0, 6, 0, 6, 0, -2.62268e-07, 104.918, 2.85561, 14.2124)
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, -41.4751, 2.69688, 38.8541)
 mesh = ExtResource("11_bv6il")
+
+[node name="HighResAntennaV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.22502, 0, 2.94944, 0, 6, 0, -2.94944, 0, 5.22502, -95.22, 3, -15.3575)
+mesh = ExtResource("5_qwdf3")
+
+[node name="VeryLargeArrayAntennaV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.04189, 0, 5.90885, 0, 6, 0, -5.90885, 0, -1.04189, 89.5966, 3, -17.5318)
+mesh = ExtResource("2_78cdj")
+
+[node name="StairCase2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 56.802, 2.66675, -8.09528)
+mesh = ExtResource("11_bv6il")
+
+[node name="PillarGriffinStationV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 66.2822, 2.69687, -28.8188)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 58.342, 2.69687, -21.6532)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV3" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -44.9953, 2.69687, 36.1778)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV4" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -44.9953, 2.69687, 44.7828)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV5" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -44.7905, 2.69687, 52.5682)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV6" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -51.7564, 2.69687, 48.6755)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV7" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -51.7564, 2.69687, 32.7973)
+mesh = ExtResource("8_kywwj")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
