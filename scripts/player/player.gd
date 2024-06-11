@@ -1,12 +1,9 @@
 extends CharacterBody3D
 
-@export var walk_speed = 15
+@export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
-var getHitCooldown = true
-var health = Global.player_max_health
-var points = 0
-@export var push_force = 1
+@export var push_force = 0.3
 
 var walk_acceleration = 40
 var walk_deceleration = 50
@@ -14,6 +11,10 @@ var rotation_smoothing = 10
 
 var speed = 0
 var direction = Vector2.ZERO
+
+var getHitCooldown = true
+var health = Global.player_max_health
+var points = 0
 
 var max_dist: float = 25.0  # max distance between players
 
@@ -27,7 +28,7 @@ func _ready():
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		position = lobby_spawn
-	elif multiplayer.get_peers().size() > 0:
+	elif multiplayer.get_peers().size() > 0 and Network.other_team_member_id != null:
 		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
 	else:
@@ -86,7 +87,7 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
-func move_object():
+func move_object(delta):
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
@@ -96,14 +97,17 @@ func move_object():
 func activate_door_open():
 	get_parent().get_node('Door').open_door()
 
+
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
 		move_and_slide()
-	move_object()
-
+		
+	move_object(delta)
+	
+	
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 func take_damage(damage):
 	health = max(0, health-damage)
