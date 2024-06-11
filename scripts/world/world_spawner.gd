@@ -2,7 +2,7 @@ extends Node3D
 
 var loaded_enemy = preload("res://scenes/enemy/enemy.tscn") 
 var loaded_item = preload("res://scenes/item/item.tscn")
-var loaded_box = preload("res://scenes/interactables/moveable_items.tscn")
+var loaded_box = preload("res://scenes/interactables/moveable_object.tscn")
 
 
 func _enter_tree():

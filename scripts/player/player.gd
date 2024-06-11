@@ -93,11 +93,6 @@ func move_object(delta):
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
 
-# Action executed when button is pressed
-func activate_door_open():
-	get_parent().get_node('Door').open_door()
-
-
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
