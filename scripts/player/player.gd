@@ -3,11 +3,11 @@ extends CharacterBody3D
 @export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
-@export var push_force = 0.3
+@export var push_force = 4
 
 var walk_acceleration = 40
 var walk_deceleration = 50
-var rotation_smoothing = 10
+var rotation_speed = 10	
 
 var speed = 0
 var direction = Vector2.ZERO
@@ -45,7 +45,7 @@ func _horizontal_movement(delta):
 
 	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		direction = lerp(direction, current_direction, rotation_speed * delta)
 		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
@@ -87,7 +87,7 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
-func move_object(delta):
+func move_object():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
@@ -103,9 +103,9 @@ func _physics_process(delta):
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
-		move_and_slide()
 		
-	move_object(delta)
+		if move_and_slide():
+			move_object()
 	
 	
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
