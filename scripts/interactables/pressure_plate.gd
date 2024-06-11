@@ -2,20 +2,25 @@ extends Node3D
 
 @export var interactable : Node
 
+var customRooms = null
+var bodies_on_plate: Array = []
+
 # Detect when body entered the area
 func _on_area_3d_body_entered(body):
-	if body is CharacterBody3D and body.is_in_group("Players"):
-		interactable.activated()
+	if body.is_in_group("Players") or body is RigidBody3D:
+		if bodies_on_plate.is_empty():
+			interactable.activated()
+		bodies_on_plate.append(body)
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body):
-	if body is CharacterBody3D and body.is_in_group("Players"):
-		interactable.deactivated()
+	if body.is_in_group("Players") or body is RigidBody3D:
+		bodies_on_plate.erase(body)
+		if bodies_on_plate.is_empty():
+			interactable.deactivated()
 
-# Change the scale of the pressure plate
-func scale_pressure_plate(scaling_factor):
-	$PressurePlate.scale *= scaling_factor
-
-# Change to position of the pressure plate
-func transform_pressure_plate(x, y, z):
-	$PressurePlate.position = Vector3(x, y, z)
+# Called when button is placed in world. Sets the mesh instance to off.
+#func _ready():
+	#customRooms = get_parent().get_parent()
+	#if customRooms is GridMap:
+		#$PressurePlate/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(customRooms.PRESSUREPLATEOFF)
