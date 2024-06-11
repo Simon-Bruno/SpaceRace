@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/menu/pause.gd" id="1_sg6lf"]
 
-[node name="Pause" type="Control"]
+[node name="PauseMenu" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,33 +12,47 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sg6lf")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 474.0
-offset_top = 218.0
-offset_right = 674.0
-offset_bottom = 354.0
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.25098, 0.25098, 0.705882)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -92.5
+offset_right = 56.5
+offset_bottom = 92.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/v_separation = 8
+
+[node name="Label" type="Label" parent="GridContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Paused"
 
-[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="GridContainer"]
 layout_mode = 2
 text = "Resume"
 
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="GridContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="Titlescreen" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="TitlescreenButton" type="Button" parent="GridContainer"]
 layout_mode = 2
 text = "Title Screen"
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Quit"
-
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Titlescreen" to="." method="_on_titlescreen_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GridContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="GridContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="GridContainer/TitlescreenButton" to="." method="_on_titlescreen_button_pressed"]

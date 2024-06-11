@@ -41,4 +41,6 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 425.538, 2, 500)
 shape = SubResource("BoxShape3D_afshc")
 
-[node name="Pause" parent="." instance=ExtResource("6_3shum")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_3shum")]
