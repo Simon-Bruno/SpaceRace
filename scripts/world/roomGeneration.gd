@@ -26,7 +26,7 @@ func fill_room():
 	add_child(item, true)
 	var box = box_scene.instantiate()
 	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
-	add_child(box)
+	add_child(box, true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
