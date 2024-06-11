@@ -33,7 +33,7 @@ func _on_deal_attack_timer_timeout():
 
 func apply_damage_to_enemy():
 	if enemy_in_range and targeted_enemy:
-		targeted_enemy.take_damage(20, self)
+		targeted_enemy.take_damage(100, self)
 
 func _on_GetHitCooldown_timeout():
 	get_parent().getHitCooldown = true
