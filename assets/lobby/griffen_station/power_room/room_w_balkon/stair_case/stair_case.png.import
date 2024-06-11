@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0o3i02hqfp1x"
-path.s3tc="res://.godot/imported/little_satelite.png-1e66503bd0c29346585072ba07bca64d.s3tc.ctex"
+uid="uid://dnpi5xwqyxvsr"
+path.s3tc="res://.godot/imported/stair_case.png-1f8a859539cb6e642430cd34d1cdf741.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/lobby/little_sat/little_satelite.png"
-dest_files=["res://.godot/imported/little_satelite.png-1e66503bd0c29346585072ba07bca64d.s3tc.ctex"]
+source_file="res://assets/lobby/griffen_station/power_room/room_w_balkon/stair_case/stair_case.png"
+dest_files=["res://.godot/imported/stair_case.png-1f8a859539cb6e642430cd34d1cdf741.s3tc.ctex"]
 
 [params]
 
