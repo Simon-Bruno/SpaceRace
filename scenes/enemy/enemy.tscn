@@ -20,10 +20,13 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="Enemy" type="CharacterBody3D" groups=["Enemies"]]
+collision_layer = 4
+collision_mask = 7
+collision_priority = 2.0
 script = ExtResource("1_pccks")
 
 [node name="DetectionArea" type="Area3D" parent="."]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
@@ -39,6 +42,8 @@ mesh = SubResource("BoxMesh_k2tf3")
 shape = SubResource("BoxShape3D_pbp3d")
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
