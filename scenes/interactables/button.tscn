@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsyyqedsi8il8"]
+[gd_scene load_steps=4 format=3 uid="uid://bsyyqedsi8il8"]
 
 [ext_resource type="Script" path="res://scripts/interactables/button.gd" id="1_rlorl"]
-[ext_resource type="ArrayMesh" uid="uid://ccw74040hni0u" path="res://assets/CustomBlocks/walls/wallSwitchOff.obj" id="2_f0gnh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr0lf"]
 size = Vector3(1.60342, 0.743408, 1.5896)
@@ -19,7 +18,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.97274)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815483, 0.86514)
 layers = 4
-mesh = ExtResource("2_f0gnh")
 
 [node name="Area3D" type="Area3D" parent="Button"]
 collision_layer = 4

@@ -6,6 +6,8 @@ var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser_beam.tscn")
 var item_scene = preload("res://scenes/item/item.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
+var button_scene = preload("res://scenes/interactables/button.tscn")
+var door_scene = preload("res://scenes/interactables/door.tscn")
 
 func _ready():
 	if world.generate_room:
@@ -30,6 +32,15 @@ func fill_room():
 	var box = box_scene.instantiate()
 	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	add_child(box)
+	
+	var button = button_scene.instantiate()
+	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	add_child(button)
+	
+	var door = door_scene.instantiate()
+	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	add_child(door)
+	button.interactable = door
 
 #func _process(delta):
 	#pass
