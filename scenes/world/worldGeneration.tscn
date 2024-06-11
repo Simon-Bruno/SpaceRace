@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://btxasx3bw2gsj"]
 
-[ext_resource type="MeshLibrary" uid="uid://4igdcrkl61q6" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_bwbkc"]
+[ext_resource type="MeshLibrary" uid="uid://xqw14c2d05d3" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_bwbkc"]
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
 [ext_resource type="Texture2D" uid="uid://prl5fv3kveqp" path="res://assets/world/MoonTexture.png" id="3_s0vbt"]
 
