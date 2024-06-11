@@ -6,8 +6,7 @@ enum {ROOM1, ROOM2, ROOM3, ROOM4}
 static var START = 24
 static var END = 23
 
-# Define the widths of the rooms.
-@export var room_types = {ROOM1:[0]}
+# Defines the rooms.
 @export var rooms = []
 
 
@@ -18,25 +17,23 @@ func sort_vector(a : Vector3i, b : Vector3i):
 	return false
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func generate_dimensions():
 	var starts = self.get_used_cells_by_item(START)
 	var ends = self.get_used_cells_by_item(END)
 	
 	starts.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
 	
-	print(starts)
-	print(ends)
-	
 	for i in starts.size():
 		var start = starts[i].x + 1
 		var width = ends[i].x - starts[i].x - 1
 		var height = ends[i].z - starts[i].z + 1
 		rooms.append([width, height, start])
-	
-	print(rooms)
-	
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	print("start")
 	self.clear()
 
 

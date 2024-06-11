@@ -17,7 +17,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 const CUSTOMROOMPERCENTAGE : float = 0.4
 
 # General room parameters
-const room_amount : int = 15
+const room_amount : int = 5
 const room_width  : int = 10
 const room_height : int = 10
 const room_margin : int = 7
@@ -63,12 +63,32 @@ func new_seed() -> void:
 func set_seed(given_seed : int) -> void:
 	seed(given_seed)
 	build_map()
+
+
+# Main function that builds the map. Clears the map first to stop overlap.
+# TODO: Expand with all generation layers.
+func build_map() -> void:
+	self.clear()
 	
+	define_rooms()
+	var pairs : Array = get_custom_rooms()
+	draw_rooms()
+	place_custom_room(pairs)
+	
+	print(rooms)
+	
+	draw_paths()
+	
+	draw_windows()
+	draw_walls()
+	
+	mirror_world()
+
 
 # Randomly picks n unique indexes.
-func random_picks(total_picks : int, max_value : int) -> Array:
+func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
 	var all_options = []
-	for i in range(max_value):
+	for i in range(min_value, max_value):
 		all_options.append(i)
 
 	var picks = []
@@ -82,10 +102,11 @@ func random_picks(total_picks : int, max_value : int) -> Array:
 # and returns an array containing the pairs [original, new].
 # TODO: Breaks room margins a bit, might need to be changed.
 func get_custom_rooms() -> Array:
-	var total_picks = int(min(room_amount * CUSTOMROOMPERCENTAGE, customRooms.rooms.size()))
+	customRooms.generate_dimensions( )
+	var total_picks = int(min((room_amount - 2) * CUSTOMROOMPERCENTAGE, customRooms.rooms.size()))
 	
-	var originals = random_picks(total_picks, room_amount)
-	var customs = random_picks(total_picks, customRooms.rooms.size())
+	var originals = random_picks(total_picks, 1, room_amount - 1)
+	var customs = random_picks(total_picks, 0, customRooms.rooms.size())
 	
 	# Creates index pairs between the generated floorplan and the custom floorplan.
 	var pairs = []
@@ -104,37 +125,22 @@ func get_custom_rooms() -> Array:
 func place_custom_room(pairs : Array) -> void:
 	var MAX_HEIGHT = 4
 	
+	print(pairs)
+	
 	for pair in pairs:
 		var orig = rooms[pair[0]]
 		var custom = customRooms.rooms[pair[1]]
 
-		print(orig[2])
-		print(custom[2])
-
 		var ori_start = orig[2]
 		var custom_start = custom[2]
-		for y in MAX_HEIGHT:
+		for y in range(1, MAX_HEIGHT):
 			for x in orig[0]:
 				for z in orig[1]:
 					var item = customRooms.get_cell_item(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
+					var current = self.get_cell_item(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					var orientation = customRooms.get_cell_item_orientation(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
-					
-	
-# Main function that builds the map. Clears the map first to stop overlap.
-# TODO: Expand with all generation layers.
-func build_map() -> void:
-	self.clear()
-	
-	define_rooms()
-	var pairs : Array = get_custom_rooms()
-	draw_rooms()
-	draw_walls()
-	draw_windows()
-	place_custom_room(pairs)
-	
-	mirror_world()
 
 
 # Rotates function to new 
@@ -169,18 +175,25 @@ func mirror_world() -> void:
 		self.set_cell_item(new_location, item, orientation)
 
 
+# Places a window on the given coords, except for when there already is an item.
+func place_window(location : Vector3i) -> void:
+	if get_cell_item(location) == -1 or get_cell_item(location + Vector3i(1, 0, 0)):
+		return
+
+	self.set_cell_item(location, WINDOWL)
+	self.set_cell_item(location + Vector3i(1, 0, 0), WINDOWR)
+
+
 # Draws windows with 2 normal walls in between and centers it on the middle of the wall.
 # Only works on the connecting walls.
 func draw_windows() -> void:
 	for room in rooms:
 		var start = room[2] + 1 if (room[0] / 2) % 2 == 0 else room[2] + 2
 
-		self.set_cell_item(Vector3i(start, 1, 0), WINDOWL)
-		self.set_cell_item(Vector3i(start + 1, 1, 0), WINDOWR)
+		place_window(Vector3i(start, 1, 0))
 		while start < room[2] + room[0] - 4:
 			start += 4
-			self.set_cell_item(Vector3i(start, 1, 0), WINDOWL)
-			self.set_cell_item(Vector3i(start + 1, 1, 0), WINDOWR)
+			place_window(Vector3i(start, 1, 0))
 
 
 # Summs all x values in an array based on the rooms variable.
@@ -229,7 +242,8 @@ func draw_rooms() -> void:
 		var xstart = rooms[i][2] + rooms[i][0] - 1
 		var xend = rooms[i + 1][2]
 
-		make_path(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+		place_doors(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+
 
 
 func fill_room(room_dim: Array) -> void:
@@ -246,10 +260,37 @@ func make_room(room : Array) -> void:
 			self.set_cell_item(start + Vector3i(w, HEIGHT, h), FLOOR1)
 
 
+# Sorts vectors on x axis.
+func sort_vector(a : Vector3i, b : Vector3i):
+	if a.x < b.x:
+		return true
+	return false
+
+
+# Draws paths between the doors.
+func draw_paths() -> void:
+	var starts = self.get_used_cells_by_item(DOOROPENL)
+	var ends = self.get_used_cells_by_item(DOOROPENR)
+	
+	starts.sort_custom(sort_vector)
+	ends.sort_custom(sort_vector)
+
+	for i in range(starts.size() - 1, -1, -1):
+		if get_cell_item_orientation(starts[i]) != 22:
+			starts.pop_at(i)
+		if get_cell_item_orientation(ends[i]) != 16:
+			ends.pop_at(i)
+			
+	print(starts)
+	print(ends)
+
+	for i in starts.size():
+		make_path(starts[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
+
+
 # Draws a 2 wide path between two given vectors, the given point will be the top
 # of the path.
 func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
-	#print("making wall between:" + str(start_location) + str(end_location))
 	var relative_distance = end_location - start_location
 	var direction = 0 if relative_distance.z > 0 else 1
 
@@ -277,24 +318,23 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR1)
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR1)
 
-	place_doors(start_location, end_location)
 
-
+# Places doors on random begin and end spots to make it possible to generate the paths later.
 func place_doors(start_location : Vector3i, end_location : Vector3i) -> void:
 	self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENL, 22)
 	self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENR, 22)
-	
 	self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENR, 16)
-	self.set_cell_item(end_location + Vector3i(0, 0, 1), DOOROPENL, 16)
+	self.set_cell_item(end_location + Vector3i(0, 1, 1), DOOROPENL, 16)
 
 # Sums the integers in an array
-static func sum_array(array):
+func sum_array(array):
 	var sum = 0
 	for element in array:
 		sum += element
 	return sum
 
 
+# Randomizes floor placement.
 func random_floor(floor : Vector3i) -> void:
 	var walls = [FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5]
 	var special = [FLOORVENT, FLOORWATER]
@@ -333,7 +373,9 @@ func draw_walls() -> void:
 		var type = WALL
 		
 		# Checks which type of wall, then finds the needed orientation.
-		if sum_array(surround) == 3:
+		if get_cell_item(floor_item + Vector3i(0, 1, 0)) != -1:
+			idx = -1
+		elif sum_array(surround) == 3:
 			idx = walls.find(surround)
 		elif sum_array(surround) == 2:
 			idx = corner.find(surround)
