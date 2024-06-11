@@ -568,7 +568,7 @@ draw_pass_1 = ExtResource("4_2a2jn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.3171, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(-8.74228e-07, 0, 20, 0, 20, 0, -20, 0, -8.74228e-07, -81.2813, 15.1935, 13.0329)
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -81.2813, 15.1935, 13.0329)
 material_override = SubResource("ShaderMaterial_cfijk")
 mesh = SubResource("QuadMesh_kh4cc")
 
