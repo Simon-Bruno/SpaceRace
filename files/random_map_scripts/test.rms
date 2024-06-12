@@ -2,8 +2,8 @@
 
 create_wall {
     set_min_distance 5
-    set_max_distance 8
-    length 6
+    set_max_distance 5
+    length 10
     length_variation 2
 }
 
