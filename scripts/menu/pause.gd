@@ -27,6 +27,9 @@ func _on_resume_button_pressed():
 
 func _on_settings_button_pressed():
 	print("Settings button pressed")
+	# Link with settings page TBC
 
 func _on_titlescreen_button_pressed():
 	print("Titlescreen button pressed")
+	Network._on_leave_button_pressed()
+	self.visible = false
