@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=67 format=3 uid="uid://cehfbggdu6pms"]
 
 [ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
@@ -26,6 +26,13 @@
 [ext_resource type="ArrayMesh" uid="uid://c4thxn35mjcc8" path="res://assets/CustomBlocks/walls/wallWindowR.obj" id="20_mj8xf"]
 [ext_resource type="ArrayMesh" uid="uid://0esprmopx1uc" path="res://assets/CustomBlocks/misc/customEnd.obj" id="25_q6iur"]
 [ext_resource type="ArrayMesh" uid="uid://dwq82es06u5fu" path="res://assets/CustomBlocks/misc/customStart.obj" id="26_u2x3f"]
+[ext_resource type="ArrayMesh" uid="uid://erbgglae4cgx" path="res://assets/CustomBlocks/placable/largeBox.obj" id="27_kdqmv"]
+[ext_resource type="ArrayMesh" uid="uid://cumgrcrwja411" path="res://assets/CustomBlocks/placable/redBox.obj" id="28_ngbk2"]
+[ext_resource type="ArrayMesh" uid="uid://cbpumyfshlt6j" path="res://assets/CustomBlocks/placable/smallBox.obj" id="29_k7mfs"]
+[ext_resource type="ArrayMesh" uid="uid://h7b6lfsliy2w" path="res://assets/CustomBlocks/placable/pressurePlateOff.obj" id="30_hgunv"]
+[ext_resource type="ArrayMesh" uid="uid://c2k4ofk3nm13g" path="res://assets/CustomBlocks/placable/pressurePlateOn.obj" id="31_3fpn3"]
+[ext_resource type="ArrayMesh" uid="uid://bja6hv3l4sctj" path="res://assets/CustomBlocks/placable/terminal.obj" id="32_52kga"]
+[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://files/voxelFiles/export/computer.obj" id="33_jktwi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
 albedo_texture = ExtResource("1_c8374")
@@ -121,6 +128,9 @@ albedo_texture = ExtResource("1_c8374")
 albedo_texture = ExtResource("1_c8374")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hw6gx"]
+albedo_texture = ExtResource("1_c8374")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyii1"]
 albedo_texture = ExtResource("1_c8374")
 
 [node name="Node3D" type="Node3D"]
@@ -355,3 +365,38 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hw6gx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00332773, 0, 0.00183892)
 mesh = ExtResource("26_u2x3f")
 surface_material_override/0 = SubResource("StandardMaterial3D_hw6gx")
+
+[node name="LargeBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
+mesh = ExtResource("27_kdqmv")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
+
+[node name="RedBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
+mesh = ExtResource("28_ngbk2")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
+
+[node name="SmallBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
+mesh = ExtResource("29_k7mfs")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
+
+[node name="PressurePlateOff" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
+mesh = ExtResource("30_hgunv")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
+
+[node name="PressurePlateOn" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
+mesh = ExtResource("31_3fpn3")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
+
+[node name="Terminal" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
+mesh = ExtResource("32_52kga")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
+
+[node name="Computer" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0779099, 0, -0.0174141)
+mesh = ExtResource("33_jktwi")
+surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
