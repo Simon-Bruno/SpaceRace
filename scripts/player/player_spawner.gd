@@ -19,6 +19,7 @@ func respawn_player():
 	var player = dead_player
 	print(player.health)
 	player.health = Global.player_max_health
+	player.get_node("PlayerCombat/SubViewport/HpBar").value = Global.player_max_health
 	player.alive = true
 	player.visible = true
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
