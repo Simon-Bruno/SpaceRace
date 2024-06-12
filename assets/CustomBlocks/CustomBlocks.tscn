@@ -32,7 +32,7 @@
 [ext_resource type="ArrayMesh" uid="uid://h7b6lfsliy2w" path="res://assets/CustomBlocks/placable/pressurePlateOff.obj" id="30_hgunv"]
 [ext_resource type="ArrayMesh" uid="uid://c2k4ofk3nm13g" path="res://assets/CustomBlocks/placable/pressurePlateOn.obj" id="31_3fpn3"]
 [ext_resource type="ArrayMesh" uid="uid://bja6hv3l4sctj" path="res://assets/CustomBlocks/placable/terminal.obj" id="32_52kga"]
-[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://assets/CustomBlocks/placable/computer.obj" id="33_jktwi"]
+[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://files/voxelFiles/export/computer.obj" id="33_jktwi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
 albedo_texture = ExtResource("1_c8374")
