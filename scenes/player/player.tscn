@@ -125,6 +125,7 @@ shape = SubResource("CylinderShape3D_sjmiw")
 
 [node name="HealthBar" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46299, 0)
+billboard = 1
 texture = SubResource("ViewportTexture_ucjvb")
 
 [connection signal="value_changed" from="PlayerCombat/SubViewport/HpBar" to="PlayerCombat/SubViewport/HpBar" method="_on_value_changed"]

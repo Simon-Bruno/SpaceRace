@@ -30,7 +30,7 @@ shape = SubResource("BoxShape3D_u6b37")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(48, 0, 0)
-collision_mask = 9
+collision_mask = 11
 script = ExtResource("2_tgb42")
 
 [connection signal="body_entered" from="Origin/LaserRange" to="." method="_on_area_3d_body_entered"]

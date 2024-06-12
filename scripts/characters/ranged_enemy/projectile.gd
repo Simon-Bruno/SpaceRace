@@ -9,6 +9,7 @@ var direction: Vector3
 func _ready():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
+	$LifeSpan.start()
 	print("Projectile ready")
 
 func _physics_process(delta):
@@ -22,7 +23,7 @@ func _physics_process(delta):
 
 	if collision:
 		print(collision.get_collider().name)
-		print(str(multiplayer.get_unique_id()) + " Collision detected")
+		print(collision.get_collider())
 		if collision.get_collider().is_in_group("Players"):
 			print("Hit player: ", collision.get_collider().name)
 			collision.get_collider().take_damage.rpc(collision.get_collider().name, damage)
@@ -32,3 +33,7 @@ func _physics_process(delta):
 				collision.get_collider().take_damage(damage, self)
 		queue_free()
 
+
+
+func _on_life_span_timeout():
+	queue_free()

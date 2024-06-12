@@ -21,6 +21,7 @@ func _process(delta):
 	if player:
 		damage_time += delta
 		while damage_time > damage_delay:
+			print(player)
 			damage_time -= damage_delay
-			player.take_damage(damage)
+			player.take_damage(player.name, damage)
 		

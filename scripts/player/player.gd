@@ -13,13 +13,10 @@ var respawn_immunity : bool = false
 var walk_acceleration = 40
 var walk_deceleration = 50
 var rotation_speed = 10
+var rotation_smoothing = 10
 
 var speed = 0
 var direction = Vector2.ZERO
-
-var getHitCooldown = true
-var health = Global.player_max_health
-var points = 0
 
 var max_dist: float = 25.0  # max distance between players
 
@@ -119,7 +116,6 @@ func take_damage(id, damage):
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive:
-		print("health < 0")
 		die()
 		
 func die():

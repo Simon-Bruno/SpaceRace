@@ -73,17 +73,11 @@ func _on_detection_area_body_exited(body):
 		if body == closest_target_node:
 			closest_target_node = null
 		nodes_in_area.erase(body)
-
-#func _on_enemy_hitbox_body_entered(body):
-	#if body.is_in_group("Players"):
-		#player_in_attack_zone = true
-#
-#func _on_enemy_hitbox_body_exited(body):
-	#if body.is_in_group("Players"):
-		#player_in_attack_zone = false
 		
 # Used in player script when attacking an enemy, apply_damage_to_enemy
 func take_damage(damage, source):
+	if not multiplayer.is_server():
+		return
 	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
@@ -96,6 +90,8 @@ func take_damage(damage, source):
 	velocity.z += knockback_direction.z * knockback_strength
 
 func die():
+	if not multiplayer.is_server():
+		return
 	print(last_damaged_by)
 	if last_damaged_by.get_parent().is_in_group("Players"):
 		last_damaged_by.get_parent().points += 5

@@ -51,6 +51,7 @@ mesh = SubResource("CapsuleMesh_jfshl")
 shape = SubResource("CapsuleShape3D_2bedf")
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+collision_mask = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
