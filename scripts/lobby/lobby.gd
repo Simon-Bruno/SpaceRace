@@ -1,6 +1,7 @@
 extends Node
 
 @onready var start_timer = Timer.new()
+@onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var quit_button_area = $AreaQuit
 
 var world = preload("res://scenes/world.tscn")
@@ -18,6 +19,10 @@ func _process(_delta):
 			if random.size() == multiplayer.get_peers().size() + 1 or \
 			team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
 				_on_start_timer_timeout()
+		if not start_timer.is_stopped():
+			$SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
+	if Input.is_action_just_pressed("pause"):
+		pause_menu.handle_esc_input()
 
 func _ready():
 	if multiplayer.is_server():
