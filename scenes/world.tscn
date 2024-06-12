@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
 [ext_resource type="PackedScene" uid="uid://b47e0ly4dll8p" path="res://scenes/player/player_spawner.tscn" id="1_fahhe"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
-[ext_resource type="PackedScene" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
+[ext_resource type="PackedScene" uid="uid://bjchbb8ua0ijg" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1991.92, 1, 1000)
