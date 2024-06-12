@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b64tujrdyrpoy"
+path="res://.godot/imported/pressurePlateOn.obj-3697acf849726c29ac701d430536edfc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pressurePlateOn.obj-3697acf849726c29ac701d430536edfc.mesh"]
+
+source_file="res://files/voxelFiles/export/pressurePlateOn.obj"
+dest_files=["res://.godot/imported/pressurePlateOn.obj-3697acf849726c29ac701d430536edfc.mesh", "res://.godot/imported/pressurePlateOn.obj-3697acf849726c29ac701d430536edfc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

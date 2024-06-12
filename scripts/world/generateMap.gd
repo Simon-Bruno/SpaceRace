@@ -20,7 +20,7 @@ const CUSTOMROOMPERCENTAGE : float = 0.4
 const room_amount : int = 5
 const room_width  : int = 10
 const room_height : int = 10
-const room_margin : int = 7
+const room_margin : int = 4
 
 # How much the room size can variate in incraments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
