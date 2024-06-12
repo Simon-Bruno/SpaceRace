@@ -12,11 +12,6 @@ func _ready():
 		# Spawn all connected player nodes
 		for id in Network.player_names.keys():
 			$PlayerSpawner.add_player_character(id)
-		
-		#TODO: Remove hardcode item
-		var item = loaded_item.instantiate()
-		item.position = Vector3(4,5,4)
-		get_node("/root/Main/SpawnedItems/World").add_child(item, true)
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):

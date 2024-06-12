@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bm5ivu17noj78"
+path="res://.godot/imported/very_large_array_antenna_v1.obj-9c085becfcfd32d4d212e2b74248ee20.mesh"
+
+[deps]
+
+files=["res://.godot/imported/very_large_array_antenna_v1.obj-9c085becfcfd32d4d212e2b74248ee20.mesh"]
+
+source_file="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj"
+dest_files=["res://.godot/imported/very_large_array_antenna_v1.obj-9c085becfcfd32d4d212e2b74248ee20.mesh", "res://.godot/imported/very_large_array_antenna_v1.obj-9c085becfcfd32d4d212e2b74248ee20.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
