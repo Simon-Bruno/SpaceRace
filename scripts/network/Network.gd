@@ -7,7 +7,7 @@ signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
 
-var max_client_connections = 3
+var max_client_connections = 3 # Excluding the host
 
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
 var loaded_menu = preload("res://scenes/menu/menu.tscn")
