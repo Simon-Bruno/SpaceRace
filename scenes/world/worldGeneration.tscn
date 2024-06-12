@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://btxasx3bw2gsj"]
+[gd_scene load_steps=9 format=3 uid="uid://btxasx3bw2gsj"]
 
-[ext_resource type="MeshLibrary" uid="uid://xqw14c2d05d3" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_bwbkc"]
+[ext_resource type="MeshLibrary" uid="uid://dfkrg5kovlgy5" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_bwbkc"]
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
-[ext_resource type="Texture2D" uid="uid://prl5fv3kveqp" path="res://assets/world/MoonTexture.png" id="3_s0vbt"]
+[ext_resource type="Texture2D" uid="uid://didwfxwu170he" path="res://assets/world/pixel_moon.png" id="3_iylh6"]
+[ext_resource type="Script" path="res://scripts/world/CustomRooms.gd" id="4_oo6rm"]
 
 [sub_resource type="Environment" id="Environment_mgk52"]
 fog_enabled = true
@@ -18,7 +19,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwrri"]
-albedo_texture = ExtResource("3_s0vbt")
+albedo_texture = ExtResource("3_iylh6")
 uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rwr1h"]
@@ -33,6 +34,7 @@ environment = SubResource("Environment_mgk52")
 mesh_library = ExtResource("1_bwbkc")
 cell_scale = 1.25
 script = ExtResource("1_een4t")
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.79673, 0.604335, 0, -0.604335, -0.79673, 0, 0, 0, 1, 0, 133.512, 0)
@@ -41,6 +43,15 @@ transform = Transform3D(-0.79673, 0.604335, 0, -0.604335, -0.79673, 0, 0, 0, 1, 
 replication_config = SubResource("SceneReplicationConfig_hh1hr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, -2.1696, 0)
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 1.89836, 0)
 mesh = SubResource("PlaneMesh_rwr1h")
 skeleton = NodePath("../WorldGeneration")
+
+[node name="CustomRooms" type="GridMap" parent="."]
+mesh_library = ExtResource("1_bwbkc")
+cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(6, 3, 0, 6, 5, 0, 6, 0, 0, 5, 7, 0, 6, 7, 0, 6, 6, 0, 6, 4, 0, 6, 1, 0, 6, 2, 0, 4, 5, 0, 4, 4, 0, 4, 3, 0, 4, 7, 0, 4, 6, 0, 5, 4, 0, 5, 2, 0, 4, 0, 0, 5, 6, 0, 5, 5, 0, 5, 3, 0, 5, 1, 0, 5, 0, 0, 4, 1, 0, 4, 2, 0, 3, 7, 0, 2, 4, 0, 3, 6, 0, 3, 4, 0, 2, 0, 0, 2, 5, 0, 2, 3, 0, 2, 7, 0, 2, 6, 0, 3, 5, 0, 3, 3, 0, 3, 2, 0, 3, 1, 0, 3, 0, 0, 2, 1, 0, 2, 2, 0, 1, 7, 0, 1, 6, 0, 1, 5, 0, 1, 4, 0, 1, 3, 0, 1, 2, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 7, 0, 0, 7, 1, 0, 7, 2, 0, 7, 3, 0, 7, 4, 0, 7, 5, 0, 7, 6, 0, 7, 7, 0, 65536, 6, 1048590, 65537, 7, 655382, 65536, 7, 1048589, 65536, 0, 13, 65537, 0, 15, 65538, 0, 15, 65539, 0, 11, 65543, 1, 1441808, 65543, 2, 1441808, 65543, 3, 1441801, 65543, 4, 1441802, 65543, 5, 1441803, 65543, 6, 1441803, 65542, 7, 655381, 65541, 7, 655382, 65540, 7, 655381, 65539, 7, 655382, 65538, 7, 655381, 65540, 0, 11, 65541, 0, 11, 65542, 0, 12, 65536, 5, 1048593, 65536, 4, 1048593, 65536, 1, 1048594, 65543, 0, 1441805, 65543, 7, 655373, 131071, 0, 24, 65544, 7, 23, 65536, 2, 1048586, 65536, 3, 1048585, 65546, 0, 24, 65551, 7, 23, 65547, 2, 1048585, 65547, 1, 1048586, 65550, 3, 1441802, 65550, 2, 1441801, 11, 0, 1441792, 12, 0, 1441792, 13, 0, 1441792, 14, 0, 1441792, 14, 1, 1441792, 14, 2, 1441792, 14, 3, 1441792, 14, 4, 1441792, 14, 5, 1441792, 14, 6, 1441792, 14, 7, 1441792, 12, 7, 1441792, 11, 7, 1441792, 13, 7, 1441792, 12, 6, 1441792, 11, 6, 1441792, 11, 5, 1441792, 11, 4, 1441792, 11, 3, 1441792, 11, 2, 1441792, 11, 1, 1441792, 12, 1, 1441792, 12, 2, 1441792, 12, 3, 1441792, 12, 4, 1441792, 12, 5, 1441792, 13, 4, 1441792, 13, 3, 1441792, 13, 2, 1441792, 13, 1, 1441792, 13, 5, 1441792, 13, 6, 1441792, 65547, 0, 13, 65550, 0, 1441805, 65549, 0, 14, 65548, 0, 14, 65550, 4, 1441806, 65550, 5, 1441806, 65550, 6, 1441806, 65549, 4, 1048590, 65549, 5, 1048590, 65549, 6, 1048590, 65548, 4, 1441806, 65548, 5, 1441806, 65548, 6, 1441806, 65547, 4, 1048590, 65547, 5, 1048590, 65547, 6, 1048590, 65550, 7, 655373, 65547, 7, 1048589, 65549, 7, 655381, 65548, 7, 655382, 65547, 3, 1048587, 65550, 1, 1441803)
+}
+script = ExtResource("4_oo6rm")
+metadata/_editor_floor_ = Vector3(0, 1, 0)

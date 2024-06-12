@@ -3,6 +3,7 @@ extends Node3D
 
 func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
+	character.add_to_group("Players")
 	character.name = str(id)
 	add_child(character)
 
