@@ -21,7 +21,7 @@ var playername
 
 var player_teams = {}
 
-var players_connected = 0 
+var players_connected = 0
 var player_names = {}
 
 func _ready():
@@ -56,6 +56,7 @@ func _on_host_pressed(port):
 	else:
 		return false
 	return true
+
 
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
@@ -105,7 +106,9 @@ func _on_player_disconnected(id):
 			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
 			for player_id in player_names.keys():
 				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
-	player_disconnected.emit(id)	
+	player_disconnected.emit(id)
+
+	player_disconnected.emit(id)
 
 func _on_leave_button_pressed():
 	var id = multiplayer.get_unique_id()
@@ -117,6 +120,8 @@ func _on_leave_button_pressed():
 	world.queue_free()
 	get_node("/root/Main/SpawnedItems").remove_child(world)
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
+
+
 
 func _on_server_disconnected():
 	print("Server disconnect")
@@ -140,3 +145,7 @@ func _on_join_pressed(ip, port):
 		Audiocontroller.play_lobby_music()
 		return true
 	return false
+
+
+func get_player_node_by_id(id):
+	return get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node(str(id))
