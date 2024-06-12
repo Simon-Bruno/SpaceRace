@@ -205,7 +205,7 @@ angle_max = 694.3
 direction = Vector3(0, 1, 0)
 gravity = Vector3(0, 0, 0)
 scale_min = 0.9
-scale_max = 1.5
+scale_max = 5.0
 scale_curve = SubResource("CurveXYZTexture_wo2p0")
 color = Color(1, 1, 3, 1)
 
@@ -244,7 +244,7 @@ radius = 0.686439
 radius = 0.711841
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_66t8f"]
-radius = 1.11081
+radius = 0.702192
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwu5"]
 render_priority = 0
@@ -949,8 +949,8 @@ mesh = ExtResource("4_2a2jn")
 skeleton = NodePath("../..")
 
 [node name="TeamA_text" type="Label3D" parent="Assets/TeamA_plate3"]
-transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, 3.50474, 0.280173, 1.59984)
-text = "TEAM A
+transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, 0.00290442, 1.85072, 0.0292904)
+text = "0/2
 "
 
 [node name="TeamB_plate2" type="MeshInstance3D" parent="Assets"]
@@ -959,8 +959,8 @@ mesh = ExtResource("4_2a2jn")
 skeleton = NodePath("../..")
 
 [node name="TeamB_text" type="Label3D" parent="Assets/TeamB_plate2"]
-transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, -3.43042, 0.280173, 1.57022)
-text = "TEAM B
+transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, 0.00774527, 1.82342, 0.0269635)
+text = "0/2
 "
 
 [node name="Telepath" type="MeshInstance3D" parent="Assets"]
@@ -969,9 +969,13 @@ mesh = ExtResource("4_2a2jn")
 skeleton = NodePath("../..")
 
 [node name="TeamX_text" type="Label3D" parent="Assets/Telepath"]
-transform = Transform3D(5, 0, 0, 0, -8.74229e-09, 0.2, 0, -2.6, -1.1365e-07, -0.0512348, 0.280173, 2.36814)
-text = "RANDOM
-"
+transform = Transform3D(5, 0, 0, 0, -8.74229e-09, 0.2, 0, -2.6, -1.1365e-07, 0.012434, 0.280173, 0.0123596)
+text = "0/4"
+
+[node name="Label3D" type="Label3D" parent="Assets/Telepath"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.043354, 0.982164, 2.34112)
+text = "RANDOM"
+font_size = 72
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.764314, 0.644845, 0, -0.644845, 0.764314, -3.92735, 60.2119, 69.7497)
@@ -1003,7 +1007,7 @@ shape = SubResource("CylinderShape3D_66t8f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
 
 [node name="CollisionShapeQuit" type="CollisionShape3D" parent="AreaQuit"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 61.0151, 14.7313, 39.7102)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 54.1706, 14.7313, 39.551)
 shape = SubResource("CylinderShape3D_66t8f")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
