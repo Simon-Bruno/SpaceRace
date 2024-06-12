@@ -8,6 +8,7 @@ static var END = 23
 
 # Defines the rooms.
 @export var rooms = []
+@export var end_room = [10, 8, -12]
 
 
 # Sorts vectors based on x value.
@@ -28,7 +29,8 @@ func generate_dimensions():
 		var start = starts[i].x + 1
 		var width = ends[i].x - starts[i].x - 1
 		var height = ends[i].z - starts[i].z + 1
-		rooms.append([width, height, start])
+		if start >= 0:
+			rooms.append([width, height, start])
 
 
 # Called when the node enters the scene tree for the first time.
