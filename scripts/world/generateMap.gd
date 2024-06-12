@@ -194,7 +194,6 @@ func place_window(location : Vector3i) -> void:
 # Draws windows with 2 normal walls in between and centers it on the middle of the wall.
 # Only works on the connecting walls.
 func draw_windows() -> void:
-	print(rooms)
 	for room in rooms:
 		var start = room[2] + 1 if (room[0] / 2) % 2 == 0 else room[2] + 2
 
@@ -263,7 +262,7 @@ func fill_room(room_dim: Array) -> void:
 	generate_room = not generate_room
 	room_scene = room_scene.duplicate(5)
 	room_scene.scale.z = -1
-	add_child(room_scene)
+	add_child(room_scene, true)
 	generate_room = not generate_room
 
 
