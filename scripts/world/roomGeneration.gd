@@ -63,7 +63,7 @@ func add_objects(objects_list):
 
 func fill_room(world_dict: Dictionary, start : Vector3i):
 	var room = world.room
-var width : int = room[0]
+	var width : int = room[0]
 	var height : int = room[1]
 	add_walls(world_dict['walls'], width, height, start)
 	
