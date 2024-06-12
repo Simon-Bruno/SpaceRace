@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1sppkmxnnog5"]
+[gd_scene load_steps=5 format=3 uid="uid://b1sppkmxnnog5"]
 
 [ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="1_3xkob"]
+[ext_resource type="PackedScene" uid="uid://cwi7l5pb4w74k" path="res://scenes/characters/ranged_enemy/projectile.tscn" id="2_bqe34"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m7821"]
 
@@ -8,6 +9,7 @@
 
 [node name="Weapon" type="Node3D"]
 script = ExtResource("1_3xkob")
+projectile_scene = ExtResource("2_bqe34")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0, -0.549695)

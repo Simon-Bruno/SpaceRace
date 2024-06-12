@@ -18,6 +18,12 @@ script = ExtResource("1_25n6l")
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
 
+[node name="ProjectileSpawner" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ProjectileSpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn")
+spawn_path = NodePath("..")
+
 [node name="EnemySpawner" parent="." instance=ExtResource("3_bij7o")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="EnemySpawner"]

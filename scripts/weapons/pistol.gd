@@ -5,30 +5,19 @@ var closest_target_node : Node = null
 
 var damage = 20
 
-# Function to find the closest enemy from an array of nodes
-func find_closest_enemy_in_range(nodes_array: Array):
-	var min_distance = INF
-	
-	for enemy in enemies_in_weapon_range:
-		var distance = (self.global_transform.origin - enemy.global_transform.origin).length()
-		print(distance)
-		if distance < min_distance:
-			min_distance = distance
-			closest_target_node = enemy
-
-func _process(delta):
-	find_closest_enemy_in_range(enemies_in_weapon_range)
+@export var projectile_scene : PackedScene
 
 func attack():
-	var player_node = get_parent().get_parent()
-	print(closest_target_node)
-	if closest_target_node:
-		closest_target_node.take_damage(damage, player_node)
-
-func _on_range_body_entered(body):
-	if body.is_in_group("Enemies"):
-		enemies_in_weapon_range.append(body)
-
-func _on_range_body_exited(body):
-	if body.is_in_group("Enemies"):
-		enemies_in_weapon_range.erase(body)
+	var direction_to_shoot = -global_transform.basis.z.normalized()
+	var spawn_offset = direction_to_shoot * 1
+	spawn_projectile_for_me.rpc(global_transform.origin, spawn_offset, direction_to_shoot)
+	
+@rpc("any_peer", "call_local", "reliable")
+func spawn_projectile_for_me(transform_origin, spawn_offset, direction):
+	if not multiplayer.is_server():
+		return
+		
+	var projectile_instance = projectile_scene.instantiate()
+	get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
+	projectile_instance.global_transform.origin = transform_origin + spawn_offset
+	projectile_instance.direction = direction

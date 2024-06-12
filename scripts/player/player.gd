@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 var getHitCooldown = true
-var health = Global.player_max_health
+@export var health = Global.player_max_health
 var points = 0
 @export var push_force = 1
 var alive = true
@@ -106,9 +106,13 @@ func _physics_process(delta):
 	move_object()
 	
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
-func take_damage(damage):
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(id, damage):
+	if id != str(multiplayer.get_unique_id()):
+		return 
+		
 	if !respawn_immunity and alive and getHitCooldown:
-		health = max(0, health-damage)
+		health = max(0, health - damage)
 		getHitCooldown = false
 		$PlayerCombat/GetHitCooldown.start()
 	HpBar.value = float(health) / Global.player_max_health * 100
