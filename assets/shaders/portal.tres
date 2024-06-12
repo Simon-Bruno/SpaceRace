@@ -1,7 +1,4 @@
-[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://601mw1n0k5te"]
-
-[ext_resource type="Texture2D" uid="uid://jh7vktsl7hp8" path="res://assets/lobby/laser_beam/matrix.jpg" id="1_w4vbw"]
-[ext_resource type="Texture2D" uid="uid://bjsqyf78fx3sq" path="res://assets/lobby/laser_beam/T_VFX_Glow_1.PNG" id="2_jpnvu"]
+[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://601mw1n0k5te"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_fcv2j"]
 parameter_name = "ColorIntensity"
@@ -13,7 +10,6 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_hm1wd"]
 expanded_output_ports = [0]
-texture = ExtResource("1_w4vbw")
 
 [sub_resource type="VisualShaderNodeUVPolarCoord" id="VisualShaderNodeUVPolarCoord_sgmcd"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, 1.0, 3, 10.0]
@@ -31,7 +27,6 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_conh1"]
 expanded_output_ports = [0]
-texture = ExtResource("2_jpnvu")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_wdp2m"]
