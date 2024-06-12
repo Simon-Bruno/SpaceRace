@@ -13,12 +13,17 @@ var DISPLAY_RESOLUTION_KEYS : Array = RESOLUTION_DICTIONARY.keys()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	option_button.item_selected.connect(on_resolution_selected)
 	add_resolution_items()
 	select_current_display_resolution()
-	option_button.item_selected.connect(on_resolution_selected)
+	load_data()
 
+
+func load_data():
+	on_resolution_selected(SettingsContainer.get_resolution_mode_index())
 
 func on_resolution_selected(index : int):
+	SettingsSignalBus.emit_on_resolution_mode_selected(index)
 	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
 	centre_window()
 
@@ -30,15 +35,15 @@ func add_resolution_items():
 
 func select_current_display_resolution():
 	var current_resolution = DisplayServer.window_get_size()
-	var current_resolution_string = str(current_resolution.x) + " " + "x" + " " + str(current_resolution.y)
-	var index = DISPLAY_RESOLUTION_KEYS.find(current_resolution_string)
+	var current_resolution_str = str(current_resolution.x) + " " + "x" + " " + str(current_resolution.y)
+	var index = DISPLAY_RESOLUTION_KEYS.find(current_resolution_str)
 	option_button.select(index)
 
 
 func centre_window():
 	var centre_screen = DisplayServer.screen_get_position() + DisplayServer.screen_get_size() / 2
 	var window_size = get_window().get_size_with_decorations()
-	get_window().set_position(centre_screen - window_size/2)
+	get_window().set_position(centre_screen - window_size / 2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

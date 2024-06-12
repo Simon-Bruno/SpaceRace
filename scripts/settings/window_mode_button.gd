@@ -16,6 +16,12 @@ func _ready():
 	add_window_mode_items()
 	select_current_window_mode()
 	option_button.item_selected.connect(on_window_mode_selected)
+	load_data()
+
+
+func load_data():
+	on_window_mode_selected(SettingsContainer.get_window_mode_index())
+	option_button.select(SettingsContainer.get_window_mode_index())
 
 
 func add_window_mode_items():
@@ -23,6 +29,7 @@ func add_window_mode_items():
 		option_button.add_item(window_mode)
 
 func on_window_mode_selected(index):
+	SettingsSignalBus.emit_on_window_mode_selected(index)
 	match index:
 		0:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)

@@ -15,12 +15,18 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://assets/menu/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
+
 [autoload]
 
 Network="*res://autoloads/Network.gd"
 Global="*res://autoloads/global.gd"
 Audiocontroller="*res://autoloads/audiocontroller.gd"
 SettingsContainer="*res://autoloads/SettingsDataContainer.gd"
+SettingsSignalBus="*res://autoloads/SettingsSignalBus.gd"
+SaveManager="*res://autoloads/SaveManager.gd"
 
 [editor_plugins]
 

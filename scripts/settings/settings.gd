@@ -4,18 +4,14 @@ extends Control
 
 @onready var back_button = $MarginContainer/VBoxContainer/BackButton as Button
 
-signal exit_options_menu
+signal back_to_menu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	back_button.button_down.connect(on_exit_pressed)
+	back_button.button_down.connect(on_back_button_pressed)
 	set_process(false)
 
-func on_exit_pressed() -> void:
-	exit_options_menu.emit()
-	set_process(false)
-
-func _on_back_button_pressed():
-	self.visible = false
-	exit_options_menu.emit()
+func on_back_button_pressed() -> void:
+	back_to_menu.emit()
+	SettingsSignalBus.emit_settings_dictionary(SettingsContainer.make_storage_dict())
 	set_process(false)
