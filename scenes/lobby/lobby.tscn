@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=70 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
@@ -229,6 +229,12 @@ shader_parameter/PortalColor = Color(0.0235294, 0.92549, 0.392157, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_kh4cc"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0l07"]
+render_priority = 0
+shader = ExtResource("7_pane6")
+shader_parameter/ColorIntensity = 8.0
+shader_parameter/PortalColor = Color(1, 0, 1, 1)
+
 [sub_resource type="TextMesh" id="TextMesh_8f32b"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0vp51"]
@@ -238,7 +244,7 @@ radius = 0.686439
 radius = 0.711841
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_66t8f"]
-radius = 0.686213
+radius = 1.11081
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwu5"]
 render_priority = 0
@@ -732,7 +738,6 @@ font_size = 19
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor21" type="MeshInstance3D" parent="Assets/floors"]
@@ -746,7 +751,6 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor21/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor24" type="MeshInstance3D" parent="Assets/floors"]
@@ -760,7 +764,6 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor24/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor26" type="MeshInstance3D" parent="Assets/floors"]
@@ -774,7 +777,6 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor26/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor25" type="MeshInstance3D" parent="Assets/floors"]
@@ -788,7 +790,6 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor25/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor22" type="MeshInstance3D" parent="Assets/floors"]
@@ -802,7 +803,6 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor22/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor23" type="MeshInstance3D" parent="Assets/floors"]
@@ -816,7 +816,6 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Floor23/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="Floor2" type="MeshInstance3D" parent="Assets/floors"]
@@ -913,10 +912,20 @@ draw_pass_1 = ExtResource("4_2a2jn")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Assets/floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.3171, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Assets/floors"]
+[node name="EntrancePortal" type="MeshInstance3D" parent="Assets/floors"]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -81.2813, 15.1935, 13.0329)
 material_override = SubResource("ShaderMaterial_cfijk")
 mesh = SubResource("QuadMesh_kh4cc")
+
+[node name="ExitPortal" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 66.0644, 15.1935, 13.3793)
+material_override = SubResource("ShaderMaterial_h0l07")
+mesh = SubResource("QuadMesh_kh4cc")
+
+[node name="Label3D" type="Label3D" parent="Assets/floors/ExitPortal"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0.000350296, -0.444379, -0.169855)
+modulate = Color(1, 0, 1, 1)
+text = "EXIT GAME"
 
 [node name="Head_text" type="MeshInstance3D" parent="Assets"]
 transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
@@ -977,9 +986,10 @@ transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -5.4137, 14.6375, 37.7954)
 shape = SubResource("CylinderShape3D_66t8f")
 
 [node name="AreaQuit" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
 
 [node name="CollisionShapeQuit" type="CollisionShape3D" parent="AreaQuit"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 55.5059, 14.7313, 39.1593)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 61.0151, 14.7313, 39.7102)
 shape = SubResource("CylinderShape3D_66t8f")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
