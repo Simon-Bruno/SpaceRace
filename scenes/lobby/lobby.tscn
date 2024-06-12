@@ -1,628 +1,1077 @@
-[gd_scene load_steps=70 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=70 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
-[ext_resource type="ArrayMesh" uid="uid://j1652dsjp1kp" path="res://assets/lobby/rocket_platform.obj" id="2_8k7pi"]
+[ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
+[ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
+[ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
+[ext_resource type="Texture2D" uid="uid://bo38py7b0g4ut" path="res://assets/lobby/laser_beam/T_VFX_Noise_9.PNG" id="3_ijbb2"]
+[ext_resource type="ArrayMesh" uid="uid://cfv3e04julldf" path="res://assets/lobby/telepath/telepath.obj" id="4_2a2jn"]
+[ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
+[ext_resource type="Texture2D" uid="uid://cypenukx706yr" path="res://assets/lobby/laser_beam/Noise1_tiled.png" id="4_7fblf"]
+[ext_resource type="Texture2D" uid="uid://dp70b1b5w8ndg" path="res://assets/lobby/laser_beam/T_VFX_Noise_4.PNG" id="4_r3l3u"]
+[ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]
+[ext_resource type="Shader" uid="uid://601mw1n0k5te" path="res://assets/shaders/portal.tres" id="7_pane6"]
+[ext_resource type="ArrayMesh" uid="uid://t0gxr68td25" path="res://assets/lobby/griffen_station/power_room/room/power_room_griffin_station_v1.obj" id="8_jiux7"]
+[ext_resource type="ArrayMesh" uid="uid://ccxkqj7nv7uf0" path="res://assets/lobby/griffen_station/power_room/pillars/pillar_griffin_station_v1.obj" id="8_kywwj"]
+[ext_resource type="ArrayMesh" uid="uid://3jw0ui0pnhmc" path="res://assets/lobby/fuel_tanks/fuel_tanks.obj" id="9_5q0np"]
+[ext_resource type="Material" uid="uid://demnrs8sun55r" path="res://assets/shaders/hologram_shader_material.tres" id="9_jvh0i"]
+[ext_resource type="ArrayMesh" uid="uid://e0tuqxiew5x0" path="res://assets/lobby/death_ray/death_ray.obj" id="10_2jxae"]
+[ext_resource type="ArrayMesh" uid="uid://c0r04e8lkblwi" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/stair_case/stair_case.obj" id="11_bv6il"]
+[ext_resource type="ArrayMesh" uid="uid://bgib0f2687iao" path="res://assets/lobby/death_ray/death_ray_monitor.obj" id="11_cnme7"]
+[ext_resource type="ArrayMesh" uid="uid://d02orydh5ukim" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/room_w_balkon/balkon_power_room_griffin_station_v1.obj" id="14_1qpjt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
-albedo_color = Color(0.973094, 0.666402, 0.526047, 1)
+albedo_color = Color(0.71, 0.71, 0.71, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m1p0p"]
 material = SubResource("StandardMaterial3D_xrsps")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tllhi"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gug83"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scou3"]
+render_priority = 0
+shader = ExtResource("2_5jcod")
+shader_parameter/color = Color(0.172549, 0.870588, 1, 1)
+shader_parameter/lines1 = 2.0
+shader_parameter/lines2 = 2.0
+shader_parameter/_emission = 5.2
+shader_parameter/_fresnel = 1.8
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lbqit"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ebel4"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4e06n"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rllbv"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_h8bnx"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s8xm1"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_es6v5"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n7uqg"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jym0j"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6nyr7"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_11k61"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_to12q"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mr6ro"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5mqqh"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v8nw8"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_smhf5"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lkq8h"]
+render_priority = 0
+shader = ExtResource("2_5jcod")
+shader_parameter/color = Color(0.172549, 0.827451, 0, 1)
+shader_parameter/lines1 = 2.0
+shader_parameter/lines2 = 2.0
+shader_parameter/_emission = 5.2
+shader_parameter/_fresnel = 1.8
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_trlb1"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1s5wb"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_rxmwi"]
+operator = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yogj"]
-albedo_color = Color(0.509286, 0.509286, 0.509286, 1)
-metallic_specular = 0.0
-roughness = 0.0
-emission_enabled = true
-emission = Color(0.0425102, 0, 0.46695, 1)
-emission_energy_multiplier = 28.4
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_hdd7f"]
+parameter_name = "Texture_Power"
+default_value_enabled = true
+default_value = 1.5
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_qjd1b"]
+parameter_name = "Speed"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_177hg"]
+parameter_name = "Energy_Texture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qcwa3"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tcn7a"]
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_631pr"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1j44h"]
+default_input_values = [0, 0.0, 1, 1.0]
+operator = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_7xlo1"]
+parameter_name = "Gradient_Power"
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_jj6tw"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_3gxif"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_l7lrv"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1br3q"]
+default_input_values = [0, 0.0, 1, 1.5]
+operator = 5
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_3qscq"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_hmkty"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_bu4ni"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(2, 1)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_fvqil"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShader" id="VisualShader_ap1ec"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform vec2 Speed = vec2(0.000000, 0.000000);
+uniform sampler2D Energy_Texture;
+uniform float Texture_Power = 1.5;
+uniform sampler2D tex_frg_15;
+uniform float Gradient_Power = 1;
+
+
+
+void fragment() {
+// Input:2
+	vec4 n_out2p0 = COLOR;
+
+
+// Input:7
+	float n_out7p0 = TIME;
+
+
+// Vector2Parameter:12
+	vec2 n_out12p0 = Speed;
+
+
+// VectorOp:8
+	vec2 n_out8p0 = vec2(n_out7p0) * n_out12p0;
+
+
+// UVFunc:6
+	vec2 n_in6p1 = vec2(1.00000, 1.00000);
+	vec2 n_out6p0 = n_out8p0 * n_in6p1 + UV;
+
+
+	vec4 n_out14p0;
+// Texture2D:14
+	n_out14p0 = texture(Energy_Texture, n_out6p0);
+
+
+// VectorDecompose:4
+	float n_out4p0 = n_out14p0.x;
+	float n_out4p1 = n_out14p0.y;
+	float n_out4p2 = n_out14p0.z;
+	float n_out4p3 = n_out14p0.w;
+
+
+// FloatParameter:11
+	float n_out11p0 = Texture_Power;
+
+
+// FloatOp:5
+	float n_out5p0 = pow(n_out4p0, n_out11p0);
+
+
+// Texture2D:15
+	vec4 n_out15p0 = texture(tex_frg_15, UV);
+
+
+// VectorDecompose:16
+	float n_out16p0 = n_out15p0.x;
+	float n_out16p1 = n_out15p0.y;
+	float n_out16p2 = n_out15p0.z;
+	float n_out16p3 = n_out15p0.w;
+
+
+// FloatParameter:18
+	float n_out18p0 = Gradient_Power;
+
+
+// FloatOp:17
+	float n_out17p0 = pow(n_out16p0, n_out18p0);
+
+
+// FloatOp:19
+	float n_out19p0 = n_out5p0 * n_out17p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ALPHA = n_out19p0;
+
+
+}
+"
+modes/cull = 2
+flags/unshaded = true
+nodes/fragment/0/position = Vector2(1200, -20)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_3gxif")
+nodes/fragment/2/position = Vector2(40, 60)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorDecompose_l7lrv")
+nodes/fragment/4/position = Vector2(320, 480)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatOp_1br3q")
+nodes/fragment/5/position = Vector2(580, 500)
+nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_3qscq")
+nodes/fragment/6/position = Vector2(-220, 400)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_hmkty")
+nodes/fragment/7/position = Vector2(-800, 80)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_bu4ni")
+nodes/fragment/8/position = Vector2(-480, 200)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorDecompose_fvqil")
+nodes/fragment/9/position = Vector2(380, 160)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_rxmwi")
+nodes/fragment/10/position = Vector2(880, 220)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatParameter_hdd7f")
+nodes/fragment/11/position = Vector2(260, 660)
+nodes/fragment/12/node = SubResource("VisualShaderNodeVec2Parameter_qjd1b")
+nodes/fragment/12/position = Vector2(-920, 280)
+nodes/fragment/13/node = SubResource("VisualShaderNodeTexture2DParameter_177hg")
+nodes/fragment/13/position = Vector2(-260, 680)
+nodes/fragment/14/node = SubResource("VisualShaderNodeTexture_qcwa3")
+nodes/fragment/14/position = Vector2(60, 340)
+nodes/fragment/15/node = SubResource("VisualShaderNodeTexture_tcn7a")
+nodes/fragment/15/position = Vector2(-220, 1040)
+nodes/fragment/16/node = SubResource("VisualShaderNodeVectorDecompose_631pr")
+nodes/fragment/16/position = Vector2(152.087, 1080.73)
+nodes/fragment/17/node = SubResource("VisualShaderNodeFloatOp_1j44h")
+nodes/fragment/17/position = Vector2(380, 1000)
+nodes/fragment/18/node = SubResource("VisualShaderNodeFloatParameter_7xlo1")
+nodes/fragment/18/position = Vector2(120, 1280)
+nodes/fragment/19/node = SubResource("VisualShaderNodeFloatOp_jj6tw")
+nodes/fragment/19/position = Vector2(820, 660)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 4, 0, 5, 0, 7, 0, 8, 0, 8, 0, 6, 2, 2, 0, 9, 0, 9, 3, 10, 0, 5, 0, 10, 1, 11, 0, 5, 1, 12, 0, 8, 1, 13, 0, 14, 2, 6, 0, 14, 0, 14, 0, 4, 0, 15, 0, 16, 0, 16, 0, 17, 0, 18, 0, 17, 1, 17, 0, 19, 1, 5, 0, 19, 0, 19, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrpni"]
+render_priority = 0
+shader = SubResource("VisualShader_ap1ec")
+shader_parameter/Speed = Vector2(5, -1)
+shader_parameter/Texture_Power = 1.3
+shader_parameter/Gradient_Power = 1.0
+shader_parameter/Energy_Texture = ExtResource("3_ijbb2")
+
+[sub_resource type="Curve" id="Curve_14g4b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5h8ep"]
+max_value = 8.0
+_data = [Vector2(0, 2.98901), 0.0, 0.0, 0, 0, Vector2(1, 8), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_p3neh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gkojr"]
+curve_x = SubResource("Curve_14g4b")
+curve_y = SubResource("Curve_5h8ep")
+curve_z = SubResource("Curve_p3neh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjmpr"]
+emission_shape_offset = Vector3(0, -8, 0)
+angle_max = 694.3
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_gkojr")
+color = Color(1.2, 0.5, 2.5, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v3oi4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6grmh"]
+render_priority = 0
+shader = SubResource("VisualShader_ap1ec")
+shader_parameter/Speed = Vector2(2, -1)
+shader_parameter/Texture_Power = 2.0
+shader_parameter/Gradient_Power = 1.0
+shader_parameter/Energy_Texture = ExtResource("4_7fblf")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_wo2p0"]
+curve_x = SubResource("Curve_14g4b")
+curve_y = SubResource("Curve_5h8ep")
+curve_z = SubResource("Curve_p3neh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tsht1"]
+emission_shape_offset = Vector3(0, -8, 0)
+angle_max = 694.3
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.9
+scale_max = 5.0
+scale_curve = SubResource("CurveXYZTexture_wo2p0")
+color = Color(1, 1, 3, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jr2h5"]
+render_priority = 0
+shader = SubResource("VisualShader_ap1ec")
+shader_parameter/Speed = Vector2(1.5, 2)
+shader_parameter/Texture_Power = 1.5
+shader_parameter/Gradient_Power = 1.0
+shader_parameter/Energy_Texture = ExtResource("4_r3l3u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nlcyh"]
+gravity = Vector3(0, 0, 0)
+color = Color(1.2, 0.5, 2.5, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfijk"]
+render_priority = 0
+shader = ExtResource("7_pane6")
+shader_parameter/ColorIntensity = 7.0
+shader_parameter/PortalColor = Color(0.0235294, 0.92549, 0.392157, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_kh4cc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0l07"]
+render_priority = 0
+shader = ExtResource("7_pane6")
+shader_parameter/ColorIntensity = 8.0
+shader_parameter/PortalColor = Color(1, 0, 1, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_8f32b"]
-material = SubResource("StandardMaterial3D_5yogj")
-text = "Space Race"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0207"]
-albedo_color = Color(1, 0.168627, 1, 1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cceer"]
+data = PackedVector3Array(-2, 0, -0.9, -2, 0.1, 0.9, -2, 0, 0.9, -2, 0, -0.9, -2, 0.1, -0.9, -2, 0.1, 0.9, -1.9, 0, 0.9, -1.9, 0.1, 1, -1.9, 0, 1, -1.9, 0, 0.9, -1.9, 0.1, 0.9, -1.9, 0.1, 1, -1.9, 0, -1, -1.9, 0.1, -0.9, -1.9, 0, -0.9, -1.9, 0, -1, -1.9, 0.1, -1, -1.9, 0.1, -0.9, -1.8, 0, 1, -1.8, 0.1, 1.1, -1.8, 0, 1.1, -1.8, 0, 1, -1.8, 0.1, 1, -1.8, 0.1, 1.1, -1.8, 0, -1.1, -1.8, 0.1, -1, -1.8, 0, -1, -1.8, 0, -1.1, -1.8, 0.1, -1.1, -1.8, 0.1, -1, -1.7, 0, 1.1, -1.7, 0.1, 1.2, -1.7, 0, 1.2, -1.7, 0, 1.1, -1.7, 0.1, 1.1, -1.7, 0.1, 1.2, -1.7, 0, -1.2, -1.7, 0.1, -1.1, -1.7, 0, -1.1, -1.7, 0, -1.2, -1.7, 0.1, -1.2, -1.7, 0.1, -1.1, -1.6, 0, 1.2, -1.6, 0.1, 1.3, -1.6, 0, 1.3, -1.6, 0, 1.2, -1.6, 0.1, 1.2, -1.6, 0.1, 1.3, -1.6, 0, -1.3, -1.6, 0.1, -1.2, -1.6, 0, -1.2, -1.6, 0, -1.3, -1.6, 0.1, -1.3, -1.6, 0.1, -1.2, -1.5, 0, 1.3, -1.5, 0.1, 1.4, -1.5, 0, 1.4, -1.5, 0, 1.3, -1.5, 0.1, 1.3, -1.5, 0.1, 1.4, -1.5, 0, -1.4, -1.5, 0.1, -1.3, -1.5, 0, -1.3, -1.5, 0, -1.4, -1.5, 0.1, -1.4, -1.5, 0.1, -1.3, -1.4, 0, 1.4, -1.4, 0.1, 1.5, -1.4, 0, 1.5, -1.4, 0, 1.4, -1.4, 0.1, 1.4, -1.4, 0.1, 1.5, -1.4, 0, -1.5, -1.4, 0.1, -1.4, -1.4, 0, -1.4, -1.4, 0, -1.5, -1.4, 0.1, -1.5, -1.4, 0.1, -1.4, -1.3, 0, 1.5, -1.3, 0.1, 1.6, -1.3, 0, 1.6, -1.3, 0, 1.5, -1.3, 0.1, 1.5, -1.3, 0.1, 1.6, -1.3, 0, -1.6, -1.3, 0.1, -1.5, -1.3, 0, -1.5, -1.3, 0, -1.6, -1.3, 0.1, -1.6, -1.3, 0.1, -1.5, -1.2, 0, 1.6, -1.2, 0.1, 1.7, -1.2, 0, 1.7, -1.2, 0, 1.6, -1.2, 0.1, 1.6, -1.2, 0.1, 1.7, -1.2, 0, -1.7, -1.2, 0.1, -1.6, -1.2, 0, -1.6, -1.2, 0, -1.7, -1.2, 0.1, -1.7, -1.2, 0.1, -1.6, -1.1, 0, 1.7, -1.1, 0.1, 1.8, -1.1, 0, 1.8, -1.1, 0, 1.7, -1.1, 0.1, 1.7, -1.1, 0.1, 1.8, -1.1, 0, -1.8, -1.1, 0.1, -1.7, -1.1, 0, -1.7, -1.1, 0, -1.8, -1.1, 0.1, -1.8, -1.1, 0.1, -1.7, -1, 0, 1.8, -1, 0.1, 1.9, -1, 0, 1.9, -1, 0, 1.8, -1, 0.1, 1.8, -1, 0.1, 1.9, -1, 0, -1.9, -1, 0.1, -1.8, -1, 0, -1.8, -1, 0, -1.9, -1, 0.1, -1.9, -1, 0.1, -1.8, -0.9, 0, 1.9, -0.9, 0.1, 2, -0.9, 0, 2, -0.9, 0, 1.9, -0.9, 0.1, 1.9, -0.9, 0.1, 2, -0.9, 0, -2, -0.9, 0.1, -1.9, -0.9, 0, -1.9, -0.9, 0, -2, -0.9, 0.1, -2, -0.9, 0.1, -1.9, 0.9, 0, 1.9, 0.9, 0, 2, 0.9, 0.1, 2, 0.9, 0, 1.9, 0.9, 0.1, 2, 0.9, 0.1, 1.9, 0.9, 0, -2, 0.9, 0, -1.9, 0.9, 0.1, -1.9, 0.9, 0, -2, 0.9, 0.1, -1.9, 0.9, 0.1, -2, 1, 0, 1.8, 1, 0, 1.9, 1, 0.1, 1.9, 1, 0, 1.8, 1, 0.1, 1.9, 1, 0.1, 1.8, 1, 0, -1.9, 1, 0, -1.8, 1, 0.1, -1.8, 1, 0, -1.9, 1, 0.1, -1.8, 1, 0.1, -1.9, 1.1, 0, 1.7, 1.1, 0, 1.8, 1.1, 0.1, 1.8, 1.1, 0, 1.7, 1.1, 0.1, 1.8, 1.1, 0.1, 1.7, 1.1, 0, -1.8, 1.1, 0, -1.7, 1.1, 0.1, -1.7, 1.1, 0, -1.8, 1.1, 0.1, -1.7, 1.1, 0.1, -1.8, 1.2, 0, 1.6, 1.2, 0, 1.7, 1.2, 0.1, 1.7, 1.2, 0, 1.6, 1.2, 0.1, 1.7, 1.2, 0.1, 1.6, 1.2, 0, -1.7, 1.2, 0, -1.6, 1.2, 0.1, -1.6, 1.2, 0, -1.7, 1.2, 0.1, -1.6, 1.2, 0.1, -1.7, 1.3, 0, 1.5, 1.3, 0, 1.6, 1.3, 0.1, 1.6, 1.3, 0, 1.5, 1.3, 0.1, 1.6, 1.3, 0.1, 1.5, 1.3, 0, -1.6, 1.3, 0, -1.5, 1.3, 0.1, -1.5, 1.3, 0, -1.6, 1.3, 0.1, -1.5, 1.3, 0.1, -1.6, 1.4, 0, 1.4, 1.4, 0, 1.5, 1.4, 0.1, 1.5, 1.4, 0, 1.4, 1.4, 0.1, 1.5, 1.4, 0.1, 1.4, 1.4, 0, -1.5, 1.4, 0, -1.4, 1.4, 0.1, -1.4, 1.4, 0, -1.5, 1.4, 0.1, -1.4, 1.4, 0.1, -1.5, 1.5, 0, 1.3, 1.5, 0, 1.4, 1.5, 0.1, 1.4, 1.5, 0, 1.3, 1.5, 0.1, 1.4, 1.5, 0.1, 1.3, 1.5, 0, -1.4, 1.5, 0, -1.3, 1.5, 0.1, -1.3, 1.5, 0, -1.4, 1.5, 0.1, -1.3, 1.5, 0.1, -1.4, 1.6, 0, 1.2, 1.6, 0, 1.3, 1.6, 0.1, 1.3, 1.6, 0, 1.2, 1.6, 0.1, 1.3, 1.6, 0.1, 1.2, 1.6, 0, -1.3, 1.6, 0, -1.2, 1.6, 0.1, -1.2, 1.6, 0, -1.3, 1.6, 0.1, -1.2, 1.6, 0.1, -1.3, 1.7, 0, 1.1, 1.7, 0, 1.2, 1.7, 0.1, 1.2, 1.7, 0, 1.1, 1.7, 0.1, 1.2, 1.7, 0.1, 1.1, 1.7, 0, -1.2, 1.7, 0, -1.1, 1.7, 0.1, -1.1, 1.7, 0, -1.2, 1.7, 0.1, -1.1, 1.7, 0.1, -1.2, 1.8, 0, 1, 1.8, 0, 1.1, 1.8, 0.1, 1.1, 1.8, 0, 1, 1.8, 0.1, 1.1, 1.8, 0.1, 1, 1.8, 0, -1.1, 1.8, 0, -1, 1.8, 0.1, -1, 1.8, 0, -1.1, 1.8, 0.1, -1, 1.8, 0.1, -1.1, 1.9, 0, 0.9, 1.9, 0, 1, 1.9, 0.1, 1, 1.9, 0, 0.9, 1.9, 0.1, 1, 1.9, 0.1, 0.9, 1.9, 0, -1, 1.9, 0, -0.9, 1.9, 0.1, -0.9, 1.9, 0, -1, 1.9, 0.1, -0.9, 1.9, 0.1, -1, 2, 0, -0.9, 2, 0, 0.9, 2, 0.1, 0.9, 2, 0, -0.9, 2, 0.1, 0.9, 2, 0.1, -0.9, -0.9, 0.1, 2, 0.9, 0, 2, -0.9, 0, 2, -0.9, 0.1, 2, 0.9, 0.1, 2, 0.9, 0, 2, -1, 0.1, 1.9, -0.9, 0, 1.9, -1, 0, 1.9, -1, 0.1, 1.9, -0.9, 0.1, 1.9, -0.9, 0, 1.9, 0.9, 0.1, 1.9, 1, 0, 1.9, 0.9, 0, 1.9, 0.9, 0.1, 1.9, 1, 0.1, 1.9, 1, 0, 1.9, -1.1, 0.1, 1.8, -1, 0, 1.8, -1.1, 0, 1.8, -1.1, 0.1, 1.8, -1, 0.1, 1.8, -1, 0, 1.8, 1, 0.1, 1.8, 1.1, 0, 1.8, 1, 0, 1.8, 1, 0.1, 1.8, 1.1, 0.1, 1.8, 1.1, 0, 1.8, -1.2, 0.1, 1.7, -1.1, 0, 1.7, -1.2, 0, 1.7, -1.2, 0.1, 1.7, -1.1, 0.1, 1.7, -1.1, 0, 1.7, 1.1, 0.1, 1.7, 1.2, 0, 1.7, 1.1, 0, 1.7, 1.1, 0.1, 1.7, 1.2, 0.1, 1.7, 1.2, 0, 1.7, -1.3, 0.1, 1.6, -1.2, 0, 1.6, -1.3, 0, 1.6, -1.3, 0.1, 1.6, -1.2, 0.1, 1.6, -1.2, 0, 1.6, 1.2, 0.1, 1.6, 1.3, 0, 1.6, 1.2, 0, 1.6, 1.2, 0.1, 1.6, 1.3, 0.1, 1.6, 1.3, 0, 1.6, -1.4, 0.1, 1.5, -1.3, 0, 1.5, -1.4, 0, 1.5, -1.4, 0.1, 1.5, -1.3, 0.1, 1.5, -1.3, 0, 1.5, 1.3, 0.1, 1.5, 1.4, 0, 1.5, 1.3, 0, 1.5, 1.3, 0.1, 1.5, 1.4, 0.1, 1.5, 1.4, 0, 1.5, -1.5, 0.1, 1.4, -1.4, 0, 1.4, -1.5, 0, 1.4, -1.5, 0.1, 1.4, -1.4, 0.1, 1.4, -1.4, 0, 1.4, 1.4, 0.1, 1.4, 1.5, 0, 1.4, 1.4, 0, 1.4, 1.4, 0.1, 1.4, 1.5, 0.1, 1.4, 1.5, 0, 1.4, -1.6, 0.1, 1.3, -1.5, 0, 1.3, -1.6, 0, 1.3, -1.6, 0.1, 1.3, -1.5, 0.1, 1.3, -1.5, 0, 1.3, 1.5, 0.1, 1.3, 1.6, 0, 1.3, 1.5, 0, 1.3, 1.5, 0.1, 1.3, 1.6, 0.1, 1.3, 1.6, 0, 1.3, -1.7, 0.1, 1.2, -1.6, 0, 1.2, -1.7, 0, 1.2, -1.7, 0.1, 1.2, -1.6, 0.1, 1.2, -1.6, 0, 1.2, 1.6, 0.1, 1.2, 1.7, 0, 1.2, 1.6, 0, 1.2, 1.6, 0.1, 1.2, 1.7, 0.1, 1.2, 1.7, 0, 1.2, -1.8, 0.1, 1.1, -1.7, 0, 1.1, -1.8, 0, 1.1, -1.8, 0.1, 1.1, -1.7, 0.1, 1.1, -1.7, 0, 1.1, 1.7, 0.1, 1.1, 1.8, 0, 1.1, 1.7, 0, 1.1, 1.7, 0.1, 1.1, 1.8, 0.1, 1.1, 1.8, 0, 1.1, -1.9, 0.1, 1, -1.8, 0, 1, -1.9, 0, 1, -1.9, 0.1, 1, -1.8, 0.1, 1, -1.8, 0, 1, 1.8, 0.1, 1, 1.9, 0, 1, 1.8, 0, 1, 1.8, 0.1, 1, 1.9, 0.1, 1, 1.9, 0, 1, -2, 0.1, 0.9, -1.9, 0, 0.9, -2, 0, 0.9, -2, 0.1, 0.9, -1.9, 0.1, 0.9, -1.9, 0, 0.9, 1.9, 0.1, 0.9, 2, 0, 0.9, 1.9, 0, 0.9, 1.9, 0.1, 0.9, 2, 0.1, 0.9, 2, 0, 0.9, -2, 0.1, -0.9, -2, 0, -0.9, -1.9, 0, -0.9, -2, 0.1, -0.9, -1.9, 0, -0.9, -1.9, 0.1, -0.9, 1.9, 0.1, -0.9, 1.9, 0, -0.9, 2, 0, -0.9, 1.9, 0.1, -0.9, 2, 0, -0.9, 2, 0.1, -0.9, -1.9, 0.1, -1, -1.9, 0, -1, -1.8, 0, -1, -1.9, 0.1, -1, -1.8, 0, -1, -1.8, 0.1, -1, 1.8, 0.1, -1, 1.8, 0, -1, 1.9, 0, -1, 1.8, 0.1, -1, 1.9, 0, -1, 1.9, 0.1, -1, -1.8, 0.1, -1.1, -1.8, 0, -1.1, -1.7, 0, -1.1, -1.8, 0.1, -1.1, -1.7, 0, -1.1, -1.7, 0.1, -1.1, 1.7, 0.1, -1.1, 1.7, 0, -1.1, 1.8, 0, -1.1, 1.7, 0.1, -1.1, 1.8, 0, -1.1, 1.8, 0.1, -1.1, -1.7, 0.1, -1.2, -1.7, 0, -1.2, -1.6, 0, -1.2, -1.7, 0.1, -1.2, -1.6, 0, -1.2, -1.6, 0.1, -1.2, 1.6, 0.1, -1.2, 1.6, 0, -1.2, 1.7, 0, -1.2, 1.6, 0.1, -1.2, 1.7, 0, -1.2, 1.7, 0.1, -1.2, -1.6, 0.1, -1.3, -1.6, 0, -1.3, -1.5, 0, -1.3, -1.6, 0.1, -1.3, -1.5, 0, -1.3, -1.5, 0.1, -1.3, 1.5, 0.1, -1.3, 1.5, 0, -1.3, 1.6, 0, -1.3, 1.5, 0.1, -1.3, 1.6, 0, -1.3, 1.6, 0.1, -1.3, -1.5, 0.1, -1.4, -1.5, 0, -1.4, -1.4, 0, -1.4, -1.5, 0.1, -1.4, -1.4, 0, -1.4, -1.4, 0.1, -1.4, 1.4, 0.1, -1.4, 1.4, 0, -1.4, 1.5, 0, -1.4, 1.4, 0.1, -1.4, 1.5, 0, -1.4, 1.5, 0.1, -1.4, -1.4, 0.1, -1.5, -1.4, 0, -1.5, -1.3, 0, -1.5, -1.4, 0.1, -1.5, -1.3, 0, -1.5, -1.3, 0.1, -1.5, 1.3, 0.1, -1.5, 1.3, 0, -1.5, 1.4, 0, -1.5, 1.3, 0.1, -1.5, 1.4, 0, -1.5, 1.4, 0.1, -1.5, -1.3, 0.1, -1.6, -1.3, 0, -1.6, -1.2, 0, -1.6, -1.3, 0.1, -1.6, -1.2, 0, -1.6, -1.2, 0.1, -1.6, 1.2, 0.1, -1.6, 1.2, 0, -1.6, 1.3, 0, -1.6, 1.2, 0.1, -1.6, 1.3, 0, -1.6, 1.3, 0.1, -1.6, -1.2, 0.1, -1.7, -1.2, 0, -1.7, -1.1, 0, -1.7, -1.2, 0.1, -1.7, -1.1, 0, -1.7, -1.1, 0.1, -1.7, 1.1, 0.1, -1.7, 1.1, 0, -1.7, 1.2, 0, -1.7, 1.1, 0.1, -1.7, 1.2, 0, -1.7, 1.2, 0.1, -1.7, -1.1, 0.1, -1.8, -1.1, 0, -1.8, -1, 0, -1.8, -1.1, 0.1, -1.8, -1, 0, -1.8, -1, 0.1, -1.8, 1, 0.1, -1.8, 1, 0, -1.8, 1.1, 0, -1.8, 1, 0.1, -1.8, 1.1, 0, -1.8, 1.1, 0.1, -1.8, -1, 0.1, -1.9, -1, 0, -1.9, -0.9, 0, -1.9, -1, 0.1, -1.9, -0.9, 0, -1.9, -0.9, 0.1, -1.9, 0.9, 0.1, -1.9, 0.9, 0, -1.9, 1, 0, -1.9, 0.9, 0.1, -1.9, 1, 0, -1.9, 1, 0.1, -1.9, -0.9, 0.1, -2, -0.9, 0, -2, 0.9, 0, -2, -0.9, 0.1, -2, 0.9, 0, -2, 0.9, 0.1, -2, 0.9, 0, 2, -0.9, 0, 1.9, -0.9, 0, 2, 0.9, 0, 2, 0.9, 0, 1.9, -0.9, 0, 1.9, -0.9, 0, 1.9, -1, 0, 1.8, -1, 0, 1.9, 0.9, 0, 1.9, -0.9, 0, 1.8, -0.9, 0, 1.9, -0.9, 0, 1.9, -0.9, 0, 1.8, -1, 0, 1.8, 0.9, 0, 1.9, -0.6, 0, 1.8, -0.9, 0, 1.8, 0.9, 0, 1.9, 0.6, 0, 1.8, -0.6, 0, 1.8, 1, 0, 1.9, 0.9, 0, 1.8, 0.9, 0, 1.9, 0.9, 0, 1.9, 0.9, 0, 1.8, 0.6, 0, 1.8, 1, 0, 1.9, 1, 0, 1.8, 0.9, 0, 1.8, -1, 0, 1.8, -1.1, 0, 1.7, -1.1, 0, 1.8, -0.9, 0, 1.8, -1, 0, 1.7, -1, 0, 1.8, -0.6, 0, 1.8, -1, 0, 1.7, -0.9, 0, 1.8, -1, 0, 1.8, -1, 0, 1.7, -1.1, 0, 1.7, -0.6, 0, 1.8, -0.7, 0, 1.7, -1, 0, 1.7, 0.6, 0, 1.8, -0.6, 0, 1.7, -0.6, 0, 1.8, -0.6, 0, 1.8, -0.6, 0, 1.7, -0.7, 0, 1.7, 0.9, 0, 1.8, 0.6, 0, 1.7, 0.6, 0, 1.8, 0.6, 0, 1.8, 0.6, 0, 1.7, -0.6, 0, 1.7, 1, 0, 1.8, 0.6, 0, 1.7, 0.9, 0, 1.8, 1, 0, 1.8, 0.7, 0, 1.7, 0.6, 0, 1.7, 1.1, 0, 1.8, 1, 0, 1.7, 1, 0, 1.8, 1, 0, 1.8, 1, 0, 1.7, 0.7, 0, 1.7, 1.1, 0, 1.8, 1.1, 0, 1.7, 1, 0, 1.7, -1.1, 0, 1.7, -1.2, 0, 1.6, -1.2, 0, 1.7, -0.7, 0, 1.7, -1.1, 0, 1.6, -1, 0, 1.7, -1, 0, 1.7, -1.1, 0, 1.6, -1.1, 0, 1.7, -1.1, 0, 1.7, -1.1, 0, 1.6, -1.2, 0, 1.6, -0.7, 0, 1.7, -0.8, 0, 1.6, -1.1, 0, 1.6, -0.6, 0, 1.7, -0.7, 0, 1.6, -0.7, 0, 1.7, -0.7, 0, 1.7, -0.7, 0, 1.6, -0.8, 0, 1.6, 0.6, 0, 1.7, -0.6, 0, 1.6, -0.6, 0, 1.7, -0.6, 0, 1.7, -0.6, 0, 1.6, -0.7, 0, 1.6, 0.7, 0, 1.7, 0.6, 0, 1.6, 0.6, 0, 1.7, 0.6, 0, 1.7, 0.6, 0, 1.6, -0.6, 0, 1.6, 1, 0, 1.7, 0.7, 0, 1.6, 0.7, 0, 1.7, 0.7, 0, 1.7, 0.7, 0, 1.6, 0.6, 0, 1.6, 1.1, 0, 1.7, 0.7, 0, 1.6, 1, 0, 1.7, 1.1, 0, 1.7, 0.8, 0, 1.6, 0.7, 0, 1.6, 1.2, 0, 1.7, 1.1, 0, 1.6, 1.1, 0, 1.7, 1.1, 0, 1.7, 1.1, 0, 1.6, 0.8, 0, 1.6, 1.2, 0, 1.7, 1.2, 0, 1.6, 1.1, 0, 1.6, -1.2, 0, 1.6, -1.3, 0, 1.5, -1.3, 0, 1.6, -0.8, 0, 1.6, -1.2, 0, 1.5, -1.1, 0, 1.6, -1.1, 0, 1.6, -1.2, 0, 1.5, -1.2, 0, 1.6, -1.2, 0, 1.6, -1.2, 0, 1.5, -1.3, 0, 1.5, -0.8, 0, 1.6, -0.9, 0, 1.5, -1.2, 0, 1.5, 1.1, 0, 1.6, 0.9, 0, 1.5, 0.8, 0, 1.6, 1.2, 0, 1.6, 0.9, 0, 1.5, 1.1, 0, 1.6, 1.3, 0, 1.6, 1.2, 0, 1.5, 1.2, 0, 1.6, 1.2, 0, 1.6, 1.2, 0, 1.5, 0.9, 0, 1.5, 1.3, 0, 1.6, 1.3, 0, 1.5, 1.2, 0, 1.5, -1.3, 0, 1.5, -1.4, 0, 1.4, -1.4, 0, 1.5, -1.2, 0, 1.5, -1.3, 0, 1.4, -1.3, 0, 1.5, -1.3, 0, 1.5, -1.3, 0, 1.4, -1.4, 0, 1.4, -0.9, 0, 1.5, -1.2, 0, 1.4, -1.2, 0, 1.5, -1.2, 0, 1.5, -1.2, 0, 1.4, -1.3, 0, 1.4, -0.9, 0, 1.5, -1, 0, 1.4, -1.2, 0, 1.4, 1.2, 0, 1.5, 1, 0, 1.4, 0.9, 0, 1.5, 1.3, 0, 1.5, 1.2, 0, 1.4, 1.2, 0, 1.5, 1.2, 0, 1.5, 1.2, 0, 1.4, 1, 0, 1.4, 1.4, 0, 1.5, 1.3, 0, 1.4, 1.3, 0, 1.5, 1.3, 0, 1.5, 1.3, 0, 1.4, 1.2, 0, 1.4, 1.4, 0, 1.5, 1.4, 0, 1.4, 1.3, 0, 1.4, -1.4, 0, 1.4, -1.5, 0, 1.3, -1.5, 0, 1.4, -1.3, 0, 1.4, -1.4, 0, 1.3, -1.4, 0, 1.4, -1.4, 0, 1.4, -1.4, 0, 1.3, -1.5, 0, 1.3, -1.2, 0, 1.4, -1.3, 0, 1.3, -1.3, 0, 1.4, -1.3, 0, 1.4, -1.3, 0, 1.3, -1.4, 0, 1.3, -1, 0, 1.4, -1.2, 0, 1.3, -1.2, 0, 1.4, -1.2, 0, 1.4, -1.2, 0, 1.3, -1.3, 0, 1.3, 1.2, 0, 1.4, 1.2, 0, 1.3, 1, 0, 1.4, 1.3, 0, 1.4, 1.2, 0, 1.3, 1.2, 0, 1.4, 1.4, 0, 1.4, 1.3, 0, 1.3, 1.3, 0, 1.4, 1.3, 0, 1.4, 1.3, 0, 1.3, 1.2, 0, 1.3, 1.5, 0, 1.4, 1.4, 0, 1.3, 1.4, 0, 1.4, 1.4, 0, 1.4, 1.4, 0, 1.3, 1.3, 0, 1.3, 1.5, 0, 1.4, 1.5, 0, 1.3, 1.4, 0, 1.3, -1.5, 0, 1.3, -1.6, 0, 1.2, -1.6, 0, 1.3, -1.4, 0, 1.3, -1.5, 0, 1.2, -1.5, 0, 1.3, -1.5, 0, 1.3, -1.5, 0, 1.2, -1.6, 0, 1.2, -1.3, 0, 1.3, -1.4, 0, 1.2, -1.4, 0, 1.3, -1.4, 0, 1.3, -1.4, 0, 1.2, -1.5, 0, 1.2, -1.2, 0, 1.3, -1.3, 0, 1.2, -1.3, 0, 1.3, -1.3, 0, 1.3, -1.3, 0, 1.2, -1.4, 0, 1.2, 1.3, 0, 1.3, 1.3, 0, 1.2, 1.2, 0, 1.3, 1.4, 0, 1.3, 1.3, 0, 1.2, 1.3, 0, 1.3, 1.5, 0, 1.3, 1.4, 0, 1.2, 1.4, 0, 1.3, 1.4, 0, 1.3, 1.4, 0, 1.2, 1.3, 0, 1.2, 1.6, 0, 1.3, 1.5, 0, 1.2, 1.5, 0, 1.3, 1.5, 0, 1.3, 1.5, 0, 1.2, 1.4, 0, 1.2, 1.6, 0, 1.3, 1.6, 0, 1.2, 1.5, 0, 1.2, -1.6, 0, 1.2, -1.7, 0, 1.1, -1.7, 0, 1.2, -1.5, 0, 1.2, -1.6, 0, 1.1, -1.6, 0, 1.2, -1.6, 0, 1.2, -1.6, 0, 1.1, -1.7, 0, 1.1, -1, 0, 1.4, -1.1, 0, 1.1, -1.2, 0, 1.3, -1.2, 0, 1.3, -1.1, 0, 1.1, -1.3, 0, 1.2, -1.3, 0, 1.2, -1.1, 0, 1.1, -1.4, 0, 1.2, -0.9, 0, 1.5, -1, 0, 1.1, -1, 0, 1.4, -1, 0, 1.4, -1, 0, 1.1, -1.1, 0, 1.1, -0.8, 0, 1.6, -0.9, 0, 1.1, -0.9, 0, 1.5, -0.9, 0, 1.5, -0.9, 0, 1.1, -1, 0, 1.1, -0.7, 0, 1.6, -0.8, 0, 1.1, -0.8, 0, 1.6, -0.8, 0, 1.6, -0.8, 0, 1.1, -0.9, 0, 1.1, -0.6, 0, 1.6, -0.7, 0, 1.1, -0.7, 0, 1.6, -0.7, 0, 1.6, -0.7, 0, 1.1, -0.8, 0, 1.1, 0.6, 0, 1.6, -0.7, 0, 1.1, -0.6, 0, 1.6, 0.7, 0, 1.6, -0.7, 0, 1.1, 0.6, 0, 1.6, 0.7, 0, 1.6, -0.6, 0, 1.1, -0.7, 0, 1.1, 0.7, 0, 1.6, 0.6, 0, 1.1, -0.6, 0, 1.1, 0.8, 0, 1.6, 0.7, 0, 1.1, 0.7, 0, 1.6, 0.7, 0, 1.6, 0.7, 0, 1.1, 0.6, 0, 1.1, 0.9, 0, 1.5, 0.8, 0, 1.1, 0.8, 0, 1.6, 0.8, 0, 1.6, 0.8, 0, 1.1, 0.7, 0, 1.1, 1, 0, 1.4, 0.9, 0, 1.1, 0.9, 0, 1.5, 0.9, 0, 1.5, 0.9, 0, 1.1, 0.8, 0, 1.1, 1.4, 0, 1.2, 1, 0, 1.1, 1.3, 0, 1.2, 1, 0, 1.4, 1, 0, 1.1, 0.9, 0, 1.1, 1.2, 0, 1.3, 1, 0, 1.1, 1, 0, 1.4, 1.3, 0, 1.2, 1, 0, 1.1, 1.2, 0, 1.3, 1.4, 0, 1.2, 1.1, 0, 1.1, 1, 0, 1.1, 1.6, 0, 1.2, 1.6, 0, 1.1, 1.5, 0, 1.2, 1.7, 0, 1.2, 1.6, 0, 1.1, 1.6, 0, 1.2, 1.7, 0, 1.2, 1.7, 0, 1.1, 1.6, 0, 1.1, -1.7, 0, 1.1, -1.8, 0, 1, -1.8, 0, 1.1, -1.6, 0, 1.1, -1.7, 0, 1, -1.7, 0, 1.1, -1.7, 0, 1.1, -1.7, 0, 1, -1.8, 0, 1, -1.1, 0, 1.1, -1.4, 0, 1, -1.4, 0, 1.2, -1.4, 0, 1.2, -1.4, 0, 1, -1.5, 0, 1.2, -1, 0, 1.1, -1.1, 0, 1, -1.1, 0, 1.1, -1.1, 0, 1.1, -1.1, 0, 1, -1.4, 0, 1, -0.8, 0, 1.1, -1, 0, 1, -0.9, 0, 1.1, -1, 0, 1.1, -1, 0, 1, -1.1, 0, 1, -0.9, 0, 1.1, -1, 0, 1, -1, 0, 1.1, -0.7, 0, 1.1, -1, 0, 1, -0.8, 0, 1.1, -0.7, 0, 1.1, -0.9, 0, 1, -1, 0, 1, -0.7, 0, 1.1, -0.8, 0, 1, -0.9, 0, 1, -0.6, 0, 1.1, -0.7, 0, 1, -0.7, 0, 1.1, -0.7, 0, 1.1, -0.7, 0, 1, -0.8, 0, 1, 0.6, 0, 1.1, -0.6, 0, 1, -0.6, 0, 1.1, -0.6, 0, 1.1, -0.6, 0, 1, -0.7, 0, 1, 0.7, 0, 1.1, 0.6, 0, 1, 0.6, 0, 1.1, 0.6, 0, 1.1, 0.6, 0, 1, -0.6, 0, 1, 0.9, 0, 1.1, 0.7, 0, 1, 0.8, 0, 1.1, 0.7, 0, 1.1, 0.7, 0, 1, 0.6, 0, 1, 0.8, 0, 1.1, 0.7, 0, 1, 0.7, 0, 1.1, 1, 0, 1.1, 0.7, 0, 1, 0.9, 0, 1.1, 1, 0, 1.1, 0.8, 0, 1, 0.7, 0, 1, 1, 0, 1.1, 0.9, 0, 1, 0.8, 0, 1, 1.1, 0, 1.1, 1, 0, 1, 1, 0, 1.1, 1, 0, 1.1, 1, 0, 1, 0.9, 0, 1, 1.4, 0, 1.2, 1.1, 0, 1, 1.1, 0, 1.1, 1.1, 0, 1.1, 1.1, 0, 1, 1, 0, 1, 1.5, 0, 1.2, 1.4, 0, 1, 1.4, 0, 1.2, 1.4, 0, 1.2, 1.4, 0, 1, 1.1, 0, 1, 1.8, 0, 1.1, 1.7, 0, 1, 1.7, 0, 1.1, 1.7, 0, 1.1, 1.7, 0, 1, 1.6, 0, 1.1, 1.8, 0, 1.1, 1.8, 0, 1, 1.7, 0, 1, -1.8, 0, 1, -1.9, 0, 0.9, -1.9, 0, 1, -1.7, 0, 1, -1.8, 0, 0.9, -1.8, 0, 1, -1.8, 0, 1, -1.8, 0, 0.9, -1.9, 0, 0.9, -1.1, 0, 1, -1.5, 0, 0.9, -1.4, 0, 1, -1.7, 0, 1, -1.5, 0, 0.9, -1.8, 0, 0.9, -1.5, 0, 1.2, -1.5, 0, 0.9, -1.6, 0, 1.1, -1.4, 0, 1, -1.5, 0, 0.9, -1.5, 0, 1.2, -1.6, 0, 1.1, -1.5, 0, 0.9, -1.7, 0, 1, -0.9, 0, 1, -1.1, 0, 0.9, -1, 0, 1, -1.1, 0, 1, -1.1, 0, 0.9, -1.5, 0, 0.9, -1, 0, 1, -1.1, 0, 0.9, -1.1, 0, 1, -0.9, 0, 1, -1, 0, 0.9, -1.1, 0, 0.9, -0.8, 0, 1, -0.9, 0, 0.9, -0.9, 0, 1, -0.9, 0, 1, -0.9, 0, 0.9, -1, 0, 0.9, -0.6, 0, 1, -0.8, 0, 0.9, -0.7, 0, 1, -0.8, 0, 1, -0.8, 0, 0.9, -0.9, 0, 0.9, -0.7, 0, 1, -0.8, 0, 0.9, -0.8, 0, 1, -0.6, 0, 1, -0.7, 0, 0.9, -0.8, 0, 0.9, 0.6, 0, 1, -0.6, 0, 0.9, -0.6, 0, 1, -0.6, 0, 1, -0.6, 0, 0.9, -0.7, 0, 0.9, 0.8, 0, 1, 0.6, 0, 0.9, 0.7, 0, 1, 0.6, 0, 1, 0.6, 0, 0.9, -0.6, 0, 0.9, 0.7, 0, 1, 0.6, 0, 0.9, 0.6, 0, 1, 0.8, 0, 1, 0.7, 0, 0.9, 0.6, 0, 0.9, 0.9, 0, 1, 0.8, 0, 0.9, 0.8, 0, 1, 0.8, 0, 1, 0.8, 0, 0.9, 0.7, 0, 0.9, 1, 0, 1, 0.9, 0, 0.9, 0.9, 0, 1, 0.9, 0, 1, 0.9, 0, 0.9, 0.8, 0, 0.9, 1.1, 0, 1, 0.9, 0, 0.9, 1, 0, 1, 1.1, 0, 1, 1, 0, 0.9, 0.9, 0, 0.9, 1.4, 0, 1, 1.1, 0, 0.9, 1.1, 0, 1, 1.1, 0, 1, 1.1, 0, 0.9, 1, 0, 0.9, 1.8, 0, 1, 1.5, 0, 0.9, 1.7, 0, 1, 1.4, 0, 1, 1.5, 0, 0.9, 1.1, 0, 0.9, 1.7, 0, 1, 1.5, 0, 0.9, 1.6, 0, 1.1, 1.5, 0, 1.2, 1.5, 0, 0.9, 1.4, 0, 1, 1.6, 0, 1.1, 1.5, 0, 0.9, 1.5, 0, 1.2, 1.9, 0, 1, 1.8, 0, 0.9, 1.8, 0, 1, 1.8, 0, 1, 1.8, 0, 0.9, 1.5, 0, 0.9, 1.9, 0, 1, 1.9, 0, 0.9, 1.8, 0, 0.9, -1.8, 0, 0.9, -1.6, 0, 0.8, -1.9, 0, 0.9, -1.1, 0, 0.9, -1.6, 0, 0.8, -1.5, 0, 0.9, -1.5, 0, 0.9, -1.6, 0, 0.8, -1.8, 0, 0.9, -1, 0, 0.9, -1.6, 0, 0.8, -1.1, 0, 0.9, -1, 0, 0.9, -1.1, 0, 0.8, -1.6, 0, 0.8, -0.9, 0, 0.9, -1, 0, 0.8, -1, 0, 0.9, -1, 0, 0.9, -1, 0, 0.8, -1.1, 0, 0.8, -0.7, 0, 0.9, -1, 0, 0.8, -0.8, 0, 0.9, -0.8, 0, 0.9, -1, 0, 0.8, -0.9, 0, 0.9, -0.7, 0, 0.9, -0.9, 0, 0.8, -1, 0, 0.8, -0.7, 0, 0.9, -0.8, 0, 0.8, -0.9, 0, 0.8, 0.6, 0, 0.9, -0.7, 0, 0.8, -0.6, 0, 0.9, -0.7, 0, 0.9, -0.7, 0, 0.8, -0.8, 0, 0.8, 0.7, 0, 0.9, -0.7, 0, 0.8, 0.6, 0, 0.9, -0.6, 0, 0.9, -0.7, 0, 0.8, -0.7, 0, 0.9, 0.7, 0, 0.9, -0.6, 0, 0.8, -0.7, 0, 0.8, 0.7, 0, 0.9, 0.6, 0, 0.8, -0.6, 0, 0.8, 0.8, 0, 0.9, 0.7, 0, 0.8, 0.7, 0, 0.9, 0.7, 0, 0.9, 0.7, 0, 0.8, 0.6, 0, 0.8, 0.9, 0, 0.9, 0.7, 0, 0.8, 0.8, 0, 0.9, 1, 0, 0.9, 0.7, 0, 0.8, 0.9, 0, 0.9, 1, 0, 0.9, 0.8, 0, 0.8, 0.7, 0, 0.8, 1, 0, 0.9, 0.9, 0, 0.8, 0.8, 0, 0.8, 1.9, 0, 0.9, 1, 0, 0.8, 1.8, 0, 0.9, 1, 0, 0.9, 1, 0, 0.8, 0.9, 0, 0.8, 1.1, 0, 0.9, 1, 0, 0.8, 1, 0, 0.9, 1.5, 0, 0.9, 1, 0, 0.8, 1.1, 0, 0.9, 1.8, 0, 0.9, 1, 0, 0.8, 1.5, 0, 0.9, 1.9, 0, 0.9, 1.1, 0, 0.8, 1, 0, 0.8, 1.9, 0, 0.9, 1.6, 0, 0.8, 1.1, 0, 0.8, -1.6, 0, 0.8, -1.7, 0, 0.7, -1.9, 0, 0.9, -1.1, 0, 0.8, -1.6, 0, 0.7, -1.6, 0, 0.8, -1.6, 0, 0.8, -1.6, 0, 0.7, -1.7, 0, 0.7, -0.9, 0, 0.8, -1.1, 0, 0.7, -1, 0, 0.8, -1.1, 0, 0.8, -1.1, 0, 0.7, -1.6, 0, 0.7, -1, 0, 0.8, -1.1, 0, 0.7, -1.1, 0, 0.8, -0.9, 0, 0.8, -1, 0, 0.7, -1.1, 0, 0.7, -0.8, 0, 0.8, -0.9, 0, 0.7, -0.9, 0, 0.8, -0.9, 0, 0.8, -0.9, 0, 0.7, -1, 0, 0.7, -0.6, 0, 0.8, -0.8, 0, 0.7, -0.7, 0, 0.8, -0.8, 0, 0.8, -0.8, 0, 0.7, -0.9, 0, 0.7, -0.7, 0, 0.8, -0.8, 0, 0.7, -0.8, 0, 0.8, -0.6, 0, 0.8, -0.7, 0, 0.7, -0.8, 0, 0.7, 0.6, 0, 0.8, -0.6, 0, 0.7, -0.6, 0, 0.8, -0.6, 0, 0.8, -0.6, 0, 0.7, -0.7, 0, 0.7, 0.8, 0, 0.8, 0.6, 0, 0.7, 0.7, 0, 0.8, 0.6, 0, 0.8, 0.6, 0, 0.7, -0.6, 0, 0.7, 0.7, 0, 0.8, 0.6, 0, 0.7, 0.6, 0, 0.8, 0.8, 0, 0.8, 0.7, 0, 0.7, 0.6, 0, 0.7, 0.9, 0, 0.8, 0.8, 0, 0.7, 0.8, 0, 0.8, 0.8, 0, 0.8, 0.8, 0, 0.7, 0.7, 0, 0.7, 1, 0, 0.8, 0.9, 0, 0.7, 0.9, 0, 0.8, 0.9, 0, 0.8, 0.9, 0, 0.7, 0.8, 0, 0.7, 1.1, 0, 0.8, 0.9, 0, 0.7, 1, 0, 0.8, 1.1, 0, 0.8, 1, 0, 0.7, 0.9, 0, 0.7, 1.6, 0, 0.8, 1.1, 0, 0.7, 1.1, 0, 0.8, 1.1, 0, 0.8, 1.1, 0, 0.7, 1, 0, 0.7, 1.6, 0, 0.8, 1.5, 0, 0.7, 1.1, 0, 0.7, 1.9, 0, 0.9, 1.6, 0, 0.7, 1.6, 0, 0.8, 1.6, 0, 0.8, 1.6, 0, 0.7, 1.5, 0, 0.7, 1.9, 0, 0.9, 1.7, 0, 0.7, 1.6, 0, 0.7, -1.7, 0, 0.7, -1.8, 0, 0.6, -1.9, 0, 0.9, -1.6, 0, 0.7, -1.7, 0, 0.6, -1.7, 0, 0.7, -1.7, 0, 0.7, -1.7, 0, 0.6, -1.8, 0, 0.6, -1.1, 0, 0.7, -1.6, 0, 0.6, -1.6, 0, 0.7, -1.6, 0, 0.7, -1.6, 0, 0.6, -1.7, 0, 0.6, -1, 0, 0.7, -1.1, 0, 0.6, -1.1, 0, 0.7, -1.1, 0, 0.7, -1.1, 0, 0.6, -1.6, 0, 0.6, -0.7, 0, 0.7, -1, 0, 0.6, -0.8, 0, 0.7, -1, 0, 0.7, -1, 0, 0.6, -1.1, 0, 0.6, -0.8, 0, 0.7, -1, 0, 0.6, -0.9, 0, 0.7, -0.9, 0, 0.7, -1, 0, 0.6, -1, 0, 0.7, -0.7, 0, 0.7, -0.9, 0, 0.6, -1, 0, 0.6, -0.7, 0, 0.7, -0.8, 0, 0.6, -0.9, 0, 0.6, -0.6, 0, 0.7, -0.7, 0, 0.6, -0.7, 0, 0.7, -0.7, 0, 0.7, -0.7, 0, 0.6, -0.8, 0, 0.6, 0.6, 0, 0.7, -0.6, 0, 0.6, -0.6, 0, 0.7, -0.6, 0, 0.7, -0.6, 0, 0.6, -0.7, 0, 0.6, 0.7, 0, 0.7, 0.6, 0, 0.6, 0.6, 0, 0.7, 0.6, 0, 0.7, 0.6, 0, 0.6, -0.6, 0, 0.6, 1, 0, 0.7, 0.7, 0, 0.6, 0.9, 0, 0.7, 0.7, 0, 0.7, 0.7, 0, 0.6, 0.6, 0, 0.6, 0.8, 0, 0.7, 0.7, 0, 0.6, 0.7, 0, 0.7, 0.9, 0, 0.7, 0.7, 0, 0.6, 0.8, 0, 0.7, 1, 0, 0.7, 0.8, 0, 0.6, 0.7, 0, 0.6, 1, 0, 0.7, 0.9, 0, 0.6, 0.8, 0, 0.6, 1.1, 0, 0.7, 1, 0, 0.6, 1, 0, 0.7, 1, 0, 0.7, 1, 0, 0.6, 0.9, 0, 0.6, 1.5, 0, 0.7, 1.1, 0, 0.6, 1.1, 0, 0.7, 1.1, 0, 0.7, 1.1, 0, 0.6, 1, 0, 0.6, 1.7, 0, 0.7, 1.5, 0, 0.6, 1.6, 0, 0.7, 1.5, 0, 0.7, 1.5, 0, 0.6, 1.1, 0, 0.6, 1.6, 0, 0.7, 1.5, 0, 0.6, 1.5, 0, 0.7, 1.9, 0, 0.9, 1.7, 0, 0.6, 1.7, 0, 0.7, 1.7, 0, 0.7, 1.7, 0, 0.6, 1.5, 0, 0.6, 1.9, 0, 0.9, 1.8, 0, 0.6, 1.7, 0, 0.6, -1.7, 0, 0.6, -1.8, 0, -0.6, -1.8, 0, 0.6, -1.8, 0, 0.6, -1.8, 0, -0.6, -1.9, 0, 0.9, -1.1, 0, 0.6, -1.7, 0, -0.6, -1.6, 0, 0.6, -1.7, 0, 0.6, -1.7, 0, -0.6, -1.8, 0, -0.6, -1.6, 0, 0.6, -1.7, 0, -0.6, -1.7, 0, 0.6, -1, 0, 0.6, -1.7, 0, -0.6, -1.1, 0, 0.6, -1, 0, 0.6, -1.6, 0, -0.6, -1.7, 0, -0.6, -1, 0, 0.6, -1.1, 0, -0.6, -1.6, 0, -0.6, -0.9, 0, 0.6, -1, 0, -0.6, -1, 0, 0.6, -1, 0, 0.6, -1, 0, -0.6, -1.1, 0, -0.6, -0.8, 0, 0.6, -0.9, 0, -0.6, -0.9, 0, 0.6, -0.9, 0, 0.6, -0.9, 0, -0.6, -1, 0, -0.6, -0.7, 0, 0.6, -0.8, 0, -0.6, -0.8, 0, 0.6, -0.8, 0, 0.6, -0.8, 0, -0.6, -0.9, 0, -0.6, -0.6, 0, 0.6, -0.7, 0, -0.6, -0.7, 0, 0.6, -0.7, 0, 0.6, -0.7, 0, -0.6, -0.8, 0, -0.6, 0.6, 0, 0.6, -0.7, 0, -0.6, -0.6, 0, 0.6, 0.7, 0, 0.6, -0.7, 0, -0.6, 0.6, 0, 0.6, 0.7, 0, 0.6, -0.6, 0, -0.6, -0.7, 0, -0.6, 0.7, 0, 0.6, 0.6, 0, -0.6, -0.6, 0, -0.6, 0.8, 0, 0.6, 0.7, 0, -0.6, 0.7, 0, 0.6, 0.7, 0, 0.6, 0.7, 0, -0.6, 0.6, 0, -0.6, 0.9, 0, 0.6, 0.8, 0, -0.6, 0.8, 0, 0.6, 0.8, 0, 0.6, 0.8, 0, -0.6, 0.7, 0, -0.6, 1, 0, 0.6, 0.9, 0, -0.6, 0.9, 0, 0.6, 0.9, 0, 0.6, 0.9, 0, -0.6, 0.8, 0, -0.6, 1.5, 0, 0.6, 1, 0, -0.6, 1.1, 0, 0.6, 1, 0, 0.6, 1, 0, -0.6, 0.9, 0, -0.6, 1.7, 0, 0.6, 1, 0, -0.6, 1.5, 0, 0.6, 1.1, 0, 0.6, 1, 0, -0.6, 1, 0, 0.6, 1.7, 0, 0.6, 1.1, 0, -0.6, 1, 0, -0.6, 1.7, 0, 0.6, 1.6, 0, -0.6, 1.1, 0, -0.6, 1.8, 0, 0.6, 1.7, 0, -0.6, 1.7, 0, 0.6, 1.7, 0, 0.6, 1.7, 0, -0.6, 1.6, 0, -0.6, 1.9, 0, 0.9, 1.8, 0, -0.6, 1.8, 0, 0.6, 1.8, 0, 0.6, 1.8, 0, -0.6, 1.7, 0, -0.6, -1.6, 0, -0.6, -1.7, 0, -0.7, -1.7, 0, -0.6, -1.7, 0, -0.6, -1.7, 0, -0.7, -1.8, 0, -0.6, -1.1, 0, -0.6, -1.6, 0, -0.7, -1.6, 0, -0.6, -1.6, 0, -0.6, -1.6, 0, -0.7, -1.7, 0, -0.7, -1, 0, -0.6, -1.1, 0, -0.7, -1.1, 0, -0.6, -1.1, 0, -0.6, -1.1, 0, -0.7, -1.6, 0, -0.7, -0.8, 0, -0.6, -1, 0, -0.7, -0.9, 0, -0.6, -1, 0, -0.6, -1, 0, -0.7, -1.1, 0, -0.7, -0.7, 0, -0.6, -1, 0, -0.7, -0.8, 0, -0.6, -0.9, 0, -0.6, -1, 0, -0.7, -1, 0, -0.6, -0.7, 0, -0.6, -0.9, 0, -0.7, -1, 0, -0.7, -0.7, 0, -0.6, -0.8, 0, -0.7, -0.9, 0, -0.7, -0.6, 0, -0.6, -0.7, 0, -0.7, -0.7, 0, -0.6, -0.7, 0, -0.6, -0.7, 0, -0.7, -0.8, 0, -0.7, 0.6, 0, -0.6, -0.6, 0, -0.7, -0.6, 0, -0.6, -0.6, 0, -0.6, -0.6, 0, -0.7, -0.7, 0, -0.7, 0.7, 0, -0.6, 0.6, 0, -0.7, 0.6, 0, -0.6, 0.6, 0, -0.6, 0.6, 0, -0.7, -0.6, 0, -0.7, 0.9, 0, -0.6, 0.7, 0, -0.7, 0.8, 0, -0.6, 0.7, 0, -0.6, 0.7, 0, -0.7, 0.6, 0, -0.7, 0.8, 0, -0.6, 0.7, 0, -0.7, 0.7, 0, -0.6, 1, 0, -0.6, 0.7, 0, -0.7, 0.9, 0, -0.6, 1, 0, -0.6, 0.8, 0, -0.7, 0.7, 0, -0.7, 1, 0, -0.6, 0.9, 0, -0.7, 0.8, 0, -0.7, 1.1, 0, -0.6, 1, 0, -0.7, 1, 0, -0.6, 1, 0, -0.6, 1, 0, -0.7, 0.9, 0, -0.7, 1.6, 0, -0.6, 1.1, 0, -0.7, 1.1, 0, -0.6, 1.1, 0, -0.6, 1.1, 0, -0.7, 1, 0, -0.7, 1.7, 0, -0.6, 1.6, 0, -0.7, 1.6, 0, -0.6, 1.6, 0, -0.6, 1.6, 0, -0.7, 1.1, 0, -0.7, 1.8, 0, -0.6, 1.7, 0, -0.7, 1.7, 0, -0.6, 1.7, 0, -0.6, 1.7, 0, -0.7, 1.6, 0, -0.7, -1.1, 0, -0.7, -1.6, 0, -0.8, -1.6, 0, -0.7, -1.6, 0, -0.7, -1.6, 0, -0.8, -1.7, 0, -0.7, -0.9, 0, -0.7, -1.1, 0, -0.8, -1, 0, -0.7, -1.1, 0, -0.7, -1.1, 0, -0.8, -1.6, 0, -0.8, -1, 0, -0.7, -1.1, 0, -0.8, -1.1, 0, -0.7, -0.9, 0, -0.7, -1, 0, -0.8, -1.1, 0, -0.8, -0.8, 0, -0.7, -0.9, 0, -0.8, -0.9, 0, -0.7, -0.9, 0, -0.7, -0.9, 0, -0.8, -1, 0, -0.8, -0.7, 0, -0.7, -0.8, 0, -0.8, -0.8, 0, -0.7, -0.8, 0, -0.7, -0.8, 0, -0.8, -0.9, 0, -0.8, -0.6, 0, -0.7, -0.8, 0, -0.8, -0.7, 0, -0.7, -0.6, 0, -0.7, -0.7, 0, -0.8, -0.8, 0, -0.8, 0.6, 0, -0.7, -0.6, 0, -0.8, -0.6, 0, -0.7, -0.6, 0, -0.7, -0.6, 0, -0.8, -0.7, 0, -0.8, 0.8, 0, -0.7, 0.6, 0, -0.8, 0.7, 0, -0.7, 0.6, 0, -0.7, 0.6, 0, -0.8, -0.6, 0, -0.8, 0.7, 0, -0.7, 0.6, 0, -0.8, 0.6, 0, -0.7, 0.8, 0, -0.7, 0.7, 0, -0.8, 0.6, 0, -0.8, 0.9, 0, -0.7, 0.8, 0, -0.8, 0.8, 0, -0.7, 0.8, 0, -0.7, 0.8, 0, -0.8, 0.7, 0, -0.8, 1.1, 0, -0.7, 0.9, 0, -0.8, 1, 0, -0.7, 0.9, 0, -0.7, 0.9, 0, -0.8, 0.8, 0, -0.8, 1, 0, -0.7, 0.9, 0, -0.8, 0.9, 0, -0.7, 1.1, 0, -0.7, 1, 0, -0.8, 0.9, 0, -0.8, 1.6, 0, -0.7, 1.1, 0, -0.8, 1.1, 0, -0.7, 1.1, 0, -0.7, 1.1, 0, -0.8, 1, 0, -0.8, 1.7, 0, -0.7, 1.6, 0, -0.8, 1.6, 0, -0.7, 1.6, 0, -0.7, 1.6, 0, -0.8, 1.1, 0, -0.8, -1.9, 0, 0.9, -2, 0, -0.9, -2, 0, 0.9, -1.8, 0, -0.6, -1.9, 0, -0.9, -1.9, 0, 0.9, -1.9, 0, 0.9, -1.9, 0, -0.9, -2, 0, -0.9, -1, 0, -0.8, -1.9, 0, -0.9, -1.1, 0, -0.8, -1.6, 0, -0.8, -1.9, 0, -0.9, -1.7, 0, -0.7, -1.7, 0, -0.7, -1.9, 0, -0.9, -1.8, 0, -0.6, -1.1, 0, -0.8, -1.9, 0, -0.9, -1.6, 0, -0.8, -1, 0, -0.8, -1.8, 0, -0.9, -1.9, 0, -0.9, -1, 0, -0.8, -1.5, 0, -0.9, -1.8, 0, -0.9, -1, 0, -0.8, -1.1, 0, -0.9, -1.5, 0, -0.9, -0.7, 0, -0.8, -1, 0, -0.9, -0.8, 0, -0.8, -1, 0, -0.8, -1, 0, -0.9, -1.1, 0, -0.9, -0.9, 0, -0.8, -1, 0, -0.9, -1, 0, -0.8, -0.8, 0, -0.8, -1, 0, -0.9, -0.9, 0, -0.8, -0.7, 0, -0.8, -0.9, 0, -0.9, -1, 0, -0.9, -0.7, 0, -0.8, -0.8, 0, -0.9, -0.9, 0, -0.9, 0.7, 0, -0.8, -0.7, 0, -0.9, 0.6, 0, -0.8, -0.7, 0, -0.8, -0.7, 0, -0.9, -0.8, 0, -0.9, 0.6, 0, -0.8, -0.7, 0, -0.9, -0.6, 0, -0.8, -0.6, 0, -0.8, -0.7, 0, -0.9, -0.7, 0, -0.8, 0.7, 0, -0.8, -0.6, 0, -0.9, -0.7, 0, -0.9, 0.7, 0, -0.8, 0.6, 0, -0.9, -0.6, 0, -0.9, 0.9, 0, -0.8, 0.7, 0, -0.9, 0.8, 0, -0.8, 0.7, 0, -0.8, 0.7, 0, -0.9, 0.6, 0, -0.9, 0.8, 0, -0.8, 0.7, 0, -0.9, 0.7, 0, -0.8, 1, 0, -0.8, 0.7, 0, -0.9, 0.9, 0, -0.8, 1, 0, -0.8, 0.8, 0, -0.9, 0.7, 0, -0.9, 1, 0, -0.8, 0.9, 0, -0.9, 0.8, 0, -0.9, 1.6, 0, -0.8, 1, 0, -0.9, 1.1, 0, -0.8, 1, 0, -0.8, 1, 0, -0.9, 0.9, 0, -0.9, 1.1, 0, -0.8, 1, 0, -0.9, 1, 0, -0.8, 1.6, 0, -0.8, 1.1, 0, -0.9, 1, 0, -0.9, 1.6, 0, -0.8, 1.5, 0, -0.9, 1.1, 0, -0.9, 1.8, 0, -0.6, 1.8, 0, -0.9, 1.7, 0, -0.7, 1.6, 0, -0.8, 1.8, 0, -0.9, 1.5, 0, -0.9, 1.7, 0, -0.7, 1.8, 0, -0.9, 1.6, 0, -0.8, 1.9, 0, 0.9, 1.8, 0, -0.9, 1.8, 0, -0.6, 2, 0, 0.9, 1.9, 0, -0.9, 1.9, 0, 0.9, 1.9, 0, 0.9, 1.9, 0, -0.9, 1.8, 0, -0.9, 2, 0, 0.9, 2, 0, -0.9, 1.9, 0, -0.9, -1.8, 0, -0.9, -1.9, 0, -1, -1.9, 0, -0.9, -1.5, 0, -0.9, -1.8, 0, -1, -1.8, 0, -0.9, -1.8, 0, -0.9, -1.8, 0, -1, -1.9, 0, -1, -1.5, 0, -0.9, -1.7, 0, -1, -1.8, 0, -1, -1.1, 0, -0.9, -1.4, 0, -1, -1.5, 0, -0.9, -0.9, 0, -0.9, -1.1, 0, -1, -1, 0, -0.9, -1.1, 0, -0.9, -1.1, 0, -1, -1.4, 0, -1, -1, 0, -0.9, -1.1, 0, -1, -1.1, 0, -0.9, -0.9, 0, -0.9, -1, 0, -1, -1.1, 0, -1, -0.8, 0, -0.9, -0.9, 0, -1, -0.9, 0, -0.9, -0.9, 0, -0.9, -0.9, 0, -1, -1, 0, -1, -0.6, 0, -0.9, -0.8, 0, -1, -0.7, 0, -0.9, -0.8, 0, -0.9, -0.8, 0, -1, -0.9, 0, -1, -0.7, 0, -0.9, -0.8, 0, -1, -0.8, 0, -0.9, -0.6, 0, -0.9, -0.7, 0, -1, -0.8, 0, -1, 0.6, 0, -0.9, -0.6, 0, -1, -0.6, 0, -0.9, -0.6, 0, -0.9, -0.6, 0, -1, -0.7, 0, -1, 0.8, 0, -0.9, 0.6, 0, -1, 0.7, 0, -0.9, 0.6, 0, -0.9, 0.6, 0, -1, -0.6, 0, -1, 0.7, 0, -0.9, 0.6, 0, -1, 0.6, 0, -0.9, 0.8, 0, -0.9, 0.7, 0, -1, 0.6, 0, -1, 0.9, 0, -0.9, 0.8, 0, -1, 0.8, 0, -0.9, 0.8, 0, -0.9, 0.8, 0, -1, 0.7, 0, -1, 1.1, 0, -0.9, 0.9, 0, -1, 1, 0, -0.9, 0.9, 0, -0.9, 0.9, 0, -1, 0.8, 0, -1, 1, 0, -0.9, 0.9, 0, -1, 0.9, 0, -0.9, 1.1, 0, -0.9, 1, 0, -1, 0.9, 0, -1, 1.5, 0, -0.9, 1.1, 0, -1, 1.1, 0, -0.9, 1.1, 0, -0.9, 1.1, 0, -1, 1, 0, -1, 1.5, 0, -0.9, 1.4, 0, -1, 1.1, 0, -1, 1.8, 0, -0.9, 1.7, 0, -1, 1.5, 0, -0.9, 1.9, 0, -0.9, 1.8, 0, -1, 1.8, 0, -0.9, 1.8, 0, -0.9, 1.8, 0, -1, 1.7, 0, -1, 1.9, 0, -0.9, 1.9, 0, -1, 1.8, 0, -1, -1.7, 0, -1, -1.8, 0, -1.1, -1.8, 0, -1, -1.5, 0, -0.9, -1.7, 0, -1.1, -1.7, 0, -1, -1.7, 0, -1, -1.7, 0, -1.1, -1.8, 0, -1.1, -1.5, 0, -0.9, -1.6, 0, -1.1, -1.7, 0, -1.1, -1, 0, -1, -1.1, 0, -1.1, -1.1, 0, -1, -1.1, 0, -1, -1.1, 0, -1.1, -1.4, 0, -1, -0.7, 0, -1, -1, 0, -1.1, -0.8, 0, -1, -1, 0, -1, -1, 0, -1.1, -1.1, 0, -1.1, -0.9, 0, -1, -1, 0, -1.1, -1, 0, -1, -0.8, 0, -1, -1, 0, -1.1, -0.9, 0, -1, -0.7, 0, -1, -0.9, 0, -1.1, -1, 0, -1.1, -0.7, 0, -1, -0.8, 0, -1.1, -0.9, 0, -1.1, -0.6, 0, -1, -0.7, 0, -1.1, -0.7, 0, -1, -0.7, 0, -1, -0.7, 0, -1.1, -0.8, 0, -1.1, 0.6, 0, -1, -0.6, 0, -1.1, -0.6, 0, -1, -0.6, 0, -1, -0.6, 0, -1.1, -0.7, 0, -1.1, 0.7, 0, -1, 0.6, 0, -1.1, 0.6, 0, -1, 0.6, 0, -1, 0.6, 0, -1.1, -0.6, 0, -1.1, 1, 0, -1, 0.7, 0, -1.1, 0.9, 0, -1, 0.7, 0, -1, 0.7, 0, -1.1, 0.6, 0, -1.1, 0.8, 0, -1, 0.7, 0, -1.1, 0.7, 0, -1, 0.9, 0, -1, 0.7, 0, -1.1, 0.8, 0, -1, 1, 0, -1, 0.8, 0, -1.1, 0.7, 0, -1.1, 1, 0, -1, 0.9, 0, -1.1, 0.8, 0, -1.1, 1.1, 0, -1, 1, 0, -1.1, 1, 0, -1, 1, 0, -1, 1, 0, -1.1, 0.9, 0, -1.1, 1.4, 0, -1, 1.1, 0, -1.1, 1.1, 0, -1, 1.1, 0, -1, 1.1, 0, -1.1, 1, 0, -1.1, 1.7, 0, -1, 1.6, 0, -1.1, 1.5, 0, -0.9, 1.8, 0, -1, 1.7, 0, -1.1, 1.7, 0, -1, 1.7, 0, -1, 1.7, 0, -1.1, 1.6, 0, -1.1, 1.8, 0, -1, 1.8, 0, -1.1, 1.7, 0, -1.1, -1.6, 0, -1.1, -1.7, 0, -1.2, -1.7, 0, -1.1, -1.5, 0, -0.9, -1.6, 0, -1.2, -1.6, 0, -1.1, -1.6, 0, -1.1, -1.6, 0, -1.2, -1.7, 0, -1.2, -1.4, 0, -1, -1.5, 0, -1.2, -1.5, 0, -0.9, -1.5, 0, -0.9, -1.5, 0, -1.2, -1.6, 0, -1.2, -1.1, 0, -1.1, -1.4, 0, -1.2, -1.4, 0, -1, -1.4, 0, -1, -1.4, 0, -1.2, -1.5, 0, -1.2, -1, 0, -1.1, -1.4, 0, -1.2, -1.1, 0, -1.1, -1, 0, -1.1, -1.3, 0, -1.2, -1.4, 0, -1.2, 1.4, 0, -1, 1.3, 0, -1.2, 1.1, 0, -1.1, 1.1, 0, -1.1, 1.3, 0, -1.2, 1, 0, -1.1, 1.5, 0, -0.9, 1.4, 0, -1.2, 1.4, 0, -1, 1.4, 0, -1, 1.4, 0, -1.2, 1.3, 0, -1.2, 1.6, 0, -1.1, 1.5, 0, -1.2, 1.5, 0, -0.9, 1.5, 0, -0.9, 1.5, 0, -1.2, 1.4, 0, -1.2, 1.7, 0, -1.1, 1.6, 0, -1.2, 1.6, 0, -1.1, 1.6, 0, -1.1, 1.6, 0, -1.2, 1.5, 0, -1.2, 1.7, 0, -1.1, 1.7, 0, -1.2, 1.6, 0, -1.2, -1.5, 0, -1.2, -1.6, 0, -1.3, -1.6, 0, -1.2, -1.4, 0, -1.2, -1.5, 0, -1.3, -1.5, 0, -1.2, -1.5, 0, -1.2, -1.5, 0, -1.3, -1.6, 0, -1.3, -1.3, 0, -1.2, -1.4, 0, -1.3, -1.4, 0, -1.2, -1.4, 0, -1.2, -1.4, 0, -1.3, -1.5, 0, -1.3, -1, 0, -1.1, -1.3, 0, -1.3, -1.3, 0, -1.2, -1.3, 0, -1.2, -1.3, 0, -1.3, -1.4, 0, -1.3, -1, 0, -1.1, -1.2, 0, -1.3, -1.3, 0, -1.3, 1.3, 0, -1.2, 1.2, 0, -1.3, 1, 0, -1.1, 1.4, 0, -1.2, 1.3, 0, -1.3, 1.3, 0, -1.2, 1.3, 0, -1.2, 1.3, 0, -1.3, 1.2, 0, -1.3, 1.5, 0, -1.2, 1.4, 0, -1.3, 1.4, 0, -1.2, 1.4, 0, -1.2, 1.4, 0, -1.3, 1.3, 0, -1.3, 1.6, 0, -1.2, 1.5, 0, -1.3, 1.5, 0, -1.2, 1.5, 0, -1.2, 1.5, 0, -1.3, 1.4, 0, -1.3, 1.6, 0, -1.2, 1.6, 0, -1.3, 1.5, 0, -1.3, -1.4, 0, -1.3, -1.5, 0, -1.4, -1.5, 0, -1.3, -1.3, 0, -1.3, -1.4, 0, -1.4, -1.4, 0, -1.3, -1.4, 0, -1.3, -1.4, 0, -1.4, -1.5, 0, -1.4, -1.2, 0, -1.3, -1.3, 0, -1.4, -1.3, 0, -1.3, -1.3, 0, -1.3, -1.3, 0, -1.4, -1.4, 0, -1.4, -1, 0, -1.1, -1.2, 0, -1.4, -1.2, 0, -1.3, -1.2, 0, -1.3, -1.2, 0, -1.4, -1.3, 0, -1.4, -0.9, 0, -1.1, -1, 0, -1.4, -1, 0, -1.1, -1, 0, -1.1, -1, 0, -1.4, -1.2, 0, -1.4, 1, 0, -1.1, 1, 0, -1.4, 0.9, 0, -1.1, 1.2, 0, -1.3, 1, 0, -1.4, 1, 0, -1.1, 1.3, 0, -1.3, 1.2, 0, -1.4, 1.2, 0, -1.3, 1.2, 0, -1.3, 1.2, 0, -1.4, 1, 0, -1.4, 1.4, 0, -1.3, 1.3, 0, -1.4, 1.3, 0, -1.3, 1.3, 0, -1.3, 1.3, 0, -1.4, 1.2, 0, -1.4, 1.5, 0, -1.3, 1.4, 0, -1.4, 1.4, 0, -1.3, 1.4, 0, -1.3, 1.4, 0, -1.4, 1.3, 0, -1.4, 1.5, 0, -1.3, 1.5, 0, -1.4, 1.4, 0, -1.4, -1.3, 0, -1.4, -1.4, 0, -1.5, -1.4, 0, -1.4, -1.2, 0, -1.4, -1.3, 0, -1.5, -1.3, 0, -1.4, -1.3, 0, -1.4, -1.3, 0, -1.5, -1.4, 0, -1.5, -1, 0, -1.4, -1.2, 0, -1.5, -1.2, 0, -1.4, -1.2, 0, -1.4, -1.2, 0, -1.5, -1.3, 0, -1.5, -0.8, 0, -1.1, -0.9, 0, -1.5, -0.9, 0, -1.1, -1, 0, -1.4, -0.9, 0, -1.5, -1.2, 0, -1.5, -0.9, 0, -1.1, -0.9, 0, -1.5, -1, 0, -1.4, 1.2, 0, -1.4, 0.9, 0, -1.5, 1, 0, -1.4, 1, 0, -1.4, 0.9, 0, -1.5, 0.9, 0, -1.1, 0.9, 0, -1.1, 0.9, 0, -1.5, 0.8, 0, -1.1, 1.3, 0, -1.4, 1.2, 0, -1.5, 1.2, 0, -1.4, 1.2, 0, -1.4, 1.2, 0, -1.5, 0.9, 0, -1.5, 1.4, 0, -1.4, 1.3, 0, -1.5, 1.3, 0, -1.4, 1.3, 0, -1.4, 1.3, 0, -1.5, 1.2, 0, -1.5, 1.4, 0, -1.4, 1.4, 0, -1.5, 1.3, 0, -1.5, -1.2, 0, -1.5, -1.3, 0, -1.6, -1.3, 0, -1.5, -0.9, 0, -1.5, -1.2, 0, -1.6, -1.2, 0, -1.5, -1.2, 0, -1.5, -1.2, 0, -1.6, -1.3, 0, -1.6, -0.9, 0, -1.5, -1.1, 0, -1.6, -1.2, 0, -1.6, -0.8, 0, -1.1, -0.8, 0, -1.6, -0.9, 0, -1.5, -0.9, 0, -1.5, -0.8, 0, -1.6, -1.1, 0, -1.6, -0.7, 0, -1.1, -0.8, 0, -1.6, -0.8, 0, -1.1, 0.6, 0, -1.1, -0.7, 0, -1.6, -0.6, 0, -1.1, -0.7, 0, -1.1, -0.7, 0, -1.6, -0.8, 0, -1.6, -0.6, 0, -1.1, -0.7, 0, -1.6, -0.7, 0, -1.1, 0.7, 0, -1.1, -0.7, 0, -1.6, 0.6, 0, -1.1, 0.7, 0, -1.1, -0.6, 0, -1.6, -0.7, 0, -1.6, 0.7, 0, -1.1, 0.6, 0, -1.6, -0.6, 0, -1.6, 0.8, 0, -1.1, 0.7, 0, -1.6, 0.7, 0, -1.1, 0.7, 0, -1.1, 0.7, 0, -1.6, 0.6, 0, -1.6, 1.2, 0, -1.5, 0.8, 0, -1.6, 0.9, 0, -1.5, 0.8, 0, -1.1, 0.8, 0, -1.6, 0.7, 0, -1.6, 0.9, 0, -1.5, 0.8, 0, -1.6, 0.8, 0, -1.1, 1.2, 0, -1.5, 1.1, 0, -1.6, 0.8, 0, -1.6, 1.3, 0, -1.5, 1.2, 0, -1.6, 1.2, 0, -1.5, 1.2, 0, -1.5, 1.2, 0, -1.6, 1.1, 0, -1.6, 1.3, 0, -1.5, 1.3, 0, -1.6, 1.2, 0, -1.6, -1.1, 0, -1.6, -1.2, 0, -1.7, -1.2, 0, -1.6, -0.8, 0, -1.6, -1.1, 0, -1.7, -1.1, 0, -1.6, -1.1, 0, -1.6, -1.1, 0, -1.7, -1.2, 0, -1.7, -0.7, 0, -1.6, -1.1, 0, -1.7, -0.8, 0, -1.6, -0.7, 0, -1.6, -1, 0, -1.7, -1.1, 0, -1.7, -0.6, 0, -1.6, -0.7, 0, -1.7, -0.7, 0, -1.6, -0.7, 0, -1.6, -0.7, 0, -1.7, -1, 0, -1.7, 0.6, 0, -1.6, -0.6, 0, -1.7, -0.6, 0, -1.6, -0.6, 0, -1.6, -0.6, 0, -1.7, -0.7, 0, -1.7, 0.7, 0, -1.6, 0.6, 0, -1.7, 0.6, 0, -1.6, 0.6, 0, -1.6, 0.6, 0, -1.7, -0.6, 0, -1.7, 1.1, 0, -1.6, 0.7, 0, -1.7, 0.8, 0, -1.6, 0.7, 0, -1.6, 0.7, 0, -1.7, 0.6, 0, -1.7, 0.8, 0, -1.6, 0.7, 0, -1.7, 0.7, 0, -1.6, 1.1, 0, -1.6, 1, 0, -1.7, 0.7, 0, -1.7, 1.2, 0, -1.6, 1.1, 0, -1.7, 1.1, 0, -1.6, 1.1, 0, -1.6, 1.1, 0, -1.7, 1, 0, -1.7, 1.2, 0, -1.6, 1.2, 0, -1.7, 1.1, 0, -1.7, -1, 0, -1.7, -1.1, 0, -1.8, -1.1, 0, -1.7, -0.6, 0, -1.7, -1, 0, -1.8, -0.7, 0, -1.7, -1, 0, -1.7, -1, 0, -1.8, -1.1, 0, -1.8, -0.7, 0, -1.7, -1, 0, -1.8, -1, 0, -1.7, -0.6, 0, -1.7, -0.9, 0, -1.8, -1, 0, -1.8, 0.6, 0, -1.7, -0.6, 0, -1.8, -0.6, 0, -1.7, -0.6, 0, -1.7, -0.6, 0, -1.8, -0.9, 0, -1.8, 1, 0, -1.7, 0.6, 0, -1.8, 0.7, 0, -1.7, 0.6, 0, -1.7, 0.6, 0, -1.8, -0.6, 0, -1.8, 0.7, 0, -1.7, 0.6, 0, -1.8, 0.6, 0, -1.7, 1, 0, -1.7, 0.9, 0, -1.8, 0.6, 0, -1.8, 1.1, 0, -1.7, 1, 0, -1.8, 1, 0, -1.7, 1, 0, -1.7, 1, 0, -1.8, 0.9, 0, -1.8, 1.1, 0, -1.7, 1.1, 0, -1.8, 1, 0, -1.8, -0.9, 0, -1.8, -1, 0, -1.9, -1, 0, -1.8, -0.6, 0, -1.8, -0.9, 0, -1.9, -0.9, 0, -1.8, -0.9, 0, -1.8, -0.9, 0, -1.9, -1, 0, -1.9, 0.9, 0, -1.8, -0.9, 0, -1.9, 0.6, 0, -1.8, 0.6, 0, -1.8, -0.9, 0, -1.9, -0.6, 0, -1.8, 1, 0, -1.8, 0.9, 0, -1.9, 0.9, 0, -1.8, 0.9, 0, -1.8, 0.9, 0, -1.9, -0.9, 0, -1.9, 1, 0, -1.8, 1, 0, -1.9, 0.9, 0, -1.9, 0.9, 0, -1.9, -0.9, 0, -2, -0.9, 0, -1.9, 0.9, 0, -1.9, 0.9, 0, -2, -0.9, 0, -2, 0.9, 0.1, 2, -0.9, 0.1, 2, -0.9, 0.1, 1.9, 0.9, 0.1, 2, -0.9, 0.1, 1.9, 0.9, 0.1, 1.9, -0.9, 0.1, 1.9, -1, 0.1, 1.9, -1, 0.1, 1.8, 0.9, 0.1, 1.9, -0.9, 0.1, 1.9, -0.9, 0.1, 1.8, -0.9, 0.1, 1.9, -1, 0.1, 1.8, -0.9, 0.1, 1.8, 0.9, 0.1, 1.9, -0.9, 0.1, 1.8, -0.6, 0.1, 1.8, 0.9, 0.1, 1.9, -0.6, 0.1, 1.8, 0.6, 0.1, 1.8, 1, 0.1, 1.9, 0.9, 0.1, 1.9, 0.9, 0.1, 1.8, 0.9, 0.1, 1.9, 0.6, 0.1, 1.8, 0.9, 0.1, 1.8, 1, 0.1, 1.9, 0.9, 0.1, 1.8, 1, 0.1, 1.8, -1, 0.1, 1.8, -1.1, 0.1, 1.8, -1.1, 0.1, 1.7, -0.9, 0.1, 1.8, -1, 0.1, 1.8, -1, 0.1, 1.7, -0.6, 0.1, 1.8, -0.9, 0.1, 1.8, -1, 0.1, 1.7, -1, 0.1, 1.8, -1.1, 0.1, 1.7, -1, 0.1, 1.7, -0.6, 0.1, 1.8, -1, 0.1, 1.7, -0.7, 0.1, 1.7, 0.6, 0.1, 1.8, -0.6, 0.1, 1.8, -0.6, 0.1, 1.7, -0.6, 0.1, 1.8, -0.7, 0.1, 1.7, -0.6, 0.1, 1.7, 0.9, 0.1, 1.8, 0.6, 0.1, 1.8, 0.6, 0.1, 1.7, 0.6, 0.1, 1.8, -0.6, 0.1, 1.7, 0.6, 0.1, 1.7, 1, 0.1, 1.8, 0.9, 0.1, 1.8, 0.6, 0.1, 1.7, 1, 0.1, 1.8, 0.6, 0.1, 1.7, 0.7, 0.1, 1.7, 1.1, 0.1, 1.8, 1, 0.1, 1.8, 1, 0.1, 1.7, 1, 0.1, 1.8, 0.7, 0.1, 1.7, 1, 0.1, 1.7, 1.1, 0.1, 1.8, 1, 0.1, 1.7, 1.1, 0.1, 1.7, -1.1, 0.1, 1.7, -1.2, 0.1, 1.7, -1.2, 0.1, 1.6, -0.7, 0.1, 1.7, -1, 0.1, 1.7, -1.1, 0.1, 1.6, -1, 0.1, 1.7, -1.1, 0.1, 1.7, -1.1, 0.1, 1.6, -1.1, 0.1, 1.7, -1.2, 0.1, 1.6, -1.1, 0.1, 1.6, -0.7, 0.1, 1.7, -1.1, 0.1, 1.6, -0.8, 0.1, 1.6, -0.6, 0.1, 1.7, -0.7, 0.1, 1.7, -0.7, 0.1, 1.6, -0.7, 0.1, 1.7, -0.8, 0.1, 1.6, -0.7, 0.1, 1.6, 0.6, 0.1, 1.7, -0.6, 0.1, 1.7, -0.6, 0.1, 1.6, -0.6, 0.1, 1.7, -0.7, 0.1, 1.6, -0.6, 0.1, 1.6, 0.7, 0.1, 1.7, 0.6, 0.1, 1.7, 0.6, 0.1, 1.6, 0.6, 0.1, 1.7, -0.6, 0.1, 1.6, 0.6, 0.1, 1.6, 1, 0.1, 1.7, 0.7, 0.1, 1.7, 0.7, 0.1, 1.6, 0.7, 0.1, 1.7, 0.6, 0.1, 1.6, 0.7, 0.1, 1.6, 1.1, 0.1, 1.7, 1, 0.1, 1.7, 0.7, 0.1, 1.6, 1.1, 0.1, 1.7, 0.7, 0.1, 1.6, 0.8, 0.1, 1.6, 1.2, 0.1, 1.7, 1.1, 0.1, 1.7, 1.1, 0.1, 1.6, 1.1, 0.1, 1.7, 0.8, 0.1, 1.6, 1.1, 0.1, 1.6, 1.2, 0.1, 1.7, 1.1, 0.1, 1.6, 1.2, 0.1, 1.6, -1.2, 0.1, 1.6, -1.3, 0.1, 1.6, -1.3, 0.1, 1.5, -0.8, 0.1, 1.6, -1.1, 0.1, 1.6, -1.2, 0.1, 1.5, -1.1, 0.1, 1.6, -1.2, 0.1, 1.6, -1.2, 0.1, 1.5, -1.2, 0.1, 1.6, -1.3, 0.1, 1.5, -1.2, 0.1, 1.5, -0.8, 0.1, 1.6, -1.2, 0.1, 1.5, -0.9, 0.1, 1.5, 1.1, 0.1, 1.6, 0.8, 0.1, 1.6, 0.9, 0.1, 1.5, 1.2, 0.1, 1.6, 1.1, 0.1, 1.6, 0.9, 0.1, 1.5, 1.3, 0.1, 1.6, 1.2, 0.1, 1.6, 1.2, 0.1, 1.5, 1.2, 0.1, 1.6, 0.9, 0.1, 1.5, 1.2, 0.1, 1.5, 1.3, 0.1, 1.6, 1.2, 0.1, 1.5, 1.3, 0.1, 1.5, -1.3, 0.1, 1.5, -1.4, 0.1, 1.5, -1.4, 0.1, 1.4, -1.2, 0.1, 1.5, -1.3, 0.1, 1.5, -1.3, 0.1, 1.4, -1.3, 0.1, 1.5, -1.4, 0.1, 1.4, -1.3, 0.1, 1.4, -0.9, 0.1, 1.5, -1.2, 0.1, 1.5, -1.2, 0.1, 1.4, -1.2, 0.1, 1.5, -1.3, 0.1, 1.4, -1.2, 0.1, 1.4, -0.9, 0.1, 1.5, -1.2, 0.1, 1.4, -1, 0.1, 1.4, 1.2, 0.1, 1.5, 0.9, 0.1, 1.5, 1, 0.1, 1.4, 1.3, 0.1, 1.5, 1.2, 0.1, 1.5, 1.2, 0.1, 1.4, 1.2, 0.1, 1.5, 1, 0.1, 1.4, 1.2, 0.1, 1.4, 1.4, 0.1, 1.5, 1.3, 0.1, 1.5, 1.3, 0.1, 1.4, 1.3, 0.1, 1.5, 1.2, 0.1, 1.4, 1.3, 0.1, 1.4, 1.4, 0.1, 1.5, 1.3, 0.1, 1.4, 1.4, 0.1, 1.4, -1.4, 0.1, 1.4, -1.5, 0.1, 1.4, -1.5, 0.1, 1.3, -1.3, 0.1, 1.4, -1.4, 0.1, 1.4, -1.4, 0.1, 1.3, -1.4, 0.1, 1.4, -1.5, 0.1, 1.3, -1.4, 0.1, 1.3, -1.2, 0.1, 1.4, -1.3, 0.1, 1.4, -1.3, 0.1, 1.3, -1.3, 0.1, 1.4, -1.4, 0.1, 1.3, -1.3, 0.1, 1.3, -1, 0.1, 1.4, -1.2, 0.1, 1.4, -1.2, 0.1, 1.3, -1.2, 0.1, 1.4, -1.3, 0.1, 1.3, -1.2, 0.1, 1.3, 1.2, 0.1, 1.4, 1, 0.1, 1.4, 1.2, 0.1, 1.3, 1.3, 0.1, 1.4, 1.2, 0.1, 1.4, 1.2, 0.1, 1.3, 1.4, 0.1, 1.4, 1.3, 0.1, 1.4, 1.3, 0.1, 1.3, 1.3, 0.1, 1.4, 1.2, 0.1, 1.3, 1.3, 0.1, 1.3, 1.5, 0.1, 1.4, 1.4, 0.1, 1.4, 1.4, 0.1, 1.3, 1.4, 0.1, 1.4, 1.3, 0.1, 1.3, 1.4, 0.1, 1.3, 1.5, 0.1, 1.4, 1.4, 0.1, 1.3, 1.5, 0.1, 1.3, -1.5, 0.1, 1.3, -1.6, 0.1, 1.3, -1.6, 0.1, 1.2, -1.4, 0.1, 1.3, -1.5, 0.1, 1.3, -1.5, 0.1, 1.2, -1.5, 0.1, 1.3, -1.6, 0.1, 1.2, -1.5, 0.1, 1.2, -1.3, 0.1, 1.3, -1.4, 0.1, 1.3, -1.4, 0.1, 1.2, -1.4, 0.1, 1.3, -1.5, 0.1, 1.2, -1.4, 0.1, 1.2, -1.2, 0.1, 1.3, -1.3, 0.1, 1.3, -1.3, 0.1, 1.2, -1.3, 0.1, 1.3, -1.4, 0.1, 1.2, -1.3, 0.1, 1.2, 1.3, 0.1, 1.3, 1.2, 0.1, 1.3, 1.3, 0.1, 1.2, 1.4, 0.1, 1.3, 1.3, 0.1, 1.3, 1.3, 0.1, 1.2, 1.5, 0.1, 1.3, 1.4, 0.1, 1.3, 1.4, 0.1, 1.2, 1.4, 0.1, 1.3, 1.3, 0.1, 1.2, 1.4, 0.1, 1.2, 1.6, 0.1, 1.3, 1.5, 0.1, 1.3, 1.5, 0.1, 1.2, 1.5, 0.1, 1.3, 1.4, 0.1, 1.2, 1.5, 0.1, 1.2, 1.6, 0.1, 1.3, 1.5, 0.1, 1.2, 1.6, 0.1, 1.2, -1.6, 0.1, 1.2, -1.7, 0.1, 1.2, -1.7, 0.1, 1.1, -1.5, 0.1, 1.2, -1.6, 0.1, 1.2, -1.6, 0.1, 1.1, -1.6, 0.1, 1.2, -1.7, 0.1, 1.1, -1.6, 0.1, 1.1, -1, 0.1, 1.4, -1.2, 0.1, 1.3, -1.1, 0.1, 1.1, -1.2, 0.1, 1.3, -1.3, 0.1, 1.2, -1.1, 0.1, 1.1, -1.3, 0.1, 1.2, -1.4, 0.1, 1.2, -1.1, 0.1, 1.1, -0.9, 0.1, 1.5, -1, 0.1, 1.4, -1, 0.1, 1.1, -1, 0.1, 1.4, -1.1, 0.1, 1.1, -1, 0.1, 1.1, -0.8, 0.1, 1.6, -0.9, 0.1, 1.5, -0.9, 0.1, 1.1, -0.9, 0.1, 1.5, -1, 0.1, 1.1, -0.9, 0.1, 1.1, -0.7, 0.1, 1.6, -0.8, 0.1, 1.6, -0.8, 0.1, 1.1, -0.8, 0.1, 1.6, -0.9, 0.1, 1.1, -0.8, 0.1, 1.1, -0.6, 0.1, 1.6, -0.7, 0.1, 1.6, -0.7, 0.1, 1.1, -0.7, 0.1, 1.6, -0.8, 0.1, 1.1, -0.7, 0.1, 1.1, 0.6, 0.1, 1.6, -0.6, 0.1, 1.6, -0.7, 0.1, 1.1, 0.7, 0.1, 1.6, 0.6, 0.1, 1.6, -0.7, 0.1, 1.1, 0.7, 0.1, 1.6, -0.7, 0.1, 1.1, -0.6, 0.1, 1.1, 0.7, 0.1, 1.6, -0.6, 0.1, 1.1, 0.6, 0.1, 1.1, 0.8, 0.1, 1.6, 0.7, 0.1, 1.6, 0.7, 0.1, 1.1, 0.7, 0.1, 1.6, 0.6, 0.1, 1.1, 0.7, 0.1, 1.1, 0.9, 0.1, 1.5, 0.8, 0.1, 1.6, 0.8, 0.1, 1.1, 0.8, 0.1, 1.6, 0.7, 0.1, 1.1, 0.8, 0.1, 1.1, 1, 0.1, 1.4, 0.9, 0.1, 1.5, 0.9, 0.1, 1.1, 0.9, 0.1, 1.5, 0.8, 0.1, 1.1, 0.9, 0.1, 1.1, 1.4, 0.1, 1.2, 1.3, 0.1, 1.2, 1, 0.1, 1.1, 1, 0.1, 1.4, 0.9, 0.1, 1.1, 1, 0.1, 1.1, 1.2, 0.1, 1.3, 1, 0.1, 1.4, 1, 0.1, 1.1, 1.3, 0.1, 1.2, 1.2, 0.1, 1.3, 1, 0.1, 1.1, 1.4, 0.1, 1.2, 1, 0.1, 1.1, 1.1, 0.1, 1.1, 1.6, 0.1, 1.2, 1.5, 0.1, 1.2, 1.6, 0.1, 1.1, 1.7, 0.1, 1.2, 1.6, 0.1, 1.2, 1.6, 0.1, 1.1, 1.7, 0.1, 1.2, 1.6, 0.1, 1.1, 1.7, 0.1, 1.1, -1.7, 0.1, 1.1, -1.8, 0.1, 1.1, -1.8, 0.1, 1, -1.6, 0.1, 1.1, -1.7, 0.1, 1.1, -1.7, 0.1, 1, -1.7, 0.1, 1.1, -1.8, 0.1, 1, -1.7, 0.1, 1, -1.1, 0.1, 1.1, -1.4, 0.1, 1.2, -1.4, 0.1, 1, -1.4, 0.1, 1.2, -1.5, 0.1, 1.2, -1.4, 0.1, 1, -1, 0.1, 1.1, -1.1, 0.1, 1.1, -1.1, 0.1, 1, -1.1, 0.1, 1.1, -1.4, 0.1, 1, -1.1, 0.1, 1, -0.8, 0.1, 1.1, -0.9, 0.1, 1.1, -1, 0.1, 1, -1, 0.1, 1.1, -1.1, 0.1, 1, -1, 0.1, 1, -0.9, 0.1, 1.1, -1, 0.1, 1.1, -1, 0.1, 1, -0.7, 0.1, 1.1, -0.8, 0.1, 1.1, -1, 0.1, 1, -0.7, 0.1, 1.1, -1, 0.1, 1, -0.9, 0.1, 1, -0.7, 0.1, 1.1, -0.9, 0.1, 1, -0.8, 0.1, 1, -0.6, 0.1, 1.1, -0.7, 0.1, 1.1, -0.7, 0.1, 1, -0.7, 0.1, 1.1, -0.8, 0.1, 1, -0.7, 0.1, 1, 0.6, 0.1, 1.1, -0.6, 0.1, 1.1, -0.6, 0.1, 1, -0.6, 0.1, 1.1, -0.7, 0.1, 1, -0.6, 0.1, 1, 0.7, 0.1, 1.1, 0.6, 0.1, 1.1, 0.6, 0.1, 1, 0.6, 0.1, 1.1, -0.6, 0.1, 1, 0.6, 0.1, 1, 0.9, 0.1, 1.1, 0.8, 0.1, 1.1, 0.7, 0.1, 1, 0.7, 0.1, 1.1, 0.6, 0.1, 1, 0.7, 0.1, 1, 0.8, 0.1, 1.1, 0.7, 0.1, 1.1, 0.7, 0.1, 1, 1, 0.1, 1.1, 0.9, 0.1, 1.1, 0.7, 0.1, 1, 1, 0.1, 1.1, 0.7, 0.1, 1, 0.8, 0.1, 1, 1, 0.1, 1.1, 0.8, 0.1, 1, 0.9, 0.1, 1, 1.1, 0.1, 1.1, 1, 0.1, 1.1, 1, 0.1, 1, 1, 0.1, 1.1, 0.9, 0.1, 1, 1, 0.1, 1, 1.4, 0.1, 1.2, 1.1, 0.1, 1.1, 1.1, 0.1, 1, 1.1, 0.1, 1.1, 1, 0.1, 1, 1.1, 0.1, 1, 1.5, 0.1, 1.2, 1.4, 0.1, 1.2, 1.4, 0.1, 1, 1.4, 0.1, 1.2, 1.1, 0.1, 1, 1.4, 0.1, 1, 1.8, 0.1, 1.1, 1.7, 0.1, 1.1, 1.7, 0.1, 1, 1.7, 0.1, 1.1, 1.6, 0.1, 1.1, 1.7, 0.1, 1, 1.8, 0.1, 1.1, 1.7, 0.1, 1, 1.8, 0.1, 1, -1.8, 0.1, 1, -1.9, 0.1, 1, -1.9, 0.1, 0.9, -1.7, 0.1, 1, -1.8, 0.1, 1, -1.8, 0.1, 0.9, -1.8, 0.1, 1, -1.9, 0.1, 0.9, -1.8, 0.1, 0.9, -1.1, 0.1, 1, -1.4, 0.1, 1, -1.5, 0.1, 0.9, -1.7, 0.1, 1, -1.8, 0.1, 0.9, -1.5, 0.1, 0.9, -1.5, 0.1, 1.2, -1.6, 0.1, 1.1, -1.5, 0.1, 0.9, -1.4, 0.1, 1, -1.5, 0.1, 1.2, -1.5, 0.1, 0.9, -1.6, 0.1, 1.1, -1.7, 0.1, 1, -1.5, 0.1, 0.9, -0.9, 0.1, 1, -1, 0.1, 1, -1.1, 0.1, 0.9, -1.1, 0.1, 1, -1.5, 0.1, 0.9, -1.1, 0.1, 0.9, -1, 0.1, 1, -1.1, 0.1, 1, -1.1, 0.1, 0.9, -0.9, 0.1, 1, -1.1, 0.1, 0.9, -1, 0.1, 0.9, -0.8, 0.1, 1, -0.9, 0.1, 1, -0.9, 0.1, 0.9, -0.9, 0.1, 1, -1, 0.1, 0.9, -0.9, 0.1, 0.9, -0.6, 0.1, 1, -0.7, 0.1, 1, -0.8, 0.1, 0.9, -0.8, 0.1, 1, -0.9, 0.1, 0.9, -0.8, 0.1, 0.9, -0.7, 0.1, 1, -0.8, 0.1, 1, -0.8, 0.1, 0.9, -0.6, 0.1, 1, -0.8, 0.1, 0.9, -0.7, 0.1, 0.9, 0.6, 0.1, 1, -0.6, 0.1, 1, -0.6, 0.1, 0.9, -0.6, 0.1, 1, -0.7, 0.1, 0.9, -0.6, 0.1, 0.9, 0.8, 0.1, 1, 0.7, 0.1, 1, 0.6, 0.1, 0.9, 0.6, 0.1, 1, -0.6, 0.1, 0.9, 0.6, 0.1, 0.9, 0.7, 0.1, 1, 0.6, 0.1, 1, 0.6, 0.1, 0.9, 0.8, 0.1, 1, 0.6, 0.1, 0.9, 0.7, 0.1, 0.9, 0.9, 0.1, 1, 0.8, 0.1, 1, 0.8, 0.1, 0.9, 0.8, 0.1, 1, 0.7, 0.1, 0.9, 0.8, 0.1, 0.9, 1, 0.1, 1, 0.9, 0.1, 1, 0.9, 0.1, 0.9, 0.9, 0.1, 1, 0.8, 0.1, 0.9, 0.9, 0.1, 0.9, 1.1, 0.1, 1, 1, 0.1, 1, 0.9, 0.1, 0.9, 1.1, 0.1, 1, 0.9, 0.1, 0.9, 1, 0.1, 0.9, 1.4, 0.1, 1, 1.1, 0.1, 1, 1.1, 0.1, 0.9, 1.1, 0.1, 1, 1, 0.1, 0.9, 1.1, 0.1, 0.9, 1.8, 0.1, 1, 1.7, 0.1, 1, 1.5, 0.1, 0.9, 1.4, 0.1, 1, 1.1, 0.1, 0.9, 1.5, 0.1, 0.9, 1.7, 0.1, 1, 1.6, 0.1, 1.1, 1.5, 0.1, 0.9, 1.5, 0.1, 1.2, 1.4, 0.1, 1, 1.5, 0.1, 0.9, 1.6, 0.1, 1.1, 1.5, 0.1, 1.2, 1.5, 0.1, 0.9, 1.9, 0.1, 1, 1.8, 0.1, 1, 1.8, 0.1, 0.9, 1.8, 0.1, 1, 1.5, 0.1, 0.9, 1.8, 0.1, 0.9, 1.9, 0.1, 1, 1.8, 0.1, 0.9, 1.9, 0.1, 0.9, -1.8, 0.1, 0.9, -1.9, 0.1, 0.9, -1.6, 0.1, 0.8, -1.1, 0.1, 0.9, -1.5, 0.1, 0.9, -1.6, 0.1, 0.8, -1.5, 0.1, 0.9, -1.8, 0.1, 0.9, -1.6, 0.1, 0.8, -1, 0.1, 0.9, -1.1, 0.1, 0.9, -1.6, 0.1, 0.8, -1, 0.1, 0.9, -1.6, 0.1, 0.8, -1.1, 0.1, 0.8, -0.9, 0.1, 0.9, -1, 0.1, 0.9, -1, 0.1, 0.8, -1, 0.1, 0.9, -1.1, 0.1, 0.8, -1, 0.1, 0.8, -0.7, 0.1, 0.9, -0.8, 0.1, 0.9, -1, 0.1, 0.8, -0.8, 0.1, 0.9, -0.9, 0.1, 0.9, -1, 0.1, 0.8, -0.7, 0.1, 0.9, -1, 0.1, 0.8, -0.9, 0.1, 0.8, -0.7, 0.1, 0.9, -0.9, 0.1, 0.8, -0.8, 0.1, 0.8, 0.6, 0.1, 0.9, -0.6, 0.1, 0.9, -0.7, 0.1, 0.8, -0.7, 0.1, 0.9, -0.8, 0.1, 0.8, -0.7, 0.1, 0.8, 0.7, 0.1, 0.9, 0.6, 0.1, 0.9, -0.7, 0.1, 0.8, -0.6, 0.1, 0.9, -0.7, 0.1, 0.9, -0.7, 0.1, 0.8, 0.7, 0.1, 0.9, -0.7, 0.1, 0.8, -0.6, 0.1, 0.8, 0.7, 0.1, 0.9, -0.6, 0.1, 0.8, 0.6, 0.1, 0.8, 0.8, 0.1, 0.9, 0.7, 0.1, 0.9, 0.7, 0.1, 0.8, 0.7, 0.1, 0.9, 0.6, 0.1, 0.8, 0.7, 0.1, 0.8, 0.9, 0.1, 0.9, 0.8, 0.1, 0.9, 0.7, 0.1, 0.8, 1, 0.1, 0.9, 0.9, 0.1, 0.9, 0.7, 0.1, 0.8, 1, 0.1, 0.9, 0.7, 0.1, 0.8, 0.8, 0.1, 0.8, 1, 0.1, 0.9, 0.8, 0.1, 0.8, 0.9, 0.1, 0.8, 1.9, 0.1, 0.9, 1.8, 0.1, 0.9, 1, 0.1, 0.8, 1, 0.1, 0.9, 0.9, 0.1, 0.8, 1, 0.1, 0.8, 1.1, 0.1, 0.9, 1, 0.1, 0.9, 1, 0.1, 0.8, 1.5, 0.1, 0.9, 1.1, 0.1, 0.9, 1, 0.1, 0.8, 1.8, 0.1, 0.9, 1.5, 0.1, 0.9, 1, 0.1, 0.8, 1.9, 0.1, 0.9, 1, 0.1, 0.8, 1.1, 0.1, 0.8, 1.9, 0.1, 0.9, 1.1, 0.1, 0.8, 1.6, 0.1, 0.8, -1.6, 0.1, 0.8, -1.9, 0.1, 0.9, -1.7, 0.1, 0.7, -1.1, 0.1, 0.8, -1.6, 0.1, 0.8, -1.6, 0.1, 0.7, -1.6, 0.1, 0.8, -1.7, 0.1, 0.7, -1.6, 0.1, 0.7, -0.9, 0.1, 0.8, -1, 0.1, 0.8, -1.1, 0.1, 0.7, -1.1, 0.1, 0.8, -1.6, 0.1, 0.7, -1.1, 0.1, 0.7, -1, 0.1, 0.8, -1.1, 0.1, 0.8, -1.1, 0.1, 0.7, -0.9, 0.1, 0.8, -1.1, 0.1, 0.7, -1, 0.1, 0.7, -0.8, 0.1, 0.8, -0.9, 0.1, 0.8, -0.9, 0.1, 0.7, -0.9, 0.1, 0.8, -1, 0.1, 0.7, -0.9, 0.1, 0.7, -0.6, 0.1, 0.8, -0.7, 0.1, 0.8, -0.8, 0.1, 0.7, -0.8, 0.1, 0.8, -0.9, 0.1, 0.7, -0.8, 0.1, 0.7, -0.7, 0.1, 0.8, -0.8, 0.1, 0.8, -0.8, 0.1, 0.7, -0.6, 0.1, 0.8, -0.8, 0.1, 0.7, -0.7, 0.1, 0.7, 0.6, 0.1, 0.8, -0.6, 0.1, 0.8, -0.6, 0.1, 0.7, -0.6, 0.1, 0.8, -0.7, 0.1, 0.7, -0.6, 0.1, 0.7, 0.8, 0.1, 0.8, 0.7, 0.1, 0.8, 0.6, 0.1, 0.7, 0.6, 0.1, 0.8, -0.6, 0.1, 0.7, 0.6, 0.1, 0.7, 0.7, 0.1, 0.8, 0.6, 0.1, 0.8, 0.6, 0.1, 0.7, 0.8, 0.1, 0.8, 0.6, 0.1, 0.7, 0.7, 0.1, 0.7, 0.9, 0.1, 0.8, 0.8, 0.1, 0.8, 0.8, 0.1, 0.7, 0.8, 0.1, 0.8, 0.7, 0.1, 0.7, 0.8, 0.1, 0.7, 1, 0.1, 0.8, 0.9, 0.1, 0.8, 0.9, 0.1, 0.7, 0.9, 0.1, 0.8, 0.8, 0.1, 0.7, 0.9, 0.1, 0.7, 1.1, 0.1, 0.8, 1, 0.1, 0.8, 0.9, 0.1, 0.7, 1.1, 0.1, 0.8, 0.9, 0.1, 0.7, 1, 0.1, 0.7, 1.6, 0.1, 0.8, 1.1, 0.1, 0.8, 1.1, 0.1, 0.7, 1.1, 0.1, 0.8, 1, 0.1, 0.7, 1.1, 0.1, 0.7, 1.6, 0.1, 0.8, 1.1, 0.1, 0.7, 1.5, 0.1, 0.7, 1.9, 0.1, 0.9, 1.6, 0.1, 0.8, 1.6, 0.1, 0.7, 1.6, 0.1, 0.8, 1.5, 0.1, 0.7, 1.6, 0.1, 0.7, 1.9, 0.1, 0.9, 1.6, 0.1, 0.7, 1.7, 0.1, 0.7, -1.7, 0.1, 0.7, -1.9, 0.1, 0.9, -1.8, 0.1, 0.6, -1.6, 0.1, 0.7, -1.7, 0.1, 0.7, -1.7, 0.1, 0.6, -1.7, 0.1, 0.7, -1.8, 0.1, 0.6, -1.7, 0.1, 0.6, -1.1, 0.1, 0.7, -1.6, 0.1, 0.7, -1.6, 0.1, 0.6, -1.6, 0.1, 0.7, -1.7, 0.1, 0.6, -1.6, 0.1, 0.6, -1, 0.1, 0.7, -1.1, 0.1, 0.7, -1.1, 0.1, 0.6, -1.1, 0.1, 0.7, -1.6, 0.1, 0.6, -1.1, 0.1, 0.6, -0.7, 0.1, 0.7, -0.8, 0.1, 0.7, -1, 0.1, 0.6, -1, 0.1, 0.7, -1.1, 0.1, 0.6, -1, 0.1, 0.6, -0.8, 0.1, 0.7, -0.9, 0.1, 0.7, -1, 0.1, 0.6, -0.9, 0.1, 0.7, -1, 0.1, 0.7, -1, 0.1, 0.6, -0.7, 0.1, 0.7, -1, 0.1, 0.6, -0.9, 0.1, 0.6, -0.7, 0.1, 0.7, -0.9, 0.1, 0.6, -0.8, 0.1, 0.6, -0.6, 0.1, 0.7, -0.7, 0.1, 0.7, -0.7, 0.1, 0.6, -0.7, 0.1, 0.7, -0.8, 0.1, 0.6, -0.7, 0.1, 0.6, 0.6, 0.1, 0.7, -0.6, 0.1, 0.7, -0.6, 0.1, 0.6, -0.6, 0.1, 0.7, -0.7, 0.1, 0.6, -0.6, 0.1, 0.6, 0.7, 0.1, 0.7, 0.6, 0.1, 0.7, 0.6, 0.1, 0.6, 0.6, 0.1, 0.7, -0.6, 0.1, 0.6, 0.6, 0.1, 0.6, 1, 0.1, 0.7, 0.9, 0.1, 0.7, 0.7, 0.1, 0.6, 0.7, 0.1, 0.7, 0.6, 0.1, 0.6, 0.7, 0.1, 0.6, 0.8, 0.1, 0.7, 0.7, 0.1, 0.7, 0.7, 0.1, 0.6, 0.9, 0.1, 0.7, 0.8, 0.1, 0.7, 0.7, 0.1, 0.6, 1, 0.1, 0.7, 0.7, 0.1, 0.6, 0.8, 0.1, 0.6, 1, 0.1, 0.7, 0.8, 0.1, 0.6, 0.9, 0.1, 0.6, 1.1, 0.1, 0.7, 1, 0.1, 0.7, 1, 0.1, 0.6, 1, 0.1, 0.7, 0.9, 0.1, 0.6, 1, 0.1, 0.6, 1.5, 0.1, 0.7, 1.1, 0.1, 0.7, 1.1, 0.1, 0.6, 1.1, 0.1, 0.7, 1, 0.1, 0.6, 1.1, 0.1, 0.6, 1.7, 0.1, 0.7, 1.6, 0.1, 0.7, 1.5, 0.1, 0.6, 1.5, 0.1, 0.7, 1.1, 0.1, 0.6, 1.5, 0.1, 0.6, 1.6, 0.1, 0.7, 1.5, 0.1, 0.7, 1.5, 0.1, 0.6, 1.9, 0.1, 0.9, 1.7, 0.1, 0.7, 1.7, 0.1, 0.6, 1.7, 0.1, 0.7, 1.5, 0.1, 0.6, 1.7, 0.1, 0.6, 1.9, 0.1, 0.9, 1.7, 0.1, 0.6, 1.8, 0.1, 0.6, -1.7, 0.1, 0.6, -1.8, 0.1, 0.6, -1.8, 0.1, -0.6, -1.8, 0.1, 0.6, -1.9, 0.1, 0.9, -1.8, 0.1, -0.6, -1.1, 0.1, 0.6, -1.6, 0.1, 0.6, -1.7, 0.1, -0.6, -1.7, 0.1, 0.6, -1.8, 0.1, -0.6, -1.7, 0.1, -0.6, -1.6, 0.1, 0.6, -1.7, 0.1, 0.6, -1.7, 0.1, -0.6, -1, 0.1, 0.6, -1.1, 0.1, 0.6, -1.7, 0.1, -0.6, -1, 0.1, 0.6, -1.7, 0.1, -0.6, -1.6, 0.1, -0.6, -1, 0.1, 0.6, -1.6, 0.1, -0.6, -1.1, 0.1, -0.6, -0.9, 0.1, 0.6, -1, 0.1, 0.6, -1, 0.1, -0.6, -1, 0.1, 0.6, -1.1, 0.1, -0.6, -1, 0.1, -0.6, -0.8, 0.1, 0.6, -0.9, 0.1, 0.6, -0.9, 0.1, -0.6, -0.9, 0.1, 0.6, -1, 0.1, -0.6, -0.9, 0.1, -0.6, -0.7, 0.1, 0.6, -0.8, 0.1, 0.6, -0.8, 0.1, -0.6, -0.8, 0.1, 0.6, -0.9, 0.1, -0.6, -0.8, 0.1, -0.6, -0.6, 0.1, 0.6, -0.7, 0.1, 0.6, -0.7, 0.1, -0.6, -0.7, 0.1, 0.6, -0.8, 0.1, -0.6, -0.7, 0.1, -0.6, 0.6, 0.1, 0.6, -0.6, 0.1, 0.6, -0.7, 0.1, -0.6, 0.7, 0.1, 0.6, 0.6, 0.1, 0.6, -0.7, 0.1, -0.6, 0.7, 0.1, 0.6, -0.7, 0.1, -0.6, -0.6, 0.1, -0.6, 0.7, 0.1, 0.6, -0.6, 0.1, -0.6, 0.6, 0.1, -0.6, 0.8, 0.1, 0.6, 0.7, 0.1, 0.6, 0.7, 0.1, -0.6, 0.7, 0.1, 0.6, 0.6, 0.1, -0.6, 0.7, 0.1, -0.6, 0.9, 0.1, 0.6, 0.8, 0.1, 0.6, 0.8, 0.1, -0.6, 0.8, 0.1, 0.6, 0.7, 0.1, -0.6, 0.8, 0.1, -0.6, 1, 0.1, 0.6, 0.9, 0.1, 0.6, 0.9, 0.1, -0.6, 0.9, 0.1, 0.6, 0.8, 0.1, -0.6, 0.9, 0.1, -0.6, 1.5, 0.1, 0.6, 1.1, 0.1, 0.6, 1, 0.1, -0.6, 1, 0.1, 0.6, 0.9, 0.1, -0.6, 1, 0.1, -0.6, 1.7, 0.1, 0.6, 1.5, 0.1, 0.6, 1, 0.1, -0.6, 1.1, 0.1, 0.6, 1, 0.1, 0.6, 1, 0.1, -0.6, 1.7, 0.1, 0.6, 1, 0.1, -0.6, 1.1, 0.1, -0.6, 1.7, 0.1, 0.6, 1.1, 0.1, -0.6, 1.6, 0.1, -0.6, 1.8, 0.1, 0.6, 1.7, 0.1, 0.6, 1.7, 0.1, -0.6, 1.7, 0.1, 0.6, 1.6, 0.1, -0.6, 1.7, 0.1, -0.6, 1.9, 0.1, 0.9, 1.8, 0.1, 0.6, 1.8, 0.1, -0.6, 1.8, 0.1, 0.6, 1.7, 0.1, -0.6, 1.8, 0.1, -0.6, -1.6, 0.1, -0.6, -1.7, 0.1, -0.6, -1.7, 0.1, -0.7, -1.7, 0.1, -0.6, -1.8, 0.1, -0.6, -1.7, 0.1, -0.7, -1.1, 0.1, -0.6, -1.6, 0.1, -0.6, -1.6, 0.1, -0.7, -1.6, 0.1, -0.6, -1.7, 0.1, -0.7, -1.6, 0.1, -0.7, -1, 0.1, -0.6, -1.1, 0.1, -0.6, -1.1, 0.1, -0.7, -1.1, 0.1, -0.6, -1.6, 0.1, -0.7, -1.1, 0.1, -0.7, -0.8, 0.1, -0.6, -0.9, 0.1, -0.6, -1, 0.1, -0.7, -1, 0.1, -0.6, -1.1, 0.1, -0.7, -1, 0.1, -0.7, -0.7, 0.1, -0.6, -0.8, 0.1, -0.6, -1, 0.1, -0.7, -0.9, 0.1, -0.6, -1, 0.1, -0.6, -1, 0.1, -0.7, -0.7, 0.1, -0.6, -1, 0.1, -0.7, -0.9, 0.1, -0.7, -0.7, 0.1, -0.6, -0.9, 0.1, -0.7, -0.8, 0.1, -0.7, -0.6, 0.1, -0.6, -0.7, 0.1, -0.6, -0.7, 0.1, -0.7, -0.7, 0.1, -0.6, -0.8, 0.1, -0.7, -0.7, 0.1, -0.7, 0.6, 0.1, -0.6, -0.6, 0.1, -0.6, -0.6, 0.1, -0.7, -0.6, 0.1, -0.6, -0.7, 0.1, -0.7, -0.6, 0.1, -0.7, 0.7, 0.1, -0.6, 0.6, 0.1, -0.6, 0.6, 0.1, -0.7, 0.6, 0.1, -0.6, -0.6, 0.1, -0.7, 0.6, 0.1, -0.7, 0.9, 0.1, -0.6, 0.8, 0.1, -0.6, 0.7, 0.1, -0.7, 0.7, 0.1, -0.6, 0.6, 0.1, -0.7, 0.7, 0.1, -0.7, 0.8, 0.1, -0.6, 0.7, 0.1, -0.6, 0.7, 0.1, -0.7, 1, 0.1, -0.6, 0.9, 0.1, -0.6, 0.7, 0.1, -0.7, 1, 0.1, -0.6, 0.7, 0.1, -0.7, 0.8, 0.1, -0.7, 1, 0.1, -0.6, 0.8, 0.1, -0.7, 0.9, 0.1, -0.7, 1.1, 0.1, -0.6, 1, 0.1, -0.6, 1, 0.1, -0.7, 1, 0.1, -0.6, 0.9, 0.1, -0.7, 1, 0.1, -0.7, 1.6, 0.1, -0.6, 1.1, 0.1, -0.6, 1.1, 0.1, -0.7, 1.1, 0.1, -0.6, 1, 0.1, -0.7, 1.1, 0.1, -0.7, 1.7, 0.1, -0.6, 1.6, 0.1, -0.6, 1.6, 0.1, -0.7, 1.6, 0.1, -0.6, 1.1, 0.1, -0.7, 1.6, 0.1, -0.7, 1.8, 0.1, -0.6, 1.7, 0.1, -0.6, 1.7, 0.1, -0.7, 1.7, 0.1, -0.6, 1.6, 0.1, -0.7, 1.7, 0.1, -0.7, -1.1, 0.1, -0.7, -1.6, 0.1, -0.7, -1.6, 0.1, -0.8, -1.6, 0.1, -0.7, -1.7, 0.1, -0.7, -1.6, 0.1, -0.8, -0.9, 0.1, -0.7, -1, 0.1, -0.7, -1.1, 0.1, -0.8, -1.1, 0.1, -0.7, -1.6, 0.1, -0.8, -1.1, 0.1, -0.8, -1, 0.1, -0.7, -1.1, 0.1, -0.7, -1.1, 0.1, -0.8, -0.9, 0.1, -0.7, -1.1, 0.1, -0.8, -1, 0.1, -0.8, -0.8, 0.1, -0.7, -0.9, 0.1, -0.7, -0.9, 0.1, -0.8, -0.9, 0.1, -0.7, -1, 0.1, -0.8, -0.9, 0.1, -0.8, -0.7, 0.1, -0.7, -0.8, 0.1, -0.7, -0.8, 0.1, -0.8, -0.8, 0.1, -0.7, -0.9, 0.1, -0.8, -0.8, 0.1, -0.8, -0.6, 0.1, -0.7, -0.7, 0.1, -0.7, -0.8, 0.1, -0.8, -0.6, 0.1, -0.7, -0.8, 0.1, -0.8, -0.7, 0.1, -0.8, 0.6, 0.1, -0.7, -0.6, 0.1, -0.7, -0.6, 0.1, -0.8, -0.6, 0.1, -0.7, -0.7, 0.1, -0.8, -0.6, 0.1, -0.8, 0.8, 0.1, -0.7, 0.7, 0.1, -0.7, 0.6, 0.1, -0.8, 0.6, 0.1, -0.7, -0.6, 0.1, -0.8, 0.6, 0.1, -0.8, 0.7, 0.1, -0.7, 0.6, 0.1, -0.7, 0.6, 0.1, -0.8, 0.8, 0.1, -0.7, 0.6, 0.1, -0.8, 0.7, 0.1, -0.8, 0.9, 0.1, -0.7, 0.8, 0.1, -0.7, 0.8, 0.1, -0.8, 0.8, 0.1, -0.7, 0.7, 0.1, -0.8, 0.8, 0.1, -0.8, 1.1, 0.1, -0.7, 1, 0.1, -0.7, 0.9, 0.1, -0.8, 0.9, 0.1, -0.7, 0.8, 0.1, -0.8, 0.9, 0.1, -0.8, 1, 0.1, -0.7, 0.9, 0.1, -0.7, 0.9, 0.1, -0.8, 1.1, 0.1, -0.7, 0.9, 0.1, -0.8, 1, 0.1, -0.8, 1.6, 0.1, -0.7, 1.1, 0.1, -0.7, 1.1, 0.1, -0.8, 1.1, 0.1, -0.7, 1, 0.1, -0.8, 1.1, 0.1, -0.8, 1.7, 0.1, -0.7, 1.6, 0.1, -0.7, 1.6, 0.1, -0.8, 1.6, 0.1, -0.7, 1.1, 0.1, -0.8, 1.6, 0.1, -0.8, -1.9, 0.1, 0.9, -2, 0.1, 0.9, -2, 0.1, -0.9, -1.8, 0.1, -0.6, -1.9, 0.1, 0.9, -1.9, 0.1, -0.9, -1.9, 0.1, 0.9, -2, 0.1, -0.9, -1.9, 0.1, -0.9, -1, 0.1, -0.8, -1.1, 0.1, -0.8, -1.9, 0.1, -0.9, -1.6, 0.1, -0.8, -1.7, 0.1, -0.7, -1.9, 0.1, -0.9, -1.7, 0.1, -0.7, -1.8, 0.1, -0.6, -1.9, 0.1, -0.9, -1.1, 0.1, -0.8, -1.6, 0.1, -0.8, -1.9, 0.1, -0.9, -1, 0.1, -0.8, -1.9, 0.1, -0.9, -1.8, 0.1, -0.9, -1, 0.1, -0.8, -1.8, 0.1, -0.9, -1.5, 0.1, -0.9, -1, 0.1, -0.8, -1.5, 0.1, -0.9, -1.1, 0.1, -0.9, -0.7, 0.1, -0.8, -0.8, 0.1, -0.8, -1, 0.1, -0.9, -1, 0.1, -0.8, -1.1, 0.1, -0.9, -1, 0.1, -0.9, -0.9, 0.1, -0.8, -1, 0.1, -0.8, -1, 0.1, -0.9, -0.8, 0.1, -0.8, -0.9, 0.1, -0.8, -1, 0.1, -0.9, -0.7, 0.1, -0.8, -1, 0.1, -0.9, -0.9, 0.1, -0.9, -0.7, 0.1, -0.8, -0.9, 0.1, -0.9, -0.8, 0.1, -0.9, 0.7, 0.1, -0.8, 0.6, 0.1, -0.8, -0.7, 0.1, -0.9, -0.7, 0.1, -0.8, -0.8, 0.1, -0.9, -0.7, 0.1, -0.9, 0.6, 0.1, -0.8, -0.6, 0.1, -0.8, -0.7, 0.1, -0.9, -0.6, 0.1, -0.8, -0.7, 0.1, -0.8, -0.7, 0.1, -0.9, 0.7, 0.1, -0.8, -0.7, 0.1, -0.9, -0.6, 0.1, -0.9, 0.7, 0.1, -0.8, -0.6, 0.1, -0.9, 0.6, 0.1, -0.9, 0.9, 0.1, -0.8, 0.8, 0.1, -0.8, 0.7, 0.1, -0.9, 0.7, 0.1, -0.8, 0.6, 0.1, -0.9, 0.7, 0.1, -0.9, 0.8, 0.1, -0.8, 0.7, 0.1, -0.8, 0.7, 0.1, -0.9, 1, 0.1, -0.8, 0.9, 0.1, -0.8, 0.7, 0.1, -0.9, 1, 0.1, -0.8, 0.7, 0.1, -0.9, 0.8, 0.1, -0.9, 1, 0.1, -0.8, 0.8, 0.1, -0.9, 0.9, 0.1, -0.9, 1.6, 0.1, -0.8, 1.1, 0.1, -0.8, 1, 0.1, -0.9, 1, 0.1, -0.8, 0.9, 0.1, -0.9, 1, 0.1, -0.9, 1.1, 0.1, -0.8, 1, 0.1, -0.8, 1, 0.1, -0.9, 1.6, 0.1, -0.8, 1, 0.1, -0.9, 1.1, 0.1, -0.9, 1.6, 0.1, -0.8, 1.1, 0.1, -0.9, 1.5, 0.1, -0.9, 1.8, 0.1, -0.6, 1.7, 0.1, -0.7, 1.8, 0.1, -0.9, 1.6, 0.1, -0.8, 1.5, 0.1, -0.9, 1.8, 0.1, -0.9, 1.7, 0.1, -0.7, 1.6, 0.1, -0.8, 1.8, 0.1, -0.9, 1.9, 0.1, 0.9, 1.8, 0.1, -0.6, 1.8, 0.1, -0.9, 2, 0.1, 0.9, 1.9, 0.1, 0.9, 1.9, 0.1, -0.9, 1.9, 0.1, 0.9, 1.8, 0.1, -0.9, 1.9, 0.1, -0.9, 2, 0.1, 0.9, 1.9, 0.1, -0.9, 2, 0.1, -0.9, -1.8, 0.1, -0.9, -1.9, 0.1, -0.9, -1.9, 0.1, -1, -1.5, 0.1, -0.9, -1.8, 0.1, -0.9, -1.8, 0.1, -1, -1.8, 0.1, -0.9, -1.9, 0.1, -1, -1.8, 0.1, -1, -1.5, 0.1, -0.9, -1.8, 0.1, -1, -1.7, 0.1, -1, -1.1, 0.1, -0.9, -1.5, 0.1, -0.9, -1.4, 0.1, -1, -0.9, 0.1, -0.9, -1, 0.1, -0.9, -1.1, 0.1, -1, -1.1, 0.1, -0.9, -1.4, 0.1, -1, -1.1, 0.1, -1, -1, 0.1, -0.9, -1.1, 0.1, -0.9, -1.1, 0.1, -1, -0.9, 0.1, -0.9, -1.1, 0.1, -1, -1, 0.1, -1, -0.8, 0.1, -0.9, -0.9, 0.1, -0.9, -0.9, 0.1, -1, -0.9, 0.1, -0.9, -1, 0.1, -1, -0.9, 0.1, -1, -0.6, 0.1, -0.9, -0.7, 0.1, -0.9, -0.8, 0.1, -1, -0.8, 0.1, -0.9, -0.9, 0.1, -1, -0.8, 0.1, -1, -0.7, 0.1, -0.9, -0.8, 0.1, -0.9, -0.8, 0.1, -1, -0.6, 0.1, -0.9, -0.8, 0.1, -1, -0.7, 0.1, -1, 0.6, 0.1, -0.9, -0.6, 0.1, -0.9, -0.6, 0.1, -1, -0.6, 0.1, -0.9, -0.7, 0.1, -1, -0.6, 0.1, -1, 0.8, 0.1, -0.9, 0.7, 0.1, -0.9, 0.6, 0.1, -1, 0.6, 0.1, -0.9, -0.6, 0.1, -1, 0.6, 0.1, -1, 0.7, 0.1, -0.9, 0.6, 0.1, -0.9, 0.6, 0.1, -1, 0.8, 0.1, -0.9, 0.6, 0.1, -1, 0.7, 0.1, -1, 0.9, 0.1, -0.9, 0.8, 0.1, -0.9, 0.8, 0.1, -1, 0.8, 0.1, -0.9, 0.7, 0.1, -1, 0.8, 0.1, -1, 1.1, 0.1, -0.9, 1, 0.1, -0.9, 0.9, 0.1, -1, 0.9, 0.1, -0.9, 0.8, 0.1, -1, 0.9, 0.1, -1, 1, 0.1, -0.9, 0.9, 0.1, -0.9, 0.9, 0.1, -1, 1.1, 0.1, -0.9, 0.9, 0.1, -1, 1, 0.1, -1, 1.5, 0.1, -0.9, 1.1, 0.1, -0.9, 1.1, 0.1, -1, 1.1, 0.1, -0.9, 1, 0.1, -1, 1.1, 0.1, -1, 1.5, 0.1, -0.9, 1.1, 0.1, -1, 1.4, 0.1, -1, 1.8, 0.1, -0.9, 1.5, 0.1, -0.9, 1.7, 0.1, -1, 1.9, 0.1, -0.9, 1.8, 0.1, -0.9, 1.8, 0.1, -1, 1.8, 0.1, -0.9, 1.7, 0.1, -1, 1.8, 0.1, -1, 1.9, 0.1, -0.9, 1.8, 0.1, -1, 1.9, 0.1, -1, -1.7, 0.1, -1, -1.8, 0.1, -1, -1.8, 0.1, -1.1, -1.5, 0.1, -0.9, -1.7, 0.1, -1, -1.7, 0.1, -1.1, -1.7, 0.1, -1, -1.8, 0.1, -1.1, -1.7, 0.1, -1.1, -1.5, 0.1, -0.9, -1.7, 0.1, -1.1, -1.6, 0.1, -1.1, -1, 0.1, -1, -1.1, 0.1, -1, -1.1, 0.1, -1.1, -1.1, 0.1, -1, -1.4, 0.1, -1, -1.1, 0.1, -1.1, -0.7, 0.1, -1, -0.8, 0.1, -1, -1, 0.1, -1.1, -1, 0.1, -1, -1.1, 0.1, -1.1, -1, 0.1, -1.1, -0.9, 0.1, -1, -1, 0.1, -1, -1, 0.1, -1.1, -0.8, 0.1, -1, -0.9, 0.1, -1, -1, 0.1, -1.1, -0.7, 0.1, -1, -1, 0.1, -1.1, -0.9, 0.1, -1.1, -0.7, 0.1, -1, -0.9, 0.1, -1.1, -0.8, 0.1, -1.1, -0.6, 0.1, -1, -0.7, 0.1, -1, -0.7, 0.1, -1.1, -0.7, 0.1, -1, -0.8, 0.1, -1.1, -0.7, 0.1, -1.1, 0.6, 0.1, -1, -0.6, 0.1, -1, -0.6, 0.1, -1.1, -0.6, 0.1, -1, -0.7, 0.1, -1.1, -0.6, 0.1, -1.1, 0.7, 0.1, -1, 0.6, 0.1, -1, 0.6, 0.1, -1.1, 0.6, 0.1, -1, -0.6, 0.1, -1.1, 0.6, 0.1, -1.1, 1, 0.1, -1, 0.9, 0.1, -1, 0.7, 0.1, -1.1, 0.7, 0.1, -1, 0.6, 0.1, -1.1, 0.7, 0.1, -1.1, 0.8, 0.1, -1, 0.7, 0.1, -1, 0.7, 0.1, -1.1, 0.9, 0.1, -1, 0.8, 0.1, -1, 0.7, 0.1, -1.1, 1, 0.1, -1, 0.7, 0.1, -1.1, 0.8, 0.1, -1.1, 1, 0.1, -1, 0.8, 0.1, -1.1, 0.9, 0.1, -1.1, 1.1, 0.1, -1, 1, 0.1, -1, 1, 0.1, -1.1, 1, 0.1, -1, 0.9, 0.1, -1.1, 1, 0.1, -1.1, 1.4, 0.1, -1, 1.1, 0.1, -1, 1.1, 0.1, -1.1, 1.1, 0.1, -1, 1, 0.1, -1.1, 1.1, 0.1, -1.1, 1.7, 0.1, -1, 1.5, 0.1, -0.9, 1.6, 0.1, -1.1, 1.8, 0.1, -1, 1.7, 0.1, -1, 1.7, 0.1, -1.1, 1.7, 0.1, -1, 1.6, 0.1, -1.1, 1.7, 0.1, -1.1, 1.8, 0.1, -1, 1.7, 0.1, -1.1, 1.8, 0.1, -1.1, -1.6, 0.1, -1.1, -1.7, 0.1, -1.1, -1.7, 0.1, -1.2, -1.5, 0.1, -0.9, -1.6, 0.1, -1.1, -1.6, 0.1, -1.2, -1.6, 0.1, -1.1, -1.7, 0.1, -1.2, -1.6, 0.1, -1.2, -1.4, 0.1, -1, -1.5, 0.1, -0.9, -1.5, 0.1, -1.2, -1.5, 0.1, -0.9, -1.6, 0.1, -1.2, -1.5, 0.1, -1.2, -1.1, 0.1, -1.1, -1.4, 0.1, -1, -1.4, 0.1, -1.2, -1.4, 0.1, -1, -1.5, 0.1, -1.2, -1.4, 0.1, -1.2, -1, 0.1, -1.1, -1.1, 0.1, -1.1, -1.4, 0.1, -1.2, -1, 0.1, -1.1, -1.4, 0.1, -1.2, -1.3, 0.1, -1.2, 1.4, 0.1, -1, 1.1, 0.1, -1.1, 1.3, 0.1, -1.2, 1.1, 0.1, -1.1, 1, 0.1, -1.1, 1.3, 0.1, -1.2, 1.5, 0.1, -0.9, 1.4, 0.1, -1, 1.4, 0.1, -1.2, 1.4, 0.1, -1, 1.3, 0.1, -1.2, 1.4, 0.1, -1.2, 1.6, 0.1, -1.1, 1.5, 0.1, -0.9, 1.5, 0.1, -1.2, 1.5, 0.1, -0.9, 1.4, 0.1, -1.2, 1.5, 0.1, -1.2, 1.7, 0.1, -1.1, 1.6, 0.1, -1.1, 1.6, 0.1, -1.2, 1.6, 0.1, -1.1, 1.5, 0.1, -1.2, 1.6, 0.1, -1.2, 1.7, 0.1, -1.1, 1.6, 0.1, -1.2, 1.7, 0.1, -1.2, -1.5, 0.1, -1.2, -1.6, 0.1, -1.2, -1.6, 0.1, -1.3, -1.4, 0.1, -1.2, -1.5, 0.1, -1.2, -1.5, 0.1, -1.3, -1.5, 0.1, -1.2, -1.6, 0.1, -1.3, -1.5, 0.1, -1.3, -1.3, 0.1, -1.2, -1.4, 0.1, -1.2, -1.4, 0.1, -1.3, -1.4, 0.1, -1.2, -1.5, 0.1, -1.3, -1.4, 0.1, -1.3, -1, 0.1, -1.1, -1.3, 0.1, -1.2, -1.3, 0.1, -1.3, -1.3, 0.1, -1.2, -1.4, 0.1, -1.3, -1.3, 0.1, -1.3, -1, 0.1, -1.1, -1.3, 0.1, -1.3, -1.2, 0.1, -1.3, 1.3, 0.1, -1.2, 1, 0.1, -1.1, 1.2, 0.1, -1.3, 1.4, 0.1, -1.2, 1.3, 0.1, -1.2, 1.3, 0.1, -1.3, 1.3, 0.1, -1.2, 1.2, 0.1, -1.3, 1.3, 0.1, -1.3, 1.5, 0.1, -1.2, 1.4, 0.1, -1.2, 1.4, 0.1, -1.3, 1.4, 0.1, -1.2, 1.3, 0.1, -1.3, 1.4, 0.1, -1.3, 1.6, 0.1, -1.2, 1.5, 0.1, -1.2, 1.5, 0.1, -1.3, 1.5, 0.1, -1.2, 1.4, 0.1, -1.3, 1.5, 0.1, -1.3, 1.6, 0.1, -1.2, 1.5, 0.1, -1.3, 1.6, 0.1, -1.3, -1.4, 0.1, -1.3, -1.5, 0.1, -1.3, -1.5, 0.1, -1.4, -1.3, 0.1, -1.3, -1.4, 0.1, -1.3, -1.4, 0.1, -1.4, -1.4, 0.1, -1.3, -1.5, 0.1, -1.4, -1.4, 0.1, -1.4, -1.2, 0.1, -1.3, -1.3, 0.1, -1.3, -1.3, 0.1, -1.4, -1.3, 0.1, -1.3, -1.4, 0.1, -1.4, -1.3, 0.1, -1.4, -1, 0.1, -1.1, -1.2, 0.1, -1.3, -1.2, 0.1, -1.4, -1.2, 0.1, -1.3, -1.3, 0.1, -1.4, -1.2, 0.1, -1.4, -0.9, 0.1, -1.1, -1, 0.1, -1.1, -1, 0.1, -1.4, -1, 0.1, -1.1, -1.2, 0.1, -1.4, -1, 0.1, -1.4, 1, 0.1, -1.1, 0.9, 0.1, -1.1, 1, 0.1, -1.4, 1.2, 0.1, -1.3, 1, 0.1, -1.1, 1, 0.1, -1.4, 1.3, 0.1, -1.3, 1.2, 0.1, -1.3, 1.2, 0.1, -1.4, 1.2, 0.1, -1.3, 1, 0.1, -1.4, 1.2, 0.1, -1.4, 1.4, 0.1, -1.3, 1.3, 0.1, -1.3, 1.3, 0.1, -1.4, 1.3, 0.1, -1.3, 1.2, 0.1, -1.4, 1.3, 0.1, -1.4, 1.5, 0.1, -1.3, 1.4, 0.1, -1.3, 1.4, 0.1, -1.4, 1.4, 0.1, -1.3, 1.3, 0.1, -1.4, 1.4, 0.1, -1.4, 1.5, 0.1, -1.3, 1.4, 0.1, -1.4, 1.5, 0.1, -1.4, -1.3, 0.1, -1.4, -1.4, 0.1, -1.4, -1.4, 0.1, -1.5, -1.2, 0.1, -1.4, -1.3, 0.1, -1.4, -1.3, 0.1, -1.5, -1.3, 0.1, -1.4, -1.4, 0.1, -1.5, -1.3, 0.1, -1.5, -1, 0.1, -1.4, -1.2, 0.1, -1.4, -1.2, 0.1, -1.5, -1.2, 0.1, -1.4, -1.3, 0.1, -1.5, -1.2, 0.1, -1.5, -0.8, 0.1, -1.1, -0.9, 0.1, -1.1, -0.9, 0.1, -1.5, -1, 0.1, -1.4, -1.2, 0.1, -1.5, -0.9, 0.1, -1.5, -0.9, 0.1, -1.1, -1, 0.1, -1.4, -0.9, 0.1, -1.5, 1.2, 0.1, -1.4, 1, 0.1, -1.4, 0.9, 0.1, -1.5, 1, 0.1, -1.4, 0.9, 0.1, -1.1, 0.9, 0.1, -1.5, 0.9, 0.1, -1.1, 0.8, 0.1, -1.1, 0.9, 0.1, -1.5, 1.3, 0.1, -1.4, 1.2, 0.1, -1.4, 1.2, 0.1, -1.5, 1.2, 0.1, -1.4, 0.9, 0.1, -1.5, 1.2, 0.1, -1.5, 1.4, 0.1, -1.4, 1.3, 0.1, -1.4, 1.3, 0.1, -1.5, 1.3, 0.1, -1.4, 1.2, 0.1, -1.5, 1.3, 0.1, -1.5, 1.4, 0.1, -1.4, 1.3, 0.1, -1.5, 1.4, 0.1, -1.5, -1.2, 0.1, -1.5, -1.3, 0.1, -1.5, -1.3, 0.1, -1.6, -0.9, 0.1, -1.5, -1.2, 0.1, -1.5, -1.2, 0.1, -1.6, -1.2, 0.1, -1.5, -1.3, 0.1, -1.6, -1.2, 0.1, -1.6, -0.9, 0.1, -1.5, -1.2, 0.1, -1.6, -1.1, 0.1, -1.6, -0.8, 0.1, -1.1, -0.9, 0.1, -1.5, -0.8, 0.1, -1.6, -0.9, 0.1, -1.5, -1.1, 0.1, -1.6, -0.8, 0.1, -1.6, -0.7, 0.1, -1.1, -0.8, 0.1, -1.1, -0.8, 0.1, -1.6, 0.6, 0.1, -1.1, -0.6, 0.1, -1.1, -0.7, 0.1, -1.6, -0.7, 0.1, -1.1, -0.8, 0.1, -1.6, -0.7, 0.1, -1.6, -0.6, 0.1, -1.1, -0.7, 0.1, -1.1, -0.7, 0.1, -1.6, 0.7, 0.1, -1.1, 0.6, 0.1, -1.1, -0.7, 0.1, -1.6, 0.7, 0.1, -1.1, -0.7, 0.1, -1.6, -0.6, 0.1, -1.6, 0.7, 0.1, -1.1, -0.6, 0.1, -1.6, 0.6, 0.1, -1.6, 0.8, 0.1, -1.1, 0.7, 0.1, -1.1, 0.7, 0.1, -1.6, 0.7, 0.1, -1.1, 0.6, 0.1, -1.6, 0.7, 0.1, -1.6, 1.2, 0.1, -1.5, 0.9, 0.1, -1.5, 0.8, 0.1, -1.6, 0.8, 0.1, -1.1, 0.7, 0.1, -1.6, 0.8, 0.1, -1.6, 0.9, 0.1, -1.5, 0.8, 0.1, -1.1, 0.8, 0.1, -1.6, 1.2, 0.1, -1.5, 0.8, 0.1, -1.6, 1.1, 0.1, -1.6, 1.3, 0.1, -1.5, 1.2, 0.1, -1.5, 1.2, 0.1, -1.6, 1.2, 0.1, -1.5, 1.1, 0.1, -1.6, 1.2, 0.1, -1.6, 1.3, 0.1, -1.5, 1.2, 0.1, -1.6, 1.3, 0.1, -1.6, -1.1, 0.1, -1.6, -1.2, 0.1, -1.6, -1.2, 0.1, -1.7, -0.8, 0.1, -1.6, -1.1, 0.1, -1.6, -1.1, 0.1, -1.7, -1.1, 0.1, -1.6, -1.2, 0.1, -1.7, -1.1, 0.1, -1.7, -0.7, 0.1, -1.6, -0.8, 0.1, -1.6, -1.1, 0.1, -1.7, -0.7, 0.1, -1.6, -1.1, 0.1, -1.7, -1, 0.1, -1.7, -0.6, 0.1, -1.6, -0.7, 0.1, -1.6, -0.7, 0.1, -1.7, -0.7, 0.1, -1.6, -1, 0.1, -1.7, -0.7, 0.1, -1.7, 0.6, 0.1, -1.6, -0.6, 0.1, -1.6, -0.6, 0.1, -1.7, -0.6, 0.1, -1.6, -0.7, 0.1, -1.7, -0.6, 0.1, -1.7, 0.7, 0.1, -1.6, 0.6, 0.1, -1.6, 0.6, 0.1, -1.7, 0.6, 0.1, -1.6, -0.6, 0.1, -1.7, 0.6, 0.1, -1.7, 1.1, 0.1, -1.6, 0.8, 0.1, -1.6, 0.7, 0.1, -1.7, 0.7, 0.1, -1.6, 0.6, 0.1, -1.7, 0.7, 0.1, -1.7, 0.8, 0.1, -1.6, 0.7, 0.1, -1.6, 0.7, 0.1, -1.7, 1.1, 0.1, -1.6, 0.7, 0.1, -1.7, 1, 0.1, -1.7, 1.2, 0.1, -1.6, 1.1, 0.1, -1.6, 1.1, 0.1, -1.7, 1.1, 0.1, -1.6, 1, 0.1, -1.7, 1.1, 0.1, -1.7, 1.2, 0.1, -1.6, 1.1, 0.1, -1.7, 1.2, 0.1, -1.7, -1, 0.1, -1.7, -1.1, 0.1, -1.7, -1.1, 0.1, -1.8, -0.6, 0.1, -1.7, -0.7, 0.1, -1.7, -1, 0.1, -1.8, -1, 0.1, -1.7, -1.1, 0.1, -1.8, -1, 0.1, -1.8, -0.7, 0.1, -1.7, -1, 0.1, -1.7, -1, 0.1, -1.8, -0.6, 0.1, -1.7, -1, 0.1, -1.8, -0.9, 0.1, -1.8, 0.6, 0.1, -1.7, -0.6, 0.1, -1.7, -0.6, 0.1, -1.8, -0.6, 0.1, -1.7, -0.9, 0.1, -1.8, -0.6, 0.1, -1.8, 1, 0.1, -1.7, 0.7, 0.1, -1.7, 0.6, 0.1, -1.8, 0.6, 0.1, -1.7, -0.6, 0.1, -1.8, 0.6, 0.1, -1.8, 0.7, 0.1, -1.7, 0.6, 0.1, -1.7, 0.6, 0.1, -1.8, 1, 0.1, -1.7, 0.6, 0.1, -1.8, 0.9, 0.1, -1.8, 1.1, 0.1, -1.7, 1, 0.1, -1.7, 1, 0.1, -1.8, 1, 0.1, -1.7, 0.9, 0.1, -1.8, 1, 0.1, -1.8, 1.1, 0.1, -1.7, 1, 0.1, -1.8, 1.1, 0.1, -1.8, -0.9, 0.1, -1.8, -1, 0.1, -1.8, -1, 0.1, -1.9, -0.6, 0.1, -1.8, -0.9, 0.1, -1.8, -0.9, 0.1, -1.9, -0.9, 0.1, -1.8, -1, 0.1, -1.9, -0.9, 0.1, -1.9, 0.9, 0.1, -1.8, 0.6, 0.1, -1.8, -0.9, 0.1, -1.9, 0.6, 0.1, -1.8, -0.6, 0.1, -1.8, -0.9, 0.1, -1.9, 1, 0.1, -1.8, 0.9, 0.1, -1.8, 0.9, 0.1, -1.9, 0.9, 0.1, -1.8, -0.9, 0.1, -1.9, 0.9, 0.1, -1.9, 1, 0.1, -1.8, 0.9, 0.1, -1.9, 1, 0.1, -1.9, 0.9, 0.1, -1.9, -0.9, 0.1, -1.9, -0.9, 0.1, -2, 0.9, 0.1, -1.9, -0.9, 0.1, -2, 0.9, 0.1, -2)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo0dd"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0vp51"]
+radius = 0.686439
 
-[sub_resource type="BoxMesh" id="BoxMesh_186s4"]
-material = SubResource("ShaderMaterial_oo0dd")
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3uonl"]
+radius = 0.711841
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3dbk"]
-albedo_color = Color(1, 0.290196, 1, 1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_66t8f"]
+radius = 0.702192
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jxf8t"]
+[sub_resource type="Shader" id="Shader_vshyg"]
+code = "shader_type spatial;
+render_mode unshaded, shadows_disabled, world_vertex_coords;
+#include \"funcs.gdshaderinc\"
+uniform vec3 color: source_color;
+uniform float lines1:hint_range(0.0, 200.0, 1.0) = 2.0;
+uniform float lines2:hint_range(0.0, 100.0, 1.0) = 2.0;
+uniform float _emission:hint_range(0.0,10.0)=1;
+uniform float _fresnel:hint_range(0.0,10.0)=1;
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh5nd"]
-albedo_color = Color(0.487671, 0.397349, 0.245734, 1)
+varying float rand_dist;
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x70g3"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
+void vertex(){
+	float distortion = sin(TIME*10.0 + VERTEX.y*30.0);
+	float rand_time = random(TIME);
+	rand_dist = step(rand_time, 0.05);
+	VERTEX.x += distortion * rand_dist;
+}
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01asd"]
-transparency = 1
-albedo_color = Color(0.0588235, 0.396078, 0.65098, 0.827451)
-metallic = 1.0
-metallic_specular = 1.0
+void fragment(){
+	float n = random2_1(SCREEN_UV);
+	float f = fresnel(_fresnel, NORMAL, VIEW);
+	
+	vec2 igrid = floor(SCREEN_UV * lines1);
+	float l1 = mod(igrid.y, 2.0);
+	l1 = mix(0.4,1.0,l1);
+	
+	vec2 uv2 = SCREEN_UV;
+	uv2.y -= TIME * 0.06;
+	vec2 igrid2 = floor(uv2*lines2);
+	float l2 = random(igrid2.y);
+	l2 = step(0.2, l2);
+	l2 = mix(0.2, 1.0, l2);
+	
+	//ALBEDO = vec3(l2);
+	float m = f*n*l1*l2;
+	ALPHA = m;
+	ALBEDO = color * mix(_emission, _emission*10.0, rand_dist);
+}"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2los"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 0.86
-metallic_specular = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lu4jo"]
+render_priority = 0
+shader = SubResource("Shader_vshyg")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dj81r"]
-albedo_color = Color(0.156863, 0, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mbux1"]
+render_priority = 0
+shader = ExtResource("2_5jcod")
+shader_parameter/color = Color(0.0941176, 0.886275, 0.541176, 1)
+shader_parameter/lines1 = 2.0
+shader_parameter/lines2 = 2.0
+shader_parameter/_emission = 10.0
+shader_parameter/_fresnel = 1.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_squfd"]
-albedo_color = Color(0.226707, 0.226707, 0.226707, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwu5"]
+render_priority = 0
+shader = SubResource("Shader_vshyg")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nxg3"]
-albedo_color = Color(0.286275, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vg844"]
-albedo_color = Color(0.286275, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5s7ig"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd5dn"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awmqi"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdb65"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtgdp"]
-albedo_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elloe"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p2f6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0atqx"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_esn1j"]
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7rej"]
-cull_mode = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dysa"]
-cull_mode = 2
-albedo_color = Color(0.498039, 0.498039, 0, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1i4c5"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smiup"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ricc2"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pienk"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gb64g"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm7aj"]
-cull_mode = 2
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_sltl1"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weul7"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfgm4"]
-albedo_color = Color(0, 0, 0.286275, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oau3f"]
-albedo_color = Color(0, 0, 0.286275, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkus3"]
-albedo_color = Color(0, 0, 0.286275, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tabxa"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ek84v"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyoog"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2xme"]
-cull_mode = 2
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jbwpq"]
-properties/0/path = NodePath("../BlueTeam/AmountText:text")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dwu6y"]
+properties/0/path = NodePath("../Assets/TeamA_plate3/TeamA_text:text")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath("../RedTeam/AmountText:text")
+properties/1/path = NodePath("../Assets/TeamB_plate2/TeamB_text:text")
 properties/1/spawn = true
 properties/1/replication_mode = 2
-properties/2/path = NodePath("../RandomTeam/AmountText:text")
+properties/2/path = NodePath("../Assets/Telepath/TeamX_text:text")
 properties/2/spawn = true
 properties/2/replication_mode = 2
-properties/3/path = NodePath("../SubViewport/ProgressBar:value")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath("../Sprite3D:visible")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gsbe"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gdyv"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 20
-border_width_right = 1
-border_width_bottom = 20
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_hiim5"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
 
 [node name="Assets" type="Node" parent="."]
 
-[node name="floors" type="Node" parent="Assets"]
-
-[node name="Floor3" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, 11.8425, 0.196878, 42.0535)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor3"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor3/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_tllhi")
-
-[node name="Floor4" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(20, 0, 0, 0, 5, 0, 0, 0, 20, -22.3279, 0.196878, 42.0535)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor4"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor4/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_gug83")
-
-[node name="Floor5" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, -41.5165, 0.196878, 33.3337)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor5"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor5/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_lbqit")
-
-[node name="Floor6" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, -34.9384, 0.196878, 39.6127)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor6"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor6/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ebel4")
-
-[node name="Floor7" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 41.0084, 0.196878, 39.6127)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor7"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor7/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_4e06n")
-
-[node name="Floor8" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 26.6563, 0.196878, -42.6131)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor8"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor8/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_rllbv")
-
-[node name="Floor9" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 35.9253, 0.196878, -33.045)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor9"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor9/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_h8bnx")
-
-[node name="Floor10" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 35.9253, 0.196878, -33.045)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor10"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor10/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_s8xm1")
-
-[node name="Floor11" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, 35.9253, 0.196878, -33.045)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor11"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor11/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_es6v5")
-
-[node name="Floor12" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 20, -32.2474, 0.196878, -40.2211)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor12"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor12/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_n7uqg")
-
-[node name="Floor13" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(25, 0, 0, 0, 5, 0, 0, 0, 20, 58.0516, 0.196878, -27.3639)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor13"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor13/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_jym0j")
-
-[node name="Floor14" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 15, 69.5898, 0.196878, -27.3171)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor14"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor14/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_6nyr7")
-
-[node name="Floor15" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 15, 52.5007, 0.196878, -15.8081)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor15"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor15/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_11k61")
-
-[node name="Floor16" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 40, 48.6643, 0.196878, 9.6512)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor16"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor16/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_to12q")
-
-[node name="Floor17" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 60, -48.6389, 0.196878, -3.95034)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor17"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor17/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_mr6ro")
-
-[node name="Floor18" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 55, -51.0802, 0.196878, -3.25282)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor18"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor18/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_5mqqh")
-
-[node name="Floor19" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 45, -53.5215, 0.196878, -5.34537)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor19"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor19/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_v8nw8")
-
-[node name="Floor20" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 35, 53.5469, 0.196878, 7.20987)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor20"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor20/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_smhf5")
-
-[node name="Floor" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 80, -0.0760918, 0.196878, -0.278904)
-mesh = SubResource("BoxMesh_m1p0p")
-skeleton = NodePath("../../..")
-
-[node name="Floor_text" type="Label3D" parent="Assets/floors/Floor"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0607237, 0.58613, -0.430689)
-visible = false
-outline_modulate = Color(0.53259, 0.0341948, 0.59166, 1)
-text = "Multiplayer"
+[node name="GAME_TITLE_!" type="Label3D" parent="Assets"]
+transform = Transform3D(100, 0, 0, 0, 0.269, 4.99275, 0, -79.8841, 4.30399, -21.1794, 3.12753, -41.065)
+pixel_size = 0.008
+modulate = Color(0.168627, 1, 1, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "SPACE."
 font_size = 19
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor"]
+[node name="GAME_TITLE_2" type="Label3D" parent="Assets"]
+transform = Transform3D(100, 0, 0, 0, 0.269, 4.99275, 0, -79.8841, 4.30399, 22.2523, 3.72506, -41.065)
+pixel_size = 0.008
+modulate = Color(0.168627, 1, 0.286275, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "RACE"
+font_size = 19
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_trlb1")
+[node name="floors" type="Node" parent="Assets"]
 
-[node name="Floor2" type="MeshInstance3D" parent="Assets/floors"]
-transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
+[node name="BlueBlock1" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -42.8108, 0.25, 42.1206)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock1/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_lbqit")
+
+[node name="BlueBlock2" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -78.7547, 0.25, -9.84095)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/BlueBlock2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59461, 0, -2.27159)
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock3" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -72.278, 0.25, -18.51)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/BlueBlock3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09536, 0, 0.848727)
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Assets/floors/BlueBlock3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87219, 0, -5.0674)
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock4" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -23.4094, 0.25, -31.4549)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock5" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.183571, 0.25, -65.8013)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock6" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -29.1514, 0.25, 51.2468)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock6/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock7" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -101.214, 0.25, 29.7007)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock7/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock8" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -101.214, 0.25, 29.7007)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock8/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock9" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -91.2354, 0.25, -26.1181)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock9/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/BlueBlock9/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7596, 0, -3.37841)
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock10" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -52.3184, 0.25, -58.2463)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock10/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock11" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 52.1022, 0.25, -42.2501)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock11"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock11/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock12" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 73.587, 0.25, -11.5245)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock12"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock12/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="BlueBlock13" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 92.5306, 0.25, 30.29)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_scou3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/BlueBlock13"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/BlueBlock13/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock1" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -88.2779, 0.25, 30.29)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock1/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock2" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -92.0503, 0.25, 37.8349)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock3" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -103.368, 0.25, 10.6193)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Assets/floors/Greenblock3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.873489, 0, -2.06726)
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock4" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -103.368, 0.25, 10.6193)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock5" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -97.3989, 0.25, 16.297)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock6" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -97.9812, 0.25, -6.55928)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock6/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock7" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -107.59, 0.25, -4.8123)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock7/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock8" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -107.881, 0.25, 22.4115)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock8/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock9" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -107.735, 0.25, -29.4156)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock9/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock10" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -102.931, 0.25, -29.27)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock10/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock11" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -92.8859, 0.25, -2.3374)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock11"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock11/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock12" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -98.1268, 0.25, -32.6184)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock12"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock12/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="Greenblock13" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -96.2342, 0.25, 25.4687)
+mesh = SubResource("BoxMesh_m1p0p")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lkq8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Greenblock13"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Greenblock13/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n7uqg")
+
+[node name="MainFloor" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(253.211, 0, 0, 0, 5, 0, 0, 0, 150.696, -0.0570517, 0.196868, -0.930843)
 mesh = SubResource("BoxMesh_m1p0p")
 skeleton = NodePath("../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/Floor2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/MainFloor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/Floor2/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_1s5wb")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/MainFloor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_trlb1")
+
+[node name="death_ray_beam" type="Node3D" parent="Assets/floors"]
+transform = Transform3D(-0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, -0.819152, 103.599, 20.2817, 34.6581)
+
+[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_wrpni")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_fjmpr")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_6grmh")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_tsht1")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
+material_override = SubResource("ShaderMaterial_jr2h5")
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_nlcyh")
+draw_pass_1 = ExtResource("4_2a2jn")
+
+[node name="death_ray_beam2" type="Node3D" parent="Assets/floors"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -132.525, 20.2817, 3.91461)
+
+[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_wrpni")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_fjmpr")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_6grmh")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_tsht1")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
+material_override = SubResource("ShaderMaterial_jr2h5")
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_nlcyh")
+draw_pass_1 = ExtResource("4_2a2jn")
+
+[node name="death_ray_beam3" type="Node3D" parent="Assets/floors"]
+transform = Transform3D(0.707107, -0.164135, -0.687793, 0, 0.972687, -0.232121, 0.707107, 0.164135, 0.687793, 18.5631, 26.7566, -98.6825)
+
+[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_wrpni")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_fjmpr")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
+material_override = SubResource("ShaderMaterial_6grmh")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_tsht1")
+draw_pass_1 = SubResource("CylinderMesh_v3oi4")
+
+[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
+material_override = SubResource("ShaderMaterial_jr2h5")
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_nlcyh")
+draw_pass_1 = ExtResource("4_2a2jn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Assets/floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.3171, 0)
+
+[node name="EntrancePortal" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -81.2813, 15.1935, 13.0329)
+material_override = SubResource("ShaderMaterial_cfijk")
+mesh = SubResource("QuadMesh_kh4cc")
+
+[node name="ExitPortal" type="MeshInstance3D" parent="Assets/floors"]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 66.0644, 15.1935, 13.3793)
+material_override = SubResource("ShaderMaterial_h0l07")
+mesh = SubResource("QuadMesh_kh4cc")
+
+[node name="Label3D" type="Label3D" parent="Assets/floors/ExitPortal"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0.000350296, -0.444379, -0.169855)
+modulate = Color(1, 0, 1, 1)
+text = "EXIT GAME"
 
 [node name="Head_text" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(79.2259, 0, 0, 0, 30.0812, 24.4244, 0, -42.177, 17.4198, -1.50678, 5.06902, -45.5789)
+transform = Transform3D(60, 0, 0, 0, 5, 0, 0, 0, 30, -3.15402, 0.196878, -44.4383)
 mesh = SubResource("TextMesh_8f32b")
 skeleton = NodePath("../..")
 
-[node name="Quit_plate" type="MeshInstance3D" parent="Assets"]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 24.208, 2.2, 19.724)
-material_override = SubResource("StandardMaterial3D_r0207")
-mesh = SubResource("BoxMesh_186s4")
+[node name="TeamA_plate3" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 16.7057, 3, -11.4601)
+mesh = ExtResource("4_2a2jn")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_m3dbk")
 
-[node name="Quit_text" type="Label3D" parent="Assets/Quit_plate"]
-transform = Transform3D(1.25, 0, 0, 0, -4.37114e-08, 1, 0, -1.3, -5.68248e-08, -0.236, 0.6, -0.293)
-text = "EXIT
+[node name="TeamA_text" type="Label3D" parent="Assets/TeamA_plate3"]
+transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, 0.00290442, 1.85072, 0.0292904)
+text = "0/2
 "
-outline_size = 7
 
-[node name="Press K to start" type="Label3D" parent="Assets"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -9.23112, 3, 16.1352)
-pixel_size = 0.1285
-text = "Press 'K' to play
+[node name="StaticBody3D2" type="StaticBody3D" parent="Assets/TeamA_plate3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/TeamA_plate3/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_cceer")
+
+[node name="TeamB_plate2" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -31.2536, 3, -11.1025)
+mesh = ExtResource("4_2a2jn")
+skeleton = NodePath("../..")
+
+[node name="TeamB_text" type="Label3D" parent="Assets/TeamB_plate2"]
+transform = Transform3D(5, 0, 0, 0, 1.83848, 0.141421, 0, -1.83848, 0.141421, 0.00774527, 1.82342, 0.0269635)
+text = "0/2
 "
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Assets/TeamB_plate2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/TeamB_plate2/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_cceer")
+
+[node name="Telepath" type="MeshInstance3D" parent="Assets"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -5.44242, 3, 37.7421)
+mesh = ExtResource("4_2a2jn")
+skeleton = NodePath("../..")
+
+[node name="TeamX_text" type="Label3D" parent="Assets/Telepath"]
+transform = Transform3D(5, 0, 0, 0, -8.74229e-09, 0.2, 0, -2.6, -1.1365e-07, 0.012434, 0.280173, 0.0123596)
+text = "0/4"
+
+[node name="Label3D" type="Label3D" parent="Assets/Telepath"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.043354, 0.982164, 2.34112)
+text = "RANDOM"
+font_size = 72
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Assets/Telepath"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/Telepath/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_cceer")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 9.81035, 40, 41.3175)
+transform = Transform3D(1, 0, 0, 0, 0.764314, 0.644845, 0, -0.644845, 0.764314, -3.92735, 60.2119, 69.7497)
 
-[node name="RandomTeam" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.482, 3.75, -21.332)
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_mask = 3
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="RandomTeam"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -14, -1, 0)
-shape = SubResource("BoxShape3D_jxf8t")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 16.9882, 14.27, -11.2987)
+shape = SubResource("CylinderShape3D_0vp51")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RandomTeam"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-mesh = ExtResource("2_8k7pi")
-surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
-surface_material_override/1 = SubResource("StandardMaterial3D_x70g3")
-surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
-surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
-surface_material_override/4 = SubResource("StandardMaterial3D_dj81r")
-surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
-surface_material_override/6 = SubResource("StandardMaterial3D_1nxg3")
-surface_material_override/7 = SubResource("StandardMaterial3D_vg844")
-surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
-surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
-surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
-surface_material_override/11 = SubResource("StandardMaterial3D_xdb65")
-surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
-surface_material_override/13 = SubResource("StandardMaterial3D_elloe")
-surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
-surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
-surface_material_override/16 = SubResource("StandardMaterial3D_esn1j")
-surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
-surface_material_override/18 = SubResource("StandardMaterial3D_0dysa")
-
-[node name="AmountText" type="Label3D" parent="RandomTeam"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -12.5, -0.99, 5)
-text = "0/4"
-font_size = 600
-
-[node name="RedTeam" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.327, 3.75, 0)
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.973)
 collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RedTeam"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -14, -1, 0)
-shape = SubResource("BoxShape3D_1i4c5")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -31.0671, 12.27, 6.02709)
+shape = SubResource("CylinderShape3D_3uonl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RedTeam"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-mesh = ExtResource("2_8k7pi")
-surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
-surface_material_override/1 = SubResource("StandardMaterial3D_smiup")
-surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
-surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
-surface_material_override/4 = SubResource("StandardMaterial3D_dj81r")
-surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
-surface_material_override/6 = SubResource("StandardMaterial3D_1nxg3")
-surface_material_override/7 = SubResource("StandardMaterial3D_vg844")
-surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
-surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
-surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
-surface_material_override/11 = SubResource("StandardMaterial3D_ricc2")
-surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
-surface_material_override/13 = SubResource("StandardMaterial3D_pienk")
-surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
-surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
-surface_material_override/16 = SubResource("StandardMaterial3D_gb64g")
-surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
-surface_material_override/18 = SubResource("StandardMaterial3D_qm7aj")
-
-[node name="AmountText" type="Label3D" parent="RedTeam"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -12.5, -0.99, 5)
-text = "0/2"
-font_size = 600
-
-[node name="BlueTeam" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.064, 3.75, 0)
+[node name="Area3D3" type="Area3D" parent="."]
 collision_mask = 3
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="BlueTeam"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 14, -1, 0)
-shape = SubResource("BoxShape3D_sltl1")
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D3"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -5.4137, 14.6375, 37.7954)
+shape = SubResource("CylinderShape3D_66t8f")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BlueTeam"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-mesh = ExtResource("2_8k7pi")
-surface_material_override/0 = SubResource("StandardMaterial3D_qh5nd")
-surface_material_override/1 = SubResource("StandardMaterial3D_weul7")
-surface_material_override/2 = SubResource("StandardMaterial3D_01asd")
-surface_material_override/3 = SubResource("StandardMaterial3D_i2los")
-surface_material_override/4 = SubResource("StandardMaterial3D_yfgm4")
-surface_material_override/5 = SubResource("StandardMaterial3D_squfd")
-surface_material_override/6 = SubResource("StandardMaterial3D_oau3f")
-surface_material_override/7 = SubResource("StandardMaterial3D_qkus3")
-surface_material_override/8 = SubResource("StandardMaterial3D_5s7ig")
-surface_material_override/9 = SubResource("StandardMaterial3D_dd5dn")
-surface_material_override/10 = SubResource("StandardMaterial3D_awmqi")
-surface_material_override/11 = SubResource("StandardMaterial3D_tabxa")
-surface_material_override/12 = SubResource("StandardMaterial3D_rtgdp")
-surface_material_override/13 = SubResource("StandardMaterial3D_ek84v")
-surface_material_override/14 = SubResource("StandardMaterial3D_3p2f6")
-surface_material_override/15 = SubResource("StandardMaterial3D_0atqx")
-surface_material_override/16 = SubResource("StandardMaterial3D_gyoog")
-surface_material_override/17 = SubResource("StandardMaterial3D_r7rej")
-surface_material_override/18 = SubResource("StandardMaterial3D_r2xme")
+[node name="AreaQuit" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
 
-[node name="AmountText" type="Label3D" parent="BlueTeam"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 12.5, -0.99, 5)
-text = "0/2"
-font_size = 600
+[node name="CollisionShapeQuit" type="CollisionShape3D" parent="AreaQuit"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 54.1706, 14.7313, 39.551)
+shape = SubResource("CylinderShape3D_66t8f")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
 
+[node name="SpaceshuttlelaneV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, 6.46725, 1.72, 14.5439)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttlelaneV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, -33.5387, 1.72, 14.5439)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttlelaneV5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, -73.3513, 1.72, 14.5439)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttlelaneV3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, 85.7061, 1.72, 14.5439)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttlelaneV4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, 8.74228e-07, 0, 10, 0, -8.74228e-07, 0, -10, 45.7002, 1.72, 14.5439)
+mesh = ExtResource("3_74055")
+
+[node name="SpaceshuttleV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.99988, 0, -0.0486954, 0, 10, 0, 0.0486954, 0, 9.99988, -8.36224, -4.097, 13.9343)
+material_override = ExtResource("9_jvh0i")
+mesh = ExtResource("4_2ubwl")
+surface_material_override/0 = SubResource("ShaderMaterial_lu4jo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71, 0)
+visible = false
+light_energy = 2.333
+shadow_enabled = true
+
+[node name="DeathRay" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, 14.7263, 2.61437, 40.3339)
+mesh = ExtResource("10_2jxae")
+
+[node name="DeathRay2" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.65685, 0, 5.65685, 0, 8, 0, -5.65685, 0, 5.65685, 34.3969, 2.61437, -17.5052)
+mesh = ExtResource("10_2jxae")
+
+[node name="DeathRay3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.65685, 0, 5.65685, 0, 8, 0, -5.65685, 0, -5.65685, -51.4942, 2.61437, -12.2914)
+mesh = ExtResource("10_2jxae")
+
+[node name="DeathRayMonitor" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8, 4.94538e-07, -4.94538e-07, 0, 5.65685, 5.65685, 6.99382e-07, 5.65685, -5.65685, 16.7885, 11.8458, 41.604)
+material_override = SubResource("ShaderMaterial_mbux1")
+mesh = ExtResource("11_cnme7")
+surface_material_override/0 = SubResource("ShaderMaterial_6fwu5")
+
+[node name="DeathRayMonitor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.65685, 4, -4, 0, 5.65685, 5.65685, 5.65685, 4, -4, -48.7907, 12.9481, -13.1979)
+material_override = SubResource("ShaderMaterial_mbux1")
+mesh = ExtResource("11_cnme7")
+surface_material_override/0 = SubResource("ShaderMaterial_lu4jo")
+
+[node name="DeathRayMonitor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.65685, -4, 4, 0, 5.65685, 5.65685, -5.65685, 4, -4, 35.5616, 13.2588, -14.7637)
+material_override = SubResource("ShaderMaterial_mbux1")
+mesh = ExtResource("11_cnme7")
+surface_material_override/0 = SubResource("ShaderMaterial_lu4jo")
+
+[node name="FuelTanks" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -70.9408, 0.00697434, 34.3549)
+mesh = ExtResource("9_5q0np")
+
+[node name="FuelTanks2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -71.0433, 0.00697434, 43.6769)
+mesh = ExtResource("9_5q0np")
+
+[node name="PowerRoomGriffinStationV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, -52.7433, 9.18146, 54.079)
+mesh = ExtResource("8_jiux7")
+
+[node name="PowerRoomGriffinStationV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 57.4234, 19.4727, -19.3436)
+mesh = ExtResource("8_jiux7")
+
+[node name="BalkonPowerRoomGriffinStationV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, -52.7257, 9.48459, 38.1129)
+mesh = ExtResource("14_1qpjt")
+
+[node name="BalkonPowerRoomGriffinStationV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 57.4133, 11.1043, -19.3143)
+mesh = ExtResource("14_1qpjt")
+
+[node name="StairCase" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.74846e-07, 0, 4, 0, 4, 0, -4, 0, -1.74846e-07, -41.4751, 2.69688, 38.8541)
+mesh = ExtResource("11_bv6il")
+
+[node name="HighResAntennaV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.22502, 0, 2.94944, 0, 6, 0, -2.94944, 0, 5.22502, -95.22, 3, -15.3575)
+mesh = ExtResource("5_qwdf3")
+
+[node name="VeryLargeArrayAntennaV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.04189, 0, 5.90885, 0, 6, 0, -5.90885, 0, -1.04189, 89.5966, 3, -17.5318)
+mesh = ExtResource("2_78cdj")
+
+[node name="StairCase2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 56.802, 2.66675, -8.09528)
+mesh = ExtResource("11_bv6il")
+
+[node name="PillarGriffinStationV1" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 66.2822, 2.69687, -28.8188)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 58.342, 2.69687, -21.6532)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV3" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -44.9953, 2.69687, 36.1778)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV4" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -44.9953, 2.69687, 44.7828)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV5" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -44.7905, 2.69687, 52.5682)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV6" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -51.7564, 2.69687, 48.6755)
+mesh = ExtResource("8_kywwj")
+
+[node name="PillarGriffinStationV7" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -51.7564, 2.69687, 32.7973)
+mesh = ExtResource("8_kywwj")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath("../Camera3D")
-replication_config = SubResource("SceneReplicationConfig_jbwpq")
+replication_config = SubResource("SceneReplicationConfig_dwu6y")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42.2136, 0)
-light_energy = 2.33
-omni_range = 100.0
-omni_attenuation = 0.258816
-
-[node name="SubViewport" type="SubViewport" parent="."]
-
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_1gsbe")
-theme_override_styles/fill = SubResource("StyleBoxFlat_0gdyv")
-show_percentage = false
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(14.4639, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5.345, 2.7, 11.1548)
-visible = false
-texture = SubResource("ViewportTexture_hiim5")
-
-[connection signal="body_entered" from="RandomTeam" to="." method="_on_random_body_entered"]
-[connection signal="body_exited" from="RandomTeam" to="." method="_on_random_body_exited"]
-[connection signal="body_entered" from="RedTeam" to="." method="_on_team1_body_entered"]
-[connection signal="body_exited" from="RedTeam" to="." method="_on_team1_body_exited"]
-[connection signal="body_entered" from="BlueTeam" to="." method="_on_team2_body_entered"]
-[connection signal="body_exited" from="BlueTeam" to="." method="_on_team2_body_exited"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_team2_body_entered"]
+[connection signal="body_exited" from="Area3D2" to="." method="_on_team2_body_exited"]
+[connection signal="body_entered" from="Area3D3" to="." method="_on_random_body_entered"]
+[connection signal="body_exited" from="Area3D3" to="." method="_on_random_body_exited"]
+[connection signal="body_entered" from="AreaQuit" to="." method="_on_random_body_entered"]
+[connection signal="body_exited" from="AreaQuit" to="." method="_on_random_body_exited"]
