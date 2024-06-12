@@ -6,8 +6,8 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
-# Excluding host
-var max_client_connections = 3
+
+var max_client_connections = 3 # Excluding the host
 
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
 var loaded_menu = preload("res://scenes/menu/menu.tscn")
@@ -38,6 +38,7 @@ func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
 	player_names[peer_id] = playername
 	player_connected.emit(peer_id, playername)
+	rpc_id(1, "_register_player_rpc", peer_id, playername)
 
 # Called when the host button is pressed
 func _on_host_pressed(port):
@@ -62,13 +63,30 @@ func remove_multiplayer_peer():
 
 func _on_player_connected(id):
 	if multiplayer.is_server():
-		_register_player.rpc(id, playername)
+		_send_player_info.rpc(playername)
 		player_added.emit(id)
+		rpc_id(id, "_sync_player_names", player_names) # Send updated player_names to new client
 
-@rpc("any_peer","call_local", "reliable")
-func _register_player(id, new_player_info):
+@rpc("any_peer", "reliable")
+func _send_player_info(new_player_info):
+	var id = multiplayer.get_unique_id()
 	player_names[id] = new_player_info
 	player_connected.emit(id, new_player_info)
+	if multiplayer.is_server():
+		rpc("_sync_player_names", player_names)
+
+@rpc("any_peer", "reliable")
+func _register_player_rpc(id, new_player_info):
+	player_names[id] = new_player_info
+	player_connected.emit(id, new_player_info)
+	if multiplayer.is_server():
+		rpc("_sync_player_names", player_names)
+
+@rpc("any_peer", "reliable")
+func _sync_player_names(names_dict):
+	player_names = names_dict.duplicate()
+	for id in player_names.keys():
+		player_connected.emit(id, player_names[id])
 
 @rpc("authority", "call_local", "reliable")
 func _hard_reset_to_lobby():
@@ -90,8 +108,10 @@ func _on_player_disconnected(id):
 				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
 	player_disconnected.emit(id)
 
+	player_disconnected.emit(id)
+
 func _on_leave_button_pressed():
-	var id = multiplayer_peer.get_unique_id()
+	var id = multiplayer.get_unique_id()
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
@@ -101,6 +121,7 @@ func _on_leave_button_pressed():
 		world.queue_free()
 	get_node("/root/Main/SpawnedItems").remove_child(world)
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
+
 
 
 func _on_server_disconnected():
