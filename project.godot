@@ -17,9 +17,10 @@ config/icon="res://assets/menu/icon.svg"
 
 [autoload]
 
-Network="*res://scripts/network/Network.gd"
-Global="*res://scripts/global.gd"
-Audiocontroller="*res://scripts/audiocontroller.gd"
+Network="*res://autoloads/Network.gd"
+Global="*res://autoloads/global.gd"
+Audiocontroller="*res://autoloads/audiocontroller.gd"
+SettingsContainer="*res://autoloads/SettingsDataContainer.gd"
 
 [editor_plugins]
 
