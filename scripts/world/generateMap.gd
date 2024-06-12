@@ -83,6 +83,8 @@ func build_map() -> void:
 	draw_windows()
 	draw_walls()
 	
+	copy_room(rooms[room_amount - 1], customRooms.end_room, 0)
+	
 	mirror_world()
 
 
@@ -124,20 +126,20 @@ func get_custom_rooms() -> Array:
 		rooms[i[0]][0] = customRooms.rooms[i[1]][0]
 		rooms[i[0]][1] = customRooms.rooms[i[1]][1]
 
-	room[room_amount - 1][0] = customRooms.end_room[0]
-	room[room_amount - 1][1] = customRooms.end_room[1]
+	rooms[room_amount - 1][0] = customRooms.end_room[0]
+	rooms[room_amount - 1][1] = customRooms.end_room[1]
 
 	reset_room_spacing()
 
 	return pairs
 
 
-func copy_room(orig : Array, custom : Array) -> void:
+func copy_room(orig : Array, custom : Array, start : int) -> void:
 	var MAX_HEIGHT = 2
 	
 	var ori_start = orig[2]
 	var custom_start = custom[2]
-	for y in range(1, MAX_HEIGHT):
+	for y in range(start, MAX_HEIGHT):
 		for x in orig[0]:
 			for z in orig[1]:
 				var item = customRooms.get_cell_item(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
@@ -153,12 +155,8 @@ func place_custom_room(pairs : Array) -> void:
 	for pair in pairs:
 		var orig = rooms[pair[0]]
 		var custom = customRooms.rooms[pair[1]]
-		copy_room(orig, custom)
-
-	var orig = rooms[room_amount - 1]
-	var custom = customRooms.end_room
-	copy_room(orig, custom)
-
+		copy_room(orig, custom, 1)
+	copy_room(rooms[room_amount - 1], customRooms.end_room, 0)
 
 # Rotates function to new 
 static func new_orientation(item : int, orientation : int) -> int:
