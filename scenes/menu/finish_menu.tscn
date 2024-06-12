@@ -1,3 +1,52 @@
-[gd_scene format=3 uid="uid://unahf8unm045"]
+[gd_scene load_steps=3 format=3 uid="uid://y44y1wmnacy2"]
 
-[node name="FinishMenu" type="Node2D"]
+[ext_resource type="Script" path="res://scripts/menu/finish_menu.gd" id="1_w7f6y"]
+[ext_resource type="Texture2D" uid="uid://bis8yamj1e4iv" path="res://assets/menu/BackgroundImage.png" id="2_gp8ye"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w7f6y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gp8ye")
+
+[node name="Holder" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -76.0
+offset_right = 118.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="Holder"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="Holder"]
+layout_mode = 2
+text = "Join"
+
+[node name="QuitButton" type="Button" parent="Holder"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Holder/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Holder/JoinButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Holder/QuitButton" to="." method="_on_quit_button_pressed"]
