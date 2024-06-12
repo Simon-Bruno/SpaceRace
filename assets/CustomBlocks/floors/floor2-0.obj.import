@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dj7xnktmygrjc"
+path="res://.godot/imported/floor2-0.obj-428ebadc5c6771cf9b085384abc64989.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor2-0.obj-428ebadc5c6771cf9b085384abc64989.mesh"]
+
+source_file="res://assets/CustomBlocks/floors/floor2-0.obj"
+dest_files=["res://.godot/imported/floor2-0.obj-428ebadc5c6771cf9b085384abc64989.mesh", "res://.godot/imported/floor2-0.obj-428ebadc5c6771cf9b085384abc64989.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

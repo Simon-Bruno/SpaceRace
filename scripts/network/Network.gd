@@ -6,19 +6,22 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
-signal player_spawned(object, id)
 # Excluding host
 var max_client_connections = 3
 
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
+var loaded_menu = preload("res://scenes/menu/menu.tscn")
+
+var inverted = 1
+var other_team_member_id = null
+var other_team_member_node = null
 
 #Username van de speler, moet veranderbaar zijn in game
 var playername
-var player_nodes = {}
 
 var player_teams = {}
 
-var players_connected = 0 
+var players_connected = 0
 var player_names = {}
 
 func _ready():
@@ -42,16 +45,17 @@ func _on_host_pressed(port):
 	if multiplayer_peer.create_server(port, max_client_connections) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
 		var world = loaded_world.instantiate()
-		get_node("/root/Main/Menu").queue_free()
-		get_node("/root/Main").add_child(world)
+		get_node("/root/Main/SpawnedItems/Menu").queue_free()
+		get_node("/root/Main/SpawnedItems").add_child(world)
 		await get_tree().create_timer(0.4).timeout
 		player_added.emit(1)
 		player_names[1] = playername
 		player_connected.emit(1, playername)
+		Audiocontroller.play_lobby_music()
 	else:
 		return false
 	return true
-	
+
 
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
@@ -66,25 +70,47 @@ func _register_player(id, new_player_info):
 	player_names[id] = new_player_info
 	player_connected.emit(id, new_player_info)
 
+@rpc("authority", "call_local", "reliable")
+func _hard_reset_to_lobby():
+	other_team_member_id = null
+	other_team_member_node = null
+	player_teams.clear()
+	inverted = 1
+
 func _on_player_disconnected(id):
 	player_names.erase(id)
+	if multiplayer.is_server():
+		var world = get_node_or_null("/root/Main/SpawnedItems/World")
+		if world != null:
+			world.queue_free()
+			get_node("/root/Main/SpawnedItems").remove_child(world)
+			_hard_reset_to_lobby.rpc()
+			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
+			for player_id in player_names.keys():
+				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
 	player_disconnected.emit(id)
-	if has_node(str(id)):
-		var player_node = get_node(str(id))
-		remove_child(player_node)
-		player_node.queue_free()
-	
+
 func _on_leave_button_pressed():
 	var id = multiplayer_peer.get_unique_id()
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
-	var menu = preload("res://scenes/menu/menu.tscn").instantiate()
-	get_node("/root/Main/World").queue_free()
-	get_node("/root/Main").add_child(menu)
-	
-	
+	multiplayer_peer.close()
+	var world = get_node("/root/Main/SpawnedItems/World")
+	world.queue_free()
+	get_node("/root/Main/SpawnedItems").remove_child(world)
+	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
+
+
 func _on_server_disconnected():
+	print("Server disconnect")
+	var world = get_node_or_null("/root/Main/SpawnedItems/World")
+	if world:
+		world.queue_free()
+	var lobby = get_node_or_null("/root/Main/SpawnedItems/Lobby")
+	if lobby:
+		lobby.queue_free()
+	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 	remove_multiplayer_peer()
 	player_names.clear()
 	server_disconnected.emit()
@@ -94,13 +120,11 @@ func _on_join_pressed(ip, port):
 	port = str(port).to_int()
 	if multiplayer_peer.create_client(ip, port) == OK:
 		multiplayer.multiplayer_peer = multiplayer_peer
-		var world = loaded_world.instantiate()
-		get_node("/root/Main/Menu").queue_free()
-		get_node("/root/Main").add_child(world)
+		get_node("/root/Main/SpawnedItems/Menu").queue_free()
+		Audiocontroller.play_lobby_music()
 		return true
 	return false
 
 
-@rpc("authority", "call_remote", "reliable")
-func _update_player_node_dict(dict):
-	player_nodes = dict
+func get_player_node_by_id(id):
+	return get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node(str(id))

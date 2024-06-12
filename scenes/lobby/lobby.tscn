@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=71 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
@@ -254,6 +254,17 @@ shader_parameter/lines1 = 2.0
 shader_parameter/lines2 = 2.0
 shader_parameter/_emission = 10.0
 shader_parameter/_fresnel = 1.806
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dwu6y"]
+properties/0/path = NodePath("../Assets/TeamA_plate3/TeamA_text:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("../Assets/TeamB_plate2/TeamB_text:text")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("../Assets/Telepath/TeamX_text:text")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
@@ -967,6 +978,7 @@ transform = Transform3D(1, 0, 0, 0, 0.764314, 0.644845, 0, -0.644845, 0.764314, 
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 16.9882, 14.27, -11.2987)
@@ -974,12 +986,14 @@ shape = SubResource("CylinderShape3D_0vp51")
 
 [node name="Area3D2" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -16.973)
+collision_mask = 3
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D2"]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -31.0671, 12.27, 6.02709)
 shape = SubResource("CylinderShape3D_3uonl")
 
 [node name="Area3D3" type="Area3D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D3"]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -5.4137, 14.6375, 37.7954)
@@ -1121,6 +1135,10 @@ mesh = ExtResource("8_kywwj")
 [node name="PillarGriffinStationV7" type="MeshInstance3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -51.7564, 2.69687, 32.7973)
 mesh = ExtResource("8_kywwj")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../Camera3D")
+replication_config = SubResource("SceneReplicationConfig_dwu6y")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
