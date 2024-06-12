@@ -1,6 +1,7 @@
 extends Node3D
 
 var loaded_item = preload("res://scenes/item/item.tscn")
+@onready var pause_menu = $CanvasLayer/PauseMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,3 +17,7 @@ func _ready():
 		var item = loaded_item.instantiate()
 		item.position = Vector3(4,5,4)
 		get_node("/root/Main/SpawnedItems/World").add_child(item, true)
+
+func _process(delta):
+	if Input.is_action_just_pressed("pause"):
+		pause_menu.handle_esc_input()

@@ -1,6 +1,7 @@
 extends Node
 
 @onready var start_timer = Timer.new()
+@onready var pause_menu = $CanvasLayer/PauseMenu
 
 var world = preload("res://scenes/world.tscn")
 
@@ -19,6 +20,8 @@ func _process(_delta):
 				_on_start_timer_timeout()
 		if not start_timer.is_stopped():
 			$SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
+	if Input.is_action_just_pressed("pause"):
+		pause_menu.handle_esc_input()
 
 func _ready():
 	if multiplayer.is_server():

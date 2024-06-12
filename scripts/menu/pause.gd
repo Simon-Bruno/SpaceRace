@@ -3,13 +3,14 @@ extends Control
 var game_status = false # Is true when game is paused, otherwise false
 
 func _ready():
-	var status = false 
+	var status = false
+	self.visible = false
 
-func _process(delta):
-	if Input.is_action_pressed("pause") and !game_status:
-		_pause_game()
-	elif Input.is_action_pressed("pause") and game_status:
+func handle_esc_input():
+	if game_status:
 		_resume_game()
+	else:
+		_pause_game()
 
 func _pause_game():
 	self.visible = true
@@ -33,3 +34,4 @@ func _on_titlescreen_button_pressed():
 	print("Titlescreen button pressed")
 	Network._on_leave_button_pressed()
 	self.visible = false
+	game_status = false

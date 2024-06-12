@@ -1,7 +1,8 @@
-[gd_scene load_steps=70 format=3 uid="uid://baog8vucx61nn"]
+[gd_scene load_steps=71 format=3 uid="uid://baog8vucx61nn"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="ArrayMesh" uid="uid://j1652dsjp1kp" path="res://assets/lobby/rocket_platform.obj" id="2_8k7pi"]
+[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.973094, 0.666402, 0.526047, 1)
@@ -619,6 +620,11 @@ show_percentage = false
 transform = Transform3D(14.4639, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5.345, 2.7, 11.1548)
 visible = false
 texture = SubResource("ViewportTexture_hiim5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_l42m8")]
+visible = true
 
 [connection signal="body_entered" from="RandomTeam" to="." method="_on_random_body_entered"]
 [connection signal="body_exited" from="RandomTeam" to="." method="_on_random_body_exited"]
