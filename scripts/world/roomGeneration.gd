@@ -37,7 +37,6 @@ func check_wall_placement(floor_plan: Array, x: int, z: int):
 		return false
 	if z + 2 < max_z and floor_plan[x][z + 2] and not floor_plan[x][z + 1]:
 		return false
-	print(x, ' ', z)
 	return true
 		
 func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array):
@@ -96,19 +95,16 @@ func add_walls(wall_list : Array, width : int, height : int, start : Vector3i):
 			x = randi_range(xmin, xmax)
 		else:
 			continue
-		print('x: ', x, ' z: ', z)
-		print(floor_plan.size(), floor_plan[0].size())
 		for i in range(-length / 2, length / 2):
 			place_wall(x, z, i, orientation, floor_plan)
 		# If length / 2 == 0, the upper loop places nothing.
 		if length / 2 == 0:
 			place_wall(x, z, 0, orientation, floor_plan)
-	print(floor_plan)
 
 
 func add_objects(objects_list):
 	pass
-	
+
 
 func fill_room(world_dict: Dictionary, start : Vector3i):
 	var room = world.room
