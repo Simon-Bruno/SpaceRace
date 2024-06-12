@@ -53,11 +53,11 @@ func _physics_process(delta):
 		move_and_slide()
 
 func fire_projectile():
-	if closest_target_node:
+	if closest_target_node and multiplayer.is_server():
 		var projectile_instance = projectile_scene.instantiate()
 		var direction_to_player = (closest_target_node.global_position - global_position).normalized()
 		var spawn_offset = direction_to_player * 1
-		get_parent().add_child(projectile_instance)
+		get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 		projectile_instance.global_transform.origin = global_transform.origin + spawn_offset
 		projectile_instance.direction = direction_to_player
 		

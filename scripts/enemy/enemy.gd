@@ -48,7 +48,7 @@ func _process(delta):
 		
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if !closest_target_node.respawn_immunity:
-			closest_target_node.take_damage(20)
+			closest_target_node.take_damage(closest_target_node.name, 20)
 	
 
 func _physics_process(delta):

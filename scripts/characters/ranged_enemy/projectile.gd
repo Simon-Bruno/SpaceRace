@@ -12,6 +12,9 @@ func _ready():
 	print("Projectile ready")
 
 func _physics_process(delta):
+	if not multiplayer.is_server():
+		return
+		
 	var motion = direction * speed * delta
 	motion.y = 0  # Prevent downward motion
 

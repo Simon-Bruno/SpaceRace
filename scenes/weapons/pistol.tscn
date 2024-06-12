@@ -21,9 +21,5 @@ mesh = SubResource("BoxMesh_m7821")
 transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 4, 0, 0, -2.57537)
 shape = SubResource("BoxShape3D_mk7hm")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn")
-spawn_path = NodePath("..")
-
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
