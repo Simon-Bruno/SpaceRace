@@ -739,10 +739,8 @@ mesh = SubResource("BoxMesh_m1p0p")
 skeleton = NodePath("../../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/floors/MainFloor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/MainFloor/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_trlb1")
 
 [node name="death_ray_beam" type="Node3D" parent="Assets/floors"]
