@@ -35,6 +35,7 @@ var room_variation_y : int = 1
 # a custom value useing set_seed()
 @export var game_seed : int = 0
 
+@export var start_pos : Vector3i = Vector3i(0, 0, 0)
 @export var generate_room : bool = true
 
 
@@ -248,6 +249,8 @@ func draw_rooms() -> void:
 
 		var xstart = rooms[i][2] + rooms[i][0] - 1
 		var xend = rooms[i + 1][2]
+		
+		start_pos = Vector3i(1, 10, zend * 2)
 
 		place_doors(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
 
