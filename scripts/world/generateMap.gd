@@ -86,7 +86,19 @@ func build_map() -> void:
 	copy_room(rooms[room_amount - 1], customRooms.end_room, 0)
 	
 	mirror_world()
+	
+# Generate finish pressure plate:
+	add_finish()
 
+# Adds the pressureplate in the last room
+func add_finish():
+	var lastroom_width = rooms[-1][0]
+	var lastroom_start = rooms[-1][2]
+	
+	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
+	plate.position = map_to_local(Vector3i((lastroom_start + lastroom_width - 5), 1, 0))
+	plate.interactable = null
+	add_child(plate, true)
 
 # Randomly picks n unique indexes.
 func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
