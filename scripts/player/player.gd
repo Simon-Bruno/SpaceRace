@@ -1,12 +1,13 @@
 extends CharacterBody3D
 
-@export var walk_speed = 15
+@export var walk_speed = 7
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 var getHitCooldown = true
 var health = Global.player_max_health
 var points = 0
 @export var push_force = 1
+
 
 var walk_acceleration = 40
 var walk_deceleration = 50
@@ -60,6 +61,8 @@ func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		$Pivot/AnimationPlayer.stop()
+		$Pivot/AnimationPlayer.play("jump")
 		vel.y = jump_impulse
 
 	if not is_on_floor():
@@ -101,6 +104,11 @@ func _physics_process(delta):
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
+		if velocity != Vector3.ZERO && velocity.y == 0:
+			if not $Pivot/AnimationPlayer.is_playing():
+				$Pivot/AnimationPlayer.play("walk")
+		if velocity == Vector3.ZERO:
+			$Pivot/AnimationPlayer.play("stop")
 		move_and_slide()
 	move_object()
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
