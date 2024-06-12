@@ -9,21 +9,24 @@ func _ready():
 	self.visible = false
 	settings.visible = false
 
+# Handles the ESC button event, to activate the pause menu
 func handle_esc_input():
 	if game_status:
 		_resume_game()
 	else:
 		_pause_game()
 
+# Will show the pause menu, while the game is still going
 func _pause_game():
+	print("Pausing game")
 	self.visible = true
 	game_status = true
-	print("Pausing game")
 
+# Hides the pause menu
 func _resume_game():
+	print("Resuming game")
 	self.visible = false
 	game_status = false
-	print("Resuming game")
 
 func _on_resume_button_pressed():
 	print("Resume button pressed")
