@@ -21,32 +21,57 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_gp8ye")
 
-[node name="Holder" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -118.0
-offset_top = -76.0
-offset_right = 118.0
-offset_bottom = 76.0
+offset_left = -400.0
+offset_top = -324.0
+offset_right = 400.0
+offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HostButton" type="Button" parent="Holder"]
-layout_mode = 2
-text = "Host"
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+modulate = Color(0.99558, 0.99558, 0.99558, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -648.0
+offset_right = 200.0
+offset_bottom = 452.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="JoinButton" type="Button" parent="Holder"]
+[node name="Holder" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="MarginContainer2/Holder"]
+custom_minimum_size = Vector2(200, 0)
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "Play again"
+
+[node name="JoinButton" type="Button" parent="MarginContainer2/Holder"]
 layout_mode = 2
 text = "Join"
 
-[node name="QuitButton" type="Button" parent="Holder"]
+[node name="QuitButton" type="Button" parent="MarginContainer2/Holder"]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="Holder/HostButton" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Holder/JoinButton" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="Holder/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/HostButton" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/JoinButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/JoinButton" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/QuitButton" to="." method="_on_quit_button_pressed"]
