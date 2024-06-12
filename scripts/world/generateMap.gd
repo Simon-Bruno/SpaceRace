@@ -406,6 +406,7 @@ func draw_walls() -> void:
 		# Place wall.
 		var orientation = orientations[idx]
 		self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
+			
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
