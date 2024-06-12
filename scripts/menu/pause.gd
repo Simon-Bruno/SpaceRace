@@ -1,10 +1,13 @@
 extends Control
 
+@onready var settings = $Settings
+
 var game_status = false # Is true when game is paused, otherwise false
 
 func _ready():
 	var status = false
 	self.visible = false
+	settings.visible = false
 
 func handle_esc_input():
 	if game_status:
@@ -28,7 +31,8 @@ func _on_resume_button_pressed():
 
 func _on_settings_button_pressed():
 	print("Settings button pressed")
-	# Link with settings page TBC
+	settings.set_process(true)
+	settings.visible = true
 
 func _on_titlescreen_button_pressed():
 	print("Titlescreen button pressed")

@@ -48,3 +48,5 @@ custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 size_flags_vertical = 8
 text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

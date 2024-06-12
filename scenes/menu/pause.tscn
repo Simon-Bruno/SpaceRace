@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh4dikqsn7v43"]
+[gd_scene load_steps=3 format=3 uid="uid://bh4dikqsn7v43"]
 
 [ext_resource type="Script" path="res://scripts/menu/pause.gd" id="1_sg6lf"]
+[ext_resource type="PackedScene" uid="uid://dpvimj5wn8htd" path="res://scenes/settings/settings.tscn" id="2_f7fdu"]
 
 [node name="PauseMenu" type="Control"]
 visible = false
@@ -52,6 +53,9 @@ text = "Settings"
 [node name="TitlescreenButton" type="Button" parent="GridContainer"]
 layout_mode = 2
 text = "Title Screen"
+
+[node name="Settings" parent="." instance=ExtResource("2_f7fdu")]
+layout_mode = 1
 
 [connection signal="pressed" from="GridContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="GridContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

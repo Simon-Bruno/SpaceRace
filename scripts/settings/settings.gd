@@ -1,5 +1,6 @@
 class_name Settings
 extends Control
+#var pause_menu = preload("res://scenes/menu/pause.tscn").instantiate()
 
 @onready var back_button = $MarginContainer/VBoxContainer/BackButton as Button
 
@@ -14,9 +15,7 @@ func on_exit_pressed() -> void:
 	exit_options_menu.emit()
 	set_process(false)
 
-
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-	#pass
-
-
+func _on_back_button_pressed():
+	self.visible = false
+	exit_options_menu.emit()
+	set_process(false)
