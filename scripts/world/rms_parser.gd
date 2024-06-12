@@ -1,9 +1,9 @@
 extends Node
 
 
-var wall_test = [ {"set_min_distance": "5", "set_max_distance": "8", "length": "6", "length_variation": "2" }, { "set_min_distance": "4", "set_max_distance": "6", "length": "3", "length_variation": "1" } ]
-var object_test = [ { "set_min_distance": "8", "set_max_distance": "10", "set_length": "3", "type": "LASER" }, { "set_min_distance": "17", "set_max_distance": "20", "type": "ITEM" }, { "set_min_distance": "4", "set_max_distance": "9", "type": "ITEM" } ]
-var enemy_test = [ { "set_min_distance": "5", "set_max_distance": "8", "set_group_size": "3", "loose_grouping": true } ]
+var wall_test = [ {"set_min_distance": 5, "set_max_distance": 8, "length": 6, "length_variation": 2 }, { "set_min_distance": 4, "set_max_distance": 6, "length": 3, "length_variation": 1 } ]
+var object_test = [ { "set_min_distance": 8, "set_max_distance": 10, "set_length": 3, "type": "LASER" }, { "set_min_distance": 17, "set_max_distance": 20, "type": "ITEM" }, { "set_min_distance": 4, "set_max_distance": 9, "type": "ITEM" } ]
+var enemy_test = [ { "set_min_distance": 5, "set_max_distance": 8, "set_group_size": 3, "loose_grouping": true } ]
 
 func _ready():
 	var rms_dict = parse_file("res://files/random_map_scripts/test.rms")
@@ -44,8 +44,10 @@ func segment_to_dict(segment : String) -> Dictionary:
 		if line == "":
 			continue
 		line = line.split(" ", false, 1)
-		if len(line) > 1:
-			dict[line[0]] = line[1]
+		if line[0] == "type":
+			dict["type"] = line[1]
+		elif len(line) > 1:
+			dict[line[0]] = int(line[1])
 		elif line[0] == "set_loose_grouping":
 			dict['loose_grouping'] = true
 	return dict
