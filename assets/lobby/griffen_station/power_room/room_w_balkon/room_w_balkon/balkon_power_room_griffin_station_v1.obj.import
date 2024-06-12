@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d02orydh5ukim"
+path="res://.godot/imported/balkon_power_room_griffin_station_v1.obj-90560a71bc84fe7c271756c824e1590a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/balkon_power_room_griffin_station_v1.obj-90560a71bc84fe7c271756c824e1590a.mesh"]
+
+source_file="res://assets/lobby/griffen_station/power_room/room_w_balkon/room_w_balkon/balkon_power_room_griffin_station_v1.obj"
+dest_files=["res://.godot/imported/balkon_power_room_griffin_station_v1.obj-90560a71bc84fe7c271756c824e1590a.mesh", "res://.godot/imported/balkon_power_room_griffin_station_v1.obj-90560a71bc84fe7c271756c824e1590a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
