@@ -21,8 +21,8 @@ func _ready():
 		var filename = "res://files/random_map_scripts/test.rms"
 		var world_dict : Dictionary = parser.parse_file(filename)
 		fill_room(world_dict, start)
-		
-func wall_check_direction(floor_plan : Array, x : int, z : int, max_x : int, max_z : int, orientation):
+
+func wall_check_vertical(floor_plan : Array, x : int, z : int, max_x : int, orientation):
 	if x > 0 and floor_plan[x - 1][z + 2 * orientation]:
 		return false
 	if floor_plan[x][z + 2 * orientation]:
@@ -30,7 +30,18 @@ func wall_check_direction(floor_plan : Array, x : int, z : int, max_x : int, max
 	if x + 1 < max_x and floor_plan[x + 1][z + 2 * orientation]:
 		return false
 	return true
-		
+
+
+func wall_check_horizontal(floor_plan : Array, x : int, z : int, max_z : int, orientation : int):
+	if z > 0 and floor_plan[x + 2 * orientation][z - 1]:
+		return false
+	if floor_plan[x + 2 * orientation][z]:
+		return false
+	if z + 1 < max_z and floor_plan[x + 2 * orientation][z + 1]:
+		return false
+	return true
+
+
 func check_wall_placement(floor_plan: Array, x: int, z: int):
 	var max_x : int = floor_plan.size()
 	var max_z : int = floor_plan[0].size()
@@ -39,27 +50,19 @@ func check_wall_placement(floor_plan: Array, x: int, z: int):
 	if z < 0 or z >= max_z:
 		return false
 	if z > 1 and not floor_plan[x][z - 1]:
-		if not wall_check_direction(floor_plan, x, z, max_x, max_z, -1):
+		if not wall_check_vertical(floor_plan, x, z, max_x, max_z, -1):
 			return false
 	if x > 1 and not floor_plan[x-1][z]:
-		if z > 0 and floor_plan[x - 2][z - 1]:
-			return false
-		if floor_plan[x - 2][z]:
-			return false
-		if z + 1 < max_z and floor_plan[x - 2][z + 1]:
+		if not wall_check_horizontal(floor_plan, x, z, max_z, -1):
 			return false
 	if x + 2 < max_x and not floor_plan[x + 1][z]:
-		if z > 0 and floor_plan[x + 2][z - 1]:
-			return false
-		if floor_plan[x + 2][z]:
-			return false
-		if z + 1 < max_z and floor_plan[x + 2][z + 1]:
+		if not wall_check_horizontal(floor_plan, x, z, max_z, 1):
 			return false
 	if z + 2 < max_z and not floor_plan[x][z + 1]:
-		if not wall_check_direction(floor_plan, x, z, max_x, max_z, 1):
+		if not wall_check_vertical(floor_plan, x, z, max_x, max_z, 1):
 			return false
 	return true
-		
+
 func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array):
 	var wall_block = wall_scene.instantiate()
 	var new_x = x
