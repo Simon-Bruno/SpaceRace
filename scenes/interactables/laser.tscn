@@ -18,25 +18,29 @@ size = Vector3(0.1, 0.6, 0.6)
 [node name="Laser" type="Node3D"]
 script = ExtResource("1_cdal3")
 
-[node name="Beam" type="Node3D" parent="."]
+[node name="Origin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0)
+
+[node name="Beam" type="Node3D" parent="Origin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Beam"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Origin/Beam"]
 mesh = SubResource("BoxMesh_muaet")
 
-[node name="DamageArea" type="Area3D" parent="Beam"]
+[node name="DamageArea" type="Area3D" parent="Origin/Beam"]
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Beam/DamageArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/Beam/DamageArea"]
 shape = SubResource("BoxShape3D_u6b37")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="Base" type="MeshInstance3D" parent="Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
+mesh = SubResource("BoxMesh_37bc0")
+skeleton = NodePath("../..")
+
+[node name="RayCast3D" type="RayCast3D" parent="Origin"]
 target_position = Vector3(48, 0, 0)
 collision_mask = 9
 
-[node name="Base" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
-mesh = SubResource("BoxMesh_37bc0")
-
-[connection signal="body_entered" from="Beam/DamageArea" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Beam/DamageArea" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_exited"]
