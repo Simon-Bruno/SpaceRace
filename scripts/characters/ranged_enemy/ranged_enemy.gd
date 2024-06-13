@@ -4,21 +4,19 @@ extends CharacterBody3D
 @export var acceleration : int = 2
 @export var fall_acceleration : float = 60.0
 @export var stopping_distance : float = 1.5
+@export var health : int = Global.ranged_enemy_max_health
+@export var projectile_scene : PackedScene
+
+@onready var HpBar = $SubViewport/HpBar
 
 var knockback_strength : float = 25.0
-
 var player_chase : bool  = false
 var targeted_player : Node = null
 var last_damaged_by : Node = null
-
-@export var health : int = 100
-var max_health: int = 100
+var max_health: int = Global.ranged_enemy_max_health
 var player_in_attack_zone : bool = false
-
 var closest_target_node : Node = null
-@export var projectile_scene : PackedScene
 var nodes_in_area : Array = []
-
 var fire_cooldown : float = 4.0 
 var time_since_last_fire : float = 0.0
 
@@ -31,9 +29,6 @@ func find_closest_player_in_range(nodes_array: Array):
 		if distance < min_distance:
 			min_distance = distance
 			closest_target_node = node
-
-
-@onready var HpBar = $SubViewport/HpBar
 
 func _enter_tree():
 	if multiplayer.is_server():
@@ -81,7 +76,7 @@ func take_damage(damage, source):
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
 	
-	print("ranged_enemy took damage on peer: " + str(multiplayer.get_unique_id()) + "health: " + str(health))
+	print("ranged_enemy took damage on peer:  " + str(multiplayer.get_unique_id()) + "  health:  " + str(health))
 	if health <= 0:
 		die() 
 

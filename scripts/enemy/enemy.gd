@@ -1,26 +1,21 @@
 extends CharacterBody3D
 
-@export var speed = 7
-@export var acceleration = 2
-@export var fall_acceleration = 60.0
-@export var stopping_distance = 1.5
+@export var speed : int = 7
+@export var acceleration : int = 2
+@export var fall_acceleration : float = 60.0
+@export var stopping_distance : float = 1.5
+@export var health : int = 100
 
-var knockback_strength = 25.0
-
-var player_chase = false
-var targeted_player = null
-var last_damaged_by = null
-
-@export var health = 100
-var max_health: int = 100
-var player_in_attack_zone = false
-
-var closest_target_node = null
+var knockback_strength : float = 25.0
+var targeted_player : Node = null
+var last_damaged_by : Node = null
+var max_health: int = Global.enemy_max_health
+var player_in_attack_zone : bool = false
+var closest_target_node : Node = null
 var nodes_in_area : Array = []
 
 func _ready():
 	add_to_group("Enemies")
-	pass
 
 # Function to find the closest node from an array of nodes
 func find_closest_player_in_range(nodes_array: Array):
@@ -76,8 +71,6 @@ func _physics_process(delta):
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
-		#print("body entered: ", body)
-		#print("array:", nodes_in_area)
 
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("Players"):
@@ -102,7 +95,7 @@ func take_damage(damage, source):
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
 	
-	print("enemy took damage on peer: " + str(multiplayer.get_unique_id()) + "health: " + str(health))	
+	print("enemy took damage on peer:  " + str(multiplayer.get_unique_id()) + "  health:  " + str(health))
 	if health <= 0:
 		die() 
 

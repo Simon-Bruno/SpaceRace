@@ -2,9 +2,6 @@ extends Node3D
 
 var enemies_in_weapon_range : Array = []
 var closest_target_node : Node = null
-
-var damage = 20
-
 @export var projectile_scene : PackedScene
 
 func attack():

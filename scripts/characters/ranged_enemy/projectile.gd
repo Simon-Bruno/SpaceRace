@@ -1,9 +1,7 @@
 extends RigidBody3D
 
-@export var lifespan : float = 5.0
 @export var speed : float = 30.0
 var damage : int = 50
-
 var direction: Vector3
 
 func _ready():
@@ -16,7 +14,6 @@ func _physics_process(delta):
 		return
 		
 	var motion = direction * speed * delta
-
 	var collision = move_and_collide(motion)
 
 	if collision:
@@ -26,8 +23,6 @@ func _physics_process(delta):
 			if collision.get_collider().has_method("take_damage"):
 				collision.get_collider().take_damage(damage, self)
 		queue_free()
-
-
 
 func _on_life_span_timeout():
 	queue_free()
