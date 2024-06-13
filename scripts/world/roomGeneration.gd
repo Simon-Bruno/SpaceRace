@@ -22,6 +22,15 @@ func _ready():
 		var world_dict : Dictionary = parser.parse_file(filename)
 		fill_room(world_dict, start)
 		
+func wall_check_direction(floor_plan : Array, x : int, z : int, max_x : int, max_z : int, orientation):
+	if x > 0 and floor_plan[x - 1][z + 2 * orientation]:
+		return false
+	if floor_plan[x][z + 2 * orientation]:
+		return false
+	if x + 1 < max_x and floor_plan[x + 1][z + 2 * orientation]:
+		return false
+	return true
+		
 func check_wall_placement(floor_plan: Array, x: int, z: int):
 	var max_x : int = floor_plan.size()
 	var max_z : int = floor_plan[0].size()
@@ -29,14 +38,26 @@ func check_wall_placement(floor_plan: Array, x: int, z: int):
 		return false
 	if z < 0 or z >= max_z:
 		return false
-	if floor_plan[x][z - 2] and not floor_plan[x][z - 1]:
-		return false
-	if floor_plan[x - 2][z] and not floor_plan[x-1][z]:
-		return false
-	if x + 2 < max_x and floor_plan[x + 2][z] and not floor_plan[x+1][z]:
-		return false
-	if z + 2 < max_z and floor_plan[x][z + 2] and not floor_plan[x][z + 1]:
-		return false
+	if z > 1 and not floor_plan[x][z - 1]:
+		if not wall_check_direction(floor_plan, x, z, max_x, max_z, -1):
+			return false
+	if x > 1 and not floor_plan[x-1][z]:
+		if z > 0 and floor_plan[x - 2][z - 1]:
+			return false
+		if floor_plan[x - 2][z]:
+			return false
+		if z + 1 < max_z and floor_plan[x - 2][z + 1]:
+			return false
+	if x + 2 < max_x and not floor_plan[x + 1][z]:
+		if z > 0 and floor_plan[x + 2][z - 1]:
+			return false
+		if floor_plan[x + 2][z]:
+			return false
+		if z + 1 < max_z and floor_plan[x + 2][z + 1]:
+			return false
+	if z + 2 < max_z and not floor_plan[x][z + 1]:
+		if not wall_check_direction(floor_plan, x, z, max_x, max_z, 1):
+			return false
 	return true
 		
 func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array):
@@ -74,7 +95,7 @@ func add_walls(wall_list : Array, width : int, height : int, start : Vector3i):
 		var zmin : int = 0
 		var zmax : int = 0
 		if orientation == HORIZONTAL and width > length:
-			zmin = max(2, start[2] - max_dist)
+			zmin = max(1, start[2] - max_dist)
 			zmax = min(height * 2 - 2, start[2] + max_dist)
 			z = randi_range(zmin, zmax)
 			if abs(start[2] - z) >= min_dist:
@@ -88,7 +109,7 @@ func add_walls(wall_list : Array, width : int, height : int, start : Vector3i):
 			zmax = min(height * 2 - length / 2, start[2] + max_dist)
 			z = randi_range(zmin, zmax)
 			if abs(start[2] - z) >= min_dist:
-				xmin = 2
+				xmin = 1
 			else:
 				xmin = start[0] + min_dist
 			xmax = min(width * 2 - 2, start[0] + max_dist)
