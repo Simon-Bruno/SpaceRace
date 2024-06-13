@@ -72,10 +72,56 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array):
 	else:
 		new_z += i
 	if not check_wall_placement(floor_plan, new_x - 1, new_z - 1):
-		return
+		return false
 	wall_block.position = Vector3i(new_x, 3, new_z)
 	floor_plan[new_x - 1][new_z - 1] = 1
 	add_child(wall_block, true)
+	return true
+
+func handle_wall(floor_plan : Array, wall : Dictionary, width : int, height: int, start : Vector3i):
+	var placed : bool = false
+	var min_dist : int  = wall['set_min_distance']
+	var max_dist : int = wall['set_max_distance']
+	var length : int = wall['length']
+	var variation : int = wall['length_variation']
+	length += randi_range(-variation, variation)
+	var orientation = randi() % 2
+	var x : int = 0
+	var z : int = 0
+	var xmin : int = 0
+	var xmax : int = 0
+	var zmin : int = 0
+	var zmax : int = 0
+	if orientation == HORIZONTAL and width > length:
+		zmin = max(1, start[2] - max_dist)
+		zmax = min(height * 2 - 2, start[2] + max_dist)
+		z = randi_range(zmin, zmax)
+		if abs(start[2] - z) >= min_dist:
+			xmin = length / 2
+		else:
+			xmin = start[0] + min_dist
+		xmax = min(width * 2 - length / 2 - 2, start[0] + max_dist)
+		x = randi_range(xmin, xmax)
+	elif height > length:
+		zmin = max(length / 2, start[2] - max_dist)
+		zmax = min(height * 2 - length / 2, start[2] + max_dist)
+		z = randi_range(zmin, zmax)
+		if abs(start[2] - z) >= min_dist:
+			xmin = 1
+		else:
+			xmin = start[0] + min_dist
+		xmax = min(width * 2 - 2, start[0] + max_dist)
+		x = randi_range(xmin, xmax)
+	else:
+		return false
+	for i in range(-length / 2, length / 2):
+		if place_wall(x, z, i, orientation, floor_plan):
+			placed = true
+	# If length / 2 == 0, the upper loop places nothing.
+	if length / 2 == 0:
+		if place_wall(x, z, 0, orientation, floor_plan):
+			placed = true
+	return placed
 
 func add_walls(wall_list : Array, width : int, height : int, start : Vector3i):
 	var floor_plan : Array[Array] = []
@@ -85,45 +131,8 @@ func add_walls(wall_list : Array, width : int, height : int, start : Vector3i):
 			row.append(0)
 		floor_plan.append(row)
 	for wall in wall_list:
-		var min_dist : int  = wall['set_min_distance']
-		var max_dist : int = wall['set_max_distance']
-		var length : int = wall['length']
-		var variation : int = wall['length_variation']
-		length += randi_range(-variation, variation)
-		var orientation = randi() % 2
-		var x : int = 0
-		var z : int = 0
-		var xmin : int = 0
-		var xmax : int = 0
-		var zmin : int = 0
-		var zmax : int = 0
-		if orientation == HORIZONTAL and width > length:
-			zmin = max(1, start[2] - max_dist)
-			zmax = min(height * 2 - 2, start[2] + max_dist)
-			z = randi_range(zmin, zmax)
-			if abs(start[2] - z) >= min_dist:
-				xmin = length / 2
-			else:
-				xmin = start[0] + min_dist
-			xmax = min(width * 2 - length / 2 - 2, start[0] + max_dist)
-			x = randi_range(xmin, xmax)
-		elif height > length:
-			zmin = max(length / 2, start[2] - max_dist)
-			zmax = min(height * 2 - length / 2, start[2] + max_dist)
-			z = randi_range(zmin, zmax)
-			if abs(start[2] - z) >= min_dist:
-				xmin = 1
-			else:
-				xmin = start[0] + min_dist
-			xmax = min(width * 2 - 2, start[0] + max_dist)
-			x = randi_range(xmin, xmax)
-		else:
-			continue
-		for i in range(-length / 2, length / 2):
-			place_wall(x, z, i, orientation, floor_plan)
-		# If length / 2 == 0, the upper loop places nothing.
-		if length / 2 == 0:
-			place_wall(x, z, 0, orientation, floor_plan)
+		if not handle_wall(floor_plan, wall, width, height, start):
+			handle_wall(floor_plan, wall, width, height, start)
 
 
 func add_objects(objects_list):
