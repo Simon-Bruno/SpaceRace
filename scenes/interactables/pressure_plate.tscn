@@ -1,32 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://3w41m2g82qdm"]
+[gd_scene load_steps=3 format=3 uid="uid://3w41m2g82qdm"]
 
 [ext_resource type="Script" path="res://scripts/interactables/pressure_plate.gd" id="1_p0lul"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eflyr"]
-albedo_color = Color(0.306699, 0.531991, 0.331917, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wlcrg"]
-material = SubResource("StandardMaterial3D_eflyr")
-size = Vector3(0.5, 0.2, 0.5)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr0lf"]
-size = Vector3(2, 1, 2)
+size = Vector3(1.20221, 0.67981, 1.20081)
 
 [node name="PressurePlateActivate" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.97042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.508426, 0)
 script = ExtResource("1_p0lul")
 
 [node name="PressurePlate" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PressurePlate"]
-mesh = SubResource("BoxMesh_wlcrg")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302796, 0)
 
 [node name="Area3D" type="Area3D" parent="PressurePlate"]
 collision_layer = 4
 collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PressurePlate/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000396729, -0.160095, 0.00152588)
 shape = SubResource("BoxShape3D_vr0lf")
 
 [connection signal="body_entered" from="PressurePlate/Area3D" to="." method="_on_area_3d_body_entered"]
