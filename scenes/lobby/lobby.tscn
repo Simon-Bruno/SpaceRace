@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://bgvenhiau3fn0"]
+[gd_scene load_steps=100 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
@@ -11,9 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://dp70b1b5w8ndg" path="res://assets/lobby/laser_beam/T_VFX_Noise_4.PNG" id="4_r3l3u"]
 [ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]
 [ext_resource type="Shader" uid="uid://601mw1n0k5te" path="res://assets/shaders/portal.tres" id="7_pane6"]
+[ext_resource type="Texture2D" uid="uid://jh7vktsl7hp8" path="res://assets/lobby/laser_beam/matrix.jpg" id="8_fck50"]
 [ext_resource type="ArrayMesh" uid="uid://t0gxr68td25" path="res://assets/lobby/griffen_station/power_room/room/power_room_griffin_station_v1.obj" id="8_jiux7"]
 [ext_resource type="ArrayMesh" uid="uid://ccxkqj7nv7uf0" path="res://assets/lobby/griffen_station/power_room/pillars/pillar_griffin_station_v1.obj" id="8_kywwj"]
 [ext_resource type="ArrayMesh" uid="uid://3jw0ui0pnhmc" path="res://assets/lobby/fuel_tanks/fuel_tanks.obj" id="9_5q0np"]
+[ext_resource type="Texture2D" uid="uid://dyx6m2eagpdf" path="res://assets/lobby/laser_beam/T_VFX_Flare_15.PNG" id="9_frs4a"]
 [ext_resource type="Material" uid="uid://demnrs8sun55r" path="res://assets/shaders/hologram_shader_material.tres" id="9_jvh0i"]
 [ext_resource type="ArrayMesh" uid="uid://e0tuqxiew5x0" path="res://assets/lobby/death_ray/death_ray.obj" id="10_2jxae"]
 [ext_resource type="ArrayMesh" uid="uid://c0r04e8lkblwi" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/stair_case/stair_case.obj" id="11_bv6il"]
@@ -311,16 +313,72 @@ color = Color(1.2, 0.5, 2.5, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cfijk"]
 render_priority = 0
 shader = ExtResource("7_pane6")
-shader_parameter/ColorIntensity = 7.0
+shader_parameter/ColorIntensity = 20.0
 shader_parameter/PortalColor = Color(0.0235294, 0.92549, 0.392157, 1)
+shader_parameter/Speed_X_Y = Vector2(0.3, -0.3)
+shader_parameter/Portal_Texture = ExtResource("8_fck50")
 
 [sub_resource type="QuadMesh" id="QuadMesh_kh4cc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blpj6"]
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 1, 0.2, 1)
+albedo_texture = ExtResource("9_frs4a")
+use_particle_trails = true
+
+[sub_resource type="Curve" id="Curve_dmmvu"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_mtl2k"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2vr31"]
+min_value = -2.0
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_afaav"]
+curve_x = SubResource("Curve_dmmvu")
+curve_y = SubResource("Curve_mtl2k")
+curve_z = SubResource("Curve_2vr31")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q2t0t"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 10.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = -0.2
+orbit_velocity_curve = SubResource("CurveXYZTexture_afaav")
+radial_velocity_min = 0.2
+radial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_ub2vw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h0l07"]
 render_priority = 0
 shader = ExtResource("7_pane6")
-shader_parameter/ColorIntensity = 8.0
+shader_parameter/ColorIntensity = 20.0
 shader_parameter/PortalColor = Color(1, 0, 1, 1)
+shader_parameter/Speed_X_Y = Vector2(-0.3, 0.3)
+shader_parameter/Portal_Texture = ExtResource("8_fck50")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_il0nx"]
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0, 1, 1)
+albedo_texture = ExtResource("9_frs4a")
+use_particle_trails = true
 
 [sub_resource type="TextMesh" id="TextMesh_8f32b"]
 
@@ -887,18 +945,42 @@ draw_pass_1 = ExtResource("4_2a2jn")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Assets/floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.3171, 0)
 
-[node name="EntrancePortal" type="MeshInstance3D" parent="Assets/floors"]
+[node name="VFX_PORTAL_ENTRANCE" type="Node3D" parent="Assets/floors"]
+
+[node name="EntrancePortal" type="MeshInstance3D" parent="Assets/floors/VFX_PORTAL_ENTRANCE"]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -81.2813, 15.1935, 13.0329)
 material_override = SubResource("ShaderMaterial_cfijk")
 mesh = SubResource("QuadMesh_kh4cc")
+skeleton = NodePath("../..")
 
-[node name="ExitPortal" type="MeshInstance3D" parent="Assets/floors"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Assets/floors/VFX_PORTAL_ENTRANCE"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -80.6214, 15.1899, 12.939)
+material_override = SubResource("StandardMaterial3D_blpj6")
+amount = 200
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_q2t0t")
+draw_pass_1 = SubResource("RibbonTrailMesh_ub2vw")
+
+[node name="VFX_PORTAL_EXIT" type="Node3D" parent="Assets/floors"]
+
+[node name="ExitPortal" type="MeshInstance3D" parent="Assets/floors/VFX_PORTAL_EXIT"]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 66.0644, 15.1935, 13.3793)
 material_override = SubResource("ShaderMaterial_h0l07")
 mesh = SubResource("QuadMesh_kh4cc")
+skeleton = NodePath("../..")
 
-[node name="Label3D" type="Label3D" parent="Assets/floors/ExitPortal"]
-transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0.000350296, -0.444379, -0.169855)
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Assets/floors/VFX_PORTAL_EXIT"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 65.9818, 15.1899, 12.939)
+material_override = SubResource("StandardMaterial3D_il0nx")
+amount = 200
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_q2t0t")
+draw_pass_1 = SubResource("RibbonTrailMesh_ub2vw")
+
+[node name="Label3D" type="Label3D" parent="Assets/floors/VFX_PORTAL_EXIT"]
+transform = Transform3D(3.27835e-06, 25, -1.09278e-06, 9.55343e-14, 1.09278e-06, 25, 25, -3.27835e-06, 4.77669e-14, 61.818, 4.08402, 13.3705)
 modulate = Color(1, 0, 1, 1)
 text = "EXIT GAME"
 
