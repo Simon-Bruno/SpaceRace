@@ -80,8 +80,8 @@ create_object ITEM
 
 create_object ITEM
 {
-    set_min_distance 4
-    set_max_distance 9
+    set_min_distance 12
+    set_max_distance 15
 }
 
 <ENEMY_GENERATION>
