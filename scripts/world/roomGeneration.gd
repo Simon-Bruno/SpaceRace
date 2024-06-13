@@ -72,9 +72,9 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	#var item = item_scene.instantiate()
 	#item.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	#add_child(item, true)
-	#var box = box_scene.instantiate()
-	#box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
-	#add_child(box, true)
+	var box = box_scene.instantiate()
+	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
+	add_child(box, true)
 	
 	var width : int = room[0]
 	var height : int = room[1]
@@ -83,17 +83,23 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	var door = door_scene.instantiate()
 	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
 	add_child(door)
-	door.activation_count = 1
+	door.activation_count = 2
 	
 	var pressure_plate = pressure_plate_scene.instantiate()
 	pressure_plate.position = Vector3i(randi_range(1, room[0] * 2 - 1), 3, randi_range(1, room[1] * 2 - 1))
 	add_child(pressure_plate)
 	pressure_plate.interactable = door
 	
-	#var button2 = button_scene.instantiate()
-	#button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	#add_child(button2)
-	#button2.interactable = door
+	var button = button_scene.instantiate()
+	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	add_child(button)
+	button.interactable = door
+
+	var button2 = button_scene.instantiate()
+	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 3, randi_range(1, room[1] * 2 - 1))
+	add_child(button2)
+	button2.interactable = door
+	button2.inverse = true
 
 #func _process(delta):
 	#pass
