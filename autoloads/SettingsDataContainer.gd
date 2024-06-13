@@ -2,6 +2,7 @@ extends Node
 
 
 @onready var DEFAULT_SETTINGS : DefaultSettingsResource = preload("res://resources/settings/DefaultSettings.tres")
+@onready var keybind_resource: PlayerKeybindResource = preload("res://resources/settings/PlayerKeybindDefault.tres")
 
 var window_mode_index : int = 0 
 var resolution_mode_index : int = 0
@@ -27,15 +28,22 @@ func make_storage_dict():
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
 		"fps_state": fps_state,
-		"move_left": InputMap.action_get_events("move_left"),
-		"move_right": InputMap.action_get_events("move_right"),
-		"move_back": InputMap.action_get_events("move_back"),
-		"move_forward": InputMap.action_get_events("move_forward"),
-		"jump": InputMap.action_get_events("jump"),
-		"interact": InputMap.action_get_events("interact")
+		"keybinds": create_keybinds_dict()
 	}
-	
+
 	return settings_container_dict
+
+
+func create_keybinds_dict():
+	var keybinds_container_dict = {
+		keybind_resource.MOVE_LEFT: keybind_resource.move_left_key,
+		keybind_resource.MOVE_RIGHT: keybind_resource.move_right_key,
+		keybind_resource.MOVE_FORWARD: keybind_resource.move_forward_key,
+		keybind_resource.MOVE_BACK: keybind_resource.move_back_key,
+		keybind_resource.JUMP: keybind_resource.jump_key
+	}
+
+	return keybinds_container_dict
 
 
 func get_window_mode_index():
@@ -74,6 +82,34 @@ func get_fps_meter():
 	return fps_state
 
 
+func get_keybind(action : String):
+	if !loaded_data.has("keybinds"):
+		match action:
+			keybind_resource.MOVE_LEFT:
+				return keybind_resource.DEFAULT_MOVE_LEFT_KEY
+			keybind_resource.MOVE_RIGHT:
+				return keybind_resource.DEFAULT_MOVE_RIGHT_KEY
+			keybind_resource.MOVE_FORWARD:
+				return keybind_resource.DEFAULT_MOVE_FORWARD_KEY
+			keybind_resource.MOVE_BACK:
+				return keybind_resource.DEFAULT_MOVE_BACK_KEY
+			keybind_resource.JUMP:
+				return keybind_resource.DEFAULT_JUMP_KEY
+	else:
+		match action:
+			keybind_resource.MOVE_LEFT:
+				return keybind_resource.move_left_key
+			keybind_resource.MOVE_RIGHT:
+				return keybind_resource.move_right_key
+			keybind_resource.MOVE_FORWARD:
+				return keybind_resource.move_forward_key
+			keybind_resource.MOVE_BACK:
+				return keybind_resource.move_back_key
+			keybind_resource.JUMP:
+				return keybind_resource.jump_key
+			
+
+
 func on_window_mode_selected(index : int):
 	window_mode_index = index
 
@@ -96,7 +132,40 @@ func on_sfx_sound_set(value: float):
 
 func on_fps_toggled(value : bool):
 	fps_state = value
-	#print(fps_state)
+
+
+func set_keybind(action : String, event):
+	match action:
+		keybind_resource.MOVE_LEFT:
+			keybind_resource.move_left_key = event
+		keybind_resource.MOVE_RIGHT:
+			keybind_resource.move_right_key = event
+		keybind_resource.MOVE_FORWARD:
+			keybind_resource.move_forward_key = event
+		keybind_resource.MOVE_BACK:
+			keybind_resource.move_back_key = event
+		keybind_resource.JUMP:
+			keybind_resource.jump_key = event
+
+
+func on_keybinds_loaded(data : Dictionary):
+	var loaded_move_left = InputEventKey.new()
+	var loaded_move_right = InputEventKey.new()
+	var loaded_move_forward = InputEventKey.new()
+	var loaded_move_back = InputEventKey.new()
+	var loaded_jump = InputEventKey.new()
+
+	loaded_move_left.set_physical_keycode(int(data.move_left))
+	loaded_move_right.set_physical_keycode(int(data.move_right))
+	loaded_move_forward.set_physical_keycode(int(data.move_forward))
+	loaded_move_back.set_physical_keycode(int(data.move_back))
+	loaded_jump.set_physical_keycode(int(data.jump))
+	
+	keybind_resource.move_left_key = loaded_move_left
+	keybind_resource.move_right_key = loaded_move_right
+	keybind_resource.move_forward_key = loaded_move_forward
+	keybind_resource.move_back_key = loaded_move_back
+	keybind_resource.jump_key = loaded_jump
 
 
 func on_settings_data_loaded(data : Dictionary):
@@ -108,6 +177,7 @@ func on_settings_data_loaded(data : Dictionary):
 	on_music_sound_set(loaded_data.music_volume)
 	on_sfx_sound_set(loaded_data.sfx_volume)
 	on_fps_toggled(loaded_data.fps_state)
+	on_keybinds_loaded(loaded_data.keybinds)
 
 
 func handle_signals():

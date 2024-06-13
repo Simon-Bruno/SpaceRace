@@ -12,6 +12,11 @@ func _ready():
 	set_process_unhandled_key_input(false)
 	set_action_name()
 	set_text_for_key()
+	load_keybinds()
+
+
+func load_keybinds():
+	rebind_action_key(SettingsContainer.get_keybind(action_name))
 
 
 func set_action_name():
@@ -32,14 +37,12 @@ func set_action_name():
 		"attack":
 			label.text = "Attack"
 		"chat_command":
-			label.text = "Command Opener"
+			label.text = "Open Chat"
 
 func set_text_for_key():
 	var action_events = InputMap.action_get_events(action_name)
-	#print(action_events)
 	var action_event = action_events[0]
 	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
-	#print(action_keycode)
 	button.text = "%s" % action_keycode
 
 
@@ -65,17 +68,24 @@ func _unhandled_key_input(event):
 
 
 func rebind_action_key(event):
-	var is_duplicate = false # Check whether a key is not used twice
-	var action_event = event
-	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
-	for i in get_tree().get_nodes_in_group("hotkey_button"):
-		if i.action_name != self.action_name:
-			if i.button.text == "%s" %action_keycode:
-				is_duplicate = true
-				break
-	if not is_duplicate:
-		InputMap.action_erase_events(action_name)
-		InputMap.action_add_event(action_name,event)
-		set_process_unhandled_key_input(false)
-		set_text_for_key()
-		set_action_name()
+	InputMap.action_erase_events(action_name)
+	InputMap.action_add_event(action_name, event)
+	SettingsContainer.set_keybind(action_name, event)
+	set_process_unhandled_key_input(false)
+	set_text_for_key()
+	set_action_name()
+	#var is_duplicate = false # Check whether a key is not used twice
+	#var action_event = event
+	#var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+	#for i in get_tree().get_nodes_in_group("hotkey_button"):
+		#if i.action_name != self.action_name:
+			#if i.button.text == "%s" %action_keycode:
+				#is_duplicate = true
+				#break
+	#if not is_duplicate:
+		#InputMap.action_erase_events(action_name)
+		#InputMap.action_add_event(action_name, event)
+		#SettingsContainer.set_keybind(action_name, event)
+		#set_process_unhandled_key_input(false)
+		#set_text_for_key()
+		#set_action_name()

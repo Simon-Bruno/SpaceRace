@@ -31,7 +31,7 @@ func _input(event):
 			message_display.visible = false
 
 
-func _process(delta):
+func _process(_delta):
 	fps_meter.text = "FPS: " + str(Engine.get_frames_per_second())
 
 
@@ -156,7 +156,6 @@ func leave_game():
 # Function to start an easter egg when the "/easteregg" command is submitted
 func easter_egg():
 	if message_input.text == "/easteregg":
-		video_stream_player
 		video_stream_player.play()
 		return true
 

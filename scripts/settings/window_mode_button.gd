@@ -61,8 +61,3 @@ func select_current_window_mode() -> void:
 				option_button.select(1)
 		_:
 			pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
