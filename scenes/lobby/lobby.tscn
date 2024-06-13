@@ -1,10 +1,11 @@
-[gd_scene load_steps=70 format=3 uid="uid://bgvenhiau3fn0"]
+[gd_scene load_steps=71 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
 [ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
 [ext_resource type="Texture2D" uid="uid://bo38py7b0g4ut" path="res://assets/lobby/laser_beam/T_VFX_Noise_9.PNG" id="3_ijbb2"]
+[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
 [ext_resource type="ArrayMesh" uid="uid://cfv3e04julldf" path="res://assets/lobby/telepath/telepath.obj" id="4_2a2jn"]
 [ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
 [ext_resource type="Texture2D" uid="uid://cypenukx706yr" path="res://assets/lobby/laser_beam/Noise1_tiled.png" id="4_7fblf"]
@@ -19,8 +20,6 @@
 [ext_resource type="ArrayMesh" uid="uid://c0r04e8lkblwi" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/stair_case/stair_case.obj" id="11_bv6il"]
 [ext_resource type="ArrayMesh" uid="uid://bgib0f2687iao" path="res://assets/lobby/death_ray/death_ray_monitor.obj" id="11_cnme7"]
 [ext_resource type="ArrayMesh" uid="uid://d02orydh5ukim" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/room_w_balkon/balkon_power_room_griffin_station_v1.obj" id="14_1qpjt"]
-[ext_resource type="ArrayMesh" uid="uid://j1652dsjp1kp" path="res://assets/lobby/rocket_platform.obj" id="2_8k7pi"]
-[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.71, 0.71, 0.71, 1)
@@ -970,17 +969,10 @@ shadow_enabled = true
 [node name="DeathRay" type="MeshInstance3D" parent="."]
 transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, 14.7263, 2.61437, 40.3339)
 mesh = ExtResource("10_2jxae")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_l42m8")]
-visible = true
-
-[connection signal="body_entered" from="RandomTeam" to="." method="_on_random_body_entered"]
-[connection signal="body_exited" from="RandomTeam" to="." method="_on_random_body_exited"]
-[connection signal="body_entered" from="RedTeam" to="." method="_on_team1_body_entered"]
-[connection signal="body_exited" from="RedTeam" to="." method="_on_team1_body_exited"]
-[connection signal="body_entered" from="BlueTeam" to="." method="_on_team2_body_entered"]
-[connection signal="body_exited" from="BlueTeam" to="." method="_on_team2_body_exited"]
 
 [node name="DeathRay2" type="MeshInstance3D" parent="."]
 transform = Transform3D(5.65685, 0, 5.65685, 0, 8, 0, -5.65685, 0, 5.65685, 34.3969, 2.61437, -17.5052)

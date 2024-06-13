@@ -22,6 +22,7 @@ func _ready():
 func load_data():
 	on_resolution_selected(SettingsContainer.get_resolution_mode_index())
 
+
 func on_resolution_selected(index : int):
 	SettingsSignalBus.emit_on_resolution_mode_selected(index)
 	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])

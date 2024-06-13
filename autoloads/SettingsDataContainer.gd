@@ -17,7 +17,6 @@ var loaded_data : Dictionary = {}
 func _ready():
 	handle_signals()
 	make_storage_dict()
-	#SettingsSignalBus.on_fps_toggled.connect(on_fps_toggled)
 
 
 func make_storage_dict():
@@ -170,7 +169,6 @@ func on_keybinds_loaded(data : Dictionary):
 
 func on_settings_data_loaded(data : Dictionary):
 	loaded_data = data
-	print(loaded_data)
 	on_window_mode_selected(loaded_data.window_mode_index)
 	on_resolution_mode_selected(loaded_data.resolution_mode_index)
 	on_master_sound_set(loaded_data.master_volume)

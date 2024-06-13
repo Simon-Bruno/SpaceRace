@@ -10,11 +10,6 @@ signal settings_dictionary(settings_dict : Dictionary)
 signal load_settings_data(settings_dict : Dictionary)
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
 func emit_load_settings_data(settings_dict : Dictionary):
 	load_settings_data.emit(settings_dict)
 

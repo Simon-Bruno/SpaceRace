@@ -81,7 +81,6 @@ func _on_settings_button_pressed():
 	$Holder.visible = false
 	settings.set_process(true)
 	settings.visible = true
-	#get_tree().change_scene_to_file("res://scenes/settings/settings.tscn")
 
 
 func on_back_to_menu():
