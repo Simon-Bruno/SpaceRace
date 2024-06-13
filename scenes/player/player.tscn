@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxnsgqthgkbxc"]
+[gd_scene load_steps=11 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
+[ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="2_8qfng"]
 [ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
+[ext_resource type="ArrayMesh" uid="uid://bx4tbrmxswfmc" path="res://assets/CustomBlocks/entities/player.obj" id="3_tlg8v"]
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v5bfw"]
@@ -18,19 +20,16 @@ properties/3/path = NodePath("FloatingName:text")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oikiw"]
-albedo_color = Color(0.608341, 0.465065, 0.736269, 1)
-roughness = 0.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_17as0"]
-material = SubResource("StandardMaterial3D_oikiw")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owxfs"]
+albedo_texture = ExtResource("2_8qfng")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4hx3q"]
-height = 1.0
+height = 1.5526
+radius = 0.600331
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2fdg3"]
 height = 1.0
-radius = 1.0
+radius = 1.04195
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sjmiw"]
 height = 1.0
@@ -47,7 +46,8 @@ replication_config = SubResource("SceneReplicationConfig_v5bfw")
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
-mesh = SubResource("BoxMesh_17as0")
+material_override = SubResource("StandardMaterial3D_owxfs")
+mesh = ExtResource("3_tlg8v")
 skeleton = NodePath("../../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
