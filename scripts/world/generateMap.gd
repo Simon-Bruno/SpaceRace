@@ -3,6 +3,9 @@ extends GridMap
 enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL, 
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF, WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR}
 
+# The room types.
+enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
+
 @onready var customRooms : GridMap = get_node("../CustomRooms")
 
 # At what y level is the floor
@@ -27,8 +30,10 @@ const room_margin : int = 4
 var room_variation_x : int = 1
 var room_variation_y : int = 1
 
+
 # Stores the locations of the rooms. Each entry is: [width, height, startX]
 @export var rooms : Array = []
+@export var roomTypes : Array = []
 @export var room : Array = []
 
 # Stores game seed, which will be randomized at start of game, can be set to 
@@ -83,6 +88,7 @@ func build_map() -> void:
 	draw_windows()
 	draw_walls()
 	
+	print(roomTypes)
 	mirror_world()
 
 
@@ -123,6 +129,7 @@ func get_custom_rooms() -> Array:
 	for i in pairs:
 		rooms[i[0]][0] = customRooms.rooms[i[1]][0]
 		rooms[i[0]][1] = customRooms.rooms[i[1]][1]
+		roomTypes[i[0]] = CUSTOM
 
 	reset_room_spacing()
 
@@ -213,6 +220,10 @@ static func sumXValues(the_rooms : Array) -> int:
 	return sum
 
 
+func pick_random_type() -> int:
+	var types = [TYPE1, TYPE2, TYPE3, TYPE4, TYPE5]
+	return types[randi() % types.size()]
+	
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
 	var xMax = room_width + room_variation_x
@@ -227,6 +238,10 @@ func define_rooms() -> void:
 		var start = sumXValues(rooms) + room_margin * i
 		
 		rooms.append([x, y, start])
+		roomTypes.append(pick_random_type())
+	
+	roomTypes[0] = STARTROOM
+	roomTypes[room_amount - 1] = ENDROOM
 
 
 # Draws the full floorplan by:
@@ -408,7 +423,6 @@ func draw_walls() -> void:
 		# Place wall.
 		var orientation = orientations[idx]
 		self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
-			
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
