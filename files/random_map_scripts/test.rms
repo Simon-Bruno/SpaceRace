@@ -28,6 +28,41 @@ create_wall {
     length_variation 3
 }
 
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 9
+    length 6
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 9
+    length 6
+    length_variation 3
+}
+
 <OBJECTS_GENERATION>
 
 create_object LASER

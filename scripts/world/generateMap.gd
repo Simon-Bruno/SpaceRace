@@ -17,7 +17,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 const CUSTOMROOMPERCENTAGE : float = 0.4
 
 # General room parameters
-const room_amount : int = 5
+const room_amount : int = 100
 const room_width  : int = 10
 const room_height : int = 10
 const room_margin : int = 7
