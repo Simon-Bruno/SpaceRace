@@ -5,7 +5,6 @@ extends Control
 var game_status = false # Is true when game is paused, otherwise false
 
 func _ready():
-	var status = false
 	self.visible = false
 	settings.visible = false
 

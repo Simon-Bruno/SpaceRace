@@ -36,7 +36,7 @@ func _deactivate_switch():
 	activate = false
 
 # Activate when button is pressed. Change the mesh to activate or deactivate.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("interact") and activate_text:
 		if player != null and interactable != null:
 			if !activate:

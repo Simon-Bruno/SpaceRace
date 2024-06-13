@@ -1,10 +1,9 @@
-class_name HotkeyRebindButton
+class_name KeybindRebindButton
 extends Control
 
-@onready var label = $HBoxContainer/Label as Label
-@onready var button = $HBoxContainer/Button as Button
-
 @export var action_name : String = "move_left"
+@onready var label = $HBoxContainer/Label
+@onready var button = $HBoxContainer/Button 
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,12 +49,12 @@ func _on_button_toggled(toggled_on):
 	if toggled_on:
 		button.text = "Press any key"
 		set_process_unhandled_key_input(toggled_on)
-		for i in get_tree().get_nodes_in_group("hotkey_button"):
+		for i in get_tree().get_nodes_in_group("keybind_button"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = false
 				i.set_process_unhandled_key_input(false)
 	else:
-		for i in get_tree().get_nodes_in_group("hotkey_button"):
+		for i in get_tree().get_nodes_in_group("keybind_button"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = true
 				i.set_process_unhandled_key_input(false)

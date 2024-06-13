@@ -17,7 +17,7 @@ func _ready():
 
 # This function handles different kinds of inputs given by the user
 func _input(event):
-	if Input.is_action_just_pressed("chat_command"):
+	if Input.is_action_just_pressed("open_chat"):
 		message_input.grab_focus()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		message_input.release_focus()
@@ -168,29 +168,34 @@ func stop_easter_egg():
 		return true
 
 
-#func mute_master():
-	#if message_input.text == "/mute_master":
-##func set_slider_value():
-	##h_slider.value = db_to_linear(AudioServer.get_bus_volume_db(0))
-	##set_audio_num_label_text()
-		#return true
-#
-#
-#func mute_music():
-	#if message_input.text == "/mute_music":
-		##func set_slider_value():
-	##h_slider.value = db_to_linear(AudioServer.get_bus_volume_db(1))
-	##set_audio_num_label_text()
-		#return true
-#
-#
-#func mute_sfx():
-	#if message_input.text == "/mute_sfx":
-		#pass
-				##func set_slider_value():
-	##h_slider.value = db_to_linear(AudioServer.get_bus_volume_db(2))
-	##set_audio_num_label_text()
-		#return 
+func mute_master():
+	if message_input.text == "/mute_master":
+		return true
+
+
+func unmute_master():
+	if message_input.text == "/unmute_master":
+		return true
+
+
+func mute_music():
+	if message_input.text == "/mute_music":
+		return true
+
+
+func unmute_music():
+	if message_input.text == "/unmute_music":
+		return true
+
+
+func mute_sfx():
+	if message_input.text == "/mute_sfx":
+		return true
+
+
+func unmute_sfx():
+	if message_input.text == "/unmute_sfx":
+		return true
 
 
 # Called when the message timer times out, hides the message display if the

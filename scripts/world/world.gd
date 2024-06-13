@@ -13,6 +13,6 @@ func _ready():
 		for id in Network.player_names.keys():
 			$PlayerSpawner.add_player_character(id)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		pause_menu.handle_esc_input()

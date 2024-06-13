@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3rv6ajd0fueq"]
 
-[ext_resource type="Script" path="res://scripts/network/Chat.gd" id="1_as2nd"]
+[ext_resource type="Script" path="res://scripts/network/chat.gd" id="1_6pb1w"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_1svpq"]
 file = "res://assets/easteregg/easteregg.ogg"
@@ -13,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 1
-script = ExtResource("1_as2nd")
+script = ExtResource("1_6pb1w")
 
 [node name="MessageDisplay" type="RichTextLabel" parent="."]
 layout_mode = 1

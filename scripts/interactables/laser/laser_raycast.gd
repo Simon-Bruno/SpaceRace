@@ -10,7 +10,7 @@ func _ready():
 	init_scale = laser.scale
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_colliding():
 		var pos = global_position
 		var target_pos = get_collision_point()

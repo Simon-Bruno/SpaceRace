@@ -55,7 +55,7 @@ func _set_this_player_to_drop_item(id, item_path):
 		item.get_parent().owned = false
 		item.get_parent().owned_node = null		
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("interact"):
 		if holding:
 			_drop_item()
