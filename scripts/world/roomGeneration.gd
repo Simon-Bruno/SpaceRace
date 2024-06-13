@@ -170,10 +170,16 @@ func handle_wall(floor_plan : Array, wall : Dictionary, width : int, height: int
 			placed = true
 	return placed
 
+# A custom sorting method to give long walls more priority.
+# This sorts the list from longest to smallest wall
+func wall_sort(wall_a, wall_b) -> bool:
+	return wall_a['length'] > wall_b['length']
+
 # This is a small function that relies on the helper functions to place the walls.
 # If the first try of placing a wall fails, it will give a second try,
 # but no more than 2.
 func add_walls(floor_plan : Array[Array], wall_list : Array, width : int, height : int, start : Vector3i) -> void:
+	wall_list.sort_custom(wall_sort)
 	for wall in wall_list:
 		if not handle_wall(floor_plan, wall, width, height, start):
 			handle_wall(floor_plan, wall, width, height, start)
