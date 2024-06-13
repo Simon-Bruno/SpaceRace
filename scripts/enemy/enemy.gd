@@ -86,13 +86,10 @@ func _on_enemy_hitbox_body_exited(body):
 		player_in_attack_zone = false
 		
 # Used in player script when attacking an enemy, apply_damage_to_enemy
-@rpc("any_peer", "call_local", "reliable")
-func take_damage(id, damage, source):
+func take_damage(damage, source):
 	#if not multiplayer.is_server():
 		#return
-	if id != str(multiplayer.get_unique_id()):
-		return 
-		
+
 	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
