@@ -68,7 +68,7 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	add_child(enemy, true)
 	
 	var laser = laser_scene.instantiate()
-	laser.position = Vector3i(2, 3, 5)
+	laser.position = Vector3i(1, 3, 5)
 	add_child(laser, true)
 	
 	var item = item_scene.instantiate()
@@ -97,6 +97,7 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
 	add_child(button2)
 	button2.interactable = laser
+	button2._activate_switch()
 
 #func _process(delta):
 	#pass
