@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caw7job4uxy1"
-path.bptc="res://.godot/imported/Milky_way_panorama.jpg-155d9037add894e1e9999bdc2bfb9a3f.bptc.ctex"
+uid="uid://cif5prqtpd8xw"
+path.s3tc="res://.godot/imported/moon_surface_2.png-d45cb012ceec64c4260ff59d7de4881c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://assets/lobby/background/Milky_way_panorama.jpg"
-dest_files=["res://.godot/imported/Milky_way_panorama.jpg-155d9037add894e1e9999bdc2bfb9a3f.bptc.ctex"]
+source_file="res://assets/lobby/background/moon_surface_2.png"
+dest_files=["res://.godot/imported/moon_surface_2.png-d45cb012ceec64c4260ff59d7de4881c.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

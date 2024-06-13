@@ -1,10 +1,10 @@
-[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://cmkeknttov3aq"]
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://cehh2tb18fi2b"]
 
-[ext_resource type="Texture2D" uid="uid://dic5j3hd0j50t" path="res://assets/lobby/death_ray/thunder_texture.png" id="1_n5q3m"]
+[ext_resource type="Texture2D" uid="uid://dic5j3hd0j50t" path="res://assets/lobby/death_ray/thunder_texture.png" id="1_j2spk"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8p3x6"]
 expanded_output_ports = [0]
-texture = ExtResource("1_n5q3m")
+texture = ExtResource("1_j2spk")
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_j1s5m"]
 
@@ -27,8 +27,8 @@ input_name = "color"
 default_input_values = [1, 0.0, 2, 1.0, 3, 0.0, 4, 0.7]
 
 [sub_resource type="Gradient" id="Gradient_0k37u"]
-offsets = PackedFloat32Array(0.183486, 0.729358)
-colors = PackedColorArray(0.941176, 0.101961, 4, 1, 1, 2, 10, 1)
+offsets = PackedFloat32Array(0.183486, 0.275229, 0.729358)
+colors = PackedColorArray(0.941176, 0.101961, 4, 1, 0.635644, 0.0322374, 0.26843, 1, 1, 2, 10, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wp8l4"]
 gradient = SubResource("Gradient_0k37u")

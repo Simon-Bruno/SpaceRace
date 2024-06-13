@@ -773,12 +773,6 @@ material_override = ExtResource("9_jvh0i")
 mesh = ExtResource("4_2ubwl")
 surface_material_override/0 = SubResource("ShaderMaterial_lu4jo")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 71, 0)
-visible = false
-light_energy = 2.333
-shadow_enabled = true
-
 [node name="DeathRay" type="MeshInstance3D" parent="."]
 transform = Transform3D(-3.49691e-07, 0, 8, 0, 8, 0, -8, 0, -3.49691e-07, 14.7263, 2.61437, 40.3339)
 mesh = ExtResource("10_2jxae")
@@ -1092,13 +1086,21 @@ draw_pass_1 = ExtResource("22_0x4uc")
 [node name="Contact_Bolt_A" type="GPUParticles3D" parent="DeathRayA"]
 transform = Transform3D(0.674772, 0.734069, -0.0763218, -0.29455, 0.362681, 0.88414, 0.6767, -0.574112, 0.460947, 1.30798, 9.4926, 8.63328)
 amount = 1
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Contact_Bolt_A2" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.674772, 0.734069, -0.0763218, -0.29455, 0.362681, 0.88414, 0.6767, -0.574112, 0.460947, 2.50595, 10.0845, 7.69635)
+amount = 1
+lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_vat6v")
 draw_pass_1 = ExtResource("22_0x4uc")
 
 [node name="DeathRayB" type="Node3D" parent="."]
 
 [node name="ThunderMeshB" type="MeshInstance3D" parent="DeathRayB"]
-transform = Transform3D(-2, 0, 1.74846e-07, 0, 0.5, 0, -1.74846e-07, 0, -2, 39.2601, 23.4849, -18.0528)
+transform = Transform3D(-2, 0.000338097, 0.00136571, 0.0013512, 0.5, -0.00177816, -0.00136688, -0.000444315, -2, 39.2601, 23.4849, -18.0528)
 mesh = ExtResource("22_0x4uc")
 skeleton = NodePath("../..")
 
@@ -1152,8 +1154,22 @@ draw_pass_1 = ExtResource("22_0x4uc")
 [node name="Contact_Bolt_B" type="GPUParticles3D" parent="DeathRayB"]
 transform = Transform3D(0.414007, -0.664403, -0.622228, 0.88437, 0.455492, 0.10206, 0.215611, -0.592533, 0.776155, -12.8386, 6.96354, 11.8013)
 amount = 1
+lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_vat6v")
 draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Contact_Bolt_B2" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(0.414007, -0.664403, -0.622228, 0.88437, 0.455492, 0.10206, 0.215611, -0.592533, 0.776155, -13.6348, 7.50939, 11.0912)
+amount = 1
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 95.8195, 0)
+visible = false
+light_energy = 2.333
+shadow_enabled = true
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
