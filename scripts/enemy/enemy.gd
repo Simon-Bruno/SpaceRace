@@ -6,6 +6,8 @@ extends CharacterBody3D
 @export var stopping_distance : float = 1.5
 @export var health : int = 100
 
+@onready var HpBar = $SubViewport/HpBar
+
 var knockback_strength : float = 25.0
 var targeted_player : Node = null
 var last_damaged_by : Node = null
@@ -26,9 +28,6 @@ func find_closest_player_in_range(nodes_array: Array):
 		if distance < min_distance:
 			min_distance = distance
 			closest_target_node = node
-
-
-@onready var HpBar = $SubViewport/HpBar
 
 func _enter_tree():
 	if multiplayer.is_server():
@@ -87,10 +86,13 @@ func _on_enemy_hitbox_body_exited(body):
 		player_in_attack_zone = false
 		
 # Used in player script when attacking an enemy, apply_damage_to_enemy
-#@rpc()
-func take_damage(damage, source):
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(id, damage, source):
 	#if not multiplayer.is_server():
 		#return
+	if id != str(multiplayer.get_unique_id()):
+		return 
+		
 	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
