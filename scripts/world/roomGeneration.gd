@@ -50,7 +50,7 @@ func check_wall_placement(floor_plan: Array, x: int, z: int):
 	if z < 0 or z >= max_z:
 		return false
 	if z > 1 and not floor_plan[x][z - 1]:
-		if not wall_check_vertical(floor_plan, x, z, max_x, max_z, -1):
+		if not wall_check_vertical(floor_plan, x, z, max_x, -1):
 			return false
 	if x > 1 and not floor_plan[x-1][z]:
 		if not wall_check_horizontal(floor_plan, x, z, max_z, -1):
@@ -59,7 +59,7 @@ func check_wall_placement(floor_plan: Array, x: int, z: int):
 		if not wall_check_horizontal(floor_plan, x, z, max_z, 1):
 			return false
 	if z + 2 < max_z and not floor_plan[x][z + 1]:
-		if not wall_check_vertical(floor_plan, x, z, max_x, max_z, 1):
+		if not wall_check_vertical(floor_plan, x, z, max_x, 1):
 			return false
 	return true
 
