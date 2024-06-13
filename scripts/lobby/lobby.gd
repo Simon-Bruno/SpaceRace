@@ -65,7 +65,7 @@ func check_start_conditions():
 
 func lobby_add_player_character(id):
 	player_id = id
-	print("lobby script add player character id: ", id)
+	#print("lobby script add player character id: ", id)
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	Network.player_nodes[id] = character

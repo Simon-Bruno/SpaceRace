@@ -4,3 +4,7 @@
 
 [node name="EnemySpawner" type="Node3D"]
 script = ExtResource("1_6c7dg")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/ranged_enemy.tscn", "res://scenes/enemy/enemy.tscn")
+spawn_path = NodePath("..")
