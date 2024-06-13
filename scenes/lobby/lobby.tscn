@@ -1,14 +1,11 @@
-[gd_scene load_steps=100 format=3 uid="uid://bgvenhiau3fn0"]
+[gd_scene load_steps=71 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
 [ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
-[ext_resource type="Texture2D" uid="uid://bo38py7b0g4ut" path="res://assets/lobby/laser_beam/T_VFX_Noise_9.PNG" id="3_ijbb2"]
 [ext_resource type="ArrayMesh" uid="uid://cfv3e04julldf" path="res://assets/lobby/telepath/telepath.obj" id="4_2a2jn"]
 [ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
-[ext_resource type="Texture2D" uid="uid://cypenukx706yr" path="res://assets/lobby/laser_beam/Noise1_tiled.png" id="4_7fblf"]
-[ext_resource type="Texture2D" uid="uid://dp70b1b5w8ndg" path="res://assets/lobby/laser_beam/T_VFX_Noise_4.PNG" id="4_r3l3u"]
 [ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]
 [ext_resource type="Shader" uid="uid://601mw1n0k5te" path="res://assets/shaders/portal.tres" id="7_pane6"]
 [ext_resource type="Texture2D" uid="uid://jh7vktsl7hp8" path="res://assets/lobby/laser_beam/matrix.jpg" id="8_fck50"]
@@ -21,6 +18,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c0r04e8lkblwi" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/stair_case/stair_case.obj" id="11_bv6il"]
 [ext_resource type="ArrayMesh" uid="uid://bgib0f2687iao" path="res://assets/lobby/death_ray/death_ray_monitor.obj" id="11_cnme7"]
 [ext_resource type="ArrayMesh" uid="uid://d02orydh5ukim" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/room_w_balkon/balkon_power_room_griffin_station_v1.obj" id="14_1qpjt"]
+[ext_resource type="ArrayMesh" uid="uid://bjmenv16dpmjv" path="res://assets/lobby/death_ray/thunder_editable.tres" id="22_0x4uc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.71, 0.71, 0.71, 1)
@@ -54,261 +52,6 @@ shader_parameter/_fresnel = 1.8
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_trlb1"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_rxmwi"]
-operator = 2
-
-[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_hdd7f"]
-parameter_name = "Texture_Power"
-default_value_enabled = true
-default_value = 1.5
-
-[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_qjd1b"]
-parameter_name = "Speed"
-default_value_enabled = true
-
-[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_177hg"]
-parameter_name = "Energy_Texture"
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qcwa3"]
-source = 5
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tcn7a"]
-
-[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_631pr"]
-default_input_values = [0, Quaternion(0, 0, 0, 0)]
-op_type = 2
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1j44h"]
-default_input_values = [0, 0.0, 1, 1.0]
-operator = 5
-
-[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_7xlo1"]
-parameter_name = "Gradient_Power"
-default_value_enabled = true
-default_value = 1.0
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_jj6tw"]
-operator = 2
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_3gxif"]
-input_name = "color"
-
-[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_l7lrv"]
-default_input_values = [0, Quaternion(0, 0, 0, 0)]
-op_type = 2
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1br3q"]
-default_input_values = [0, 0.0, 1, 1.5]
-operator = 5
-
-[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_3qscq"]
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_hmkty"]
-input_name = "time"
-
-[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_bu4ni"]
-default_input_values = [0, Vector2(0, 0), 1, Vector2(2, 1)]
-op_type = 0
-operator = 2
-
-[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_fvqil"]
-default_input_values = [0, Quaternion(0, 0, 0, 0)]
-op_type = 2
-
-[sub_resource type="VisualShader" id="VisualShader_ap1ec"]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded;
-
-uniform vec2 Speed = vec2(0.000000, 0.000000);
-uniform sampler2D Energy_Texture;
-uniform float Texture_Power = 1.5;
-uniform sampler2D tex_frg_15;
-uniform float Gradient_Power = 1;
-
-
-
-void fragment() {
-// Input:2
-	vec4 n_out2p0 = COLOR;
-
-
-// Input:7
-	float n_out7p0 = TIME;
-
-
-// Vector2Parameter:12
-	vec2 n_out12p0 = Speed;
-
-
-// VectorOp:8
-	vec2 n_out8p0 = vec2(n_out7p0) * n_out12p0;
-
-
-// UVFunc:6
-	vec2 n_in6p1 = vec2(1.00000, 1.00000);
-	vec2 n_out6p0 = n_out8p0 * n_in6p1 + UV;
-
-
-	vec4 n_out14p0;
-// Texture2D:14
-	n_out14p0 = texture(Energy_Texture, n_out6p0);
-
-
-// VectorDecompose:4
-	float n_out4p0 = n_out14p0.x;
-	float n_out4p1 = n_out14p0.y;
-	float n_out4p2 = n_out14p0.z;
-	float n_out4p3 = n_out14p0.w;
-
-
-// FloatParameter:11
-	float n_out11p0 = Texture_Power;
-
-
-// FloatOp:5
-	float n_out5p0 = pow(n_out4p0, n_out11p0);
-
-
-// Texture2D:15
-	vec4 n_out15p0 = texture(tex_frg_15, UV);
-
-
-// VectorDecompose:16
-	float n_out16p0 = n_out15p0.x;
-	float n_out16p1 = n_out15p0.y;
-	float n_out16p2 = n_out15p0.z;
-	float n_out16p3 = n_out15p0.w;
-
-
-// FloatParameter:18
-	float n_out18p0 = Gradient_Power;
-
-
-// FloatOp:17
-	float n_out17p0 = pow(n_out16p0, n_out18p0);
-
-
-// FloatOp:19
-	float n_out19p0 = n_out5p0 * n_out17p0;
-
-
-// Output:0
-	ALBEDO = vec3(n_out2p0.xyz);
-	ALPHA = n_out19p0;
-
-
-}
-"
-modes/cull = 2
-flags/unshaded = true
-nodes/fragment/0/position = Vector2(1200, -20)
-nodes/fragment/2/node = SubResource("VisualShaderNodeInput_3gxif")
-nodes/fragment/2/position = Vector2(40, 60)
-nodes/fragment/4/node = SubResource("VisualShaderNodeVectorDecompose_l7lrv")
-nodes/fragment/4/position = Vector2(320, 480)
-nodes/fragment/5/node = SubResource("VisualShaderNodeFloatOp_1br3q")
-nodes/fragment/5/position = Vector2(580, 500)
-nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_3qscq")
-nodes/fragment/6/position = Vector2(-220, 400)
-nodes/fragment/7/node = SubResource("VisualShaderNodeInput_hmkty")
-nodes/fragment/7/position = Vector2(-800, 80)
-nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_bu4ni")
-nodes/fragment/8/position = Vector2(-480, 200)
-nodes/fragment/9/node = SubResource("VisualShaderNodeVectorDecompose_fvqil")
-nodes/fragment/9/position = Vector2(380, 160)
-nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_rxmwi")
-nodes/fragment/10/position = Vector2(880, 220)
-nodes/fragment/11/node = SubResource("VisualShaderNodeFloatParameter_hdd7f")
-nodes/fragment/11/position = Vector2(260, 660)
-nodes/fragment/12/node = SubResource("VisualShaderNodeVec2Parameter_qjd1b")
-nodes/fragment/12/position = Vector2(-920, 280)
-nodes/fragment/13/node = SubResource("VisualShaderNodeTexture2DParameter_177hg")
-nodes/fragment/13/position = Vector2(-260, 680)
-nodes/fragment/14/node = SubResource("VisualShaderNodeTexture_qcwa3")
-nodes/fragment/14/position = Vector2(60, 340)
-nodes/fragment/15/node = SubResource("VisualShaderNodeTexture_tcn7a")
-nodes/fragment/15/position = Vector2(-220, 1040)
-nodes/fragment/16/node = SubResource("VisualShaderNodeVectorDecompose_631pr")
-nodes/fragment/16/position = Vector2(152.087, 1080.73)
-nodes/fragment/17/node = SubResource("VisualShaderNodeFloatOp_1j44h")
-nodes/fragment/17/position = Vector2(380, 1000)
-nodes/fragment/18/node = SubResource("VisualShaderNodeFloatParameter_7xlo1")
-nodes/fragment/18/position = Vector2(120, 1280)
-nodes/fragment/19/node = SubResource("VisualShaderNodeFloatOp_jj6tw")
-nodes/fragment/19/position = Vector2(820, 660)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 4, 0, 5, 0, 7, 0, 8, 0, 8, 0, 6, 2, 2, 0, 9, 0, 9, 3, 10, 0, 5, 0, 10, 1, 11, 0, 5, 1, 12, 0, 8, 1, 13, 0, 14, 2, 6, 0, 14, 0, 14, 0, 4, 0, 15, 0, 16, 0, 16, 0, 17, 0, 18, 0, 17, 1, 17, 0, 19, 1, 5, 0, 19, 0, 19, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrpni"]
-render_priority = 0
-shader = SubResource("VisualShader_ap1ec")
-shader_parameter/Speed = Vector2(5, -1)
-shader_parameter/Texture_Power = 1.3
-shader_parameter/Gradient_Power = 1.0
-shader_parameter/Energy_Texture = ExtResource("3_ijbb2")
-
-[sub_resource type="Curve" id="Curve_14g4b"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_5h8ep"]
-max_value = 8.0
-_data = [Vector2(0, 2.98901), 0.0, 0.0, 0, 0, Vector2(1, 8), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_p3neh"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gkojr"]
-curve_x = SubResource("Curve_14g4b")
-curve_y = SubResource("Curve_5h8ep")
-curve_z = SubResource("Curve_p3neh")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjmpr"]
-emission_shape_offset = Vector3(0, -8, 0)
-angle_max = 694.3
-direction = Vector3(0, 1, 0)
-gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveXYZTexture_gkojr")
-color = Color(1.2, 0.5, 2.5, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_v3oi4"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6grmh"]
-render_priority = 0
-shader = SubResource("VisualShader_ap1ec")
-shader_parameter/Speed = Vector2(2, -1)
-shader_parameter/Texture_Power = 2.0
-shader_parameter/Gradient_Power = 1.0
-shader_parameter/Energy_Texture = ExtResource("4_7fblf")
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_wo2p0"]
-curve_x = SubResource("Curve_14g4b")
-curve_y = SubResource("Curve_5h8ep")
-curve_z = SubResource("Curve_p3neh")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tsht1"]
-emission_shape_offset = Vector3(0, -8, 0)
-angle_max = 694.3
-direction = Vector3(0, 1, 0)
-gravity = Vector3(0, 0, 0)
-scale_min = 0.9
-scale_max = 5.0
-scale_curve = SubResource("CurveXYZTexture_wo2p0")
-color = Color(1, 1, 3, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jr2h5"]
-render_priority = 0
-shader = SubResource("VisualShader_ap1ec")
-shader_parameter/Speed = Vector2(1.5, 2)
-shader_parameter/Texture_Power = 1.5
-shader_parameter/Gradient_Power = 1.0
-shader_parameter/Energy_Texture = ExtResource("4_r3l3u")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nlcyh"]
-gravity = Vector3(0, 0, 0)
-color = Color(1.2, 0.5, 2.5, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cfijk"]
 render_priority = 0
@@ -521,6 +264,16 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath("../Assets/Telepath/TeamX_text:text")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_8skx5"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xr12k"]
+gradient = SubResource("Gradient_8skx5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vat6v"]
+lifetime_randomness = 1.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_xr12k")
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
@@ -860,87 +613,6 @@ skeleton = NodePath("../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/floors/MainFloor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_trlb1")
-
-[node name="death_ray_beam" type="Node3D" parent="Assets/floors"]
-transform = Transform3D(-0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, -0.819152, 103.599, 20.2817, 34.6581)
-
-[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
-material_override = SubResource("ShaderMaterial_wrpni")
-amount = 1
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_fjmpr")
-draw_pass_1 = SubResource("CylinderMesh_v3oi4")
-
-[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
-material_override = SubResource("ShaderMaterial_6grmh")
-amount = 1
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_tsht1")
-draw_pass_1 = SubResource("CylinderMesh_v3oi4")
-
-[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
-material_override = SubResource("ShaderMaterial_jr2h5")
-amount = 1
-lifetime = 1.5
-process_material = SubResource("ParticleProcessMaterial_nlcyh")
-draw_pass_1 = ExtResource("4_2a2jn")
-
-[node name="death_ray_beam2" type="Node3D" parent="Assets/floors"]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -132.525, 20.2817, 3.91461)
-
-[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
-material_override = SubResource("ShaderMaterial_wrpni")
-amount = 1
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_fjmpr")
-draw_pass_1 = SubResource("CylinderMesh_v3oi4")
-
-[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
-material_override = SubResource("ShaderMaterial_6grmh")
-amount = 1
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_tsht1")
-draw_pass_1 = SubResource("CylinderMesh_v3oi4")
-
-[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
-material_override = SubResource("ShaderMaterial_jr2h5")
-amount = 1
-lifetime = 1.5
-process_material = SubResource("ParticleProcessMaterial_nlcyh")
-draw_pass_1 = ExtResource("4_2a2jn")
-
-[node name="death_ray_beam3" type="Node3D" parent="Assets/floors"]
-transform = Transform3D(0.707107, -0.164135, -0.687793, 0, 0.972687, -0.232121, 0.707107, 0.164135, 0.687793, 18.5631, 26.7566, -98.6825)
-
-[node name="MainEnergyCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
-material_override = SubResource("ShaderMaterial_wrpni")
-amount = 1
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_fjmpr")
-draw_pass_1 = SubResource("CylinderMesh_v3oi4")
-
-[node name="LittleCylinder" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 72.3752, 7.30867, 44.3615)
-material_override = SubResource("ShaderMaterial_6grmh")
-amount = 1
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_tsht1")
-draw_pass_1 = SubResource("CylinderMesh_v3oi4")
-
-[node name="SplashEnergy" type="GPUParticles3D" parent="Assets/floors/death_ray_beam3"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 72.5085, 7.47673, 45.2374)
-material_override = SubResource("ShaderMaterial_jr2h5")
-amount = 1
-lifetime = 1.5
-process_material = SubResource("ParticleProcessMaterial_nlcyh")
-draw_pass_1 = ExtResource("4_2a2jn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Assets/floors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.3171, 0)
@@ -1308,6 +980,180 @@ shape = SubResource("ConcavePolygonShape3D_h4glo")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath("../Camera3D")
 replication_config = SubResource("SceneReplicationConfig_dwu6y")
+
+[node name="DeathRayRandom" type="Node3D" parent="."]
+
+[node name="ThunderMeshRANDOM" type="MeshInstance3D" parent="DeathRayRandom"]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 17.8475, 23.4849, 36.9464)
+mesh = ExtResource("22_0x4uc")
+skeleton = NodePath("../..")
+
+[node name="ThunderMeshRANDOM2" type="MeshInstance3D" parent="DeathRayRandom"]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 16.7428, 23.4849, 41.5094)
+mesh = ExtResource("22_0x4uc")
+skeleton = NodePath("../..")
+
+[node name="Lightning_Bolt_random" type="GPUParticles3D" parent="DeathRayRandom"]
+transform = Transform3D(0.67053, -0.726149, -0.151978, -0.236741, -0.403579, 0.883786, -0.703095, -0.556626, -0.442521, 16.2734, 26.3045, 38.2556)
+amount = 1
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_random5" type="GPUParticles3D" parent="DeathRayRandom"]
+transform = Transform3D(0.67053, -0.726149, -0.151978, -0.236741, -0.403579, 0.883786, -0.703095, -0.556626, -0.442521, 16.2734, 26.3045, 38.2556)
+amount = 1
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_random2" type="GPUParticles3D" parent="DeathRayRandom"]
+transform = Transform3D(0.67053, -0.726149, -0.151978, -0.236741, -0.403578, 0.883786, -0.703095, -0.556626, -0.442521, 13.5407, 24.7857, 36.1609)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_random3" type="GPUParticles3D" parent="DeathRayRandom"]
+transform = Transform3D(0.67053, -0.726149, -0.151978, -0.236741, -0.403578, 0.883786, -0.703095, -0.556626, -0.442521, 17.6837, 28.2141, 38.9576)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_random4" type="GPUParticles3D" parent="DeathRayRandom"]
+transform = Transform3D(0.67053, -0.726149, -0.151978, -0.236741, -0.403578, 0.883786, -0.703095, -0.556626, -0.442521, 18.2317, 26.2054, 40.1566)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_random6" type="GPUParticles3D" parent="DeathRayRandom"]
+transform = Transform3D(0.67053, -0.726149, -0.151978, -0.236741, -0.403578, 0.883786, -0.703095, -0.556626, -0.442521, 18.2317, 26.2054, 40.1566)
+amount = 1
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="DeathRayA" type="Node3D" parent="."]
+
+[node name="ThunderMeshA" type="MeshInstance3D" parent="DeathRayA"]
+transform = Transform3D(1.93185, 0, 0.517638, 0, 0.5, 0, -0.517638, 0, 1.93185, -49.8208, 23.4849, -15.0118)
+mesh = ExtResource("22_0x4uc")
+skeleton = NodePath("../..")
+
+[node name="ThunderMeshA2" type="MeshInstance3D" parent="DeathRayA"]
+transform = Transform3D(2.59808, 0, 1.5, 0, 0.5, 0, -1.5, 0, 2.59808, -50.0552, 23.4849, -14.0232)
+mesh = ExtResource("22_0x4uc")
+skeleton = NodePath("../..")
+
+[node name="Lightning_Bolt_A" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.367763, 0.778295, -0.508928, 0.00275385, -0.548191, -0.836349, -0.929916, 0.306176, -0.203748, -47.9951, 28.0099, -12.303)
+amount = 1
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_A2" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.367763, 0.778295, -0.508928, 0.00275385, -0.548191, -0.836349, -0.929916, 0.306176, -0.203748, -47.3955, 27.5876, -12.0671)
+amount = 1
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_A3" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.367763, 0.778295, -0.508928, 0.00275385, -0.548191, -0.836349, -0.929916, 0.306176, -0.203748, -46.6236, 27.0439, -11.7635)
+amount = 1
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_A4" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.367763, 0.778295, -0.508928, 0.00275385, -0.548191, -0.836349, -0.929916, 0.306176, -0.203748, -45.5697, 26.3016, -11.3489)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_A5" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.367763, 0.778295, -0.508928, 0.00275385, -0.548191, -0.836349, -0.929916, 0.306176, -0.203748, -45.0181, 25.9131, -11.1319)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_A6" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.367763, 0.778295, -0.508928, 0.00275385, -0.548191, -0.836349, -0.929916, 0.306176, -0.203748, -45.193, 26.0363, -11.2007)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Contact_Bolt_A" type="GPUParticles3D" parent="DeathRayA"]
+transform = Transform3D(0.674772, 0.734069, -0.0763218, -0.29455, 0.362681, 0.88414, 0.6767, -0.574112, 0.460947, 1.30798, 9.4926, 8.63328)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="DeathRayB" type="Node3D" parent="."]
+
+[node name="ThunderMeshB" type="MeshInstance3D" parent="DeathRayB"]
+transform = Transform3D(-2, 0, 1.74846e-07, 0, 0.5, 0, -1.74846e-07, 0, -2, 39.2601, 23.4849, -18.0528)
+mesh = ExtResource("22_0x4uc")
+skeleton = NodePath("../..")
+
+[node name="ThunderMeshB2" type="MeshInstance3D" parent="DeathRayB"]
+transform = Transform3D(3, 0, 0, 0, 0.5, 0, 0, 0, 3, 38.1554, 23.4849, -13.4898)
+mesh = ExtResource("22_0x4uc")
+skeleton = NodePath("../..")
+
+[node name="Lightning_Bolt_B" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(-0.337694, -0.726032, -0.599033, -0.351749, -0.492968, 0.795773, -0.873061, 0.479437, -0.0889084, 35.3248, 27.4134, -13.0321)
+amount = 1
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_B2" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(-0.337694, -0.726032, -0.599033, -0.351749, -0.492968, 0.795773, -0.873061, 0.479437, -0.0889084, 34.8389, 27.0835, -12.7112)
+amount = 1
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_B3" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(-0.337694, -0.726032, -0.599033, -0.351749, -0.492968, 0.795773, -0.873061, 0.479437, -0.0889084, 34.4216, 26.8002, -12.4356)
+amount = 1
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_B4" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(-0.337694, -0.726032, -0.599033, -0.351749, -0.492968, 0.795773, -0.873061, 0.479437, -0.0889084, 35.3248, 27.4134, -13.0321)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_B5" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(-0.337694, -0.726032, -0.599033, -0.351749, -0.492968, 0.795773, -0.873061, 0.479437, -0.0889084, 34.7196, 27.0025, -12.6324)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Lightning_Bolt_B6" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(-0.337694, -0.726032, -0.599033, -0.351749, -0.492968, 0.795773, -0.873061, 0.479437, -0.0889084, 36.0789, 27.9255, -13.5301)
+amount = 1
+lifetime = 7.25
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
+
+[node name="Contact_Bolt_B" type="GPUParticles3D" parent="DeathRayB"]
+transform = Transform3D(0.414007, -0.664403, -0.622228, 0.88437, 0.455492, 0.10206, 0.215611, -0.592533, 0.776155, -12.8386, 6.96354, 11.8013)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_vat6v")
+draw_pass_1 = ExtResource("22_0x4uc")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
