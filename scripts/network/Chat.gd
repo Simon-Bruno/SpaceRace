@@ -39,7 +39,6 @@ func _on_send_pressed():
 		start_message_timer()
 	message_input.text = ""
 
-
 # Helper function to pad a value with leading characters up to a given length
 func pad_left(value, length, character="0"):
 	var str_value = str(value)
@@ -63,22 +62,39 @@ func new_timestamp():
 func _on_leave_button_pressed():
 	Network._on_leave_button_pressed()
 
-
 # Remote procedure call (RPC) for sending messages between players
 @rpc("any_peer", "call_local")
-func msg_rpc(sender, message):
-	var colored_sender_id = "[color=red]" + str(sender) + "[/color]"
+func msg_rpc(sender, message):	
+	var peer_id = _get_key(sender)
+	var team = Network.player_teams[peer_id]
 	message_display.append_text(str(new_timestamp()))
-	message_display.append_text(" " + colored_sender_id + ": " + message + "\n")
+	if str(team) == "1":
+		var colored_sender_id = "[color=red]" + str(team) + " - " + str(sender) + "[/color]"
+		message_display.append_text(" " + colored_sender_id + ": " + message + "\n")
+	elif str(team) == "2":
+		var colored_sender_id = "[color=blue]" + str(team) + " - " + str(sender) + "[/color]"
+		message_display.append_text(" " + colored_sender_id + ": " + message + "\n")
+	else:
+		var colored_sender_id = "[color=grey]" + str(sender) + "[/color]"
+		message_display.append_text(" " + colored_sender_id + ": " + message + "\n")
 	message_display.set_scroll_follow(true)
 	message_display.visible = true
 	start_message_timer()
 
 
+# Returns the corresponding peer id given a name
+func _get_key(sender):
+	var players = Network.player_names
+	for key in players.keys():
+		if players[key] == sender:
+			return str(key)
+	return 0
+
+
 # To handle when text is submitted with the enter key
 func _on_message_input_text_submitted(_new_text):
 	_on_send_pressed()
-
+	
 
 # This function sets the caret to the correct position based on the length of
 # the input
