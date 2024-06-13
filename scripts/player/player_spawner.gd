@@ -10,7 +10,7 @@ func add_player_character(id):
 
 var dead_player = null
 func player_died(player_to_die):
-	print('died')
+	#print('died')
 	player_to_die.health = 100
 	# dead_player = player_to_die
 	#player_to_die.queue_free()

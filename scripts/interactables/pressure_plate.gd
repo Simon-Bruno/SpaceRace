@@ -15,7 +15,8 @@ func _on_area_3d_body_entered(body):
 	if body.is_in_group("Players") or body is RigidBody3D:
 		if bodies_on_plate.is_empty():
 			if interactable == null:
-				var win_lose = finish_plate.process_winning_team(multiplayer, Network)
+				print("this is the ID of the PRESUSRE PLATE PRESSER:", multiplayer.get_unique_id())
+				var win_lose = finish_plate.process_winning_team(multiplayer.get_unique_id())
 				winning_players = win_lose[0]
 				losing_players = win_lose[1]
 				
