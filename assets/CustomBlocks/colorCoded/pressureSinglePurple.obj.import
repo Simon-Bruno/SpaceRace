@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://vmukjmiweklk"
+path="res://.godot/imported/pressureSinglePurple.obj-0881acdfdefcb9714fb26248dd630abe.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pressureSinglePurple.obj-0881acdfdefcb9714fb26248dd630abe.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/pressureSinglePurple.obj"
+dest_files=["res://.godot/imported/pressureSinglePurple.obj-0881acdfdefcb9714fb26248dd630abe.mesh", "res://.godot/imported/pressureSinglePurple.obj-0881acdfdefcb9714fb26248dd630abe.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

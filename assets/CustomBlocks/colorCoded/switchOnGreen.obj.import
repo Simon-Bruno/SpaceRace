@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dqlpdonm0xij6"
+path="res://.godot/imported/switchOnGreen.obj-58cb889e474f87f89f66ebe516c26a82.mesh"
+
+[deps]
+
+files=["res://.godot/imported/switchOnGreen.obj-58cb889e474f87f89f66ebe516c26a82.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/switchOnGreen.obj"
+dest_files=["res://.godot/imported/switchOnGreen.obj-58cb889e474f87f89f66ebe516c26a82.mesh", "res://.godot/imported/switchOnGreen.obj-58cb889e474f87f89f66ebe516c26a82.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bvgn5bet5qgqe"
+path="res://.godot/imported/pressureMultiOrange.obj-35527fca1ccba7a89e8a25ee02b65ada.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pressureMultiOrange.obj-35527fca1ccba7a89e8a25ee02b65ada.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/pressureMultiOrange.obj"
+dest_files=["res://.godot/imported/pressureMultiOrange.obj-35527fca1ccba7a89e8a25ee02b65ada.mesh", "res://.godot/imported/pressureMultiOrange.obj-35527fca1ccba7a89e8a25ee02b65ada.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
