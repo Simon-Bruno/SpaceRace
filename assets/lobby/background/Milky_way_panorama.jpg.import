@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyx6m2eagpdf"
-path.s3tc="res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"
+uid="uid://caw7job4uxy1"
+path.bptc="res://.godot/imported/Milky_way_panorama.jpg-155d9037add894e1e9999bdc2bfb9a3f.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://assets/lobby/laser_beam/T_VFX_Flare_15.PNG"
-dest_files=["res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"]
+source_file="res://assets/lobby/background/Milky_way_panorama.jpg"
+dest_files=["res://.godot/imported/Milky_way_panorama.jpg-155d9037add894e1e9999bdc2bfb9a3f.bptc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

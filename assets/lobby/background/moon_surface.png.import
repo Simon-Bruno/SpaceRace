@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyx6m2eagpdf"
-path.s3tc="res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"
+uid="uid://c7qmvqopscxxe"
+path.s3tc="res://.godot/imported/moon_surface.png-6fabdfc6c8b4f5905950f0295b9d54d9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/lobby/laser_beam/T_VFX_Flare_15.PNG"
-dest_files=["res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"]
+source_file="res://assets/lobby/background/moon_surface.png"
+dest_files=["res://.godot/imported/moon_surface.png-6fabdfc6c8b4f5905950f0295b9d54d9.s3tc.ctex"]
 
 [params]
 

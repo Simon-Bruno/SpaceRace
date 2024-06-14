@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyx6m2eagpdf"
-path.s3tc="res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"
+uid="uid://d3k8qpmdhjxi7"
+path.s3tc="res://.godot/imported/floor_mark_texture.png-83af81653102801e7ea11e85b822529b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/lobby/laser_beam/T_VFX_Flare_15.PNG"
-dest_files=["res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"]
+source_file="res://assets/lobby/death_ray/floor_mark_texture.png"
+dest_files=["res://.godot/imported/floor_mark_texture.png-83af81653102801e7ea11e85b822529b.s3tc.ctex"]
 
 [params]
 
