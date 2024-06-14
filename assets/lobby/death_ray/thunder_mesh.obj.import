@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bpcgi17olgkh3"
+path="res://.godot/imported/thunder_mesh.obj-0c6d8630fc27ff35e375c58170d81be2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/thunder_mesh.obj-0c6d8630fc27ff35e375c58170d81be2.mesh"]
+
+source_file="res://assets/lobby/death_ray/thunder_mesh.obj"
+dest_files=["res://.godot/imported/thunder_mesh.obj-0c6d8630fc27ff35e375c58170d81be2.mesh", "res://.godot/imported/thunder_mesh.obj-0c6d8630fc27ff35e375c58170d81be2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

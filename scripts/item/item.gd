@@ -1,7 +1,10 @@
 extends Node3D
 
 # make sure only one person holds the item
-var owned = false
+@export var owned = false
+var owned_node : Node3D = null
+# how fast the item should follow the player
+var item_follow_speed = 15
 
 # animation vars
 var rotation_speed = 0.5
@@ -10,10 +13,16 @@ var bob_amplitude = 0.25
 var bob_offset = 0.25
 var bob_time = 0.0
 
+@export var item_position : Vector3
 var initial_position = Vector3()
+
+func _enter_tree():
+	if multiplayer.is_server():
+		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 
 func _ready():
 	initial_position = $RigidBody3D/MeshOrigin.position
+	item_position = $RigidBody3D.global_position
 
 func _animate(delta):
 	"""Makes the item rotate and bob up and down"""
@@ -29,3 +38,12 @@ func _animate(delta):
 
 func _process(delta):
 	_animate(delta)
+	if owned_node and multiplayer.is_server():
+		
+		var destination = owned_node.global_position
+		destination.y += owned_node.get_node("Pivot/MeshInstance3D").get_aabb().size.y
+	
+		# Nodig voor het syncen
+		item_position = $RigidBody3D.global_position.lerp(destination, item_follow_speed * delta)
+
+		$RigidBody3D.global_position = item_position

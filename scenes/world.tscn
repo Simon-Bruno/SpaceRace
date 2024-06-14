@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://n62snpmyadi0"]
+[gd_scene load_steps=8 format=3 uid="uid://n62snpmyadi0"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_25n6l"]
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
 [ext_resource type="PackedScene" uid="uid://dxy03iwwac4y3" path="res://scenes/player/player_spawner.tscn" id="1_fahhe"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
 [ext_resource type="PackedScene" uid="uid://bjchbb8ua0ijg" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
+[ext_resource type="PackedScene" path="res://scenes/menu/pause.tscn" id="6_3shum"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1991.92, 1, 1000)
@@ -40,7 +41,12 @@ spawn_path = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, -500)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 425.538, 2, 500)
 shape = SubResource("BoxShape3D_afshc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_3shum")]

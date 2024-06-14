@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var walk_speed = 15
+@export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 var getHitCooldown = true
@@ -12,6 +12,7 @@ var respawn_immunity : bool = false
 
 var walk_acceleration = 40
 var walk_deceleration = 50
+var rotation_speed = 10
 var rotation_smoothing = 10
 
 var speed = 0
@@ -31,7 +32,7 @@ func _ready():
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		position = lobby_spawn
-	elif multiplayer.get_peers().size() > 0:
+	elif multiplayer.get_peers().size() > 0 and Network.other_team_member_id != null:
 		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
 	else:
@@ -45,13 +46,13 @@ func _horizontal_movement(delta):
 	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
-		basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
+		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
 	else:
 		speed = max(0, speed - walk_deceleration  * delta)
 
-	vel.x = direction.x * speed * Network.inverted
+	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
 
 	return vel
@@ -86,15 +87,12 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
+# Lets the player moves object in the room.
 func move_object():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
-
-# Action executed when button is pressed
-func activate_door_open():
-	get_parent().get_node('Door').open_door()
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
