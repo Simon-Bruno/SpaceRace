@@ -1,5 +1,9 @@
-extends Node3D
+extends Node
 
+func _enter_tree():
+	if multiplayer.is_server():
+		$"EnemyMultiplayerSpawner".set_multiplayer_authority(multiplayer.get_unique_id())
+		
 func _ready():
 	#var enemy = preload("res://scenes/enemy/enemy.tscn").instantiate()
 	#enemy.position = Vector3(2,20,4)

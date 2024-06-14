@@ -7,7 +7,7 @@ var getHitCooldown = true
 @export var health = Global.player_max_health
 var points = 0
 @export var push_force = 1
-var alive = true
+@export var alive = true
 var respawn_immunity : bool = false
 
 var walk_acceleration = 40

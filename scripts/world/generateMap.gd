@@ -275,7 +275,7 @@ func fill_room(room_dim: Array) -> void:
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
 	add_child(room_scene, true)
 	generate_room = not generate_room
-	room_scene = room_scene.duplicate(5)
+	room_scene = room_scene.duplicate(7)
 	room_scene.scale.z = -1
 	add_child(room_scene, true)
 	generate_room = not generate_room
