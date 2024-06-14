@@ -11,7 +11,7 @@ var player_chase = false
 var targeted_player = null
 var last_damaged_by = null
 
-var health = 100
+@export var health = 100
 var max_health: int = 100
 var player_in_attack_zone = false
 
@@ -40,6 +40,8 @@ func _enter_tree():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 
 func _process(delta):
+	if not multiplayer.is_server():
+		return
 	find_closest_player_in_range(nodes_in_area)
 	time_since_last_fire += delta
 	if player_in_attack_zone and time_since_last_fire >= fire_cooldown:
@@ -48,6 +50,8 @@ func _process(delta):
 	
 
 func _physics_process(delta):
+	if not multiplayer.is_server():
+		return
 	if not is_on_floor():
 		velocity.y -= fall_acceleration * delta
 		move_and_slide()
@@ -62,28 +66,26 @@ func fire_projectile():
 		projectile_instance.direction = direction_to_player
 		
 func _on_detection_area_body_entered(body):
+	if not multiplayer.is_server():
+		return
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
 		player_in_attack_zone = true
 		fire_projectile()
 
 func _on_detection_area_body_exited(body):
+	if not multiplayer.is_server():
+		return
 	if body.is_in_group("Players"):
 		#print("Out of range")
 		if body == closest_target_node:
 			closest_target_node = null
 		nodes_in_area.erase(body)
-
-#func _on_enemy_hitbox_body_entered(body):
-	#if body.is_in_group("Players"):
-		#player_in_attack_zone = true
-#
-#func _on_enemy_hitbox_body_exited(body):
-	#if body.is_in_group("Players"):
-		#player_in_attack_zone = false
 		
 # Used in player script when attacking an enemy, apply_damage_to_enemy
 func take_damage(damage, source):
+	if not multiplayer.is_server():
+		return
 	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
