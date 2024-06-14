@@ -6,8 +6,10 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
+signal on_fps_toggled(value : bool)
 
-var max_client_connections = 3 # Excluding the host
+# Excluding host
+var max_client_connections = 3
 
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
 var loaded_menu = preload("res://scenes/menu/menu.tscn")
@@ -30,6 +32,10 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+
+
+func emit_on_fps_toggled(value : bool):
+	on_fps_toggled.emit(value)
 
 func _on_connection_failed():
 	remove_multiplayer_peer()
@@ -117,7 +123,8 @@ func _on_leave_button_pressed():
 	remove_multiplayer_peer()
 	multiplayer_peer.close()
 	var world = get_node("/root/Main/SpawnedItems/World")
-	world.queue_free()
+	if world:
+		world.queue_free()
 	get_node("/root/Main/SpawnedItems").remove_child(world)
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
 
