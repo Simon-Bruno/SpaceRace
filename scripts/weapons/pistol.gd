@@ -8,9 +8,10 @@ var damage = 20
 @export var projectile_scene : PackedScene
 
 func attack():
-	var direction_to_shoot = -global_transform.basis.z.normalized()
-	var spawn_offset = direction_to_shoot * 1
-	spawn_projectile_for_me.rpc(global_transform.origin, spawn_offset, direction_to_shoot)
+	if get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner") != null:
+		var direction_to_shoot = -global_transform.basis.z.normalized()
+		var spawn_offset = direction_to_shoot * 1
+		spawn_projectile_for_me.rpc(global_transform.origin, spawn_offset, direction_to_shoot)
 	
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile_for_me(transform_origin, spawn_offset, direction):

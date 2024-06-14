@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5
 
-var knockback_strength = 25.0
+var knockback_strength = 15
 
 var player_chase = false
 var targeted_player = null
