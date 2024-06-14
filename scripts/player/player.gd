@@ -116,7 +116,7 @@ func take_damage(id, damage):
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive:
-		print("health < 0")
+		#print("health < 0")
 		die()
 		
 func die():

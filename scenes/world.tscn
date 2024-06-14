@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_25n6l"]
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
-[ext_resource type="PackedScene" uid="uid://dxy03iwwac4y3" path="res://scenes/player/player_spawner.tscn" id="1_fahhe"]
+[ext_resource type="PackedScene" uid="uid://b47e0ly4dll8p" path="res://scenes/player/player_spawner.tscn" id="1_fahhe"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
 [ext_resource type="PackedScene" uid="uid://bjchbb8ua0ijg" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
-[ext_resource type="PackedScene" path="res://scenes/menu/pause.tscn" id="6_3shum"]
+[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="6_3shum"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1991.92, 1, 1000)
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node"]
 script = ExtResource("1_25n6l")
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("1_fahhe")]
@@ -19,10 +19,15 @@ script = ExtResource("1_25n6l")
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
 
+[node name="ItemSpawner" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemSpawner"]
+spawn_path = NodePath("..")
+
 [node name="ProjectileSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ProjectileSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn", "res://scenes/interactables/laser.tscn")
 spawn_path = NodePath("..")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_bij7o")]

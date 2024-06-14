@@ -69,7 +69,7 @@ func _on_detection_area_body_entered(body):
 
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("Players"):
-		print("Out of range")
+		#print("Out of range")
 		if body == closest_target_node:
 			closest_target_node = null
 		nodes_in_area.erase(body)
@@ -96,7 +96,7 @@ func take_damage(damage, source):
 	velocity.z += knockback_direction.z * knockback_strength
 
 func die():
-	print(last_damaged_by)
+	#print(last_damaged_by)
 	if last_damaged_by.get_parent().is_in_group("Players"):
 		last_damaged_by.get_parent().points += 5
 	queue_free()

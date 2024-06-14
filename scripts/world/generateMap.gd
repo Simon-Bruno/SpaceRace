@@ -88,7 +88,7 @@ func build_map() -> void:
 	draw_windows()
 	draw_walls()
 	
-	print(roomTypes)
+	#print(roomTypes)
 	mirror_world()
 
 

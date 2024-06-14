@@ -106,7 +106,7 @@ func take_damage(damage, source):
 	velocity.z += knockback_direction.z * knockback_strength
 
 func die():
-	print(last_damaged_by)
+	#print(last_damaged_by)
 	if last_damaged_by.get_parent().is_in_group("Players"):
 		last_damaged_by.get_parent().points += 5
 	queue_free()
