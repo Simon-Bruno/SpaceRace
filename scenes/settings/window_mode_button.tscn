@@ -8,3 +8,5 @@ script = ExtResource("2_dn686")
 
 [node name="Label" parent="HBoxContainer" index="0"]
 text = "Window Mode"
+
+[connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]

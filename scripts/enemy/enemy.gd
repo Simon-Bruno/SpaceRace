@@ -74,7 +74,6 @@ func take_damage(damage, source):
 	last_damaged_by = source
 
 func die():
-	print(last_damaged_by)
 	if last_damaged_by.get_parent().is_in_group("Players"):
 		last_damaged_by.get_parent().points += 5
 	queue_free()

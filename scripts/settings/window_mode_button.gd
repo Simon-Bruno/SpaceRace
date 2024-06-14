@@ -15,12 +15,11 @@ const WINDOW_MODE_ARRAY : Array[String] = [
 func _ready():
 	add_window_mode_items()
 	select_current_window_mode()
-	option_button.item_selected.connect(on_window_mode_selected)
 	load_data()
 
 
 func load_data():
-	on_window_mode_selected(SettingsContainer.get_window_mode_index())
+	_on_option_button_item_selected(SettingsContainer.get_window_mode_index())
 	option_button.select(SettingsContainer.get_window_mode_index())
 
 
@@ -28,7 +27,8 @@ func add_window_mode_items():
 	for window_mode in WINDOW_MODE_ARRAY:
 		option_button.add_item(window_mode)
 
-func on_window_mode_selected(index):
+
+func _on_option_button_item_selected(index):
 	SettingsSignalBus.emit_on_window_mode_selected(index)
 	match index:
 		0:

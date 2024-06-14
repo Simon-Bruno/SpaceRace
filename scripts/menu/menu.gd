@@ -6,7 +6,6 @@ extends Control
 func _ready():
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	settings.visible = false
-	settings.back_to_menu.connect(on_back_to_menu)
 
 
 func _on_connection_failed():
@@ -83,7 +82,7 @@ func _on_settings_button_pressed():
 	settings.visible = true
 
 
-func on_back_to_menu():
+func _on_settings_back_to_menu():
 	$Holder.visible = true
 	settings.visible = false
 

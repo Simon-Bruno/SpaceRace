@@ -225,3 +225,4 @@ layout_mode = 1
 [connection signal="pressed" from="Host/Holder/Button" to="." method="_on_host_menu_pressed"]
 [connection signal="pressed" from="Host/Button" to="." method="_on_close_host_button_pressed"]
 [connection signal="pressed" from="DialogMessage/Button" to="." method="_on_close_dialog_pressed"]
+[connection signal="back_to_menu" from="Settings" to="." method="_on_settings_back_to_menu"]

@@ -18,7 +18,6 @@ func die():
 
 func _process(_delta):
 	if get_parent().health <= 0:
-		print("health < 0")
 		die()
 
 func _input(event):

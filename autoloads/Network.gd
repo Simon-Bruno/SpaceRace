@@ -128,7 +128,6 @@ func _on_leave_button_pressed():
 
 
 func _on_server_disconnected():
-	print("Server disconnect")
 	var world = get_node_or_null("/root/Main/SpawnedItems/World")
 	if world:
 		world.queue_free()
