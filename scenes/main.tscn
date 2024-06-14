@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfcjq8a6jlnnp"]
+[gd_scene load_steps=2 format=3 uid="uid://bfcjq8a6jlnnp"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_58kw5"]
-[ext_resource type="Script" path="res://scenes/EasierDevFlow.gd" id="2_gaggm"]
-[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="2_xp56h"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_58kw5")
@@ -15,8 +13,3 @@ spawn_path = NodePath("../SpawnedItems")
 
 [node name="MusicController" type="AudioStreamPlayer" parent="."]
 autoplay = true
-
-[node name="DEV_QOL_NODE (Disable before build)" type="Node" parent="."]
-script = ExtResource("2_gaggm")
-
-[node name="PauseMenu" parent="." instance=ExtResource("2_xp56h")]

@@ -22,6 +22,10 @@ Global="*res://autoloads/global.gd"
 Audiocontroller="*res://autoloads/audiocontroller.gd"
 SettingsContainer="*res://autoloads/SettingsDataContainer.gd"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/BasGe/OneDrive/Documents/godot_clips/godot_temp_video.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray()

@@ -1,4 +1,6 @@
-[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://601mw1n0k5te"]
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://601mw1n0k5te"]
+
+[ext_resource type="Texture2D" uid="uid://bjsqyf78fx3sq" path="res://assets/lobby/laser_beam/T_VFX_Glow_1.PNG" id="1_p8lba"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_fcv2j"]
 parameter_name = "ColorIntensity"
@@ -35,6 +37,7 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_conh1"]
 expanded_output_ports = [0]
+texture = ExtResource("1_p8lba")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_wdp2m"]
@@ -121,6 +124,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-178.921, -114.039)
 modes/cull = 2
 flags/unshaded = true
 nodes/fragment/0/position = Vector2(960, 160)
@@ -133,7 +137,7 @@ nodes/fragment/5/position = Vector2(-760, 360)
 nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_hm0aw")
 nodes/fragment/6/position = Vector2(-420, 460)
 nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_conh1")
-nodes/fragment/7/position = Vector2(540, 520)
+nodes/fragment/7/position = Vector2(140, 1180)
 nodes/fragment/8/node = SubResource("VisualShaderNodeColorParameter_wdp2m")
 nodes/fragment/8/position = Vector2(-180, -100)
 nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_rb5px")

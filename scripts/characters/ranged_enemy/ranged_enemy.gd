@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5
 
-var knockback_strength = 15
+var knockback_strength = 25.0
 
 var player_chase = false
 var targeted_player = null
@@ -16,7 +16,11 @@ var max_health: int = 100
 var player_in_attack_zone = false
 
 var closest_target_node = null
+@export var projectile_scene : PackedScene
 var nodes_in_area : Array = []
+
+var fire_cooldown = 4.0 
+var time_since_last_fire = 0.0
 
 # Function to find the closest node from an array of nodes
 func find_closest_player_in_range(nodes_array: Array):
@@ -37,60 +41,46 @@ func _enter_tree():
 
 func _process(delta):
 	find_closest_player_in_range(nodes_in_area)
+	time_since_last_fire += delta
+	if player_in_attack_zone and time_since_last_fire >= fire_cooldown:
+		fire_projectile()
+		time_since_last_fire = 0.0 
 	
-	if closest_target_node:
-		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
-		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
-		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-		#look_at(targeted_player.global_transform.origin)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
-		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-		
-	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
-		if !closest_target_node.respawn_immunity:
-			closest_target_node.take_damage(closest_target_node.name, 20)
-	
-	if health <= 0:
-		die() 
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= fall_acceleration * delta
-	else:
-		velocity.y = 0.0
+		move_and_slide()
 
-	if closest_target_node:
-		var distance_to_player = global_transform.origin.distance_to(closest_target_node.global_transform.origin)
-		if distance_to_player > stopping_distance:
-			var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
-			velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
-			velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-		else:
-			velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
-			velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-
-	move_and_slide()
-
+func fire_projectile():
+	if closest_target_node and multiplayer.is_server():
+		var projectile_instance = projectile_scene.instantiate()
+		var direction_to_player = (closest_target_node.global_position - global_position).normalized()
+		var spawn_offset = direction_to_player * 1
+		get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
+		projectile_instance.global_transform.origin = global_transform.origin + spawn_offset
+		projectile_instance.direction = direction_to_player
+		
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
-		#print("body entered: ", body)
-		#print("array:", nodes_in_area)
+		player_in_attack_zone = true
+		fire_projectile()
 
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("Players"):
+		print("Out of range")
 		if body == closest_target_node:
 			closest_target_node = null
 		nodes_in_area.erase(body)
 
-func _on_enemy_hitbox_body_entered(body):
-	if body.is_in_group("Players"):
-		player_in_attack_zone = true
-
-func _on_enemy_hitbox_body_exited(body):
-	if body.is_in_group("Players"):
-		player_in_attack_zone = false
+#func _on_enemy_hitbox_body_entered(body):
+	#if body.is_in_group("Players"):
+		#player_in_attack_zone = true
+#
+#func _on_enemy_hitbox_body_exited(body):
+	#if body.is_in_group("Players"):
+		#player_in_attack_zone = false
 		
 # Used in player script when attacking an enemy, apply_damage_to_enemy
 func take_damage(damage, source):

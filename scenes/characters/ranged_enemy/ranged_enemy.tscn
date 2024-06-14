@@ -1,21 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://cds22hi7osiev"]
+[gd_scene load_steps=12 format=3 uid="uid://dwaxenqde6n6y"]
 
-[ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_pccks"]
-[ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="2_k2v20"]
-[ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="2_tc1n5"]
-[ext_resource type="ArrayMesh" uid="uid://b0mh2ut430vxt" path="res://assets/CustomBlocks/entities/enemy.obj" id="3_ou388"]
+[ext_resource type="Script" path="res://scripts/characters/ranged_enemy/ranged_enemy.gd" id="1_dg3f2"]
+[ext_resource type="PackedScene" uid="uid://cwi7l5pb4w74k" path="res://scenes/characters/ranged_enemy/projectile.tscn" id="2_qt8wf"]
+[ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="2_vvwnb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jx3wm"]
-radius = 1.0
+radius = 2.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0igbs"]
-albedo_texture = ExtResource("2_k2v20")
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jfshl"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pbp3d"]
-size = Vector3(1, 1.57303, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2bedf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c22be"]
-size = Vector3(1, 1.44879, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ocmc4"]
 properties/0/path = NodePath(".:position")
@@ -34,35 +30,30 @@ bg_color = Color(0, 0, 0, 0.501961)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxypm"]
 bg_color = Color(0.471704, 0.569977, 0.959633, 1)
 
-[node name="Enemy" type="CharacterBody3D" groups=["Enemies"]]
-collision_layer = 3
-collision_mask = 11
-collision_priority = 2.0
-script = ExtResource("1_pccks")
+[node name="RangedEnemy" type="CharacterBody3D" groups=["Enemies"]]
+script = ExtResource("1_dg3f2")
+projectile_scene = ExtResource("2_qt8wf")
 
 [node name="DetectionArea" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
 shape = SubResource("SphereShape3D_jx3wm")
 
-[node name="enemy_textures" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_0igbs")
-mesh = ExtResource("3_ou388")
-skeleton = NodePath("")
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("CapsuleMesh_jfshl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00798035, 0)
-shape = SubResource("BoxShape3D_pbp3d")
+shape = SubResource("CapsuleShape3D_2bedf")
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
-collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.0124878, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_c22be")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -95,7 +86,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_6btbb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hxypm")
 value = 100.0
 show_percentage = false
-script = ExtResource("2_tc1n5")
+script = ExtResource("2_vvwnb")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
