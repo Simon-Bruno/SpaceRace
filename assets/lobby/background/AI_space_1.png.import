@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyx6m2eagpdf"
-path.s3tc="res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"
+uid="uid://bsyqwcnbob55v"
+path.s3tc="res://.godot/imported/AI_space_1.png-bd14b4483bc9fb17f22e8136d8cb5819.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/lobby/laser_beam/T_VFX_Flare_15.PNG"
-dest_files=["res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"]
+source_file="res://assets/lobby/background/AI_space_1.png"
+dest_files=["res://.godot/imported/AI_space_1.png-bd14b4483bc9fb17f22e8136d8cb5819.s3tc.ctex"]
 
 [params]
 

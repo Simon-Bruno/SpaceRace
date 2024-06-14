@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
 [ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="2_8qfng"]
 [ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
-[ext_resource type="ArrayMesh" uid="uid://bx4tbrmxswfmc" path="res://assets/CustomBlocks/entities/player.obj" id="3_tlg8v"]
+[ext_resource type="ArrayMesh" uid="uid://bx4tbrmxswfmc" path="res://assets/CustomBlocks/entities/player.obj" id="3_ip8av"]
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v5bfw"]
@@ -47,7 +47,7 @@ replication_config = SubResource("SceneReplicationConfig_v5bfw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
 material_override = SubResource("StandardMaterial3D_owxfs")
-mesh = ExtResource("3_tlg8v")
+mesh = ExtResource("3_ip8av")
 skeleton = NodePath("../../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

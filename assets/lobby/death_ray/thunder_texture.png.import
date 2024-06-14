@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyx6m2eagpdf"
-path.s3tc="res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"
+uid="uid://dic5j3hd0j50t"
+path.s3tc="res://.godot/imported/thunder_texture.png-4af7e62ddfb9b49c529fe87686318d0c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/lobby/laser_beam/T_VFX_Flare_15.PNG"
-dest_files=["res://.godot/imported/T_VFX_Flare_15.PNG-35a2a1fea001208e45e2ff545fdd8a3d.s3tc.ctex"]
+source_file="res://assets/lobby/death_ray/thunder_texture.png"
+dest_files=["res://.godot/imported/thunder_texture.png-4af7e62ddfb9b49c529fe87686318d0c.s3tc.ctex"]
 
 [params]
 
