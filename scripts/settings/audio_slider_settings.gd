@@ -14,7 +14,7 @@ func _ready():
 	get_bus_name_by_index()
 	load_data()
 	set_name_label_text()
-	set_slider_value()
+	set_slider_value(bus_index)
 
 
 func load_data():
@@ -39,7 +39,7 @@ func get_bus_name_by_index():
 	bus_index = AudioServer.get_bus_index(bus_name)
 
 
-func set_slider_value():
+func set_slider_value(bus_index):
 	h_slider.value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 	set_audio_num_label_text()
 

@@ -93,3 +93,4 @@ text = "FPS: 144"
 [connection signal="text_submitted" from="MessageInput" to="." method="_on_message_input_text_submitted"]
 [connection signal="pressed" from="SendButton" to="." method="_on_send_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

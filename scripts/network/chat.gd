@@ -140,8 +140,9 @@ func _on_message_input_gui_input(_event):
 #TODO add more commands (respawn, etc)
 # Check for special commands in the input field
 func commands():
-	if leave_game() or easter_egg() or stop_easter_egg():
-	#or mute_master() or mute_music() or mute_sfx():
+	if leave_game() or easter_egg() or stop_easter_egg() \
+	or mute_master_command() or mute_music_command() or mute_sfx_command() \
+	or unmute_master_command() or unmute_music_command() or unmute_sfx_command():
 		return true
 
 
@@ -156,6 +157,7 @@ func leave_game():
 # Function to start an easter egg when the "/easteregg" command is submitted
 func easter_egg():
 	if message_input.text == "/easteregg":
+		Audiocontroller.mute_music()
 		video_stream_player.play()
 		return true
 
@@ -164,37 +166,48 @@ func easter_egg():
 # submitted
 func stop_easter_egg():
 	if message_input.text == "/stop_easteregg":
+		Audiocontroller.unmute_music()
 		video_stream_player.stop()
 		return true
 
 
-func mute_master():
+func _on_video_stream_player_finished():
+	Audiocontroller.unmute_music()
+
+
+func mute_master_command():
 	if message_input.text == "/mute_master":
+		Audiocontroller.mute_master()
 		return true
 
 
-func unmute_master():
+func unmute_master_command():
 	if message_input.text == "/unmute_master":
+		Audiocontroller.unmute_master()
 		return true
 
 
-func mute_music():
+func mute_music_command():
 	if message_input.text == "/mute_music":
+		Audiocontroller.mute_music()
 		return true
 
 
-func unmute_music():
+func unmute_music_command():
 	if message_input.text == "/unmute_music":
+		Audiocontroller.unmute_music()
 		return true
 
 
-func mute_sfx():
+func mute_sfx_command():
 	if message_input.text == "/mute_sfx":
+		Audiocontroller.mute_sfx()
 		return true
 
 
-func unmute_sfx():
+func unmute_sfx_command():
 	if message_input.text == "/unmute_sfx":
+		Audiocontroller.unmute_sfx()
 		return true
 
 

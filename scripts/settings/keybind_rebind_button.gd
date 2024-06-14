@@ -35,7 +35,7 @@ func set_action_name():
 			label.text = "Interact"
 		"attack":
 			label.text = "Attack"
-		"chat_command":
+		"open_chat":
 			label.text = "Open Chat"
 
 func set_text_for_key():

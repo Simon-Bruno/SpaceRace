@@ -35,9 +35,9 @@ func add_resolution_items():
 
 
 func select_current_display_resolution():
-	var current_resolution = DisplayServer.window_get_size()
-	var current_resolution_str = str(current_resolution.x) + " " + "x" + " " + str(current_resolution.y)
-	var index = DISPLAY_RESOLUTION_KEYS.find(current_resolution_str)
+	var curr_resolution = DisplayServer.window_get_size()
+	var curr_resolution_str = str(curr_resolution.x) + " " + "x" + " " + str(curr_resolution.y)
+	var index = DISPLAY_RESOLUTION_KEYS.find(curr_resolution_str)
 	option_button.select(index)
 
 
