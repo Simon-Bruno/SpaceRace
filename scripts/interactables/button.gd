@@ -46,6 +46,6 @@ func _process(delta):
 
 # Called when button is placed in world. Sets the mesh instance to off.
 func _ready():
-	customRooms = get_parent().get_parent()
+	customRooms = get_parent()
 	if customRooms is GridMap:
 		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(customRooms.WALLSWITCHOFF)

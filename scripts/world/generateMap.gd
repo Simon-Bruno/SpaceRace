@@ -1,7 +1,9 @@
 extends GridMap
 
 enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL, 
-	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF, WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR}
+	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF,
+	  WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR, CUSTOMEND, CUSTOMSTART, LARGEBOX, REDBOX, 
+	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER}
 
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
@@ -43,8 +45,13 @@ var room_variation_y : int = 1
 @export var start_pos : Vector3i = Vector3i(0, 0, 0)
 @export var generate_room : bool = true
 
+var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
+var laser_scene = preload("res://scenes/interactables/laser.tscn")
+var item_scene = preload("res://scenes/item/item.tscn")
+var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
-
+var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
+var door_scene = preload("res://scenes/interactables/door.tscn")
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -137,7 +144,32 @@ func get_custom_rooms() -> Array:
 
 	return pairs
 
+func place_item(scene, orientation, location):
+	var item = scene.instantiate()
+	item.position = location
+	item.scale = Vector3i(1.5, 1.5, 1.5)
+	item.rotation = Vector3i(0, orientation, 0)
+	add_child(item, true)
+	return item
 
+func locate_items(item, orientation, x, y, z, ori_start):
+	var location = 2*(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0))
+	if item == WALLSWITCHOFF:
+		item = place_item(button_scene, orientation, location)
+		#item.inverse = true
+		#item.interactable = door
+	elif item == WALLSWITCHON:
+		item = place_item(button_scene, orientation, location)
+		#item.interactable = door
+	elif item == PRESSUREPLATEOFF:
+		item = place_item(pressure_plate_scene, orientation, location)
+		#item.interactable = door
+	#elif item == DOOROPENL:
+		#print('door left', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+	#elif item == DOOROPENR:
+		#print('door right', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+
+	
 # Function gets an Array containing the custom rooms that have been assigned, 
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
@@ -157,20 +189,7 @@ func place_custom_room(pairs : Array) -> void:
 					var orientation = customRooms.get_cell_item_orientation(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
-					if item == WALLSWITCHOFF:
-						print('wallswitch off', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-						var button = button_scene.instantiate()
-						button.position = 2*(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0))
-						add_child(button, true)
-					elif item == WALLSWITCHON:
-						print('wallswitch on', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-					elif item == 29:
-						print('pressure plate off', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-					elif item == DOOROPENL:
-						print('door left', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-					elif item == DOOROPENR:
-						print('door right', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-
+					locate_items(item, orientation, x, y, z, ori_start)
 
 # Rotates function to new 
 static func new_orientation(item : int, orientation : int) -> int:
