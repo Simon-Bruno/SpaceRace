@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxnsgqthgkbxc"]
+[gd_scene load_steps=16 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
-[ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="2_8qfng"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_8qfng"]
 [ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
-[ext_resource type="ArrayMesh" uid="uid://bx4tbrmxswfmc" path="res://assets/CustomBlocks/entities/player.obj" id="3_tlg8v"]
+[ext_resource type="ArrayMesh" uid="uid://bx4tbrmxswfmc" path="res://assets/CustomBlocks/entities/player.obj" id="3_ip8av"]
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
+[ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="5_oaq0v"]
+[ext_resource type="PackedScene" uid="uid://b1sppkmxnnog5" path="res://scenes/weapons/pistol.tscn" id="5_wx8tt"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v5bfw"]
 properties/0/path = NodePath(".:position")
@@ -19,6 +21,18 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("FloatingName:text")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath(".:health")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath("PlayerCombat/SubViewport/HpBar:value")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:visible")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:alive")
+properties/7/spawn = true
+properties/7/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owxfs"]
 albedo_texture = ExtResource("2_8qfng")
@@ -31,12 +45,21 @@ radius = 0.600331
 height = 1.0
 radius = 1.04195
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6btbb"]
+bg_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxypm"]
+bg_color = Color(0.471704, 0.569977, 0.959633, 1)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sjmiw"]
 height = 1.0
 radius = 0.75
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_iyg84"]
+viewport_path = NodePath("PlayerCombat/SubViewport")
+
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_c8kx5")
 
@@ -47,7 +70,7 @@ replication_config = SubResource("SceneReplicationConfig_v5bfw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
 material_override = SubResource("StandardMaterial3D_owxfs")
-mesh = ExtResource("3_tlg8v")
+mesh = ExtResource("3_ip8av")
 skeleton = NodePath("../../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -63,11 +86,39 @@ shape = SubResource("CylinderShape3D_2fdg3")
 [node name="PlayerCombat" type="Node3D" parent="."]
 script = ExtResource("2_wfppx")
 
+[node name="SubViewport" type="SubViewport" parent="PlayerCombat"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="HpBar" type="ProgressBar" parent="PlayerCombat/SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6btbb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hxypm")
+value = 100.0
+show_percentage = false
+script = ExtResource("5_oaq0v")
+
+[node name="Weapon" parent="PlayerCombat" instance=ExtResource("5_wx8tt")]
+
 [node name="DealAttackTimer" type="Timer" parent="PlayerCombat"]
 wait_time = 0.5
 
 [node name="GetHitCooldown" type="Timer" parent="PlayerCombat"]
 wait_time = 0.5
+
+[node name="RespawnImmunity" type="Timer" parent="PlayerCombat"]
 
 [node name="FloatingName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
@@ -85,9 +136,16 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerItem/DetectionArea"]
 shape = SubResource("CylinderShape3D_sjmiw")
 
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.6, 2.08165e-12)
+billboard = 1
+texture = SubResource("ViewportTexture_iyg84")
+
 [connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="PlayerCombat/DealAttackTimer" to="PlayerCombat" method="_on_deal_attack_timer_timeout"]
 [connection signal="timeout" from="PlayerCombat/GetHitCooldown" to="PlayerCombat" method="_on_GetHitCooldown_timeout"]
+[connection signal="timeout" from="PlayerCombat/RespawnImmunity" to="." method="_on_respawn_immunity_timeout"]
+[connection signal="timeout" from="PlayerCombat/RespawnImmunity" to="PlayerCombat" method="_on_respawn_immunity_timeout"]
 [connection signal="body_entered" from="PlayerItem/DetectionArea" to="PlayerItem" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="PlayerItem/DetectionArea" to="PlayerItem" method="_on_area_3d_body_exited"]
