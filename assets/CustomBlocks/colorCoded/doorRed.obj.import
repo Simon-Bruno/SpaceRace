@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://blhma1bigsmbe"
+path="res://.godot/imported/doorRed.obj-c234c71c094e5f2310b768a3befa11fa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/doorRed.obj-c234c71c094e5f2310b768a3befa11fa.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/doorRed.obj"
+dest_files=["res://.godot/imported/doorRed.obj-c234c71c094e5f2310b768a3befa11fa.mesh", "res://.godot/imported/doorRed.obj-c234c71c094e5f2310b768a3befa11fa.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

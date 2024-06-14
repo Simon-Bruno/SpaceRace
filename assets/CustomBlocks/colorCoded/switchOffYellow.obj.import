@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dxh8y7n45naqn"
+path="res://.godot/imported/switchOffYellow.obj-c9a02f286239978e9ed65a6dd87c461b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/switchOffYellow.obj-c9a02f286239978e9ed65a6dd87c461b.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/switchOffYellow.obj"
+dest_files=["res://.godot/imported/switchOffYellow.obj-c9a02f286239978e9ed65a6dd87c461b.mesh", "res://.godot/imported/switchOffYellow.obj-c9a02f286239978e9ed65a6dd87c461b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

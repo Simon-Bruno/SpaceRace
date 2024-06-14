@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c8mfmymg5rqcd"
+path="res://.godot/imported/laserRed.obj-1e28bbcfb269c42a60cb080687d3d8ca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/laserRed.obj-1e28bbcfb269c42a60cb080687d3d8ca.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/laserRed.obj"
+dest_files=["res://.godot/imported/laserRed.obj-1e28bbcfb269c42a60cb080687d3d8ca.mesh", "res://.godot/imported/laserRed.obj-1e28bbcfb269c42a60cb080687d3d8ca.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

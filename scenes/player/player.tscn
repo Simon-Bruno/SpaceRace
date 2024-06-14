@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
-[ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="2_8qfng"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_8qfng"]
 [ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
 [ext_resource type="ArrayMesh" uid="uid://bx4tbrmxswfmc" path="res://assets/CustomBlocks/entities/player.obj" id="3_ip8av"]
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
