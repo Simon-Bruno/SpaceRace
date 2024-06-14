@@ -17,7 +17,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 0.4
+const CUSTOMROOMPERCENTAGE : float = 1
 
 # General room parameters
 const room_amount : int = 5
@@ -42,6 +42,8 @@ var room_variation_y : int = 1
 
 @export var start_pos : Vector3i = Vector3i(0, 0, 0)
 @export var generate_room : bool = true
+
+var button_scene = preload("res://scenes/interactables/button.tscn")
 
 
 # Called when the object is created in the scene
@@ -155,6 +157,19 @@ func place_custom_room(pairs : Array) -> void:
 					var orientation = customRooms.get_cell_item_orientation(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
+					if item == WALLSWITCHOFF:
+						print('wallswitch off', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+						var button = button_scene.instantiate()
+						button.position = 2*(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0))
+						add_child(button, true)
+					elif item == WALLSWITCHON:
+						print('wallswitch on', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+					elif item == 29:
+						print('pressure plate off', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+					elif item == DOOROPENL:
+						print('door left', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+					elif item == DOOROPENR:
+						print('door right', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
 
 
 # Rotates function to new 
