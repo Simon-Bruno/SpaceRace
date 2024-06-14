@@ -75,9 +75,9 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	add_child(box, true)
 	
-	var width : int = room[0]
-	var height : int = room[1]
-	add_walls(world_dict['walls'], width, height, start)
+	#var width : int = room[0]
+	#var height : int = room[1]
+	#add_walls(world_dict['walls'], width, height, start)
 	
 	var door = door_scene.instantiate()
 	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
