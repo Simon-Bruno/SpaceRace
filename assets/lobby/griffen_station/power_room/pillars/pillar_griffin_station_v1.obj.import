@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ccxkqj7nv7uf0"
+path="res://.godot/imported/pillar_griffin_station_v1.obj-415ee17e8a16fb534275b1eac3e320b6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pillar_griffin_station_v1.obj-415ee17e8a16fb534275b1eac3e320b6.mesh"]
+
+source_file="res://assets/lobby/griffen_station/power_room/pillars/pillar_griffin_station_v1.obj"
+dest_files=["res://.godot/imported/pillar_griffin_station_v1.obj-415ee17e8a16fb534275b1eac3e320b6.mesh", "res://.godot/imported/pillar_griffin_station_v1.obj-415ee17e8a16fb534275b1eac3e320b6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
