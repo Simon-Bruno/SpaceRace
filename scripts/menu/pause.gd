@@ -45,6 +45,7 @@ func _on_settings_back_to_menu():
 
 func _on_titlescreen_button_pressed():
 	Network._on_leave_button_pressed()
+	Audiocontroller.play_menu_music()
 	self.visible = false
 	game_status = false
 
