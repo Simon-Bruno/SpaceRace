@@ -32,8 +32,7 @@ func find_closest_player_in_range(nodes_array: Array):
 @onready var HpBar = $SubViewport/HpBar
 
 func _enter_tree():
-	if multiplayer.is_server():
-		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
+	$MultiplayerSynchronizer.set_multiplayer_authority(1)
 
 func _process(delta):
 	if not multiplayer.is_server():

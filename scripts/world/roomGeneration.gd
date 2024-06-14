@@ -81,17 +81,17 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	
 	var door = door_scene.instantiate()
 	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(door)
+	add_child(door, true)
 	door.activation_count = 2
 	
 	var button = button_scene.instantiate()
 	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(button)
+	add_child(button, true)
 	button.interactable = door
 	
 	var button2 = button_scene.instantiate()
 	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(button2)
+	add_child(button2, true)
 	button2.interactable = door
 
 #func _process(delta):

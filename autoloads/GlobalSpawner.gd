@@ -8,6 +8,8 @@ var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
 
 func spawn_melee_enemy(pos):
+	if not multiplayer.is_server():
+		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/EnemySpawner")
 	if spawner:
 		var enemy = enemy_scene.instantiate()
@@ -15,6 +17,8 @@ func spawn_melee_enemy(pos):
 		spawner.add_child(enemy, true)
 
 func spawn_laser(pos, dir):
+	if not multiplayer.is_server():
+		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
 		var laser = enemy_scene.instantiate()
