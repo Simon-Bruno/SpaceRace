@@ -21,6 +21,7 @@ Network="*res://autoloads/Network.gd"
 Global="*res://autoloads/global.gd"
 Audiocontroller="*res://autoloads/audiocontroller.gd"
 SettingsContainer="*res://autoloads/SettingsDataContainer.gd"
+GlobalSpawner="*res://autoloads/GlobalSpawner.gd"
 
 [editor]
 

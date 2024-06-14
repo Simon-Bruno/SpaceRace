@@ -7,7 +7,7 @@ var getHitCooldown = true
 @export var health = Global.player_max_health
 var points = 0
 @export var push_force = 1
-var alive = true
+@export var alive = true
 var respawn_immunity : bool = false
 
 var walk_acceleration = 40
@@ -116,7 +116,7 @@ func take_damage(id, damage):
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive:
-		print("health < 0")
+		#print("health < 0")
 		die()
 		
 func die():

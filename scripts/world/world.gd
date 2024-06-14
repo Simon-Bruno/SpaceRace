@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 var loaded_item = preload("res://scenes/item/item.tscn")
 @onready var pause_menu = $CanvasLayer/PauseMenu
@@ -7,7 +7,7 @@ var loaded_item = preload("res://scenes/item/item.tscn")
 func _ready():
 	if multiplayer.is_server():
 		var world = preload("res://scenes/world/worldGeneration.tscn").instantiate()
-		print(world)
+		#print(world)
 		world.name = "world"
 		add_child(world)
 		# Spawn all connected player nodes
