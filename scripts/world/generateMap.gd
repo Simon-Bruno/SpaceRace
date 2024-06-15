@@ -277,14 +277,12 @@ func define_rooms() -> void:
 
 		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
 		var rightDoor = height / 2 if i == room_amount - 1 else randi_range(1, height - 3)
-		
-		print(i, ' ', height, ' ', leftDoor)
-		print(i, ' ', height, ' ', rightDoor)
+
 		assert(rightDoor < height)
 		assert(leftDoor < height)
 		rooms.append([width, height, start, leftDoor, rightDoor])
 		roomTypes.append(pick_random_type())
-	
+
 	roomTypes[0] = STARTROOM
 	roomTypes[room_amount - 1] = ENDROOM
 

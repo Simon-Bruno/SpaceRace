@@ -249,8 +249,6 @@ func add_objects(floor_plan : Array[Array], objects_list : Array, width : int, h
 func generate_path(floor_plan : Array[Array], width : int, height : int, start : Vector3i, end : Vector3i) -> void:
 	var position : Vector3i = start
 	var up_down : int = 1 if start.z < end.z else -1
-	print(width, ' ', height)
-	print(position, end)
 	while position != end:
 		var new_direction = randi() % 2
 		match new_direction:
