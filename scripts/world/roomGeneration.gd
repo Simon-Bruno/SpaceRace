@@ -1,10 +1,11 @@
 extends Node3D
 
 @onready var world = get_parent()
+@onready var globalSpawner = GlobalSpawner
 
 enum {HORIZONTAL, VERTICAL}
 
-enum {EMTPY, PATH, WALL, ITEM, LASER, ENEMY}
+enum {EMPTY, PATH, WALL, ITEM, LASER, ENEMY}
 
 enum {UP, LEFT, DOWN, RIGHT}
 
@@ -27,6 +28,7 @@ func _ready():
 		var start : Vector3i = world.start_pos
 		var end : Vector3i = world.end_pos
 		var last_room : bool = world.last_room
+		absolute_position = world.absolute_position
 		var filename = "res://files/random_map_scripts/test.rms"
 		var world_dict : Dictionary = parser.parse_file(filename)
 		fill_room(world_dict, start, end, last_room)
@@ -35,12 +37,13 @@ func _ready():
 # (x, z) coordinates.
 # A small sketch:
 # . c c c .
-# c . . . c
-# c . x . c
-# c . . . c
+# c . p . c
+# c p x p c
+# c . p . c
 # . c c c .
 # If the given x needs to be checked, if any c is a wall, the function will
-# return false.
+# return false. If any of the p locations is the chosen path through the maze,
+# the function will also return false.
 # The vertical flag checks the upper and lower row, while setting it to false
 # means the function will check the two columns.
 # Setting the orientation to 1, will mean the function will check the
@@ -50,19 +53,26 @@ func _ready():
 # left without).
 func wall_check(floor_plan: Array, x: int, z: int, max_x: int, max_z: int, orientation: int, is_vertical: bool) -> bool:
 	if is_vertical:
-		if x > 0 and floor_plan[x - 1][z + 2 * orientation]:
-			return false
-		if floor_plan[x][z + 2 * orientation]:
-			return false
-		if x + 1 < max_x and floor_plan[x + 1][z + 2 * orientation]:
-			return false
+		if z + 2 * orientation >= 0 and z + 2 * orientation < max_z:
+			if floor_plan[z + orientation][x] == PATH:
+				return false
+			if x - 1 >= 0 and x - 1 < max_x and floor_plan[z + 2 * orientation][x - 1]:
+				return false
+			if floor_plan[z + 2 * orientation][x]:
+				return false
+			if x + 1 >= 0 and x + 1 < max_x and floor_plan[z + 2 * orientation][x + 1]:
+				return false
 	else:
-		if z > 0 and floor_plan[x + 2 * orientation][z - 1]:
-			return false
-		if floor_plan[x + 2 * orientation][z]:
-			return false
-		if z + 1 < max_z and floor_plan[x + 2 * orientation][z + 1]:
-			return false
+		if x + 2 * orientation >= 0 and x + 2 * orientation < max_x:
+			if floor_plan[z][x + orientation] == PATH:
+				return false
+			if z - 1 >= 0 and z - 1 < max_z and floor_plan[z - 1][x + 2 * orientation]:
+				return false
+			if floor_plan[z][x + 2 * orientation]:
+				return false
+			if z + 1 >= 0 and z + 1 < max_z and floor_plan[z + 1][x + 2 * orientation]:
+				return false
+
 	return true
 
 # This function checks if the wall that gets placed at the given (x, z)
@@ -72,28 +82,28 @@ func wall_check(floor_plan: Array, x: int, z: int, max_x: int, max_z: int, orien
 # this function return true.
 # This function does not check if there exists a route from start to finish.
 func check_wall_placement(floor_plan: Array, x: int, z: int) -> bool:
-	var max_x: int = floor_plan.size()
-	var max_z: int = floor_plan[0].size()
+	var max_x: int = floor_plan[0].size()
+	var max_z: int = floor_plan.size()
 	
 	if x < 0 or x >= max_x or z < 0 or z >= max_z:
 		return false
 
-	if floor_plan[x][z]:
+	if floor_plan[z][x]:
 		return false
 
 	# If there is a hole next to the coordinates, only place the wall if there
 	# is no wall on two tiles distance, since the player can't pass then.
-	if z > 1 and not floor_plan[x][z - 1]:
-		if not wall_check(floor_plan, x, z, max_x, max_z, -1, true):
-			return false
-	if x > 1 and not floor_plan[x - 1][z]:
+	if x > 1 and (not floor_plan[z][x - 1] or floor_plan[z][x - 1] == PATH):
 		if not wall_check(floor_plan, x, z, max_x, max_z, -1, false):
 			return false
-	if x + 2 < max_x and not floor_plan[x + 1][z]:
-		if not wall_check(floor_plan, x, z, max_x, max_z, 1, false):
+	if z > 1 and (not floor_plan[z - 1][x] or floor_plan[z - 1][x] == PATH):
+		if not wall_check(floor_plan, x, z, max_x, max_z, -1, true):
 			return false
-	if z + 2 < max_z and not floor_plan[x][z + 1]:
+	if z < max_z - 1 and x + 2 < max_x and not floor_plan[z + 1][x]:
 		if not wall_check(floor_plan, x, z, max_x, max_z, 1, true):
+			return false
+	if x < max_x - 1 and z + 2 < max_z and not floor_plan[z][x + 1]:
+		if not wall_check(floor_plan, x, z, max_x, max_z, 1, false):
 			return false
 
 	return true
@@ -115,7 +125,7 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 	if not check_wall_placement(floor_plan, new_x - 1, new_z - 1):
 		return false
 	wall_block.position = Vector3i(new_x, 3, new_z)
-	floor_plan[new_x - 1][new_z - 1] = WALL
+	floor_plan[new_z - 1][new_x - 1] = WALL
 	add_child(wall_block, true)
 	return true
 
@@ -197,7 +207,6 @@ func add_walls(floor_plan : Array[Array], wall_list : Array, width : int, height
 # and the function returns true. If the placement was unsuccessful, the floor
 # plan will be unaltered and the function will return false.
 func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height : int, start : Vector3i) -> bool:
-	var item = item_scene.instantiate()
 	var min_dist : int = object['set_min_distance']
 	var max_dist : int = object['set_max_distance']
 	# Calculations to set the object between the minimum and maximum distance.
@@ -212,12 +221,11 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 		xmin = min(width - 1, start[0] * 2 + min_dist)
 	var x = randi_range(xmin, xmax)
 	# Check if there is not another object/wall already at that place.
-	if floor_plan[x - 1][z - 1]:
+	if floor_plan[z - 1][x - 1]:
 		return false
 	# Add the item and update the plan.
-	floor_plan[x - 1][z - 1] = ITEM
-	item.position = Vector3i(x, 3, z)
-	add_child(item, true)
+	floor_plan[z - 1][x - 1] = ITEM
+	globalSpawner.spawn_item(absolute_position + Vector3i(x, 0, z))
 	return true
 
 
@@ -236,17 +244,37 @@ func add_objects(floor_plan : Array[Array], objects_list : Array, width : int, h
 		if not object_matcher(object, floor_plan, width, height, start):
 			# Try again if failed the first time.
 			object_matcher(object, floor_plan, width, height, start)
-			
+
 
 func generate_path(floor_plan : Array[Array], width : int, height : int, start : Vector3i, end : Vector3i) -> void:
-	pass
+	var position : Vector3i = start
+	var up_down : int = 1 if start.z < end.z else -1
+	print(width, ' ', height)
+	print(position, end)
+	while position != end:
+		var new_direction = randi() % 2
+		match new_direction:
+			HORIZONTAL:
+				if position.x == width - 1:
+					continue
+				position.x += 1
+			VERTICAL:
+				if position.z == end.z:
+					continue
+				if position.z + up_down < 0:
+					continue
+				if position.z + up_down > height - 1:
+					continue
+				position.z += up_down
+		floor_plan[position.z][position.x] = PATH
+
 
 # Generates a matrix of the size (width, height)
 func generate_floor_plan(width : int, height : int) -> Array[Array]:
 	var floor_plan : Array[Array] = []
-	floor_plan.resize(width)
-	for i in width:
-		floor_plan[i].resize(height)
+	floor_plan.resize(height)
+	for i in height:
+		floor_plan[i].resize(width)
 		floor_plan[i].fill(0)
 	return floor_plan
 
@@ -260,27 +288,3 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		generate_path(floor_plan, width, height, start, end)
 	add_walls(floor_plan, world_dict['walls'], width, height, start)
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
-	
-	var door = door_scene.instantiate()
-	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(door)
-	door.activation_count = 2
-	
-	var pressure_plate = pressure_plate_scene.instantiate()
-	pressure_plate.position = Vector3i(randi_range(1, room[0] * 2 - 1), 3, randi_range(1, room[1] * 2 - 1))
-	add_child(pressure_plate)
-	pressure_plate.interactable = door
-	
-	var button = button_scene.instantiate()
-	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(button)
-	button.interactable = door
-
-	var button2 = button_scene.instantiate()
-	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 3, randi_range(1, room[1] * 2 - 1))
-	add_child(button2)
-	button2.interactable = door
-	button2.inverse = true
-
-#func _process(delta):
-	#pass

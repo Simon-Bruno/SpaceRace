@@ -5,6 +5,9 @@ enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL
 	  WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR, CUSTOMEND, CUSTOMSTART, LARGEBOX, REDBOX, 
 	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER}
 
+# The room types.
+enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
+
 @onready var customRooms : GridMap = get_node("../CustomRooms")
 
 # At what y level is the floor
@@ -16,7 +19,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 0.4
+const CUSTOMROOMPERCENTAGE : float = 0
 
 # General room parameters
 const room_amount : int = 5
@@ -24,13 +27,15 @@ const room_width  : int = 10
 const room_height : int = 10
 const room_margin : int = 4
 
-# How much the room size can variate in incraments of 2. e.g 10 with variation 1
+# How much the room size can variate in increments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
 var room_variation_x : int = 1
 var room_variation_y : int = 1
 
-# Stores the locations of the rooms. Each entry is: [width, height, startX]
+
+# Stores the locations of the rooms. Each entry is: [width, height, startX, leftDoor, rightDoor]
 @export var rooms : Array = []
+@export var roomTypes : Array = []
 @export var room : Array = []
 
 # Stores game seed, which will be randomized at start of game, can be set to 
@@ -41,7 +46,16 @@ var room_variation_y : int = 1
 @export var end_pos : Vector3i = Vector3i(0, 0, 0)
 @export var generate_room : bool = true
 @export var last_room : bool = false
+@export var absolute_position : Vector3i = Vector3i(0, 3, 0)
 
+
+var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
+var laser_scene = preload("res://scenes/interactables/laser.tscn")
+var item_scene = preload("res://scenes/item/item.tscn")
+var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
+var button_scene = preload("res://scenes/interactables/button.tscn")
+var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
+var door_scene = preload("res://scenes/interactables/door.tscn")
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -87,6 +101,7 @@ func build_map() -> void:
 	draw_windows()
 	draw_walls()
 	
+	#print(roomTypes)
 	mirror_world()
 
 
@@ -127,12 +142,38 @@ func get_custom_rooms() -> Array:
 	for i in pairs:
 		rooms[i[0]][0] = customRooms.rooms[i[1]][0]
 		rooms[i[0]][1] = customRooms.rooms[i[1]][1]
+		roomTypes[i[0]] = CUSTOM
 
 	reset_room_spacing()
 
 	return pairs
 
+func place_item(scene, orientation, location):
+	var item = scene.instantiate()
+	item.position = location
+	item.scale = Vector3i(1.5, 1.5, 1.5)
+	item.rotation = Vector3i(0, orientation, 0)
+	add_child(item, true)
+	return item
 
+func locate_items(item, orientation, x, y, z, ori_start):
+	var location = 2*(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0))
+	if item == WALLSWITCHOFF:
+		item = place_item(button_scene, orientation, location)
+		#item.inverse = true
+		#item.interactable = door
+	elif item == WALLSWITCHON:
+		item = place_item(button_scene, orientation, location)
+		#item.interactable = door
+	elif item == PRESSUREPLATEOFF:
+		item = place_item(pressure_plate_scene, orientation, location)
+		#item.interactable = door
+	#elif item == DOOROPENL:
+		#print('door left', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+	#elif item == DOOROPENR:
+		#print('door right', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+
+	
 # Function gets an Array containing the custom rooms that have been assigned, 
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
@@ -152,7 +193,7 @@ func place_custom_room(pairs : Array) -> void:
 					var orientation = customRooms.get_cell_item_orientation(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
-
+					locate_items(item, orientation, x, y, z, ori_start)
 
 # Rotates function to new 
 static func new_orientation(item : int, orientation : int) -> int:
@@ -217,6 +258,10 @@ static func sumXValues(the_rooms : Array) -> int:
 	return sum
 
 
+func pick_random_type() -> int:
+	var types = [TYPE1, TYPE2, TYPE3, TYPE4, TYPE5]
+	return types[randi() % types.size()]
+	
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
 	var widthMax = room_width + room_variation_x
@@ -229,11 +274,19 @@ func define_rooms() -> void:
 		var width = randi_range(widthMin / 2, widthMax / 2 + 1) * 2
 		var height = randi_range(heightMin / 2, heightMax / 2 + 1) * 2
 		var start = sumXValues(rooms) + room_margin * i
+
 		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
-		var rightDoor = width / 2 if i == room_amount - 1 else randi_range(1, height - 3)
-
+		var rightDoor = height / 2 if i == room_amount - 1 else randi_range(1, height - 3)
+		
+		print(i, ' ', height, ' ', leftDoor)
+		print(i, ' ', height, ' ', rightDoor)
+		assert(rightDoor < height)
+		assert(leftDoor < height)
 		rooms.append([width, height, start, leftDoor, rightDoor])
-
+		roomTypes.append(pick_random_type())
+	
+	roomTypes[0] = STARTROOM
+	roomTypes[room_amount - 1] = ENDROOM
 
 # Draws the full floorplan by:
 # 1. Place first room of x * z size.
@@ -242,14 +295,23 @@ func define_rooms() -> void:
 func draw_rooms() -> void:
 	for i in room_amount:
 		room = rooms[i]
-		var rightDoor = rooms[i][4]
+
+		# Get the variables of the room
+		var rightDoor = room[4]
 		var leftDoor = room[3]
-		start_pos = Vector3i(1, 10, leftDoor * 2)
-		end_pos = Vector3i(room[1] * 2, 10, rightDoor * 2)
+
+		# Set some global variables for the generateRoom script
+		absolute_position.x = room[2]
+		start_pos = Vector3i(0, 10, leftDoor * 2)
+		end_pos = Vector3i(room[0] * 2 - 1, 10, rightDoor * 2 - 1)
 
 		make_room(room)
-		fill_room(room)
+		if roomTypes[i] != CUSTOM:
+			assert(rightDoor < room[1])
+			assert(leftDoor < room[1])
+			fill_room(room)
 
+		# Place the corridors between the current and next room
 		if i == room_amount - 1:
 			last_room = true
 			break
@@ -268,7 +330,7 @@ func fill_room(room_dim: Array) -> void:
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
 	add_child(room_scene, true)
 	generate_room = not generate_room
-	room_scene = room_scene.duplicate(5)
+	room_scene = room_scene.duplicate(7)
 	room_scene.scale.z = -1
 	add_child(room_scene, true)
 	generate_room = not generate_room
@@ -284,9 +346,7 @@ func make_room(room : Array) -> void:
 
 # Sorts vectors on x axis.
 func sort_vector(a : Vector3i, b : Vector3i):
-	if a.x < b.x:
-		return true
-	return false
+	return a.x < b.x
 
 
 # Draws paths between the doors.
@@ -296,13 +356,15 @@ func draw_paths() -> void:
 	
 	starts.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
+	
+	assert(starts.size() == ends.size(), 'This will fail regularly and a known issue. Please try again')
 
 	for i in range(starts.size() - 1, -1, -1):
 		if get_cell_item_orientation(starts[i]) != 22:
 			starts.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-
+	assert(starts.size() == ends.size(), 'This will fail regularly and a known issue. Please try again')
 	for i in starts.size():
 		make_path(starts[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
@@ -416,7 +478,6 @@ func draw_walls() -> void:
 		# Place wall.
 		var orientation = orientations[idx]
 		self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
-			
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

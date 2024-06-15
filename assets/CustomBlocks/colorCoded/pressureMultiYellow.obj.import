@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cxho831j6fyx2"
+path="res://.godot/imported/pressureMultiYellow.obj-74f691421baacb8ee0c35468b364414f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pressureMultiYellow.obj-74f691421baacb8ee0c35468b364414f.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/pressureMultiYellow.obj"
+dest_files=["res://.godot/imported/pressureMultiYellow.obj-74f691421baacb8ee0c35468b364414f.mesh", "res://.godot/imported/pressureMultiYellow.obj-74f691421baacb8ee0c35468b364414f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

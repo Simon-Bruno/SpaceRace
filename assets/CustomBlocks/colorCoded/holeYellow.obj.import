@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bw43yeq5s4sn3"
+path="res://.godot/imported/holeYellow.obj-bab3c3f651dfc6291f643293d93d5317.mesh"
+
+[deps]
+
+files=["res://.godot/imported/holeYellow.obj-bab3c3f651dfc6291f643293d93d5317.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/holeYellow.obj"
+dest_files=["res://.godot/imported/holeYellow.obj-bab3c3f651dfc6291f643293d93d5317.mesh", "res://.godot/imported/holeYellow.obj-bab3c3f651dfc6291f643293d93d5317.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

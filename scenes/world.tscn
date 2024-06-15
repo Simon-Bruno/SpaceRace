@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1991.92, 1, 1000)
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node"]
 script = ExtResource("1_25n6l")
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("1_fahhe")]
@@ -19,10 +19,21 @@ script = ExtResource("1_25n6l")
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
 spawn_path = NodePath("..")
 
+[node name="ItemSpawner" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemSpawner"]
+spawn_path = NodePath("..")
+
+[node name="ProjectileSpawner" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ProjectileSpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn", "res://scenes/interactables/laser.tscn")
+spawn_path = NodePath("..")
+
 [node name="EnemySpawner" parent="." instance=ExtResource("3_bij7o")]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="EnemySpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/enemy/enemy.tscn")
+[node name="EnemyMultiplayerSpawner" type="MultiplayerSpawner" parent="EnemySpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/enemy/enemy.tscn", "res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
 spawn_path = NodePath("..")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
@@ -44,4 +55,3 @@ shape = SubResource("BoxShape3D_afshc")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_3shum")]
-visible = true

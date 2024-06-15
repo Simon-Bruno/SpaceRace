@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bprp8wo44w1la"]
 
-[ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="1_jg63i"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_jg63i"]
 [ext_resource type="ArrayMesh" uid="uid://cbpumyfshlt6j" path="res://assets/CustomBlocks/placable/smallBox.obj" id="2_gd7fc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_paq6p"]

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://720t8mo26o7i"
+path="res://.godot/imported/buttonYellow.obj-4f61e3a650259d822f87430faa10a35f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/buttonYellow.obj-4f61e3a650259d822f87430faa10a35f.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/buttonYellow.obj"
+dest_files=["res://.godot/imported/buttonYellow.obj-4f61e3a650259d822f87430faa10a35f.mesh", "res://.godot/imported/buttonYellow.obj-4f61e3a650259d822f87430faa10a35f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

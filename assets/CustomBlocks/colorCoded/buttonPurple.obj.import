@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b33usldhep2ue"
+path="res://.godot/imported/buttonPurple.obj-4a07cc98c185e6617fdd8a4b63122216.mesh"
+
+[deps]
+
+files=["res://.godot/imported/buttonPurple.obj-4a07cc98c185e6617fdd8a4b63122216.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/buttonPurple.obj"
+dest_files=["res://.godot/imported/buttonPurple.obj-4a07cc98c185e6617fdd8a4b63122216.mesh", "res://.godot/imported/buttonPurple.obj-4a07cc98c185e6617fdd8a4b63122216.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
