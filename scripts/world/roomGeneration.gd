@@ -4,9 +4,13 @@ extends Node3D
 
 enum {HORIZONTAL, VERTICAL}
 
-enum {EMTPY, WALL, ITEM, LASER, ENEMY}
+enum {EMTPY, PATH, WALL, ITEM, LASER, ENEMY}
+
+enum {UP, LEFT, DOWN, RIGHT}
 
 var parser = preload("res://scripts/world/rms_parser.gd").new()
+
+var absolute_position = Vector3i(0, 0, 0)
 
 # Some constant scenes to load.
 const enemy_scene = preload("res://scenes/enemy/enemy.tscn")
@@ -21,9 +25,11 @@ const wall_scene = preload("res://scenes/world/intern_wall.tscn")
 func _ready():
 	if world.generate_room:
 		var start : Vector3i = world.start_pos
+		var end : Vector3i = world.end_pos
+		var last_room : bool = world.last_room
 		var filename = "res://files/random_map_scripts/test.rms"
 		var world_dict : Dictionary = parser.parse_file(filename)
-		fill_room(world_dict, start)
+		fill_room(world_dict, start, end, last_room)
 
 # This function is a check for a range of 3 tiles on two tiles distance of the given
 # (x, z) coordinates.
@@ -197,13 +203,13 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 	# Calculations to set the object between the minimum and maximum distance.
 	# Distances are the Chebyshev distance, where distance between 2 points
 	# is equal to the maximum of difference in x and y directions.
-	var zmin = max(1, start[2] - max_dist)
-	var zmax = min(height - 1, start[2] + max_dist)
+	var zmin = max(1, start[2] * 2 - max_dist)
+	var zmax = min(height - 1, start[2] * 2 + max_dist)
 	var z = randi_range(zmin, zmax)
 	var xmin = 1
-	var xmax = min(width - 1, start[0] + max_dist)
-	if abs(start[2] - z) < min_dist:
-		xmin = min(width - 1, start[0] + min_dist)
+	var xmax = min(width - 1, start[0] * 2 + max_dist)
+	if abs(start[2] * 2 - z) < min_dist:
+		xmin = min(width - 1, start[0] * 2 + min_dist)
 	var x = randi_range(xmin, xmax)
 	# Check if there is not another object/wall already at that place.
 	if floor_plan[x - 1][z - 1]:
@@ -230,6 +236,10 @@ func add_objects(floor_plan : Array[Array], objects_list : Array, width : int, h
 		if not object_matcher(object, floor_plan, width, height, start):
 			# Try again if failed the first time.
 			object_matcher(object, floor_plan, width, height, start)
+			
+
+func generate_path(floor_plan : Array[Array], width : int, height : int, start : Vector3i, end : Vector3i) -> void:
+	pass
 
 # Generates a matrix of the size (width, height)
 func generate_floor_plan(width : int, height : int) -> Array[Array]:
@@ -237,31 +247,17 @@ func generate_floor_plan(width : int, height : int) -> Array[Array]:
 	floor_plan.resize(width)
 	for i in width:
 		floor_plan[i].resize(height)
-		for j in height:
-			floor_plan[i][j] = 0
+		floor_plan[i].fill(0)
 	return floor_plan
 
-func fill_room(world_dict: Dictionary, start : Vector3i):
+func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_floor : bool) -> void:
 	var room = world.room
 	var width : int = room[0] * 2
 	var height : int = room[1] * 2
 	var floor_plan : Array[Array] = generate_floor_plan(width, height)
-	var enemy = enemy_scene.instantiate()
-	enemy.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1))
-	add_child(enemy, true)
-	
-	var laser = laser_scene.instantiate()
-	laser.position = Vector3i(1, 3, 5)
-	add_child(laser, true)
-	
-	var item = item_scene.instantiate()
-	item.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
-	add_child(item, true)
-	
-	var box = box_scene.instantiate()
-	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
-	add_child(box, true)
 
+	if not last_floor:
+		generate_path(floor_plan, width, height, start, end)
 	add_walls(floor_plan, world_dict['walls'], width, height, start)
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
 	

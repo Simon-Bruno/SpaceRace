@@ -38,7 +38,9 @@ var room_variation_y : int = 1
 @export var game_seed : int = 0
 
 @export var start_pos : Vector3i = Vector3i(0, 0, 0)
+@export var end_pos : Vector3i = Vector3i(0, 0, 0)
 @export var generate_room : bool = true
+@export var last_room : bool = false
 
 
 # Called when the object is created in the scene
@@ -60,7 +62,7 @@ func _ready() -> void:
 func new_seed() -> void:
 	randomize()
 	var random_seed = randi()
-	seed(random_seed)	
+	seed(random_seed)
 	game_seed = random_seed
 
 
@@ -217,18 +219,20 @@ static func sumXValues(the_rooms : Array) -> int:
 
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
-	var xMax = room_width + room_variation_x
-	var xMin = room_width - room_variation_x
+	var widthMax = room_width + room_variation_x
+	var widthMin = room_width - room_variation_x
 	
-	var yMax = room_width + room_variation_y
-	var yMin = room_width - room_variation_y
+	var heightMax = room_width + room_variation_y
+	var heightMin = room_width - room_variation_y
 	
 	for i in room_amount:
-		var x = randi_range(xMin / 2, xMax / 2 + 1) * 2
-		var y = randi_range(yMin / 2, yMax / 2 + 1) * 2
+		var width = randi_range(widthMin / 2, widthMax / 2 + 1) * 2
+		var height = randi_range(heightMin / 2, heightMax / 2 + 1) * 2
 		var start = sumXValues(rooms) + room_margin * i
-		
-		rooms.append([x, y, start])
+		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
+		var rightDoor = width / 2 if i == room_amount - 1 else randi_range(1, height - 3)
+
+		rooms.append([width, height, start, leftDoor, rightDoor])
 
 
 # Draws the full floorplan by:
@@ -238,22 +242,24 @@ func define_rooms() -> void:
 func draw_rooms() -> void:
 	for i in room_amount:
 		room = rooms[i]
+		var rightDoor = rooms[i][4]
+		var leftDoor = room[3]
+		start_pos = Vector3i(1, 10, leftDoor * 2)
+		end_pos = Vector3i(room[1] * 2, 10, rightDoor * 2)
 
 		make_room(room)
 		fill_room(room)
 
 		if i == room_amount - 1:
+			last_room = true
 			break
 
-		var zstart = randi_range(1, rooms[i][1] - 3)
-		var zend = randi_range(1, rooms[i + 1][1] - 3)
+		var zend = rooms[i + 1][3]
 
 		var xstart = rooms[i][2] + rooms[i][0] - 1
 		var xend = rooms[i + 1][2]
-		
-		start_pos = Vector3i(1, 10, zend * 2)
 
-		place_doors(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+		place_doors(Vector3i(xstart, HEIGHT, rightDoor), Vector3i(xend, HEIGHT, zend))
 
 
 
