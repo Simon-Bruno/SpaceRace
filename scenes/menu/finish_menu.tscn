@@ -58,6 +58,12 @@ label_settings = SubResource("LabelSettings_wnixh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_wnixh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 modulate = Color(0.99558, 0.99558, 0.99558, 1)
 layout_mode = 1
