@@ -23,6 +23,7 @@ func _on_area_3d_body_exited(body):
 			if interactable != null:
 				interactable.deactivated()
 
+# Updates the pressureplate mesh according to the current state
 func update_mesh(state : int):
 	if customRooms:
 		$PressurePlate/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
