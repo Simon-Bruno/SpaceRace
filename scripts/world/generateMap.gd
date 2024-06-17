@@ -354,9 +354,7 @@ func draw_paths() -> void:
 	
 	starts.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
-	
 	assert(starts.size() == ends.size())
-
 	for i in range(starts.size() - 1, -1, -1):
 		if get_cell_item_orientation(starts[i]) != 22:
 			starts.pop_at(i)
