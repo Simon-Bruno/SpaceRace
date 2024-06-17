@@ -10,6 +10,7 @@ enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
 
 @onready var roomLink : Node = get_node("../roomLink")
 @onready var customRooms : GridMap = get_node("../CustomRooms")
+@onready var entityGeneration : GridMap = get_node("../EntityGeneration")
 
 # At what y level is the floor
 const HEIGHT : int = 0
@@ -46,13 +47,6 @@ var room_variation_y : int = 1
 @export var start_pos : Vector3i = Vector3i(0, 0, 0)
 @export var generate_room : bool = true
 
-var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
-var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var item_scene = preload("res://scenes/item/item.tscn")
-var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
-var button_scene = preload("res://scenes/interactables/button.tscn")
-var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
-var door_scene = preload("res://scenes/interactables/door.tscn")
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -100,7 +94,8 @@ func build_map() -> void:
 	draw_walls()
 
 	mirror_world()
-
+	
+	entityGeneration.replace_entities()
 
 # Randomly picks n unique indexes.
 func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
@@ -125,7 +120,6 @@ func reset_room_spacing() -> void:
 # and returns an array containing the pairs [original, new].
 # TODO: Breaks room margins a bit, might need to be changed.
 func get_custom_rooms() -> Array:
-	customRooms.generate_dimensions( )
 	var total_picks = int(min((room_amount - 2) * CUSTOMROOMPERCENTAGE, roomLink.total_rooms()))
 	
 	var originals = random_picks(total_picks, 1, room_amount - 1)
@@ -154,22 +148,35 @@ func place_item(scene, orientation, location):
 	add_child(item, true)
 	return item
 
-func locate_items(item, orientation, x, y, z, ori_start):
-	var location = 2*(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0))
-	if item == WALLSWITCHOFF:
-		item = place_item(button_scene, orientation, location)
-		#item.inverse = true
-		#item.interactable = door
-	elif item == WALLSWITCHON:
-		item = place_item(button_scene, orientation, location)
-		#item.interactable = door
-	elif item == PRESSUREPLATEOFF:
-		item = place_item(pressure_plate_scene, orientation, location)
-		#item.interactable = door
-	#elif item == DOOROPENL:
-		#print('door left', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-	#elif item == DOOROPENR:
-		#print('door right', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+#func locate_items(item, orientation, x, y, z, ori_start):
+	#var location = 2*(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0))
+	#if item == WALLSWITCHOFF:
+		#item = place_item(button_scene, orientation, location)
+		##item.inverse = true
+		##item.interactable = door
+	#elif item == WALLSWITCHON:
+		#item = place_item(button_scene, orientation, location)
+		##item.interactable = door
+	#elif item == PRESSUREPLATEOFF:
+		#item = place_item(pressure_plate_scene, orientation, location)
+		##item.interactable = door
+	##elif item == DOOROPENL:
+		##print('door left', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+	##elif item == DOOROPENR:
+		##print('door right', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
+
+
+func write_room(orig : Array, new : int, layer : int) -> void:
+	for y in range(1, 4):
+		for x in orig[0]:
+			for z in orig[1]:
+				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer)
+				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer)
+				
+				if layer == 0:
+					self.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
+				else:
+					entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
 
 	
 # Function gets an Array containing the custom rooms that have been assigned, 
@@ -179,15 +186,8 @@ func place_custom_room(pairs : Array) -> void:
 
 	for pair in pairs:
 		var orig = rooms[pair[0]]
-		var ori_start = orig[2]
-		for y in range(1, MAX_HEIGHT):
-			for x in orig[0]:
-				for z in orig[1]:
-					var item = roomLink.get_room_item(Vector3i(x, y, z), pair[1], 0)
-					var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), pair[1], 0)
-					
-					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
-					locate_items(item, orientation, x, y, z, ori_start)
+		write_room(orig, pair[1], 0)
+		write_room(orig, pair[1], 1)
 
 # Rotates function to new 
 static func new_orientation(item : int, orientation : int) -> int:
@@ -219,6 +219,16 @@ func mirror_world() -> void:
 
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		self.set_cell_item(new_location, item, orientation)
+		
+	for x in entityGeneration.get_used_cells():
+		var item = entityGeneration.get_cell_item(x)
+		var orientation = entityGeneration.get_cell_item_orientation(x)
+
+		orientation = new_orientation(item, orientation)
+		item = new_item(item)
+
+		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
+		entityGeneration.set_cell_item(new_location, item, orientation)
 
 
 # Places a window on the given coords, except for when there already is an item.
