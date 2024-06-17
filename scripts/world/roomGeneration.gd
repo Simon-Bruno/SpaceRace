@@ -16,11 +16,12 @@ var door_scene = preload("res://scenes/interactables/door.tscn")
 var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 func _ready():
-	if world.generate_room:
-		var start : Vector3i = world.start_pos
-		var filename = "res://files/random_map_scripts/test.rms"
-		var world_dict : Dictionary = parser.parse_file(filename)
-		fill_room(world_dict, start)
+	pass
+	#if world.generate_room:
+		#var start : Vector3i = world.start_pos
+		#var filename = "res://files/random_map_scripts/test.rms"
+		#var world_dict : Dictionary = parser.parse_file(filename)
+		#fill_room(world_dict, start)
 		
 func place_wall(x: int, z: int, i: int, orientation: int):
 	var wall_block = wall_scene.instantiate()
