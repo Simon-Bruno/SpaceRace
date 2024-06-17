@@ -103,6 +103,10 @@ func _hard_reset_to_lobby():
 
 func _on_player_disconnected(id):
 	player_names.erase(id)
+	go_to_lobby()
+	player_disconnected.emit(id)
+	
+func go_to_lobby():
 	if multiplayer.is_server():
 		var world = get_node_or_null("/root/Main/SpawnedItems/World")
 		if world != null:
@@ -112,9 +116,7 @@ func _on_player_disconnected(id):
 			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
 			for player_id in player_names.keys():
 				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
-	player_disconnected.emit(id)
 
-	player_disconnected.emit(id)
 
 func _on_leave_button_pressed():
 	var id = multiplayer.get_unique_id()

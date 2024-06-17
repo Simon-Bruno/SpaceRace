@@ -6,7 +6,7 @@ func _ready():
 	var pressure_plate_vals = get_parent()
 	var winner_id = pressure_plate_vals.winner_id
 
-	if multiplayer.get_unique_id() == (winner_id) or Network.other_team_member_id == (winner_id):
+	if multiplayer.get_unique_id() == (winner_id) or int(Network.other_team_member_id) == (winner_id):
 		var label_node = get_node("VBoxContainer/Label")
 		label_node.text = str(username + "\nYou won!")
 
@@ -17,11 +17,14 @@ func _ready():
 	
 # Go to lobby
 func _on_play_again_pressed():
-	pass
+	if multiplayer.is_server():
+		Network.go_to_lobby()
+	else: 
+		print("ask the host to let everybody go to lobby!")
 
 # Go to menu
 func _on_menu_pressed():
-	pass
+	Network._on_leave_button_pressed()
 
 # Quit
 func _on_quit_button_pressed():
