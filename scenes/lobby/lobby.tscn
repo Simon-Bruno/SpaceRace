@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
 [ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
-[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
+[ext_resource type="PackedScene" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
 [ext_resource type="ArrayMesh" uid="uid://cfv3e04julldf" path="res://assets/lobby/telepath/telepath.obj" id="4_2a2jn"]
 [ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
 [ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]

@@ -15,6 +15,7 @@ var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.ts
 var door_scene = preload("res://scenes/interactables/door.tscn")
 var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
+
 func _ready():
 	if world.generate_room:
 		var start : Vector3i = world.start_pos
@@ -63,8 +64,14 @@ func add_objects(objects_list):
 
 func fill_room(world_dict: Dictionary, start : Vector3i):
 	var room = world.room
-	GlobalSpawner.spawn_melee_enemy(
-		Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
+	#GlobalSpawner.spawn_melee_enemy(
+		#Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
+	
+	if !world.boss_spawned:
+		world.boss_spawned = true
+		var boss_position = Vector3i(room[0] / 2, randi_range(5, 30), room[1] / 2)
+		GlobalSpawner.spawn_boss(boss_position)
+		
 	var laser = laser_scene.instantiate()
 	laser.position = Vector3i(2, 3, 5)
 	add_child(laser, true)
@@ -93,6 +100,7 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
 	add_child(button2, true)
 	button2.interactable = door
+	
 
 #func _process(delta):
 	#pass
