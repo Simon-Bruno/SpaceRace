@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://cepwm7wdpxnll"]
 
-[ext_resource type="MeshLibrary" uid="uid://baf0ke4g8dqlg" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
+[ext_resource type="MeshLibrary" uid="uid://vso835jyb1lq" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
 
 [node name="Custom Rooms" type="Node3D"]
 
-[node name="Room1" type="Node3D" parent="."]
+[node name="Room0" type="Node3D" parent="."]
 
-[node name="Statics" type="GridMap" parent="Room1"]
+[node name="Statics" type="GridMap" parent="Room0"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -14,13 +14,14 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room1"]
+[node name="Dynamics" type="GridMap" parent="Room0"]
 mesh_library = ExtResource("1_nvyip")
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room2" type="Node3D" parent="."]
+[node name="Room1" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room2"]
+[node name="Statics" type="GridMap" parent="Room1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -28,5 +29,5 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room2"]
+[node name="Dynamics" type="GridMap" parent="Room1"]
 mesh_library = ExtResource("1_nvyip")
