@@ -3,6 +3,9 @@ extends StaticBody3D
 var customRooms: GridMap = null
 @export var activation_count: int = 1
 
+func door():
+	pass # used to identify as door
+
 # Called when door is placed in world. Sets the mesh instance to closed.
 func _ready() -> void:
 	customRooms = get_parent().get_parent()
