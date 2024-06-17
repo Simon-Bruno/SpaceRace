@@ -102,7 +102,7 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0.0
 
-	if closest_target_node:
+	if closest_target_node and current_state == State.IDLE:
 		var distance_to_player = global_transform.origin.distance_to(closest_target_node.global_transform.origin)
 		if distance_to_player > stopping_distance:
 			var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
@@ -210,7 +210,6 @@ func handle_shooting_and_spinning(delta):
 		spawn_offset.y -= 0.5
 		var direction = global_transform.basis.z.normalized()
 		GlobalSpawner.spawn_projectile(transform_origin, spawn_offset, direction, self)
-
 
 func find_closest_player_in_range():
 	var min_distance = INF
