@@ -9,6 +9,7 @@ var parser = preload("res://scripts/world/rms_parser.gd").new()
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/item.tscn")
+var bomb_scene = preload("res://scenes/item/bomb.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
@@ -68,9 +69,16 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	var laser = laser_scene.instantiate()
 	laser.position = Vector3i(2, 3, 5)
 	add_child(laser, true)
+	
 	var item = item_scene.instantiate()
 	item.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	add_child(item, true)
+	
+	
+	var bomb = bomb_scene.instantiate()
+	bomb.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
+	add_child(bomb, true)
+	
 	var box = box_scene.instantiate()
 	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	add_child(box, true)
