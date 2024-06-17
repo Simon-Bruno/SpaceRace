@@ -7,6 +7,8 @@ var bodies_on_plate: Array = []
 
 # Detect when body entered the area
 func _on_area_3d_body_entered(body):
+	if not multiplayer.is_server():
+		return
 	if body.is_in_group("Players") or body is RigidBody3D:
 		if bodies_on_plate.is_empty():
 			if interactable != null:
@@ -15,6 +17,8 @@ func _on_area_3d_body_entered(body):
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body):
+	if not multiplayer.is_server():
+		return
 	if body.is_in_group("Players") or body is RigidBody3D:
 		bodies_on_plate.erase(body)
 		if bodies_on_plate.is_empty():
