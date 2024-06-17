@@ -22,6 +22,11 @@ Global="*res://autoloads/global.gd"
 Audiocontroller="*res://autoloads/audiocontroller.gd"
 SettingsContainer="*res://autoloads/SettingsDataContainer.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
