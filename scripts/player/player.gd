@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var jump_impulse = 20
 var getHitCooldown = true
 @export var health = Global.player_max_health
-var points = 0
+var points = 100
 @export var push_force = 1
 @export var alive = true
 var respawn_immunity : bool = false
@@ -104,6 +104,12 @@ func _physics_process(delta):
 		if alive:
 			move_and_slide()
 	move_object()
+	
+func _input(event):
+	if event.is_action_pressed("ability_1") and points > $Class.ability1_point_cost:
+		$Class.ability1()
+	if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
+		$Class.ability2()
 	
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 @rpc("any_peer", "call_local", "reliable")
