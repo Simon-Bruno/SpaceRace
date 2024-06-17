@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_10o3y"]
 [ext_resource type="Script" path="res://scripts/item/bomb.gd" id="2_oyt1b"]
-[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://assets/CustomBlocks/placable/computer.obj" id="3_8tbu7"]
+[ext_resource type="ArrayMesh" uid="uid://dip2l2lnwvq3q" path="res://assets/CustomBlocks/items/bomb.obj" id="3_1rnls"]
 
 [node name="Item" instance=ExtResource("1_10o3y")]
 script = ExtResource("2_oyt1b")
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
-mesh = ExtResource("3_8tbu7")
+transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0.0091269, -0.758, -0.0773146)
+mesh = ExtResource("3_1rnls")
