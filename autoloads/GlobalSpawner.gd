@@ -31,7 +31,7 @@ func spawn_laser(pos, dir):
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
-		var laser = enemy_scene.instantiate()
+		var laser = laser_scene.instantiate()
 		laser.position = pos
 		laser.basis	= dir
 		spawner.add_child(laser, true)
