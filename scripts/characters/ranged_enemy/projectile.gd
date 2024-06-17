@@ -30,6 +30,6 @@ func _physics_process(delta):
 		if collision.get_collider().is_in_group("Enemies"):
 			#print("Hit Enemy: ", collision.get_collider().name)
 			if collision.get_collider().has_method("take_damage"):
-				collision.get_collider().take_damage(damage, self)
+				collision.get_collider().take_damage(damage, shooter)
 		queue_free()
 

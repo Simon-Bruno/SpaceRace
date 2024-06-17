@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjhtlroiketf2"]
+[gd_scene load_steps=14 format=3 uid="uid://cjhtlroiketf2"]
 
 [ext_resource type="Script" path="res://scripts/characters/boss.gd" id="1_r0k3s"]
 [ext_resource type="PackedScene" uid="uid://cds22hi7osiev" path="res://scenes/enemy/enemy.tscn" id="2_3jxkt"]
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_5lfmr"]
 [ext_resource type="ArrayMesh" uid="uid://b0mh2ut430vxt" path="res://assets/CustomBlocks/entities/enemy.obj" id="3_vf1u7"]
+[ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="4_hmoni"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_bmorm"]
 viewport_path = NodePath("SubViewport")
@@ -40,7 +41,7 @@ properties/3/path = NodePath(".:health")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[node name="Boss" type="CharacterBody3D" groups=["Enemies"]]
+[node name="Boss" type="CharacterBody3D" groups=["Boss", "Enemies"]]
 collision_layer = 3
 collision_mask = 11
 collision_priority = 2.0
@@ -74,6 +75,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_6btbb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hxypm")
 value = 100.0
 show_percentage = false
+script = ExtResource("4_hmoni")
 
 [node name="DetectionArea" type="Area3D" parent="."]
 collision_layer = 2

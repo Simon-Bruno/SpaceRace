@@ -105,6 +105,8 @@ func _on_enemy_hitbox_body_exited(body):
 func take_damage(damage, source):
 	if not multiplayer.is_server():
 		return
+	if source.is_in_group("Boss"):
+		return
 	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100

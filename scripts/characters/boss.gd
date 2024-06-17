@@ -168,7 +168,6 @@ func check_health():
 			break
 
 func spawn_enemies():
-	print("Spawning enemies!")
 	for i in range(3):
 		var pos = self.global_transform.origin + Vector3(randf() * 10 - 5, 0, randf() * 10 - 5)
 		var enemy = GlobalSpawner.spawn_melee_enemy(pos)
@@ -180,7 +179,7 @@ func start_charge():
 		current_state = State.CHARGING
 		look_at(last_damaged_by.global_transform.origin, Vector3.UP)
 		rotate_y(PI)
-		velocity = Vector3()  # Reset velocity
+		velocity = Vector3()
 		if MeshInstance.material_override is StandardMaterial3D:
 			var new_color = original_albedo_color.lerp(Color(1.0, 0.0, 0.0, 1.0), 0.5)
 			MeshInstance.material_override.albedo_color = new_color
@@ -194,9 +193,6 @@ func move_towards_player():
 		current_state = State.IDLE
 		if MeshInstance.material_override is StandardMaterial3D:
 			MeshInstance.material_override.albedo_color = original_albedo_color
-			# print("Charge complete: Color reset to original")
-		#else:
-			#print("MeshInstance.material_override is not a StandardMaterial3D")
 
 func start_spinning():
 	if current_state == State.IDLE:
@@ -210,9 +206,11 @@ func handle_shooting_and_spinning(delta):
 	if shooting:
 		rotate_y(deg_to_rad(spin_speed) * delta)
 		var transform_origin = global_transform.origin
-		var spawn_offset = global_transform.basis.z.normalized() * 1.3 
+		var spawn_offset = global_transform.basis.z.normalized() * 1.3
+		spawn_offset.y -= 0.5
 		var direction = global_transform.basis.z.normalized()
 		GlobalSpawner.spawn_projectile(transform_origin, spawn_offset, direction, self)
+
 
 func find_closest_player_in_range():
 	var min_distance = INF
