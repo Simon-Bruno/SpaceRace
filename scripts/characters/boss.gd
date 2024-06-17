@@ -35,15 +35,18 @@ var charge_speed = 35
 
 @onready var SpinTimer = $SpinTimer
 @onready var ChargeTimer = $ChargeTimer
+@onready var MeshInstance = $enemy_textures
 
 enum State { IDLE, CHARGING, SPINNING }
-
+var original_albedo_color = Color(1.0, 1.0, 1.0, 1.0)
 var current_state = State.IDLE
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(1)
-	#reset_spin_timer()
 	reset_charge_timer()
+	
+	if MeshInstance.material_override is StandardMaterial3D:
+		original_albedo_color = MeshInstance.material_override.albedo_color
 
 func reset_spin_timer():
 	SpinTimer.wait_time = 8.0 + randf() * 5.0
@@ -63,7 +66,6 @@ func _on_charge_timer_timeout():
 		start_charge()
 	reset_charge_timer()
 
-	
 func _process(delta):
 	if not multiplayer.is_server():
 		return
@@ -87,8 +89,6 @@ func _process(delta):
 
 	check_health()
 	handle_shooting_and_spinning(delta)
-
-	
 
 func _physics_process(delta):
 	if not multiplayer.is_server():
@@ -114,8 +114,6 @@ func _physics_process(delta):
 			velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
 
 	move_and_slide()
-
-
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
@@ -183,15 +181,25 @@ func start_charge():
 	if last_damaged_by and current_state == State.IDLE:
 		current_state = State.CHARGING
 		velocity = Vector3()  # Reset velocity
+		if MeshInstance.material_override is StandardMaterial3D:
+			var new_color = original_albedo_color.lerp(Color(1.0, 0.0, 0.0, 1.0), 0.5)
+			MeshInstance.material_override.albedo_color = new_color
+			print("Boss is charging: Color changed to red")
+		else:
+			print("MeshInstance.material_override is not a StandardMaterial3D")
+		await get_tree().create_timer(charge_duration).timeout
 		move_towards_player()
-
 func move_towards_player():
 	if last_damaged_by:
 		var direction = (last_damaged_by.global_transform.origin - global_transform.origin).normalized()
 		velocity = direction * charge_speed
-		await get_tree().create_timer(charge_duration).timeout
-		velocity = Vector3() 
+		#await get_tree().create_timer(charge_duration).timeout
 		current_state = State.IDLE
+		if MeshInstance.material_override is StandardMaterial3D:
+			MeshInstance.material_override.albedo_color = original_albedo_color
+			print("Charge complete: Color reset to original")
+		else:
+			print("MeshInstance.material_override is not a StandardMaterial3D")
 
 func start_spinning():
 	if current_state == State.IDLE:
