@@ -1,8 +1,8 @@
 extends GridMap
 
-enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL, 
+enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL,
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF,
-	  WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR, CUSTOMEND, CUSTOMSTART, LARGEBOX, REDBOX, 
+	  WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR, CUSTOMEND, CUSTOMSTART, LARGEBOX, REDBOX,
 	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER}
 
 # The room types.
@@ -15,7 +15,7 @@ const HEIGHT : int = 0
 const ROTATIONS : Array = [0, 16, 10, 22]
 
 # Defines what blocks are associated together.
-const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSEDL: DOORCLOSEDR, 
+const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSEDL: DOORCLOSEDR,
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
@@ -38,7 +38,7 @@ var room_variation_y : int = 1
 @export var roomTypes : Array = []
 @export var room : Array = []
 
-# Stores game seed, which will be randomized at start of game, can be set to 
+# Stores game seed, which will be randomized at start of game, can be set to
 # a custom value useing set_seed()
 @export var game_seed : int = 0
 
@@ -72,7 +72,7 @@ func _ready() -> void:
 func new_seed() -> void:
 	randomize()
 	var random_seed = randi()
-	seed(random_seed)	
+	seed(random_seed)
 	game_seed = random_seed
 
 
@@ -86,17 +86,17 @@ func set_seed(given_seed : int) -> void:
 # TODO: Expand with all generation layers.
 func build_map() -> void:
 	self.clear()
-	
+
 	define_rooms()
 	var pairs : Array = get_custom_rooms()
-	
+
 	draw_rooms()
 	place_custom_room(pairs)
 	draw_paths()
-	
+
 	draw_windows()
 	draw_walls()
-	
+
 	#print(roomTypes)
 	mirror_world()
 
@@ -126,10 +126,10 @@ func reset_room_spacing() -> void:
 func get_custom_rooms() -> Array:
 	customRooms.generate_dimensions( )
 	var total_picks = int(min((room_amount - 2) * CUSTOMROOMPERCENTAGE, customRooms.rooms.size()))
-	
+
 	var originals = random_picks(total_picks, 1, room_amount - 1)
 	var customs = random_picks(total_picks, 0, customRooms.rooms.size())
-	
+
 	# Creates index pairs between the generated floorplan and the custom floorplan.
 	var pairs = []
 	for i in total_picks:
@@ -152,25 +152,7 @@ func place_item(scene, orientation, location):
 	add_child(item, true)
 	return item
 
-func locate_items(item, orientation, x, y, z, ori_start):
-	var location = 2*(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0))
-	if item == WALLSWITCHOFF:
-		item = place_item(button_scene, orientation, location)
-		#item.inverse = true
-		#item.interactable = door
-	elif item == WALLSWITCHON:
-		item = place_item(button_scene, orientation, location)
-		#item.interactable = door
-	elif item == PRESSUREPLATEOFF:
-		item = place_item(pressure_plate_scene, orientation, location)
-		#item.interactable = door
-	#elif item == DOOROPENL:
-		#print('door left', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-	#elif item == DOOROPENR:
-		#print('door right', item, Vector3i(x,y,z), Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), orientation)
-
-	
-# Function gets an Array containing the custom rooms that have been assigned, 
+# Function gets an Array containing the custom rooms that have been assigned,
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
 	var MAX_HEIGHT = 4
@@ -187,11 +169,10 @@ func place_custom_room(pairs : Array) -> void:
 					var item = customRooms.get_cell_item(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					var current = self.get_cell_item(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
 					var orientation = customRooms.get_cell_item_orientation(Vector3i(x, y, z) + Vector3i(custom_start, 0, 0))
-					
-					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
-					locate_items(item, orientation, x, y, z, ori_start)
 
-# Rotates function to new 
+					self.set_cell_item(Vector3i(x, y, z) + Vector3i(ori_start, 0, 0), item, orientation)
+
+# Rotates function to new
 static func new_orientation(item : int, orientation : int) -> int:
 	var new_rotation = []
 	match item:
@@ -257,23 +238,23 @@ static func sumXValues(the_rooms : Array) -> int:
 func pick_random_type() -> int:
 	var types = [TYPE1, TYPE2, TYPE3, TYPE4, TYPE5]
 	return types[randi() % types.size()]
-	
+
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
 	var xMax = room_width + room_variation_x
 	var xMin = room_width - room_variation_x
-	
+
 	var yMax = room_width + room_variation_y
 	var yMin = room_width - room_variation_y
-	
+
 	for i in room_amount:
 		var x = randi_range(xMin / 2, xMax / 2 + 1) * 2
 		var y = randi_range(yMin / 2, yMax / 2 + 1) * 2
 		var start = sumXValues(rooms) + room_margin * i
-		
+
 		rooms.append([x, y, start])
 		roomTypes.append(pick_random_type())
-	
+
 	roomTypes[0] = STARTROOM
 	roomTypes[room_amount - 1] = ENDROOM
 
@@ -297,7 +278,7 @@ func draw_rooms() -> void:
 
 		var xstart = rooms[i][2] + rooms[i][0] - 1
 		var xend = rooms[i + 1][2]
-		
+
 		start_pos = Vector3i(1, 10, zend * 2)
 
 		place_doors(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
@@ -334,7 +315,7 @@ func sort_vector(a : Vector3i, b : Vector3i):
 func draw_paths() -> void:
 	var starts = self.get_used_cells_by_item(DOOROPENL)
 	var ends = self.get_used_cells_by_item(DOOROPENR)
-	
+
 	starts.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
 
@@ -356,22 +337,22 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 
 	var middle = (relative_distance.x - 1) / 2
 	var opposite = relative_distance.x - middle
-	
+
 	var vertical_start_main = middle + direction - 1
 	var vertical_start_secondary = middle - direction
-	
+
 	for i in vertical_start_main:
 		self.set_cell_item(start_location + Vector3i(i + 1, HEIGHT, 1), FLOOR1)
-		
+
 	for i in vertical_start_secondary:
 		self.set_cell_item(start_location + Vector3i(i + 1, HEIGHT, 0), FLOOR1)
-		
+
 	for i in opposite + direction - 1:
 		self.set_cell_item(end_location - Vector3i(i + 1, HEIGHT, 0), FLOOR1)
-		
+
 	for i in opposite - direction:
 		self.set_cell_item(end_location - Vector3i(i + 1, HEIGHT, -1), FLOOR1)
-	
+
 	for i in abs(relative_distance.z):
 		i = i * (-1 if direction == 0 else 1)
 		var offset = 2 if direction == 0 else 0
@@ -398,17 +379,17 @@ func sum_array(array):
 func random_floor(floor : Vector3i) -> void:
 	var walls = [FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5]
 	var special = [FLOORVENT, FLOORWATER]
-	
+
 	var rotation = ROTATIONS[randi() % ROTATIONS.size()]
 
 	if randi_range(1, 100) < 96:
 		self.set_cell_item(floor, walls[randi() % walls.size()], rotation)
 	else:
 		self.set_cell_item(floor, special[randi() % special.size()], rotation)
-		
+
 func random_wall() -> int:
 	var walls = [WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLTERMINAL]
-	
+
 	if randi_range(1, 100) >= 96:
 		return walls[randi() % walls.size()]
 	return WALL
@@ -418,15 +399,15 @@ func random_wall() -> int:
 # It also randomised the floor grid.
 func draw_walls() -> void:
 	var neighbors = [Vector3i(0, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i(-1, 0, 0)]
-	
+
 	# Defining the different floor layouts, and their corresponding orientation.
 	var walls = [[0, 1, 1, 1], [1, 0, 1, 1], [1, 1, 0, 1], [1, 1, 1, 0]]
 	var corner = [[0, 1, 1, 0], [0, 0, 1, 1], [1, 0, 0, 1], [1, 1, 0, 0]]
 	var orientations = [0, 22, 10, 16]
-	
+
 	# Get all floors in grid.
 	var floors = self.get_used_cells_by_item(FLOOR1)
-	
+
 	# Go trough all floor items, and check if wall is needed.
 	for floor_item in floors:
 		var surround = []
@@ -438,7 +419,7 @@ func draw_walls() -> void:
 
 		var idx = -1
 		var type = WALL
-		
+
 		# Checks which type of wall, then finds the needed orientation.
 		if get_cell_item(floor_item + Vector3i(0, 1, 0)) != -1:
 			idx = -1
