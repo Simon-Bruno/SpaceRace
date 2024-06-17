@@ -9,4 +9,9 @@ script = ExtResource("1_mkcab")
 wait_time = 3.0
 one_shot = true
 
+[node name="strengthDuration" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="timeout" from="weaponDuration" to="." method="_on_weapon_duration_timeout"]
+[connection signal="timeout" from="strengthDuration" to="." method="_on_strength_duration_timeout"]

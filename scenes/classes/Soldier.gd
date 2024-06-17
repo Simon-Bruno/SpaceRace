@@ -1,11 +1,14 @@
 extends Node
 
 @onready var weaponDurationTimer = $weaponDuration
+@onready var strenthDurationTimer = $strengthDuration
 var pistol = preload("res://scenes/weapons/pistol.tscn")
 var fists = preload("res://scenes/weapons/fists.tscn")
 
 @onready var player_node = get_parent()
 @onready var player_combat_node = player_node.get_node("PlayerCombat")
+
+var strength_debuff : float = 0.5
 
 func _onready():
 	print("player_node: ", player_node)
@@ -25,7 +28,6 @@ func pistol_upgrade():
 	player_combat_node.add_child(new_pistol, true)
 	new_pistol.set_name("Weapon") 
 	
-	
 func _on_weapon_duration_timeout():
 	var weapon_node = player_node.get_node("PlayerCombat/Weapon")
 	
@@ -33,6 +35,9 @@ func _on_weapon_duration_timeout():
 	player_combat_node.add_child(fists.instantiate(), true)
 	
 func strength_buff():
-	pass
+	player_node.strength += strength_debuff
+	strenthDurationTimer.start()
+	
 
-
+func _on_strength_duration_timeout():
+	player_node.strength -= strength_debuff

@@ -20,6 +20,8 @@ var direction = Vector2.ZERO
 
 var max_dist: float = 25.0  # max distance between players
 
+var strength : float = 1.0
+
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 10, 20)
