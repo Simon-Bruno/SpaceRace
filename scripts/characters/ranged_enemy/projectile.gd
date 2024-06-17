@@ -5,6 +5,7 @@ extends RigidBody3D
 var damage : int = 50
 
 var direction: Vector3
+var shooter = null
 
 func _ready():
 	if multiplayer.is_server():

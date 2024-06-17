@@ -77,6 +77,10 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func add_target(body):
+	if body.is_in_group("Players"):
+		nodes_in_area.append(body)
+
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
@@ -115,7 +119,14 @@ func take_damage(damage, source):
 func die():
 	if not multiplayer.is_server():
 		return
-	#print(last_damaged_by)
 	if last_damaged_by.get_parent().is_in_group("Players"):
 		last_damaged_by.get_parent().points += 5
 	queue_free()
+
+func chase_player(body):
+	if is_instance_valid(body) and body.is_in_group("Players"):
+		closest_target_node = body
+		if not nodes_in_area.has(body):
+			nodes_in_area.append(body)
+	else:
+		print("Invalid body")

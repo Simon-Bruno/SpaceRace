@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5
 
-var knockback_strength = 15
+var knockback_strength = 0
 
 var player_chase = false
 var targeted_player = null
@@ -28,20 +28,48 @@ var charging = false
 var shooting = false
 var spin_speed = 90.0
 var charge_time = 2.0
-var charge_speed = 20.0
+var charge_speed = 35
+@export var charge_duration = 2.0
 
 @onready var HpBar = $SubViewport/HpBar
 
-func _enter_tree():
-	print("Boss spawned")
-	$MultiplayerSynchronizer.set_multiplayer_authority(1)
+@onready var SpinTimer = $SpinTimer
+@onready var ChargeTimer = $ChargeTimer
 
+enum State { IDLE, CHARGING, SPINNING }
+
+var current_state = State.IDLE
+
+func _ready():
+	$MultiplayerSynchronizer.set_multiplayer_authority(1)
+	#reset_spin_timer()
+	reset_charge_timer()
+
+func reset_spin_timer():
+	SpinTimer.wait_time = 8.0 + randf() * 5.0
+	SpinTimer.start()
+
+func _on_spin_timer_timeout():
+	if current_state == State.IDLE:
+		start_spinning()
+	reset_spin_timer()
+
+func reset_charge_timer():
+	ChargeTimer.wait_time = 8.0 + randf() * 5.0
+	ChargeTimer.start()
+
+func _on_charge_timer_timeout():
+	if current_state == State.IDLE:
+		start_charge()
+	reset_charge_timer()
+
+	
 func _process(delta):
 	if not multiplayer.is_server():
 		return
 
 	find_closest_player_in_range()
-	
+
 	if closest_target_node:
 		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
@@ -49,21 +77,27 @@ func _process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-		
+
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if not closest_target_node.respawn_immunity:
 			closest_target_node.take_damage(closest_target_node.name, 20)
-	
+
 	if health <= 0:
 		die()
 
 	check_health()
 	handle_shooting_and_spinning(delta)
 
+	
+
 func _physics_process(delta):
 	if not multiplayer.is_server():
 		return
-	
+
+	if current_state == State.CHARGING:
+		move_and_slide()
+		return
+
 	if not is_on_floor():
 		velocity.y -= fall_acceleration * delta
 	else:
@@ -80,6 +114,8 @@ func _physics_process(delta):
 			velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
 
 	move_and_slide()
+
+
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
@@ -103,7 +139,13 @@ func take_damage(damage, source):
 	if not multiplayer.is_server():
 		return
 	health = max(0, health - damage)
-	last_damaged_by = source
+	if source.has_method("get_parent") and source.get_parent().is_in_group("Players"):
+		last_damaged_by = source.get_parent()
+	elif "shooter" in source and source.shooter.is_in_group("Players"):
+		last_damaged_by = source.shooter
+	else:
+		last_damaged_by = source
+		
 	HpBar.value = float(health) / max_health * 100
 		
 	if health <= 0:
@@ -116,8 +158,8 @@ func take_damage(damage, source):
 func die():
 	if not multiplayer.is_server():
 		return
-	if last_damaged_by.get_parent().is_in_group("Players"):
-		last_damaged_by.get_parent().points += 5
+	if last_damaged_by.is_in_group("Players"):
+		last_damaged_by.points += 5
 	queue_free()
 
 # Boss-specific functions
@@ -131,38 +173,41 @@ func check_health():
 
 func spawn_enemies():
 	print("Spawning enemies!")
-	for i in range(4):
+	for i in range(3):
 		var pos = self.global_transform.origin + Vector3(randf() * 10 - 5, 0, randf() * 10 - 5)
 		var enemy = GlobalSpawner.spawn_melee_enemy(pos)
-
+		if enemy:
+			enemy.call_deferred("chase_player", last_damaged_by)
 
 func start_charge():
-	if closest_target_node:
-		charging = true
-		await get_tree().create_timer(charge_time).timeout
+	if last_damaged_by and current_state == State.IDLE:
+		current_state = State.CHARGING
+		velocity = Vector3()  # Reset velocity
 		move_towards_player()
 
 func move_towards_player():
-	charging = false
-	if closest_target_node:
-		var direction = (closest_target_node.global_transform.origin - self.translation).normalized()
+	if last_damaged_by:
+		var direction = (last_damaged_by.global_transform.origin - global_transform.origin).normalized()
 		velocity = direction * charge_speed
+		await get_tree().create_timer(charge_duration).timeout
+		velocity = Vector3() 
+		current_state = State.IDLE
 
 func start_spinning():
-	shooting = true
-	await get_tree().create_timer(5.0).timeout
-	shooting = false
+	if current_state == State.IDLE:
+		current_state = State.SPINNING
+		shooting = true
+		await get_tree().create_timer(5.0).timeout
+		shooting = false
+		current_state = State.IDLE
 
 func handle_shooting_and_spinning(delta):
 	if shooting:
 		rotate_y(deg_to_rad(spin_speed) * delta)
-		shoot_projectile()
-
-func shoot_projectile():
-	var projectile = projectile_scene.instance()
-	projectile.translation = self.translation
-	projectile.rotation = self.rotation
-	get_parent().add_child(projectile)
+		var transform_origin = global_transform.origin
+		var spawn_offset = global_transform.basis.z.normalized() * 1.3 
+		var direction = global_transform.basis.z.normalized()
+		GlobalSpawner.spawn_projectile(transform_origin, spawn_offset, direction, self)
 
 func find_closest_player_in_range():
 	var min_distance = INF
