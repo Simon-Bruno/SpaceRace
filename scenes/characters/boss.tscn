@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjhtlroiketf2"]
+[gd_scene load_steps=13 format=3 uid="uid://cjhtlroiketf2"]
 
 [ext_resource type="Script" path="res://scripts/characters/boss.gd" id="1_r0k3s"]
 [ext_resource type="PackedScene" uid="uid://cds22hi7osiev" path="res://scenes/enemy/enemy.tscn" id="2_3jxkt"]
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_5lfmr"]
-[ext_resource type="PackedScene" uid="uid://cwi7l5pb4w74k" path="res://scenes/characters/ranged_enemy/projectile.tscn" id="3_uh6cf"]
 [ext_resource type="ArrayMesh" uid="uid://b0mh2ut430vxt" path="res://assets/CustomBlocks/entities/enemy.obj" id="3_vf1u7"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_bmorm"]
@@ -47,7 +46,6 @@ collision_mask = 11
 collision_priority = 2.0
 script = ExtResource("1_r0k3s")
 enemy_scene = ExtResource("2_3jxkt")
-projectile_scene = ExtResource("3_uh6cf")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.21857, 0)
@@ -86,7 +84,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("SphereShape3D_jx3wm")
 
 [node name="enemy_textures" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2, 6.97574e-16, 1.74846e-07, 6.97574e-16, 2, -6.97574e-16, -1.74846e-07, -6.97574e-16, -2, 0, 0, 0)
+transform = Transform3D(-2, 6.97574e-16, -1.74846e-07, 6.97574e-16, 2, -6.97574e-16, 1.74846e-07, -6.97574e-16, -2, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_0igbs")
 mesh = ExtResource("3_vf1u7")
 skeleton = NodePath("")

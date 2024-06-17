@@ -18,9 +18,7 @@ var player_in_attack_zone = false
 var closest_target_node = null
 var nodes_in_area : Array = []
 
-# Boss-specific variables
 @export var enemy_scene : PackedScene
-@export var projectile_scene : PackedScene
 
 var spawn_thresholds = [0.75, 0.5, 0.25]
 var spawned_enemies = false
@@ -44,6 +42,7 @@ var current_state = State.IDLE
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(1)
 	reset_charge_timer()
+	reset_spin_timer()
 	
 	if MeshInstance.material_override is StandardMaterial3D:
 		original_albedo_color = MeshInstance.material_override.albedo_color
@@ -160,7 +159,6 @@ func die():
 		last_damaged_by.points += 5
 	queue_free()
 
-# Boss-specific functions
 func check_health():
 	var health_percentage = float(health) / float(max_health)
 	for threshold in spawn_thresholds:
@@ -180,26 +178,25 @@ func spawn_enemies():
 func start_charge():
 	if last_damaged_by and current_state == State.IDLE:
 		current_state = State.CHARGING
+		look_at(last_damaged_by.global_transform.origin, Vector3.UP)
+		rotate_y(PI)
 		velocity = Vector3()  # Reset velocity
 		if MeshInstance.material_override is StandardMaterial3D:
 			var new_color = original_albedo_color.lerp(Color(1.0, 0.0, 0.0, 1.0), 0.5)
 			MeshInstance.material_override.albedo_color = new_color
-			print("Boss is charging: Color changed to red")
-		else:
-			print("MeshInstance.material_override is not a StandardMaterial3D")
 		await get_tree().create_timer(charge_duration).timeout
 		move_towards_player()
+		
 func move_towards_player():
 	if last_damaged_by:
 		var direction = (last_damaged_by.global_transform.origin - global_transform.origin).normalized()
 		velocity = direction * charge_speed
-		#await get_tree().create_timer(charge_duration).timeout
 		current_state = State.IDLE
 		if MeshInstance.material_override is StandardMaterial3D:
 			MeshInstance.material_override.albedo_color = original_albedo_color
-			print("Charge complete: Color reset to original")
-		else:
-			print("MeshInstance.material_override is not a StandardMaterial3D")
+			# print("Charge complete: Color reset to original")
+		#else:
+			#print("MeshInstance.material_override is not a StandardMaterial3D")
 
 func start_spinning():
 	if current_state == State.IDLE:
