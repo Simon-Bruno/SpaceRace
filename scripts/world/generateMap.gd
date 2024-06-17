@@ -301,7 +301,7 @@ func draw_rooms() -> void:
 		# Set some global variables for the generateRoom script
 		absolute_position.x = room[2]		
 		start_pos = Vector3i(0, 10, leftDoor * 2)
-		end_pos = Vector3i(room[0] * 2, 10, rightDoor * 2)
+		end_pos = Vector3i(room[0] * 2 - 1, 10, rightDoor * 2 - 1)
 
 		make_room(room)
 		if roomTypes[i] != CUSTOM:
