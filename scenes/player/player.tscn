@@ -52,8 +52,8 @@ bg_color = Color(0, 0, 0, 0.501961)
 bg_color = Color(0.471704, 0.569977, 0.959633, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sjmiw"]
-height = 1.0
-radius = 0.75
+height = 1.6
+radius = 1.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_iyg84"]
 viewport_path = NodePath("PlayerCombat/SubViewport")
