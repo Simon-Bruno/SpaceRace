@@ -8,6 +8,7 @@ var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
+var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
 
@@ -22,6 +23,18 @@ func spawn_pressure_plate(pos, dir, interact):
 		plate.interactable = interact
 		spawner.add_child(plate, true)
 		return plate
+	return null
+
+func spawn_portal(pos, dir):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
+	if spawner:
+		var portal = portal_scene.instantiate()
+		portal.position = pos
+		portal.basis	= dir
+		spawner.add_child(portal, true)
+		return portal
 	return null
 
 func spawn_button(pos, dir, interact, inverse):
@@ -69,7 +82,7 @@ func spawn_ranged_enemy(pos):
 		var enemy = ranged_enemy_scene.instantiate()
 		enemy.position = pos
 		spawner.add_child(enemy, true)
-		
+
 func spawn_boss(pos):
 	if not multiplayer.is_server():
 		return
@@ -103,7 +116,7 @@ func spawn_item(pos):
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
 	if not multiplayer.is_server():
 		return
-		
+
 	var projectile_instance = projectile_scene.instantiate()
 	get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 	projectile_instance.global_transform.origin = transform_origin + spawn_offset
