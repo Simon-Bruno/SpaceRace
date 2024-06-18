@@ -4,7 +4,7 @@ extends Node3D
 
 enum {HORIZONTAL, VERTICAL}
 
-enum {EMPTY, PATH, WALL, ITEM, LASER, ENEMY}
+enum {EMPTY, PATH, WALL, ITEM, LASER, BUFF, ENEMY}
 
 enum {UP, LEFT, DOWN, RIGHT}
 
@@ -210,7 +210,7 @@ func object_placement(object : Dictionary, width : int, height : int, start : Ve
 	# Calculations to set the object between the minimum and maximum distance.
 	# Distances are the Chebyshev distance, where distance between 2 points
 	# is equal to the maximum of difference in x and y directions.
-	var zmin = max(1, start[2] * 2 - max_dist)
+	var zmin = min(max(1, start[2] * 2 - max_dist), height - 1)
 	var zmax = min(height - 1, start[2] * 2 + max_dist)
 	var z = randi_range(zmin, zmax)
 	var xmin = 1
@@ -242,13 +242,13 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 
 func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
-	var x= pos[0]
+	var x = pos[0]
 	var z = pos[1]
-	
+
 	if floor_plan[z - 1][x - 1]:
 		return false
-	
-	floor_plan[z - 1][x - 1] = ITEM
+
+	floor_plan[z - 1][x - 1] = BUFF
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, z))
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
 	return true
@@ -274,12 +274,92 @@ func add_objects(floor_plan : Array[Array], objects_list : Array, width : int, h
 			# Try again if failed the first time.
 			object_matcher(object, floor_plan, width, height, start)
 
+func enemy_placement(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> Array:
+	var min_dist : int = object['set_min_distance']
+	var max_dist : int = object['set_max_distance']
+
+	var zmin = min(max(3, start[2] * 2 - max_dist), height - 3)
+	var zmax = min(height - 5, start[2] * 2 + max_dist)
+	var z = randi_range(zmin, zmax)
+	var xmin = 3
+	var xmax = min(width - 3, start[0] * 2 + max_dist)
+	if abs(start[2] * 2 - z) < min_dist:
+		xmin = min(width - 3, start[0] * 2 + min_dist)
+	var x = randi_range(xmin, xmax)
+	
+	assert(z < height)
+
+	return [x, z]
+	
+func place_enemy_in_radius(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
+	for i in radius + 1:
+		for j in radius + 1:
+			if not floor_plan[z - 1 + j][x - 1 + i]:
+				return [x + i, z + j]
+	return []
+
+func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, x : int, z: int) -> Array:
+	var number_enemies = object['set_group_size']
+	const radius : int = 2
+	var positions = []
+	positions.resize(number_enemies)
+	for i in number_enemies:
+		var pos = place_enemy_in_radius(floor_plan, radius, x, z)
+		if not pos:
+			for j in i:
+				pos = positions[j]
+				var new_x = pos[0]
+				var new_z = pos[1]
+				assert(floor_plan[new_z - 1][new_x - 1] == ENEMY)
+				floor_plan[new_z - 1][new_x - 1] = EMPTY
+			return []
+		positions[i] = pos
+		var new_x = pos[0]
+		var new_z = pos[1]
+		floor_plan[new_z - 1][new_x - 1] = ENEMY
+	return positions
+
+
+func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i):
+	var pos = enemy_placement(floor_plan, object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+	assert(z < height)
+	var type = object['type']
+	var positions = generate_enemy_placement(floor_plan, object, x, z)
+	for position in positions:
+		x = position[0]
+		z = position[1]
+		if type == 'MELEE':
+			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 1, z) + absolute_position)
+			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 1, -z) + absolute_position)
+		elif type == 'RANGED':
+			# Pass for now, since the bullets of the ranged enemies are bugged.
+			continue
+			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 1, z) + absolute_position)
+			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 1, -z) + absolute_position)
+
+	return positions != []
+
+
+func add_mobs(floor_plan : Array[Array], objects_list : Array, width : int, height : int, start : Vector3i):
+	for object in objects_list:
+		if not add_mob(floor_plan, object, width, height, start):
+			# Try again if the first attempt failed.
+			add_mob(floor_plan, object, width, height, start)
+
+
 # This function will trace a shortest path from the start of the room to the
 # finish to assure the player not getting stuck. The path will be traced
 # inside the floor plan matrix where the path cells will have the value
 # PATH.
 func generate_path(floor_plan : Array[Array], width : int, height : int, start : Vector3i, end : Vector3i) -> void:
 	var position : Vector3i = start
+	floor_plan[position.z - 2][position.x] = PATH
+	floor_plan[position.z - 1][position.x] = PATH
+	floor_plan[position.z][position.x] = PATH
+	floor_plan[position.z + 1][position.x] = PATH
+	floor_plan[position.z + 2][position.x] = PATH
 	var up_down : int = 1 if start.z < end.z else -1
 	while position != end:
 		var new_direction = randi() % 2
@@ -329,4 +409,5 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	# Set the generate variable back, so the next will be filled.
 	world.generate_room = true
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
-	GlobalSpawner.spawn_melee_enemy(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
+	add_mobs(floor_plan, world_dict['enemies'], width, height, start)
+	#GlobalSpawner.spawn_melee_enemy(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))

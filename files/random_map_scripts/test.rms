@@ -155,10 +155,18 @@ create_object BUFF
 
 <ENEMY_GENERATION>
 
-create_mob {
+create_mob MELEE
+{
     set_min_distance 5
     set_max_distance 8
     set_group_size 3
     set_loose_grouping
 }
 
+create_mob RANGED
+{
+    set_min_distance 5
+    set_max_distance 8
+    set_group_size 3
+    set_loose_grouping
+}
