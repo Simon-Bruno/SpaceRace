@@ -15,7 +15,7 @@ var absolute_position = Vector3i(0, 0, 0)
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var key_scene = preload("res://scenes/item/key.tscn")
+var key_scene = preload("res://scenes/item/item.tscn")
 var bomb_scene = preload("res://scenes/item/bomb.tscn")
 var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
@@ -228,6 +228,7 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 	# Add the item and update the plan.
 	floor_plan[z - 1][x - 1] = ITEM
 	globalSpawner.spawn_item(absolute_position + Vector3i(x, 0, z))
+	globalSpawner.spawn_item(absolute_position + Vector3i(x, 0, -z))
 	return true
 
 
@@ -287,4 +288,9 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	if not last_floor:
 		generate_path(floor_plan, width, height, start, end)
 	add_walls(floor_plan, world_dict['walls'], width, height, start)
+	world.generate_room = false
+	var dup = self.duplicate()
+	dup.scale.z = -1
+	self.get_parent().add_child(dup, true)
+	world.generate_room = true
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
