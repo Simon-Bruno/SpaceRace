@@ -22,3 +22,4 @@ func spawn_projectile_for_me(transform_origin, spawn_offset, direction):
 	get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 	projectile_instance.global_transform.origin = transform_origin + spawn_offset
 	projectile_instance.direction = direction
+	projectile_instance.shooter = get_parent().get_parent()

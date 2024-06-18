@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cljs8rm1l5bxj"]
 
-[ext_resource type="MeshLibrary" uid="uid://d3xfnokd1s7p2" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
+[ext_resource type="MeshLibrary" uid="uid://vso835jyb1lq" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
 
 [node name="Custom Rooms" type="Node3D"]
 
@@ -208,6 +208,6 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65543, 1, 1441830, 65543, 2, 1441800, 65538, 0, 76, 65540, 0, 82, 65539, 0, 76, 65541, 0, 82, 65540, 2, 88)
+"cells": PackedInt32Array(65538, 5, 75, 65539, 7, 75, 65537, 7, 43, 65539, 10, 1441834, 65541, 9, 41, 65543, 3, 1441830, 65536, 11, 1048656, 65536, 10, 1048662, 65536, 8, 1048662, 65536, 9, 1048656, 65543, 12, 1048641, 65542, 12, 1048641, 65543, 11, 1048603, 65542, 11, 1048603, 65543, 2, 1048608, 65537, 9, 1048664, 65538, 10, 1048664, 65541, 10, 1048664, 65541, 6, 1048664, 65541, 0, 57, 65540, 0, 77, 65541, 3, 1441805, 65542, 3, 1048587, 65542, 4, 1048587, 65541, 2, 655371)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
