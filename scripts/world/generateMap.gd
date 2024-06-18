@@ -10,7 +10,6 @@ enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
 
 @onready var customRooms : GridMap = get_node("../CustomRooms")
 
-var boss_spawned = false # Currently for debugging purposesd
 # At what y level is the floor
 const HEIGHT : int = 0
 const ROTATIONS : Array = [0, 16, 10, 22]
