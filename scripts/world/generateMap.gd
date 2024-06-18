@@ -325,7 +325,8 @@ func draw_paths() -> void:
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
 
-	for i in starts.size():
+	var size = starts.size() if starts.size() < ends.size() else ends.size()
+	for i in size:
 		make_path(starts[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
