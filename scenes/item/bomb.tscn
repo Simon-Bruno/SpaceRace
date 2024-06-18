@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3pyb8aatghrw"]
+[gd_scene load_steps=6 format=3 uid="uid://4k1f4flwet83"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_10o3y"]
 [ext_resource type="Script" path="res://scripts/item/bomb.gd" id="2_oyt1b"]
-[ext_resource type="ArrayMesh" uid="uid://dip2l2lnwvq3q" path="res://assets/CustomBlocks/items/bomb.obj" id="3_1rnls"]
 [ext_resource type="Texture2D" uid="uid://cr2usc4nelcgu" path="res://assets/CustomBlocks/items/bomb.png" id="3_q1ogh"]
+[ext_resource type="ArrayMesh" uid="uid://df0ib0ofm7dbm" path="res://assets/CustomBlocks/items/dynamite.obj" id="4_sfx00"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_1wd07"]
 albedo_texture = ExtResource("3_q1ogh")
@@ -15,6 +15,6 @@ script = ExtResource("2_oyt1b")
 collision_mask = 3
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
-transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0, -0.682751, 0)
+transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0.0085088, -0.799201, -0.0010272)
 material_override = SubResource("ORMMaterial3D_1wd07")
-mesh = ExtResource("3_1rnls")
+mesh = ExtResource("4_sfx00")

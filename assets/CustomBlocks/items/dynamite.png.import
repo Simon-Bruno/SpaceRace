@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr2usc4nelcgu"
-path.s3tc="res://.godot/imported/bomb.png-45906a40a2c0bcecb6cd383f1bcb95a1.s3tc.ctex"
+uid="uid://blhtila7r7nu7"
+path.s3tc="res://.godot/imported/dynamite.png-5dfebf0462e207cf1c4b9d67945801c8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/CustomBlocks/items/bomb.png"
-dest_files=["res://.godot/imported/bomb.png-45906a40a2c0bcecb6cd383f1bcb95a1.s3tc.ctex"]
+source_file="res://assets/CustomBlocks/items/dynamite.png"
+dest_files=["res://.godot/imported/dynamite.png-5dfebf0462e207cf1c4b9d67945801c8.s3tc.ctex"]
 
 [params]
 
