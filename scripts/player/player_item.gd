@@ -65,7 +65,8 @@ func _process(delta):
 			_drop_item()
 		else:
 			var candidate = _find_best_candidate()
-			if candidate and not candidate.get_parent().owned: _hold_item(candidate)
+			if candidate and not candidate.get_parent().owned:
+				_hold_item(candidate)
 			
 	if Input.is_action_just_pressed("use_item"):
 		if not holding: return
