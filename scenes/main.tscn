@@ -13,3 +13,7 @@ spawn_path = NodePath("../SpawnedItems")
 
 [node name="MusicController" type="AudioStreamPlayer" parent="."]
 autoplay = true
+bus = &"Music"
+
+[node name="SfxController" type="AudioStreamPlayer" parent="."]
+bus = &"Sfx"

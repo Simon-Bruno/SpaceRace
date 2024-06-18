@@ -1,21 +1,22 @@
 class_name Settings
 extends Control
-#var pause_menu = preload("res://scenes/menu/pause.tscn").instantiate()
 
-@onready var back_button = $MarginContainer/VBoxContainer/BackButton as Button
 
-signal exit_options_menu
+@onready var back_button = $MarginContainer/VBoxContainer/BackButton
+@onready var settings_tab_container = $MarginContainer/VBoxContainer/Settings_Tab_Container
+
+signal back_to_menu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	back_button.button_down.connect(on_exit_pressed)
 	set_process(false)
 
-func on_exit_pressed() -> void:
-	exit_options_menu.emit()
-	set_process(false)
+
+func _on_back_button_button_down():
+	_on_back_button_pressed()
+
 
 func _on_back_button_pressed():
-	self.visible = false
-	exit_options_menu.emit()
+	back_to_menu.emit()
+	SettingsSignalBus.emit_settings_dictionary(SettingsContainer.make_storage_dict())
 	set_process(false)

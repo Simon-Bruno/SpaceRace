@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3rv6ajd0fueq"]
 
-[ext_resource type="Script" path="res://scripts/network/Chat.gd" id="1_as2nd"]
+[ext_resource type="Script" path="res://scripts/network/chat.gd" id="1_6pb1w"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_1svpq"]
 file = "res://assets/easteregg/easteregg.ogg"
@@ -13,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 1
-script = ExtResource("1_as2nd")
+script = ExtResource("1_6pb1w")
 
 [node name="MessageDisplay" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -27,16 +27,6 @@ offset_right = 0.271988
 offset_bottom = -1.0
 bbcode_enabled = true
 scroll_following = true
-
-[node name="LeaveButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -103.0
-offset_bottom = 53.0
-grow_horizontal = 0
-text = "Leave Game"
 
 [node name="MessageInput" type="LineEdit" parent="."]
 layout_mode = 1
@@ -77,19 +67,17 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -168.0
-offset_top = 15.0
-offset_right = -104.0
-offset_bottom = 38.0
+offset_left = -64.0
+offset_bottom = 23.0
 grow_horizontal = 0
 text = "FPS: 144"
 
 [connection signal="mouse_entered" from="MessageDisplay" to="." method="_on_message_display_mouse_entered"]
 [connection signal="mouse_exited" from="MessageDisplay" to="." method="_on_message_display_mouse_exited"]
-[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="focus_entered" from="MessageInput" to="." method="_on_message_input_focus_entered"]
 [connection signal="focus_exited" from="MessageInput" to="." method="_on_message_input_focus_exited"]
 [connection signal="gui_input" from="MessageInput" to="." method="_on_message_input_gui_input"]
 [connection signal="text_submitted" from="MessageInput" to="." method="_on_message_input_text_submitted"]
 [connection signal="pressed" from="SendButton" to="." method="_on_send_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
