@@ -55,7 +55,6 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Room2" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Room2"]
 mesh_library = ExtResource("1_nvyip")
@@ -180,7 +179,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65544, 3, 1441830, 65544, 4, 1441800, 65543, 5, 1441820, 65542, 5, 1441820, 65541, 5, 1441854, 65540, 5, 1441820, 65539, 5, 1441820, 65538, 5, 1441854, 65537, 5, 1441820, 65543, 1, 1441819, 65542, 1, 1441819, 65537, 1, 88, 65540, 0, 76)
+"cells": PackedInt32Array(65544, 3, 1441830, 65544, 4, 1441800, 65543, 5, 1441820, 65542, 5, 1441820, 65540, 5, 1441820, 65539, 5, 1441820, 65537, 5, 1441820, 65543, 1, 1441819, 65542, 1, 1441819, 65537, 1, 88, 65540, 0, 76, 65541, 5, 1441854, 65538, 5, 1441854)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 

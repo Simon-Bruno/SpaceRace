@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckl8ocde3h7p8"]
+[gd_scene load_steps=10 format=3 uid="uid://ckl8ocde3h7p8"]
 
 [ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_sm1kj"]
 [ext_resource type="ArrayMesh" uid="uid://ccd0q27uv0njb" path="res://assets/CustomBlocks/doors/doorClosedL.obj" id="2_1fvsg"]
@@ -136,10 +136,8 @@ properties/4/path = NodePath("CollisionShape3DR:position")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ce51f"]
-
 [node name="Door" type="StaticBody3D"]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, -0.297518, -1)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_sm1kj")
@@ -153,27 +151,19 @@ libraries = {
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.811082, 1.25584, 0.145597)
 shape = SubResource("BoxShape3D_37ekf")
 
-[node name="MeshInstance3DL" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -1.00876, 1.25338, 0.799294)
-mesh = ExtResource("2_1fvsg")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3DR" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.986758, 1.25338, 0.799294)
-mesh = ExtResource("3_g424f")
-skeleton = NodePath("../..")
-
 [node name="CollisionShape3DR" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.787573, 1.25584, 0.145597)
 shape = SubResource("BoxShape3D_37ekf")
 
+[node name="MeshInstance3DL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -1.00876, 0.990773, -0.000706005)
+mesh = ExtResource("2_1fvsg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3DR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.986758, 0.990773, -0.000706005)
+mesh = ExtResource("3_g424f")
+skeleton = NodePath("../..")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_0sf4h")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.985334, 0.262567, 0.811437)
-mesh = SubResource("PlaneMesh_ce51f")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01313, 0.262567, 0.811437)
-mesh = SubResource("PlaneMesh_ce51f")
