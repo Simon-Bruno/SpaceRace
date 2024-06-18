@@ -15,6 +15,6 @@ script = ExtResource("2_oyt1b")
 collision_mask = 3
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
-transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0.0091269, -0.758, -0.0773146)
+transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0, -0.682751, 0)
 material_override = SubResource("ORMMaterial3D_1wd07")
 mesh = ExtResource("3_1rnls")
