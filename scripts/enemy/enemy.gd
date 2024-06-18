@@ -21,7 +21,7 @@ var nodes_in_area : Array = []
 # Function to find the closest node from an array of nodes
 func find_closest_player_in_range(nodes_array: Array):
 	var min_distance = INF
-	
+
 	for node in nodes_in_area:
 		var distance = (self.global_transform.origin - node.global_transform.origin).length()
 		if distance < min_distance:
@@ -40,9 +40,9 @@ func _enter_tree():
 func _process(delta):
 	if not multiplayer.is_server():
 		return
-	
+
 	find_closest_player_in_range(nodes_in_area)
-	
+
 	if closest_target_node:
 		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
@@ -50,18 +50,18 @@ func _process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-		
+
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if !closest_target_node.respawn_immunity:
 			closest_target_node.take_damage(closest_target_node.name, 20)
-	
+
 	if health <= 0:
-		die() 
+		die()
 
 func _physics_process(delta):
 	if not multiplayer.is_server():
-		return 
-	
+		return
+
 	if not is_on_floor():
 		velocity.y -= fall_acceleration * delta
 	else:
@@ -102,7 +102,7 @@ func _on_enemy_hitbox_body_entered(body):
 func _on_enemy_hitbox_body_exited(body):
 	if body.is_in_group("Players"):
 		player_in_attack_zone = false
-		
+
 # Used in player script when attacking an enemy, apply_damage_to_enemy
 func take_damage(damage, source):
 	if not multiplayer.is_server():
@@ -112,9 +112,9 @@ func take_damage(damage, source):
 	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
-		
+
 	if health <= 0:
-		die() 
+		die()
 
 	var knockback_direction = (global_transform.origin - source.global_transform.origin).normalized()
 	velocity.x += knockback_direction.x * knockback_strength
