@@ -85,9 +85,14 @@ func spawn_buff(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	print(spawner)
+	var etc = null
+	var bomb = null
+	var BUFFS = [hp_bottle_scene, bomb, etc]
 	if spawner:
-		var buff = hp_bottle_scene.instantiate()
+		var buff_scene = BUFFS[randi() % BUFFS.size()]
+		# TODO: Remove the hardcoded version of the hp_bottle
+		buff_scene = hp_bottle_scene
+		var buff = buff_scene.instantiate()
 		buff.position = pos
 		spawner.add_child(buff, true)
 		print('Added buf at ', pos)

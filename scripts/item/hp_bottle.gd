@@ -2,7 +2,7 @@ extends "res://scripts/item/item.gd"
 
 func use():
 	var player = owned_node
-	print(player)
+	
 	
 	super.delete()
 
