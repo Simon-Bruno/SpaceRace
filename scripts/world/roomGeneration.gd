@@ -258,10 +258,7 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int,
 		'ITEM':
 			return add_item(floor_plan, object, width, height, start)
 		'BUFF':
-			# TODO: This should work with a version of globalSpawner that
-			# knows how to spawn buffs. For now, we just return true.
-			# return add_buff(floor_plan, object, width, height, start)
-			return true
+			return add_buff(floor_plan, object, width, height, start)
 		_:
 			print('The object is not a supported object')
 			return true
