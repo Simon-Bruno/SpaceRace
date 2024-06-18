@@ -2,15 +2,13 @@ extends RigidBody3D
 
 @export var lifespan : float = 5.0
 @export var speed : float = 30.0
+@export var shooter: CharacterBody3D = null
 var damage : int = 50
-
 var direction: Vector3
-var shooter = null
 
 func _ready():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
-	#print("Projectile ready")
 
 func _physics_process(delta):
 	if not multiplayer.is_server():
@@ -22,13 +20,11 @@ func _physics_process(delta):
 	var collision = move_and_collide(motion)
 
 	if collision:
-		#print(collision.get_collider().name)
-		#print(str(multiplayer.get_unique_id()) + " Collision detected")
+		if collision.get_collider().is_in_group("Boss") and shooter.is_in_group("Boss"):
+			return
 		if collision.get_collider().is_in_group("Players"):
-			#print("Hit player: ", collision.get_collider().name)
 			collision.get_collider().take_damage.rpc(collision.get_collider().name, damage)
 		if collision.get_collider().is_in_group("Enemies"):
-			#print("Hit Enemy: ", collision.get_collider().name)
 			if collision.get_collider().has_method("take_damage"):
 				collision.get_collider().take_damage(damage, shooter)
 		queue_free()

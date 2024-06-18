@@ -24,7 +24,7 @@ var spawn_thresholds = [0.75, 0.5, 0.25]
 var spawned_enemies = false
 var charging = false
 var shooting = false
-var spin_speed = 90.0
+var spin_speed = 90.0 * 8
 var charge_time = 2.0
 var charge_speed = 35
 @export var charge_duration = 2.0
@@ -71,14 +71,6 @@ func _process(delta):
 
 	find_closest_player_in_range()
 
-	if closest_target_node:
-		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
-		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
-		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
-		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if not closest_target_node.respawn_immunity:
 			closest_target_node.take_damage(closest_target_node.name, 20)
@@ -103,14 +95,17 @@ func _physics_process(delta):
 		velocity.y = 0.0
 
 	if closest_target_node and current_state == State.IDLE:
-		var distance_to_player = global_transform.origin.distance_to(closest_target_node.global_transform.origin)
-		if distance_to_player > stopping_distance:
-			var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
-			velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
-			velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-		else:
-			velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
-			velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
+		var target_position = closest_target_node.global_transform.origin
+		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
+		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
+		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
+		
+		var look_at_position = Vector3(target_position.x, global_transform.origin.y, target_position.z)
+		look_at(look_at_position)
+		rotate_y(PI)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
+		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
 
 	move_and_slide()
 
@@ -168,6 +163,8 @@ func check_health():
 			break
 
 func spawn_enemies():
+	if not multiplayer.is_server():
+		return
 	for i in range(3):
 		var pos = self.global_transform.origin + Vector3(randf() * 10 - 5, 0, randf() * 10 - 5)
 		var enemy = GlobalSpawner.spawn_melee_enemy(pos)
@@ -175,6 +172,8 @@ func spawn_enemies():
 			enemy.call_deferred("chase_player", last_damaged_by)
 
 func start_charge():
+	if not multiplayer.is_server():
+		return
 	if last_damaged_by and current_state == State.IDLE:
 		current_state = State.CHARGING
 		look_at(last_damaged_by.global_transform.origin, Vector3.UP)
@@ -187,6 +186,8 @@ func start_charge():
 		move_towards_player()
 		
 func move_towards_player():
+	if not multiplayer.is_server():
+		return
 	if last_damaged_by:
 		var direction = (last_damaged_by.global_transform.origin - global_transform.origin).normalized()
 		velocity = direction * charge_speed
@@ -195,14 +196,20 @@ func move_towards_player():
 			MeshInstance.material_override.albedo_color = original_albedo_color
 
 func start_spinning():
+	if not multiplayer.is_server():
+		return
 	if current_state == State.IDLE:
+		print("Start spinning state")
 		current_state = State.SPINNING
 		shooting = true
 		await get_tree().create_timer(5.0).timeout
 		shooting = false
 		current_state = State.IDLE
+		print("Idle now")
 
 func handle_shooting_and_spinning(delta):
+	if not multiplayer.is_server():
+		return
 	if shooting:
 		rotate_y(deg_to_rad(spin_speed) * delta)
 		var transform_origin = global_transform.origin

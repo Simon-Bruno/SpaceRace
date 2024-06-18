@@ -44,7 +44,6 @@ func _process(delta):
 		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-		#look_at(targeted_player.global_transform.origin)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
