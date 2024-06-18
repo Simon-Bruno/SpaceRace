@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bgib0f2687iao"
+path="res://.godot/imported/death_ray_monitor.obj-be436741f70988271393ca711f2e125a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/death_ray_monitor.obj-be436741f70988271393ca711f2e125a.mesh"]
+
+source_file="res://assets/lobby/death_ray/death_ray_monitor.obj"
+dest_files=["res://.godot/imported/death_ray_monitor.obj-be436741f70988271393ca711f2e125a.mesh", "res://.godot/imported/death_ray_monitor.obj-be436741f70988271393ca711f2e125a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

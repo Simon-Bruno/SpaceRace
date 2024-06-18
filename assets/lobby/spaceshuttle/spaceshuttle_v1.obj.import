@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dqtgttwa278f"
+path="res://.godot/imported/spaceshuttle_v1.obj-ecf9174b2c08c592e85e68d8b4c34f64.mesh"
+
+[deps]
+
+files=["res://.godot/imported/spaceshuttle_v1.obj-ecf9174b2c08c592e85e68d8b4c34f64.mesh"]
+
+source_file="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj"
+dest_files=["res://.godot/imported/spaceshuttle_v1.obj-ecf9174b2c08c592e85e68d8b4c34f64.mesh", "res://.godot/imported/spaceshuttle_v1.obj-ecf9174b2c08c592e85e68d8b4c34f64.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

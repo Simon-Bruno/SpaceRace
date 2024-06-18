@@ -1,31 +1,39 @@
 extends Node3D
 
-var player = null
+@export var interactable : Node
+
+var customRooms = null
+var bodies_on_plate: Array = []
 
 # Detect when body entered the area
 func _on_area_3d_body_entered(body):
-	if body is CharacterBody3D and player == null:
-		player = body
-		player.activate_door_open()
+	if not multiplayer.is_server():
+		return
+	if body.is_in_group("Players") or body is RigidBody3D:
+		if bodies_on_plate.is_empty():
+			update_mesh.rpc(customRooms.PRESSUREPLATEON)
+			if interactable != null:
+				interactable.activated()
+		bodies_on_plate.append(body)
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body):
-	if body is CharacterBody3D and player != null:
-		player.activate_door_close()
-		player = null
+	if not multiplayer.is_server():
+		return
+	if body.is_in_group("Players") or body is RigidBody3D:
+		bodies_on_plate.erase(body)
+		if bodies_on_plate.is_empty():
+			update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
+			if interactable != null:
+				interactable.deactivated()
 
-# Change the scale of the pressure plate
-func scale_pressure_plate(scaling_factor):
-	$PressurePlate.scale *= scaling_factor
+# Updates the pressureplate mesh according to the current state
+@rpc("authority", "call_local", "reliable")
+func update_mesh(state : int):
+	if customRooms:
+		$PressurePlate/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
 
-# Change to position of the pressure plate
-func transform_pressure_plate(x, y, z):
-	$PressurePlate.position = Vector3(x, y, z)
-
-# Change the scale of the door
-func scale_door(scaling_factor):
-	$Door.scale *= scaling_factor
-
-# Change to position of the door
-func transform_door(x, y, z):
-	$Door.position = Vector3(x, y, z)
+# Called when button is placed in world. Sets the mesh instance to off.
+func _ready():
+	customRooms = get_parent().get_parent()
+	update_mesh(customRooms.PRESSUREPLATEOFF)

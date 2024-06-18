@@ -1,43 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsyyqedsi8il8"]
+[gd_scene load_steps=5 format=3 uid="uid://bsyyqedsi8il8"]
 
 [ext_resource type="Script" path="res://scripts/interactables/button.gd" id="1_rlorl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eflyr"]
-albedo_color = Color(0.306699, 0.531991, 0.331917, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wlcrg"]
-material = SubResource("StandardMaterial3D_eflyr")
-size = Vector3(0.5, 0.2, 0.5)
+[ext_resource type="ArrayMesh" uid="uid://ccw74040hni0u" path="res://assets/CustomBlocks/walls/wallSwitchOff.obj" id="2_517h3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr0lf"]
-size = Vector3(2, 1, 2)
+size = Vector3(1.60342, 1.00027, 1.61121)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_drfv7"]
 viewport_path = NodePath("ButtonText/SubViewport2")
 
 [node name="ButtonActivate" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.97042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00952846, -1.97042)
 script = ExtResource("1_rlorl")
 
 [node name="Button" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38419e-07, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.07419, 0.1)
-layers = 4
-mesh = SubResource("BoxMesh_wlcrg")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.97274)
 
 [node name="Area3D" type="Area3D" parent="Button"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Button/Area3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.01053, 0.5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.002, 0.815803, 0.564833)
 shape = SubResource("BoxShape3D_vr0lf")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815483, 0.86514)
+mesh = ExtResource("2_517h3")
+skeleton = NodePath("")
+
 [node name="ButtonText" type="Sprite3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 2.62369, -9.03655)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 2.059, 1)
 visible = false
+pixel_size = 0.005
 billboard = 1
 texture = SubResource("ViewportTexture_drfv7")
 

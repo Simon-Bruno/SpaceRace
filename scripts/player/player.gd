@@ -1,20 +1,5 @@
 extends CharacterBody3D
 
-<<<<<<< Updated upstream
-@export var walk_speed = 7
-@export var fall_acceleration = 60
-@export var jump_impulse = 20
-var getHitCooldown = true
-var health = Global.player_max_health
-var points = 0
-@export var push_force = 1
-
-
-var walk_acceleration = 40
-var walk_deceleration = 50
-var rotation_smoothing = 10
-
-=======
 var getHitCooldown: bool = true
 @export var health: int = Global.player_max_health
 var points: int = 0
@@ -30,19 +15,15 @@ var walk_acceleration: int = 40
 var walk_deceleration: int = 50
 var rotation_speed: int = 10
 var rotation_smoothing: int = 10
->>>>>>> Stashed changes
 var speed = 0
 var direction = Vector2.ZERO
 var max_dist: float = 25.0  # max distance between players
 
-<<<<<<< Updated upstream
-=======
 # animation death variable
 var AnimDeath: bool = false
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
->>>>>>> Stashed changes
 var lobby_spawn = Vector3(0, 10, 20)
 var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
 
@@ -61,12 +42,6 @@ func _ready():
 	else:
 		position = game_spawn[1][0]
 
-<<<<<<< Updated upstream
-# KEEP! IMPORTANT TO IDENTIFY PLAYER
-func player():
-	pass
-=======
->>>>>>> Stashed changes
 
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
@@ -76,7 +51,7 @@ func _horizontal_movement(delta):
 	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
-		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
+		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
 	else:
@@ -91,11 +66,7 @@ func _horizontal_movement(delta):
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 
-<<<<<<< Updated upstream
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-=======
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
->>>>>>> Stashed changes
 		$Pivot/AnimationPlayer.stop()
 		$Pivot/AnimationPlayer.play("jump")
 		vel.y = jump_impulse
@@ -126,23 +97,14 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
-<<<<<<< Updated upstream
-=======
 
 # Lets the player moves object in the room.
->>>>>>> Stashed changes
 func move_object():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
 
-<<<<<<< Updated upstream
-# Action executed when button is pressed
-func activate_door_open():
-	get_parent().get_node('Door').open_door()
-=======
->>>>>>> Stashed changes
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
@@ -154,15 +116,6 @@ func _physics_process(delta):
 				$Pivot/AnimationPlayer.play("walk")
 		if velocity == Vector3.ZERO:
 			$Pivot/AnimationPlayer.play("stop")
-<<<<<<< Updated upstream
-		move_and_slide()
-	move_object()
-# Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
-func take_damage(damage):
-	health = max(0, health-damage)
-	getHitCooldown = false
-	$PlayerCombat/GetHitCooldown.start()
-=======
 		if alive:
 			move_and_slide()
 	move_object()
@@ -206,4 +159,3 @@ func die():
 
 func _on_respawn_immunity_timeout():
 	respawn_immunity = false
->>>>>>> Stashed changes

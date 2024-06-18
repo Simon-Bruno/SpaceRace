@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c2k4ofk3nm13g"
+path="res://.godot/imported/pressurePlateOn.obj-e50ae0bdac0851e03e0f2c8fed284fea.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pressurePlateOn.obj-e50ae0bdac0851e03e0f2c8fed284fea.mesh"]
+
+source_file="res://assets/CustomBlocks/placable/pressurePlateOn.obj"
+dest_files=["res://.godot/imported/pressurePlateOn.obj-e50ae0bdac0851e03e0f2c8fed284fea.mesh", "res://.godot/imported/pressurePlateOn.obj-e50ae0bdac0851e03e0f2c8fed284fea.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,60 @@
+<WALL_SETUP>
+
+create_wall {
+    set_min_distance 5
+    set_max_distance 8
+    length 6
+    length_variation 2
+}
+
+create_wall {
+    set_min_distance 4
+    set_max_distance 6
+    length 3
+    length_variation 1
+}
+
+create_wall {
+    set_min_distance 10
+    set_max_distance 15
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 9
+    length 6
+    length_variation 3
+}
+
+<OBJECTS_GENERATION>
+
+create_object LASER
+{
+    set_min_distance 8
+    set_max_distance 10
+    set_length 3
+}
+
+create_object ITEM
+{
+    set_min_distance 17
+    set_max_distance 20
+}
+
+create_object ITEM
+{
+    set_min_distance 4
+    set_max_distance 9
+}
+
+<ENEMY_GENERATION>
+
+create_mob {
+    set_min_distance 5
+    set_max_distance 8
+    set_group_size 3
+    set_loose_grouping
+}
+
