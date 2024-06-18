@@ -7,8 +7,7 @@ func _ready():
 	var winner_id = pressure_plate_vals.winner_id
 	
 	var your_id = multiplayer.get_unique_id() 
-	var teamplayer_id = Network.other_team_member_id.to_int()
-	
+
 	if Network.other_team_member_id != null and Network.other_team_member_id.is_valid_int():
 		if your_id == (winner_id) or Network.other_team_member_id.to_int() == (winner_id):
 			var label_node = get_node("VBoxContainer/Label")

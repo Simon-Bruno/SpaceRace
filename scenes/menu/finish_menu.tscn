@@ -93,7 +93,7 @@ text = "Play again"
 
 [node name="JoinButton" type="Button" parent="MarginContainer2/Holder"]
 layout_mode = 2
-text = "Join"
+text = "Menu"
 
 [node name="QuitButton" type="Button" parent="MarginContainer2/Holder"]
 layout_mode = 2
