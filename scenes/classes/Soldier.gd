@@ -13,9 +13,11 @@ var ability1_point_cost : int = 10
 var ability2_point_cost : int = 20
 
 func ability1():
+	print("ability 1 soldier")
 	strength_buff()
 	
 func ability2():
+	print("ability 2 soldier")
 	pistol_upgrade()
 
 func pistol_upgrade():
