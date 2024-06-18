@@ -26,12 +26,15 @@ var purple = [LASERP, BUTTONP, DOORP, HOLEP, KEYP, MULTIPRESSUREP, SOLOPRESSUREP
 var red = [LASERR, BUTTONR, DOORR, HOLER, KEYR, MULTIPRESSURER, SOLOPRESSURER]
 var yellow = [LASERY, BUTTONY, DOORY, HOLEY, KEYY, MULTIPRESSUREY, SOLOPRESSUREY]
 
+
+# Main function to be called
 func replace_entities(rooms : Array) -> void:
 	spawn_enemies()
 	spawn_lasers()
 	spawn_doors(rooms)
 
 
+# Checks each room seperately
 func spawn_doors(rooms : Array) -> void:
 	for i in rooms:
 		spawn_doors_room(i)
@@ -62,6 +65,42 @@ func find_in_room(items, width, height, start):
 	return found
 
 
+# Returns the locations of two doors dependent on the left door as input.
+func return_door_pair(location : Vector3i, direction : int) -> Array:
+	var new_location = Vector3i(0, 0, 0)
+	match direction:
+		0: new_location = Vector3i(1, 0, 0)
+		16: new_location = Vector3i(0, 0, -1)
+		10: new_location = Vector3i(-1, 0, 0)
+		22: new_location = Vector3i(0, 0, 1)
+		
+	return [location, location + new_location]
+	
+
+func remove_current_items(location : Vector3i) -> void:
+	#statics.set_cell_item(location, EMPTY)
+	set_cell_item(location, EMPTY)
+
+
+func match_interactable_and_door(item : Array, interactables : Array) -> void:
+	var locations = return_door_pair(item[1], item[2])
+	var actual_location = (map_to_local(locations[0]) + map_to_local(locations[1])) / 2
+	actual_location.y = 2
+	var door = GlobalSpawner.spawn_door(actual_location, get_basis_with_orthogonal_index(item[2]), interactables.size() - 1)
+	# TODO: Doors seems to not be perfectly centered. This will be fixed later.
+	remove_current_items(locations[0])
+	remove_current_items(locations[1])
+	
+	for interact in interactables:
+		if interact == item:
+			continue
+			
+		var location = map_to_local(interact[1])
+		location.y = 2
+		var button = GlobalSpawner.spawn_button(location, get_basis_with_orthogonal_index(interact[2]), door, false)
+		remove_current_items(interact[1])
+		
+
 func spawn_doors_room(room : Array) -> void:
 	var width = room[0]
 	var height = room[1]
@@ -73,6 +112,7 @@ func spawn_doors_room(room : Array) -> void:
 	# Find all items that correspond to the door
 	for item in current:
 		var corresponding = find_in_room(corresponding_types(item[0]), room[0], room[1], room[2])
+		match_interactable_and_door(item, corresponding)
 
 
 # Spawns a laser at all laser spawnpoints in the map.
