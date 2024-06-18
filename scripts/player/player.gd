@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+<<<<<<< Updated upstream
 @export var walk_speed = 7
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
@@ -13,16 +14,42 @@ var walk_acceleration = 40
 var walk_deceleration = 50
 var rotation_smoothing = 10
 
+=======
+var getHitCooldown: bool = true
+@export var health: int = Global.player_max_health
+var points: int = 0
+@export var push_force: int = 1
+@export var alive: bool = true
+var respawn_immunity : bool = false
+
+# movement variables
+@export var walk_speed: int = 12
+@export var fall_acceleration: int = 60
+@export var jump_impulse: int = 20
+var walk_acceleration: int = 40
+var walk_deceleration: int = 50
+var rotation_speed: int = 10
+var rotation_smoothing: int = 10
+>>>>>>> Stashed changes
 var speed = 0
 var direction = Vector2.ZERO
-
 var max_dist: float = 25.0  # max distance between players
 
+<<<<<<< Updated upstream
+=======
+# animation death variable
+var AnimDeath: bool = false
+
+@onready var HpBar = $PlayerCombat/SubViewport/HpBar
+
+>>>>>>> Stashed changes
 var lobby_spawn = Vector3(0, 10, 20)
 var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
 
+
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+
 
 func _ready():
 	$FloatingName.text = Network.playername
@@ -34,9 +61,12 @@ func _ready():
 	else:
 		position = game_spawn[1][0]
 
+<<<<<<< Updated upstream
 # KEEP! IMPORTANT TO IDENTIFY PLAYER
 func player():
 	pass
+=======
+>>>>>>> Stashed changes
 
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
@@ -57,10 +87,15 @@ func _horizontal_movement(delta):
 
 	return vel
 
+
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 
+<<<<<<< Updated upstream
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
+=======
+	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+>>>>>>> Stashed changes
 		$Pivot/AnimationPlayer.stop()
 		$Pivot/AnimationPlayer.play("jump")
 		vel.y = jump_impulse
@@ -70,18 +105,20 @@ func _vertical_movement(delta):
 
 	return vel
 
+
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
 
 	return h + v
 
+
 func check_distance(target_velocity):
 	if Network.other_team_member_node != null:
 		var player_pos = global_transform.origin
 		var player2_pos = Network.other_team_member_node.global_transform.origin
 
-		var x_distance = abs(player_pos.x - player2_pos.x)
+		var x_distance: float = abs(player_pos.x - player2_pos.x)
 		if x_distance > max_dist:  # check distance
 			if player_pos.x > player2_pos.x and target_velocity.x > 0:  # if player trying to walk further
 				target_velocity.x = 0
@@ -89,15 +126,23 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
+<<<<<<< Updated upstream
+=======
+
+# Lets the player moves object in the room.
+>>>>>>> Stashed changes
 func move_object():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
 
+<<<<<<< Updated upstream
 # Action executed when button is pressed
 func activate_door_open():
 	get_parent().get_node('Door').open_door()
+=======
+>>>>>>> Stashed changes
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
@@ -109,6 +154,7 @@ func _physics_process(delta):
 				$Pivot/AnimationPlayer.play("walk")
 		if velocity == Vector3.ZERO:
 			$Pivot/AnimationPlayer.play("stop")
+<<<<<<< Updated upstream
 		move_and_slide()
 	move_object()
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
@@ -116,3 +162,48 @@ func take_damage(damage):
 	health = max(0, health-damage)
 	getHitCooldown = false
 	$PlayerCombat/GetHitCooldown.start()
+=======
+		if alive:
+			move_and_slide()
+	move_object()
+
+
+# Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(id, damage):
+	if str(id) != str(multiplayer.get_unique_id()):
+		return 
+		
+	if !respawn_immunity and alive and getHitCooldown:
+		health = max(0, health - damage)
+		getHitCooldown = false
+		$PlayerCombat/GetHitCooldown.start()
+	HpBar.value = float(health) / Global.player_max_health * 100
+
+	if health <= 0 and alive and not AnimDeath:
+		#print("health < 0")
+		die()
+
+
+func die():
+	# assign globals
+	AnimDeath = true
+	var temp = walk_speed
+	walk_speed = 0
+	
+	# play anim
+	$Pivot/AnimationPlayer.play("death")
+	# wait for anim
+	await get_tree().create_timer(2).timeout
+	# die
+	get_parent().player_died(self)
+	
+	# reset globals
+	AnimDeath = false
+	walk_speed = temp
+	$Pivot/AnimationPlayer.stop()
+
+
+func _on_respawn_immunity_timeout():
+	respawn_immunity = false
+>>>>>>> Stashed changes
