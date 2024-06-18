@@ -1,13 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bej2ury5pyyei"]
+[gd_scene load_steps=6 format=3 uid="uid://bej2ury5pyyei"]
 
 [ext_resource type="Script" path="res://scripts/item/item.gd" id="1_o5cad"]
-[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_xcw8s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r6fdv"]
 friction = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpqrv"]
-albedo_texture = ExtResource("2_xcw8s")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_473qe"]
 height = 1.0
