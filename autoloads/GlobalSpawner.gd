@@ -10,6 +10,28 @@ var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.ts
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
 
+func spawn_pressure_plate_enemy(pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
+	if spawner:
+		var plate = pressure_plate_scene.instantiate()
+		plate.position = pos
+		spawner.add_child(plate, true)
+		return plate
+	return null
+
+func spawn_button_enemy(pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
+	if spawner:
+		var button = button_scene.instantiate()
+		button.position = pos
+		spawner.add_child(button, true)
+		return button
+	return null
+
 func spawn_melee_enemy(pos):
 	if not multiplayer.is_server():
 		return

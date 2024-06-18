@@ -24,7 +24,7 @@ var spawn_thresholds = [0.75, 0.5, 0.25]
 var spawned_enemies = false
 var charging = false
 var shooting = false
-var spin_speed = 90.0 * 8
+var spin_speed = 180
 var charge_time = 2.0
 var charge_speed = 35
 @export var charge_duration = 2.0
@@ -199,13 +199,11 @@ func start_spinning():
 	if not multiplayer.is_server():
 		return
 	if current_state == State.IDLE:
-		print("Start spinning state")
 		current_state = State.SPINNING
 		shooting = true
 		await get_tree().create_timer(5.0).timeout
 		shooting = false
 		current_state = State.IDLE
-		print("Idle now")
 
 func handle_shooting_and_spinning(delta):
 	if not multiplayer.is_server():

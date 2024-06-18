@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://df0ib0ofm7dbm"
+path="res://.godot/imported/dynamite.obj-778c2c560b71cc10ea78259f1ddafe6a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/dynamite.obj-778c2c560b71cc10ea78259f1ddafe6a.mesh"]
+
+source_file="res://assets/CustomBlocks/items/dynamite.obj"
+dest_files=["res://.godot/imported/dynamite.obj-778c2c560b71cc10ea78259f1ddafe6a.mesh", "res://.godot/imported/dynamite.obj-778c2c560b71cc10ea78259f1ddafe6a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
