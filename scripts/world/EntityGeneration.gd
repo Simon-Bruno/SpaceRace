@@ -74,8 +74,6 @@ func spawn_doors_room(room : Array) -> void:
 	for item in current:
 		var corresponding = find_in_room(corresponding_types(item[0]), room[0], room[1], room[2])
 
-		
-
 
 # Spawns a laser at all laser spawnpoints in the map.
 func spawn_lasers() -> void:
