@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbacswmnwu2am"]
+
+[ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_fva33"]
+[ext_resource type="Script" path="res://scripts/item/hp_bottle.gd" id="2_pydsu"]
+[ext_resource type="Texture2D" uid="uid://dbu588q5vqn3h" path="res://assets/CustomBlocks/items/hp-bottle.png" id="3_g5r1h"]
+[ext_resource type="ArrayMesh" uid="uid://dvk558lkgv2x" path="res://assets/CustomBlocks/items/hp-small-bottle.obj" id="4_wmphl"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_2l4y6"]
+albedo_texture = ExtResource("3_g5r1h")
+
+[node name="Item" instance=ExtResource("1_fva33")]
+script = ExtResource("2_pydsu")
+
+[node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0091269, -0.625156, -0.0773146)
+material_override = SubResource("ORMMaterial3D_2l4y6")
+mesh = ExtResource("4_wmphl")
