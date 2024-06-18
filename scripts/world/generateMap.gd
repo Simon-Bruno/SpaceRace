@@ -25,7 +25,7 @@ const CUSTOMROOMPERCENTAGE : float = 1
 const room_amount : int = 5
 const room_width  : int = 10
 const room_height : int = 10
-const room_margin : int = 4
+const room_margin : int = 100
 
 # How much the room size can variate in increments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
@@ -47,6 +47,8 @@ var room_variation_y : int = 1
 @export var generate_room : bool = true
 @export var last_room : bool = false
 @export var absolute_position : Vector3i = Vector3i(0, 3, 0)
+
+static var placed_doors : int = 0
 
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
@@ -100,8 +102,7 @@ func build_map() -> void:
 	
 	draw_windows()
 	draw_walls()
-	
-	#print(roomTypes)
+
 	mirror_world()
 
 
@@ -291,6 +292,7 @@ func define_rooms() -> void:
 # 2. Place a path between the first room and a random point at an x offset.
 # 3. Place second room on same x-axis
 func draw_rooms() -> void:
+	var start = true
 	for i in room_amount:
 		room = rooms[i]
 
@@ -308,18 +310,17 @@ func draw_rooms() -> void:
 			assert(rightDoor < room[1])
 			assert(leftDoor < room[1])
 			fill_room(room)
+		else:
+			continue
 
 		# Place the corridors between the current and next room
 		if i == room_amount - 1:
 			last_room = true
-			break
 
-		var zend = rooms[i + 1][3]
-
-		var xstart = rooms[i][2] + rooms[i][0] - 1
-		var xend = rooms[i + 1][2]
-
-		place_doors(Vector3i(xstart, HEIGHT, rightDoor), Vector3i(xend, HEIGHT, zend))
+		var xstart = rooms[i][2]
+		var xend = rooms[i][2] + rooms[i][0] - 1
+		place_doors(Vector3i(xstart, HEIGHT, leftDoor), Vector3i(xend, HEIGHT, rightDoor), start, last_room)
+		start = false
 
 
 
@@ -349,20 +350,20 @@ func sort_vector(a : Vector3i, b : Vector3i):
 
 # Draws paths between the doors.
 func draw_paths() -> void:
-	var starts = self.get_used_cells_by_item(DOOROPENL)
+	var right = self.get_used_cells_by_item(DOOROPENL)
 	var ends = self.get_used_cells_by_item(DOOROPENR)
 	
-	starts.sort_custom(sort_vector)
+	right.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
-	assert(starts.size() == ends.size())
-	for i in range(starts.size() - 1, -1, -1):
-		if get_cell_item_orientation(starts[i]) != 22:
-			starts.pop_at(i)
+	assert(right.size() == ends.size())
+	for i in range(right.size() - 1, -1, -1):
+		if get_cell_item_orientation(right[i]) != 22:
+			right.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-	assert(starts.size() == ends.size())
-	for i in starts.size():
-		make_path(starts[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
+	assert(right.size() == ends.size())
+	for i in right.size():
+		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
@@ -395,13 +396,18 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR1)
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR1)
 
-
 # Places doors on random begin and end spots to make it possible to generate the paths later.
-func place_doors(start_location : Vector3i, end_location : Vector3i) -> void:
-	self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENL, 22)
-	self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENR, 22)
-	self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENR, 16)
-	self.set_cell_item(end_location + Vector3i(0, 1, 1), DOOROPENL, 16)
+func place_doors(start_location : Vector3i, end_location : Vector3i, start, end) -> void:
+	print('Placing doors')
+	if not start:
+		self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENL, 16)
+		self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENR, 16)
+		print('Placed left door at ', start_location)
+		placed_doors += 2
+	if not end:
+		self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENR, 22)
+		self.set_cell_item(end_location + Vector3i(0, 1, 1), DOOROPENL, 22)
+		print('Placed right door at ', end_location)
 
 # Sums the integers in an array
 func sum_array(array):
