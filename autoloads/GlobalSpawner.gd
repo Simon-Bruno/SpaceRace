@@ -3,7 +3,7 @@ extends Node
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var item_scene = preload("res://scenes/item/item.tscn")
+var item_scene = preload("res://scenes/item/key.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
@@ -75,9 +75,12 @@ func spawn_item(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
+	print(spawner)
 	if spawner:
 		var item = item_scene.instantiate()
+		print(item)
 		item.position = pos
+		print(pos)
 		spawner.add_child(item, true)
 
 @rpc("any_peer", "call_local", "reliable")
