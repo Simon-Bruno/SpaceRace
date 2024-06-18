@@ -1,8 +1,15 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=26 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_8qfng"]
 [ext_resource type="Texture2D" uid="uid://dlwenu60pivco" path="res://assets/characters/player_Player.png" id="2_qq60o"]
+=======
+[gd_scene load_steps=14 format=3 uid="uid://bxnsgqthgkbxc"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
+[ext_resource type="PackedScene" uid="uid://d3c1n4m8kg4c4" path="res://assets/characters/player.glb" id="2_sgpm8"]
+>>>>>>> Stashed changes
 [ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
 [ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="5_oaq0v"]
@@ -34,6 +41,7 @@ properties/7/path = NodePath(".:alive")
 properties/7/spawn = true
 properties/7/replication_mode = 2
 
+<<<<<<< Updated upstream
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_144tu"]
 resource_name = "palette"
 cull_mode = 2
@@ -597,6 +605,8 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owxfs"]
 albedo_texture = ExtResource("2_8qfng")
 
+=======
+>>>>>>> Stashed changes
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4hx3q"]
 height = 1.5526
 radius = 0.600331
@@ -626,6 +636,7 @@ script = ExtResource("1_c8kx5")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_v5bfw")
 
+<<<<<<< Updated upstream
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="Armature" type="Node3D" parent="Pivot"]
@@ -728,6 +739,9 @@ libraries = {
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
 material_override = SubResource("StandardMaterial3D_owxfs")
 skeleton = NodePath("../../CollisionShape3D")
+=======
+[node name="Pivot" parent="." instance=ExtResource("2_sgpm8")]
+>>>>>>> Stashed changes
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_4hx3q")
