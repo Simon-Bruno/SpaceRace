@@ -1,7 +1,6 @@
 extends Node3D
 
 @onready var world = get_parent()
-@onready var globalSpawner = GlobalSpawner
 
 enum {HORIZONTAL, VERTICAL}
 
@@ -202,13 +201,10 @@ func add_walls(floor_plan : Array[Array], wall_list : Array, width : int, height
 		if not handle_wall(floor_plan, wall, width, height, start):
 			handle_wall(floor_plan, wall, width, height, start)
 
-# This function takes the floor plan, an object and some parameters of the room
-# and tries to fit the object in the room, while keeping the rules set in the
-# object dictionary.
-# If the object could be placed successfully, the floor plan will be updated
-# and the function returns true. If the placement was unsuccessful, the floor
-# plan will be unaltered and the function will return false.
-func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height : int, start : Vector3i) -> bool:
+# This function will calculate a position (x, z) for the object to spawn. This
+# will consider the size of the room and object restrictions, but will not care
+# about other things in the room.
+func object_placement(object : Dictionary, width : int, height : int, start : Vector3i) -> Array:
 	var min_dist : int = object['set_min_distance']
 	var max_dist : int = object['set_max_distance']
 	# Calculations to set the object between the minimum and maximum distance.
@@ -222,22 +218,52 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 	if abs(start[2] * 2 - z) < min_dist:
 		xmin = min(width - 1, start[0] * 2 + min_dist)
 	var x = randi_range(xmin, xmax)
+	
+	return [x, z]
+
+# This function takes the floor plan, an object and some parameters of the room
+# and tries to fit the object in the room, while keeping the rules set in the
+# object dictionary.
+# If the object could be placed successfully, the floor plan will be updated
+# and the function returns true. If the placement was unsuccessful, the floor
+# plan will be unaltered and the function will return false.
+func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
 	# Check if there is not another object/wall already at that place.
 	if floor_plan[z - 1][x - 1]:
 		return false
 	# Add the item and update the plan.
 	floor_plan[z - 1][x - 1] = ITEM
-	globalSpawner.spawn_item(absolute_position + Vector3i(x, 0, z))
-	globalSpawner.spawn_item(absolute_position + Vector3i(x, 0, -z))
+	GlobalSpawner.spawn_item(absolute_position + Vector3i(x, 0, z))
+	GlobalSpawner.spawn_item(absolute_position + Vector3i(x, 0, -z))
 	return true
 
+func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x= pos[0]
+	var z = pos[1]
+	
+	if floor_plan[z - 1][x - 1]:
+		return false
+	
+	floor_plan[z - 1][x - 1] = ITEM
+	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, z))
+	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
+	return true
 
 func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int, height : int, start: Vector3i) -> bool:
 	match object['type']:
 		'ITEM':
 			return add_item(floor_plan, object, width, height, start)
+		'BUFF':
+			# TODO: This should work with a version of globalSpawner that
+			# knows how to spawn buffs. For now, we just return true.
+			# return add_buff(floor_plan, object, width, height, start)
+			return true
 		_:
-			print('The object is not an item')
+			print('The object is not a supported object')
 			return true
 
 # This function will eventually handle all the object placements. Currently it
@@ -248,7 +274,10 @@ func add_objects(floor_plan : Array[Array], objects_list : Array, width : int, h
 			# Try again if failed the first time.
 			object_matcher(object, floor_plan, width, height, start)
 
-
+# This function will trace a shortest path from the start of the room to the
+# finish to assure the player not getting stuck. The path will be traced
+# inside the floor plan matrix where the path cells will have the value
+# PATH.
 func generate_path(floor_plan : Array[Array], width : int, height : int, start : Vector3i, end : Vector3i) -> void:
 	var position : Vector3i = start
 	var up_down : int = 1 if start.z < end.z else -1
@@ -279,6 +308,8 @@ func generate_floor_plan(width : int, height : int) -> Array[Array]:
 		floor_plan[i].fill(0)
 	return floor_plan
 
+# The main function of the script that will generate a room and duplicates
+# it for the enemy, so the entire room is just a single scene.
 func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_floor : bool) -> void:
 	var room = world.room
 	var width : int = room[0] * 2
@@ -288,10 +319,14 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	if not last_floor:
 		generate_path(floor_plan, width, height, start, end)
 	add_walls(floor_plan, world_dict['walls'], width, height, start)
+	# Set the generate variable, so it will not recurse infinitely.
 	world.generate_room = false
+	# Only duplicate the walls.
 	var dup = self.duplicate()
+	# Set the x to be mirrored.
 	dup.scale.z = -1
 	self.get_parent().add_child(dup, true)
+	# Set the generate variable back, so the next will be filled.
 	world.generate_room = true
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
 	GlobalSpawner.spawn_melee_enemy(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))

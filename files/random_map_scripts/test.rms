@@ -147,6 +147,12 @@ create_object ITEM
     set_max_distance 15
 }
 
+create_object BUFF
+{
+    set_min_distance 7
+    set_max_distance 20
+}
+
 <ENEMY_GENERATION>
 
 create_mob {

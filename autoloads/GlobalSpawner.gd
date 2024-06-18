@@ -75,12 +75,9 @@ func spawn_item(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	print(spawner)
 	if spawner:
 		var item = item_scene.instantiate()
-		print(item)
 		item.position = pos
-		print(pos)
 		spawner.add_child(item, true)
 
 @rpc("any_peer", "call_local", "reliable")
