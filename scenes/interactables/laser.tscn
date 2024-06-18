@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://8gurumik6vsg"]
+[gd_scene load_steps=6 format=3 uid="uid://degvv7aybwe61"]
 
 [ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_cdal3"]
 
