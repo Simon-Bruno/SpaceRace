@@ -2,7 +2,7 @@ extends Node3D
 
 # make sure only one person holds the item
 @export var owned = false
-var owned_node : Node3D = null
+@export var owned_node : Node3D = null
 # how fast the item should follow the player
 var item_follow_speed = 15
 
@@ -35,6 +35,9 @@ func _animate(delta):
 	# TAU is 2*PI
 	var new_y = bob_offset + initial_position.y + bob_amplitude * sin(bob_time * bob_frequency * TAU)
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
+
+func delete():
+	print("Delete item")
 
 func _process(delta):
 	_animate(delta)

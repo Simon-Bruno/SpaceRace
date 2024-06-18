@@ -37,8 +37,9 @@ func _hold_item(item):
 	_set_this_player_to_hold_item.rpc(multiplayer.get_unique_id(), item.get_path())
 	
 func _use_item():
-	if holding.has_method("use"): 
-		holding.use()
+	var node = holding.get_parent_node_3d()
+	if node.has_method("use"):
+		node.use()
 	
 @rpc("any_peer", "call_local", "reliable")
 func _set_this_player_to_hold_item(id, item_path):
