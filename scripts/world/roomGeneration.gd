@@ -83,14 +83,14 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	var door = door_scene.instantiate()
 	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
 	add_child(door, true)
-	door.activation_count = 2
+	door.activation_count = 1
 	
-	var button = button_scene.instantiate()
-	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	var button = pressure_plate_scene.instantiate()
+	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 3, randi_range(1, room[1] * 2 - 1))
 	add_child(button, true)
 	button.interactable = door
 	
-	var button2 = button_scene.instantiate()
-	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(button2, true)
-	button2.interactable = door
+	#var button2 = button_scene.instantiate()
+	#button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	#add_child(button2, true)
+	#button2.interactable = door
