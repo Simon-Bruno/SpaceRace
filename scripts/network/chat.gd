@@ -1,7 +1,6 @@
 extends Control
 
 @onready var message_display = $MessageDisplay
-@onready var leave_button = $LeaveButton
 @onready var send_button = $SendButton
 @onready var message_input = $MessageInput
 @onready var message_timer = $MessageTimer
@@ -64,11 +63,6 @@ func new_timestamp():
 	return timestamp
 
 
-# Allows the player to leave the game when the leave button is pressed
-func _on_leave_button_pressed():
-	Network._on_leave_button_pressed()
-	Audiocontroller.play_menu_music()
-
 # Remote procedure call (RPC) for sending messages between players
 @rpc("any_peer", "call_local")
 func msg_rpc(sender, message):	
@@ -112,6 +106,8 @@ func set_caret_pos():
 
 # Called when the message input field gets focus
 func _on_message_input_focus_entered():
+	#_on_in_chat(true)
+	#emit_in_chat(true)
 	Global.in_chat = true # To disable other actions when in chat #TODO remove
 	message_display.visible = true
 	message_input.set_max_length(1024)
@@ -150,7 +146,8 @@ func commands():
 # in the chat
 func leave_game():
 	if message_input.text == "/leave":
-		_on_leave_button_pressed()
+		Network._on_leave_button_pressed()
+		Audiocontroller.play_menu_music()
 		return true
 
 

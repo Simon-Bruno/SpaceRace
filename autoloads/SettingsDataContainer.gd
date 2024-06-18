@@ -39,7 +39,10 @@ func create_keybinds_dict():
 		keybind_resource.MOVE_RIGHT: keybind_resource.move_right_key,
 		keybind_resource.MOVE_FORWARD: keybind_resource.move_forward_key,
 		keybind_resource.MOVE_BACK: keybind_resource.move_back_key,
-		keybind_resource.JUMP: keybind_resource.jump_key
+		keybind_resource.JUMP: keybind_resource.jump_key,
+		keybind_resource.INTERACT: keybind_resource.interact_key,
+		keybind_resource.ATTACK : keybind_resource.attack_key,
+		keybind_resource.OPEN_CHAT: keybind_resource.open_chat_key
 	}
 
 	return keybinds_container_dict
@@ -82,7 +85,7 @@ func get_fps_meter():
 
 
 func get_keybind(action : String):
-	if !loaded_data.has("keybinds"):
+	if not loaded_data.has("keybinds"):
 		match action:
 			keybind_resource.MOVE_LEFT:
 				return keybind_resource.DEFAULT_MOVE_LEFT_KEY
@@ -94,6 +97,12 @@ func get_keybind(action : String):
 				return keybind_resource.DEFAULT_MOVE_BACK_KEY
 			keybind_resource.JUMP:
 				return keybind_resource.DEFAULT_JUMP_KEY
+			keybind_resource.INTERACT:
+				return keybind_resource.DEFAULT_INTERACT_KEY
+			keybind_resource.ATTACK: 
+				return keybind_resource.DEFAULT_ATTACK_KEY
+			keybind_resource.OPEN_CHAT:
+				return keybind_resource.DEFAULT_OPEN_CHAT_KEY
 	else:
 		match action:
 			keybind_resource.MOVE_LEFT:
@@ -106,7 +115,12 @@ func get_keybind(action : String):
 				return keybind_resource.move_back_key
 			keybind_resource.JUMP:
 				return keybind_resource.jump_key
-			
+			keybind_resource.INTERACT:
+				return keybind_resource.interact_key
+			keybind_resource.ATTACK: 
+				return keybind_resource.attack_key
+			keybind_resource.OPEN_CHAT:
+				return keybind_resource.open_chat_key
 
 
 func on_window_mode_selected(index : int):
@@ -145,6 +159,12 @@ func set_keybind(action : String, event):
 			keybind_resource.move_back_key = event
 		keybind_resource.JUMP:
 			keybind_resource.jump_key = event
+		keybind_resource.INTERACT:
+			keybind_resource.interact_key = event
+		keybind_resource.ATTACK:
+			keybind_resource.attack_key = event
+		keybind_resource.OPEN_CHAT:
+			keybind_resource.open_chat_key = event
 
 
 func on_keybinds_loaded(data : Dictionary):
@@ -153,18 +173,27 @@ func on_keybinds_loaded(data : Dictionary):
 	var loaded_move_forward = InputEventKey.new()
 	var loaded_move_back = InputEventKey.new()
 	var loaded_jump = InputEventKey.new()
+	var loaded_interact = InputEventKey.new()
+	var loaded_attack = InputEventKey.new()
+	var loaded_open_chat = InputEventKey.new()
 
 	loaded_move_left.set_physical_keycode(int(data.move_left))
 	loaded_move_right.set_physical_keycode(int(data.move_right))
 	loaded_move_forward.set_physical_keycode(int(data.move_forward))
 	loaded_move_back.set_physical_keycode(int(data.move_back))
 	loaded_jump.set_physical_keycode(int(data.jump))
+	loaded_interact.set_physical_keycode(int(data.interact))
+	loaded_attack.set_physical_keycode(int(data.attack))
+	loaded_open_chat.set_physical_keycode(int(data.open_chat))
 	
 	keybind_resource.move_left_key = loaded_move_left
 	keybind_resource.move_right_key = loaded_move_right
 	keybind_resource.move_forward_key = loaded_move_forward
 	keybind_resource.move_back_key = loaded_move_back
 	keybind_resource.jump_key = loaded_jump
+	keybind_resource.interact_key = loaded_interact
+	keybind_resource.attack_key = loaded_attack
+	keybind_resource.open_chat_key = loaded_open_chat
 
 
 func on_settings_data_loaded(data : Dictionary):

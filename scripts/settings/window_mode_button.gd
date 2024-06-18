@@ -14,13 +14,13 @@ const WINDOW_MODE_ARRAY : Array[String] = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_window_mode_items()
-	select_current_window_mode()
 	load_data()
+	select_current_window_mode()
 
 
 func load_data():
-	_on_option_button_item_selected(SettingsContainer.get_window_mode_index())
 	option_button.select(SettingsContainer.get_window_mode_index())
+	_on_option_button_item_selected(SettingsContainer.get_window_mode_index())
 
 
 func add_window_mode_items():
@@ -49,15 +49,15 @@ func select_current_window_mode() -> void:
 	var mode = DisplayServer.window_get_mode()
 	var borderless = DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS)
 	match mode:
-		DisplayServer.WINDOW_MODE_FULLSCREEN:
-			if borderless:
-				option_button.select(3)
-			else:
-				option_button.select(0)
 		DisplayServer.WINDOW_MODE_WINDOWED:
 			if borderless:
 				option_button.select(2)
 			else:
 				option_button.select(1)
+		DisplayServer.WINDOW_MODE_FULLSCREEN:
+			if borderless:
+				option_button.select(3)
+			else:
+				option_button.select(0)
 		_:
 			pass

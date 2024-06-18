@@ -40,8 +40,10 @@ func _process(_delta):
 	if Input.is_action_just_pressed("interact") and activate_text:
 		if player != null and interactable != null:
 			if !activate:
+				Audiocontroller.play_button_sfx()
 				_activate_switch()
 			else:
+				Audiocontroller.play_button_sfx()
 				_deactivate_switch()
 
 # Called when button is placed in world. Sets the mesh instance to off.

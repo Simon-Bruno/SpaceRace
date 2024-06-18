@@ -146,6 +146,18 @@ action_name = "move_right"
 layout_mode = 2
 action_name = "jump"
 
+[node name="Keybind_Rebind_Button6" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_8avhk")]
+layout_mode = 2
+action_name = "interact"
+
+[node name="Keybind_Rebind_Button7" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_8avhk")]
+layout_mode = 2
+action_name = "attack"
+
+[node name="Keybind_Rebind_Button8" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_8avhk")]
+layout_mode = 2
+action_name = "open_chat"
+
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8

@@ -2,8 +2,8 @@ class_name KeybindRebindButton
 extends Control
 
 @export var action_name : String = "move_left"
-@onready var label = $HBoxContainer/Label
-@onready var button = $HBoxContainer/Button 
+@onready var label = $HBoxContainer/Label as Label
+@onready var button = $HBoxContainer/Button as Button
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,7 +58,7 @@ func _on_button_toggled(toggled_on):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = true
 				i.set_process_unhandled_key_input(false)
-		set_text_for_key()
+		#set_text_for_key()
 
 
 func _unhandled_key_input(event):
@@ -73,18 +73,3 @@ func rebind_action_key(event):
 	set_process_unhandled_key_input(false)
 	set_text_for_key()
 	set_action_name()
-	#var is_duplicate = false # Check whether a key is not used twice
-	#var action_event = event
-	#var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
-	#for i in get_tree().get_nodes_in_group("hotkey_button"):
-		#if i.action_name != self.action_name:
-			#if i.button.text == "%s" %action_keycode:
-				#is_duplicate = true
-				#break
-	#if not is_duplicate:
-		#InputMap.action_erase_events(action_name)
-		#InputMap.action_add_event(action_name, event)
-		#SettingsContainer.set_keybind(action_name, event)
-		#set_process_unhandled_key_input(false)
-		#set_text_for_key()
-		#set_action_name()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/settings/keybind_rebind_button.gd" id="1_25c1i"]
 
-[node name="Hotkey_Rebind_Button" type="Control" groups=["keybind_button"]]
+[node name="Keybind_Rebind_Button" type="Control" groups=["keybind_button"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,4 +40,5 @@ layout_mode = 2
 toggle_mode = true
 text = "ACTION_KEY"
 
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]

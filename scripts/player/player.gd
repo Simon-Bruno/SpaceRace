@@ -54,6 +54,7 @@ func _horizontal_movement(delta):
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
+	#Audiocontroller.play_walking_sfx()
 
 	return vel
 
@@ -62,6 +63,7 @@ func _vertical_movement(delta):
 
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		vel.y = jump_impulse
+		Audiocontroller.play_jump_sfx()
 
 	if not is_on_floor():
 		vel.y = velocity.y - (fall_acceleration * delta)
@@ -94,11 +96,18 @@ func move_object():
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
 
+
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
+		if velocity != Vector3.ZERO && velocity.y == 0:
+			#Audiocontroller.play_walking_sfx()
+			pass
+		if velocity == Vector3.ZERO:
+			pass
+			#Audiocontroller.stop_walking_sfx()
 		move_and_slide()
 
 	move_object()

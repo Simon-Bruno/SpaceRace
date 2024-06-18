@@ -11,7 +11,7 @@ func _ready():
 
 
 func on_settings_save(data : Dictionary):
-	var save_settings_data_file = FileAccess.open_encrypted_with_pass(SETTINGS_SAVE_PATH, FileAccess.WRITE, "VeryDifficultPwToBeChang3dLaterPLS")
+	var save_settings_data_file = FileAccess.open_encrypted_with_pass(SETTINGS_SAVE_PATH, FileAccess.WRITE, "MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgFGEGflGwObzO7IECx3Ulsxmj3NxevmB5na1LlOE/8BygAJN0v7zu9SSQq4u4+GKiViImwBq4RvaGKu2cTrY9rsyUG435RvWxVtCJwN/psi07dbFlpnBgsXceuUSqMDB28yA6UNz1criEWP6qsSHJE77xrm/kWHG0dikj7grFGx9AgMBAAE=")
 	var json_data_string = JSON.stringify(data)
 	save_settings_data_file.store_line(json_data_string)
 
@@ -20,7 +20,7 @@ func load_settings_data():
 	if not FileAccess.file_exists(SETTINGS_SAVE_PATH):
 		return
 
-	var save_settings_data_file = FileAccess.open_encrypted_with_pass(SETTINGS_SAVE_PATH, FileAccess.READ, "VeryDifficultPwToBeChang3dLaterPLS")
+	var save_settings_data_file = FileAccess.open_encrypted_with_pass(SETTINGS_SAVE_PATH, FileAccess.READ, "MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgFGEGflGwObzO7IECx3Ulsxmj3NxevmB5na1LlOE/8BygAJN0v7zu9SSQq4u4+GKiViImwBq4RvaGKu2cTrY9rsyUG435RvWxVtCJwN/psi07dbFlpnBgsXceuUSqMDB28yA6UNz1criEWP6qsSHJE77xrm/kWHG0dikj7grFGx9AgMBAAE=")
 	var loaded_data : Dictionary = {}
 
 	while save_settings_data_file.get_position() < save_settings_data_file.get_length():

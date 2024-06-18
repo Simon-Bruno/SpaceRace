@@ -43,6 +43,8 @@ func _on_deal_attack_timer_timeout():
 func apply_damage_to_enemy():
 	if enemy_in_range and targeted_enemy:
 		targeted_enemy.take_damage(20, self)
+		if Input.is_action_just_pressed("attack"):
+			Audiocontroller.play_attack_fist_sfx()
 
 func _on_GetHitCooldown_timeout():
 	get_parent().getHitCooldown = true

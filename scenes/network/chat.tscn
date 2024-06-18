@@ -28,16 +28,6 @@ offset_bottom = -1.0
 bbcode_enabled = true
 scroll_following = true
 
-[node name="LeaveButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -103.0
-offset_bottom = 53.0
-grow_horizontal = 0
-text = "Leave Game"
-
 [node name="MessageInput" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -77,16 +67,13 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -168.0
-offset_top = 15.0
-offset_right = -104.0
-offset_bottom = 38.0
+offset_left = -64.0
+offset_bottom = 23.0
 grow_horizontal = 0
 text = "FPS: 144"
 
 [connection signal="mouse_entered" from="MessageDisplay" to="." method="_on_message_display_mouse_entered"]
 [connection signal="mouse_exited" from="MessageDisplay" to="." method="_on_message_display_mouse_exited"]
-[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="focus_entered" from="MessageInput" to="." method="_on_message_input_focus_entered"]
 [connection signal="focus_exited" from="MessageInput" to="." method="_on_message_input_focus_exited"]
 [connection signal="gui_input" from="MessageInput" to="." method="_on_message_input_gui_input"]
