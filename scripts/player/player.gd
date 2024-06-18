@@ -3,20 +3,24 @@ extends CharacterBody3D
 @export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
-@export var push_force = 1.0
+var getHitCooldown = true
+@export var health = Global.player_max_health
+var points = 0
+@export var push_force = 1
+@export var alive = true
+var respawn_immunity : bool = false
 
 var walk_acceleration = 40
 var walk_deceleration = 50
 var rotation_speed = 10
+var rotation_smoothing = 10
 
 var speed = 0
 var direction = Vector2.ZERO
 
-var getHitCooldown = true
-var health = Global.player_max_health
-var points = 0
-
 var max_dist: float = 25.0  # max distance between players
+
+@onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 10, 20)
 var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
@@ -34,10 +38,6 @@ func _ready():
 	else:
 		position = game_spawn[1][0]
 
-# KEEP! IMPORTANT TO IDENTIFY PLAYER
-func player():
-	pass
-
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 
@@ -45,8 +45,8 @@ func _horizontal_movement(delta):
 
 	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-		direction = lerp(direction, current_direction, rotation_speed * delta)
-		$Pivot.basis = Basis.looking_at(Vector3(direction[0], 0, direction[1]))
+		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
 	else:
@@ -99,13 +99,28 @@ func _physics_process(delta):
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
-		move_and_slide()
-
+		if alive:
+			move_and_slide()
 	move_object()
-
+	
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
-func take_damage(damage):
-	health = max(0, health-damage)
-	#print('health', health)
-	getHitCooldown = false
-	$PlayerCombat/GetHitCooldown.start()
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(id, damage):
+	if str(id) != str(multiplayer.get_unique_id()):
+		return 
+		
+	if !respawn_immunity and alive and getHitCooldown:
+		health = max(0, health - damage)
+		getHitCooldown = false
+		$PlayerCombat/GetHitCooldown.start()
+	HpBar.value = float(health) / Global.player_max_health * 100
+
+	if health <= 0 and alive:
+		#print("health < 0")
+		die()
+		
+func die():
+	get_parent().player_died(self)
+
+func _on_respawn_immunity_timeout():
+	respawn_immunity = false

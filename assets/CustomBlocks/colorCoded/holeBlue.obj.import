@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cironc65kashf"
+path="res://.godot/imported/holeBlue.obj-7c586a987f242617acb1af60a5817673.mesh"
+
+[deps]
+
+files=["res://.godot/imported/holeBlue.obj-7c586a987f242617acb1af60a5817673.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/holeBlue.obj"
+dest_files=["res://.godot/imported/holeBlue.obj-7c586a987f242617acb1af60a5817673.mesh", "res://.godot/imported/holeBlue.obj-7c586a987f242617acb1af60a5817673.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

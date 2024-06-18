@@ -8,7 +8,9 @@ var parser = preload("res://scripts/world/rms_parser.gd").new()
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var item_scene = preload("res://scenes/item/item.tscn")
+var key_scene = preload("res://scenes/item/key.tscn")
+var bomb_scene = preload("res://scenes/item/bomb.tscn")
+var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
@@ -63,15 +65,26 @@ func add_objects(objects_list):
 
 func fill_room(world_dict: Dictionary, start : Vector3i):
 	var room = world.room
-	var enemy = enemy_scene.instantiate()
-	enemy.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1))
-	add_child(enemy, true)
+	GlobalSpawner.spawn_melee_enemy(
+		Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
+
 	var laser = laser_scene.instantiate()
 	laser.position = Vector3i(2, 3, 5)
 	add_child(laser, true)
-	var item = item_scene.instantiate()
-	item.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
-	add_child(item, true)
+	
+	var key = key_scene.instantiate()
+	key.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
+	add_child(key, true)
+	
+	
+	var bomb = bomb_scene.instantiate()
+	bomb.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
+	add_child(bomb, true)
+	
+	var hp_bottle = hp_bottle_scene.instantiate()
+	hp_bottle.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
+	add_child(hp_bottle, true)
+	
 	var box = box_scene.instantiate()
 	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	add_child(box, true)
@@ -82,18 +95,15 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	
 	var door = door_scene.instantiate()
 	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(door)
-	door.activation_count = 2
+	add_child(door, true)
+	door.activation_count = 1
 	
-	var button = button_scene.instantiate()
-	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(button)
+	var button = pressure_plate_scene.instantiate()
+	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 3, randi_range(1, room[1] * 2 - 1))
+	add_child(button, true)
 	button.interactable = door
 	
-	var button2 = button_scene.instantiate()
-	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
-	add_child(button2)
-	button2.interactable = door
-
-#func _process(delta):
-	#pass
+	#var button2 = button_scene.instantiate()
+	#button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
+	#add_child(button2, true)
+	#button2.interactable = door

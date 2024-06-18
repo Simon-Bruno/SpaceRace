@@ -20,7 +20,7 @@ func _process(_delta):
 			team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
 				_on_start_timer_timeout()
 		if not start_timer.is_stopped():
-			$SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
+			$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
 	if Input.is_action_just_pressed("pause"):
 		pause_menu.handle_esc_input()
 
@@ -96,7 +96,6 @@ func assign_teams():
 func _on_team1_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team1.has(body):
 		team1.append(body)
-		print("tema1")
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 

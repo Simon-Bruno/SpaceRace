@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cwb8cpd3pjekd"
+path="res://.godot/imported/switchOffBlue.obj-b27917387248c5058e4f8c9aa869abc1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/switchOffBlue.obj-b27917387248c5058e4f8c9aa869abc1.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/switchOffBlue.obj"
+dest_files=["res://.godot/imported/switchOffBlue.obj-b27917387248c5058e4f8c9aa869abc1.mesh", "res://.godot/imported/switchOffBlue.obj-b27917387248c5058e4f8c9aa869abc1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

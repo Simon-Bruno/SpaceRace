@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cscvgmd621fsx"]
+
+[ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_en2nu"]
+[ext_resource type="ArrayMesh" uid="uid://ck17fi8lk73v8" path="res://assets/CustomBlocks/items/key.obj" id="3_empdk"]
+
+[node name="Key" instance=ExtResource("1_en2nu")]
+
+[node name="RigidBody3D" parent="." index="0"]
+gravity_scale = 2.0
+
+[node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.092, -0.077)
+mesh = ExtResource("3_empdk")
