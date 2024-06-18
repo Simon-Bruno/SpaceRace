@@ -40,25 +40,31 @@ func _use_item():
 	var node = holding.get_parent_node_3d()
 	if node.has_method("use"):
 		node.use()
+	holding = null
 	
 @rpc("any_peer", "call_local", "reliable")
 func _set_this_player_to_hold_item(id, item_path):
 	if multiplayer.is_server():
-		var item = get_node(item_path) 
-		item.get_parent().owned = true
-		item.get_parent().owned_node = Network.get_player_node_by_id(id)
+		var item = get_node(item_path)
+		if item:
+			item.get_parent().owned = true
+			item.get_parent().owned_node = Network.get_player_node_by_id(id)
+	
 	
 func _drop_item():
 	""" Drop the item """
 	_set_this_player_to_drop_item.rpc(multiplayer.get_unique_id(), holding.get_path())
 	holding = null
 
+
 @rpc("any_peer", "call_local", "reliable")
 func _set_this_player_to_drop_item(id, item_path):
 	if multiplayer.is_server():
 		var item = get_node(item_path)
-		item.get_parent().owned = false
-		item.get_parent().owned_node = null
+		if item:
+			item.get_parent().owned = false
+			item.get_parent().owned_node = null
+
 
 func _process(delta):
 	if Input.is_action_just_pressed("interact"):

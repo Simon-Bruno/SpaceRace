@@ -126,7 +126,12 @@ func take_damage(id, damage):
 
 	if health <= 0 and alive:
 		die()
-		
+
+# Increases health/HP of the player
+func increase_health(value):
+	health = min(Global.player_max_health, health + value)
+	HpBar.value = float(health) / Global.player_max_health * 100
+
 func die():
 	get_parent().player_died(self)
 

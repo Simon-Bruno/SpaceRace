@@ -38,6 +38,9 @@ func _animate(delta):
 
 func delete():
 	print("Delete item")
+	if not multiplayer.is_server():
+		return
+	queue_free()
 
 func _process(delta):
 	_animate(delta)
