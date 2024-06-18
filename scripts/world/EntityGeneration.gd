@@ -36,6 +36,7 @@ var remove = []
 func replace_entities(rooms : Array) -> Array:
 	spawn_enemies()
 	spawn_lasers()
+	spawn_small_boxes()
 	spawn_doors(rooms)
 	
 	return remove
@@ -43,12 +44,12 @@ func replace_entities(rooms : Array) -> Array:
 
 # Checks each room seperately
 func spawn_doors(rooms : Array) -> void:
-	print(rooms)
 	for room in rooms:
-		print("Room: ", room)
-		spawn_doors_room(room)
+		spawn_doors_room(room, false)
+		spawn_doors_room(room, true)
 
 
+# Matches a door with its color type
 func corresponding_types(door : int) -> Array:
 	match door:
 		DOORB: return blue
@@ -58,15 +59,14 @@ func corresponding_types(door : int) -> Array:
 		DOORR: return red
 		DOORY: return yellow
 		_: get_tree().quit(); return []
-		
 
 
 # Tries to find an item in a certain room, and returns all instances.
-func find_in_room(items, width, height, start):
+func find_in_room(items, width, height, start, zvalue):
 	var found = []
 	for x in width:
 		for z in height:
-			var location = Vector3i(x, 1, z) + Vector3i(start, 0, 0)
+			var location = Vector3i(x, 1, z) + Vector3i(start, 0, zvalue)
 			var item = get_cell_item(location)
 			if item in items:
 				found.append([item, location, get_cell_item_orientation(location)])
@@ -75,16 +75,23 @@ func find_in_room(items, width, height, start):
 
 
 # Returns the locations of two doors dependent on the left door as input.
-func return_door_pair(location : Vector3i, direction : int) -> Array:
+func return_door_pair(location : Vector3i, direction : int, mirrored : bool) -> Array:
 	var new_location = Vector3i(0, 0, 0)
-	match direction:
-		0: new_location = Vector3i(1, 0, 0)
-		16: new_location = Vector3i(0, 0, -1)
-		10: new_location = Vector3i(-1, 0, 0)
-		22: new_location = Vector3i(0, 0, 1)
-		
-	return [location, location + new_location]
-	
+	if mirrored:
+		match direction:
+			0: new_location = Vector3i(-1, 0, 0)
+			16: new_location = Vector3i(0, 0, 1)
+			10: new_location = Vector3i(1, 0, 0)
+			22: new_location = Vector3i(0, 0, -1)
+		return [location, location + new_location]
+	else:
+		match direction:
+			0: new_location = Vector3i(1, 0, 0)
+			16: new_location = Vector3i(0, 0, -1)
+			10: new_location = Vector3i(-1, 0, 0)
+			22: new_location = Vector3i(0, 0, 1)
+		return [location + new_location, location]
+
 
 # Removes item from dynamic gridmap and adds them to list to be passed to static layer.
 func remove_current_items(location : Vector3i) -> void:
@@ -93,8 +100,8 @@ func remove_current_items(location : Vector3i) -> void:
 
 
 # This funcion matches all doors with the appropriate buttons, and binds them to work as expected.
-func match_interactable_and_door(item : Array, interactables : Array) -> void:
-	var locations = return_door_pair(item[1], item[2])
+func match_interactable_and_door(item : Array, interactables : Array, mirrored : bool) -> void:
+	var locations = return_door_pair(item[1], item[2], mirrored)
 	var actual_location = (map_to_local(locations[0]) + map_to_local(locations[1])) / 2
 	actual_location.y = 2
 	
@@ -104,7 +111,6 @@ func match_interactable_and_door(item : Array, interactables : Array) -> void:
 			total_interactions = 1
 	
 	var door = GlobalSpawner.spawn_door(actual_location, get_basis_with_orthogonal_index(item[2]), total_interactions)
-	# TODO: Doors seems to not be perfectly centered. This will be fixed later.
 	remove_current_items(locations[0])
 	remove_current_items(locations[1])
 	
@@ -138,18 +144,30 @@ func connect_button(door : StaticBody3D, interactable : Array) -> void:
 
 # Finds all different doors in a room and the interactables that are linked to it. It then starts
 # the process of matching them.
-func spawn_doors_room(room : Array) -> void:
+func spawn_doors_room(room : Array, mirrored : bool) -> void:
 	var width = room[0]
 	var height = room[1]
 	var start = room[2]
+	
+	var zstart = 0 if mirrored == false else -height
+	
+	
 
 	# Find all door types.
-	var current = find_in_room(doors, room[0], room[1], room[2])
+	var current = find_in_room(doors, width, height, start, zstart)
 	
 	# Find all items that correspond to the door
 	for item in current:
-		var corresponding = find_in_room(corresponding_types(item[0]), room[0], room[1], room[2])
-		match_interactable_and_door(item, corresponding)
+		var corresponding = find_in_room(corresponding_types(item[0]), width, height, start, zstart)
+		match_interactable_and_door(item, corresponding, mirrored)
+
+
+# Spawns a small box at all small box placeholders in the map. It then also removes the placeholder.
+func spawn_small_boxes() -> void:
+	var boxes = get_used_cells_by_item(SMALLBOX)
+	for box in boxes:
+		GlobalSpawner.spawn_box(map_to_local(box))
+		remove_current_items(box)
 
 
 # Spawns a laser at all laser spawnpoints in the map.
@@ -174,7 +192,7 @@ func spawn_enemies() -> void:
 	var enemies = get_used_cells_by_item(ENEMY)
 	for item in enemies:
 		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
-		self.set_cell_item(item, EMPTY)
+		remove_current_items(item)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
