@@ -3,7 +3,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await get_tree().create_timer(randf() + 0.3).timeout 
+	await get_tree().create_timer(randf() + 0.1).timeout 
 	AudioServer.set_bus_mute(0, false)
 	Network.playername = "~DEV~"
 	if not await Network._on_host_pressed(9999):

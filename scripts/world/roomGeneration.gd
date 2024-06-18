@@ -66,11 +66,8 @@ func add_objects(objects_list):
 
 func fill_room(world_dict: Dictionary, start : Vector3i):
 	var room = world.room
-	#GlobalSpawner.spawn_melee_enemy(
+	GlobalSpawner.spawn_melee_enemy(
 		#Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
-		
-	GlobalSpawner.spawn_boss(
-		Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
 
 	var laser = laser_scene.instantiate()
 	laser.position = Vector3i(2, 3, 5)
