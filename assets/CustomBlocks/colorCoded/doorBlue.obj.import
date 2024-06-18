@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://crmf7ltmwch8y"
+path="res://.godot/imported/doorBlue.obj-7b4513f47421c3235f3d1237f8883c65.mesh"
+
+[deps]
+
+files=["res://.godot/imported/doorBlue.obj-7b4513f47421c3235f3d1237f8883c65.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/doorBlue.obj"
+dest_files=["res://.godot/imported/doorBlue.obj-7b4513f47421c3235f3d1237f8883c65.mesh", "res://.godot/imported/doorBlue.obj-7b4513f47421c3235f3d1237f8883c65.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

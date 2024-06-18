@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cgj3ao2wygse0"
+path="res://.godot/imported/laserPurple.obj-145de60eedab7a5d6bd1cdbcec723b6e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/laserPurple.obj-145de60eedab7a5d6bd1cdbcec723b6e.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/laserPurple.obj"
+dest_files=["res://.godot/imported/laserPurple.obj-145de60eedab7a5d6bd1cdbcec723b6e.mesh", "res://.godot/imported/laserPurple.obj-145de60eedab7a5d6bd1cdbcec723b6e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

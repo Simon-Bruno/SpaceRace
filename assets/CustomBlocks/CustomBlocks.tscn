@@ -1,6 +1,6 @@
-[gd_scene load_steps=67 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=124 format=3 uid="uid://cehfbggdu6pms"]
 
-[ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
 [ext_resource type="ArrayMesh" uid="uid://dj7xnktmygrjc" path="res://assets/CustomBlocks/floors/floor2-0.obj" id="3_cvwad"]
 [ext_resource type="ArrayMesh" uid="uid://dju3x1xpt87y7" path="res://assets/CustomBlocks/floors/Floor3-0.obj" id="4_1k2xy"]
@@ -32,7 +32,63 @@
 [ext_resource type="ArrayMesh" uid="uid://h7b6lfsliy2w" path="res://assets/CustomBlocks/placable/pressurePlateOff.obj" id="30_hgunv"]
 [ext_resource type="ArrayMesh" uid="uid://c2k4ofk3nm13g" path="res://assets/CustomBlocks/placable/pressurePlateOn.obj" id="31_3fpn3"]
 [ext_resource type="ArrayMesh" uid="uid://bja6hv3l4sctj" path="res://assets/CustomBlocks/placable/terminal.obj" id="32_52kga"]
-[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://files/voxelFiles/export/computer.obj" id="33_jktwi"]
+[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://assets/CustomBlocks/placable/computer.obj" id="33_jktwi"]
+[ext_resource type="ArrayMesh" uid="uid://cjm1mx5bu7ii2" path="res://assets/CustomBlocks/colorCoded/buttonBlue.obj" id="34_bkik2"]
+[ext_resource type="ArrayMesh" uid="uid://bgsjd7hg1hy75" path="res://assets/CustomBlocks/colorCoded/buttonGreen.obj" id="35_xiu1r"]
+[ext_resource type="ArrayMesh" uid="uid://q7q7x6c1uuu" path="res://assets/CustomBlocks/colorCoded/buttonOrange.obj" id="36_58bkf"]
+[ext_resource type="ArrayMesh" uid="uid://b33usldhep2ue" path="res://assets/CustomBlocks/colorCoded/buttonPurple.obj" id="37_6ql2y"]
+[ext_resource type="ArrayMesh" uid="uid://bq5uuot2twhyy" path="res://assets/CustomBlocks/colorCoded/buttonRed.obj" id="38_cn4kc"]
+[ext_resource type="ArrayMesh" uid="uid://720t8mo26o7i" path="res://assets/CustomBlocks/colorCoded/buttonYellow.obj" id="39_kpj2f"]
+[ext_resource type="ArrayMesh" uid="uid://crmf7ltmwch8y" path="res://assets/CustomBlocks/colorCoded/doorBlue.obj" id="40_g8iyh"]
+[ext_resource type="ArrayMesh" uid="uid://dxwvens4l5xky" path="res://assets/CustomBlocks/colorCoded/doorGreen.obj" id="41_fflxd"]
+[ext_resource type="ArrayMesh" uid="uid://dvs0scgpyceh4" path="res://assets/CustomBlocks/colorCoded/doorOrange.obj" id="42_5jpn4"]
+[ext_resource type="ArrayMesh" uid="uid://b81rp4mt46vw8" path="res://assets/CustomBlocks/colorCoded/doorPurple.obj" id="43_22f17"]
+[ext_resource type="ArrayMesh" uid="uid://blhma1bigsmbe" path="res://assets/CustomBlocks/colorCoded/doorRed.obj" id="44_0yaqk"]
+[ext_resource type="ArrayMesh" uid="uid://cgi8ojoid3vp" path="res://assets/CustomBlocks/colorCoded/doorYellow.obj" id="45_6y05e"]
+[ext_resource type="ArrayMesh" uid="uid://cironc65kashf" path="res://assets/CustomBlocks/colorCoded/holeBlue.obj" id="46_8liio"]
+[ext_resource type="ArrayMesh" uid="uid://dg3olwqx5k0lf" path="res://assets/CustomBlocks/colorCoded/holeGreen.obj" id="47_yu5jd"]
+[ext_resource type="ArrayMesh" uid="uid://baxpc5a02un14" path="res://assets/CustomBlocks/colorCoded/holeOrange.obj" id="48_7bl56"]
+[ext_resource type="ArrayMesh" uid="uid://duk1rlj0qf7i4" path="res://assets/CustomBlocks/colorCoded/holePurple.obj" id="49_mchxy"]
+[ext_resource type="ArrayMesh" uid="uid://dwipb3limhytg" path="res://assets/CustomBlocks/colorCoded/holeRed.obj" id="50_0wytb"]
+[ext_resource type="ArrayMesh" uid="uid://bw43yeq5s4sn3" path="res://assets/CustomBlocks/colorCoded/holeYellow.obj" id="51_pvm3u"]
+[ext_resource type="ArrayMesh" uid="uid://bm5uddr8hisd" path="res://assets/CustomBlocks/colorCoded/keyBlue.obj" id="52_qu0el"]
+[ext_resource type="ArrayMesh" uid="uid://srygjx473eer" path="res://assets/CustomBlocks/colorCoded/keyGreen.obj" id="53_4gwfe"]
+[ext_resource type="ArrayMesh" uid="uid://dgw7jgru74ik7" path="res://assets/CustomBlocks/colorCoded/keyOrange.obj" id="54_2sacx"]
+[ext_resource type="ArrayMesh" uid="uid://bec8214au6e37" path="res://assets/CustomBlocks/colorCoded/keyPurple.obj" id="55_gkiwa"]
+[ext_resource type="ArrayMesh" uid="uid://d4e5t0oph8f3l" path="res://assets/CustomBlocks/colorCoded/keyRed.obj" id="56_rbdmu"]
+[ext_resource type="ArrayMesh" uid="uid://cjy8sl6bhvra0" path="res://assets/CustomBlocks/colorCoded/keyYellow.obj" id="57_gntqu"]
+[ext_resource type="ArrayMesh" uid="uid://xgeb1enek17d" path="res://assets/CustomBlocks/colorCoded/laserBlue.obj" id="58_2bckq"]
+[ext_resource type="ArrayMesh" uid="uid://ccwxxugh0pxum" path="res://assets/CustomBlocks/colorCoded/laserGreen.obj" id="59_fnhep"]
+[ext_resource type="ArrayMesh" uid="uid://78uisymfjthj" path="res://assets/CustomBlocks/colorCoded/laserOrange.obj" id="60_favd0"]
+[ext_resource type="ArrayMesh" uid="uid://cgj3ao2wygse0" path="res://assets/CustomBlocks/colorCoded/laserPurple.obj" id="61_1as4m"]
+[ext_resource type="ArrayMesh" uid="uid://c8mfmymg5rqcd" path="res://assets/CustomBlocks/colorCoded/laserRed.obj" id="62_710pq"]
+[ext_resource type="ArrayMesh" uid="uid://cpa3403fktf0c" path="res://assets/CustomBlocks/colorCoded/laserYellow.obj" id="63_w5mxo"]
+[ext_resource type="ArrayMesh" uid="uid://cg5q6pd7ajnhr" path="res://assets/CustomBlocks/colorCoded/pressureMultiBlue.obj" id="64_jcflw"]
+[ext_resource type="ArrayMesh" uid="uid://c4dsmmbaxpxl7" path="res://assets/CustomBlocks/colorCoded/pressureMultiGreen.obj" id="65_bi5a6"]
+[ext_resource type="ArrayMesh" uid="uid://bvgn5bet5qgqe" path="res://assets/CustomBlocks/colorCoded/pressureMultiOrange.obj" id="66_tsxo3"]
+[ext_resource type="ArrayMesh" uid="uid://1aqiv7fx07so" path="res://assets/CustomBlocks/colorCoded/pressureMultiPurple.obj" id="67_qtnen"]
+[ext_resource type="ArrayMesh" uid="uid://57xahvlcb8xj" path="res://assets/CustomBlocks/colorCoded/pressureMultiRed.obj" id="68_0ibr8"]
+[ext_resource type="ArrayMesh" uid="uid://cxho831j6fyx2" path="res://assets/CustomBlocks/colorCoded/pressureMultiYellow.obj" id="69_bfvlq"]
+[ext_resource type="ArrayMesh" uid="uid://cydum4ror6u3t" path="res://assets/CustomBlocks/colorCoded/pressurePlateOff.obj" id="70_7ftdj"]
+[ext_resource type="ArrayMesh" uid="uid://c8jw5mqlnlv7r" path="res://assets/CustomBlocks/colorCoded/pressurePlateOn.obj" id="71_mmrnv"]
+[ext_resource type="ArrayMesh" uid="uid://dgai1xxisxvbx" path="res://assets/CustomBlocks/colorCoded/pressureSingleBlue.obj" id="72_d2x2r"]
+[ext_resource type="ArrayMesh" uid="uid://dwmx5uk0unaqt" path="res://assets/CustomBlocks/colorCoded/pressureSingleGreen.obj" id="73_wcwcd"]
+[ext_resource type="ArrayMesh" uid="uid://bmsxdj0bgnjni" path="res://assets/CustomBlocks/colorCoded/pressureSingleOrange.obj" id="74_pqjsb"]
+[ext_resource type="ArrayMesh" uid="uid://vmukjmiweklk" path="res://assets/CustomBlocks/colorCoded/pressureSinglePurple.obj" id="75_aknjx"]
+[ext_resource type="ArrayMesh" uid="uid://b3nfuxenvflwn" path="res://assets/CustomBlocks/colorCoded/pressureSingleRed.obj" id="76_rdf75"]
+[ext_resource type="ArrayMesh" uid="uid://b2pbsj8ys0cj2" path="res://assets/CustomBlocks/colorCoded/pressureSingleYellow.obj" id="77_4ck8c"]
+[ext_resource type="ArrayMesh" uid="uid://cwb8cpd3pjekd" path="res://assets/CustomBlocks/colorCoded/switchOffBlue.obj" id="78_70fjj"]
+[ext_resource type="ArrayMesh" uid="uid://dhtxcn4200giy" path="res://assets/CustomBlocks/colorCoded/switchOffGreen.obj" id="79_4dj6a"]
+[ext_resource type="ArrayMesh" uid="uid://fuwe1rouneh7" path="res://assets/CustomBlocks/colorCoded/switchOffOrange.obj" id="80_1brmv"]
+[ext_resource type="ArrayMesh" uid="uid://cvxu4nrsq8fp1" path="res://assets/CustomBlocks/colorCoded/switchOffPurple.obj" id="81_tstwv"]
+[ext_resource type="ArrayMesh" uid="uid://chh5kbs6nuulb" path="res://assets/CustomBlocks/colorCoded/switchOffRed.obj" id="82_6fudy"]
+[ext_resource type="ArrayMesh" uid="uid://dxh8y7n45naqn" path="res://assets/CustomBlocks/colorCoded/switchOffYellow.obj" id="83_aeuqg"]
+[ext_resource type="ArrayMesh" uid="uid://dn0ondi6v1m5y" path="res://assets/CustomBlocks/colorCoded/switchOnBlue.obj" id="84_1egkq"]
+[ext_resource type="ArrayMesh" uid="uid://dqlpdonm0xij6" path="res://assets/CustomBlocks/colorCoded/switchOnGreen.obj" id="85_rw7ei"]
+[ext_resource type="ArrayMesh" uid="uid://6eqgk2nitxyh" path="res://assets/CustomBlocks/colorCoded/switchOnOrange.obj" id="86_47r2o"]
+[ext_resource type="ArrayMesh" uid="uid://do31a5yhfetwo" path="res://assets/CustomBlocks/colorCoded/switchOnPurple.obj" id="87_vf3o5"]
+[ext_resource type="ArrayMesh" uid="uid://c1yi2g0orvorf" path="res://assets/CustomBlocks/colorCoded/switchOnRed.obj" id="88_1yt1f"]
+[ext_resource type="ArrayMesh" uid="uid://bkoxoq1byolu3" path="res://assets/CustomBlocks/colorCoded/switchOnYellow.obj" id="89_dfg1r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
 albedo_texture = ExtResource("1_c8374")
@@ -131,6 +187,9 @@ albedo_texture = ExtResource("1_c8374")
 albedo_texture = ExtResource("1_c8374")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyii1"]
+albedo_texture = ExtResource("1_c8374")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj78p"]
 albedo_texture = ExtResource("1_c8374")
 
 [node name="Node3D" type="Node3D"]
@@ -400,3 +459,283 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0779099, 0, -0.0174141)
 mesh = ExtResource("33_jktwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
+
+[node name="ButtonBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("34_bkik2")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="ButtonGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("35_xiu1r")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="ButtonOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("36_58bkf")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="ButtonPurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("37_6ql2y")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="ButtonRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("38_cn4kc")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="ButtonYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("39_kpj2f")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="DoorBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("40_g8iyh")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="DoorGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("41_fflxd")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="DoorOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("42_5jpn4")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="DoorPurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("43_22f17")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="DoorRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("44_0yaqk")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="DoorYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("45_6y05e")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="HoleBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("46_8liio")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="HoleGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("47_yu5jd")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="HoleOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("48_7bl56")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="HolePurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("49_mchxy")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="HoleRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("50_0wytb")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="HoleYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("51_pvm3u")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="KeyBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("52_qu0el")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="KeyGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("53_4gwfe")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="KeyOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("54_2sacx")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="KeyPurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("55_gkiwa")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="KeyRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("56_rbdmu")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="KeyYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("57_gntqu")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="LaserBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("58_2bckq")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="LaserGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("59_fnhep")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="LaserOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("60_favd0")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="LaserPurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("61_1as4m")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="LaserRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("62_710pq")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="LaserYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("63_w5mxo")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureMultiBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("64_jcflw")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureMultiGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("65_bi5a6")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureMultiOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("66_tsxo3")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureMultiPurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("67_qtnen")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureMultiRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("68_0ibr8")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureMultiYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("69_bfvlq")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressurePlateOff2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("70_7ftdj")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressurePlateOn2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("71_mmrnv")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureSingleBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("72_d2x2r")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureSingleGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("73_wcwcd")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureSingleOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("74_pqjsb")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureSinglePurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("75_aknjx")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureSingleRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("76_rdf75")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="PressureSingleYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("77_4ck8c")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOffBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("78_70fjj")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOffGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("79_4dj6a")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOffOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("80_1brmv")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOffPurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("81_tstwv")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOffRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("82_6fudy")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOffYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("83_aeuqg")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOnBlue" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("84_1egkq")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOnGreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("85_rw7ei")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOnOrange" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("86_47r2o")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOnPurple" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("87_vf3o5")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOnRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("88_1yt1f")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="SwitchOnYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
+mesh = ExtResource("89_dfg1r")
+surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")

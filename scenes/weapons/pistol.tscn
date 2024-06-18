@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1sppkmxnnog5"]
+
+[ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="1_3xkob"]
+[ext_resource type="PackedScene" uid="uid://cwi7l5pb4w74k" path="res://scenes/characters/ranged_enemy/projectile.tscn" id="2_bqe34"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m7821"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mk7hm"]
+
+[node name="Weapon" type="Node3D"]
+script = ExtResource("1_3xkob")
+projectile_scene = ExtResource("2_bqe34")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0, -0.549695)
+mesh = SubResource("BoxMesh_m7821")
+
+[node name="Range" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Range"]
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 4, 0, 0, -2.57537)
+shape = SubResource("BoxShape3D_mk7hm")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

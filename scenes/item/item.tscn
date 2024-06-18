@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bej2ury5pyyei"]
+[gd_scene load_steps=7 format=3 uid="uid://bej2ury5pyyei"]
 
 [ext_resource type="Script" path="res://scripts/item/item.gd" id="1_o5cad"]
-[ext_resource type="Texture2D" uid="uid://sfte15ypoiy6" path="res://assets/CustomBlocks/textures.png" id="2_xcw8s"]
-[ext_resource type="ArrayMesh" uid="uid://ck17fi8lk73v8" path="res://assets/CustomBlocks/items/key.obj" id="3_p8wb3"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_xcw8s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r6fdv"]
+friction = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpqrv"]
 albedo_texture = ExtResource("2_xcw8s")
@@ -14,17 +14,23 @@ height = 1.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lkux1"]
 properties/0/path = NodePath("RigidBody3D/MeshOrigin:rotation")
-properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/spawn = false
+properties/0/replication_mode = 2
 properties/1/path = NodePath("RigidBody3D/MeshOrigin:position")
-properties/1/spawn = true
+properties/1/spawn = false
 properties/1/replication_mode = 1
 properties/2/path = NodePath("RigidBody3D:position")
 properties/2/spawn = true
-properties/2/replication_mode = 1
+properties/2/replication_mode = 2
 properties/3/path = NodePath(".:owned")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath(".:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [node name="Item" type="Node3D"]
 script = ExtResource("1_o5cad")
@@ -32,6 +38,7 @@ script = ExtResource("1_o5cad")
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 collision_layer = 4
 physics_material_override = SubResource("PhysicsMaterial_r6fdv")
+gravity_scale = 3.0
 lock_rotation = true
 
 [node name="MeshOrigin" type="Node3D" parent="RigidBody3D"]
@@ -39,7 +46,6 @@ lock_rotation = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/MeshOrigin"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.0917343, -0.0773146)
 material_override = SubResource("StandardMaterial3D_jpqrv")
-mesh = ExtResource("3_p8wb3")
 skeleton = NodePath("../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]

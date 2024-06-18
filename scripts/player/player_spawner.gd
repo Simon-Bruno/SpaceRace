@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 
 func add_player_character(id):
@@ -10,13 +10,18 @@ func add_player_character(id):
 
 var dead_player = null
 func player_died(player_to_die):
-	player_to_die.health = 100
-
+	player_to_die.alive = false
+	player_to_die.visible = false
+	$RespawnTimer.start()
+	dead_player = player_to_die
 
 func respawn_player():
-	var player = dead_player.instantiate()
+	var player = dead_player
 	player.health = Global.player_max_health
-	add_child(player)
+	player.get_node("PlayerCombat/SubViewport/HpBar").value = Global.player_max_health
+	player.alive = true
+	player.visible = true
+	player.get_node("./PlayerCombat/RespawnImmunity").start()
 
 func _on_respawn_timer_timeout():
 	respawn_player()

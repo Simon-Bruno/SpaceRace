@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckl8ocde3h7p8"]
+[gd_scene load_steps=9 format=3 uid="uid://ckl8ocde3h7p8"]
 
 [ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_sm1kj"]
+[ext_resource type="ArrayMesh" uid="uid://ccd0q27uv0njb" path="res://assets/CustomBlocks/doors/doorClosedL.obj" id="2_1fvsg"]
+[ext_resource type="ArrayMesh" uid="uid://b0qffqe60h7bs" path="res://assets/CustomBlocks/doors/doorClosedR.obj" id="3_g424f"]
 
 [sub_resource type="Animation" id="Animation_liulv"]
 resource_name = "Door Sliding"
@@ -134,10 +136,12 @@ shape = SubResource("BoxShape3D_37ekf")
 
 [node name="MeshInstance3DL" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.810823, 1.25338, 0.799294)
+mesh = ExtResource("2_1fvsg")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3DR" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.786043, 1.25338, 0.799294)
+mesh = ExtResource("3_g424f")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3DR" type="CollisionShape3D" parent="."]
