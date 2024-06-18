@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckl8ocde3h7p8"]
+[gd_scene load_steps=10 format=3 uid="uid://ckl8ocde3h7p8"]
 
 [ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_sm1kj"]
 [ext_resource type="ArrayMesh" uid="uid://ccd0q27uv0njb" path="res://assets/CustomBlocks/doors/doorClosedL.obj" id="2_1fvsg"]
@@ -119,6 +119,23 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_37ekf"]
 size = Vector3(1.60733, 1.59621, 0.298645)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0sf4h"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("MeshInstance3DL:skeleton")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("MeshInstance3DR:skeleton")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("CollisionShape3DL:position")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("CollisionShape3DR:position")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
 [node name="Door" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45471, 0)
 collision_layer = 2
@@ -147,3 +164,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3DR" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.787573, 1.25584, 0.145597)
 shape = SubResource("BoxShape3D_37ekf")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0sf4h")
