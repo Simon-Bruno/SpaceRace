@@ -8,8 +8,11 @@
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_1wd07"]
 albedo_texture = ExtResource("3_q1ogh")
 
-[node name="Item" instance=ExtResource("1_10o3y")]
+[node name="Bomb" instance=ExtResource("1_10o3y")]
 script = ExtResource("2_oyt1b")
+
+[node name="RigidBody3D" parent="." index="0"]
+collision_mask = 3
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
 transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0.0091269, -0.758, -0.0773146)
