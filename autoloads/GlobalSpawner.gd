@@ -4,6 +4,7 @@ var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/key.tscn")
+var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
@@ -75,13 +76,21 @@ func spawn_item(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	print(spawner)
 	if spawner:
 		var item = item_scene.instantiate()
-		print(item)
 		item.position = pos
-		print(pos)
 		spawner.add_child(item, true)
+		
+func spawn_buff(pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
+	print(spawner)
+	if spawner:
+		var buff = hp_bottle_scene.instantiate()
+		buff.position = pos
+		spawner.add_child(buff, true)
+		print('Added buf at ', pos)
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):

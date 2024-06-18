@@ -22,7 +22,7 @@ spawn_path = NodePath("..")
 [node name="ItemSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/item/key.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/item/key.tscn", "res://scenes/item/hp_bottle.tscn")
 spawn_path = NodePath("..")
 
 [node name="ProjectileSpawner" type="Node" parent="."]
