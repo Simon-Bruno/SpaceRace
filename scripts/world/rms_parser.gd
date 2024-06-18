@@ -5,6 +5,8 @@ var wall_test = [ {"set_min_distance": 5, "set_max_distance": 8, "length": 6, "l
 var object_test = [ { "set_min_distance": 8, "set_max_distance": 10, "set_length": 3, "type": "LASER" }, { "set_min_distance": 17, "set_max_distance": 20, "type": "ITEM" }, { "set_min_distance": 4, "set_max_distance": 9, "type": "ITEM" } ]
 var enemy_test = [ { "set_min_distance": 5, "set_max_distance": 8, "set_group_size": 3, "loose_grouping": true } ]
 
+# This function is purely a unit check, since this will never be loaded
+# in the main project.
 func _ready():
 	var rms_dict = parse_file("res://files/random_map_scripts/test.rms")
 	print(rms_dict)
@@ -76,7 +78,6 @@ func object_parser(section: String, object_dict : Array) -> void:
 		var parsed_object : Dictionary = segment_to_dict(object[1])
 		# Do a safety check if segment_to_dict works.
 		if parsed_object == {}:
-			print('Object failed')
 			continue
 		# Set the type of object
 		parsed_object['type'] = type

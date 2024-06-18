@@ -7,6 +7,7 @@
 size = Vector3(1.19525, 0.516479, 1.1936)
 
 [node name="PressurePlateActivate" type="Node3D"]
+
 script = ExtResource("1_p0lul")
 
 [node name="PressurePlate" type="Node3D" parent="."]

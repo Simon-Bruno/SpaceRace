@@ -19,21 +19,21 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 0.5
+const CUSTOMROOMPERCENTAGE : float = 1
 
 # General room parameters
 const room_amount : int = 5
 const room_width  : int = 10
 const room_height : int = 10
-const room_margin : int = 4
+const room_margin : int = 7
 
-# How much the room size can variate in incraments of 2. e.g 10 with variation 1
+# How much the room size can variate in increments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
 var room_variation_x : int = 1
 var room_variation_y : int = 1
 
 
-# Stores the locations of the rooms. Each entry is: [width, height, startX]
+# Stores the locations of the rooms. Each entry is: [width, height, startX, leftDoor, rightDoor]
 @export var rooms : Array = []
 @export var roomTypes : Array = []
 @export var room : Array = []
@@ -43,7 +43,13 @@ var room_variation_y : int = 1
 @export var game_seed : int = 0
 
 @export var start_pos : Vector3i = Vector3i(0, 0, 0)
+@export var end_pos : Vector3i = Vector3i(0, 0, 0)
 @export var generate_room : bool = true
+@export var last_room : bool = false
+@export var absolute_position : Vector3i = Vector3i(0, 3, 0)
+
+static var placed_doors : int = 0
+
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
@@ -97,8 +103,10 @@ func build_map() -> void:
 	draw_windows()
 	draw_walls()
 
-	#print(roomTypes)
 	mirror_world()
+	
+	var right = self.get_used_cells_by_item(DOOROPENL)
+	var ends = self.get_used_cells_by_item(DOOROPENR)
 
 
 # Randomly picks n unique indexes.
@@ -241,47 +249,60 @@ func pick_random_type() -> int:
 
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
-	var xMax = room_width + room_variation_x
-	var xMin = room_width - room_variation_x
-
-	var yMax = room_width + room_variation_y
-	var yMin = room_width - room_variation_y
-
+	var widthMax = room_width + room_variation_x
+	var widthMin = room_width - room_variation_x
+	
+	var heightMax = room_width + room_variation_y
+	var heightMin = room_width - room_variation_y
 	for i in room_amount:
-		var x = randi_range(xMin / 2, xMax / 2 + 1) * 2
-		var y = randi_range(yMin / 2, yMax / 2 + 1) * 2
+		var width = randi_range(widthMin / 2, widthMax / 2 + 1) * 2
+		var height = randi_range(heightMin / 2, heightMax / 2 + 1) * 2
 		var start = sumXValues(rooms) + room_margin * i
 
-		rooms.append([x, y, start])
+		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
+		var rightDoor = height / 2 if i == room_amount - 1 else randi_range(1, height - 3)
+
+		assert(rightDoor < height)
+		assert(leftDoor < height)
+		rooms.append([width, height, start, leftDoor, rightDoor])
 		roomTypes.append(pick_random_type())
 
 	roomTypes[0] = STARTROOM
 	roomTypes[room_amount - 1] = ENDROOM
-
 
 # Draws the full floorplan by:
 # 1. Place first room of x * z size.
 # 2. Place a path between the first room and a random point at an x offset.
 # 3. Place second room on same x-axis
 func draw_rooms() -> void:
+	var start = true
 	for i in room_amount:
 		room = rooms[i]
 
+		# Get the variables of the room
+		var rightDoor = room[4]
+		var leftDoor = room[3]
+
+		# Set some global variables for the generateRoom script
+		absolute_position.x = room[2]		
+		start_pos = Vector3i(0, 10, leftDoor * 2)
+		end_pos = Vector3i(room[0] * 2 - 1, 10, rightDoor * 2 - 1)
+
 		make_room(room)
-		fill_room(room)
-
+		if roomTypes[i] != CUSTOM:
+			assert(rightDoor < room[1])
+			assert(leftDoor < room[1])
+			fill_room(room)
+		else:
+			continue
+		# Place the corridors between the current and next room
 		if i == room_amount - 1:
-			break
+			last_room = true
 
-		var zstart = randi_range(1, rooms[i][1] - 3)
-		var zend = randi_range(1, rooms[i + 1][1] - 3)
-
-		var xstart = rooms[i][2] + rooms[i][0] - 1
-		var xend = rooms[i + 1][2]
-
-		start_pos = Vector3i(1, 10, zend * 2)
-
-		place_doors(Vector3i(xstart, HEIGHT, zstart), Vector3i(xend, HEIGHT, zend))
+		var xstart = rooms[i][2]
+		var xend = rooms[i][2] + rooms[i][0] - 1
+		place_doors(Vector3i(xstart, HEIGHT, leftDoor), Vector3i(xend, HEIGHT, rightDoor), start, last_room)
+		start = false
 
 
 
@@ -306,28 +327,25 @@ func make_room(room : Array) -> void:
 
 # Sorts vectors on x axis.
 func sort_vector(a : Vector3i, b : Vector3i):
-	if a.x < b.x:
-		return true
-	return false
+	return a.x < b.x
 
 
 # Draws paths between the doors.
 func draw_paths() -> void:
-	var starts = self.get_used_cells_by_item(DOOROPENL)
+	var right = self.get_used_cells_by_item(DOOROPENL)
 	var ends = self.get_used_cells_by_item(DOOROPENR)
 
-	starts.sort_custom(sort_vector)
+	right.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
-
-	for i in range(starts.size() - 1, -1, -1):
-		if get_cell_item_orientation(starts[i]) != 22:
-			starts.pop_at(i)
+	assert(right.size() == ends.size())
+	for i in range(right.size() - 1, -1, -1):
+		if get_cell_item_orientation(right[i]) != 22:
+			right.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-
-	var size = starts.size() if starts.size() < ends.size() else ends.size()
-	for i in size:
-		make_path(starts[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
+	assert(right.size() == ends.size())
+	for i in right.size():
+		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
@@ -360,13 +378,14 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + offset, 0, 0), FLOOR1)
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR1)
 
-
 # Places doors on random begin and end spots to make it possible to generate the paths later.
-func place_doors(start_location : Vector3i, end_location : Vector3i) -> void:
-	self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENL, 22)
-	self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENR, 22)
-	self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENR, 16)
-	self.set_cell_item(end_location + Vector3i(0, 1, 1), DOOROPENL, 16)
+func place_doors(start_location : Vector3i, end_location : Vector3i, start, end) -> void:
+	if not start:
+		self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENL, 16)
+		self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENR, 16)
+	if not end:
+		self.set_cell_item(end_location + Vector3i(0, 1, 1), DOOROPENR, 22)
+		self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENL, 22)
 
 # Sums the integers in an array
 func sum_array(array):
