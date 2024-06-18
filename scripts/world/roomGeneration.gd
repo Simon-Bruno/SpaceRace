@@ -245,12 +245,26 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 	var x = pos[0]
 	var z = pos[1]
 
-	if floor_plan[z - 1][x - 1]:
+	if floor_plan[z - 1][x - 1] > PATH:
 		return false
 
 	floor_plan[z - 1][x - 1] = BUFF
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, z))
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
+	return true
+
+func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+
+	if floor_plan[z -  1][x - 1] > PATH:
+		return false
+
+	floor_plan[z - 1][x - 1] = LASER
+	var basis = Basis()
+	basis = basis.rotated(Vector3(0, 1, 0), .5 * 3.14)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis)
 	return true
 
 func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int, height : int, start: Vector3i) -> bool:
@@ -262,6 +276,8 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int,
 			# knows how to spawn buffs. For now, we just return true.
 			# return add_buff(floor_plan, object, width, height, start)
 			return true
+		'LASER':
+			return add_laser(floor_plan, object, width, height, start)
 		_:
 			print('The object is not a supported object')
 			return true
