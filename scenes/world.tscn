@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b47e0ly4dll8p" path="res://scenes/player/player_spawner.tscn" id="1_fahhe"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
 [ext_resource type="PackedScene" uid="uid://bjchbb8ua0ijg" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
-[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="6_3shum"]
+[ext_resource type="PackedScene" path="res://scenes/menu/pause.tscn" id="6_3shum"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1991.92, 1, 1000)
@@ -33,7 +33,7 @@ spawn_path = NodePath("..")
 [node name="EnemySpawner" parent="." instance=ExtResource("3_bij7o")]
 
 [node name="EnemyMultiplayerSpawner" type="MultiplayerSpawner" parent="EnemySpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/enemy/enemy.tscn", "res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/enemy/enemy.tscn", "res://scenes/characters/ranged_enemy/ranged_enemy.tscn", "res://scenes/characters/boss.tscn")
 spawn_path = NodePath("..")
 
 [node name="InteractableSpawner" type="Node" parent="."]

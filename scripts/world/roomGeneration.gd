@@ -17,6 +17,7 @@ var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.ts
 var door_scene = preload("res://scenes/interactables/door.tscn")
 var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
+
 func _ready():
 	if world.generate_room:
 		var start : Vector3i = world.start_pos
