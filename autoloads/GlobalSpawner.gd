@@ -25,16 +25,22 @@ func spawn_pressure_plate(pos, dir, interact):
 		return plate
 	return null
 
-func spawn_portal(pos, dir):
+func spawn_portal(pos1, dir1, pos2, dir2):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
 	if spawner:
-		var portal = portal_scene.instantiate()
-		portal.position = pos
-		portal.basis	= dir
-		spawner.add_child(portal, true)
-		return portal
+		var portal1 = portal_scene.instantiate()
+		var portal2 = portal_scene.instantiate()
+		portal1.position = pos1
+		portal2.position = pos2
+		portal1.basis	= dir1
+		portal2.basis	= dir2
+		portal1.interactable = portal2
+		portal2.interactable = portal1
+		spawner.add_child(portal1, true)
+		spawner.add_child(portal2, true)
+		return portal1
 	return null
 
 func spawn_button(pos, dir, interact, inverse):
