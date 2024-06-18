@@ -19,14 +19,12 @@ properties/0/path = NodePath("WorldGeneration:game_seed")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gy1j"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwrri"]
+albedo_texture = ExtResource("3_iylh6")
 uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rwr1h"]
-material = SubResource("StandardMaterial3D_4gy1j")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lunu"]
-albedo_texture = ExtResource("3_rg2eh")
+material = SubResource("StandardMaterial3D_gwrri")
 
 [node name="WorldGeneration" type="Node3D"]
 
@@ -54,7 +52,6 @@ replication_config = SubResource("SceneReplicationConfig_hh1hr")
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 1.89836, 0)
 mesh = SubResource("PlaneMesh_rwr1h")
 skeleton = NodePath("../WorldGeneration")
-surface_material_override/0 = SubResource("StandardMaterial3D_3lunu")
 
 [node name="roomLink" type="Node" parent="."]
 script = ExtResource("4_hk2br")
