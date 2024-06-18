@@ -110,7 +110,7 @@ func build_map() -> void:
 	
 	mirror_world()
 	
-	entityGeneration.replace_entities()
+	entityGeneration.replace_entities(rooms)
 
 # Randomly picks n unique indexes.
 func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:

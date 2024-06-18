@@ -26,19 +26,40 @@ var purple = [LASERP, BUTTONP, DOORP, HOLEP, KEYP, MULTIPRESSUREP, SOLOPRESSUREP
 var red = [LASERR, BUTTONR, DOORR, HOLER, KEYR, MULTIPRESSURER, SOLOPRESSURER]
 var yellow = [LASERY, BUTTONY, DOORY, HOLEY, KEYY, MULTIPRESSUREY, SOLOPRESSUREY]
 
-
-func replace_entities() -> void:
+func replace_entities(rooms : Array) -> void:
 	spawn_enemies()
 	spawn_lasers()
-	#spawn_doors()
+	spawn_doors(rooms)
 
 
-func spawn_doors() -> void:
-	var roomLayouts = statics.rooms
-	
-	for i in roomLayouts:
+func spawn_doors(rooms : Array) -> void:
+	for i in rooms:
 		spawn_doors_room(i)
-	
+
+
+func corresponding_types(door : int) -> Array:
+	match door:
+		DOORB: return blue
+		DOORG: return green
+		DOORO: return orange
+		DOORP: return purple
+		DOORR: return red
+		DOORY: return yellow
+		_: get_tree().quit(); return []
+		
+
+
+# Tries to find an item in a certain room, and returns all instances.
+func find_in_room(items, width, height, start):
+	var found = []
+	for x in width:
+		for z in height:
+			var location = Vector3i(x, 1, z) + Vector3i(start, 0, 0)
+			var item = get_cell_item(location)
+			if item in items:
+				found.append([item, location, get_cell_item_orientation(location)])
+
+	return found
 
 
 func spawn_doors_room(room : Array) -> void:
@@ -46,10 +67,14 @@ func spawn_doors_room(room : Array) -> void:
 	var height = room[1]
 	var start = room[2]
 
+	# Find all door types.
+	var current = find_in_room(doors, room[0], room[1], room[2])
 	
-	
+	# Find all items that correspond to the door
+	for item in current:
+		var corresponding = find_in_room(corresponding_types(item[0]), room[0], room[1], room[2])
 
-#func spawn_door(doorLoc, )
+		
 
 
 # Spawns a laser at all laser spawnpoints in the map.
