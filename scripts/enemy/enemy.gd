@@ -44,7 +44,6 @@ func _process(delta):
 		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-		#look_at(targeted_player.global_transform.origin)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
@@ -78,6 +77,10 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func add_target(body):
+	if body.is_in_group("Players"):
+		nodes_in_area.append(body)
+
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
@@ -102,6 +105,8 @@ func _on_enemy_hitbox_body_exited(body):
 func take_damage(damage, source):
 	if not multiplayer.is_server():
 		return
+	if source.is_in_group("Boss"):
+		return
 	health = max(0, health - damage)
 	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
@@ -116,7 +121,14 @@ func take_damage(damage, source):
 func die():
 	if not multiplayer.is_server():
 		return
-	#print(last_damaged_by)
 	if last_damaged_by.get_parent().is_in_group("Players"):
 		last_damaged_by.get_parent().points += 5
 	queue_free()
+
+func chase_player(body):
+	if is_instance_valid(body) and body.is_in_group("Players"):
+		closest_target_node = body
+		if not nodes_in_area.has(body):
+			nodes_in_area.append(body)
+	else:
+		print("Invalid body")

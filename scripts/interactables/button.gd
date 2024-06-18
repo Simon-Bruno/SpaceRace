@@ -5,8 +5,8 @@ extends Node3D
 var customRooms : GridMap = null
 var player : CharacterBody3D = null
 var activate_text: bool = false
-
 @export var activate: bool = false
+
 var inverse : bool = false
 var start : bool = true
 
@@ -78,5 +78,18 @@ func _input(event):
 
 # Called when button is placed in world. Sets the mesh instance to off.
 func _ready() -> void:
-	customRooms = get_parent().get_parent()
+	var target_node_name = "WorldGeneration"
+	var root_node = get_tree().root
+	customRooms = find_node_by_name(root_node, target_node_name)
 	update_mesh.rpc(customRooms.WALLSWITCHOFF)
+
+#Search the gridmap of the world and returns it.
+func find_node_by_name(node: Node, target_name: String) -> Node:
+	if node.name == target_name:
+		return node
+
+	for child in node.get_children():
+		var found_node = find_node_by_name(child, target_name)
+		if found_node:
+			return found_node
+	return null

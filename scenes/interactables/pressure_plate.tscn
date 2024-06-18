@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://3w41m2g82qdm"]
+[gd_scene load_steps=5 format=3 uid="uid://3w41m2g82qdm"]
 
 [ext_resource type="Script" path="res://scripts/interactables/pressure_plate.gd" id="1_p0lul"]
 [ext_resource type="ArrayMesh" uid="uid://h7b6lfsliy2w" path="res://assets/CustomBlocks/placable/pressurePlateOff.obj" id="2_3y3ev"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr0lf"]
 size = Vector3(1.19525, 0.516479, 1.1936)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bikxg"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("PressurePlate/MeshInstance3D:skeleton")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [node name="PressurePlateActivate" type="Node3D"]
 script = ExtResource("1_p0lul")
@@ -22,6 +30,9 @@ collision_mask = 10
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PressurePlate/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00497437, 0.258036, 0)
 shape = SubResource("BoxShape3D_vr0lf")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_bikxg")
 
 [connection signal="body_entered" from="PressurePlate/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="PressurePlate/Area3D" to="." method="_on_area_3d_body_exited"]
