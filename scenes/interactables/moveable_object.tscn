@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bprp8wo44w1la"]
+[gd_scene load_steps=7 format=3 uid="uid://bprp8wo44w1la"]
 
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_jg63i"]
 [ext_resource type="ArrayMesh" uid="uid://cbpumyfshlt6j" path="res://assets/CustomBlocks/placable/smallBox.obj" id="2_gd7fc"]
@@ -10,6 +10,11 @@ friction = 10.0
 albedo_texture = ExtResource("1_jg63i")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ld8i"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nudci"]
+properties/0/path = NodePath("RigidBody3D:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="MoveableObject" type="Node3D"]
 metadata/_edit_group_ = true
@@ -29,3 +34,6 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_1ld8i")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nudci")

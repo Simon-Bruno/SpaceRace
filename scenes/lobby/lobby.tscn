@@ -1,10 +1,10 @@
-[gd_scene load_steps=72 format=3 uid="uid://bgvenhiau3fn0"]
+[gd_scene load_steps=75 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
 [ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
-[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
+[ext_resource type="PackedScene" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
 [ext_resource type="ArrayMesh" uid="uid://cfv3e04julldf" path="res://assets/lobby/telepath/telepath.obj" id="4_2a2jn"]
 [ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
 [ext_resource type="ArrayMesh" uid="uid://bxnsd181hd0tw" path="res://assets/lobby/high_res_antenna/high_res_antenna_v1.obj" id="5_qwdf3"]
@@ -20,6 +20,16 @@
 [ext_resource type="ArrayMesh" uid="uid://bgib0f2687iao" path="res://assets/lobby/death_ray/death_ray_monitor.obj" id="11_cnme7"]
 [ext_resource type="ArrayMesh" uid="uid://d02orydh5ukim" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/room_w_balkon/balkon_power_room_griffin_station_v1.obj" id="14_1qpjt"]
 [ext_resource type="ArrayMesh" uid="uid://bjmenv16dpmjv" path="res://assets/lobby/death_ray/thunder_editable.tres" id="22_0x4uc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhsop"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulm8y"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1osee"]
+viewport_path = NodePath("Progressbar/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.71, 0.71, 0.71, 1)
@@ -278,6 +288,21 @@ color_ramp = SubResource("GradientTexture1D_xr12k")
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
+
+[node name="Progressbar" type="Node" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="Progressbar"]
+
+[node name="ProgressBar" type="ProgressBar" parent="Progressbar/SubViewport"]
+offset_right = 4.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dhsop")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ulm8y")
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="Progressbar"]
+transform = Transform3D(13.8809, 0, 0, 0, 0.627922, 0.778276, 0, -0.778276, 0.627922, -0.305338, 27.4845, -52.334)
+texture = SubResource("ViewportTexture_1osee")
 
 [node name="Assets" type="Node" parent="."]
 
