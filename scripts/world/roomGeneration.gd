@@ -67,6 +67,7 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	var room = world.room
 	GlobalSpawner.spawn_melee_enemy(
 		Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
+
 	var laser = laser_scene.instantiate()
 	laser.position = Vector3i(2, 3, 5)
 	add_child(laser, true)
@@ -88,9 +89,9 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	box.position = Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(3, 10), randi_range(1, room[1] * 2 - 1))
 	add_child(box, true)
 	
-	#var width : int = room[0]
-	#var height : int = room[1]
-	#add_walls(world_dict['walls'], width, height, start)
+	var width : int = room[0]
+	var height : int = room[1]
+	add_walls(world_dict['walls'], width, height, start)
 	
 	var door = door_scene.instantiate()
 	door.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
@@ -106,6 +107,3 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	button2.position = Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1))
 	add_child(button2, true)
 	button2.interactable = door
-
-#func _process(delta):
-	#pass
