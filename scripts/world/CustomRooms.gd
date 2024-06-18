@@ -5,6 +5,8 @@ enum {ROOM1, ROOM2, ROOM3, ROOM4}
 
 static var START = 24
 static var END = 23
+static var LEFT = 9
+static var RIGHT = 10
 
 # Defines the rooms.
 @export var rooms = []
