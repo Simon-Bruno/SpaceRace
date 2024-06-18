@@ -13,14 +13,6 @@ func _input(event):
 			$DealAttackTimer.start()
 
 func _on_deal_attack_timer_timeout():
-	attack_in_progress = false
-	$DealAttackTimer.stop()
-
-func apply_damage_to_enemy():
-	if enemy_in_range and targeted_enemy:
-		targeted_enemy.take_damage(20, self)
-		if Input.is_action_just_pressed("attack"):
-			Audiocontroller.play_attack_fist_sfx()
 	able_to_attack = true
 
 func _on_GetHitCooldown_timeout():

@@ -17,7 +17,6 @@ var waittime = 3.0
 func _process(_delta):
 	if multiplayer.is_server():
 		if Input.is_action_just_pressed("StartGame"):
-			Audiocontroller.play_teleportation_sfx()
 			if random.size() == multiplayer.get_peers().size() + 1 or \
 			team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
 				_on_start_timer_timeout()
@@ -54,6 +53,7 @@ func _on_start_timer_timeout():
 	for character in team2:
 		Network.player_teams[character.name] = 2
 	
+	Audiocontroller.play_teleportation_sfx()
 	_on_game_start.rpc(Network.player_teams, Network.player_names)
 	get_parent().add_child(world.instantiate())
 	queue_free()
