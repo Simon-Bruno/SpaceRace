@@ -5,12 +5,13 @@ extends Node3D
 var customRooms : GridMap = null
 var player : CharacterBody3D = null
 var activate_text: bool = false
-
 @export var activate: bool = false
+
 var inverse : bool = false
 var start : bool = true
 
 # Detect when body entered the area
+
 func _on_area_3d_body_entered(body) -> void:
 	if body.is_in_group("Players") \
 	and body.name == str(multiplayer.get_unique_id()):
@@ -69,6 +70,11 @@ func handle_inverse_activation() -> void:
 # Handle deactivation logic in inverse mode
 func handle_inverse_deactivation() -> void:
 	interactable.activated()
+
+# Update button mesh based on current state
+func update_button_mesh(state : int):
+	if customRooms:
+		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
 
 # Activate when button is pressed. Change the mesh to activate or deactivate.
 func _input(event):
