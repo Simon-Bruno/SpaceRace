@@ -12,7 +12,7 @@ var start : bool = true
 
 # Detect when body entered the area
 func _on_area_3d_body_entered(body) -> void:
-	if body.is_in_group("Players"):
+	if body.is_in_group("Players") \
 	and body.name == str(multiplayer.get_unique_id()):
 		$ButtonText.show()
 		player = body
@@ -20,7 +20,7 @@ func _on_area_3d_body_entered(body) -> void:
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body) -> void:
-  if activate_text and body.is_in_group("Players") \
+	if activate_text and body.is_in_group("Players") \
 	and body.name == str(multiplayer.get_unique_id()):
 		$ButtonText.hide()
 		player = null
@@ -33,7 +33,7 @@ func _activate_switch():
 	else:
 		handle_inverse_activation()
 	activate = true
-  update_mesh.rpc(customRooms.WALLSWITCHON)
+	update_mesh.rpc(customRooms.WALLSWITCHON)
 
 # Deactivate the switch and call the interactable deactivation.
 func _deactivate_switch():
@@ -42,7 +42,7 @@ func _deactivate_switch():
 	else:
 		handle_inverse_deactivation()
 	activate = false
-  update_mesh.rpc(customRooms.WALLSWITCHOFF)
+	update_mesh.rpc(customRooms.WALLSWITCHOFF)
 
 @rpc("any_peer", "call_local", "reliable")
 func _interact_pressed_on_button():

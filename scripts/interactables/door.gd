@@ -6,7 +6,7 @@ var customRooms: GridMap = null
 # Called when door is placed in world. Sets the mesh instance to closed.
 func _ready() -> void:
 	customRooms = get_parent().get_parent()
-	_set_door_mesh(customRooms.DOORCLOSEDR, customRooms.DOORCLOSEDL)
+	_set_door_mesh(customRooms.DOORCLOSEDR, customRooms.DOORCLOSEDL, false)
 
 # Activates the door and opens it. Change in collision shape and meshinstance is changed to open.
 func activated() -> void:
