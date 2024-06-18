@@ -31,6 +31,9 @@ func find_closest_player_in_range(nodes_array: Array):
 
 @onready var HpBar = $SubViewport/HpBar
 
+func _ready():
+	self.add_to_group("Enemies")
+
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(1)
 

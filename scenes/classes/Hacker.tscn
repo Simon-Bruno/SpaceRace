@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxybkow41pq8j"]
+
+[ext_resource type="Script" path="res://scenes/classes/Hacker.gd" id="1_pm1j5"]
+
+[node name="Class" type="Node"]
+script = ExtResource("1_pm1j5")
