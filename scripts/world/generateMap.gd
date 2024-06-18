@@ -19,13 +19,13 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 1
+const CUSTOMROOMPERCENTAGE : float = 0
 
 # General room parameters
 const room_amount : int = 5
 const room_width  : int = 10
 const room_height : int = 10
-const room_margin : int = 100
+const room_margin : int = 7
 
 # How much the room size can variate in increments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
@@ -104,6 +104,14 @@ func build_map() -> void:
 	draw_walls()
 
 	mirror_world()
+	
+	var right = self.get_used_cells_by_item(DOOROPENL)
+	var ends = self.get_used_cells_by_item(DOOROPENR)
+	
+	right.sort_custom(sort_vector)
+	ends.sort_custom(sort_vector)
+	
+	print(right, ' ', ends)
 
 
 # Randomly picks n unique indexes.
@@ -352,9 +360,11 @@ func sort_vector(a : Vector3i, b : Vector3i):
 func draw_paths() -> void:
 	var right = self.get_used_cells_by_item(DOOROPENL)
 	var ends = self.get_used_cells_by_item(DOOROPENR)
-	
+
+
 	right.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
+	print(right, ' ', ends)
 	assert(right.size() == ends.size())
 	for i in range(right.size() - 1, -1, -1):
 		if get_cell_item_orientation(right[i]) != 22:
@@ -400,13 +410,13 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 func place_doors(start_location : Vector3i, end_location : Vector3i, start, end) -> void:
 	print('Placing doors')
 	if not start:
-		self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENL, 16)
-		self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENR, 16)
+		self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENL, 16)
+		self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENR, 16)
 		print('Placed left door at ', start_location)
 		placed_doors += 2
 	if not end:
-		self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENR, 22)
-		self.set_cell_item(end_location + Vector3i(0, 1, 1), DOOROPENL, 22)
+		self.set_cell_item(end_location + Vector3i(0, 1, 1), DOOROPENR, 22)
+		self.set_cell_item(end_location + Vector3i(0, 1, 0), DOOROPENL, 22)
 		print('Placed right door at ', end_location)
 
 # Sums the integers in an array
