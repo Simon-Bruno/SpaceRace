@@ -288,6 +288,3 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		generate_path(floor_plan, width, height, start, end)
 	add_walls(floor_plan, world_dict['walls'], width, height, start)
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
-	
-	var door = GlobalSpawner.spawn_door(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)), 0, 1)
-	GlobalSpawner.spawn_button(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)), 0, door, false)
