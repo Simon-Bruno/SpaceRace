@@ -13,15 +13,17 @@ var parser = preload("res://scripts/world/rms_parser.gd").new()
 
 var absolute_position = Vector3i(0, 0, 0)
 
-# Some constant scenes to load.
-const enemy_scene = preload("res://scenes/enemy/enemy.tscn")
-const laser_scene = preload("res://scenes/interactables/laser.tscn")
-const item_scene = preload("res://scenes/item/item.tscn")
-const box_scene = preload("res://scenes/interactables/moveable_object.tscn")
-const button_scene = preload("res://scenes/interactables/button.tscn")
-const pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
-const door_scene = preload("res://scenes/interactables/door.tscn")
-const wall_scene = preload("res://scenes/world/intern_wall.tscn")
+var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
+var laser_scene = preload("res://scenes/interactables/laser.tscn")
+var key_scene = preload("res://scenes/item/key.tscn")
+var bomb_scene = preload("res://scenes/item/bomb.tscn")
+var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
+var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
+var button_scene = preload("res://scenes/interactables/button.tscn")
+var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
+var door_scene = preload("res://scenes/interactables/door.tscn")
+var wall_scene = preload("res://scenes/world/intern_wall.tscn")
+
 
 func _ready():
 	if world.generate_room:
