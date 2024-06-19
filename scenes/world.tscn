@@ -40,7 +40,7 @@ spawn_path = NodePath("..")
 [node name="InteractableSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="InteractableSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/door.tscn", "res://scenes/interactables/portal.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn")
 spawn_path = NodePath("..")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]

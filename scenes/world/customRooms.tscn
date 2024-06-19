@@ -36,6 +36,7 @@ cell_scale = 1.25
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Room1" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="Room1"]
 mesh_library = ExtResource("1_nvyip")
@@ -54,6 +55,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Room2" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="Room2"]
 mesh_library = ExtResource("1_nvyip")
@@ -183,7 +185,6 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Room9" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Room9"]
 mesh_library = ExtResource("1_nvyip")

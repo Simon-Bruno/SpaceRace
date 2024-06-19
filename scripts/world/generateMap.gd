@@ -21,13 +21,13 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 1
+const CUSTOMROOMPERCENTAGE : float = 0
 
 # General room parameters
 const room_amount : int = 5
 const room_width  : int = 10
-const room_height : int = 10
-const room_margin : int = 7
+const room_height : int = 8
+const room_margin : int = 4
 
 # How much the room size can variate in increments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
@@ -274,11 +274,12 @@ func define_rooms() -> void:
 	var widthMax = room_width + room_variation_x
 	var widthMin = room_width - room_variation_x
 	
-	var heightMax = room_width + room_variation_y
-	var heightMin = room_width - room_variation_y
+	#var heightMax = room_height + room_variation_y
+	var heightMax = 8
+	var heightMin = room_height - room_variation_y
 	for i in room_amount:
 		var width = randi_range(widthMin / 2, widthMax / 2 + 1) * 2
-		var height = randi_range(heightMin / 2, heightMax / 2 + 1) * 2
+		var height = randi_range(heightMin / 2, ceil(heightMax / 2)) * 2
 		var start = sumXValues(rooms) + room_margin * i
 
 		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
