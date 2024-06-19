@@ -18,6 +18,8 @@ var door_scene = preload("res://scenes/interactables/door.tscn")
 var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 func _ready():
+	if not multiplayer.is_server():
+		return
 	if world.generate_room:
 		var start : Vector3i = world.start_pos
 		var filename = "res://files/random_map_scripts/test.rms"
@@ -101,6 +103,9 @@ func fill_room(world_dict: Dictionary, start : Vector3i):
 	var button = pressure_plate_scene.instantiate()
 	button.position = Vector3i(randi_range(1, room[0] * 2 - 1), 3, randi_range(1, room[1] * 2 - 1))
 	add_child(button, true)
+	button.interactable = door
+	
+	var terminal = GlobalSpawner.spawn_terminal(Vector3i(randi_range(1, room[0] * 2 - 1), 2, randi_range(1, room[1] * 2 - 1)))
 	button.interactable = door
 	
 	#var button2 = button_scene.instantiate()
