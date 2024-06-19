@@ -143,7 +143,7 @@ func add_finish():
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
 	plate.position = map_to_local(Vector3i((start_pos[2]+18), 1, 0))
 	plate.position.y = 2
-	plate.interactable = null
+	plate.is_finish_plate = true
 	add_child(plate, true)
 
 
