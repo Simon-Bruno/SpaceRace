@@ -9,7 +9,6 @@ enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
 
 @onready var roomLink : Node = get_node("../roomLink")
-@onready var customRooms : GridMap = get_node("../CustomRooms")
 @onready var entityGeneration : GridMap = get_node("../EntityGeneration")
 
 # At what y level is the floor
@@ -59,6 +58,7 @@ var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")
 
+
 # Called when the object is created in the scene
 func _enter_tree():
 	if multiplayer.is_server():
@@ -99,14 +99,51 @@ func build_map() -> void:
 
 	draw_rooms()
 	place_custom_room(pairs)
+	add_finish()
+
 	draw_paths()
 
 	draw_windows()
 	draw_walls()
 
+	add_finish()
 	mirror_world()
 
 	convert_static_to_entities()
+	# Generate finish pressure plate:
+	#entityGeneration.replace_entities(rooms)
+
+
+# Adds the pressureplate in the last room
+func add_finish():
+	# Get room dimensions:
+	var endroom_dimensions = roomLink.get_room_size(0, true)
+
+	# Get start positions of end room:
+	var start_pos = rooms[-1]
+	print("startX is: ", start_pos[2], "width: ", start_pos[0])
+
+	# startx prev room + width room
+	var endroom_startX = start_pos[2] + start_pos[0]
+
+	# layer is for static or dynamic gridmap
+	for layer in range(0, 1):
+		for x in range(0, max(endroom_dimensions[0], room_width+2)):
+			for z in range(0, max(endroom_dimensions[1], room_height+2)):
+				for y in range (0, 2):
+					# Add special endroom
+					var item = roomLink.get_room_item(Vector3i(x, y, z), 0, layer, true)
+					var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), 0, layer, true )
+
+					if layer == 0:
+						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
+					else:
+						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
+
+	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
+	plate.position = map_to_local(Vector3i((start_pos[2]+8), 1, 0))
+	plate.interactable = null
+	add_child(plate, true)
 
 
 # Calls the convert functionality and removes all static items that have overlap.
@@ -150,14 +187,17 @@ func get_custom_rooms() -> Array:
 		pairs.append([originals[i], customs[i]])
 
 	for i in pairs:
-		var customRoom = roomLink.get_room_size(i[1])
+		var customRoom = roomLink.get_room_size(i[1], false)
 		rooms[i[0]][0] = customRoom[0]
 		rooms[i[0]][1] = customRoom[1]
 		roomTypes[i[0]] = CUSTOM
 
+	roomTypes[-1] = CUSTOM
+
 	reset_room_spacing()
 
 	return pairs
+
 
 func place_item(scene, orientation, location):
 	var item = scene.instantiate()
@@ -167,12 +207,13 @@ func place_item(scene, orientation, location):
 	add_child(item, true)
 	return item
 
+
 func write_room(orig : Array, new : int, layer : int) -> void:
 	for y in range(1, 4):
 		for x in orig[0]:
 			for z in orig[1]:
-				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer)
-				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer)
+				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer, false)
+				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer, false)
 
 				if layer == 0:
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
@@ -184,11 +225,11 @@ func write_room(orig : Array, new : int, layer : int) -> void:
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
 	var MAX_HEIGHT = 4
-
 	for pair in pairs:
 		var orig = rooms[pair[0]]
 		write_room(orig, pair[1], 0)
 		write_room(orig, pair[1], 1)
+
 
 # Rotates function to new
 static func new_orientation(item : int, orientation : int) -> int:
@@ -267,6 +308,7 @@ func pick_random_type() -> int:
 	var types = [TYPE1, TYPE2, TYPE3, TYPE4, TYPE5]
 	return types[randi() % types.size()]
 
+
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
 	var widthMax = room_width + room_variation_x
@@ -283,8 +325,6 @@ func define_rooms() -> void:
 		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
 		var rightDoor = height / 2 if i == room_amount - 1 else randi_range(1, height - 3)
 
-		assert(rightDoor < height)
-		assert(leftDoor < height)
 		rooms.append([width, height, start, leftDoor, rightDoor])
 		roomTypes.append(pick_random_type())
 
@@ -311,8 +351,6 @@ func draw_rooms() -> void:
 
 		make_room(room)
 		if roomTypes[i] != CUSTOM:
-			assert(rightDoor < room[1])
-			assert(leftDoor < room[1])
 			fill_room(room)
 		else:
 			continue
