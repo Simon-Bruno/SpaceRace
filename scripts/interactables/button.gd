@@ -46,7 +46,7 @@ func _deactivate_switch():
 
 @rpc("any_peer", "call_local", "reliable")
 func _interact_pressed_on_button():
-	if not multiplayer.is_server():
+	if not multiplayer.is_server() or not interactable:
 		return
 	if !activate:
 		_activate_switch()
@@ -73,7 +73,7 @@ func handle_inverse_deactivation() -> void:
 # Activate when button is pressed. Change the mesh to activate or deactivate.
 func _input(event):
 	if event.is_action_pressed("interact") and activate_text:
-		if player != null and interactable != null:
+		if player != null:
 			_interact_pressed_on_button.rpc()
 
 # Called when button is placed in world. Sets the mesh instance to off.
