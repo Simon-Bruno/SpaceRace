@@ -1,19 +1,29 @@
 extends Control
 
+@export_enum("Master", "Music", "Sfx") var bus_name : String
+
 @onready var audio_name_lbl = $HBoxContainer/Audio_Name_Lbl
 @onready var audio_num_lbl = $HBoxContainer/Audio_Num_Lbl
 @onready var h_slider = $HBoxContainer/HSlider
-
-@export_enum("Master", "Music", "Sfx") var bus_name : String
 
 var bus_index : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	h_slider.value_changed.connect(on_value_changed)
 	get_bus_name_by_index()
+	load_data()
 	set_name_label_text()
 	set_slider_value()
+
+
+func load_data():
+	match bus_name:
+		"Master":
+			_on_h_slider_value_changed(SettingsContainer.get_master_volume())
+		"Music":
+			_on_h_slider_value_changed(SettingsContainer.get_music_volume())
+		"Sfx":
+			_on_h_slider_value_changed(SettingsContainer.get_sfx_volume())
 
 
 func set_name_label_text():
@@ -33,6 +43,13 @@ func set_slider_value():
 	set_audio_num_label_text()
 
 
-func on_value_changed(value : float):
+func _on_h_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	set_audio_num_label_text()
+	match bus_index:
+		0:
+			SettingsSignalBus.emit_on_master_sound_set(value)
+		1:
+			SettingsSignalBus.emit_on_music_sound_set(value)
+		2:
+			SettingsSignalBus.emit_on_sfx_sound_set(value)

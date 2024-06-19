@@ -14,7 +14,7 @@ func player_died(player_to_die):
 	player_to_die.visible = false
 	$RespawnTimer.start()
 	dead_player = player_to_die
-	
+
 func respawn_player():
 	var player = dead_player
 	player.health = Global.player_max_health
@@ -22,6 +22,6 @@ func respawn_player():
 	player.alive = true
 	player.visible = true
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
-	
+
 func _on_respawn_timer_timeout():
 	respawn_player()

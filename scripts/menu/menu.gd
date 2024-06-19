@@ -2,14 +2,10 @@ extends Control
 
 @onready var settings = $Settings
 
-#func on_exit_options_menu() -> void:
-	#pass
-
 
 func _ready():
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	settings.visible = false
-	settings.exit_options_menu.connect(on_exit_options_menu)
 
 
 func _on_connection_failed():
@@ -84,12 +80,12 @@ func _on_settings_button_pressed():
 	$Holder.visible = false
 	settings.set_process(true)
 	settings.visible = true
-	#get_tree().change_scene_to_file("res://scenes/settings/settings.tscn")
 
 
-func on_exit_options_menu():
+func _on_settings_back_to_menu():
 	$Holder.visible = true
 	settings.visible = false
+
 
 var last_parent
 func set_notification_and_show(text, parent):

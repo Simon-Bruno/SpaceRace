@@ -3,7 +3,7 @@ extends Node
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var item_scene = preload("res://scenes/item/item.tscn")
+var item_scene = preload("res://scenes/item/key.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")

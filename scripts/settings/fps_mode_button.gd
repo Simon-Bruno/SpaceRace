@@ -10,7 +10,7 @@ func _ready():
 
 
 func set_label_text(button_pressed : bool):
-	if button_pressed != true:
+	if not button_pressed:
 		state_label.text = "Off"
 	else:
 		state_label.text = "On"
@@ -18,6 +18,6 @@ func set_label_text(button_pressed : bool):
 
 func on_fps_toggled(button_pressed : bool):
 	set_label_text(button_pressed)
-	Network.emit_on_fps_toggled(button_pressed)
+	SettingsSignalBus.emit_on_fps_toggled(button_pressed)
 
 

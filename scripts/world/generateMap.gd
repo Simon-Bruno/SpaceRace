@@ -21,7 +21,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 1
+const CUSTOMROOMPERCENTAGE : float = 0
 
 # General room parameters
 const room_amount : int = 5
@@ -49,8 +49,6 @@ var room_variation_y : int = 1
 @export var generate_room : bool = true
 @export var last_room : bool = false
 @export var absolute_position : Vector3i = Vector3i(0, 3, 0)
-
-static var placed_doors : int = 0
 
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
@@ -307,7 +305,7 @@ func draw_rooms() -> void:
 		var leftDoor = room[3]
 
 		# Set some global variables for the generateRoom script
-		absolute_position.x = room[2]		
+		absolute_position.x = room[2] * 2
 		start_pos = Vector3i(0, 10, leftDoor * 2)
 		end_pos = Vector3i(room[0] * 2 - 1, 10, rightDoor * 2 - 1)
 
@@ -333,11 +331,7 @@ func fill_room(room_dim: Array) -> void:
 	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
 	add_child(room_scene, true)
-	generate_room = not generate_room
-	room_scene = room_scene.duplicate(7)
-	room_scene.scale.z = -1
-	add_child(room_scene, true)
-	generate_room = not generate_room
+
 
 
 # Places floor grid of x * z size based on room array
