@@ -17,6 +17,6 @@ material_override = SubResource("ORMMaterial3D_6l28a")
 mesh = ExtResource("4_5f0f7")
 
 [node name="PotionTimer" type="Timer" parent="." index="2"]
+wait_time = 10.0
 
-[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="timeout" from="PotionTimer" to="." method="_on_potion_timer_timeout"]
