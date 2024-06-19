@@ -140,6 +140,12 @@ func take_damage(id, damage):
 func increase_health(value):
 	health = min(Global.player_max_health, health + value)
 	HpBar.value = float(health) / Global.player_max_health * 100
+	
+# sets the health to full HP of player
+func full_health():
+	print("full_health_been run")
+	health = Global.player_max_health
+	HpBar.value = Global.player_max_health
 
 func die():
 	get_parent().player_died(self)
