@@ -141,7 +141,8 @@ func add_finish():
 						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
 	
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
-	plate.position = map_to_local(Vector3i((start_pos[2]+18), 0, 0))
+	plate.position = map_to_local(Vector3i((start_pos[2]+18), 1, 0))
+	plate.position.y = 2
 	plate.interactable = null
 	add_child(plate, true)
 
