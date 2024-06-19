@@ -23,7 +23,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 const CUSTOMROOMPERCENTAGE : float = 0
 
 # General room parameters
-const room_amount : int = 5
+const room_amount : int = 2
 const room_width  : int = 10
 const room_height : int = 8
 const room_margin : int = 4
@@ -109,7 +109,7 @@ func build_map() -> void:
 	add_finish()
 	mirror_world()
 	
-	#convert_static_to_entities()
+	convert_static_to_entities()
 	# Generate finish pressure plate:
 	#entityGeneration.replace_entities(rooms)
 
@@ -127,7 +127,7 @@ func add_finish():
 	var endroom_startX = start_pos[2] + start_pos[0]
 	
 	# layer is for static or dynamic gridmap
-	for layer in range(0, 1):
+	for layer in range(0, 2):
 		for x in range(0, max(endroom_dimensions[0], room_width+2)):
 			for z in range(0, max(endroom_dimensions[1], room_height+2)):
 				for y in range (0, 2):
@@ -139,6 +139,7 @@ func add_finish():
 						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
 					else:
 						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
+
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
 	plate.position = map_to_local(Vector3i((start_pos[2]+18), 0, 0))
 	plate.interactable = null
@@ -260,7 +261,7 @@ func mirror_world() -> void:
 
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		self.set_cell_item(new_location, item, orientation)
-		
+
 	for x in entityGeneration.get_used_cells():
 		var item = entityGeneration.get_cell_item(x)
 		var orientation = entityGeneration.get_cell_item_orientation(x)
@@ -329,6 +330,7 @@ func define_rooms() -> void:
 
 	roomTypes[0] = STARTROOM
 	roomTypes[room_amount - 1] = ENDROOM
+
 
 # Draws the full floorplan by:
 # 1. Place first room of x * z size.
