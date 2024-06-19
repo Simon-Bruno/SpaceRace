@@ -1,0 +1,280 @@
+[gd_scene load_steps=28 format=3 uid="uid://ou03mtnfj0ll"]
+
+[ext_resource type="Script" path="res://scripts/interactables/terminal.gd" id="1_8dv0e"]
+[ext_resource type="ArrayMesh" uid="uid://bja6hv3l4sctj" path="res://assets/CustomBlocks/placable/terminal.obj" id="1_ee46a"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_4hhsl"]
+[ext_resource type="Texture2D" uid="uid://n17j54lj4a0u" path="res://assets/world/Terminal.png" id="4_c4tgd"]
+[ext_resource type="Texture2D" uid="uid://djjewgs84auah" path="res://assets/world/1Key.png" id="5_hcg54"]
+[ext_resource type="Script" path="res://scripts/interactables/SumTerminal.gd" id="5_hmbsv"]
+[ext_resource type="Texture2D" uid="uid://d0fiscm64glg8" path="res://assets/world/2Key.png" id="6_7qy07"]
+[ext_resource type="Texture2D" uid="uid://c4a4d5syq37dh" path="res://assets/world/3Key.png" id="7_crvie"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmcls"]
+albedo_color = Color(0.452279, 0.552612, 1, 1)
+albedo_texture = ExtResource("2_4hhsl")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ullli"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mvl7u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07vqa"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6jur"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ek73"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_svmtp"]
+font_size = 45
+
+[sub_resource type="InputEventKey" id="InputEventKey_3i7gc"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_oal2x"]
+events = [SubResource("InputEventKey_3i7gc")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_timm4"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_x35pw"]
+events = [SubResource("InputEventKey_timm4")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ctfuj"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_j5jjq"]
+events = [SubResource("InputEventKey_ctfuj")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jggl8"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfmss"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiq18"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsjc0"]
+bg_color = Color(0.729412, 0.752941, 0.819608, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_bottom = 6
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_735ep"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ade2m"]
+properties/0/path = NodePath("SubViewport/ProgressBar:value")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("TextureRect/Sum:text")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("TextureRect/ProgressBar:value")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("TextureRect/ProgressBar2:value")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath("TextureRect/Answer1:text")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath("TextureRect/Answer2:text")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath("TextureRect/Answer3:text")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+
+[node name="Terminal" type="Node3D"]
+script = ExtResource("1_8dv0e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.994422, 0, 0, 0, 0.994422, 0, 0, 0, 0.994422, 0, 0.788247, 0)
+mesh = ExtResource("1_ee46a")
+surface_material_override/0 = SubResource("StandardMaterial3D_qmcls")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(0.987764, 0, 0, 0, 0.987764, 0, 0, 0, 0.987764, 0, 0.788247, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_ullli")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0234971, 0)
+collision_mask = 2
+
+[node name="DetectionShape" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("SphereShape3D_mvl7u")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -324.0
+offset_right = 264.0
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_07vqa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m6jur")
+value = 50.0
+show_percentage = false
+
+[node name="Terminal" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_4ek73")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -361.0
+offset_top = -194.0
+offset_right = 373.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_c4tgd")
+
+[node name="Terminal" type="Node" parent="Terminal"]
+script = ExtResource("5_hmbsv")
+
+[node name="Sum" type="Label" parent="Terminal/Terminal"]
+offset_left = 150.0
+offset_top = 121.0
+offset_right = 1020.0
+offset_bottom = 252.0
+label_settings = SubResource("LabelSettings_svmtp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Answer1" type="Button" parent="Terminal/Terminal"]
+offset_left = 356.0
+offset_top = 275.5
+offset_right = 469.0
+offset_bottom = 375.5
+shortcut = SubResource("Shortcut_oal2x")
+
+[node name="TextureRect" type="TextureRect" parent="Terminal/Terminal/Answer1"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 110.0
+offset_right = 80.0
+offset_bottom = 155.0
+texture = ExtResource("5_hcg54")
+expand_mode = 1
+
+[node name="Answer2" type="Button" parent="Terminal/Terminal"]
+offset_left = 526.0
+offset_top = 275.5
+offset_right = 639.0
+offset_bottom = 379.5
+shortcut = SubResource("Shortcut_x35pw")
+
+[node name="TextureRect" type="TextureRect" parent="Terminal/Terminal/Answer2"]
+offset_left = 35.0
+offset_top = 110.0
+offset_right = 80.0
+offset_bottom = 155.0
+texture = ExtResource("6_7qy07")
+expand_mode = 1
+
+[node name="Answer3" type="Button" parent="Terminal/Terminal"]
+offset_left = 706.0
+offset_top = 275.5
+offset_right = 819.0
+offset_bottom = 379.5
+shortcut = SubResource("Shortcut_j5jjq")
+
+[node name="TextureRect" type="TextureRect" parent="Terminal/Terminal/Answer3"]
+offset_left = 35.0
+offset_top = 110.0
+offset_right = 80.0
+offset_bottom = 155.0
+texture = ExtResource("7_crvie")
+expand_mode = 1
+
+[node name="ScoreBar" type="ProgressBar" parent="Terminal"]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 51.0
+offset_right = 643.0
+offset_bottom = 73.0
+theme_override_styles/background = SubResource("StyleBoxFlat_jggl8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rfmss")
+value = 60.0
+show_percentage = false
+
+[node name="TimeBar" type="ProgressBar" parent="Terminal"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 420.0
+offset_right = 786.0
+offset_bottom = 452.0
+theme_override_styles/background = SubResource("StyleBoxFlat_hiq18")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qsjc0")
+value = 60.0
+show_percentage = false
+
+[node name="Time" type="Label" parent="Terminal"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 372.5
+offset_right = 512.0
+offset_bottom = 432.5
+text = "TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.521721, 0, 0, 0, 0.0645114, 0, 0, 0, 1, -0.00783682, 1.80042, -0.00896788)
+billboard = 1
+texture = SubResource("ViewportTexture_735ep")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ade2m")
+
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D2" to="." method="_on_area_3d_body_exited"]
+[connection signal="pressed" from="Terminal/Terminal/Answer1" to="." method="_on_answer_1_pressed"]
+[connection signal="pressed" from="Terminal/Terminal/Answer2" to="." method="_on_answer_2_pressed"]
+[connection signal="pressed" from="Terminal/Terminal/Answer3" to="." method="_on_answer_3_pressed"]

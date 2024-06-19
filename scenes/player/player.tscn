@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=24 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
@@ -5,7 +6,8 @@
 [ext_resource type="Script" path="res://scripts/player/player_combat.gd" id="2_wfppx"]
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
 [ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="5_oaq0v"]
-[ext_resource type="PackedScene" uid="uid://b1sppkmxnnog5" path="res://scenes/weapons/pistol.tscn" id="5_wx8tt"]
+[ext_resource type="PackedScene" uid="uid://b88dvh1fk5f62" path="res://scenes/weapons/fists.tscn" id="6_b3ksh"]
+[ext_resource type="PackedScene" uid="uid://byhpqtro72se3" path="res://scenes/classes/Scientist.tscn" id="8_umnnj"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v5bfw"]
 properties/0/path = NodePath(".:position")
@@ -766,8 +768,6 @@ value = 100.0
 show_percentage = false
 script = ExtResource("5_oaq0v")
 
-[node name="Weapon" parent="PlayerCombat" instance=ExtResource("5_wx8tt")]
-
 [node name="DealAttackTimer" type="Timer" parent="PlayerCombat"]
 wait_time = 0.5
 
@@ -775,6 +775,8 @@ wait_time = 0.5
 wait_time = 0.5
 
 [node name="RespawnImmunity" type="Timer" parent="PlayerCombat"]
+
+[node name="Weapon" parent="PlayerCombat" instance=ExtResource("6_b3ksh")]
 
 [node name="FloatingName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
@@ -796,6 +798,8 @@ shape = SubResource("CylinderShape3D_sjmiw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.6, 2.08165e-12)
 billboard = 1
 texture = SubResource("ViewportTexture_iyg84")
+
+[node name="Class" parent="." instance=ExtResource("8_umnnj")]
 
 [connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]

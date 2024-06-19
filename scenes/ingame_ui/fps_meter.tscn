@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://xjab6hyj2yux"]
+
+[ext_resource type="Script" path="res://scenes/ingame_ui/FPS.gd" id="1_cx6rk"]
+
+[node name="FPS_Meter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPS" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "FPS: 144"
+script = ExtResource("1_cx6rk")
