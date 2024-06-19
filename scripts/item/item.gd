@@ -36,10 +36,16 @@ func _animate(delta):
 	var new_y = bob_offset + initial_position.y + bob_amplitude * sin(bob_time * bob_frequency * TAU)
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
 
+# Deletes the item after consuming/using it
 func delete():
-	print("Delete item")
-	if not multiplayer.is_server():
+	if not multiplayer.is_server() or not owned_node:
+		queue_free()
 		return
+
+	var node = owned_node.get_node_or_null("PlayerItem")
+	
+	# Player stops holding item / forgets item
+	node.holding = null
 	queue_free()
 
 func _process(delta):

@@ -7,8 +7,6 @@ func use():
 	var player = owned_node
 	if player:
 		player.increase_health(health_potion_value)
-		owned_node = null
-		owned = false
 	super.delete()
 	
 	

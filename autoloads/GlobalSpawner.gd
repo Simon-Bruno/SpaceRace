@@ -5,6 +5,7 @@ var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_en
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/key.tscn")
 var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
+var bomb_scene = preload("res://scenes/item/bomb.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
@@ -85,17 +86,12 @@ func spawn_buff(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	var etc = null
-	var bomb = null
-	var BUFFS = [hp_bottle_scene, bomb, etc]
+	var BUFFS = [hp_bottle_scene, bomb_scene]
 	if spawner:
 		var buff_scene = BUFFS[randi() % BUFFS.size()]
-		# TODO: Remove the hardcoded version of the hp_bottle
-		buff_scene = hp_bottle_scene
 		var buff = buff_scene.instantiate()
 		buff.position = pos
 		spawner.add_child(buff, true)
-		print('Added buf at ', pos)
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):

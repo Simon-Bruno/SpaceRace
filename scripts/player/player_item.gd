@@ -39,7 +39,6 @@ func _use_item():
 	var node = holding.get_parent_node_3d()
 	if node.has_method("use"):
 		node.use()
-	holding = null
 
 @rpc("any_peer", "call_local", "reliable")
 func _set_this_player_to_hold_item(id, item_path):
