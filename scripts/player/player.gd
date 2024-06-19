@@ -4,7 +4,7 @@ var getHitCooldown: bool = true
 @export var health: int = Global.player_max_health
 var points: int = 0
 @export var push_force: int = 1
-@export var alive: bool = 
+@export var alive: bool = true
 var respawn_immunity : bool = false
 
 # movement variables
@@ -156,9 +156,9 @@ func _physics_process(delta):
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
 		anim_handler()
-		if velocity != Vector3.ZERO && velocity.y == 0:
+		#if velocity != Vector3.ZERO && velocity.y == 0:
 			#Audiocontroller.play_walking_sfx()
-		if velocity == Vector3.ZERO:
+		#if velocity == Vector3.ZERO:
 			#Audiocontroller.stop_walking_sfx()
 		if alive:
 			move_and_slide()
