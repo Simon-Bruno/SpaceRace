@@ -262,7 +262,7 @@ func mirror_world() -> void:
 
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		self.set_cell_item(new_location, item, orientation)
-		
+
 	for x in entityGeneration.get_used_cells():
 		var item = entityGeneration.get_cell_item(x)
 		var orientation = entityGeneration.get_cell_item_orientation(x)
@@ -331,6 +331,7 @@ func define_rooms() -> void:
 
 	roomTypes[0] = STARTROOM
 	roomTypes[room_amount - 1] = ENDROOM
+
 
 # Draws the full floorplan by:
 # 1. Place first room of x * z size.

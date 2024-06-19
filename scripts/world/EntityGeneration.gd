@@ -93,12 +93,6 @@ func return_door_pair(location : Vector3i, direction : int, mirrored : bool) -> 
 		return [location + new_location, location]
 
 
-# Removes item from dynamic gridmap and adds them to list to be passed to static layer.
-func remove_current_items(location : Vector3i) -> void:
-	remove.append(location)
-	set_cell_item(location, EMPTY)
-
-
 # This funcion matches all doors with the appropriate buttons, and binds them to work as expected.
 func match_interactable_and_door(item : Array, interactables : Array, mirrored : bool) -> void:
 	var locations = return_door_pair(item[1], item[2], mirrored)
@@ -111,8 +105,8 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 			total_interactions = 1
 	
 	var door = GlobalSpawner.spawn_door(actual_location, get_basis_with_orthogonal_index(item[2]), total_interactions)
-	remove_current_items(locations[0])
-	remove_current_items(locations[1])
+	set_cell_item(locations[0], EMPTY)
+	set_cell_item(locations[1], EMPTY)
 	
 	for interactable in interactables:
 		if interactable == item:
@@ -129,7 +123,7 @@ func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 2
 	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
-	remove_current_items(interactable[1])
+	set_cell_item(interactable[1], EMPTY)
 
 
 # Spawns a button on the correct location, and links it to a given door.
@@ -139,7 +133,7 @@ func connect_button(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 2
 	var button = GlobalSpawner.spawn_button(location, get_basis_with_orthogonal_index(interactable[2]), door, inverted)
-	remove_current_items(interactable[1])
+	set_cell_item(interactable[1], EMPTY)
 
 
 # Finds all different doors in a room and the interactables that are linked to it. It then starts
@@ -167,7 +161,7 @@ func spawn_small_boxes() -> void:
 	var boxes = get_used_cells_by_item(SMALLBOX)
 	for box in boxes:
 		GlobalSpawner.spawn_box(map_to_local(box))
-		remove_current_items(box)
+		set_cell_item(box, EMPTY)
 
 
 # Spawns a laser at all laser spawnpoints in the map.
@@ -192,7 +186,8 @@ func spawn_enemies() -> void:
 	var enemies = get_used_cells_by_item(ENEMY)
 	for item in enemies:
 		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
-		remove_current_items(item)
+		set_cell_item(item, EMPTY)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
