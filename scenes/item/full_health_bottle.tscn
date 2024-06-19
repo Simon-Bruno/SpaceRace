@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bspdkuwalqhn6"]
+[gd_scene load_steps=6 format=3 uid="uid://bspdkuwalqhn6"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_12bqk"]
 [ext_resource type="Script" path="res://scripts/item/full_health_bottle.gd" id="2_pah6j"]
-[ext_resource type="ArrayMesh" uid="uid://dvk558lkgv2x" path="res://assets/CustomBlocks/items/hp-small-bottle.obj" id="4_ih4ut"]
+[ext_resource type="Texture2D" uid="uid://db6bqtbrv1t4i" path="res://assets/CustomBlocks/items/hp-large-bottle.png" id="3_ava3c"]
+[ext_resource type="ArrayMesh" uid="uid://dkfyght3kwx85" path="res://assets/CustomBlocks/items/hp-large-bottle.obj" id="4_b2xtg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dew62"]
-albedo_color = Color(0.0352941, 1, 1, 1)
+albedo_texture = ExtResource("3_ava3c")
 
 [node name="FullHealthBottle" instance=ExtResource("1_12bqk")]
 script = ExtResource("2_pah6j")
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.5, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0206275, 0.12427, 0)
 material_override = SubResource("StandardMaterial3D_dew62")
-mesh = ExtResource("4_ih4ut")
+mesh = ExtResource("4_b2xtg")
