@@ -45,9 +45,9 @@ func calc_total_x(player_count):
 func calc_total_z(player_count):
 	var total_z: float = 0.0
 	if  is_instance_valid(player) and player.get_parent() != null:
-		total_z += player.global_transform.origin.z + 25 * Network.inverted
+		total_z += player.global_transform.origin.z + 20 * Network.inverted
 	if  is_instance_valid(player2) and player2.get_parent() != null:
-		total_z += player2.global_transform.origin.z + 25 * Network.inverted
+		total_z += player2.global_transform.origin.z + 20 * Network.inverted
 	return total_z
 
 # modify the current camera position
