@@ -18,6 +18,7 @@ properties/1/replication_mode = 2
 script = ExtResource("1_p0lul")
 
 [node name="PressurePlate" type="Node3D" parent="."]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PressurePlate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.802957, 0)

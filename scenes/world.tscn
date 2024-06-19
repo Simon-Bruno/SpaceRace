@@ -22,6 +22,7 @@ spawn_path = NodePath("..")
 [node name="ItemSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemSpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/interactables/moveable_object.tscn")
 spawn_path = NodePath("..")
 
 [node name="ProjectileSpawner" type="Node" parent="."]

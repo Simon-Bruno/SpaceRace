@@ -5,7 +5,8 @@ static var END = 23
 
 @onready var customRooms = preload("res://scenes/world/customRooms.tscn").instantiate()
 
-var rooms = ["Room0", "Room1", "Room2"]
+#var rooms = ["Room0", "Room1", "Room2", "Room3", "Room4", "Room5", "Room6", "Room7", "Room8", "Room9", "Room10", "Room11"]
+var rooms = ["Room1", "Room2", "Room3", "Room8"]
 var roomNodes = []
 
 
@@ -22,7 +23,7 @@ func get_room_size(room : int) -> Array:
 	var end = roomNodes[room].get_child(0).get_used_cells_by_item(END)[0]
 	
 	return [end.x - start.x - 1, end.z - start.z + 1, start.x + 1]
-	
+
 
 func total_rooms() -> int:
 	return rooms.size()

@@ -3,7 +3,7 @@ extends GridMap
 enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL,
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF,
 	  WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR, CUSTOMEND, CUSTOMSTART, LARGEBOX, REDBOX,
-	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER}
+	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER, EMPTY=-1}
 
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
@@ -108,9 +108,15 @@ func build_map() -> void:
 
 	mirror_world()
 	
-	mirror_world()
-	
-	entityGeneration.replace_entities()
+	convert_static_to_entities()
+
+
+# Calls the convert functionality and removes all static items that have overlap.
+func convert_static_to_entities() -> void:
+	var remove = entityGeneration.replace_entities(rooms)
+	for location in remove:
+		set_cell_item(location, EMPTY)
+
 
 # Randomly picks n unique indexes.
 func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
