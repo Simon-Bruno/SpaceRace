@@ -2,6 +2,7 @@ extends Node3D
 
 @export var interactable : Node
 @export var winner_id : int
+var is_finish_plate = false
 
 
 var customRooms = null
@@ -17,7 +18,7 @@ func _on_area_3d_body_entered(body) -> void:
 	if body.is_in_group("Players") or body is RigidBody3D:
 		if bodies_on_plate.is_empty():
 			update_mesh.rpc(customRooms.PRESSUREPLATEON)
-			if interactable == null:
+			if is_finish_plate:
 				winner_id = body.name.to_int()
 				finish = finish.instantiate()
 				add_child(finish)
