@@ -128,6 +128,12 @@ create_wall {
 
 <OBJECTS_GENERATION>
 
+create_object BOX
+{
+    set_min_distance 6
+    set_max_distance 8
+}
+
 create_object LASER
 {
     set_min_distance 8

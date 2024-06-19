@@ -4,7 +4,7 @@ extends Node3D
 
 enum {HORIZONTAL, VERTICAL}
 
-enum {EMPTY, PATH, WALL, ITEM, LASER, BUFF, ENEMY}
+enum {EMPTY, PATH, WALL, ITEM, LASER, BUFF, ENEMY, BOX}
 
 enum {UP, LEFT, DOWN, RIGHT}
 
@@ -253,6 +253,19 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
 	return true
 
+func add_box(floor_plan, object, width, height, start):
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+
+	if floor_plan[z - 1][x - 1]:
+		return false
+
+	floor_plan[z - 1][x - 1] = BOX
+	GlobalSpawner.spawn_box(absolute_position + Vector3i(x, 0, z))
+	GlobalSpawner.spawn_box(absolute_position + Vector3i(x, 0, -z))
+	return true
+
 func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int, height : int, start: Vector3i) -> bool:
 	match object['type']:
 		'ITEM':
@@ -262,6 +275,8 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int,
 			# knows how to spawn buffs. For now, we just return true.
 			# return add_buff(floor_plan, object, width, height, start)
 			return true
+		'BOX':
+			return add_box(floor_plan, object, width, height, start)
 		_:
 			print('The object is not a supported object')
 			return true
