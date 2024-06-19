@@ -5,5 +5,7 @@
 [node name="Camera" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.657375, 0.753563, 0, -0.753563, 0.657375, 9, 12.6068, 17.6485)
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 20, 0)
+fov = 40.7
+far = 100.0
 script = ExtResource("1_8xw8w")
