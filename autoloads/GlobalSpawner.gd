@@ -110,7 +110,7 @@ func spawn_laser(pos, dir, activation = 1, hinder = false):
 	if spawner:
 		var laser = laser_scene.instantiate()
 		laser.position = pos
-		laser.basis	= dir
+		laser.basis = dir
 		laser.activation_count = activation
 		laser.hinder = hinder
 		spawner.add_child(laser, true)

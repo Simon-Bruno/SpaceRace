@@ -298,7 +298,9 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
 	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
-	var door = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, object['set_activation'], true)
+	var laser = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, object['set_activation'], true)
+	basis = Basis().rotated(Vector3(0, -1, 0), angle)
+	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, object['set_activation'], true)
 
 	for i in object['set_activation']:
 		var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
@@ -307,11 +309,13 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 		z = pos[1]
 
 		if floor_plan[z - 1][x - 1]:
-			door.activation_count -= 1
+			laser.activation_count -= 1
+			laser2.activation_count -= 1
 			continue
 
 		floor_plan[z - 1][x - 1] = BUTTON
-		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), door, false)
+		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), laser, false)
+		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, -z), Basis().rotated(Vector3(0, -1, 0), deg_to_rad(180)), laser2, false)
 	
 	return true
 
