@@ -20,7 +20,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 0
+const CUSTOMROOMPERCENTAGE : float = 1
 
 # General room parameters
 const room_amount : int = 2
@@ -139,9 +139,10 @@ func add_finish():
 						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
 					else:
 						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
-
+	
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
-	plate.position = map_to_local(Vector3i((start_pos[2]+18), 0, 0))
+	plate.position = map_to_local(Vector3i((start_pos[2]+18), 1, 0))
+	plate.position.y = 2
 	plate.interactable = null
 	add_child(plate, true)
 
