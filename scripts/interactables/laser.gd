@@ -6,21 +6,14 @@ var target = null
 var damage = 10
 var damage_delay = 0.2 # dmg delay in seconds
 var damage_time = damage_delay # keep track of time, first dmg tick should be instant
-var active = true
+@export var active = true
 
 # beam
-var ray = null
-var beam = null
-var beam_init_pos = null
-var beam_init_scale = null
-var beam_size = null
-
-func _ready():
-	ray = $Origin/RayCast3D
-	beam = $Origin/Beam
-	beam_init_pos = beam.position
-	beam_init_scale = beam.scale
-	beam_size = $Origin/Beam/DamageArea/CollisionShape3D.shape.get_size().x
+@onready var ray = $Origin/RayCast3D
+@onready var beam = $Origin/Beam
+@onready var beam_init_pos = beam.position
+@onready var beam_init_scale = beam.scale
+@onready var beam_size = $Origin/Beam/DamageArea/CollisionShape3D.shape.get_size().x
 
 func _on_area_3d_body_entered(body):
 	if body.is_in_group("Players"):
@@ -33,11 +26,15 @@ func _on_area_3d_body_exited(body):
 		damage_time = damage_delay
 
 func activated():
+	if not multiplayer.is_server():
+		return
 	active = true
 	ray.enabled = true
 	beam.visible = true
 	
 func deactivated():
+	if not multiplayer.is_server():
+		return
 	active = false
 	ray.enabled = false
 	beam.visible = false
@@ -49,6 +46,8 @@ func _process(delta):
 			damage_time -= damage_delay
 			target.take_damage(target.name, damage)
 		
+	if not multiplayer.is_server():
+		return 
 	if ray.is_colliding():
 		var pos = ray.global_position
 		var target_pos = ray.get_collision_point()
