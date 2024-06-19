@@ -5,8 +5,8 @@ extends "res://scripts/item/item.gd"
 func use():
 	print("STRENGTH")
 	var player = owned_node
-	if playe
-	super.delete()
+	#if playe
+	#super.delete()
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
