@@ -5,6 +5,7 @@ var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_en
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/key.tscn")
 var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
+var full_hp_bottle_scene = preload("res://scenes/item/full_health_bottle.tscn")
 var strength_bottle_scene = preload("res://scenes/item/strength_bottle.tscn")
 var bomb_scene = preload("res://scenes/item/bomb.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
@@ -53,7 +54,7 @@ func spawn_ranged_enemy(pos):
 		var enemy = ranged_enemy_scene.instantiate()
 		enemy.position = pos
 		spawner.add_child(enemy, true)
-		
+
 func spawn_boss(pos):
 	if not multiplayer.is_server():
 		return
@@ -82,15 +83,15 @@ func spawn_item(pos):
 		var item = item_scene.instantiate()
 		item.position = pos
 		spawner.add_child(item, true)
-		
+
 func spawn_buff(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene]
+	var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene, full_hp_bottle_scene]
 	if spawner:
 		#var buff_scene = BUFFS[randi() % BUFFS.size()]
-		var buff_scene = strength_bottle_scene
+		var buff_scene = full_hp_bottle_scene
 		var buff = buff_scene.instantiate()
 		buff.position = pos
 		spawner.add_child(buff, true)
@@ -99,7 +100,7 @@ func spawn_buff(pos):
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
 	if not multiplayer.is_server():
 		return
-		
+
 	var projectile_instance = projectile_scene.instantiate()
 	get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 	projectile_instance.global_transform.origin = transform_origin + spawn_offset

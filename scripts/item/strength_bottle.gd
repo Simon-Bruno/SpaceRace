@@ -22,8 +22,8 @@ func _on_potion_timer_timeout():
 		player.strength = 1.0
 		print("Strength reset ", player.strength)
 	super.delete()
-	
-	
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	super._process(delta)
