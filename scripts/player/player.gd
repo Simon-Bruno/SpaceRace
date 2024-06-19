@@ -8,7 +8,7 @@ var points: int = 0
 var respawn_immunity : bool = false
 
 # movement variables
-@export var walk_speed: int = 12
+@export var walk_speed: int = 7
 @export var fall_acceleration: int = 60
 @export var jump_impulse: int = 20
 var walk_acceleration: int = 40
@@ -19,8 +19,9 @@ var speed = 0
 var direction = Vector2.ZERO
 var max_dist: float = 25.0  # max distance between players
 
-# animation death variable
+# animation variable
 var AnimDeath: bool = false
+var AnimJump: bool = false
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
@@ -67,8 +68,6 @@ func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
-		$Pivot/AnimationPlayer.stop()
-		$Pivot/AnimationPlayer.play("jump")
 		vel.y = jump_impulse
 
 	if not is_on_floor():
@@ -106,16 +105,54 @@ func move_object():
 			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
 
 
+func play_animation(anim_player, animation):
+	if anim_player == 1:  # anim speed 1
+		$Pivot/AnimationPlayer.play(animation)
+	else:  # anim speed 1.15 (default for walk)
+		$Pivot/AnimationPlayer2.play(animation)
+
+
+func stop_animations():
+	$Pivot/AnimationPlayer.stop()
+	$Pivot/AnimationPlayer2.stop()
+
+
+# request other clients to play animation
+func request_play_animation(anim_player, animation):
+	rpc_id(0, "sync_play_animation", anim_player, animation)
+
+
+# send animation update to other clients
+@rpc("any_peer", "call_local", "reliable")
+func sync_play_animation(anim_player, animation):
+	if anim_player == 0:  # to stop animations
+		stop_animations()
+	else:  # to play animations
+		play_animation(anim_player, animation)
+
+
+func anim_handler():
+	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+		request_play_animation(0, "stop")
+		request_play_animation(1, "jump")
+
+		AnimJump = true
+	else:
+		if velocity != Vector3.ZERO && velocity.y == 0:
+			if not $Pivot/AnimationPlayer.is_playing():
+				request_play_animation(2, "walk")
+		if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
+			request_play_animation(0, "stop")
+		if velocity.y == 0:
+			AnimJump = false
+
+
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
-		if velocity != Vector3.ZERO && velocity.y == 0:
-			if not $Pivot/AnimationPlayer.is_playing():
-				$Pivot/AnimationPlayer.play("walk")
-		if velocity == Vector3.ZERO:
-			$Pivot/AnimationPlayer.play("stop")
+		anim_handler()
 		if alive:
 			move_and_slide()
 	move_object()
@@ -134,7 +171,6 @@ func take_damage(id, damage):
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive and not AnimDeath:
-		#print("health < 0")
 		die()
 
 
@@ -144,17 +180,15 @@ func die():
 	var temp = walk_speed
 	walk_speed = 0
 	
-	# play anim
-	$Pivot/AnimationPlayer.play("death")
-	# wait for anim
-	await get_tree().create_timer(2).timeout
-	# die
-	get_parent().player_died(self)
+	
+	request_play_animation(1, "death")  # play anim
+	await get_tree().create_timer(2).timeout  # wait for anim
+	get_parent().player_died(self)  # die
 	
 	# reset globals
 	AnimDeath = false
 	walk_speed = temp
-	$Pivot/AnimationPlayer.stop()
+	request_play_animation(0, "stop")
 
 
 func _on_respawn_immunity_timeout():
