@@ -62,7 +62,7 @@ func wall_parser(section: String, wall_dict : Array) -> void:
 		if parsed_wall == {}:
 			continue
 		wall_dict.append(parsed_wall)
-		
+
 func object_parser(section: String, object_dict : Array) -> void:
 	var objects = section.split('create_object')
 	for i in objects.size():
@@ -87,8 +87,13 @@ func object_parser(section: String, object_dict : Array) -> void:
 func enemies_parser(section : String, enemy_dict : Array) -> void:
 	var mobs = section.split('create_mob')
 	for i in mobs.size():
-		var mob : String = mobs[i].strip_edges()
+		var mob = mobs[i].strip_edges()
 		if mob.begins_with("ENEMY_GENERATION"):
 			continue
-		var parsed_mob : Dictionary = segment_to_dict(mob)
+		mob = mob.split("\n", false, 1)
+		var type = mob[0]
+		var parsed_mob : Dictionary = segment_to_dict(mob[1])
+		if parsed_mob == {}:
+			continue
+		parsed_mob['type'] = type
 		enemy_dict.append(parsed_mob)

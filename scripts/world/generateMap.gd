@@ -3,7 +3,7 @@ extends GridMap
 enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL,
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF,
 	  WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR, CUSTOMEND, CUSTOMSTART, LARGEBOX, REDBOX,
-	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER}
+	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER, EMPTY=-1}
 
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
@@ -20,13 +20,13 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 1
+const CUSTOMROOMPERCENTAGE : float = 0
 
 # General room parameters
 const room_amount : int = 5
 const room_width  : int = 10
-const room_height : int = 10
-const room_margin : int = 7
+const room_height : int = 8
+const room_margin : int = 4
 
 # How much the room size can variate in increments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
@@ -48,8 +48,6 @@ var room_variation_y : int = 1
 @export var generate_room : bool = true
 @export var last_room : bool = false
 @export var absolute_position : Vector3i = Vector3i(0, 3, 0)
-
-static var placed_doors : int = 0
 
 
 var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
@@ -111,6 +109,7 @@ func build_map() -> void:
 	add_finish()
 	mirror_world()
 	
+	convert_static_to_entities()
 	# Generate finish pressure plate:
 	#entityGeneration.replace_entities(rooms)
 
@@ -145,6 +144,13 @@ func add_finish():
 	plate.position = map_to_local(Vector3i((start_pos[2]+8), 1, 0))
 	plate.interactable = null
 	add_child(plate, true)
+
+
+# Calls the convert functionality and removes all static items that have overlap.
+func convert_static_to_entities() -> void:
+	var remove = entityGeneration.replace_entities(rooms)
+	for location in remove:
+		set_cell_item(location, EMPTY)
 
 
 # Randomly picks n unique indexes.
@@ -308,11 +314,12 @@ func define_rooms() -> void:
 	var widthMax = room_width + room_variation_x
 	var widthMin = room_width - room_variation_x
 	
-	var heightMax = room_width + room_variation_y
-	var heightMin = room_width - room_variation_y
+	#var heightMax = room_height + room_variation_y
+	var heightMax = 8
+	var heightMin = room_height - room_variation_y
 	for i in room_amount:
 		var width = randi_range(widthMin / 2, widthMax / 2 + 1) * 2
-		var height = randi_range(heightMin / 2, heightMax / 2 + 1) * 2
+		var height = randi_range(heightMin / 2, ceil(heightMax / 2)) * 2
 		var start = sumXValues(rooms) + room_margin * i
 
 		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
@@ -338,7 +345,7 @@ func draw_rooms() -> void:
 		var leftDoor = room[3]
 
 		# Set some global variables for the generateRoom script
-		absolute_position.x = room[2]		
+		absolute_position.x = room[2] * 2
 		start_pos = Vector3i(0, 10, leftDoor * 2)
 		end_pos = Vector3i(room[0] * 2 - 1, 10, rightDoor * 2 - 1)
 
@@ -362,11 +369,7 @@ func fill_room(room_dim: Array) -> void:
 	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
 	add_child(room_scene, true)
-	generate_room = not generate_room
-	room_scene = room_scene.duplicate(7)
-	room_scene.scale.z = -1
-	add_child(room_scene, true)
-	generate_room = not generate_room
+
 
 
 # Places floor grid of x * z size based on room array

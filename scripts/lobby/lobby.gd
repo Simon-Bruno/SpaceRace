@@ -4,6 +4,7 @@ extends Node
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var quit_button_area = $AreaQuit
 
+
 var world = preload("res://scenes/world.tscn")
 
 var team1 = []
@@ -51,6 +52,8 @@ func _on_start_timer_timeout():
 		Network.player_teams[character.name] = 1
 	for character in team2:
 		Network.player_teams[character.name] = 2
+	
+	Audiocontroller.play_teleportation_sfx()
 	_on_game_start.rpc(Network.player_teams, Network.player_names)
 	get_parent().add_child(world.instantiate())
 	queue_free()
