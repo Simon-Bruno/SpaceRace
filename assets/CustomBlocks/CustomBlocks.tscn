@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=126 format=3 uid="uid://cehfbggdu6pms"]
 
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
@@ -32,7 +32,7 @@
 [ext_resource type="ArrayMesh" uid="uid://h7b6lfsliy2w" path="res://assets/CustomBlocks/placable/pressurePlateOff.obj" id="30_hgunv"]
 [ext_resource type="ArrayMesh" uid="uid://c2k4ofk3nm13g" path="res://assets/CustomBlocks/placable/pressurePlateOn.obj" id="31_3fpn3"]
 [ext_resource type="ArrayMesh" uid="uid://bja6hv3l4sctj" path="res://assets/CustomBlocks/placable/terminal.obj" id="32_52kga"]
-[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://assets/CustomBlocks/placable/computer.obj" id="33_jktwi"]
+[ext_resource type="ArrayMesh" uid="uid://bvswva70tqatx" path="res://files/voxelFiles/export/computer.obj" id="33_jktwi"]
 [ext_resource type="ArrayMesh" uid="uid://cjm1mx5bu7ii2" path="res://assets/CustomBlocks/colorCoded/buttonBlue.obj" id="34_bkik2"]
 [ext_resource type="ArrayMesh" uid="uid://bgsjd7hg1hy75" path="res://assets/CustomBlocks/colorCoded/buttonGreen.obj" id="35_xiu1r"]
 [ext_resource type="ArrayMesh" uid="uid://q7q7x6c1uuu" path="res://assets/CustomBlocks/colorCoded/buttonOrange.obj" id="36_58bkf"]
@@ -89,6 +89,7 @@
 [ext_resource type="ArrayMesh" uid="uid://do31a5yhfetwo" path="res://assets/CustomBlocks/colorCoded/switchOnPurple.obj" id="87_vf3o5"]
 [ext_resource type="ArrayMesh" uid="uid://c1yi2g0orvorf" path="res://assets/CustomBlocks/colorCoded/switchOnRed.obj" id="88_1yt1f"]
 [ext_resource type="ArrayMesh" uid="uid://bkoxoq1byolu3" path="res://assets/CustomBlocks/colorCoded/switchOnYellow.obj" id="89_dfg1r"]
+[ext_resource type="ArrayMesh" uid="uid://b0mh2ut430vxt" path="res://assets/CustomBlocks/entities/enemy.obj" id="90_xbbvs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
 albedo_texture = ExtResource("1_c8374")
@@ -190,6 +191,9 @@ albedo_texture = ExtResource("1_c8374")
 albedo_texture = ExtResource("1_c8374")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj78p"]
+albedo_texture = ExtResource("1_c8374")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbb55"]
 albedo_texture = ExtResource("1_c8374")
 
 [node name="Node3D" type="Node3D"]
@@ -739,3 +743,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("89_dfg1r")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
+
+[node name="Enemy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0976478, 0, 0.132923)
+material_override = SubResource("StandardMaterial3D_mbb55")
+mesh = ExtResource("90_xbbvs")

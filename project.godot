@@ -29,6 +29,11 @@ SettingsSignalBus="*res://autoloads/SettingsSignalBus.gd"
 SaveManager="*res://autoloads/SaveManager.gd"
 GlobalSpawner="*res://autoloads/GlobalSpawner.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [editor]
 
 movie_writer/movie_file="C:/Users/BasGe/OneDrive/Documents/godot_clips/godot_temp_video.avi"

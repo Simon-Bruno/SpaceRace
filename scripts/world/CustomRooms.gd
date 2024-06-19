@@ -5,11 +5,10 @@ enum {ROOM1, ROOM2, ROOM3, ROOM4}
 
 static var START = 24
 static var END = 23
-static var LEFT = 9
-static var RIGHT = 10
 
 # Defines the rooms.
 @export var rooms = []
+@export var end_room = []
 
 #var interactables = {
 	#0 : {},
@@ -50,10 +49,18 @@ func generate_dimensions():
 		var start = starts[i].x + 1
 		var width = ends[i].x - starts[i].x - 1
 		var height = ends[i].z - starts[i].z + 1
-		rooms.append([width, height, start])
+		if start >= 0:
+			rooms.append([width, height, start])
+		else:
+			end_room = [width, height, start]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#print("start")
 	self.clear()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass

@@ -25,6 +25,8 @@ var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 
 func _ready():
+	if not multiplayer.is_server():
+		return
 	if world.generate_room:
 		var start : Vector3i = world.start_pos
 		var end : Vector3i = world.end_pos
@@ -85,7 +87,7 @@ func wall_check(floor_plan: Array, x: int, z: int, max_x: int, max_z: int, orien
 func check_wall_placement(floor_plan: Array, x: int, z: int) -> bool:
 	var max_x: int = floor_plan[0].size()
 	var max_z: int = floor_plan.size()
-	
+
 	if x < 0 or x >= max_x or z < 0 or z >= max_z:
 		return false
 
@@ -153,24 +155,24 @@ func handle_wall(floor_plan : Array, wall : Dictionary, width : int, height: int
 		zmin = max(1, start[2] - max_dist)
 		zmax = min(height - 2, start[2] + max_dist)
 		z = randi_range(zmin, zmax)
-		
+
 		if abs(start[2] - z) >= min_dist:
 			xmin = length / 2
 		else:
 			xmin = start[0] + min_dist
-		
+
 		xmax = min(width - length / 2 - 2, start[0] + max_dist)
 	elif height > length:
 		zmin = max(length / 2, start[2] - max_dist)
 		zmax = min(height - length / 2, start[2] + max_dist)
 		z = randi_range(zmin, zmax)
-		
+
 		if abs(start[2] - z) >= min_dist:
 			xmin = 1
 		else:
 			xmin = start[0] + min_dist
 		orientation = VERTICAL
-		
+
 		xmax = min(width - 2, start[0] + max_dist)
 	else:
 		# The length is too large to fit horizontally or vertically, so cancel the operation.
@@ -218,7 +220,7 @@ func object_placement(object : Dictionary, width : int, height : int, start : Ve
 	if abs(start[2] * 2 - z) < min_dist:
 		xmin = min(width - 1, start[0] * 2 + min_dist)
 	var x = randi_range(xmin, xmax)
-	
+
 	return [x, z]
 
 # This function takes the floor plan, an object and some parameters of the room
@@ -316,11 +318,11 @@ func enemy_placement(floor_plan : Array[Array], object : Dictionary, width : int
 	if abs(start[2] * 2 - z) < min_dist:
 		xmin = min(width - 3, start[0] * 2 + min_dist)
 	var x = randi_range(xmin, xmax)
-	
+
 	assert(z < height)
 
 	return [x, z]
-	
+
 func place_enemy_in_radius(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
 	for i in radius + 1:
 		for j in radius + 1:
