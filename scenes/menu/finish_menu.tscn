@@ -1,0 +1,146 @@
+[gd_scene load_steps=4 format=3 uid="uid://y44y1wmnacy2"]
+
+[ext_resource type="Script" path="res://scripts/menu/finish_menu.gd" id="1_w7f6y"]
+[ext_resource type="Texture2D" uid="uid://bis8yamj1e4iv" path="res://assets/menu/BackgroundImage.png" id="2_gp8ye"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wnixh"]
+font_size = 40
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w7f6y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gp8ye")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_wnixh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_wnixh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+modulate = Color(0.99558, 0.99558, 0.99558, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.85
+anchor_right = 0.5
+anchor_bottom = 0.85
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Holder" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="MarginContainer2/Holder"]
+custom_minimum_size = Vector2(200, 0)
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "Play again"
+
+[node name="JoinButton" type="Button" parent="MarginContainer2/Holder"]
+layout_mode = 2
+text = "Menu"
+
+[node name="QuitButton" type="Button" parent="MarginContainer2/Holder"]
+layout_mode = 2
+text = "Quit"
+
+[node name="DialogMessage" type="Panel" parent="."]
+visible = false
+offset_left = 451.0
+offset_top = 240.0
+offset_right = 707.0
+offset_bottom = 417.0
+
+[node name="Label2" type="Label" parent="DialogMessage"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 9.0
+offset_right = 50.0
+offset_bottom = 32.0
+text = "Error"
+
+[node name="Text" type="Label" parent="DialogMessage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 47.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cant join game because of ooopsie"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="DialogMessage"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -34.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = 38.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="pressed" from="MarginContainer2/Holder/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/HostButton" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/JoinButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/JoinButton" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="MarginContainer2/Holder/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -25,6 +25,8 @@ var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 
 func _ready():
+	if not multiplayer.is_server():
+		return
 	if world.generate_room:
 		var start : Vector3i = world.start_pos
 		var end : Vector3i = world.end_pos

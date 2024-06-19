@@ -8,6 +8,7 @@ var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
+var terminal_scene = preload("res://scenes/interactables/terminal.tscn")
 var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
@@ -112,6 +113,15 @@ func spawn_laser(pos, dir):
 		laser.basis	= dir
 		spawner.add_child(laser, true)
 
+func spawn_terminal(pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
+	if spawner:
+		var terminal = terminal_scene.instantiate()
+		terminal.position = pos
+		#terminal.basis	= dir
+		spawner.add_child(terminal, true)
 
 func spawn_box(pos):
 	if not multiplayer.is_server():
