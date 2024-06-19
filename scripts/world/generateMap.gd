@@ -130,17 +130,17 @@ func add_finish():
 	
 	# layer is for static or dynamic gridmap
 	for layer in range(0, 1):
-		for x in range(1, endroom_dimensions[0]):
-			for z in range(1, endroom_dimensions[1]):
+		for x in range(0, endroom_dimensions[0]):
+			for z in range(0, endroom_dimensions[1]):
 				for y in range (0, 2):
 					# Add special endroom
 					var item = roomLink.get_room_item(Vector3i(x, y, z), 0, layer, true)
 					var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), 0, layer, true )
 					
 					if layer == 0:
-						self.set_cell_item(Vector3i(x, y, z) + Vector3i(endroom_startX , 0, 0), item, orientation)
+						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
 					else:
-						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(endroom_startX, 0, 0), item, orientation)
+						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
 
 # Get_room_item takes in Vector3i (location), de room, de layer:
 	#var endroom = roomLink.get_room_item( )
