@@ -100,7 +100,8 @@ func build_map() -> void:
 	draw_rooms()
 	place_custom_room(pairs)
 	add_finish()
-	
+
+
 	draw_paths()
 
 	draw_windows()
@@ -121,7 +122,6 @@ func add_finish():
 
 	# Get start positions of end room:
 	var start_pos = rooms[-1]
-	print("startX is: ", start_pos[2], "width: ", start_pos[0])
 	
 	# startx prev room + width room
 	var endroom_startX = start_pos[2] + start_pos[0]
@@ -149,9 +149,7 @@ func add_finish():
 
 # Calls the convert functionality and removes all static items that have overlap.
 func convert_static_to_entities() -> void:
-	var remove = entityGeneration.replace_entities(rooms)
-	for location in remove:
-		set_cell_item(location, EMPTY)
+	entityGeneration.replace_entities(rooms)
 
 
 # Randomly picks n unique indexes.
@@ -193,6 +191,9 @@ func get_custom_rooms() -> Array:
 		rooms[i[0]][1] = customRoom[1]
 		roomTypes[i[0]] = CUSTOM
 	
+	var endroom = roomLink.get_room_size(0, true)
+	rooms[-1][0] = endroom[0]
+	rooms[-1][1] = endroom[1]
 	roomTypes[-1] = CUSTOM
 
 	reset_room_spacing()
@@ -330,7 +331,7 @@ func define_rooms() -> void:
 		roomTypes.append(pick_random_type())
 
 	roomTypes[0] = STARTROOM
-	roomTypes[room_amount - 1] = ENDROOM
+	roomTypes[-1] = CUSTOM
 
 
 # Draws the full floorplan by:
