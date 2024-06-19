@@ -141,6 +141,13 @@ create_object LASER
     set_length 3
 }
 
+create_object ENEMY_LASER
+{
+    set_min_distance 8
+    set_max_distance 10
+    set_activation 10
+}
+
 create_object ITEM
 {
     set_min_distance 17

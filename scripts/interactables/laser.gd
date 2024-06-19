@@ -7,6 +7,8 @@ var damage = 10
 var damage_delay = 0.2 # dmg delay in seconds
 var damage_time = damage_delay # keep track of time, first dmg tick should be instant
 @export var active = true
+@export var activation_count = 1
+@export var hinder = false
 
 # beam
 @onready var ray = $Origin/RayCast3D
@@ -28,16 +30,20 @@ func _on_area_3d_body_exited(body):
 func activated():
 	if not multiplayer.is_server():
 		return
-	active = true
-	ray.enabled = true
-	beam.visible = true
+	activation_count -= 1
+	if activation_count == 0:
+		active = true
+		ray.enabled = true
+		beam.visible = true
 	
 func deactivated():
 	if not multiplayer.is_server():
 		return
-	active = false
-	ray.enabled = false
-	beam.visible = false
+	activation_count += 1
+	if activation_count == 1:
+		active = false
+		ray.enabled = false
+		beam.visible = false
 	
 func _process(delta):
 	if target != null and active:
@@ -56,3 +62,9 @@ func _process(delta):
 		
 		beam.position.x = beam_init_pos.x * dist
 		beam.scale.x = beam_init_scale.x * dist
+		
+func set_laser():
+	if hinder:
+		active = false
+		ray.enabled = false
+		beam.visible = false

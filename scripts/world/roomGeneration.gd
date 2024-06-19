@@ -279,10 +279,42 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
 	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
-	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, 1)
 	basis = Basis().rotated(Vector3(0, -1, 0), angle)
-	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, 1)
 	return true
+
+func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+	const orientations = [0, 90, 180, 270]
+
+	if floor_plan[z - 1][x - 1] > PATH:
+		return false
+
+	# Spawn the laser
+	floor_plan[z - 1][x - 1] = LASER
+	var orientation = orientations[randi() % orientations.size()]
+	var angle = deg_to_rad(orientation)
+	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
+	var door = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, object['set_activation'], true)
+
+	for i in object['set_activation']:
+		var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
+		pos = object_placement(button_object, width, height, start)
+		x = pos[0]
+		z = pos[1]
+
+		if floor_plan[z - 1][x - 1]:
+			door.activation_count -= 1
+			continue
+
+		floor_plan[z - 1][x - 1] = BUTTON
+		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), door, false)
+	
+	return true
+
 
 func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int, height : int, start: Vector3i) -> bool:
 	match object['type']:
@@ -295,6 +327,8 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int,
 			return true
 		'LASER':
 			return add_laser(floor_plan, object, width, height, start)
+		'ENEMY_LASER':
+			return add_enemy_laser(floor_plan, object, width, height, start)
 		_:
 			print('The object is not a supported object')
 			return true
@@ -442,5 +476,6 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	# Set the generate variable back, so the next will be filled.
 	world.generate_room = true
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
-	add_mobs(floor_plan, world_dict['enemies'], width, height, start)
+	if world_dict.has('enemies'):
+		add_mobs(floor_plan, world_dict['enemies'], width, height, start)
 	#GlobalSpawner.spawn_melee_enemy(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
