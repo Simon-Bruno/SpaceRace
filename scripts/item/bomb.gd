@@ -1,8 +1,8 @@
 extends "res://scripts/item/item.gd"
 
 
-var bomb_damage = 50
 @onready var timer = $FuseTimer
+var bomb_damage = 50
 var player_history : Node3D = null
 
 

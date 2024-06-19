@@ -89,7 +89,8 @@ func spawn_buff(pos):
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
 	var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene]
 	if spawner:
-		var buff_scene = BUFFS[randi() % BUFFS.size()]
+		#var buff_scene = BUFFS[randi() % BUFFS.size()]
+		var buff_scene = strength_bottle_scene
 		var buff = buff_scene.instantiate()
 		buff.position = pos
 		spawner.add_child(buff, true)

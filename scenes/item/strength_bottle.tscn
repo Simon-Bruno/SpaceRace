@@ -8,10 +8,15 @@
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_b42w0"]
 albedo_texture = ExtResource("2_nyoqg")
 
-[node name="Item" instance=ExtResource("1_xxtqf")]
+[node name="StrengthBottle" instance=ExtResource("1_xxtqf")]
 script = ExtResource("2_jju86")
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.747044, -0.0773146)
 material_override = SubResource("ORMMaterial3D_b42w0")
 mesh = ExtResource("2_emtnq")
+
+[node name="PotionTimer" type="Timer" parent="." index="1"]
+wait_time = 10.0
+
+[connection signal="timeout" from="PotionTimer" to="." method="_on_potion_timer_timeout"]
