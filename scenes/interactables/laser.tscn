@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://8gurumik6vsg"]
+[gd_scene load_steps=6 format=3 uid="uid://degvv7aybwe61"]
 
-[ext_resource type="Script" path="res://scripts/interactables/laser/laser.gd" id="1_fimeb"]
-[ext_resource type="Script" path="res://scripts/interactables/laser/laser_raycast.gd" id="2_tgb42"]
+[ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_cdal3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mj71s"]
 albedo_color = Color(0.822335, 0.0526998, 4.81307e-07, 1)
@@ -13,25 +12,35 @@ size = Vector3(0.2, 0.2, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_u6b37"]
 size = Vector3(0.2, 0.2, 0.2)
 
+[sub_resource type="BoxMesh" id="BoxMesh_37bc0"]
+size = Vector3(0.1, 0.6, 0.6)
+
 [node name="Laser" type="Node3D"]
-script = ExtResource("1_fimeb")
+script = ExtResource("1_cdal3")
 
 [node name="Origin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0)
+
+[node name="Beam" type="Node3D" parent="Origin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Origin"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Origin/Beam"]
 mesh = SubResource("BoxMesh_muaet")
 
-[node name="LaserRange" type="Area3D" parent="Origin"]
+[node name="DamageArea" type="Area3D" parent="Origin/Beam"]
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/LaserRange"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/Beam/DamageArea"]
 shape = SubResource("BoxShape3D_u6b37")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="Base" type="MeshInstance3D" parent="Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
+mesh = SubResource("BoxMesh_37bc0")
+skeleton = NodePath("../..")
+
+[node name="RayCast3D" type="RayCast3D" parent="Origin"]
 target_position = Vector3(48, 0, 0)
 collision_mask = 9
-script = ExtResource("2_tgb42")
 
-[connection signal="body_entered" from="Origin/LaserRange" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Origin/LaserRange" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_exited"]

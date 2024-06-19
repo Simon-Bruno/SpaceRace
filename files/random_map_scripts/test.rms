@@ -2,8 +2,8 @@
 
 create_wall {
     set_min_distance 5
-    set_max_distance 8
-    length 6
+    set_max_distance 5
+    length 10
     length_variation 2
 }
 
@@ -28,6 +28,104 @@ create_wall {
     length_variation 3
 }
 
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 9
+    length 6
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 9
+    length 6
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 9
+    length 6
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 20
+    length 8
+    length_variation 3
+}
+
 <OBJECTS_GENERATION>
 
 create_object LASER
@@ -45,16 +143,30 @@ create_object ITEM
 
 create_object ITEM
 {
-    set_min_distance 4
-    set_max_distance 9
+    set_min_distance 12
+    set_max_distance 15
+}
+
+create_object BUFF
+{
+    set_min_distance 7
+    set_max_distance 20
 }
 
 <ENEMY_GENERATION>
 
-create_mob {
+create_mob MELEE
+{
     set_min_distance 5
     set_max_distance 8
     set_group_size 3
     set_loose_grouping
 }
 
+create_mob RANGED
+{
+    set_min_distance 5
+    set_max_distance 8
+    set_group_size 3
+    set_loose_grouping
+}

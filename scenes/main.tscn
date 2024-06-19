@@ -14,6 +14,7 @@ spawn_path = NodePath("../SpawnedItems")
 
 [node name="MusicController" type="AudioStreamPlayer" parent="."]
 autoplay = true
+bus = &"Music"
 
-[node name="Node" type="Node" parent="."]
-script = ExtResource("2_in23s")
+[node name="SfxController" type="AudioStreamPlayer" parent="."]
+bus = &"Sfx"
