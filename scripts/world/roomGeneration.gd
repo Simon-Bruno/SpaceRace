@@ -278,9 +278,10 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	floor_plan[z - 1][x - 1] = LASER
 	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
-	var basis = Basis()
-	basis = basis.rotated(Vector3(0, 1, 0), angle)
+	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
 	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis)
+	basis = Basis().rotated(Vector3(0, -1, 0), angle)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis)
 	return true
 
 func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int, height : int, start: Vector3i) -> bool:
