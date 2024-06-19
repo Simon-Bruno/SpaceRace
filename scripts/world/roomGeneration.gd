@@ -4,7 +4,7 @@ extends Node3D
 
 enum {HORIZONTAL, VERTICAL}
 
-enum {EMPTY, PATH, WALL, ITEM, LASER, BUFF, ENEMY}
+enum {EMPTY, PATH, WALL, BUTTON, ITEM, LASER, BUFF, ENEMY}
 
 enum {UP, LEFT, DOWN, RIGHT}
 
@@ -253,17 +253,31 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
 	return true
 
+func add_button(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+
+	if floor_plan[z - 1][x - 1] > PATH:
+		return false
+
+	floor_plan[z - 1][x - 1] = BUTTON
+	return true
+
 func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
+	const orientations = [0, 90, 180, 270]
 
 	if floor_plan[z -  1][x - 1] > PATH:
 		return false
 
 	floor_plan[z - 1][x - 1] = LASER
+	var orientation = orientations[randi() % orientations.size()]
+	var angle = deg_to_rad(orientation)
 	var basis = Basis()
-	basis = basis.rotated(Vector3(0, 1, 0), .5 * 3.14)
+	basis = basis.rotated(Vector3(0, 1, 0), angle)
 	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis)
 	return true
 

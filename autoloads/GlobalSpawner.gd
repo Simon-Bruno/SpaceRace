@@ -84,7 +84,7 @@ func spawn_item(pos):
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
 	if not multiplayer.is_server():
 		return
-		
+
 	var projectile_instance = projectile_scene.instantiate()
 	get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 	projectile_instance.global_transform.origin = transform_origin + spawn_offset
