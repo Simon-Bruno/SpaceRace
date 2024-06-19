@@ -108,22 +108,62 @@ func build_map() -> void:
 
 	mirror_world()
 	
-	mirror_world()
 	
+	# Generate finish pressure plate:
+	add_finish()
+
 	entityGeneration.replace_entities(rooms)
 	
-# Generate finish pressure plate:
-	add_finish()
+	mirror_world()
 
 # Adds the pressureplate in the last room
 func add_finish():
-	var lastroom_width = rooms[-1][0]
-	var lastroom_start = rooms[-1][2]
+	# Get room dimensions:
+	var endroom_dimensions = roomLink.get_room_size(0, true)
+
+	# Get start positions of end room:
+	var start_pos = rooms[-1]
+	print("startX is: ", start_pos[2], "width: ", start_pos[0])
 	
-	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
-	plate.position = map_to_local(Vector3i((lastroom_start + lastroom_width - 5), 1, 0))
-	plate.interactable = null
-	add_child(plate, true)
+	# startx prev room + width room
+	var endroom_startX = start_pos[2] + start_pos[0]
+	
+	# layer is for static or dynamic gridmap
+	for layer in range(0, 1):
+		for x in range(1, endroom_dimensions[0]):
+			for z in range(1, endroom_dimensions[1]):
+				for y in range (0, 2):
+					# Add special endroom
+					var item = roomLink.get_room_item(Vector3i(x, y, z), 0, layer, true)
+					var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), 0, layer, true )
+					
+					if layer == 0:
+						self.set_cell_item(Vector3i(x, y, z) + Vector3i(endroom_startX , 0, 0), item, orientation)
+					else:
+						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(endroom_startX, 0, 0), item, orientation)
+
+# Get_room_item takes in Vector3i (location), de room, de layer:
+	#var endroom = roomLink.get_room_item( )
+	
+	
+	
+	#func write_room(orig : Array, new : int, layer : int) -> void:
+	#for y in range(1, 4):
+		#for x in orig[0]:
+			#for z in orig[1]:
+				#var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer)
+				#var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer)
+				#
+				#if layer == 0:
+					#self.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
+				#else:
+					#entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
+					
+	#var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
+	#plate.position = map_to_local(Vector3i((lastroom_start + lastroom_width - 5), 1, 0))
+	#plate.interactable = null
+	#add_child(plate, true)
+
 
 # Randomly picks n unique indexes.
 func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
@@ -159,7 +199,7 @@ func get_custom_rooms() -> Array:
 		pairs.append([originals[i], customs[i]])
 
 	for i in pairs:
-		var customRoom = roomLink.get_room_size(i[1])
+		var customRoom = roomLink.get_room_size(i[1], false)
 		rooms[i[0]][0] = customRoom[0]
 		rooms[i[0]][1] = customRoom[1]
 		roomTypes[i[0]] = CUSTOM
@@ -183,8 +223,8 @@ func write_room(orig : Array, new : int, layer : int) -> void:
 	for y in range(1, 4):
 		for x in orig[0]:
 			for z in orig[1]:
-				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer)
-				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer)
+				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer, false)
+				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer, false)
 				
 				if layer == 0:
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)

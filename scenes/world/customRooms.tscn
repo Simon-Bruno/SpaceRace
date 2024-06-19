@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cljs8rm1l5bxj"]
 
-[ext_resource type="MeshLibrary" uid="uid://b25qtoexkrr81" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
+[ext_resource type="MeshLibrary" uid="uid://cbsjb6ohgeqy7" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
 
 [node name="Custom Rooms" type="Node3D"]
 
@@ -238,5 +238,23 @@ mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
 "cells": PackedInt32Array(65549, 2, 1441800, 65549, 1, 1441830, 65546, 4, 1441832, 65546, 5, 1441800, 65541, 1, 1441833, 65541, 2, 1441800, 65537, 4, 1441834, 65537, 5, 1441800)
+}
+metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="EndRoom" type="Node3D" parent="."]
+
+[node name="Statics" type="GridMap" parent="EndRoom"]
+mesh_library = ExtResource("1_nvyip")
+cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 3, 4, 0, 4, 4, 0, 6, 0, 2, 7, 0, 2, 7, 1, 0, 6, 1, 2, 6, 2, 2, 6, 3, 2, 5, 4, 0, 2, 4, 0, 6, 4, 0, 7, 3, 0, 7, 2, 0, 8, 0, 0, 8, 1, 0, 7, 4, 0, 8, 2, 0, 8, 3, 0, 9, 0, 0, 9, 1, 0, 4, 5, 0, 5, 5, 0, 3, 5, 0, 6, 5, 0, 65537, 3, 1048589, 65538, 4, 1048589, 65539, 5, 1048589, 65542, 5, 655373, 65543, 4, 655373, 65544, 3, 655373, 65545, 1, 655373, 65540, 5, 655371, 65541, 5, 655371, 65536, 1, 655371, 65545, 0, 1441806, 65537, 2, 1048590, 65544, 2, 1441807, 65546, 6, 23, 65542, 1, 1441823, 65542, 2, 1441823, 65540, 1, 1441823, 65540, 2, 1441823, 131071, 0, 24)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Dynamics" type="GridMap" parent="EndRoom"]
+mesh_library = ExtResource("1_nvyip")
+cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(65549, 1, 1441830, 65541, 1, 1441833, 65537, 4, 1441834, 65542, 0, 28)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
