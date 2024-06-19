@@ -43,11 +43,11 @@ func deactivated():
 	beam.visible = false
 	
 func _process(delta):
-	if target and active:
+	if target != null and active:
 		damage_time += delta
 		while damage_time > damage_delay:
 			damage_time -= damage_delay
-			target.take_damage(damage)
+			target.take_damage(target.name, damage)
 		
 	if ray.is_colliding():
 		var pos = ray.global_position
