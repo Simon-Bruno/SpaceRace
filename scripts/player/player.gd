@@ -5,6 +5,7 @@ var getHitCooldown: bool = true
 var points: int = 0
 @export var push_force: int = 1
 @export var alive: bool = true
+var strength : float = 1.0
 var respawn_immunity : bool = false
 
 # movement variables
@@ -22,7 +23,6 @@ var max_dist: float = 25.0  # max distance between players
 # animation variable
 var AnimDeath: bool = false
 var AnimJump: bool = false
-var strength : float = 1.0
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
@@ -61,7 +61,6 @@ func _horizontal_movement(delta):
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
-	#Audiocontroller.play_walking_sfx()
 
 	return vel
 
@@ -71,7 +70,6 @@ func _vertical_movement(delta):
 
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
 		vel.y = jump_impulse
-		Audiocontroller.play_jump_sfx()
 
 	if not is_on_floor():
 		vel.y = velocity.y - (fall_acceleration * delta)
@@ -156,10 +154,7 @@ func _physics_process(delta):
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
 		anim_handler()
-		#if velocity != Vector3.ZERO && velocity.y == 0:
-			#Audiocontroller.play_walking_sfx()
-		#if velocity == Vector3.ZERO:
-			#Audiocontroller.stop_walking_sfx()
+		
 		if alive:
 			move_and_slide()
 	move_object()
@@ -171,13 +166,14 @@ func _input(event):
 			$Class.ability1()
 		if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
 			$Class.ability2()
+ 
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(id, damage):
 	if str(id) != str(multiplayer.get_unique_id()):
-		return
-
+		return 
+		
 	if !respawn_immunity and alive and getHitCooldown:
 		health = max(0, health - damage)
 		getHitCooldown = false
@@ -193,7 +189,6 @@ func die():
 	AnimDeath = true
 	var temp = walk_speed
 	walk_speed = 0
-	
 	
 	request_play_animation(1, "death")  # play anim
 	await get_tree().create_timer(2).timeout  # wait for anim
