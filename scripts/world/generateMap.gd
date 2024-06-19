@@ -20,7 +20,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 0
+const CUSTOMROOMPERCENTAGE : float = 1
 
 # General room parameters
 const room_amount : int = 5
@@ -100,7 +100,7 @@ func build_map() -> void:
 	draw_rooms()
 	place_custom_room(pairs)
 	add_finish()
-	
+
 	draw_paths()
 
 	draw_windows()
@@ -108,7 +108,7 @@ func build_map() -> void:
 
 	add_finish()
 	mirror_world()
-	
+
 	convert_static_to_entities()
 	# Generate finish pressure plate:
 	#entityGeneration.replace_entities(rooms)
@@ -122,10 +122,10 @@ func add_finish():
 	# Get start positions of end room:
 	var start_pos = rooms[-1]
 	print("startX is: ", start_pos[2], "width: ", start_pos[0])
-	
+
 	# startx prev room + width room
 	var endroom_startX = start_pos[2] + start_pos[0]
-	
+
 	# layer is for static or dynamic gridmap
 	for layer in range(0, 1):
 		for x in range(0, max(endroom_dimensions[0], room_width+2)):
@@ -134,12 +134,12 @@ func add_finish():
 					# Add special endroom
 					var item = roomLink.get_room_item(Vector3i(x, y, z), 0, layer, true)
 					var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), 0, layer, true )
-					
+
 					if layer == 0:
 						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
 					else:
 						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
-					
+
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
 	plate.position = map_to_local(Vector3i((start_pos[2]+8), 1, 0))
 	plate.interactable = null
@@ -177,10 +177,10 @@ func reset_room_spacing() -> void:
 # TODO: Breaks room margins a bit, might need to be changed.
 func get_custom_rooms() -> Array:
 	var total_picks = int(min((room_amount - 2) * CUSTOMROOMPERCENTAGE, roomLink.total_rooms()))
-	
+
 	var originals = random_picks(total_picks, 1, room_amount - 1)
 	var customs = random_picks(total_picks, 0, roomLink.total_rooms())
-	
+
 	# Creates index pairs between the generated floorplan and the custom floorplan.
 	var pairs = []
 	for i in total_picks:
@@ -191,7 +191,7 @@ func get_custom_rooms() -> Array:
 		rooms[i[0]][0] = customRoom[0]
 		rooms[i[0]][1] = customRoom[1]
 		roomTypes[i[0]] = CUSTOM
-	
+
 	roomTypes[-1] = CUSTOM
 
 	reset_room_spacing()
@@ -214,14 +214,14 @@ func write_room(orig : Array, new : int, layer : int) -> void:
 			for z in orig[1]:
 				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer, false)
 				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer, false)
-				
+
 				if layer == 0:
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
 				else:
 					entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
 
-	
-# Function gets an Array containing the custom rooms that have been assigned, 
+
+# Function gets an Array containing the custom rooms that have been assigned,
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
 	var MAX_HEIGHT = 4
@@ -231,7 +231,7 @@ func place_custom_room(pairs : Array) -> void:
 		write_room(orig, pair[1], 1)
 
 
-# Rotates function to new 
+# Rotates function to new
 static func new_orientation(item : int, orientation : int) -> int:
 	var new_rotation = []
 	match item:
@@ -261,7 +261,7 @@ func mirror_world() -> void:
 
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		self.set_cell_item(new_location, item, orientation)
-		
+
 	for x in entityGeneration.get_used_cells():
 		var item = entityGeneration.get_cell_item(x)
 		var orientation = entityGeneration.get_cell_item_orientation(x)
@@ -313,7 +313,7 @@ func pick_random_type() -> int:
 func define_rooms() -> void:
 	var widthMax = room_width + room_variation_x
 	var widthMin = room_width - room_variation_x
-	
+
 	#var heightMax = room_height + room_variation_y
 	var heightMax = 8
 	var heightMin = room_height - room_variation_y
