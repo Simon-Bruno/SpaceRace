@@ -109,7 +109,7 @@ func build_map() -> void:
 	add_finish()
 	mirror_world()
 	
-	convert_static_to_entities()
+	#convert_static_to_entities()
 	# Generate finish pressure plate:
 	#entityGeneration.replace_entities(rooms)
 
@@ -139,9 +139,8 @@ func add_finish():
 						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
 					else:
 						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
-					
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
-	plate.position = map_to_local(Vector3i((start_pos[2]+8), 1, 0))
+	plate.position = map_to_local(Vector3i((start_pos[2]+18), 0, 0))
 	plate.interactable = null
 	add_child(plate, true)
 
