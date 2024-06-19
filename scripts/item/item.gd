@@ -42,10 +42,8 @@ func delete():
 		queue_free()
 		return
 
-	var node = owned_node.get_node_or_null("PlayerItem")
-	
-	# Player stops holding item / forgets item
-	node.holding = null
+	var node = owned_node.get_node("PlayerItem")
+	node.holding = null # Player stops holding item / forgets item
 	queue_free()
 
 func _process(delta):

@@ -1,19 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://pt017vyh5o2r"]
+[gd_scene load_steps=6 format=3 uid="uid://c7t5n213gi5k3"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_xxtqf"]
 [ext_resource type="Script" path="res://scripts/item/strength_bottle.gd" id="2_jju86"]
+[ext_resource type="Texture2D" uid="uid://cds3fsbaampch" path="res://assets/CustomBlocks/items/strength-small-bottle.png" id="3_egkvx"]
+[ext_resource type="ArrayMesh" uid="uid://bmx0mubksw422" path="res://assets/CustomBlocks/items/strength-small-bottle.obj" id="4_5f0f7"]
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_b42w0"]
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_6l28a"]
+albedo_texture = ExtResource("3_egkvx")
 
 [node name="StrengthBottle" instance=ExtResource("1_xxtqf")]
 script = ExtResource("2_jju86")
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.747044, -0.0773146)
-material_override = SubResource("ORMMaterial3D_b42w0")
-mesh = ExtResource("2_emtnq")
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.691623, -0.0773146)
+material_override = SubResource("ORMMaterial3D_6l28a")
+mesh = ExtResource("4_5f0f7")
 
-[node name="PotionTimer" type="Timer" parent="." index="1"]
-wait_time = 10.0
+[node name="PotionTimer" type="Timer" parent="." index="2"]
 
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="timeout" from="PotionTimer" to="." method="_on_potion_timer_timeout"]
