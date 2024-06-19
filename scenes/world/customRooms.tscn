@@ -35,10 +35,10 @@ mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room1" type="Node3D" parent="."]
+[node name="Plates1" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room1"]
+[node name="Statics" type="GridMap" parent="Plates1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -46,7 +46,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room1"]
+[node name="Dynamics" type="GridMap" parent="Plates1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -54,10 +54,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room2" type="Node3D" parent="."]
+[node name="Button1" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room2"]
+[node name="Statics" type="GridMap" parent="Button1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -65,7 +65,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room2"]
+[node name="Dynamics" type="GridMap" parent="Button1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -73,10 +73,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room3" type="Node3D" parent="."]
+[node name="Plates2" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room3"]
+[node name="Statics" type="GridMap" parent="Plates2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -84,7 +84,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room3"]
+[node name="Dynamics" type="GridMap" parent="Plates2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -92,10 +92,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room4" type="Node3D" parent="."]
+[node name="Maze1" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room4"]
+[node name="Statics" type="GridMap" parent="Maze1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -103,15 +103,15 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room4"]
+[node name="Dynamics" type="GridMap" parent="Maze1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room5" type="Node3D" parent="."]
+[node name="Maze2" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room5"]
+[node name="Statics" type="GridMap" parent="Maze2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -119,7 +119,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(2, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room5"]
+[node name="Dynamics" type="GridMap" parent="Maze2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -127,10 +127,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room6" type="Node3D" parent="."]
+[node name="Laser1" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room6"]
+[node name="Statics" type="GridMap" parent="Laser1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -138,7 +138,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room6"]
+[node name="Dynamics" type="GridMap" parent="Laser1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -146,10 +146,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room7" type="Node3D" parent="."]
+[node name="Repair1" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room7"]
+[node name="Statics" type="GridMap" parent="Repair1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -157,7 +157,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room7"]
+[node name="Dynamics" type="GridMap" parent="Repair1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -165,10 +165,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room8" type="Node3D" parent="."]
+[node name="Plates3" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room8"]
+[node name="Statics" type="GridMap" parent="Plates3"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -176,7 +176,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room8"]
+[node name="Dynamics" type="GridMap" parent="Plates3"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -184,10 +184,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room9" type="Node3D" parent="."]
+[node name="Laser2" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room9"]
+[node name="Statics" type="GridMap" parent="Laser2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -195,7 +195,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room9"]
+[node name="Dynamics" type="GridMap" parent="Laser2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -203,10 +203,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room10" type="Node3D" parent="."]
+[node name="Button2" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room10"]
+[node name="Statics" type="GridMap" parent="Button2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -214,7 +214,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room10"]
+[node name="Dynamics" type="GridMap" parent="Button2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -222,10 +222,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room11" type="Node3D" parent="."]
+[node name="Plates4" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room11"]
+[node name="Statics" type="GridMap" parent="Plates4"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -233,7 +233,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room11"]
+[node name="Dynamics" type="GridMap" parent="Plates4"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -241,10 +241,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room12" type="Node3D" parent="."]
+[node name="Portal1" type="Node3D" parent="."]
 visible = false
 
-[node name="Statics" type="GridMap" parent="Room12"]
+[node name="Statics" type="GridMap" parent="Portal1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -252,7 +252,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room12"]
+[node name="Dynamics" type="GridMap" parent="Portal1"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -260,9 +260,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Room13" type="Node3D" parent="."]
+[node name="Portal2" type="Node3D" parent="."]
+visible = false
 
-[node name="Statics" type="GridMap" parent="Room13"]
+[node name="Statics" type="GridMap" parent="Portal2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -270,10 +271,29 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Dynamics" type="GridMap" parent="Room13"]
+[node name="Dynamics" type="GridMap" parent="Portal2"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(7, 2, 5, 3, 3, 4, 7, 3, 1, 9, 2, 1, 9, 1, 2, 13, 2, 6, 8, 2, 1, 8, 3, 1, 8, 4, 1, 7, 4, 1, 6, 3, 4, 6, 4, 1, 4, 3, 1, 3, 4, 6, 4, 4, 1, 3, 1, 1, 6, 2, 1, 8, 1, 1, 9, 3, 4, 13, 1, 1, 13, 3, 4, 12, 3, 4, 10, 3, 4, 5, 3, 4, 5, 4, 4, 3, 2, 4, 2, 3, 5, 65537, 0, 1441826, 65539, 0, 1441828, 65539, 3, 1441829, 65544, 0, 1441824, 65542, 4, 1441824, 65544, 4, 1441828, 65542, 7, 1441825, 65549, 0, 1441829, 65543, 3, 655442, 65547, 3, 655442, 65549, 5, 1441830, 65549, 6, 1441800)
+"cells": PackedInt32Array(65537, 0, 1441826, 65539, 0, 1441828, 65539, 3, 1441829, 65544, 0, 1441824, 65542, 4, 1441824, 65544, 4, 1441828, 65542, 7, 1441825, 65549, 0, 1441829, 65543, 3, 655442, 65547, 3, 655442, 65549, 5, 1441830, 65549, 6, 1441800)
+}
+metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="Portal3" type="Node3D" parent="."]
+visible = false
+
+[node name="Statics" type="GridMap" parent="Portal3"]
+mesh_library = ExtResource("1_nvyip")
+cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(131071, 0, 24, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 1, 7, 0, 2, 7, 0, 3, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 6, 0, 3, 7, 0, 1, 6, 0, 2, 6, 0, 1, 5, 0, 2, 5, 0, 2, 4, 0, 1, 4, 0, 1, 3, 0, 2, 3, 0, 1, 2, 0, 2, 2, 0, 1, 1, 0, 2, 1, 0, 65536, 0, 13, 65536, 7, 1048589, 65536, 6, 1048587, 65536, 5, 1048587, 65536, 2, 1048587, 65536, 1, 1048587, 65537, 0, 11, 65538, 0, 11, 65538, 7, 655371, 65536, 3, 1048586, 65536, 4, 1048585, 4, 0, 1441792, 4, 1, 1441792, 4, 2, 1441792, 4, 3, 1441792, 4, 4, 1441792, 4, 5, 1441792, 4, 6, 1441792, 4, 7, 1441792, 5, 7, 1441792, 6, 7, 1441792, 6, 6, 1441792, 7, 6, 1441792, 7, 7, 1441792, 8, 7, 1441792, 9, 7, 1441792, 9, 6, 1441792, 10, 6, 1441792, 10, 5, 1441792, 10, 4, 1441792, 10, 3, 1441792, 10, 2, 1441792, 10, 1, 1441792, 9, 1, 1441792, 9, 0, 1441792, 8, 0, 1441792, 7, 0, 1441792, 7, 1, 1441792, 6, 1, 1441792, 6, 0, 1441792, 5, 0, 1441792, 5, 1, 1441792, 5, 2, 1441792, 5, 3, 1441792, 5, 4, 1441792, 5, 5, 1441792, 5, 6, 1441792, 6, 5, 1441792, 6, 4, 1441792, 7, 4, 1441792, 7, 3, 1441792, 8, 3, 1441792, 8, 2, 1441792, 9, 2, 1441792, 10, 0, 1441792, 8, 1, 1441792, 7, 2, 1441792, 6, 2, 1441792, 6, 3, 1441792, 9, 3, 1441792, 9, 4, 1441792, 9, 5, 1441792, 8, 6, 1441792, 8, 5, 1441792, 8, 4, 1441792, 7, 5, 1441792, 10, 7, 1441792, 11, 7, 1441792, 12, 7, 1441792, 13, 7, 1441792, 13, 6, 1441792, 13, 5, 1441792, 13, 4, 1441792, 14, 4, 1441792, 14, 3, 1441792, 14, 2, 1441792, 14, 1, 1441792, 14, 0, 1441792, 13, 0, 1441792, 12, 0, 1441792, 11, 0, 1441792, 11, 1, 1441792, 11, 2, 1441792, 11, 3, 1441792, 11, 4, 1441792, 11, 5, 1441792, 11, 6, 1441792, 12, 6, 1441792, 12, 5, 1441792, 13, 3, 1441792, 13, 2, 1441792, 13, 1, 1441792, 12, 1, 1441792, 12, 2, 1441792, 12, 3, 1441792, 12, 4, 1441792, 14, 5, 1441792, 14, 6, 1441792, 14, 7, 1441792, 65550, 0, 1441805, 65550, 7, 655373, 65549, 7, 655371, 65548, 7, 655371, 65547, 7, 655371, 65546, 7, 655371, 65545, 7, 655371, 65544, 7, 655371, 65543, 7, 655371, 65542, 7, 655371, 65541, 7, 655373, 65540, 7, 655371, 65539, 7, 655371, 65537, 7, 655371, 65539, 0, 11, 65540, 0, 11, 65541, 0, 1441805, 65542, 0, 11, 65543, 0, 11, 65544, 0, 11, 65546, 0, 11, 65547, 0, 11, 65548, 0, 11, 65549, 0, 11, 65545, 0, 11, 65550, 1, 1441801, 65550, 2, 1441802, 65550, 4, 1441805, 65550, 5, 1441803, 65550, 6, 1441803, 65542, 4, 11, 65543, 4, 11, 65544, 4, 11, 65545, 4, 11, 65546, 4, 11, 65548, 4, 11, 65549, 4, 11, 65547, 4, 11, 65550, 3, 1441803, 65541, 4, 1441803, 65541, 5, 1441803, 65541, 6, 1441803, 65541, 1, 1441803, 65541, 2, 1441803, 65541, 3, 1441803)
+}
+metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="Dynamics" type="GridMap" parent="Portal3"]
+mesh_library = ExtResource("1_nvyip")
+cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(65540, 2, 655396, 65540, 3, 655394, 65540, 4, 655397, 65540, 5, 655393, 65540, 6, 655392, 65540, 7, 655395, 65544, 1, 655396, 65547, 6, 655397, 65549, 1, 655394, 65544, 2, 655395, 65548, 2, 655393, 65546, 1, 655392)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
