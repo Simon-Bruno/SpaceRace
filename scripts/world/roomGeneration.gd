@@ -25,8 +25,6 @@ var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 
 func _ready():
-	if not multiplayer.is_server():
-		return
 	if world.generate_room:
 		var start : Vector3i = world.start_pos
 		var end : Vector3i = world.end_pos
@@ -410,6 +408,8 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	self.get_parent().add_child(dup, true)
 	# Set the generate variable back, so the next will be filled.
 	world.generate_room = true
+	if not multiplayer.is_server():
+		return
 	add_objects(floor_plan, world_dict['objects'], width, height, start)
 	add_mobs(floor_plan, world_dict['enemies'], width, height, start)
 	#GlobalSpawner.spawn_melee_enemy(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
