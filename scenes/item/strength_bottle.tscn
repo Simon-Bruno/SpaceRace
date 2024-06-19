@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://pt017vyh5o2r"]
+
+[ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_xxtqf"]
+[ext_resource type="ArrayMesh" uid="uid://bmx0mubksw422" path="res://assets/CustomBlocks/items/strength-small-bottle.obj" id="2_emtnq"]
+[ext_resource type="Script" path="res://scripts/item/strength_bottle.gd" id="2_jju86"]
+[ext_resource type="Texture2D" uid="uid://cds3fsbaampch" path="res://assets/CustomBlocks/items/strength-small-bottle.png" id="2_nyoqg"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_b42w0"]
+albedo_texture = ExtResource("2_nyoqg")
+
+[node name="Item" instance=ExtResource("1_xxtqf")]
+script = ExtResource("2_jju86")
+
+[node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.747044, -0.0773146)
+material_override = SubResource("ORMMaterial3D_b42w0")
+mesh = ExtResource("2_emtnq")

@@ -11,6 +11,7 @@ func use():
 	timer.start()
 	player_history = owned_node
 
+
 # The bomb will explode after three seconds
 func _on_fuse_timer_timeout():
 	var blast_radius = $RigidBody3D/Radius
@@ -24,6 +25,7 @@ func _on_fuse_timer_timeout():
 				# damage, source
 				target.take_damage(bomb_damage, player_history)
 	super.delete()
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
