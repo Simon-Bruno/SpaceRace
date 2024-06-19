@@ -136,7 +136,6 @@ func anim_handler():
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
 		request_play_animation(0, "stop")
 		request_play_animation(1, "jump")
-
 		AnimJump = true
 	else:
 		if velocity != Vector3.ZERO && velocity.y == 0:
