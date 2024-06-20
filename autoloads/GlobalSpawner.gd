@@ -13,7 +13,7 @@ var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
 
-func spawn_pressure_plate(pos, dir, interact):
+func spawn_pressure_plate(pos, dir, interact, pos_enemy):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
@@ -22,6 +22,8 @@ func spawn_pressure_plate(pos, dir, interact):
 		plate.position = pos
 		plate.basis	= dir
 		plate.interactable = interact
+		if pos_enemy != null:
+			plate.enemy_pos = pos_enemy
 		spawner.add_child(plate, true)
 		return plate
 	return null

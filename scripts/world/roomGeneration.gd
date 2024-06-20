@@ -12,15 +12,6 @@ var parser = preload("res://scripts/world/rms_parser.gd").new()
 
 var absolute_position = Vector3i(0, 0, 0)
 
-var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
-var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var key_scene = preload("res://scenes/item/item.tscn")
-var bomb_scene = preload("res://scenes/item/bomb.tscn")
-var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
-var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
-var button_scene = preload("res://scenes/interactables/button.tscn")
-var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
-var door_scene = preload("res://scenes/interactables/door.tscn")
 var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 
@@ -441,3 +432,4 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		add_objects(floor_plan, world_dict['objects'], width, height, start)
 	if world_dict.has('enemies'):
 		add_mobs(floor_plan, world_dict['enemies'], width, height, start)
+

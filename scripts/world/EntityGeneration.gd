@@ -122,7 +122,7 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 2
-	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
+	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door, null)
 	set_cell_item(interactable[1], EMPTY)
 
 
