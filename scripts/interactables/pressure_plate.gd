@@ -1,9 +1,15 @@
 extends Node3D
 
 @export var interactable : Node
+@export var winner_id : int
+var is_finish_plate = false
+
 
 var customRooms = null
 var bodies_on_plate: Array = []
+
+#@export var finish_plate: Node = preload("res://scripts/interactables/finish_plate.gd").new()
+var finish = preload("res://scenes/menu/finish_menu.tscn")
 
 # Detect when body entered the area
 func _on_area_3d_body_entered(body) -> void:
@@ -12,7 +18,11 @@ func _on_area_3d_body_entered(body) -> void:
 	if body.is_in_group("Players") or body is RigidBody3D:
 		if bodies_on_plate.is_empty():
 			update_mesh.rpc(customRooms.PRESSUREPLATEON)
-			if interactable != null:
+			if is_finish_plate:
+				winner_id = body.name.to_int()
+				finish = finish.instantiate()
+				add_child(finish)
+			else:
 				interactable.activated()
 		bodies_on_plate.append(body)
 
@@ -26,6 +36,8 @@ func _on_area_3d_body_exited(body) -> void:
 			update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 			if interactable != null:
 				interactable.deactivated()
+			else:
+				pass
 
 # Updates the pressureplate mesh according to the current state
 @rpc("authority", "call_local", "reliable")

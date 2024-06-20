@@ -6,7 +6,6 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
-signal on_fps_toggled(value : bool)
 
 # Excluding host
 var max_client_connections = 3
@@ -34,11 +33,9 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 
-func emit_on_fps_toggled(value : bool):
-	on_fps_toggled.emit(value)
-
 func _on_connection_failed():
 	remove_multiplayer_peer()
+
 
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
@@ -103,6 +100,10 @@ func _hard_reset_to_lobby():
 
 func _on_player_disconnected(id):
 	player_names.erase(id)
+	go_to_lobby()
+	player_disconnected.emit(id)
+	
+func go_to_lobby():
 	if multiplayer.is_server():
 		var world = get_node_or_null("/root/Main/SpawnedItems/World")
 		if world != null:
@@ -112,9 +113,7 @@ func _on_player_disconnected(id):
 			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
 			for player_id in player_names.keys():
 				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
-	player_disconnected.emit(id)
 
-	player_disconnected.emit(id)
 
 func _on_leave_button_pressed():
 	var id = multiplayer.get_unique_id()
@@ -131,7 +130,6 @@ func _on_leave_button_pressed():
 
 
 func _on_server_disconnected():
-	print("Server disconnect")
 	var world = get_node_or_null("/root/Main/SpawnedItems/World")
 	if world:
 		world.queue_free()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://btxasx3bw2gsj"]
 
-[ext_resource type="MeshLibrary" uid="uid://d3xfnokd1s7p2" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_6h4do"]
+[ext_resource type="MeshLibrary" uid="uid://q5dj3o3fyg0k" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_6h4do"]
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
 [ext_resource type="Texture2D" uid="uid://didwfxwu170he" path="res://assets/world/pixel_moon.png" id="3_iylh6"]
 [ext_resource type="Script" path="res://scripts/world/EntityGeneration.gd" id="3_lm2mp"]
