@@ -441,4 +441,3 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		add_objects(floor_plan, world_dict['objects'], width, height, start)
 	if world_dict.has('enemies'):
 		add_mobs(floor_plan, world_dict['enemies'], width, height, start)
-	#GlobalSpawner.spawn_melee_enemy(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))
