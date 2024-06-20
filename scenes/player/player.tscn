@@ -38,9 +38,8 @@ properties/7/replication_mode = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owxfs"]
 albedo_texture = ExtResource("2_8qfng")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_4hx3q"]
-height = 1.5526
-radius = 0.600331
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ewsk"]
+size = Vector3(1, 1.6, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2fdg3"]
 height = 1.0
@@ -70,14 +69,14 @@ replication_config = SubResource("SceneReplicationConfig_v5bfw")
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_owxfs")
 mesh = ExtResource("3_ip8av")
 skeleton = NodePath("../../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
-shape = SubResource("CylinderShape3D_4hx3q")
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+shape = SubResource("BoxShape3D_0ewsk")
 
 [node name="PlayerHitbox" type="Area3D" parent="."]
 collision_layer = 2

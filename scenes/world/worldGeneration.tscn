@@ -1,18 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://btxasx3bw2gsj"]
+[gd_scene load_steps=9 format=3 uid="uid://btxasx3bw2gsj"]
 
-[ext_resource type="MeshLibrary" uid="uid://bi3sgt1dmjk3d" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_6h4do"]
+[ext_resource type="MeshLibrary" uid="uid://4igdcrkl61q6" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_6h4do"]
 [ext_resource type="Script" path="res://scripts/world/generateMap.gd" id="1_een4t"]
 [ext_resource type="Texture2D" uid="uid://didwfxwu170he" path="res://assets/world/pixel_moon.png" id="3_iylh6"]
 [ext_resource type="Script" path="res://scripts/world/EntityGeneration.gd" id="3_lm2mp"]
 [ext_resource type="Script" path="res://scripts/world/customRoomDefs.gd" id="4_hk2br"]
-
-[sub_resource type="Environment" id="Environment_mgk52"]
-fog_enabled = true
-fog_light_color = Color(0.28973, 0.316568, 0.358758, 1)
-fog_light_energy = 0.35
-fog_sun_scatter = 0.45
-fog_density = 0.008
-fog_sky_affect = 0.375
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hh1hr"]
 properties/0/path = NodePath("WorldGeneration:game_seed")
@@ -20,16 +12,15 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwrri"]
+albedo_color = Color(0.497474, 0.497474, 0.497474, 1)
 albedo_texture = ExtResource("3_iylh6")
 uv1_scale = Vector3(50, 50, 50)
+disable_receive_shadows = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rwr1h"]
 material = SubResource("StandardMaterial3D_gwrri")
 
 [node name="WorldGeneration" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_mgk52")
 
 [node name="WorldGeneration" type="GridMap" parent="."]
 mesh_library = ExtResource("1_6h4do")
@@ -42,16 +33,20 @@ mesh_library = ExtResource("1_6h4do")
 cell_scale = 1.25
 script = ExtResource("3_lm2mp")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.79673, 0.604335, 0, -0.604335, -0.79673, 0, 0, 0, 1, 0, 133.512, 0)
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hh1hr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 1.89836, 0)
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 1.8, 0)
 mesh = SubResource("PlaneMesh_rwr1h")
 skeleton = NodePath("../WorldGeneration")
 
 [node name="roomLink" type="Node" parent="."]
 script = ExtResource("4_hk2br")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866026, -0.433013, 0.25, 0, 0.5, 0.866026, -0.5, -0.75, 0.433013, 0, 133, 0)
+light_indirect_energy = 0.0
+shadow_enabled = true
+shadow_blur = 0.0
+directional_shadow_fade_start = 0.0
