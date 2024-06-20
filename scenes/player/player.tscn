@@ -70,11 +70,13 @@ replication_config = SubResource("SceneReplicationConfig_v5bfw")
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_owxfs")
 mesh = ExtResource("3_ip8av")
 skeleton = NodePath("../../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 shape = SubResource("CylinderShape3D_4hx3q")
 
 [node name="PlayerHitbox" type="Area3D" parent="."]
