@@ -497,10 +497,8 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	self.get_parent().add_child(dup, true)
 	# Set the generate variable back, so the next will be filled.
 	world.generate_room = true
-	if world_dict.has('objects'):
-		add_objects(floor_plan, world_dict['objects'], width, height, start)
+	#if world_dict.has('objects'):
+		#add_objects(floor_plan, world_dict['objects'], width, height, start)
 	#if world_dict.has('enemies'):
 		#add_mobs(floor_plan, world_dict['enemies'], width, height, start)
 
-	#var laser = GlobalSpawner.spawn_laser(Vector3(2,3,2), 0, true)
-	#GlobalSpawner.spawn_button(Vector3i(10,2,10), 0, laser, false)
