@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@export var walk_speed = 12
 @export var walkspeed_multiplier : float = 1
+@export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 var getHitCooldown = true

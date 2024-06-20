@@ -23,10 +23,9 @@ func slow_enemies() -> void:
 		else:
 			player_node = Network.get_player_node_by_id(player_id)
 			player_node.walkspeed_multiplier = 0.1
-			player_node.walk_speed = 1
 			slowed_player_nodes.append(player_node) 
 			$slow_duration.start()
-			player_node.get_node("PlayerCombat/SubViewport/HpBar").value = 50
+			player_node.get_node("PlayerCombat/SubViewport/HpBar").value = 50 # to see which nodes are affected
 	print("player node: ", Network.get_player_node_by_id(multiplayer.get_unique_id()))
 	print("slowed nodes: ", slowed_player_nodes)
 
