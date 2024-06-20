@@ -428,13 +428,13 @@ func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height
 		x = position[0]
 		z = position[1]
 		if type == 'MELEE':
-			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 1, z) + absolute_position)
-			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 1, -z) + absolute_position)
+			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 0, z) + absolute_position)
+			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 0, -z) + absolute_position)
 		elif type == 'RANGED':
 			# Pass for now, since the bullets of the ranged enemies are bugged.
 			continue
-			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 1, z) + absolute_position)
-			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 1, -z) + absolute_position)
+			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 0, z) + absolute_position)
+			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 0, -z) + absolute_position)
 
 	return positions != []
 
