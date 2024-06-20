@@ -317,7 +317,7 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 		floor_plan[z - 1][x - 1] = BUTTON
 		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), laser, false)
 		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, -z), Basis().rotated(Vector3(0, -1, 0), deg_to_rad(180)), laser2, false)
-	
+
 	return true
 
 

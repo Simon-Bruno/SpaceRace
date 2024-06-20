@@ -1,14 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmd1ukqi3i7ue"]
+[gd_scene load_steps=5 format=3 uid="uid://dmd1ukqi3i7ue"]
 
 [ext_resource type="Script" path="res://scripts/interactables/portal.gd" id="1_n1drk"]
+[ext_resource type="ArrayMesh" uid="uid://4srb48ud25u2" path="res://assets/CustomBlocks/placable/teleporter.obj" id="2_n86jp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gg1hi"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0r7i"]
-albedo_color = Color(0.211221, 0.43954, 0.475196, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_hh88d"]
-material = SubResource("StandardMaterial3D_r0r7i")
+size = Vector3(1.3985, 0.765015, 1.39893)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lenfv"]
 properties/0/path = NodePath(".:position")
@@ -33,10 +29,11 @@ script = ExtResource("1_n1drk")
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Portal/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.15527e-05, -0.419006, -0.000244141)
 shape = SubResource("BoxShape3D_gg1hi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Portal"]
-mesh = SubResource("BoxMesh_hh88d")
+mesh = ExtResource("2_n86jp")
 skeleton = NodePath("../..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
