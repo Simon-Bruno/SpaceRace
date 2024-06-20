@@ -3,9 +3,7 @@ extends Node3D
 # the target that is in the laser
 var target = null
 
-var damage = 10
-var damage_delay = 0.2 # dmg delay in seconds
-var damage_time = damage_delay # keep track of time, first dmg tick should be instant
+var damage = 100
 @export var active = true
 @export var activation_count = 1
 @export var hinder = false
@@ -24,8 +22,6 @@ func _on_area_3d_body_entered(body):
 func _on_area_3d_body_exited(body):
 	if body.is_in_group("Players"):
 		target = null
-		# make sure first tick always does dmg
-		damage_time = damage_delay
 
 func activated():
 	if not multiplayer.is_server():
@@ -47,10 +43,9 @@ func deactivated():
 	
 func _process(delta):
 	if target != null and active:
-		damage_time += delta
-		while damage_time > damage_delay:
-			damage_time -= damage_delay
-			target.take_damage(target.name, damage)
+			#target.take_damage(target.name, damage)
+			target.die()
+			
 		
 	if not multiplayer.is_server():
 		return 
