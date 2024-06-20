@@ -299,9 +299,9 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
 	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
-	var laser = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, object['set_activation'], true)
+	var laser = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, false, object['set_activation'], true)
 	basis = Basis().rotated(Vector3(0, -1, 0), angle)
-	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, object['set_activation'], true)
+	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, false, object['set_activation'], true)
 
 	for i in object['set_activation']:
 		var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
@@ -499,6 +499,8 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	world.generate_room = true
 	if world_dict.has('objects'):
 		add_objects(floor_plan, world_dict['objects'], width, height, start)
-	if world_dict.has('enemies'):
-		add_mobs(floor_plan, world_dict['enemies'], width, height, start)
+	#if world_dict.has('enemies'):
+		#add_mobs(floor_plan, world_dict['enemies'], width, height, start)
 
+	#var laser = GlobalSpawner.spawn_laser(Vector3(2,3,2), 0, true)
+	#GlobalSpawner.spawn_button(Vector3i(10,2,10), 0, laser, false)

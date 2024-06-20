@@ -20,7 +20,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 0
+const CUSTOMROOMPERCENTAGE : float = 1
 
 # General room parameters
 const room_amount : int = 10
@@ -401,9 +401,9 @@ func draw_paths() -> void:
 			right.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-	assert(right.size() == ends.size())
-	for i in right.size():
-		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
+	#assert(right.size() == ends.size())
+	#for i in right.size():
+		#make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
