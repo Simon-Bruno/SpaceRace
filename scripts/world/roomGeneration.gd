@@ -32,7 +32,17 @@ func _ready():
 		var end : Vector3i = world.end_pos
 		var last_room : bool = world.last_room
 		absolute_position = world.absolute_position
-		var filename = "res://files/random_map_scripts/test.rms"
+		var dir = DirAccess.open("res://files/random_map_scripts")
+		var filenames = []
+		if dir:
+			dir.list_dir_begin()
+			var file = dir.get_next()
+			while file != "":
+				if file.ends_with(".rms"):
+					filenames.append("res://files/random_map_scripts/" + file)
+				file = dir.get_next()
+		print(filenames)
+		var filename = filenames[randi() % filenames.size()]
 		var world_dict : Dictionary = parser.parse_file(filename)
 		fill_room(world_dict, start, end, last_room)
 
@@ -345,37 +355,52 @@ func add_objects(floor_plan : Array[Array], objects_list : Array, width : int, h
 			# Try again if failed the first time.
 			object_matcher(object, floor_plan, width, height, start)
 
-func enemy_placement(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> Array:
+func enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, width : int, height : int, start : Vector3i) -> Array:
 	var min_dist : int = object['set_min_distance']
 	var max_dist : int = object['set_max_distance']
+	var buffer = radius + 1
 
-	var zmin = min(max(3, start[2] * 2 - max_dist), height - 3)
-	var zmax = min(height - 5, start[2] * 2 + max_dist)
+	var zmin = min(max(buffer, start[2] * 2 - max_dist), height - buffer)
+	var zmax = min(height - buffer, start[2] * 2 + max_dist)
 	var z = randi_range(zmin, zmax)
-	var xmin = 3
-	var xmax = min(width - 3, start[0] * 2 + max_dist)
+	var xmin = radius + 1
+	var xmax = min(width - buffer, start[0] * 2 + max_dist)
 	if abs(start[2] * 2 - z) < min_dist:
-		xmin = min(width - 3, start[0] * 2 + min_dist)
+		xmin = min(width - buffer, start[0] * 2 + min_dist)
 	var x = randi_range(xmin, xmax)
 
 	assert(z < height)
 
 	return [x, z]
 
-func place_enemy_in_radius(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
+func place_enemy_in_radius_tight(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
 	for i in radius + 1:
 		for j in radius + 1:
 			if not floor_plan[z - 1 + j][x - 1 + i]:
 				return [x + i, z + j]
 	return []
 
-func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, x : int, z: int) -> Array:
+func place_enemy_in_radius_loose(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
+	var xs = range(-radius, radius + 1)
+	var ys = range(-radius, radius + 1)
+	xs.shuffle()
+	ys.shuffle()
+	for i in xs:
+		for j in ys:
+			if not floor_plan[z - 1 + j][x - 1 + i]:
+				return [x + i, z + j]
+	return []
+
+func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, x : int, z: int) -> Array:
 	var number_enemies = object['set_group_size']
-	const radius : int = 2
 	var positions = []
 	positions.resize(number_enemies)
 	for i in number_enemies:
-		var pos = place_enemy_in_radius(floor_plan, radius, x, z)
+		var pos = []
+		if object['loose_grouping']:
+			pos = place_enemy_in_radius_loose(floor_plan, radius, x, z)
+		else:
+			pos = place_enemy_in_radius_tight(floor_plan, radius, x, z)
 		if not pos:
 			for j in i:
 				pos = positions[j]
@@ -392,12 +417,13 @@ func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, x 
 
 
 func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i):
-	var pos = enemy_placement(floor_plan, object, width, height, start)
+	var radius = object['radius'] if object.has('radius') else 2
+	var pos = enemy_placement(floor_plan, object, radius, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
 	assert(z < height)
 	var type = object['type']
-	var positions = generate_enemy_placement(floor_plan, object, x, z)
+	var positions = generate_enemy_placement(floor_plan, object, radius, x, z)
 	for position in positions:
 		x = position[0]
 		z = position[1]
@@ -469,7 +495,8 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 
 	if not last_floor:
 		generate_path(floor_plan, width, height, start, end)
-	add_walls(floor_plan, world_dict['walls'], width, height, start)
+	if world_dict.has('walls'):
+		add_walls(floor_plan, world_dict['walls'], width, height, start)
 	# Set the generate variable, so it will not recurse infinitely.
 	world.generate_room = false
 	# Only duplicate the walls.
@@ -479,7 +506,7 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 	self.get_parent().add_child(dup, true)
 	# Set the generate variable back, so the next will be filled.
 	world.generate_room = true
-	add_objects(floor_plan, world_dict['objects'], width, height, start)
+	if world_dict.has('objects'):
+		add_objects(floor_plan, world_dict['objects'], width, height, start)
 	if world_dict.has('enemies'):
 		add_mobs(floor_plan, world_dict['enemies'], width, height, start)
-	#GlobalSpawner.spawn_melee_enemy(Vector3i(randi_range(1, room[0] * 2 - 1), randi_range(5, 30), randi_range(1, room[1] * 2 - 1)))

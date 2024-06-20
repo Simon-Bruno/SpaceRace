@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjhtlroiketf2"]
+[gd_scene load_steps=14 format=3 uid="uid://6xgfgkneeals"]
 
 [ext_resource type="Script" path="res://scripts/characters/boss.gd" id="1_r0k3s"]
 [ext_resource type="PackedScene" uid="uid://cds22hi7osiev" path="res://scenes/enemy/enemy.tscn" id="2_3jxkt"]
