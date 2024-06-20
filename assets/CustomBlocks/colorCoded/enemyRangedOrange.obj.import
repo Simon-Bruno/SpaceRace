@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dh3dfdhy11vn2"
+path="res://.godot/imported/enemyRangedOrange.obj-6d0e57ddf3cf35a01f1dd57cb88be83e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/enemyRangedOrange.obj-6d0e57ddf3cf35a01f1dd57cb88be83e.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/enemyRangedOrange.obj"
+dest_files=["res://.godot/imported/enemyRangedOrange.obj-6d0e57ddf3cf35a01f1dd57cb88be83e.mesh", "res://.godot/imported/enemyRangedOrange.obj-6d0e57ddf3cf35a01f1dd57cb88be83e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

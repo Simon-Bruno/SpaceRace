@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://crmkckirferbu"
+path="res://.godot/imported/enemyGreen.obj-717ef3341808e701a64de1cd7842f7ae.mesh"
+
+[deps]
+
+files=["res://.godot/imported/enemyGreen.obj-717ef3341808e701a64de1cd7842f7ae.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/enemyGreen.obj"
+dest_files=["res://.godot/imported/enemyGreen.obj-717ef3341808e701a64de1cd7842f7ae.mesh", "res://.godot/imported/enemyGreen.obj-717ef3341808e701a64de1cd7842f7ae.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

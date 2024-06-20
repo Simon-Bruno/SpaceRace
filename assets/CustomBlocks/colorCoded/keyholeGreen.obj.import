@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cirqvh26xwxee"
+path="res://.godot/imported/keyholeGreen.obj-638b54816f6b27d269d681a2c1263eab.mesh"
+
+[deps]
+
+files=["res://.godot/imported/keyholeGreen.obj-638b54816f6b27d269d681a2c1263eab.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/keyholeGreen.obj"
+dest_files=["res://.godot/imported/keyholeGreen.obj-638b54816f6b27d269d681a2c1263eab.mesh", "res://.godot/imported/keyholeGreen.obj-638b54816f6b27d269d681a2c1263eab.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
