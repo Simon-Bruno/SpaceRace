@@ -98,8 +98,9 @@ func _on_detection_area_body_exited(body):
 		if body == closest_target_node:
 			closest_target_node = null
 		nodes_in_area.erase(body)
-		set_process(false)
-		set_physics_process(false)
+		if nodes_in_area.is_empty():
+			set_process(false)
+			set_physics_process(false)
 
 func _on_enemy_hitbox_body_entered(body):
 	if body.is_in_group("Players"):
