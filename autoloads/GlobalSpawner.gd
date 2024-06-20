@@ -147,7 +147,6 @@ func spawn_item(pos):
 		item.position = pos
 		spawner.add_child(item, true)
 
-
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
 	if not multiplayer.is_server():
