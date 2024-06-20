@@ -4,7 +4,7 @@ extends Node3D
 
 enum {HORIZONTAL, VERTICAL}
 
-enum {EMPTY, PATH, WALL, BUTTON, ITEM, LASER, BUFF, ENEMY}
+enum {EMPTY, PATH, WALL, BUTTON, ITEM, LASER, BUFF, ENEMY, BOX}
 
 enum {UP, LEFT, DOWN, RIGHT}
 
@@ -32,7 +32,6 @@ func _ready():
 				if file.ends_with(".rms"):
 					filenames.append("res://files/random_map_scripts/" + file)
 				file = dir.get_next()
-		print(filenames)
 		var filename = filenames[randi() % filenames.size()]
 		var world_dict : Dictionary = parser.parse_file(filename)
 		fill_room(world_dict, start, end, last_room)
@@ -256,6 +255,19 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
 	return true
 
+func add_box(floor_plan, object, width, height, start):
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+
+	if floor_plan[z - 1][x - 1]:
+		return false
+
+	floor_plan[z - 1][x - 1] = BOX
+	GlobalSpawner.spawn_box(absolute_position + Vector3i(x, 0, z))
+	GlobalSpawner.spawn_box(absolute_position + Vector3i(x, 0, -z))
+	return true
+
 func add_button(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
@@ -330,12 +342,14 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int,
 			# knows how to spawn buffs. For now, we just return true.
 			# return add_buff(floor_plan, object, width, height, start)
 			return true
+		'BOX':
+			return add_box(floor_plan, object, width, height, start)
 		'LASER':
 			return add_laser(floor_plan, object, width, height, start)
 		'ENEMY_LASER':
 			return add_enemy_laser(floor_plan, object, width, height, start)
 		_:
-			print('The object is not a supported object')
+			print('The object ', object['type'], ' is not a supported object')
 			return true
 
 # This function will eventually handle all the object placements. Currently it
@@ -419,13 +433,13 @@ func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height
 		x = position[0]
 		z = position[1]
 		if type == 'MELEE':
-			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 1, z) + absolute_position)
-			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 1, -z) + absolute_position)
+			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 0, z) + absolute_position)
+			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 0, -z) + absolute_position)
 		elif type == 'RANGED':
 			# Pass for now, since the bullets of the ranged enemies are bugged.
 			continue
-			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 1, z) + absolute_position)
-			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 1, -z) + absolute_position)
+			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 0, z) + absolute_position)
+			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 0, -z) + absolute_position)
 
 	return positions != []
 
