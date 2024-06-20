@@ -95,5 +95,7 @@ func enemies_parser(section : String, enemy_dict : Array) -> void:
 		var parsed_mob : Dictionary = segment_to_dict(mob[1])
 		if parsed_mob == {}:
 			continue
+		if not parsed_mob.has('loose_grouping'):
+			parsed_mob['loose_grouping'] = false
 		parsed_mob['type'] = type
 		enemy_dict.append(parsed_mob)
