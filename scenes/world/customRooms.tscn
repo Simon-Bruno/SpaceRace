@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cljs8rm1l5bxj"]
 
-[ext_resource type="MeshLibrary" uid="uid://d3xfnokd1s7p2" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
+[ext_resource type="MeshLibrary" uid="uid://b25qtoexkrr81" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_nvyip"]
 
 [node name="Custom Rooms" type="Node3D"]
 
@@ -24,15 +24,14 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Template" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Template"]
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65535, 0, 24, 65557, 9, 196631, 65556, 9, 196631, 65555, 9, 196631, 65554, 9, 196631, 65553, 9, 196631, 65552, 9, 196631, 65552, 10, 196631, 65553, 10, 196631, 65554, 10, 196631, 65555, 10, 196631, 65556, 10, 196631, 65557, 10, 196631, 65558, 10, 196631, 65559, 10, 196631, 65560, 9, 196631, 65561, 9, 196631, 65562, 9, 196631, 65563, 9, 196631, 65564, 8, 196631, 65565, 8, 196631, 65565, 9, 196631, 32, 7, 23, 32, 8, 23, 32, 5, 23, 27, 11, 23, 28, 10, 23, 27, 14, 23, 28, 11, 23)
+"cells": PackedInt32Array(131071, 0, 24)
 }
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Template"]
 mesh_library = ExtResource("1_nvyip")
@@ -93,6 +92,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Plates2" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="Plates2"]
 mesh_library = ExtResource("1_nvyip")
