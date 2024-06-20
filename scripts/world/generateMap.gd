@@ -383,10 +383,9 @@ func draw_rooms() -> void:
 
 
 func fill_room(room_dim: Array) -> void:
-	pass
-	#var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
-	#room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
-	#add_child(room_scene, true)
+	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
+	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
+	add_child(room_scene, true)
 
 
 
