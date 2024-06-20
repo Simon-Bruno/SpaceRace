@@ -11,7 +11,6 @@ var inverse : bool = false
 var start : bool = true
 
 # Detect when body entered the area
-
 func _on_area_3d_body_entered(body) -> void:
 	if body.is_in_group("Players") \
 	and body.name == str(multiplayer.get_unique_id()):
@@ -47,7 +46,7 @@ func _deactivate_switch():
 
 @rpc("any_peer", "call_local", "reliable")
 func _interact_pressed_on_button():
-	if not multiplayer.is_server():
+	if not multiplayer.is_server() or not interactable:
 		return
 	if !activate:
 		_activate_switch()
@@ -71,18 +70,26 @@ func handle_inverse_activation() -> void:
 func handle_inverse_deactivation() -> void:
 	interactable.activated()
 
-# Update button mesh based on current state
-func update_button_mesh(state : int):
-	if customRooms:
-		$Button/MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
-
 # Activate when button is pressed. Change the mesh to activate or deactivate.
 func _input(event):
 	if event.is_action_pressed("interact") and activate_text:
-		if player != null and interactable != null:
+		if player != null:
 			_interact_pressed_on_button.rpc()
 
 # Called when button is placed in world. Sets the mesh instance to off.
 func _ready() -> void:
-	customRooms = get_parent().get_parent()
+	var target_node_name = "WorldGeneration"
+	var root_node = get_tree().root
+	customRooms = find_node_by_name(root_node, target_node_name)
 	update_mesh.rpc(customRooms.WALLSWITCHOFF)
+
+#Search the gridmap of the world and returns it.
+func find_node_by_name(node: Node, target_name: String) -> Node:
+	if node.name == target_name:
+		return node
+
+	for child in node.get_children():
+		var found_node = find_node_by_name(child, target_name)
+		if found_node:
+			return found_node
+	return null

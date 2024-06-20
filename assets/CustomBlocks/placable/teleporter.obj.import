@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://4srb48ud25u2"
+path="res://.godot/imported/teleporter.obj-abeb3dbccea922723f195b2ebc2e3388.mesh"
+
+[deps]
+
+files=["res://.godot/imported/teleporter.obj-abeb3dbccea922723f195b2ebc2e3388.mesh"]
+
+source_file="res://assets/CustomBlocks/placable/teleporter.obj"
+dest_files=["res://.godot/imported/teleporter.obj-abeb3dbccea922723f195b2ebc2e3388.mesh", "res://.godot/imported/teleporter.obj-abeb3dbccea922723f195b2ebc2e3388.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
