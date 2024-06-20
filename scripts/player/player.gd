@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-@export var walk_speed = 12
+@export var walk_speed = 12  
+var walkspeed_multiplier : float = 1
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 var getHitCooldown = true
@@ -46,7 +47,7 @@ func _horizontal_movement(delta):
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
 	if current_direction != Vector2.ZERO:	# accelerate if moving
-		speed = min(walk_speed, speed + walk_acceleration * delta)
+		speed = min(walk_speed * walkspeed_multiplier, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
