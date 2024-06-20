@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://n62snpmyadi0"]
+[gd_scene load_steps=9 format=3 uid="uid://n62snpmyadi0"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_25n6l"]
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
@@ -9,6 +9,16 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1000, 1, 1000)
+
+[sub_resource type="Environment" id="Environment_wfjmj"]
+tonemap_mode = 2
+tonemap_exposure = 0.6
+fog_enabled = true
+fog_light_color = Color(0.28973, 0.316568, 0.358758, 1)
+fog_light_energy = 0.35
+fog_sun_scatter = 0.45
+fog_density = 0.008
+fog_sky_affect = 0.375
 
 [node name="World" type="Node"]
 script = ExtResource("1_25n6l")
@@ -61,3 +71,6 @@ shape = SubResource("BoxShape3D_afshc")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_3shum")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wfjmj")
