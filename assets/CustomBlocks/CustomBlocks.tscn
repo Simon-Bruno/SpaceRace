@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=171 format=3 uid="uid://cehfbggdu6pms"]
 
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
@@ -115,6 +115,24 @@
 [ext_resource type="ArrayMesh" uid="uid://bx7ii58kbkqd1" path="res://assets/CustomBlocks/colorCoded/terminalPurple.obj" id="113_wqgrn"]
 [ext_resource type="ArrayMesh" uid="uid://ce5q5xtkfy3uf" path="res://assets/CustomBlocks/colorCoded/terminalRed.obj" id="114_yn6fp"]
 [ext_resource type="ArrayMesh" uid="uid://w8gpski43ayf" path="res://assets/CustomBlocks/colorCoded/terminalYellow.obj" id="115_ry85d"]
+[ext_resource type="ArrayMesh" uid="uid://dbwjiu2keb62x" path="res://assets/CustomBlocks/colorCoded/bossBlue.obj" id="116_5ldii"]
+[ext_resource type="ArrayMesh" uid="uid://dmvmyxbdg67r7" path="res://assets/CustomBlocks/colorCoded/bossGreen.obj" id="117_dohsd"]
+[ext_resource type="ArrayMesh" uid="uid://imnn0a8qh6md" path="res://assets/CustomBlocks/colorCoded/bossOrange.obj" id="118_i5tjy"]
+[ext_resource type="ArrayMesh" uid="uid://yi1j57u3v5ts" path="res://assets/CustomBlocks/colorCoded/bossPurple.obj" id="119_tyrit"]
+[ext_resource type="ArrayMesh" uid="uid://c3fh3inrnhti" path="res://assets/CustomBlocks/colorCoded/bossRed.obj" id="120_6tcng"]
+[ext_resource type="ArrayMesh" uid="uid://bfm5n6qoso2ns" path="res://assets/CustomBlocks/colorCoded/bossYellow.obj" id="121_brti0"]
+[ext_resource type="ArrayMesh" uid="uid://cqny5f11p7wqa" path="res://assets/CustomBlocks/colorCoded/enemyBlue.obj" id="122_ylewc"]
+[ext_resource type="ArrayMesh" uid="uid://crmkckirferbu" path="res://assets/CustomBlocks/colorCoded/enemyGreen.obj" id="123_bdr8j"]
+[ext_resource type="ArrayMesh" uid="uid://bb8fagqpvwjo6" path="res://assets/CustomBlocks/colorCoded/enemyOrange.obj" id="124_i8qjk"]
+[ext_resource type="ArrayMesh" uid="uid://m6k5x4i01lyr" path="res://assets/CustomBlocks/colorCoded/enemyPurple.obj" id="125_mrq77"]
+[ext_resource type="ArrayMesh" uid="uid://bhlqj3x4ucd74" path="res://assets/CustomBlocks/colorCoded/enemyRed.obj" id="126_0jptj"]
+[ext_resource type="ArrayMesh" uid="uid://mxrxuf06cfba" path="res://assets/CustomBlocks/colorCoded/enemyYellow.obj" id="127_cx0q3"]
+[ext_resource type="ArrayMesh" uid="uid://cjryygm1hacao" path="res://assets/CustomBlocks/colorCoded/enemyRangedBlue.obj" id="128_ns5dw"]
+[ext_resource type="ArrayMesh" uid="uid://bqj33twr1eyis" path="res://assets/CustomBlocks/colorCoded/enemyRangedGreen.obj" id="129_oc3tt"]
+[ext_resource type="ArrayMesh" uid="uid://dh3dfdhy11vn2" path="res://assets/CustomBlocks/colorCoded/enemyRangedOrange.obj" id="130_q6btp"]
+[ext_resource type="ArrayMesh" uid="uid://bd3yxwxk8tipx" path="res://assets/CustomBlocks/colorCoded/enemyRangedPurple.obj" id="131_hhyvo"]
+[ext_resource type="ArrayMesh" uid="uid://dq8kbnan8qy7n" path="res://assets/CustomBlocks/colorCoded/enemyRangedRed.obj" id="132_hv4nd"]
+[ext_resource type="ArrayMesh" uid="uid://cwppit53l3xsc" path="res://assets/CustomBlocks/colorCoded/enemyRangedYellow.obj" id="133_g4q34"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
 albedo_texture = ExtResource("1_c8374")
@@ -222,6 +240,9 @@ albedo_texture = ExtResource("1_c8374")
 albedo_texture = ExtResource("1_c8374")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dwkl"]
+albedo_texture = ExtResource("1_c8374")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ujon"]
 albedo_texture = ExtResource("1_c8374")
 
 [node name="Node3D" type="Node3D"]
@@ -769,3 +790,75 @@ surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
 [node name="TerminalYellow" type="MeshInstance3D" parent="."]
 mesh = ExtResource("115_ry85d")
 surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="BossBlue" type="MeshInstance3D" parent="."]
+mesh = ExtResource("116_5ldii")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="BossGreen" type="MeshInstance3D" parent="."]
+mesh = ExtResource("117_dohsd")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="BossOrange" type="MeshInstance3D" parent="."]
+mesh = ExtResource("118_i5tjy")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="BossPurple" type="MeshInstance3D" parent="."]
+mesh = ExtResource("119_tyrit")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="BossRed" type="MeshInstance3D" parent="."]
+mesh = ExtResource("120_6tcng")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="BossYellow" type="MeshInstance3D" parent="."]
+mesh = ExtResource("121_brti0")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyBlue" type="MeshInstance3D" parent="."]
+mesh = ExtResource("122_ylewc")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyGreen" type="MeshInstance3D" parent="."]
+mesh = ExtResource("123_bdr8j")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyOrange" type="MeshInstance3D" parent="."]
+mesh = ExtResource("124_i8qjk")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyPurple" type="MeshInstance3D" parent="."]
+mesh = ExtResource("125_mrq77")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyRed" type="MeshInstance3D" parent="."]
+mesh = ExtResource("126_0jptj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyYellow" type="MeshInstance3D" parent="."]
+mesh = ExtResource("127_cx0q3")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyRangedBlue" type="MeshInstance3D" parent="."]
+mesh = ExtResource("128_ns5dw")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyRangedGreen" type="MeshInstance3D" parent="."]
+mesh = ExtResource("129_oc3tt")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyRangedOrange" type="MeshInstance3D" parent="."]
+mesh = ExtResource("130_q6btp")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyRangedPurple" type="MeshInstance3D" parent="."]
+mesh = ExtResource("131_hhyvo")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyRangedRed" type="MeshInstance3D" parent="."]
+mesh = ExtResource("132_hv4nd")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
+
+[node name="EnemyRangedYellow" type="MeshInstance3D" parent="."]
+mesh = ExtResource("133_g4q34")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ujon")
