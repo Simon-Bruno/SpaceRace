@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cqny5f11p7wqa"
+path="res://.godot/imported/enemyBlue.obj-81bdfe46c9b6b4c304ff2a6afee967a1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/enemyBlue.obj-81bdfe46c9b6b4c304ff2a6afee967a1.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/enemyBlue.obj"
+dest_files=["res://.godot/imported/enemyBlue.obj-81bdfe46c9b6b4c304ff2a6afee967a1.mesh", "res://.godot/imported/enemyBlue.obj-81bdfe46c9b6b4c304ff2a6afee967a1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
