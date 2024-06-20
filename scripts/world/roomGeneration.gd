@@ -41,7 +41,6 @@ func _ready():
 				if file.ends_with(".rms"):
 					filenames.append("res://files/random_map_scripts/" + file)
 				file = dir.get_next()
-		print(filenames)
 		var filename = filenames[randi() % filenames.size()]
 		var world_dict : Dictionary = parser.parse_file(filename)
 		fill_room(world_dict, start, end, last_room)
@@ -359,7 +358,7 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int,
 		'ENEMY_LASER':
 			return add_enemy_laser(floor_plan, object, width, height, start)
 		_:
-			print('The object is not a supported object')
+			print('The object ', object['type'], ' is not a supported object')
 			return true
 
 # This function will eventually handle all the object placements. Currently it
