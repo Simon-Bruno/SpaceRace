@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dbwjiu2keb62x"
+path="res://.godot/imported/bossBlue.obj-00b50bc397078d4615857cfc130ce31d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bossBlue.obj-00b50bc397078d4615857cfc130ce31d.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/bossBlue.obj"
+dest_files=["res://.godot/imported/bossBlue.obj-00b50bc397078d4615857cfc130ce31d.mesh", "res://.godot/imported/bossBlue.obj-00b50bc397078d4615857cfc130ce31d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

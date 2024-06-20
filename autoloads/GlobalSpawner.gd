@@ -53,7 +53,7 @@ func spawn_button(pos, dir, interact, inverse):
 	if spawner:
 		var button = button_scene.instantiate()
 		button.position = pos
-		button.basis	= dir
+		#button.basis	= dir
 		button.interactable = interact
 		button.inverse = inverse
 		spawner.add_child(button, true)
@@ -104,17 +104,19 @@ func spawn_boss(pos):
 		boss.position = pos
 		spawner.add_child(boss, true)
 
-
-func spawn_laser(pos, dir, timer):
+func spawn_laser(pos, dir, timer, activation = 1, hinder = false):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
 		var laser = laser_scene.instantiate()
 		laser.position = pos
-		laser.basis	= dir
+		#laser.basis	= dir
 		laser.timer_active = timer
+		laser.activation_count = activation
 		spawner.add_child(laser, true)
+		if hinder:
+			laser.set_laser()
 		return laser
 	return null
 

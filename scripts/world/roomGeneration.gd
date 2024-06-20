@@ -4,7 +4,7 @@ extends Node3D
 
 enum {HORIZONTAL, VERTICAL}
 
-enum {EMPTY, PATH, WALL, ITEM, LASER, BUFF, ENEMY}
+enum {EMPTY, PATH, WALL, BUTTON, ITEM, LASER, BUFF, ENEMY}
 
 enum {UP, LEFT, DOWN, RIGHT}
 
@@ -248,13 +248,78 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 	var x = pos[0]
 	var z = pos[1]
 
-	if floor_plan[z - 1][x - 1]:
+	if floor_plan[z - 1][x - 1] > PATH:
 		return false
 
 	floor_plan[z - 1][x - 1] = BUFF
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, z))
 	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
 	return true
+
+func add_button(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+
+	if floor_plan[z - 1][x - 1] > PATH:
+		return false
+
+	floor_plan[z - 1][x - 1] = BUTTON
+	return true
+
+func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+	const orientations = [0, 90, 180, 270]
+
+	if floor_plan[z -  1][x - 1] > PATH:
+		return false
+
+	floor_plan[z - 1][x - 1] = LASER
+	var orientation = orientations[randi() % orientations.size()]
+	var angle = deg_to_rad(orientation)
+	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, 1)
+	basis = Basis().rotated(Vector3(0, -1, 0), angle)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, 1)
+	return true
+
+func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos = object_placement(object, width, height, start)
+	var x = pos[0]
+	var z = pos[1]
+	const orientations = [0, 90, 180, 270]
+
+	if floor_plan[z - 1][x - 1] > PATH:
+		return false
+
+	# Spawn the laser
+	floor_plan[z - 1][x - 1] = LASER
+	var orientation = orientations[randi() % orientations.size()]
+	var angle = deg_to_rad(orientation)
+	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
+	var laser = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, object['set_activation'], true)
+	basis = Basis().rotated(Vector3(0, -1, 0), angle)
+	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, object['set_activation'], true)
+
+	for i in object['set_activation']:
+		var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
+		pos = object_placement(button_object, width, height, start)
+		x = pos[0]
+		z = pos[1]
+
+		if floor_plan[z - 1][x - 1]:
+			laser.activation_count -= 1
+			laser2.activation_count -= 1
+			continue
+
+		floor_plan[z - 1][x - 1] = BUTTON
+		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), laser, false)
+		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, -z), Basis().rotated(Vector3(0, -1, 0), deg_to_rad(180)), laser2, false)
+	
+	return true
+
 
 func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int, height : int, start: Vector3i) -> bool:
 	match object['type']:
@@ -265,6 +330,10 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], width : int,
 			# knows how to spawn buffs. For now, we just return true.
 			# return add_buff(floor_plan, object, width, height, start)
 			return true
+		'LASER':
+			return add_laser(floor_plan, object, width, height, start)
+		'ENEMY_LASER':
+			return add_enemy_laser(floor_plan, object, width, height, start)
 		_:
 			print('The object is not a supported object')
 			return true

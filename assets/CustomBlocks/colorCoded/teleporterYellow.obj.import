@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://behmtbh1v0tqq"
+path="res://.godot/imported/teleporterYellow.obj-0b0b8d51e9b656e88d7295163ed3745d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/teleporterYellow.obj-0b0b8d51e9b656e88d7295163ed3745d.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/teleporterYellow.obj"
+dest_files=["res://.godot/imported/teleporterYellow.obj-0b0b8d51e9b656e88d7295163ed3745d.mesh", "res://.godot/imported/teleporterYellow.obj-0b0b8d51e9b656e88d7295163ed3745d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -8,6 +8,8 @@ var damage_delay = 0.2 # dmg delay in seconds
 var damage_time = damage_delay # keep track of time, first dmg tick should be instant
 
 @export var active = true
+@export var activation_count = 1
+@export var hinder = false
 @export var timer_active = false
 
 var laser_timer = 0.0
@@ -39,14 +41,24 @@ func _on_area_3d_body_exited(body):
 func activated():
 	if not multiplayer.is_server():
 		return
-	active = true
-	ray.enabled = true
-	beam.visible = true
+
+	activation_count -= 1
+	if activation_count == 0:
+		active = true
+		ray.enabled = true
+		beam.visible = true
 
 @rpc("any_peer", "call_local", "reliable")
 func deactivated():
 	if not multiplayer.is_server():
 		return
+	activation_count += 1
+	if activation_count == 1:
+		active = false
+		ray.enabled = false
+		beam.visible = false
+
+func set_laser():
 	active = false
 	ray.enabled = false
 	beam.visible = false
@@ -77,6 +89,7 @@ func update_beam():
 		beam.position.x = beam_init_pos.x * dist
 		beam.scale.x = beam_init_scale.x * dist
 
+
 func _process(delta):
 	if timer_active:
 		handle_timer(delta)
@@ -85,6 +98,9 @@ func _process(delta):
 		apply_damage(delta)
 
 	if not multiplayer.is_server():
-		return 
+		return
 
 	update_beam()
+
+
+

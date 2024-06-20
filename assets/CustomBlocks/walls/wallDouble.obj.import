@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d356yk1f6airr"
+path="res://.godot/imported/wallDouble.obj-99c16e325a160acd68a04fdce84979ff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wallDouble.obj-99c16e325a160acd68a04fdce84979ff.mesh"]
+
+source_file="res://assets/CustomBlocks/walls/wallDouble.obj"
+dest_files=["res://.godot/imported/wallDouble.obj-99c16e325a160acd68a04fdce84979ff.mesh", "res://.godot/imported/wallDouble.obj-99c16e325a160acd68a04fdce84979ff.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
