@@ -128,11 +128,24 @@ create_wall {
 
 <OBJECTS_GENERATION>
 
+create_object BUTTON
+{
+    set_min_distance 5
+    set_max_distance 7
+}
+
 create_object LASER
 {
     set_min_distance 8
     set_max_distance 10
     set_length 3
+}
+
+create_object ENEMY_LASER
+{
+    set_min_distance 8
+    set_max_distance 10
+    set_activation 10
 }
 
 create_object ITEM
@@ -163,10 +176,9 @@ create_mob MELEE
     set_loose_grouping
 }
 
-create_mob RANGED
+create_mob MELEE
 {
     set_min_distance 5
     set_max_distance 8
     set_group_size 3
-    set_loose_grouping
 }
