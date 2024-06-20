@@ -5,6 +5,7 @@
 [node name="Custom Rooms" type="Node3D"]
 
 [node name="EndRoom" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="EndRoom"]
 mesh_library = ExtResource("1_nvyip")
@@ -38,7 +39,6 @@ mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 
 [node name="Room0" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Room0"]
 mesh_library = ExtResource("1_nvyip")
