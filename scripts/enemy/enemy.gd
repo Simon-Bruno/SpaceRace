@@ -33,6 +33,8 @@ func find_closest_player_in_range(nodes_array: Array):
 
 func _ready():
 	self.add_to_group("Enemies")
+	set_physics_process(false)
+	set_process(false)
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(1)
@@ -86,6 +88,8 @@ func add_target(body):
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
+		set_physics_process(true)
+		set_process(true)
 		#print("body entered: ", body)
 		#print("array:", nodes_in_area)
 
@@ -94,6 +98,9 @@ func _on_detection_area_body_exited(body):
 		if body == closest_target_node:
 			closest_target_node = null
 		nodes_in_area.erase(body)
+		if nodes_in_area.is_empty():
+			set_process(false)
+			set_physics_process(false)
 
 func _on_enemy_hitbox_body_entered(body):
 	if body.is_in_group("Players"):
