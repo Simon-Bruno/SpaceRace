@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@export var walk_speed = 12  
-var walkspeed_multiplier : float = 1
+@export var walk_speed = 12
+@export var walkspeed_multiplier : float = 1
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
 var getHitCooldown = true
@@ -44,23 +44,28 @@ func _ready():
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 
-	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
+	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	if current_direction != Vector2.ZERO:	# accelerate if moving
+	if current_direction != Vector2.ZERO:  # Accelerate if moving
 		speed = min(walk_speed * walkspeed_multiplier, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
-		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
+		basis = $Pivot.basis.looking_at(Vector3(direction.x, 0, direction.y))
 
-	# decelerate
-	else:
-		speed = max(0, speed - walk_deceleration  * delta)
+	else:  # Decelerate
+		speed = max(0, speed - walk_deceleration * delta)
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
-	#Audiocontroller.play_walking_sfx()
+
+	# Debugging prints
+	#print("Speed: ", speed)
+	print("Walk Speed Multiplier: ", walkspeed_multiplier)
+	#print("Direction: ", direction)
+	#print("Velocity: ", vel)
 
 	return vel
 
+	
 func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 

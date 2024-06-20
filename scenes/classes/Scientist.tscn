@@ -10,8 +10,8 @@ script = ExtResource("1_o0dqt")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_d8pfm")
 
-[node name="slow_ability_time" type="Timer" parent="."]
+[node name="slow_duration" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 
-[connection signal="timeout" from="slow_ability_time" to="." method="_on_slow_ability_time_timeout"]
+[connection signal="timeout" from="slow_duration" to="." method="_on_slow_ability_time_timeout"]
