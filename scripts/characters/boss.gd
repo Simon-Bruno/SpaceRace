@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5
 
+var interactable_door = null
 var knockback_strength = 0
 
 var player_chase = false
@@ -153,6 +154,9 @@ func die():
 	if last_damaged_by.is_in_group("Players"):
 		last_damaged_by.points += 5
 	queue_free()
+	
+	if interactable_door != null:
+		interactable_door.activate()
 
 func check_health():
 	var health_percentage = float(health) / float(max_health)
