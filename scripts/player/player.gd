@@ -21,6 +21,7 @@ var direction = Vector2.ZERO
 var max_dist: float = 25.0  # max distance between players
 
 var strength : float = 1.0
+var standard_strength : float = 1.0
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
@@ -141,9 +142,8 @@ func increase_health(value):
 	health = min(Global.player_max_health, health + value)
 	HpBar.value = float(health) / Global.player_max_health * 100
 	
-# sets the health to full HP of player
+# Sets the health to full HP of player
 func full_health():
-	print("full_health_been run")
 	health = Global.player_max_health
 	HpBar.value = Global.player_max_health
 
@@ -152,3 +152,9 @@ func die():
 
 func _on_respawn_immunity_timeout():
 	respawn_immunity = false
+
+
+# Reset the boost value to its standard value after the timer ended
+func _on_potion_timer_timeout():
+	strength = standard_strength # Reset the player's strength
+	$PotionTimer.stop()

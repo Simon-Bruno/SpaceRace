@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7t5n213gi5k3"]
+[gd_scene load_steps=6 format=3 uid="uid://gwvprney276v"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_xxtqf"]
 [ext_resource type="Script" path="res://scripts/item/strength_bottle.gd" id="2_jju86"]
@@ -15,8 +15,3 @@ script = ExtResource("2_jju86")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.691623, -0.0773146)
 material_override = SubResource("ORMMaterial3D_6l28a")
 mesh = ExtResource("4_5f0f7")
-
-[node name="PotionTimer" type="Timer" parent="." index="2"]
-wait_time = 10.0
-
-[connection signal="timeout" from="PotionTimer" to="." method="_on_potion_timer_timeout"]
