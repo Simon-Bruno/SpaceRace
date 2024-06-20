@@ -21,7 +21,7 @@ var direction = Vector2.ZERO
 var max_dist: float = 25.0  # max distance between players
 
 var strength : float = 1.0
-var standard_strength : float = 1.0
+var speed_boost : float = 1.0
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
@@ -47,7 +47,7 @@ func _horizontal_movement(delta):
 	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
 
 	if current_direction != Vector2.ZERO:	# accelerate if moving
-		speed = min(walk_speed, speed + walk_acceleration * delta)
+		speed = min(walk_speed * speed_boost, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_smoothing * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
@@ -154,7 +154,14 @@ func _on_respawn_immunity_timeout():
 	respawn_immunity = false
 
 
-# Reset the boost value to its standard value after the timer ended
+# Resets the boost value to its standard value after the timer ended
 func _on_potion_timer_timeout():
-	strength = standard_strength # Reset the player's strength
-	$PotionTimer.stop()
+	strength = 1.0 # Reset the player's strength
+	print("Strength end ", strength)	
+	$StrengthTimer.stop()
+
+# Resets the player's speed to its normal speed
+func _on_speed_timer_timeout():
+	speed_boost = 1.0 # Reset the player's speed
+	print("Speed end ", speed)
+	$SpeedTimer.stop()
