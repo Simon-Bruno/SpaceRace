@@ -147,15 +147,6 @@ func spawn_item(pos):
 		item.position = pos
 		spawner.add_child(item, true)
 
-func spawn_box(pos):
-	if not multiplayer.is_server():
-		return
-	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
-	if spawner:
-		var box = box_scene.instantiate()
-		box.position = pos
-		spawner.add_child(box, true)
-
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
 	if not multiplayer.is_server():
