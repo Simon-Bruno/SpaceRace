@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=152 format=3 uid="uid://cehfbggdu6pms"]
 
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
@@ -90,6 +90,31 @@
 [ext_resource type="ArrayMesh" uid="uid://c1yi2g0orvorf" path="res://assets/CustomBlocks/colorCoded/switchOnRed.obj" id="88_1yt1f"]
 [ext_resource type="ArrayMesh" uid="uid://bkoxoq1byolu3" path="res://assets/CustomBlocks/colorCoded/switchOnYellow.obj" id="89_dfg1r"]
 [ext_resource type="ArrayMesh" uid="uid://b0mh2ut430vxt" path="res://assets/CustomBlocks/entities/enemy.obj" id="90_xbbvs"]
+[ext_resource type="ArrayMesh" uid="uid://bo1wrvfw3cnkc" path="res://assets/CustomBlocks/entities/rangedEnemy.obj" id="91_8ri1q"]
+[ext_resource type="ArrayMesh" uid="uid://c43p7oi2s4b1n" path="res://assets/CustomBlocks/items/welder.obj" id="92_48qyj"]
+[ext_resource type="ArrayMesh" uid="uid://dx8c1pmfqaip3" path="res://assets/CustomBlocks/misc/boss.obj" id="93_x1g8i"]
+[ext_resource type="ArrayMesh" uid="uid://daayn5fuoqbm" path="res://assets/CustomBlocks/misc/spawnerMelee.obj" id="94_6x5tw"]
+[ext_resource type="ArrayMesh" uid="uid://bnjqvo35x2cn" path="res://assets/CustomBlocks/misc/spawnerRanged.obj" id="95_re5la"]
+[ext_resource type="ArrayMesh" uid="uid://bgnq8qrj4aqau" path="res://assets/CustomBlocks/placable/laserTimer.obj" id="96_16286"]
+[ext_resource type="ArrayMesh" uid="uid://4srb48ud25u2" path="res://assets/CustomBlocks/placable/teleporter.obj" id="97_fbjd3"]
+[ext_resource type="ArrayMesh" uid="uid://d2qrlk1gpudt4" path="res://assets/CustomBlocks/colorCoded/keyholeBlue.obj" id="98_8ci3g"]
+[ext_resource type="ArrayMesh" uid="uid://cirqvh26xwxee" path="res://assets/CustomBlocks/colorCoded/keyholeGreen.obj" id="99_gmer8"]
+[ext_resource type="ArrayMesh" uid="uid://dro6dullauxmn" path="res://assets/CustomBlocks/colorCoded/keyholeOrange.obj" id="100_sffin"]
+[ext_resource type="ArrayMesh" uid="uid://pt02m54hdkso" path="res://assets/CustomBlocks/colorCoded/keyholePurple.obj" id="101_45yf4"]
+[ext_resource type="ArrayMesh" uid="uid://dib7l6gg0xw8n" path="res://assets/CustomBlocks/colorCoded/keyholeRed.obj" id="102_vd54v"]
+[ext_resource type="ArrayMesh" uid="uid://rb3fx7vwkpkp" path="res://assets/CustomBlocks/colorCoded/keyholeYellow.obj" id="103_14hqv"]
+[ext_resource type="ArrayMesh" uid="uid://c4tq10ukmdtnd" path="res://assets/CustomBlocks/colorCoded/teleporterBlue.obj" id="104_6bvqm"]
+[ext_resource type="ArrayMesh" uid="uid://hgi61vfnmr1q" path="res://assets/CustomBlocks/colorCoded/teleporterGreen.obj" id="105_vg7tt"]
+[ext_resource type="ArrayMesh" uid="uid://cuctawj5nptt8" path="res://assets/CustomBlocks/colorCoded/teleporterOrange.obj" id="106_5mqid"]
+[ext_resource type="ArrayMesh" uid="uid://c2pb77n82hhu7" path="res://assets/CustomBlocks/colorCoded/teleporterPurple.obj" id="107_7f7la"]
+[ext_resource type="ArrayMesh" uid="uid://5t5ng73j5f0s" path="res://assets/CustomBlocks/colorCoded/teleporterRed.obj" id="108_f3a6j"]
+[ext_resource type="ArrayMesh" uid="uid://behmtbh1v0tqq" path="res://assets/CustomBlocks/colorCoded/teleporterYellow.obj" id="109_mmy2o"]
+[ext_resource type="ArrayMesh" uid="uid://cdxxixnfrvnft" path="res://assets/CustomBlocks/colorCoded/terminalBlue.obj" id="110_s60ps"]
+[ext_resource type="ArrayMesh" uid="uid://d1lmdki4g7qsv" path="res://assets/CustomBlocks/colorCoded/terminalGreen.obj" id="111_bfoax"]
+[ext_resource type="ArrayMesh" uid="uid://ddxr34776dtos" path="res://assets/CustomBlocks/colorCoded/terminalOrange.obj" id="112_uaecj"]
+[ext_resource type="ArrayMesh" uid="uid://bx7ii58kbkqd1" path="res://assets/CustomBlocks/colorCoded/terminalPurple.obj" id="113_wqgrn"]
+[ext_resource type="ArrayMesh" uid="uid://ce5q5xtkfy3uf" path="res://assets/CustomBlocks/colorCoded/terminalRed.obj" id="114_yn6fp"]
+[ext_resource type="ArrayMesh" uid="uid://w8gpski43ayf" path="res://assets/CustomBlocks/colorCoded/terminalYellow.obj" id="115_ry85d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
 albedo_texture = ExtResource("1_c8374")
@@ -196,555 +221,551 @@ albedo_texture = ExtResource("1_c8374")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbb55"]
 albedo_texture = ExtResource("1_c8374")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dwkl"]
+albedo_texture = ExtResource("1_c8374")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Floor1" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0155383, 0, -0.00491595)
 material_override = SubResource("StandardMaterial3D_0814s")
 mesh = ExtResource("2_ypwlb")
 surface_material_override/0 = SubResource("StandardMaterial3D_met4q")
 
 [node name="Floor2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0155383, 0, -0.00491595)
 mesh = ExtResource("3_cvwad")
 surface_material_override/0 = SubResource("StandardMaterial3D_55tw5")
 
 [node name="Floor3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0155383, 0, -0.00491595)
 material_override = SubResource("StandardMaterial3D_7u2wd")
 mesh = ExtResource("4_1k2xy")
 surface_material_override/0 = SubResource("StandardMaterial3D_xb1cn")
 
 [node name="Floor4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0155383, 0, -0.00491595)
 mesh = ExtResource("5_3i472")
 surface_material_override/0 = SubResource("StandardMaterial3D_miqj6")
 
 [node name="Floor5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0155383, 0, -0.00491595)
 mesh = ExtResource("6_63nai")
 surface_material_override/0 = SubResource("StandardMaterial3D_iv3bx")
 
 [node name="FloorVent" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0155383, 0, -0.00491595)
 mesh = ExtResource("7_l5id4")
 surface_material_override/0 = SubResource("StandardMaterial3D_m1751")
 
 [node name="FloorWater" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0155383, 0, -0.00491595)
 mesh = ExtResource("8_0lb8y")
 surface_material_override/0 = SubResource("StandardMaterial3D_d4uo6")
 
 [node name="DoorClosedL" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147661, 0, 0.0143442)
 mesh = ExtResource("9_pp2xx")
 surface_material_override/0 = SubResource("StandardMaterial3D_88haf")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorClosedL"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorClosedL/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="DoorClosedR" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0147661, 0, 0.0143442)
 mesh = ExtResource("10_5i0cv")
 surface_material_override/0 = SubResource("StandardMaterial3D_g4l75")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorClosedR"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorClosedR/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00390625, -0.00723267, -0.748291)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="DoorOpenL" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0627749, 0, 0.00910926)
 mesh = ExtResource("11_jnhrw")
 surface_material_override/0 = SubResource("StandardMaterial3D_sqqi2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorOpenL"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorOpenL/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.606934, -0.00723267, -0.748291)
 shape = SubResource("BoxShape3D_ld0fv")
 
 [node name="DoorOpenR" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0627749, 0, 0.00910926)
 mesh = ExtResource("12_ycgho")
 surface_material_override/0 = SubResource("StandardMaterial3D_s01k2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorOpenR"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorOpenR/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.604279, -0.00723267, -0.75116)
 shape = SubResource("BoxShape3D_ld0fv")
 
 [node name="Wall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("16_kk65b")
 surface_material_override/0 = SubResource("StandardMaterial3D_f4aih")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallButton" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("9_7xk7a")
 surface_material_override/0 = SubResource("StandardMaterial3D_aa3ul")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallButton"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallButton/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallCorner" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("14_kgfrm")
 surface_material_override/0 = SubResource("StandardMaterial3D_h0svh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallCorner"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallCorner/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_1dc75")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WallCorner/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.749482, -0.00723267, -0.00358582)
 shape = SubResource("BoxShape3D_krsp0")
 
 [node name="WallDesk" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("13_ffy78")
 surface_material_override/0 = SubResource("StandardMaterial3D_j8ee0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallDesk"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallDesk/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WallDesk/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000916004, -0.449387, -0.549156)
 shape = SubResource("BoxShape3D_qbys1")
 
 [node name="WallFan" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("12_2scsv")
 surface_material_override/0 = SubResource("StandardMaterial3D_k6ls7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallFan"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallFan/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.649277)
 shape = SubResource("BoxShape3D_m54uq")
 
 [node name="WallFuse" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("19_08ypj")
 surface_material_override/0 = SubResource("StandardMaterial3D_uiu33")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallFuse"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallFuse/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallLight" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("18_kffvs")
 surface_material_override/0 = SubResource("StandardMaterial3D_sstje")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallLight"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallLight/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallSwitchOff" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("7_mp7k4")
 surface_material_override/0 = SubResource("StandardMaterial3D_5igbu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallSwitchOff"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallSwitchOff/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallSwitchOn" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("8_1lrnb")
 surface_material_override/0 = SubResource("StandardMaterial3D_40r6n")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallSwitchOn"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallSwitchOn/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallTerminal" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("17_dxpcw")
 surface_material_override/0 = SubResource("StandardMaterial3D_vrcjj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallTerminal"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallTerminal/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallWindowL" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("15_50soe")
 surface_material_override/0 = SubResource("StandardMaterial3D_i1uwe")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallWindowL"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallWindowL/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallWindowR" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0123062, -0.00390291, -0.00785697)
 mesh = ExtResource("20_mj8xf")
 surface_material_override/0 = SubResource("StandardMaterial3D_0qk48")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallWindowR"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallWindowR/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253487, -0.00723267, -0.749176)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="CustomEnd" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00332773, 0, 0.00183892)
 mesh = ExtResource("25_q6iur")
 surface_material_override/0 = SubResource("StandardMaterial3D_hw6gx")
 
 [node name="CustomStart" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00332773, 0, 0.00183892)
 mesh = ExtResource("26_u2x3f")
 surface_material_override/0 = SubResource("StandardMaterial3D_hw6gx")
 
 [node name="LargeBox" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
 mesh = ExtResource("27_kdqmv")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 
 [node name="RedBox" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
 mesh = ExtResource("28_ngbk2")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 
 [node name="SmallBox" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
 mesh = ExtResource("29_k7mfs")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 
 [node name="PressurePlateOff" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
 mesh = ExtResource("30_hgunv")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 
 [node name="PressurePlateOn" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
 mesh = ExtResource("31_3fpn3")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 
 [node name="Terminal" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120648, 0.0180778, -0.0127646)
 mesh = ExtResource("32_52kga")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 
 [node name="Computer" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0779099, 0, -0.0174141)
 mesh = ExtResource("33_jktwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_qyii1")
 
 [node name="ButtonBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("34_bkik2")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="ButtonGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("35_xiu1r")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="ButtonOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("36_58bkf")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="ButtonPurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("37_6ql2y")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="ButtonRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("38_cn4kc")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="ButtonYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("39_kpj2f")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="DoorBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("40_g8iyh")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="DoorGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("41_fflxd")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="DoorOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("42_5jpn4")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="DoorPurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("43_22f17")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="DoorRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("44_0yaqk")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="DoorYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("45_6y05e")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="HoleBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("46_8liio")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="HoleGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("47_yu5jd")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="HoleOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("48_7bl56")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="HolePurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("49_mchxy")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="HoleRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("50_0wytb")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="HoleYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("51_pvm3u")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="KeyBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("52_qu0el")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="KeyGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("53_4gwfe")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="KeyOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("54_2sacx")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="KeyPurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("55_gkiwa")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="KeyRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("56_rbdmu")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="KeyYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("57_gntqu")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="LaserBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("58_2bckq")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="LaserGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("59_fnhep")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="LaserOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("60_favd0")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="LaserPurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("61_1as4m")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="LaserRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("62_710pq")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="LaserYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("63_w5mxo")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureMultiBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("64_jcflw")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureMultiGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("65_bi5a6")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureMultiOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("66_tsxo3")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureMultiPurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("67_qtnen")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureMultiRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("68_0ibr8")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureMultiYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("69_bfvlq")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressurePlateOff2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("70_7ftdj")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressurePlateOn2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("71_mmrnv")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureSingleBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("72_d2x2r")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureSingleGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("73_wcwcd")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureSingleOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("74_pqjsb")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureSinglePurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("75_aknjx")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureSingleRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("76_rdf75")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="PressureSingleYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("77_4ck8c")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOffBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("78_70fjj")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOffGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("79_4dj6a")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOffOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("80_1brmv")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOffPurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("81_tstwv")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOffRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("82_6fudy")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOffYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("83_aeuqg")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOnBlue" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("84_1egkq")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOnGreen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("85_rw7ei")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOnOrange" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("86_47r2o")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOnPurple" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("87_vf3o5")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOnRed" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("88_1yt1f")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="SwitchOnYellow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0349219, 0.0183201, -0.0122324)
 mesh = ExtResource("89_dfg1r")
 surface_material_override/0 = SubResource("StandardMaterial3D_hj78p")
 
 [node name="Enemy" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0976478, 0, 0.132923)
 material_override = SubResource("StandardMaterial3D_mbb55")
 mesh = ExtResource("90_xbbvs")
+
+[node name="RangedEnemy" type="MeshInstance3D" parent="."]
+mesh = ExtResource("91_8ri1q")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="Welder" type="MeshInstance3D" parent="."]
+mesh = ExtResource("92_48qyj")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="Boss" type="MeshInstance3D" parent="."]
+mesh = ExtResource("93_x1g8i")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="SpawnerMelee" type="MeshInstance3D" parent="."]
+mesh = ExtResource("94_6x5tw")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="SpawnerRanged" type="MeshInstance3D" parent="."]
+mesh = ExtResource("95_re5la")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="LaserTimer" type="MeshInstance3D" parent="."]
+mesh = ExtResource("96_16286")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="Teleporter" type="MeshInstance3D" parent="."]
+mesh = ExtResource("97_fbjd3")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="KeyholeBlue" type="MeshInstance3D" parent="."]
+mesh = ExtResource("98_8ci3g")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="KeyholeGreen" type="MeshInstance3D" parent="."]
+mesh = ExtResource("99_gmer8")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="KeyholeOrange" type="MeshInstance3D" parent="."]
+mesh = ExtResource("100_sffin")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="KeyholePurple" type="MeshInstance3D" parent="."]
+mesh = ExtResource("101_45yf4")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="KeyholeRed" type="MeshInstance3D" parent="."]
+mesh = ExtResource("102_vd54v")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="KeyholeYellow" type="MeshInstance3D" parent="."]
+mesh = ExtResource("103_14hqv")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TeleporterBlue" type="MeshInstance3D" parent="."]
+mesh = ExtResource("104_6bvqm")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TeleporterGreen" type="MeshInstance3D" parent="."]
+mesh = ExtResource("105_vg7tt")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TeleporterOrange" type="MeshInstance3D" parent="."]
+mesh = ExtResource("106_5mqid")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TeleporterPurple" type="MeshInstance3D" parent="."]
+mesh = ExtResource("107_7f7la")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TeleporterRed" type="MeshInstance3D" parent="."]
+mesh = ExtResource("108_f3a6j")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TeleporterYellow" type="MeshInstance3D" parent="."]
+mesh = ExtResource("109_mmy2o")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TerminalBlue" type="MeshInstance3D" parent="."]
+mesh = ExtResource("110_s60ps")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TerminalGreen" type="MeshInstance3D" parent="."]
+mesh = ExtResource("111_bfoax")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TerminalOrange" type="MeshInstance3D" parent="."]
+mesh = ExtResource("112_uaecj")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TerminalPurple" type="MeshInstance3D" parent="."]
+mesh = ExtResource("113_wqgrn")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TerminalRed" type="MeshInstance3D" parent="."]
+mesh = ExtResource("114_yn6fp")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")
+
+[node name="TerminalYellow" type="MeshInstance3D" parent="."]
+mesh = ExtResource("115_ry85d")
+surface_material_override/0 = SubResource("StandardMaterial3D_5dwkl")

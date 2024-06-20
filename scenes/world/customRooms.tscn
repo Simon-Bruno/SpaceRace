@@ -20,6 +20,7 @@ mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 
 [node name="EndRoom" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="EndRoom"]
 mesh_library = ExtResource("1_nvyip")
