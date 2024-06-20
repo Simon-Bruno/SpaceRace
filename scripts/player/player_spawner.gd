@@ -24,7 +24,7 @@ func respawn_player():
 	player.alive = true
 	player.visible = true
 	player.global_position.y -= 200
-	player.fall_acceleration = 60
+	player.fall_acceleration = 20
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
 
 func _on_respawn_timer_timeout():

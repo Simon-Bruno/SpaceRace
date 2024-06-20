@@ -1,31 +1,30 @@
 extends CharacterBody3D
 
-@export var walk_speed = 12
-@export var fall_acceleration = 60
-@export var jump_impulse = 20
+@export var walk_speed = 8
+@export var fall_acceleration = 20
+@export var jump_impulse = 6
 var getHitCooldown = true
 @export var health = Global.player_max_health
 var points = 100
 @export var push_force = 1
 @export var alive = true
-var respawn_immunity : bool = false
+var respawn_immunity: bool = false
 
 var walk_acceleration = 40
 var walk_deceleration = 50
-var rotation_speed = 10
-var rotation_smoothing = 10
+var rotation_speed = 15
 
 var speed = 0
 var direction = Vector2.ZERO
 
-var max_dist: float = 25.0  # max distance between players
+var max_dist: float = 25.0 # max distance between players
 
-var strength : float = 1.0
+var strength: float = 1.0
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 10, 20)
-var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
+var game_spawn = {1: [Vector3(10, 5, 10), Vector3(10, 5, 20)],2: [Vector3(10, 5, -10), Vector3(10, 5, -20)]}
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
@@ -43,16 +42,16 @@ func _ready():
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 
-	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
+	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	if current_direction != Vector2.ZERO:	# accelerate if moving
+	if current_direction != Vector2.ZERO: # accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		direction = lerp(direction, current_direction, rotation_speed * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
 	else:
-		speed = max(0, speed - walk_deceleration  * delta)
+		speed = max(0, speed - walk_deceleration * delta)
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
@@ -84,10 +83,10 @@ func check_distance(target_velocity):
 		var player2_pos = Network.other_team_member_node.global_transform.origin
 
 		var x_distance = abs(player_pos.x - player2_pos.x)
-		if x_distance > max_dist:  # check distance
-			if player_pos.x > player2_pos.x and target_velocity.x > 0:  # if player trying to walk further
+		if x_distance > max_dist: # check distance
+			if player_pos.x > player2_pos.x and target_velocity.x > 0: # if player trying to walk further
 				target_velocity.x = 0
-			elif player_pos.x < player2_pos.x and target_velocity.x < 0:  # if player trying to walk further
+			elif player_pos.x < player2_pos.x and target_velocity.x < 0: # if player trying to walk further
 				target_velocity.x = 0
 	return target_velocity.x
 
@@ -96,15 +95,14 @@ func move_object():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
-			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
-
+			c.get_collider().apply_central_impulse( - c.get_normal() * push_force)
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
-		if velocity != Vector3.ZERO && velocity.y == 0:
+		if velocity != Vector3.ZERO&&velocity.y == 0:
 			#Audiocontroller.play_walking_sfx()
 			pass
 		if velocity == Vector3.ZERO:
