@@ -9,12 +9,6 @@
 [sub_resource type="Environment" id="Environment_mgk52"]
 tonemap_mode = 2
 tonemap_exposure = 0.6
-glow_levels/1 = 29.6
-glow_levels/2 = 11.46
-glow_levels/3 = 11.6
-glow_levels/4 = 8.55
-glow_levels/5 = 0.0
-glow_blend_mode = 0
 fog_enabled = true
 fog_light_color = Color(0.28973, 0.316568, 0.358758, 1)
 fog_light_energy = 0.35
