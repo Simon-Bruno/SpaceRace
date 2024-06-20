@@ -48,7 +48,6 @@ func _on_area_3d_body_entered(body) -> void:
 	and body.name == str(multiplayer.get_unique_id()):
 		$ButtonText.show()
 		player = body
-		#activate_text = true
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body) -> void:
@@ -56,7 +55,6 @@ func _on_area_3d_body_exited(body) -> void:
 	and body.name == str(multiplayer.get_unique_id()):
 		$ButtonText.hide()
 		player = null
-		#activate_text = false
 
 # Activate switch and call the interactable activation.
 func _activate_switch():

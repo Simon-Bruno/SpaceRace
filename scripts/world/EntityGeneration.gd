@@ -178,7 +178,7 @@ func spawn_lasers() -> void:
 		var new_orientations = [22, 0, 16, 10]
 		var orientation = get_cell_item_orientation(laser)
 		orientation = get_basis_with_orthogonal_index(new_orientations[orientations.find(orientation)])
-		GlobalSpawner.spawn_laser(map_to_local(laser), orientation)
+		GlobalSpawner.spawn_laser(map_to_local(laser), orientation, false)
 
 
 # Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.

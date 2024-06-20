@@ -105,7 +105,7 @@ func spawn_boss(pos):
 		spawner.add_child(boss, true)
 
 
-func spawn_laser(pos, dir):
+func spawn_laser(pos, dir, timer):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
@@ -113,7 +113,10 @@ func spawn_laser(pos, dir):
 		var laser = laser_scene.instantiate()
 		laser.position = pos
 		laser.basis	= dir
+		laser.timer_active = timer
 		spawner.add_child(laser, true)
+		return laser
+	return null
 
 func spawn_terminal(pos):
 	if not multiplayer.is_server():
