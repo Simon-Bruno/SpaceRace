@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://n62snpmyadi0"]
+[gd_scene load_steps=9 format=3 uid="uid://n62snpmyadi0"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_25n6l"]
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
@@ -8,7 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="6_3shum"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
-size = Vector3(1991.92, 1, 1000)
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="Environment" id="Environment_wfjmj"]
+tonemap_mode = 2
+tonemap_exposure = 0.6
+fog_enabled = true
+fog_light_color = Color(0.28973, 0.316568, 0.358758, 1)
+fog_light_energy = 0.35
+fog_sun_scatter = 0.45
+fog_density = 0.008
+fog_sky_affect = 0.375
 
 [node name="World" type="Node"]
 script = ExtResource("1_25n6l")
@@ -40,7 +50,13 @@ spawn_path = NodePath("..")
 [node name="InteractableSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="InteractableSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/terminal.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/terminal.tscn", "res://scenes/interactables/door.tscn", "res://scenes/interactables/portal.tscn")
+spawn_path = NodePath("..")
+
+[node name="WallSpawner" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="WallSpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/world/intern_wall.tscn")
 spawn_path = NodePath("..")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
@@ -52,13 +68,15 @@ _spawnable_scenes = PackedStringArray("res://scenes/world/worldGeneration.tscn",
 spawn_path = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, -500)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 425.538, 2, 500)
 shape = SubResource("BoxShape3D_afshc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_3shum")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wfjmj")

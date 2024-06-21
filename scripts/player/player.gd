@@ -1,25 +1,24 @@
 extends CharacterBody3D
 
-var getHitCooldown: bool = true
-@export var health: int = Global.player_max_health
-var points: int = 0
-@export var push_force: int = 1
-@export var alive: bool = true
-var strength : float = 1.0
-var respawn_immunity : bool = false
+@export var walk_speed = 8
+@export var fall_acceleration = 30
+@export var jump_impulse = 8.5
+var getHitCooldown = true
+@export var health = Global.player_max_health
+var points = 500
+@export var alive = true
+var respawn_immunity: bool = false
 
-# movement variables
-@export var walk_speed: int = 7
-@export var fall_acceleration: int = 60
-@export var jump_impulse: int = 20
-var walk_acceleration: int = 40
-var walk_deceleration: int = 50
-var rotation_speed: int = 10
-var rotation_smoothing: int = 10
+var walk_acceleration = 40
+var walk_deceleration = 50
+var rotation_speed = 7.5
+
 var speed = 0
 var direction = Vector2.ZERO
-var max_dist: float = 25.0  # max distance between players
 
+var max_dist: float = 25.0 # max distance between players
+
+var strength: float = 1.0
 # animation variable
 var AnimDeath: bool = false
 var AnimJump: bool = false
@@ -27,12 +26,22 @@ var AnimJump: bool = false
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 10, 20)
-var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
+var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
 
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
+@rpc("authority", "call_local", "reliable")
+func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
+	if str(id) != str(multiplayer.get_unique_id()):
+		return
+	$Pivot.scale = new_scale
+	$PlayerHitbox.scale = new_scale
+	$CollisionShape3D.scale = new_scale
+	walk_speed = new_walk_speed
+	walk_acceleration = new_accel  
+	walk_deceleration = new_accel * 1.2  
 
 func _ready():
 	$FloatingName.text = Network.playername
@@ -46,18 +55,21 @@ func _ready():
 
 
 func _horizontal_movement(delta):
+	if !alive:
+		return Vector3.ZERO
+	
 	var vel = Vector3.ZERO
 
-	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
+	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	if current_direction != Vector2.ZERO:	# accelerate if moving
+	if current_direction != Vector2.ZERO: # accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		direction = lerp(direction, current_direction, rotation_speed * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
 	else:
-		speed = max(0, speed - walk_deceleration  * delta)
+		speed = max(0, speed - walk_deceleration * delta)
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
@@ -66,6 +78,9 @@ func _horizontal_movement(delta):
 
 
 func _vertical_movement(delta):
+	if !alive:
+		return Vector3.ZERO
+
 	var vel = Vector3.ZERO
 
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
@@ -89,22 +104,13 @@ func check_distance(target_velocity):
 		var player_pos = global_transform.origin
 		var player2_pos = Network.other_team_member_node.global_transform.origin
 
-		var x_distance: float = abs(player_pos.x - player2_pos.x)
-		if x_distance > max_dist:  # check distance
-			if player_pos.x > player2_pos.x and target_velocity.x > 0:  # if player trying to walk further
+		var x_distance = abs(player_pos.x - player2_pos.x)
+		if x_distance > max_dist: # check distance
+			if player_pos.x > player2_pos.x and target_velocity.x > 0: # if player trying to walk further
 				target_velocity.x = 0
-			elif player_pos.x < player2_pos.x and target_velocity.x < 0:  # if player trying to walk further
+			elif player_pos.x < player2_pos.x and target_velocity.x < 0: # if player trying to walk further
 				target_velocity.x = 0
 	return target_velocity.x
-
-
-# Lets the player moves object in the room.
-func move_object():
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody3D:
-			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
-
 
 func play_animation(anim_player, animation):
 	if anim_player == 1:  # anim speed 1
@@ -156,13 +162,14 @@ func _physics_process(delta):
 		
 		if alive:
 			move_and_slide()
-	move_object()
 
 
 func _input(event):
 	if str(multiplayer.get_unique_id()) == name:
+		#TODO: Not working in lobby, not allowed. Use cooldown
 		if event.is_action_pressed("ability_1") and points > $Class.ability1_point_cost:
 			$Class.ability1()
+		#TODO: Not working in lobby, not allowed. Use cooldown
 		if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
 			$Class.ability2()
  
@@ -188,6 +195,7 @@ func die():
 	AnimDeath = true
 	var temp = walk_speed
 	walk_speed = 0
+	alive = false
 	
 	request_play_animation(1, "death")  # play anim
 	await get_tree().create_timer(2).timeout  # wait for anim
