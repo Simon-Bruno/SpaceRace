@@ -6,7 +6,6 @@ extends CharacterBody3D
 var getHitCooldown = true
 @export var health = Global.player_max_health
 var points = 100
-@export var push_force = 1
 @export var alive = true
 var respawn_immunity: bool = false
 
@@ -24,10 +23,21 @@ var strength: float = 1.0
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 10, 20)
-var game_spawn = {1: [Vector3(10, 5, 10), Vector3(10, 5, 20)],2: [Vector3(10, 5, -10), Vector3(10, 5, -20)]}
+var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+
+@rpc("authority", "call_local", "reliable")
+func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
+	if str(id) != str(multiplayer.get_unique_id()):
+		return
+	$Pivot.scale = new_scale
+	$PlayerHitbox.scale = new_scale
+	$CollisionShape3D.scale = new_scale
+	walk_speed = new_walk_speed
+	walk_acceleration = new_accel  
+	walk_deceleration = new_accel * 1.2  
 
 func _ready():
 	$FloatingName.text = Network.playername
@@ -90,13 +100,6 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
-# Lets the player moves object in the room.
-func move_object():
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody3D:
-			c.get_collider().apply_central_impulse( - c.get_normal() * push_force)
-
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
@@ -110,7 +113,6 @@ func _physics_process(delta):
 			#Audiocontroller.stop_walking_sfx()
 		if alive:
 			move_and_slide()
-	move_object()
 
 func _input(event):
 	if str(multiplayer.get_unique_id()) == name:

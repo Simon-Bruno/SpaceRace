@@ -12,7 +12,7 @@ func _ready() -> void:
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
 	_set_door_mesh.rpc(customRooms.DOORCLOSEDR, customRooms.DOORCLOSEDL)
-	
+
 #Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
 	if node.name == target_name:
@@ -46,7 +46,7 @@ func deactivated() -> void:
 
 # Helper function to set the door mesh
 @rpc("authority", "call_local", "reliable")
-func _set_door_mesh(right_mesh: int, left_mesh: int) -> void:	
+func _set_door_mesh(right_mesh: int, left_mesh: int) -> void:
 	if customRooms:
 		$MeshInstance3DR.mesh = customRooms.mesh_library.get_item_mesh(right_mesh)
 		$MeshInstance3DL.mesh = customRooms.mesh_library.get_item_mesh(left_mesh)
