@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cw3mwnkwx46rk"
+path="res://.godot/imported/random_station_v1.obj-1c00f98b7204b3d74c702e1292c0bbef.mesh"
+
+[deps]
+
+files=["res://.godot/imported/random_station_v1.obj-1c00f98b7204b3d74c702e1292c0bbef.mesh"]
+
+source_file="res://assets/lobby/random_station_v1.obj"
+dest_files=["res://.godot/imported/random_station_v1.obj-1c00f98b7204b3d74c702e1292c0bbef.mesh", "res://.godot/imported/random_station_v1.obj-1c00f98b7204b3d74c702e1292c0bbef.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

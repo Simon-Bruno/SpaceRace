@@ -5,7 +5,11 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5
 
+@export var interactable_door: StaticBody3D = null
 var knockback_strength = 0
+
+var is_idle = true
+var activated = false
 
 var player_chase = false
 var targeted_player = null
@@ -127,32 +131,38 @@ func _on_enemy_hitbox_body_exited(body):
 	if body.is_in_group("Players"):
 		player_in_attack_zone = false
 
-func take_damage(damage, source):
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(damage, player_origin):
 	if not multiplayer.is_server():
 		return
 	health = max(0, health - damage)
-	if source.has_method("get_parent") and source.get_parent().is_in_group("Players"):
-		last_damaged_by = source.get_parent()
-	elif "shooter" in source and source.shooter.is_in_group("Players"):
-		last_damaged_by = source.shooter
-	else:
-		last_damaged_by = source
+	#TODO: Fix working with source
+	#if source.has_method("get_parent") and source.get_parent().is_in_group("Players"):
+		#last_damaged_by = source.get_parent()
+	#elif "shooter" in source and source.shooter.is_in_group("Players"):
+		#last_damaged_by = source.shooter
+	#else:
+		#last_damaged_by = source
 		
 	HpBar.value = float(health) / max_health * 100
 		
 	if health <= 0:
 		die()
 
-	var knockback_direction = (global_transform.origin - source.global_transform.origin).normalized()
+	var knockback_direction = (global_transform.origin - player_origin).normalized()
 	velocity.x += knockback_direction.x * knockback_strength
 	velocity.z += knockback_direction.z * knockback_strength
 
 func die():
 	if not multiplayer.is_server():
 		return
-	if last_damaged_by.is_in_group("Players"):
-		last_damaged_by.points += 5
+	#TODO: Last damaged not working
+	#if last_damaged_by.is_in_group("Players"):
+		#last_damaged_by.points += 5
 	queue_free()
+	
+	if interactable_door != null:
+		interactable_door.activated()
 
 func check_health():
 	var health_percentage = float(health) / float(max_health)
@@ -169,6 +179,8 @@ func spawn_enemies():
 		var pos = self.global_transform.origin + Vector3(randf() * 10 - 5, 0, randf() * 10 - 5)
 		var enemy = GlobalSpawner.spawn_melee_enemy(pos)
 		if enemy:
+			enemy.set_physics_process(true)
+			enemy.set_process(true)
 			enemy.call_deferred("chase_player", last_damaged_by)
 
 func start_charge():
