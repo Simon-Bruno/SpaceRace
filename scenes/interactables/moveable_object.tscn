@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bprp8wo44w1la"]
+[gd_scene load_steps=7 format=3 uid="uid://bprp8wo44w1la"]
 
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_jg63i"]
 [ext_resource type="ArrayMesh" uid="uid://cbpumyfshlt6j" path="res://assets/CustomBlocks/placable/smallBox.obj" id="2_gd7fc"]
@@ -11,10 +11,19 @@ albedo_texture = ExtResource("1_jg63i")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ld8i"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nudci"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
 [node name="MoveableObject" type="Node3D"]
 metadata/_edit_group_ = true
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.728925, 0)
 collision_layer = 8
 collision_mask = 11
 physics_material_override = SubResource("PhysicsMaterial_paq6p")
@@ -22,10 +31,14 @@ gravity_scale = 5.0
 lock_rotation = true
 
 [node name="SmallBox" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 0, 0.160501, 0)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0.160501, 0)
 material_override = SubResource("StandardMaterial3D_n0p66")
 mesh = ExtResource("2_gd7fc")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("BoxShape3D_1ld8i")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nudci")

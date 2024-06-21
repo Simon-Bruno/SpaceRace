@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=10 format=3 uid="uid://coe56ya7xmdq5"]
+
+[ext_resource type="Script" path="res://resources/settings/PlayerKeybindResource.gd" id="1_0cgf0"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_p1okg"]
+device = -1
+physical_keycode = 70
+unicode = 102
+
+[sub_resource type="InputEventKey" id="InputEventKey_cn0m7"]
+device = -1
+physical_keycode = 69
+unicode = 101
+
+[sub_resource type="InputEventKey" id="InputEventKey_6qn00"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_bkjm2"]
+device = -1
+physical_keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventKey" id="InputEventKey_tyi7h"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventKey" id="InputEventKey_aheoh"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_h240w"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventKey" id="InputEventKey_ilbaf"]
+device = -1
+physical_keycode = 4194309
+
+[resource]
+script = ExtResource("1_0cgf0")
+DEFAULT_MOVE_LEFT_KEY = SubResource("InputEventKey_aheoh")
+DEFAULT_MOVE_RIGHT_KEY = SubResource("InputEventKey_h240w")
+DEFAULT_MOVE_FORWARD_KEY = SubResource("InputEventKey_tyi7h")
+DEFAULT_MOVE_BACK_KEY = SubResource("InputEventKey_bkjm2")
+DEFAULT_JUMP_KEY = SubResource("InputEventKey_6qn00")
+DEFAULT_INTERACT_KEY = SubResource("InputEventKey_cn0m7")
+DEFAULT_ATTACK_KEY = SubResource("InputEventKey_p1okg")
+DEFAULT_OPEN_CHAT_KEY = SubResource("InputEventKey_ilbaf")

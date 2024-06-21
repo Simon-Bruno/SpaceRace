@@ -41,6 +41,16 @@
 [ext_resource type="ArrayMesh" uid="uid://vth4dh3o6v0f" path="res://assets/lobby/mountain_v1.obj" id="38_qcs22"]
 [ext_resource type="ArrayMesh" uid="uid://dmyd7go4jr1m4" path="res://assets/lobby/mountain_v2.obj" id="39_2n1iu"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhsop"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulm8y"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1osee"]
+viewport_path = NodePath("Progressbar/SubViewport")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrsps"]
 albedo_color = Color(0.709804, 0.709804, 0.709804, 1)
 albedo_texture = ExtResource("2_s7x2f")
@@ -171,18 +181,18 @@ void vertex(){
 void fragment(){
 	float n = random2_1(SCREEN_UV);
 	float f = fresnel(_fresnel, NORMAL, VIEW);
-	
+
 	vec2 igrid = floor(SCREEN_UV * lines1);
 	float l1 = mod(igrid.y, 2.0);
 	l1 = mix(0.4,1.0,l1);
-	
+
 	vec2 uv2 = SCREEN_UV;
 	uv2.y -= TIME * 0.06;
 	vec2 igrid2 = floor(uv2*lines2);
 	float l2 = random(igrid2.y);
 	l2 = step(0.2, l2);
 	l2 = mix(0.2, 1.0, l2);
-	
+
 	//ALBEDO = vec3(l2);
 	float m = f*n*l1*l2;
 	ALPHA = m;
@@ -263,6 +273,9 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath("../Assets/Telepath/TeamX_text:text")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+properties/3/path = NodePath("../Progressbar/SubViewport/ProgressBar:value")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_8skx5"]
 
@@ -303,6 +316,21 @@ data = PackedVector3Array(-1.3, 0.1, 1.1, -1.3, 0.9, 1.2, -1.3, 0.1, 1.2, -1.3, 
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_a0um3")
+
+[node name="Progressbar" type="Node" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="Progressbar"]
+
+[node name="ProgressBar" type="ProgressBar" parent="Progressbar/SubViewport"]
+offset_right = 512.0
+offset_bottom = 512.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dhsop")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ulm8y")
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="Progressbar"]
+transform = Transform3D(13.8809, 0, 0, 0, 0.627922, 0.778276, 0, -0.778276, 0.627922, -0.305338, 27.4845, -52.334)
+texture = SubResource("ViewportTexture_1osee")
 
 [node name="Assets" type="Node" parent="."]
 
@@ -600,6 +628,7 @@ mesh = ExtResource("10_2jxae")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathRay/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rfypj")
+metadata/_edit_use_anchors_ = true
 
 [node name="DeathRay2" type="MeshInstance3D" parent="."]
 transform = Transform3D(5.65685, 0, 5.65685, 0, 8, 0, -5.65685, 0, 5.65685, 34.3969, 2.61437, -17.5052)
@@ -778,6 +807,7 @@ root_path = NodePath("../Camera3D")
 replication_config = SubResource("SceneReplicationConfig_dwu6y")
 
 [node name="DeathRayRandom" type="Node3D" parent="."]
+visible = false
 
 [node name="ThunderMeshRANDOM" type="MeshInstance3D" parent="DeathRayRandom"]
 transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 17.8475, 23.4849, 36.9464)
@@ -839,6 +869,7 @@ process_material = SubResource("ParticleProcessMaterial_vat6v")
 draw_pass_1 = ExtResource("22_0x4uc")
 
 [node name="DeathRayA" type="Node3D" parent="."]
+visible = false
 
 [node name="ThunderMeshA" type="MeshInstance3D" parent="DeathRayA"]
 transform = Transform3D(1.93185, 0, 0.517638, 0, 0.5, 0, -0.517638, 0, 1.93185, -49.8208, 23.4849, -15.0118)
@@ -914,6 +945,7 @@ process_material = SubResource("ParticleProcessMaterial_vat6v")
 draw_pass_1 = ExtResource("22_0x4uc")
 
 [node name="DeathRayB" type="Node3D" parent="."]
+visible = false
 
 [node name="ThunderMeshB" type="MeshInstance3D" parent="DeathRayB"]
 transform = Transform3D(-2, 0.000338097, 0.00136571, 0.0013512, 0.5, -0.00177816, -0.00136688, -0.000444315, -2, 39.2601, 23.4849, -18.0528)
@@ -989,9 +1021,11 @@ process_material = SubResource("ParticleProcessMaterial_vat6v")
 draw_pass_1 = ExtResource("22_0x4uc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 95.8195, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, 7.833e-08, 0.895991, 0.444072, 3.8822e-08, 0.444072, -0.895991, 0, 47.845, 0)
 visible = false
-light_energy = 2.333
+light_color = Color(1, 1, 0.729412, 1)
+light_energy = 5.318
+light_indirect_energy = 3.82
 shadow_enabled = true
 
 [node name="Spotlight" type="Node3D" parent="."]

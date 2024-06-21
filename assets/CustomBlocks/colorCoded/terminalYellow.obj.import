@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://w8gpski43ayf"
+path="res://.godot/imported/terminalYellow.obj-22b236769dd7d7d0631db6844012d04d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/terminalYellow.obj-22b236769dd7d7d0631db6844012d04d.mesh"]
+
+source_file="res://assets/CustomBlocks/colorCoded/terminalYellow.obj"
+dest_files=["res://.godot/imported/terminalYellow.obj-22b236769dd7d7d0631db6844012d04d.mesh", "res://.godot/imported/terminalYellow.obj-22b236769dd7d7d0631db6844012d04d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

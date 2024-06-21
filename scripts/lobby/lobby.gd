@@ -4,6 +4,7 @@ extends Node
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var quit_button_area = $AreaQuit
 
+
 var world = preload("res://scenes/world.tscn")
 
 var team1 = []
@@ -20,21 +21,16 @@ func _process(_delta):
 			team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
 				_on_start_timer_timeout()
 		if not start_timer.is_stopped():
-			$SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
+			$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
 	if Input.is_action_just_pressed("pause"):
 		pause_menu.handle_esc_input()
 
 func _ready():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
-		Network.player_added.connect(add_player_character)
+		Network.player_added.connect(lobby_add_player_character)
 		init_timer()
-
-func add_player_character(id):
-	var character = preload("res://scenes/player/player.tscn").instantiate()
-	character.name = str(id)
-	add_child(character)
-
+		
 func init_timer():
 		add_child(start_timer)
 		start_timer.stop()
@@ -51,6 +47,8 @@ func _on_start_timer_timeout():
 		Network.player_teams[character.name] = 1
 	for character in team2:
 		Network.player_teams[character.name] = 2
+	
+	Audiocontroller.play_teleportation_sfx()
 	_on_game_start.rpc(Network.player_teams, Network.player_names)
 	get_parent().add_child(world.instantiate())
 	queue_free()
@@ -62,16 +60,15 @@ func check_start_conditions():
 	else:
 		if not start_timer.is_stopped():
 			start_timer.stop()
+			$Progressbar/SubViewport/ProgressBar.value = 0
 
 
 func lobby_add_player_character(id):
 	player_id = id
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
-	Network.player_nodes[id] = character
-	Network.player_spawned.emit(character, id)
-	Network._update_player_node_dict.rpc(Network.player_nodes)
 	add_child(character)
+	character.set_params_for_player.rpc(id, Vector3i(5, 5, 5), 30, 200)
 
 @rpc("authority", "call_local", "reliable")
 func _on_game_start(player_teams, player_names):
@@ -96,7 +93,6 @@ func assign_teams():
 func _on_team1_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team1.has(body):
 		team1.append(body)
-		#print("tema1")
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 

@@ -5,6 +5,8 @@ var wall_test = [ {"set_min_distance": 5, "set_max_distance": 8, "length": 6, "l
 var object_test = [ { "set_min_distance": 8, "set_max_distance": 10, "set_length": 3, "type": "LASER" }, { "set_min_distance": 17, "set_max_distance": 20, "type": "ITEM" }, { "set_min_distance": 4, "set_max_distance": 9, "type": "ITEM" } ]
 var enemy_test = [ { "set_min_distance": 5, "set_max_distance": 8, "set_group_size": 3, "loose_grouping": true } ]
 
+# This function is purely a unit check, since this will never be loaded
+# in the main project.
 func _ready():
 	var rms_dict = parse_file("res://files/random_map_scripts/test.rms")
 	print(rms_dict)
@@ -60,7 +62,7 @@ func wall_parser(section: String, wall_dict : Array) -> void:
 		if parsed_wall == {}:
 			continue
 		wall_dict.append(parsed_wall)
-		
+
 func object_parser(section: String, object_dict : Array) -> void:
 	var objects = section.split('create_object')
 	for i in objects.size():
@@ -76,7 +78,6 @@ func object_parser(section: String, object_dict : Array) -> void:
 		var parsed_object : Dictionary = segment_to_dict(object[1])
 		# Do a safety check if segment_to_dict works.
 		if parsed_object == {}:
-			print('Object failed')
 			continue
 		# Set the type of object
 		parsed_object['type'] = type
@@ -86,8 +87,15 @@ func object_parser(section: String, object_dict : Array) -> void:
 func enemies_parser(section : String, enemy_dict : Array) -> void:
 	var mobs = section.split('create_mob')
 	for i in mobs.size():
-		var mob : String = mobs[i].strip_edges()
+		var mob = mobs[i].strip_edges()
 		if mob.begins_with("ENEMY_GENERATION"):
 			continue
-		var parsed_mob : Dictionary = segment_to_dict(mob)
+		mob = mob.split("\n", false, 1)
+		var type = mob[0]
+		var parsed_mob : Dictionary = segment_to_dict(mob[1])
+		if parsed_mob == {}:
+			continue
+		if not parsed_mob.has('loose_grouping'):
+			parsed_mob['loose_grouping'] = false
+		parsed_mob['type'] = type
 		enemy_dict.append(parsed_mob)

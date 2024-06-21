@@ -1,32 +1,43 @@
 extends CharacterBody3D
 
-@export var walk_speed = 12
-@export var fall_acceleration = 60
-@export var jump_impulse = 20
+@export var walk_speed = 8
+@export var fall_acceleration = 30
+@export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
-var points = 0
-@export var push_force = 1
+var points = 500
 @export var alive = true
-var respawn_immunity : bool = false
+var respawn_immunity: bool = false
 
 var walk_acceleration = 40
 var walk_deceleration = 50
-var rotation_speed = 10
-var rotation_smoothing = 10
+var rotation_speed = 7.5
 
 var speed = 0
 var direction = Vector2.ZERO
 
-var max_dist: float = 25.0  # max distance between players
+var max_dist: float = 25.0 # max distance between players
+
+var strength: float = 1.0
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 10, 20)
-var game_spawn = { 1: [Vector3(10, 5, 10), Vector3(10, 5, 20)], 2:[Vector3(10, 5, -10), Vector3(10, 5, -20)]}
+var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+
+@rpc("authority", "call_local", "reliable")
+func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
+	if str(id) != str(multiplayer.get_unique_id()):
+		return
+	$Pivot.scale = new_scale
+	$PlayerHitbox.scale = new_scale
+	$CollisionShape3D.scale = new_scale
+	walk_speed = new_walk_speed
+	walk_acceleration = new_accel  
+	walk_deceleration = new_accel * 1.2  
 
 func _ready():
 	$FloatingName.text = Network.playername
@@ -41,19 +52,20 @@ func _ready():
 func _horizontal_movement(delta):
 	var vel = Vector3.ZERO
 
-	var current_direction = Input.get_vector("move_left","move_right","move_forward","move_back")
+	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	if current_direction != Vector2.ZERO:	# accelerate if moving
+	if current_direction != Vector2.ZERO: # accelerate if moving
 		speed = min(walk_speed, speed + walk_acceleration * delta)
-		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		direction = lerp(direction, current_direction, rotation_speed * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
 	else:
-		speed = max(0, speed - walk_deceleration  * delta)
+		speed = max(0, speed - walk_deceleration * delta)
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
+	#Audiocontroller.play_walking_sfx()
 
 	return vel
 
@@ -62,6 +74,7 @@ func _vertical_movement(delta):
 
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		vel.y = jump_impulse
+		Audiocontroller.play_jump_sfx()
 
 	if not is_on_floor():
 		vel.y = velocity.y - (fall_acceleration * delta)
@@ -80,35 +93,40 @@ func check_distance(target_velocity):
 		var player2_pos = Network.other_team_member_node.global_transform.origin
 
 		var x_distance = abs(player_pos.x - player2_pos.x)
-		if x_distance > max_dist:  # check distance
-			if player_pos.x > player2_pos.x and target_velocity.x > 0:  # if player trying to walk further
+		if x_distance > max_dist: # check distance
+			if player_pos.x > player2_pos.x and target_velocity.x > 0: # if player trying to walk further
 				target_velocity.x = 0
-			elif player_pos.x < player2_pos.x and target_velocity.x < 0:  # if player trying to walk further
+			elif player_pos.x < player2_pos.x and target_velocity.x < 0: # if player trying to walk further
 				target_velocity.x = 0
 	return target_velocity.x
-
-# Lets the player moves object in the room.
-func move_object():
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody3D:
-			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
+		if velocity != Vector3.ZERO&&velocity.y == 0:
+			#Audiocontroller.play_walking_sfx()
+			pass
+		if velocity == Vector3.ZERO:
+			pass
+			#Audiocontroller.stop_walking_sfx()
 		if alive:
 			move_and_slide()
-	move_object()
-	
+
+func _input(event):
+	if str(multiplayer.get_unique_id()) == name:
+		if event.is_action_pressed("ability_1") and points > $Class.ability1_point_cost:
+			$Class.ability1()
+		if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
+			$Class.ability2()
+
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(id, damage):
 	if str(id) != str(multiplayer.get_unique_id()):
-		return 
-		
+		return
+
 	if !respawn_immunity and alive and getHitCooldown:
 		health = max(0, health - damage)
 		getHitCooldown = false
@@ -116,9 +134,8 @@ func take_damage(id, damage):
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive:
-		#print("health < 0")
 		die()
-		
+
 func die():
 	get_parent().player_died(self)
 
