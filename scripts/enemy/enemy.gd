@@ -139,5 +139,3 @@ func chase_player(body):
 		closest_target_node = body
 		if not nodes_in_area.has(body):
 			nodes_in_area.append(body)
-	else:
-		print("Invalid body")
