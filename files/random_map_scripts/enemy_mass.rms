@@ -41,3 +41,4 @@ create_mob MELEE
     set_max_distance 10
     set_group_size 3
     radius 4
+}

@@ -40,8 +40,8 @@ func _ready():
 	for room in rooms:
 		roomNodes.append(customRooms.get_node(room))
 
-	#for room in special_rooms:
-		#special_roomNodes.append(customRooms.get_node(room))
+	for room in special_rooms:
+		special_roomNodes.append(customRooms.get_node(room))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
