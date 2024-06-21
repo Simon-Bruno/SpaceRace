@@ -103,15 +103,20 @@ func spawn_boss(pos):
 		spawner.add_child(boss, true)
 
 
-func spawn_laser(pos, dir):
+func spawn_laser(pos, dir, activation = 1, hinder = false):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
 		var laser = laser_scene.instantiate()
 		laser.position = pos
-		laser.basis	= dir
+		laser.basis = dir
+		laser.activation_count = activation
+		laser.hinder = hinder
 		spawner.add_child(laser, true)
+		laser.set_laser()
+		return laser
+	return null
 
 func spawn_terminal(pos):
 	if not multiplayer.is_server():
@@ -141,7 +146,6 @@ func spawn_item(pos):
 		var item = item_scene.instantiate()
 		item.position = pos
 		spawner.add_child(item, true)
-
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):

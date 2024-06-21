@@ -1,19 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://8gurumik6vsg"]
+[gd_scene load_steps=8 format=3 uid="uid://8gurumik6vsg"]
 
 [ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_cdal3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mj71s"]
-albedo_color = Color(0.822335, 0.0526998, 4.81307e-07, 1)
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_muaet"]
 material = SubResource("StandardMaterial3D_mj71s")
 size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u6b37"]
-size = Vector3(0.2, 0.2, 0.2)
+size = Vector3(0.2, 1, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_37bc0"]
-size = Vector3(0.1, 0.6, 0.6)
+size = Vector3(0.2, 0.4, 0.4)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_trd18"]
 properties/0/path = NodePath("Origin/Beam:visible")
@@ -38,6 +40,14 @@ properties/6/path = NodePath(".:position")
 properties/6/spawn = true
 properties/6/replication_mode = 2
 
+[sub_resource type="Environment" id="Environment_358yg"]
+glow_enabled = true
+glow_levels/2 = 5.0
+glow_levels/3 = 3.0
+glow_levels/4 = 0.5
+glow_levels/5 = 0.0
+glow_blend_mode = 0
+
 [node name="Laser" type="Node3D"]
 script = ExtResource("1_cdal3")
 
@@ -47,7 +57,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0)
 [node name="Beam" type="Node3D" parent="Origin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Origin/Beam"]
+[node name="Beam" type="MeshInstance3D" parent="Origin/Beam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("BoxMesh_muaet")
+
+[node name="Beam2" type="MeshInstance3D" parent="Origin/Beam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 mesh = SubResource("BoxMesh_muaet")
 
 [node name="DamageArea" type="Area3D" parent="Origin/Beam"]
@@ -57,16 +72,23 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_u6b37")
 
 [node name="Base" type="MeshInstance3D" parent="Origin"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.4, 0)
 mesh = SubResource("BoxMesh_37bc0")
 skeleton = NodePath("../..")
 
+[node name="Base2" type="MeshInstance3D" parent="Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.4, 0)
+mesh = SubResource("BoxMesh_37bc0")
+
 [node name="RayCast3D" type="RayCast3D" parent="Origin"]
-target_position = Vector3(48, 0, 0)
+target_position = Vector3(30, 0, 0)
 collision_mask = 11
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_trd18")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_358yg")
 
 [connection signal="body_entered" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_exited"]

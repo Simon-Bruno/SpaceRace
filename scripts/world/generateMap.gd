@@ -20,10 +20,14 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 1
+const CUSTOMROOMPERCENTAGE : float = 0
 
 # General room parameters
+<<<<<<< HEAD
 const room_amount : int = 5
+=======
+const room_amount : int = 10
+>>>>>>> 8c6a87900f8674430353d51203b4da85fa9a782d
 const room_width  : int = 10
 const room_height : int = 8
 const room_margin : int = 4

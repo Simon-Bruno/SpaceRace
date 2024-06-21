@@ -3,10 +3,10 @@ extends Node3D
 # the target that is in the laser
 var target = null
 
-var damage = 10
-var damage_delay = 0.2 # dmg delay in seconds
-var damage_time = damage_delay # keep track of time, first dmg tick should be instant
+var damage = 100
 @export var active = true
+@export var activation_count = 1
+@export var hinder = false
 
 # beam
 @onready var ray = $Origin/RayCast3D
@@ -22,29 +22,30 @@ func _on_area_3d_body_entered(body):
 func _on_area_3d_body_exited(body):
 	if body.is_in_group("Players"):
 		target = null
-		# make sure first tick always does dmg
-		damage_time = damage_delay
 
 func activated():
 	if not multiplayer.is_server():
 		return
-	active = true
-	ray.enabled = true
-	beam.visible = true
+	activation_count -= 1
+	if activation_count == 0:
+		active = true
+		ray.enabled = true
+		beam.visible = true
 	
 func deactivated():
 	if not multiplayer.is_server():
 		return
-	active = false
-	ray.enabled = false
-	beam.visible = false
+	activation_count += 1
+	if activation_count == 1:
+		active = false
+		ray.enabled = false
+		beam.visible = false
 	
 func _process(delta):
 	if target != null and active:
-		damage_time += delta
-		while damage_time > damage_delay:
-			damage_time -= damage_delay
-			target.take_damage(target.name, damage)
+			#target.take_damage(target.name, damage)
+			target.die()
+			
 		
 	if not multiplayer.is_server():
 		return 
@@ -56,3 +57,9 @@ func _process(delta):
 		
 		beam.position.x = beam_init_pos.x * dist
 		beam.scale.x = beam_init_scale.x * dist
+		
+func set_laser():
+	if hinder:
+		active = false
+		ray.enabled = false
+		beam.visible = false

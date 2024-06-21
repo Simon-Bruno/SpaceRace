@@ -1,0 +1,86 @@
+<OBJECTS_GENERATION>
+
+create_object LASER
+{
+    set_min_distance 8
+    set_max_distance 10
+    set_length 3
+}
+
+create_object ITEM
+{
+    set_min_distance 17
+    set_max_distance 20
+}
+
+create_object ITEM
+{
+    set_min_distance 12
+    set_max_distance 15
+}
+
+create_object BUFF
+{
+    set_min_distance 7
+    set_max_distance 20
+}
+
+<ENEMY_GENERATION>
+
+create_mob MELEE
+{
+    set_min_distance 5
+    set_max_distance 8
+    set_group_size 3
+    set_loose_grouping
+}
+
+create_mob MELEE
+{
+    set_min_distance 8
+    set_max_distance 10
+    set_group_size 3
+    radius 4
+}
+
+create_mob MELEE
+{
+    set_min_distance 10
+    set_max_distance 15
+    set_group_size 3
+    set_loose_grouping
+    radius 4
+}
+
+create_mob MELEE
+{
+    set_min_distance 12
+    set_max_distance 16
+    set_group_size 3
+    set_loose_grouping
+    radius 4
+}
+
+create_mob MELEE
+{
+    set_min_distance 13
+    set_max_distance 20
+    set_group_size 3
+    set_loose_grouping
+}
+
+create_mob MELEE
+{
+    set_min_distance 5
+    set_max_distance 20
+    set_group_size 3
+    set_loose_grouping
+}
+
+create_mob MELEE
+{
+    set_min_distance 3
+    set_max_distance 20
+    set_group_size 3
+    set_loose_grouping
+}
