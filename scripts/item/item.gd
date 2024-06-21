@@ -36,6 +36,9 @@ func _animate(delta):
 	var new_y = bob_offset + initial_position.y + bob_amplitude * sin(bob_time * bob_frequency * TAU)
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
 
+func remove():
+	queue_free()
+
 func _process(delta):
 	_animate(delta)
 	if owned_node and multiplayer.is_server():
