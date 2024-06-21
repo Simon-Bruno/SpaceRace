@@ -1,0 +1,24 @@
+<OBJECTS_GENERATION>
+create_object ITEM
+{
+    set_min_distance 15
+    set_max_distance 20
+}
+
+create_object LASER
+{
+    set_min_distance 6
+    set_max_distance 10
+}
+
+create_object BUFF
+{
+    set_min_distance 5
+    set_max_distance 20
+}
+
+create_object BUTTON
+{
+    set_min_distance 5
+    set_max_distance 7
+}
