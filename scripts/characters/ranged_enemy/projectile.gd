@@ -26,6 +26,6 @@ func _physics_process(delta):
 			collision.get_collider().take_damage.rpc(collision.get_collider().name, damage)
 		if collision.get_collider().is_in_group("Enemies"):
 			if collision.get_collider().has_method("take_damage"):
-				collision.get_collider().take_damage(damage, shooter)
+				collision.get_collider().take_damage(damage, shooter.global_transform.origin)
 		queue_free()
 

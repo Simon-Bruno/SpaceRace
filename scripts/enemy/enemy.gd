@@ -123,7 +123,6 @@ func take_damage(damage, player_pos):
 
 	if health <= 0:
 		die()
-
 	var knockback_direction = (global_transform.origin - player_pos).normalized()
 	velocity.x += knockback_direction.x * knockback_strength
 	velocity.z += knockback_direction.z * knockback_strength
@@ -140,5 +139,3 @@ func chase_player(body):
 		closest_target_node = body
 		if not nodes_in_area.has(body):
 			nodes_in_area.append(body)
-	else:
-		print("Invalid body")
