@@ -3,13 +3,26 @@ extends GridMap
 enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL, DOORCLOSEDR, DOOROPENL,
 	  DOOROPENR, WALL, WALLBUTTON, WALLCORNER, WALLDESK, WALLFAN, WALLFUSE, WALLLIGHT, WALLSWITCHOFF,
 	  WALLSWITCHON, WALLTERMINAL, WINDOWL, WINDOWR, CUSTOMEND, CUSTOMSTART, LARGEBOX, REDBOX,
-	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER, EMPTY=-1}
+	  SMALLBOX, PRESSUREPLATEOFF, PRESSUREPLATEON, TERMINAL, COMPUTER, BUTTONBLUE, BUTTONGREEN,
+	  BUTTONORANGE, BUTTONPURPLE, BUTTONRED, BUTTONYELLOW, DOORBLUE, DOORGREEN, DOORORANGE, DOORPURPLE,
+	  DOORRED, DOORYELLOW, HOLEBLUE, HOLEGREEN, HOLEORANGE, HOLEPURPLE, HOLERED, HOLEYELLOW, KEYBLUE,
+	  KEYGREEN, KEYORANGE, KEYPURPLE, KEYRED, KEYYELLOW, LASERBLUE, LASERGREEN, LASERORANGE, LASERPURPLE,
+	  LASERRED, LASERYELLOW, PRESSUREMULTIBLUE, PRESSUREMULTIGREEN, PRESSUREMULTIORANGE, PRESSUREMULTIPURPLE,
+	  PRESSUREMULTIRED, PRESSUREMULTIYELLOW, PRESSUREPLATEOFF2, PRESSUREPLATEON2, PRESSURESINGLEBLUE,
+	  PRESSURESINGLEGREEN, PRESSURESINGLEORANGE, PRESSURESINGLEPURPLE, PRESSURESINGLERED, PRESSURESINGLEYELLOW,
+	  SWITCHOFFBLUE, SWITCHOFFGREEN, SWITCHOFFORANGE, SWITCHOFFPURPLE, SWITCHOFFRED, SWITCHOFFYELLOW,
+	  SWITCHONBLUE, SWITCHONGREEN, SWITCHONORANGE, SWITCHONPURPLE, SWITCHONRED, SWITCHONYELLOW, ENEMY,
+	  RANGEDENEMY, WELDER, BOSS, SPAWNERMELEE, SPAWNERRANGED, LASERTIMER, TELEPORTER, KEYHOLEBLUE,
+	  KEYHOLEGREEN, KEYHOLEORANGE, KEYHOLEPURPLE, KEYHOLERED, KEYHOLEYELLOW, TELEPORTERBLUE, TELEPORTERGREEN,
+	  TELEPORTERORANGE, TELEPORTERPURPLE, TELEPORTERRED, TELEPORTERYELLOW, TERMINALBLUE, TERMINALGREEN,
+	  TERMINALORANGE, TERMINALPURPLE, TERMINALRED, TERMINALYELLOW, BOSSBLUE, BOSSGREEN, BOSSORANGE,
+	  BOSSPURPLE, BOSSRED, BOSSYELLOW, ENEMYBLUE, ENEMYGREEN, ENEMYORANGE, ENEMYPURPLE, ENEMYRED, ENEMYYELLOW,
+	  ENEMYRANGEDBLUE, ENEMYRANGEDGREEN, ENEMYRANGEDORANGE, ENEMYRANGEDPURPLE, ENEMYRANGEDRED, EMPTY=-1}
 
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
 
 @onready var roomLink : Node = get_node("../roomLink")
-@onready var customRooms : GridMap = get_node("../CustomRooms")
 @onready var entityGeneration : GridMap = get_node("../EntityGeneration")
 
 # At what y level is the floor
@@ -21,10 +34,10 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 0
+const CUSTOMROOMPERCENTAGE : float = 1
 
 # General room parameters
-const room_amount : int = 5
+const room_amount : int = 10
 const room_width  : int = 10
 const room_height : int = 8
 const room_margin : int = 4
@@ -58,6 +71,7 @@ var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")
+
 
 # Called when the object is created in the scene
 func _enter_tree():
@@ -99,21 +113,57 @@ func build_map() -> void:
 
 	draw_rooms()
 	place_custom_room(pairs)
+	add_finish()
+
+
 	draw_paths()
 
 	draw_windows()
 	draw_walls()
 
+	add_finish()
 	mirror_world()
-	
+
 	convert_static_to_entities()
+	# Generate finish pressure plate:
+	#entityGeneration.replace_entities(rooms)
+
+
+# Adds the pressureplate in the last room
+func add_finish():
+	# Get room dimensions:
+	var endroom_dimensions = roomLink.get_room_size(0, true)
+
+	# Get start positions of end room:
+	var start_pos = rooms[-1]
+
+	# startx prev room + width room
+	var endroom_startX = start_pos[2] + start_pos[0]
+
+	# layer is for static or dynamic gridmap
+	for layer in range(0, 2):
+		for x in range(0, max(endroom_dimensions[0], room_width+2)):
+			for z in range(0, max(endroom_dimensions[1], room_height+2)):
+				for y in range (0, 2):
+					# Add special endroom
+					var item = roomLink.get_room_item(Vector3i(x, y, z), 0, layer, true)
+					var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), 0, layer, true )
+
+					if layer == 0:
+						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
+					else:
+						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
+
+	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
+	plate.position = map_to_local(Vector3i((start_pos[2]+18), 1, 0))
+	plate.position.y = 2
+	plate.is_finish_plate = true
+	add_child(plate, true)
 
 
 # Calls the convert functionality and removes all static items that have overlap.
 func convert_static_to_entities() -> void:
-	var remove = entityGeneration.replace_entities(rooms)
-	for location in remove:
-		set_cell_item(location, EMPTY)
+	entityGeneration.replace_entities(rooms)
 
 
 # Randomly picks n unique indexes.
@@ -140,24 +190,30 @@ func reset_room_spacing() -> void:
 # TODO: Breaks room margins a bit, might need to be changed.
 func get_custom_rooms() -> Array:
 	var total_picks = int(min((room_amount - 2) * CUSTOMROOMPERCENTAGE, roomLink.total_rooms()))
-	
+
 	var originals = random_picks(total_picks, 1, room_amount - 1)
 	var customs = random_picks(total_picks, 0, roomLink.total_rooms())
-	
+
 	# Creates index pairs between the generated floorplan and the custom floorplan.
 	var pairs = []
 	for i in total_picks:
 		pairs.append([originals[i], customs[i]])
 
 	for i in pairs:
-		var customRoom = roomLink.get_room_size(i[1])
+		var customRoom = roomLink.get_room_size(i[1], false)
 		rooms[i[0]][0] = customRoom[0]
 		rooms[i[0]][1] = customRoom[1]
 		roomTypes[i[0]] = CUSTOM
 
+	var endroom = roomLink.get_room_size(0, true)
+	rooms[-1][0] = endroom[0]
+	rooms[-1][1] = endroom[1]
+	roomTypes[-1] = CUSTOM
+
 	reset_room_spacing()
 
 	return pairs
+
 
 func place_item(scene, orientation, location):
 	var item = scene.instantiate()
@@ -167,30 +223,31 @@ func place_item(scene, orientation, location):
 	add_child(item, true)
 	return item
 
+
 func write_room(orig : Array, new : int, layer : int) -> void:
 	for y in range(1, 4):
 		for x in orig[0]:
 			for z in orig[1]:
-				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer)
-				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer)
-				
+				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer, false)
+				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer, false)
+
 				if layer == 0:
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
 				else:
 					entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
 
-	
-# Function gets an Array containing the custom rooms that have been assigned, 
+
+# Function gets an Array containing the custom rooms that have been assigned,
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
 	var MAX_HEIGHT = 4
-
 	for pair in pairs:
 		var orig = rooms[pair[0]]
 		write_room(orig, pair[1], 0)
 		write_room(orig, pair[1], 1)
 
-# Rotates function to new 
+
+# Rotates function to new
 static func new_orientation(item : int, orientation : int) -> int:
 	var new_rotation = []
 	match item:
@@ -220,7 +277,7 @@ func mirror_world() -> void:
 
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		self.set_cell_item(new_location, item, orientation)
-		
+
 	for x in entityGeneration.get_used_cells():
 		var item = entityGeneration.get_cell_item(x)
 		var orientation = entityGeneration.get_cell_item_orientation(x)
@@ -267,11 +324,12 @@ func pick_random_type() -> int:
 	var types = [TYPE1, TYPE2, TYPE3, TYPE4, TYPE5]
 	return types[randi() % types.size()]
 
+
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
 	var widthMax = room_width + room_variation_x
 	var widthMin = room_width - room_variation_x
-	
+
 	#var heightMax = room_height + room_variation_y
 	var heightMax = 8
 	var heightMin = room_height - room_variation_y
@@ -283,13 +341,12 @@ func define_rooms() -> void:
 		var leftDoor = 0 if i == 0 else randi_range(1, height - 3)
 		var rightDoor = height / 2 if i == room_amount - 1 else randi_range(1, height - 3)
 
-		assert(rightDoor < height)
-		assert(leftDoor < height)
 		rooms.append([width, height, start, leftDoor, rightDoor])
 		roomTypes.append(pick_random_type())
 
 	roomTypes[0] = STARTROOM
-	roomTypes[room_amount - 1] = ENDROOM
+	roomTypes[-1] = CUSTOM
+
 
 # Draws the full floorplan by:
 # 1. Place first room of x * z size.
@@ -311,8 +368,6 @@ func draw_rooms() -> void:
 
 		make_room(room)
 		if roomTypes[i] != CUSTOM:
-			assert(rightDoor < room[1])
-			assert(leftDoor < room[1])
 			fill_room(room)
 		else:
 			continue
@@ -360,9 +415,9 @@ func draw_paths() -> void:
 			right.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-	assert(right.size() == ends.size())
-	for i in right.size():
-		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
+	#assert(right.size() == ends.size())
+	#for i in right.size():
+		#make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top

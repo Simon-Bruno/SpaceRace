@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cw3xx3anqsk7q"
+path="res://.godot/imported/wallU.obj-5c5390ef7410990c929407bc310c6a66.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wallU.obj-5c5390ef7410990c929407bc310c6a66.mesh"]
+
+source_file="res://assets/CustomBlocks/walls/wallU.obj"
+dest_files=["res://.godot/imported/wallU.obj-5c5390ef7410990c929407bc310c6a66.mesh", "res://.godot/imported/wallU.obj-5c5390ef7410990c929407bc310c6a66.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
