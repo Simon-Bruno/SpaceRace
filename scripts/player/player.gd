@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @export var walk_speed = 8
-@export var fall_acceleration = 20
-@export var jump_impulse = 6
+@export var fall_acceleration = 30
+@export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
 var points = 100
@@ -11,7 +11,7 @@ var respawn_immunity: bool = false
 
 var walk_acceleration = 40
 var walk_deceleration = 50
-var rotation_speed = 15
+var rotation_speed = 7.5
 
 var speed = 0
 var direction = Vector2.ZERO

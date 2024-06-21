@@ -9,10 +9,13 @@ func add_player_character(id):
 
 
 var dead_player = null
+var fall_acceleration = 0
+
 func player_died(player_to_die):
 	player_to_die.alive = false
 	player_to_die.visible = false
 	player_to_die.global_position.y += 200
+	fall_acceleration = player_to_die.fall_acceleration	
 	player_to_die.fall_acceleration = 0
 	$RespawnTimer.start()
 	dead_player = player_to_die
@@ -24,7 +27,7 @@ func respawn_player():
 	player.alive = true
 	player.visible = true
 	player.global_position.y -= 200
-	player.fall_acceleration = 20
+	player.fall_acceleration = fall_acceleration
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
 
 func _on_respawn_timer_timeout():

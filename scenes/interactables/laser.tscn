@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://8gurumik6vsg"]
+[gd_scene load_steps=8 format=3 uid="uid://8gurumik6vsg"]
 
 [ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_cdal3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mj71s"]
-albedo_color = Color(0.822335, 0.0526998, 4.81307e-07, 1)
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_muaet"]
 material = SubResource("StandardMaterial3D_mj71s")
@@ -38,6 +40,14 @@ properties/6/path = NodePath(".:position")
 properties/6/spawn = true
 properties/6/replication_mode = 2
 
+[sub_resource type="Environment" id="Environment_358yg"]
+glow_enabled = true
+glow_levels/2 = 5.0
+glow_levels/3 = 3.0
+glow_levels/4 = 0.5
+glow_levels/5 = 0.0
+glow_blend_mode = 0
+
 [node name="Laser" type="Node3D"]
 script = ExtResource("1_cdal3")
 
@@ -67,6 +77,9 @@ collision_mask = 11
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_trd18")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_358yg")
 
 [connection signal="body_entered" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Origin/Beam/DamageArea" to="." method="_on_area_3d_body_exited"]
