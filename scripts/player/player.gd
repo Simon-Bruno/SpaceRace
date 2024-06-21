@@ -6,7 +6,6 @@ extends CharacterBody3D
 var getHitCooldown = true
 @export var health = Global.player_max_health
 var points = 100
-@export var push_force = 1
 @export var alive = true
 var respawn_immunity: bool = false
 
@@ -91,13 +90,6 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
-# Lets the player moves object in the room.
-func move_object():
-	for i in get_slide_collision_count():
-		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody3D:
-			c.get_collider().apply_central_impulse( - c.get_normal() * push_force)
-
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
@@ -111,7 +103,6 @@ func _physics_process(delta):
 			#Audiocontroller.stop_walking_sfx()
 		if alive:
 			move_and_slide()
-	move_object()
 
 func _input(event):
 	if str(multiplayer.get_unique_id()) == name:
