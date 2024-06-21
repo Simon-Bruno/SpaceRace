@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dv7qh5ae1xi26"
+path="res://.godot/imported/concrete_block.obj-dcff4d081998077dfdca7f252da7f829.mesh"
+
+[deps]
+
+files=["res://.godot/imported/concrete_block.obj-dcff4d081998077dfdca7f252da7f829.mesh"]
+
+source_file="res://assets/lobby/concrete_block.obj"
+dest_files=["res://.godot/imported/concrete_block.obj-dcff4d081998077dfdca7f252da7f829.mesh", "res://.godot/imported/concrete_block.obj-dcff4d081998077dfdca7f252da7f829.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
