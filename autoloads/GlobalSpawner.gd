@@ -103,6 +103,8 @@ func spawn_boss(pos):
 		var boss = boss_scene.instantiate()
 		boss.position = pos
 		spawner.add_child(boss, true)
+		return boss
+	return null
 
 func spawn_laser(pos, dir, timer=false, activation = 1, hinder = false):
 	if not multiplayer.is_server():
