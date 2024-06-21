@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://bgvenhiau3fn0"]
+[gd_scene load_steps=100 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
