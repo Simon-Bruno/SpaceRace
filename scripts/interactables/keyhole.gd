@@ -27,7 +27,6 @@ func find_node_by_name(node: Node, target_name: String) -> Node:
 	return null
 	
 func _on_area_3d_body_entered(body):
-	print(body, has_player, has_item)
 	if not multiplayer.is_server():
 		return
 
@@ -35,7 +34,6 @@ func _on_area_3d_body_entered(body):
 		has_player = true
 	if body is RigidBody3D:
 		has_item = true
-	print(has_player, has_item)
 	check_bodies()
 
 func _on_area_3d_body_exited(body):
@@ -46,13 +44,11 @@ func _on_area_3d_body_exited(body):
 		has_player = false
 	if body is RigidBody3D:
 		has_item = false
-		#bodies_on_plate.erase(body)
-		#print('niet in de buurt', bodies_on_plate)
 
 func check_bodies():
 	if has_player and has_item:
 		interactable.activated()
-		key.remove()
+		key.remove.rpc()
 
 # Update keyhole mesh based on current state
 @rpc("authority", "call_local", "reliable")
