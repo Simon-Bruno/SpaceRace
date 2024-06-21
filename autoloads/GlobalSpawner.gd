@@ -12,6 +12,7 @@ var terminal_scene = preload("res://scenes/interactables/terminal.tscn")
 var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
+var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 func spawn_pressure_plate(pos, dir, interact=null, pos_enemy=null):
 	if not multiplayer.is_server():
@@ -142,13 +143,14 @@ func spawn_box(pos):
 		item.position = pos
 		spawner.add_child(item, true)
 
-func spawn_wall(wall, pos):
+func spawn_wall(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/WallSpawner")
 	if spawner:
-		add_child(wall, true)
+		var wall = wall_scene.instantiate()
 		wall.position = pos
+		add_child(wall, true)
 
 
 func spawn_item(pos):
