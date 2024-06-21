@@ -41,7 +41,7 @@ func _process(delta):
 	if owned_node and multiplayer.is_server():
 		
 		var destination = owned_node.global_position
-		destination.y += owned_node.get_node("Pivot/MeshInstance3D").get_aabb().size.y
+		destination.y += owned_node.get_node("Pivot/Armature/Skeleton3D/MeshInstance3D").get_aabb().size.y
 	
 		# Nodig voor het syncen
 		item_position = $RigidBody3D.global_position.lerp(destination, item_follow_speed * delta)
