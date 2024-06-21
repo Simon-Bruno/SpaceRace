@@ -7,6 +7,10 @@ var speed = 0.0
 const ACCELERATION = 5.0
 
 @onready var mesh = $SpaceshuttleV2
+@onready var portal_effect = $"../Assets/floors/VFX_PORTAL_ENTRANCE/GPUParticles3D"
+
+# Flag to check if the object has started moving
+var has_started_moving = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,3 +23,17 @@ func _process(delta):
 	
 	# Move the shuttle to the left
 	position += transform.basis * Vector3(-speed, speed/5, 0) * delta
+	
+	# Check if the object has started moving
+	if not has_started_moving and speed > 0:
+		has_started_moving = true
+		change_portal_effect()
+
+# Function to change the portal effect
+func change_portal_effect():
+	if portal_effect:
+		var particles_material = portal_effect.process_material
+		if particles_material and particles_material is ShaderMaterial:
+			# Example: Increase the scale of the particles
+			particles_material.set_shader_param("scale", Vector3(2.0, 2.0, 2.0))
+			print("Portal effect changed: Particle scale increased")
