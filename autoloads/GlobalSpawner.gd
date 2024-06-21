@@ -13,7 +13,7 @@ var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
 
-func spawn_pressure_plate(pos, dir, interact):
+func spawn_pressure_plate(pos, dir, interact=null, pos_enemy=null):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
@@ -22,6 +22,8 @@ func spawn_pressure_plate(pos, dir, interact):
 		plate.position = pos
 		plate.basis	= dir
 		plate.interactable = interact
+		if pos_enemy != null:
+			plate.enemy_pos = pos_enemy
 		spawner.add_child(plate, true)
 		return plate
 	return null
@@ -102,19 +104,19 @@ func spawn_boss(pos):
 		boss.position = pos
 		spawner.add_child(boss, true)
 
-
-func spawn_laser(pos, dir, activation = 1, hinder = false):
+func spawn_laser(pos, dir, timer=false, activation = 1, hinder = false):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
 		var laser = laser_scene.instantiate()
 		laser.position = pos
-		laser.basis = dir
+		laser.basis	= dir
+		laser.timer_active = timer
 		laser.activation_count = activation
-		laser.hinder = hinder
 		spawner.add_child(laser, true)
-		laser.set_laser()
+		if hinder:
+			laser.set_laser()
 		return laser
 	return null
 
