@@ -144,6 +144,8 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 			connect_button(door, interactable)
 		if interactable[0] in multipressures or interactable[0] in solopressures:
 			connect_pressureplate(door, interactable)
+		if interactable[0] in bosses:
+			connect_boss(door, interactable)
 
 
 # Returns the locations of two doors dependent on the left door as input.
@@ -181,6 +183,16 @@ func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	location.y = 2
 	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
+	
+
+func connect_boss(door : StaticBody3D, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 2
+	var boss = GlobalSpawner.spawn_boss(location)
+	print(door)
+	boss.interactable_door = door
+	set_cell_item(interactable[1], EMPTY)
+
 
 # %%%%%%%%%%%%%
 # % ALL ROOMS %
@@ -197,10 +209,15 @@ func spawn_small_boxes() -> void:
 # Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.
 func spawn_enemies() -> void:
 	var enemies = get_used_cells_by_item(ENEMY)
+	var bosses = get_used_cells_by_item(BOSS)
 	
 	for item in enemies:
 		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
 		set_cell_item(item, EMPTY)
+	
+	for boss in bosses:
+		GlobalSpawner.spawn_boss(map_to_local(boss))
+		set_cell_item(boss, EMPTY)
 
 
 # Spawns a laser at all laser spawnpoints in the map.
@@ -217,12 +234,13 @@ func spawn_lasers() -> void:
 		var new_orientations = [22, 0, 16, 10]
 		var orientation = get_cell_item_orientation(laser)
 		orientation = get_basis_with_orthogonal_index(new_orientations[orientations.find(orientation)])
-		GlobalSpawner.spawn_laser(map_to_local(laser), orientation)
+		GlobalSpawner.spawn_laser(map_to_local(laser), orientation, false)
 
 
 # %%%%%%%%%%%%%%%
 # % TELEPORTERS %
 # %%%%%%%%%%%%%%%
+
 
 # Runs the teleporter spawning for all rooms
 func spawn_teleporters(rooms : Array) -> void:

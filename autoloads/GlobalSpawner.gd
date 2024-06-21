@@ -13,7 +13,7 @@ var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
 
-func spawn_pressure_plate(pos, dir, interact):
+func spawn_pressure_plate(pos, dir, interact=null, pos_enemy=null):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
@@ -22,6 +22,8 @@ func spawn_pressure_plate(pos, dir, interact):
 		plate.position = pos
 		plate.basis	= dir
 		plate.interactable = interact
+		if pos_enemy != null:
+			plate.enemy_pos = pos_enemy
 		spawner.add_child(plate, true)
 		return plate
 	return null
@@ -101,20 +103,22 @@ func spawn_boss(pos):
 		var boss = boss_scene.instantiate()
 		boss.position = pos
 		spawner.add_child(boss, true)
+		return boss
+	return null
 
-
-func spawn_laser(pos, dir, activation = 1, hinder = false):
+func spawn_laser(pos, dir, timer=false, activation = 1, hinder = false):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
 		var laser = laser_scene.instantiate()
 		laser.position = pos
-		laser.basis = dir
+		laser.basis	= dir
+		laser.timer_active = timer
 		laser.activation_count = activation
-		laser.hinder = hinder
 		spawner.add_child(laser, true)
-		laser.set_laser()
+		if hinder:
+			laser.set_laser()
 		return laser
 	return null
 
@@ -127,6 +131,7 @@ func spawn_terminal(pos):
 		terminal.position = pos
 		#terminal.basis	= dir
 		spawner.add_child(terminal, true)
+		return terminal
 
 func spawn_box(pos):
 	if not multiplayer.is_server():
@@ -137,6 +142,14 @@ func spawn_box(pos):
 		item.position = pos
 		spawner.add_child(item, true)
 
+func spawn_wall(wall, pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/WallSpawner")
+	if spawner:
+		add_child(wall, true)
+		wall.position = pos
+
 
 func spawn_item(pos):
 	if not multiplayer.is_server():
@@ -146,7 +159,6 @@ func spawn_item(pos):
 		var item = item_scene.instantiate()
 		item.position = pos
 		spawner.add_child(item, true)
-
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):

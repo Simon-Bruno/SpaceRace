@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bap06lpjg3log"
+path="res://.godot/imported/ring_pillar.obj-5c2961365a1cda664e2f9f1ec2e08d68.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ring_pillar.obj-5c2961365a1cda664e2f9f1ec2e08d68.mesh"]
+
+source_file="res://assets/lobby/ring_pillar.obj"
+dest_files=["res://.godot/imported/ring_pillar.obj-5c2961365a1cda664e2f9f1ec2e08d68.mesh", "res://.godot/imported/ring_pillar.obj-5c2961365a1cda664e2f9f1ec2e08d68.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
