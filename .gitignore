@@ -3,8 +3,11 @@
 .env.example
 .env.local
 .env.staging
-*/CustomBlocks/CustomBlocks.tres
-CustomBlocks.tres
+**/CustomBlocks.tres
+**/Customblocks.tres
+**/customblocks.tres
+**/customBlocks.tres
+
 .tres
 **.DS_Store
 
@@ -22,10 +25,4 @@ data_*/
 mono_crash.*.json
 
 # Temp files
-*.tmp
-.tmp
-.DS_Store
-
-# Temp
-.tmp
-*.tmp
+**.tmp

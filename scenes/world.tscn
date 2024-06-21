@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://b47e0ly4dll8p" path="res://scenes/player/player_spawner.tscn" id="1_fahhe"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
 [ext_resource type="PackedScene" uid="uid://bjchbb8ua0ijg" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
-[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="6_3shum"]
+[ext_resource type="PackedScene" path="res://scenes/menu/pause.tscn" id="6_3shum"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
-size = Vector3(1000, 1, 1000)
+size = Vector3(1000, 2, 1000)
 
 [sub_resource type="Environment" id="Environment_wfjmj"]
 tonemap_mode = 2
@@ -68,7 +68,7 @@ _spawnable_scenes = PackedStringArray("res://scenes/world/worldGeneration.tscn",
 spawn_path = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]

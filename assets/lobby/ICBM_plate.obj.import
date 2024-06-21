@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bjc0wyvx8vy2"
+path="res://.godot/imported/ICBM_plate.obj-411dc81fd1da5d1751441f5ae41137ff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ICBM_plate.obj-411dc81fd1da5d1751441f5ae41137ff.mesh"]
+
+source_file="res://assets/lobby/ICBM_plate.obj"
+dest_files=["res://.godot/imported/ICBM_plate.obj-411dc81fd1da5d1751441f5ae41137ff.mesh", "res://.godot/imported/ICBM_plate.obj-411dc81fd1da5d1751441f5ae41137ff.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
