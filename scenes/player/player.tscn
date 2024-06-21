@@ -34,6 +34,12 @@ properties/6/replication_mode = 2
 properties/7/path = NodePath(".:alive")
 properties/7/spawn = true
 properties/7/replication_mode = 2
+properties/8/path = NodePath("Pivot:scale")
+properties/8/spawn = true
+properties/8/replication_mode = 2
+properties/9/path = NodePath("PlayerHitbox:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owxfs"]
 albedo_texture = ExtResource("2_8qfng")

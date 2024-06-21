@@ -129,7 +129,7 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 		return false
 	wall_block.position = Vector3(new_x, 2.5, new_z)
 	floor_plan[new_z - 1][new_x - 1] = WALL
-	add_child(wall_block, true)
+	GlobalSpawner.spawn_wall(wall_block, absolute_position + Vector3i(new_x, -0.5, new_z))
 	return true
 
 # This function will try to fit a wall on the floor plan given the restrictions
