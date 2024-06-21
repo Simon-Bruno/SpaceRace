@@ -112,27 +112,27 @@ func _on_enemy_hitbox_body_exited(body):
 
 # Used in player script when attacking an enemy, apply_damage_to_enemy
 @rpc("any_peer", "call_local", "reliable")
-func take_damage(damage, source):
+func take_damage(damage, player_pos):
 	if not multiplayer.is_server():
 		return
-	if source.is_in_group("Boss"):
-		return
+	#if source.is_in_group("Boss"):
+		#return
 	health = max(0, health - damage)
-	last_damaged_by = source
+	#last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
 
 	if health <= 0:
 		die()
 
-	var knockback_direction = (global_transform.origin - source.global_transform.origin).normalized()
+	var knockback_direction = (global_transform.origin - player_pos).normalized()
 	velocity.x += knockback_direction.x * knockback_strength
 	velocity.z += knockback_direction.z * knockback_strength
 
 func die():
 	if not multiplayer.is_server():
 		return
-	if last_damaged_by.get_parent().is_in_group("Players"):
-		last_damaged_by.get_parent().points += 5
+	#if last_damaged_by.get_parent().is_in_group("Players"):
+		#last_damaged_by.get_parent().points += 5
 	queue_free()
 
 func chase_player(body):

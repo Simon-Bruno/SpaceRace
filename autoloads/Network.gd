@@ -112,7 +112,7 @@ func go_to_lobby():
 			_hard_reset_to_lobby.rpc()
 			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
 			for player_id in player_names.keys():
-				get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
+			get_node("/root/Main/SpawnedItems/Lobby").add_player_character(player_id)
 
 
 func _on_leave_button_pressed():
