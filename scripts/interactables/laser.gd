@@ -84,7 +84,7 @@ func _process(delta):
 
 	if target != null and active:
 		#target.die()
-		target.take_damage.rpc(target.name, 1000)
+		target.take_damage.rpc(target.name, 10000)
 		
 	if not multiplayer.is_server():
 		return

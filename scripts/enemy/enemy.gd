@@ -55,7 +55,7 @@ func _process(delta):
 
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if !closest_target_node.respawn_immunity:
-			closest_target_node.take_damage.rpc(closest_target_node.name, 20)
+			closest_target_node.take_damage.rpc(closest_target_node.name, 10)
 
 	if health <= 0:
 		die()
@@ -111,6 +111,7 @@ func _on_enemy_hitbox_body_exited(body):
 		player_in_attack_zone = false
 
 # Used in player script when attacking an enemy, apply_damage_to_enemy
+@rpc("any_peer", "call_local", "reliable")
 func take_damage(damage, source):
 	if not multiplayer.is_server():
 		return

@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
-var points = 100
+var points = 500
 @export var alive = true
 var respawn_immunity: bool = false
 
