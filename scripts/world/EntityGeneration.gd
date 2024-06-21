@@ -140,7 +140,7 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 2
-	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
+	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door, null)
 	set_cell_item(interactable[1], EMPTY)
 
 
@@ -196,7 +196,7 @@ func spawn_lasers() -> void:
 		var new_orientations = [22, 0, 16, 10]
 		var orientation = get_cell_item_orientation(laser)
 		orientation = get_basis_with_orthogonal_index(new_orientations[orientations.find(orientation)])
-		GlobalSpawner.spawn_laser(map_to_local(laser), orientation)
+		GlobalSpawner.spawn_laser(map_to_local(laser), orientation, false)
 
 
 # Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.
