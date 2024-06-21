@@ -7,7 +7,7 @@
 [node name="EndRoom" type="Node3D" parent="."]
 
 [node name="Statics" type="GridMap" parent="EndRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -16,7 +16,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Dynamics" type="GridMap" parent="EndRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -27,7 +27,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 [node name="Template" type="Node3D" parent="."]
 
 [node name="Statics" type="GridMap" parent="Template"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -36,7 +36,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Template"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 
@@ -44,7 +44,7 @@ cell_scale = 1.25
 visible = false
 
 [node name="Statics" type="GridMap" parent="Room0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -53,7 +53,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Room0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 metadata/_editor_floor_ = Vector3(0, 1, 0)
@@ -62,7 +62,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Plates1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -71,7 +71,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Plates1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -83,7 +83,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Button1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -92,7 +92,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Button1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -104,7 +104,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Plates2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -113,7 +113,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Plates2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -125,7 +125,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Maze1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -134,7 +134,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Maze1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 metadata/_editor_floor_ = Vector3(0, 1, 0)
@@ -143,7 +143,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Maze2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -152,7 +152,7 @@ data = {
 metadata/_editor_floor_ = Vector3(2, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Maze2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -164,7 +164,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Laser1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -173,7 +173,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Laser1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -185,7 +185,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Repair1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -194,7 +194,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Repair1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -206,7 +206,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Plates3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -215,7 +215,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Plates3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -227,7 +227,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Laser2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -236,7 +236,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Laser2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -248,7 +248,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Button2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -257,7 +257,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Button2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -269,7 +269,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Plates4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -278,7 +278,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Plates4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -290,7 +290,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Portal1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -299,7 +299,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Portal1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -311,7 +311,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Portal2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -320,7 +320,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Portal2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -332,7 +332,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Portal3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -341,7 +341,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Portal3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -353,7 +353,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Button3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -362,7 +362,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Dynamics" type="GridMap" parent="Button3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -374,7 +374,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Maze3(portal)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -383,7 +383,7 @@ data = {
 metadata/_editor_floor_ = Vector3(2, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Maze3(portal)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -395,7 +395,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Laser3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -404,7 +404,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Laser3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -416,7 +416,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Laser4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -425,7 +425,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Laser4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -437,7 +437,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Repair2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
@@ -446,7 +446,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Repair2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17132, 0.0373144, -0.591915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh_library = ExtResource("1_nvyip")
 cell_scale = 1.25
 data = {
