@@ -333,8 +333,8 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	floor_plan[z - 1][x - 1] = BUTTON
 	doors[0].deactivated()
 	doors[1].deactivated()
-	GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), doors[0], false)
-	GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), deg_to_rad(180)), doors[1], false)
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis(), doors[0], false)
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), deg_to_rad(180)), doors[1], false)
 	return true
 
 
@@ -498,8 +498,8 @@ func generate_floor_plan(width : int, height : int) -> Array[Array]:
 	return floor_plan
 
 func spawn_dynamic_doors(end : Vector3i):
-	var door_pos_1 = Vector3i(end.x, -1, end.z + 3)
-	var door_pos_2 = Vector3i(door_pos_1)
+	var door_pos_1 = Vector3(end.x, -1, end.z + 3)
+	var door_pos_2 = Vector3(door_pos_1)
 	door_pos_2.z = -door_pos_2.z
 	var rotation = deg_to_rad(-90)
 	var door_1 = GlobalSpawner.spawn_door(absolute_position + door_pos_1, Basis().rotated(Vector3(0, 1, 0), rotation), 1)
@@ -520,6 +520,7 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		generate_path(floor_plan, width, height, start, end)
 	if world_dict.has('walls'):
 		add_walls(floor_plan, world_dict['walls'], width, height, start)
+	var doors = spawn_dynamic_doors(end)
 	if world_dict.has('objects'):
 		add_objects(floor_plan, world_dict['objects'], doors, width, height, start)
 	if world_dict.has('enemies'):
