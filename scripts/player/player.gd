@@ -65,7 +65,7 @@ func _horizontal_movement(delta):
 
 	if current_direction != Vector2.ZERO:	# accelerate if moving
 		speed = min(walk_speed * speed_boost, speed + walk_acceleration * delta)
-		direction = lerp(direction, current_direction, rotation_smoothing * delta)
+		direction = lerp(direction, current_direction, rotation_speed * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 
 	# decelerate
@@ -190,15 +190,29 @@ func take_damage(id, damage):
 	if health <= 0 and alive and not AnimDeath:
 		die()
 
+
+# Send health update to all clients
+@rpc("any_peer", "call_local", "reliable")
+func update_health(val):
+	health = val
+	update_health_bar()
+
+
+# Updates the health bar above the player's head
+func update_health_bar():
+	HpBar.value = float(health) / Global.player_max_health * 100
+	
+
 # Increases health/HP of the player
 func increase_health(value):
 	health = min(Global.player_max_health, health + value)
-	HpBar.value = float(health) / Global.player_max_health * 100
+	update_health_bar()
+	rpc_id(0, "update_health", health)
 
 # Sets the health to full HP of player
 func full_health():
 	health = Global.player_max_health
-	HpBar.value = Global.player_max_health
+	update_health_bar()
 
 
 func die():
