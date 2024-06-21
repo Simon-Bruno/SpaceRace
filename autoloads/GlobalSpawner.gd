@@ -150,7 +150,7 @@ func spawn_wall(pos):
 	if spawner:
 		var wall = wall_scene.instantiate()
 		wall.position = pos
-		add_child(wall, true)
+		spawner.add_child(wall, true)
 
 
 func spawn_item(pos):
