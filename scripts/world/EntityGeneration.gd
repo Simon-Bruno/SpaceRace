@@ -58,10 +58,10 @@ var yellow = [LASERY, BUTTONY, DOORY, HOLEY, KEYY, MULTIPRESSUREY, SOLOPRESSUREY
 # Main function to be called
 func replace_entities(rooms : Array) -> void:
 	spawn_enemies()
-	spawn_lasers()
 	spawn_small_boxes()
 	spawn_teleporters(rooms)
 	spawn_doors(rooms)
+	spawn_lasers(rooms)
 	replace_unused()
 
 
@@ -107,9 +107,44 @@ func sort_on_items(a, b) -> bool:
 	return false
 
 
-# %%%%%%%%%%
-# % UNUSED %
-# %%%%%%%%%%
+# %%%%%%%%%
+# % LASERS%
+# %%%%%%%%%
+
+# Handles all laser spawning
+func spawn_lasers(rooms : Array) -> void:
+	laser_timer()
+	colored_lasers()
+
+
+func laser_timer() -> void:
+	for timer in get_used_cells_by_item(LASERTIMER):
+		GlobalSpawner.spawn_laser(map_to_local(timer), find_laser_basis(timer), true)
+
+
+# Spawns a laser at all laser spawnpoints in the map.
+func colored_lasers() -> void:
+	var lasers = []
+	for type in [LASERB, LASERG, LASERO, LASERP, LASERR, LASERY]:
+		lasers += get_used_cells_by_item(type)
+
+	if lasers.size() == 0:
+		return
+
+	for laser in lasers:
+		GlobalSpawner.spawn_laser(map_to_local(laser), find_laser_basis(laser), false)
+
+
+func find_laser_basis(laser):
+	var orientations = [0, 16, 10, 22]
+	var new_orientations = [22, 0, 16, 10]
+	var orientation = get_cell_item_orientation(laser)
+	return get_basis_with_orthogonal_index(new_orientations[orientations.find(orientation)])
+
+
+# %%%%%%%%%%%%%%%%%%
+# % REPLACE UNUSED %
+# %%%%%%%%%%%%%%%%%%
 
 # Replaces all unused plates etc, and replaces them by dummy interactables.
 func replace_unused() -> void:
@@ -239,23 +274,6 @@ func spawn_enemies() -> void:
 	for boss in bosses:
 		GlobalSpawner.spawn_boss(map_to_local(boss))
 		set_cell_item(boss, EMPTY)
-
-
-# Spawns a laser at all laser spawnpoints in the map.
-func spawn_lasers() -> void:
-	var lasers = []
-	for type in [LASERB, LASERG, LASERO, LASERP, LASERR, LASERY]:
-		lasers += get_used_cells_by_item(type)
-
-	if lasers.size() == 0:
-		return
-
-	for laser in lasers:
-		var orientations = [0, 16, 10, 22]
-		var new_orientations = [22, 0, 16, 10]
-		var orientation = get_cell_item_orientation(laser)
-		orientation = get_basis_with_orthogonal_index(new_orientations[orientations.find(orientation)])
-		GlobalSpawner.spawn_laser(map_to_local(laser), orientation, false)
 
 
 # %%%%%%%%%%%%%%%
