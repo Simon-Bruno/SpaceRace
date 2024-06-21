@@ -129,6 +129,7 @@ func spawn_terminal(pos):
 		terminal.position = pos
 		#terminal.basis	= dir
 		spawner.add_child(terminal, true)
+		return terminal
 
 func spawn_box(pos):
 	if not multiplayer.is_server():
@@ -138,6 +139,14 @@ func spawn_box(pos):
 		var item = box_scene.instantiate()
 		item.position = pos
 		spawner.add_child(item, true)
+
+func spawn_wall(wall, pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/WallSpawner")
+	if spawner:
+		add_child(wall, true)
+		wall.position = pos
 
 
 func spawn_item(pos):

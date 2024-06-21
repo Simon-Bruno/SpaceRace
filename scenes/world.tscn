@@ -53,6 +53,12 @@ spawn_path = NodePath("..")
 _spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/terminal.tscn", "res://scenes/interactables/door.tscn", "res://scenes/interactables/portal.tscn")
 spawn_path = NodePath("..")
 
+[node name="WallSpawner" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="WallSpawner"]
+_spawnable_scenes = PackedStringArray("res://scenes/world/intern_wall.tscn")
+spawn_path = NodePath("..")
+
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
 
 [node name="Camera" parent="." instance=ExtResource("2_x5d8x")]
