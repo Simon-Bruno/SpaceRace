@@ -12,7 +12,22 @@ var terminal_scene = preload("res://scenes/interactables/terminal.tscn")
 var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
+var keyhole_scene = preload("res://scenes/interactables/keyhole.tscn")
 var jump_laser_scene = preload("res://scenes/interactables/laser_low.tscn")
+
+func spawn_keyhole(pos, dir, interact, key):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
+	if spawner:
+		var keyhole = keyhole_scene.instantiate()
+		keyhole.position = pos
+		keyhole.basis	= dir
+		keyhole.interactable = interact
+		keyhole.key = key
+		spawner.add_child(keyhole, true)
+		return keyhole
+	return null
 
 func spawn_pressure_plate(pos, dir, interact=null, pos_enemy=null):
 	if not multiplayer.is_server():
@@ -61,7 +76,6 @@ func spawn_button(pos, dir, interact, inverse):
 		return button
 	return null
 
-
 func spawn_door(pos, dir, activation):
 	if not multiplayer.is_server():
 		return
@@ -75,7 +89,6 @@ func spawn_door(pos, dir, activation):
 		return door
 	return null
 
-
 func spawn_melee_enemy(pos):
 	if not multiplayer.is_server():
 		return
@@ -85,7 +98,6 @@ func spawn_melee_enemy(pos):
 		enemy.position = pos
 		spawner.add_child(enemy, true)
 		return enemy
-
 
 func spawn_ranged_enemy(pos):
 	if not multiplayer.is_server():
@@ -153,7 +165,6 @@ func spawn_wall(wall, pos):
 		add_child(wall, true)
 		wall.position = pos
 
-
 func spawn_item(pos):
 	if not multiplayer.is_server():
 		return
@@ -162,6 +173,8 @@ func spawn_item(pos):
 		var item = item_scene.instantiate()
 		item.position = pos
 		spawner.add_child(item, true)
+		return item
+	return null
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):

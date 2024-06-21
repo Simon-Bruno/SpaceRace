@@ -534,4 +534,3 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		add_objects(floor_plan, world_dict['objects'], doors, width, height, start)
 	if world_dict.has('enemies'):
 		add_mobs(floor_plan, world_dict['enemies'], width, height, start)
-
