@@ -1,5 +1,8 @@
 extends GridMap
 
+# DO NOT SPAWN
+enum {PRESSUREPLATE=28}
+
 # Items without links
 enum {SMALLBOX=27, EMPTY=-1}
 enum {ENEMY=88, RANGEDENEMY=89, BOSS=91, SPAWNERMELEE=92, SPAWNERRANGED=93, WELDER=90, LASERTIMER=94}
@@ -59,6 +62,8 @@ func replace_entities(rooms : Array) -> void:
 	spawn_small_boxes()
 	spawn_teleporters(rooms)
 	spawn_doors(rooms)
+	replace_unused()
+
 
 # %%%%%%%%%%%%
 # % GENERAL %
@@ -100,6 +105,22 @@ func sort_on_items(a, b) -> bool:
 	if a[0] < b[0]:
 		return true
 	return false
+
+
+# %%%%%%%%%%
+# % UNUSED %
+# %%%%%%%%%%
+
+# Replaces all unused plates etc, and replaces them by dummy interactables.
+func replace_unused() -> void:
+	replace_plates()
+
+
+func replace_plates() -> void:
+	var plates = get_used_cells_by_item(PRESSUREPLATE)
+	for plate in plates:
+		var orientation = get_cell_item_orientation(plate)
+		connect_pressureplate(null, [PRESSUREPLATE, plate, orientation])
 
 
 # %%%%%%%%%
@@ -183,7 +204,7 @@ func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	location.y = 2
 	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
-	
+
 
 func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
