@@ -26,7 +26,7 @@ func respawn_player():
 	player.get_node("PlayerCombat/SubViewport/HpBar").value = Global.player_max_health
 	player.alive = true
 	player.visible = true
-	player.global_position.y -= 195
+	player.global_position.y -= 198
 	player.fall_acceleration = fall_acceleration
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
 

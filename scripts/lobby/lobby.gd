@@ -60,6 +60,7 @@ func check_start_conditions():
 	else:
 		if not start_timer.is_stopped():
 			start_timer.stop()
+			$Progressbar/SubViewport/ProgressBar.value = 0
 
 
 func lobby_add_player_character(id):

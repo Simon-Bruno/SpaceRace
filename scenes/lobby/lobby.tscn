@@ -275,6 +275,9 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath("../Assets/Telepath/TeamX_text:text")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+properties/3/path = NodePath("../Progressbar/SubViewport/ProgressBar:value")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_8skx5"]
 
@@ -294,8 +297,8 @@ script = ExtResource("1_a0um3")
 [node name="SubViewport" type="SubViewport" parent="Progressbar"]
 
 [node name="ProgressBar" type="ProgressBar" parent="Progressbar/SubViewport"]
-offset_right = 4.0
-offset_bottom = 27.0
+offset_right = 512.0
+offset_bottom = 512.0
 theme_override_styles/background = SubResource("StyleBoxFlat_dhsop")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ulm8y")
 show_percentage = false
