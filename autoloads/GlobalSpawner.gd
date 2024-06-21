@@ -12,6 +12,7 @@ var terminal_scene = preload("res://scenes/interactables/terminal.tscn")
 var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
+var jump_laser_scene = preload("res://scenes/interactables/laser_low.tscn")
 
 func spawn_pressure_plate(pos, dir, interact=null, pos_enemy=null):
 	if not multiplayer.is_server():
@@ -106,12 +107,14 @@ func spawn_boss(pos):
 		return boss
 	return null
 
-func spawn_laser(pos, dir, timer=false, activation = 1, hinder = false):
+func spawn_laser(pos, dir, timer=false, activation = 1, hinder = false, jumpable=false):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
 		var laser = laser_scene.instantiate()
+		if jumpable:
+			laser = jump_laser_scene.instantiate()
 		laser.position = pos
 		laser.basis	= dir
 		laser.timer_active = timer
