@@ -5,6 +5,7 @@
 [node name="Custom Rooms" type="Node3D"]
 
 [node name="EndRoom" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="EndRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -25,6 +26,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Template" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="Template"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
