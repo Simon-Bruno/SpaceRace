@@ -28,14 +28,9 @@ func _process(_delta):
 func _ready():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
-		Network.player_added.connect(add_player_character)
+		Network.player_added.connect(lobby_add_player_character)
 		init_timer()
-
-func add_player_character(id):
-	var character = preload("res://scenes/player/player.tscn").instantiate()
-	character.name = str(id)
-	add_child(character)
-
+		
 func init_timer():
 		add_child(start_timer)
 		start_timer.stop()
@@ -65,16 +60,15 @@ func check_start_conditions():
 	else:
 		if not start_timer.is_stopped():
 			start_timer.stop()
+			$Progressbar/SubViewport/ProgressBar.value = 0
 
 
 func lobby_add_player_character(id):
 	player_id = id
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
-	Network.player_nodes[id] = character
-	Network.player_spawned.emit(character, id)
-	Network._update_player_node_dict.rpc(Network.player_nodes)
 	add_child(character)
+	character.set_params_for_player.rpc(id, Vector3i(5, 5, 5), 30, 200)
 
 @rpc("authority", "call_local", "reliable")
 func _on_game_start(player_teams, player_names):
