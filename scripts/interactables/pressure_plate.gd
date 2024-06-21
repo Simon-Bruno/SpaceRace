@@ -49,7 +49,6 @@ func _on_area_3d_body_exited(body) -> void:
 			update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 			handle_plate_deactivation()
 
-
 # Handle the activation logic when a body enters the pressure plate
 func handle_plate_activation(body) -> void:
 	if is_finish_plate:
