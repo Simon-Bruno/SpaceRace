@@ -1,6 +1,6 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://bm83p1vlljg8d"]
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://bjmenv16dpmjv"]
 
-[ext_resource type="Shader" uid="uid://c5deghd8erhch" path="res://assets/shaders/thunder_shader.tres" id="1_5qows"]
+[ext_resource type="Shader" uid="uid://cmkeknttov3aq" path="res://assets/shaders/thunder_shader.tres" id="1_5qows"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g1pu7"]
 render_priority = 0
