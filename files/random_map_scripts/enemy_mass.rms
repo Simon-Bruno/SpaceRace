@@ -51,36 +51,3 @@ create_mob MELEE
     set_loose_grouping
     radius 4
 }
-
-create_mob MELEE
-{
-    set_min_distance 12
-    set_max_distance 16
-    set_group_size 3
-    set_loose_grouping
-    radius 4
-}
-
-create_mob MELEE
-{
-    set_min_distance 13
-    set_max_distance 20
-    set_group_size 3
-    set_loose_grouping
-}
-
-create_mob MELEE
-{
-    set_min_distance 5
-    set_max_distance 20
-    set_group_size 3
-    set_loose_grouping
-}
-
-create_mob MELEE
-{
-    set_min_distance 3
-    set_max_distance 20
-    set_group_size 3
-    set_loose_grouping
-}

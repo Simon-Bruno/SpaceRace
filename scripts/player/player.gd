@@ -23,10 +23,21 @@ var strength: float = 1.0
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 10, 20)
-var game_spawn = {1: [Vector3(10, 5, 10), Vector3(10, 5, 20)],2: [Vector3(10, 5, -10), Vector3(10, 5, -20)]}
+var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+
+@rpc("authority", "call_local", "reliable")
+func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
+	if str(id) != str(multiplayer.get_unique_id()):
+		return
+	$Pivot.scale = new_scale
+	$PlayerHitbox.scale = new_scale
+	$CollisionShape3D.scale = new_scale
+	walk_speed = new_walk_speed
+	walk_acceleration = new_accel  
+	walk_deceleration = new_accel * 1.2  
 
 func _ready():
 	$FloatingName.text = Network.playername

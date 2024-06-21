@@ -409,15 +409,15 @@ func draw_paths() -> void:
 
 	right.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
-	assert(right.size() == ends.size())
+	#assert(right.size() == ends.size())
 	for i in range(right.size() - 1, -1, -1):
 		if get_cell_item_orientation(right[i]) != 22:
 			right.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
 	#assert(right.size() == ends.size())
-	#for i in right.size():
-		#make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
+	for i in min(right.size(), ends.size()):
+		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
