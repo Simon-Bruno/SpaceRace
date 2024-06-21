@@ -33,7 +33,7 @@ func add_resolution_items():
 func _on_option_button_item_selected(index):
 	SettingsSignalBus.emit_on_resolution_mode_selected(index)
 	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
-	option_button.select(2)
+	option_button.select(index)
 	centre_window()
 
 

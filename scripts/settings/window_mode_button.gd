@@ -60,8 +60,8 @@ func select_current_window_mode() -> void:
 				_on_option_button_item_selected(1)
 		DisplayServer.WINDOW_MODE_FULLSCREEN:
 			if borderless:
-				option_button.select(2)
-				_on_option_button_item_selected(2)
+				option_button.select(3)
+				_on_option_button_item_selected(3)
 			else:
 				option_button.select(0)
 				_on_option_button_item_selected(0)
