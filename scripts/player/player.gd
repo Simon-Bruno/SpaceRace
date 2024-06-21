@@ -4,7 +4,8 @@ extends CharacterBody3D
 @export var fall_acceleration = 30
 @export var jump_impulse = 8.5
 var getHitCooldown = true
-@export var health = Global.player_max_health
+#@export var health = Global.player_max_health
+@export var health = 100
 var points = 100
 @export var push_force = 1
 @export var alive = true

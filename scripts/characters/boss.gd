@@ -5,8 +5,11 @@ extends CharacterBody3D
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5
 
-var interactable_door = null
+@export var interactable_door: StaticBody3D = null
 var knockback_strength = 0
+
+var is_idle = true
+var activated = false
 
 var player_chase = false
 var targeted_player = null
@@ -156,7 +159,7 @@ func die():
 	queue_free()
 	
 	if interactable_door != null:
-		interactable_door.activate()
+		interactable_door.activated()
 
 func check_health():
 	var health_percentage = float(health) / float(max_health)
@@ -173,6 +176,8 @@ func spawn_enemies():
 		var pos = self.global_transform.origin + Vector3(randf() * 10 - 5, 0, randf() * 10 - 5)
 		var enemy = GlobalSpawner.spawn_melee_enemy(pos)
 		if enemy:
+			enemy.set_physics_process(true)
+			enemy.set_process(true)
 			enemy.call_deferred("chase_player", last_damaged_by)
 
 func start_charge():

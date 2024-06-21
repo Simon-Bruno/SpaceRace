@@ -134,8 +134,21 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 			connect_button(door, interactable)
 		if interactable[0] in multipressures or interactable[0] in solopressures:
 			connect_pressureplate(door, interactable)
+		if interactable[0] in bosses:
+			connect_boss(door, interactable)
+			
 
 
+func connect_boss(door : StaticBody3D, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 2
+	var boss = GlobalSpawner.spawn_boss(location)
+	print(door)
+	boss.interactable_door = door
+	set_cell_item(interactable[1], EMPTY)
+	
+	
+	
 # Spawns a pressureplate on the correct location, and links it to a given door.
 func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
@@ -202,10 +215,15 @@ func spawn_lasers() -> void:
 # Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.
 func spawn_enemies() -> void:
 	var enemies = get_used_cells_by_item(ENEMY)
+	var bosses = get_used_cells_by_item(BOSS)
 	
 	for item in enemies:
 		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
 		set_cell_item(item, EMPTY)
+	
+	for boss in bosses:
+		GlobalSpawner.spawn_boss(map_to_local(boss))
+		set_cell_item(boss, EMPTY)
 
 
 # Called when the node enters the scene tree for the first time.
