@@ -13,20 +13,16 @@ var DISPLAY_RESOLUTION_KEYS : Array = RESOLUTION_DICTIONARY.keys()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	option_button.item_selected.connect(on_resolution_selected)
 	add_resolution_items()
-	select_current_display_resolution()
-	load_data()
+	if FileAccess.file_exists(SaveManager.SETTINGS_SAVE_PATH) and not SettingsContainer.get_first():
+		load_data()
+	else:
+		select_current_display_resolution()
 
 
 func load_data():
-	on_resolution_selected(SettingsContainer.get_resolution_mode_index())
-
-
-func on_resolution_selected(index : int):
-	SettingsSignalBus.emit_on_resolution_mode_selected(index)
-	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
-	centre_window()
+	_on_option_button_item_selected(SettingsContainer.get_resolution_mode_index())
+	option_button.select(SettingsContainer.get_resolution_mode_index())
 
 
 func add_resolution_items():
@@ -34,11 +30,18 @@ func add_resolution_items():
 		option_button.add_item(resolution_size_text)
 
 
+func _on_option_button_item_selected(index):
+	SettingsSignalBus.emit_on_resolution_mode_selected(index)
+	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
+	option_button.select(2)
+	centre_window()
+
+
 func select_current_display_resolution():
 	var curr_resolution = DisplayServer.window_get_size()
 	var curr_resolution_str = str(curr_resolution.x) + " " + "x" + " " + str(curr_resolution.y)
 	var index = DISPLAY_RESOLUTION_KEYS.find(curr_resolution_str)
-	option_button.select(index)
+	_on_option_button_item_selected(index)
 
 
 func centre_window():

@@ -11,7 +11,8 @@ var bus_index : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_bus_name_by_index()
-	load_data()
+	if FileAccess.file_exists(SaveManager.SETTINGS_SAVE_PATH) and not SettingsContainer.get_first():
+		load_data()
 	set_name_label_text()
 	set_slider_value()
 

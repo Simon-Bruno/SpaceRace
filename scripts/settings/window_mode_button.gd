@@ -14,13 +14,15 @@ const WINDOW_MODE_ARRAY : Array[String] = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_window_mode_items()
-	load_data()
-	select_current_window_mode()
+	if FileAccess.file_exists(SaveManager.SETTINGS_SAVE_PATH) and not SettingsContainer.get_first():
+		load_data()
+	else:
+		select_current_window_mode()
 
 
 func load_data():
-	option_button.select(SettingsContainer.get_window_mode_index())
 	_on_option_button_item_selected(SettingsContainer.get_window_mode_index())
+	option_button.select(SettingsContainer.get_window_mode_index())
 
 
 func add_window_mode_items():
@@ -52,12 +54,16 @@ func select_current_window_mode() -> void:
 		DisplayServer.WINDOW_MODE_WINDOWED:
 			if borderless:
 				option_button.select(2)
+				_on_option_button_item_selected(2)
 			else:
 				option_button.select(1)
+				_on_option_button_item_selected(1)
 		DisplayServer.WINDOW_MODE_FULLSCREEN:
 			if borderless:
-				option_button.select(3)
+				option_button.select(2)
+				_on_option_button_item_selected(2)
 			else:
 				option_button.select(0)
+				_on_option_button_item_selected(0)
 		_:
 			pass

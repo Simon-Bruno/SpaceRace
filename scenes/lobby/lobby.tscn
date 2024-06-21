@@ -4,7 +4,6 @@
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
 [ext_resource type="ArrayMesh" uid="uid://bm5ivu17noj78" path="res://assets/lobby/very_large_antenna/very_large_array_antenna_v1.obj" id="2_78cdj"]
 [ext_resource type="ArrayMesh" uid="uid://bywdnlnowkb31" path="res://assets/lobby/lane_spaceshuttle/spaceshuttlelane_v1.obj" id="3_74055"]
-[ext_resource type="Texture2D" uid="uid://bo38py7b0g4ut" path="res://assets/lobby/laser_beam/T_VFX_Noise_9.PNG" id="3_ijbb2"]
 [ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="3_l42m8"]
 [ext_resource type="ArrayMesh" uid="uid://cfv3e04julldf" path="res://assets/lobby/telepath/telepath.obj" id="4_2a2jn"]
 [ext_resource type="ArrayMesh" uid="uid://dqtgttwa278f" path="res://assets/lobby/spaceshuttle/spaceshuttle_v1.obj" id="4_2ubwl"]
@@ -20,7 +19,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c0r04e8lkblwi" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/stair_case/stair_case.obj" id="11_bv6il"]
 [ext_resource type="ArrayMesh" uid="uid://bgib0f2687iao" path="res://assets/lobby/death_ray/death_ray_monitor.obj" id="11_cnme7"]
 [ext_resource type="ArrayMesh" uid="uid://d02orydh5ukim" path="res://assets/lobby/griffen_station/power_room/room_w_balkon/room_w_balkon/balkon_power_room_griffin_station_v1.obj" id="14_1qpjt"]
-[ext_resource type="ArrayMesh" uid="uid://bjmenv16dpmjv" path="res://assets/lobby/death_ray/thunder_editable.tres" id="22_0x4uc"]
+[ext_resource type="ArrayMesh" uid="uid://bm83p1vlljg8d" path="res://assets/lobby/death_ray/thunder_editable.tres" id="22_0x4uc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhsop"]
 bg_color = Color(0, 0, 0, 1)
@@ -739,6 +738,7 @@ shape = SubResource("ConcavePolygonShape3D_cceer")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.764314, 0.644845, 0, -0.644845, 0.764314, -3.92735, 60.2119, 69.7497)
+current = true
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
