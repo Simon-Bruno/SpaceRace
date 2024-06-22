@@ -5,7 +5,7 @@ func use():
 	var player = owned_node
 	if player:
 		player.full_health()
-	super.delete()
+	super.consume_item()
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

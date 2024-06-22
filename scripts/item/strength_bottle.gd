@@ -13,7 +13,7 @@ func use():
 	if player:
 		player.strength = strength_boost
 	print("Strength ", player.strength)
-	super.delete()
+	super.consume_item()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
