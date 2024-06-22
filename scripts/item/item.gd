@@ -26,10 +26,10 @@ func _ready():
 
 func _animate(delta):
 	"""Makes the item rotate and bob up and down"""
-	
+
 	# rotate by rotating the origin
 	$RigidBody3D/MeshOrigin.rotate_y(rotation_speed * delta)
-	
+
 	# bobbing by translating the origin
 	bob_time += delta
 	# TAU is 2*PI
@@ -37,6 +37,7 @@ func _animate(delta):
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
 
 # Deletes the item after consuming/using it
+@rpc("authority", "call_local", "reliable")
 func delete():
 	if not multiplayer.is_server() or not owned_node:
 		queue_free()
@@ -49,10 +50,10 @@ func delete():
 func _process(delta):
 	_animate(delta)
 	if owned_node and multiplayer.is_server():
-		
+
 		var destination = owned_node.global_position
 		destination.y += owned_node.get_node("Pivot/Armature/Skeleton3D/MeshInstance3D").get_aabb().size.y
-	
+
 		# Nodig voor het syncen
 		item_position = $RigidBody3D.global_position.lerp(destination, item_follow_speed * delta)
 
