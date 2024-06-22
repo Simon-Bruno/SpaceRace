@@ -201,18 +201,20 @@ func update_health(val):
 # Updates the health bar above the player's head
 func update_health_bar():
 	HpBar.value = float(health) / Global.player_max_health * 100
-	
+
 
 # Increases health/HP of the player
 func increase_health(value):
 	health = min(Global.player_max_health, health + value)
 	update_health_bar()
-	rpc_id(0, "update_health", health)
+	update_health.rpc(health)
+
 
 # Sets the health to full HP of player
 func full_health():
 	health = Global.player_max_health
 	update_health_bar()
+	update_health.rpc(health)
 
 
 func die():

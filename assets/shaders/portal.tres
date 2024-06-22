@@ -1,4 +1,6 @@
-[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://601mw1n0k5te"]
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://601mw1n0k5te"]
+
+[ext_resource type="Texture2D" uid="uid://bjsqyf78fx3sq" path="res://assets/lobby/laser_beam/T_VFX_Glow_1.PNG" id="1_p8lba"]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_fcv2j"]
 parameter_name = "ColorIntensity"
@@ -35,6 +37,7 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_conh1"]
 expanded_output_ports = [0]
+texture = ExtResource("1_p8lba")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_wdp2m"]
