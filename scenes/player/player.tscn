@@ -804,5 +804,3 @@ texture = SubResource("ViewportTexture_iyg84")
 [connection signal="timeout" from="PlayerCombat/RespawnImmunity" to="PlayerCombat" method="_on_respawn_immunity_timeout"]
 [connection signal="body_entered" from="PlayerItem/DetectionArea" to="PlayerItem" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="PlayerItem/DetectionArea" to="PlayerItem" method="_on_area_3d_body_exited"]
-[connection signal="timeout" from="StrengthTimer" to="." method="_on_potion_timer_timeout"]
-[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]

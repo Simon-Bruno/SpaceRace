@@ -191,30 +191,20 @@ func take_damage(id, damage):
 		die()
 
 
-# Send health update to all clients
+# Increases health/HP of the player
 @rpc("any_peer", "call_local", "reliable")
-func update_health(val):
-	health = val
-	update_health_bar()
-
-
-# Updates the health bar above the player's head
-func update_health_bar():
+func increase_health(value):
+	health = min(Global.player_max_health, health + value)
+	print("Increasing health to:", health)  # Debug statement
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 
-# Increases health/HP of the player
-func increase_health(value):
-	health = min(Global.player_max_health, health + value)
-	update_health_bar()
-	update_health.rpc(health)
-
-
 # Sets the health to full HP of player
+@rpc("any_peer", "call_local", "reliable")
 func full_health():
 	health = Global.player_max_health
-	update_health_bar()
-	update_health.rpc(health)
+	print("Increasing health to:", health)  # Debug statement	
+	HpBar.value = Global.player_max_health
 
 
 func die():

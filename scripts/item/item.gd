@@ -39,15 +39,15 @@ func _animate(delta):
 # Deletes the item after consuming/using it
 @rpc("any_peer", "call_local", "reliable")
 func delete():
-	if not multiplayer.is_server() or not owned_node:
-		queue_free()
+	if not owned_node:
+		queue_free() # TODO: Maybe removing this queue_free(), but need to test first
 		return
 
 	var node = owned_node.get_node("PlayerItem")
 	node.holding = null # Player stops holding item / forgets item
 	queue_free()
 
-# Ensure the item is correctly deleted fron both the server and its clients
+# Ensure the item is correctly deleted from both the server and its clients
 func consume_item():
 	if multiplayer.is_server():
 		rpc("delete")

@@ -4,7 +4,8 @@ extends "res://scripts/item/item.gd"
 func use():
 	var player = owned_node
 	if player:
-		player.full_health()
+		print("Player using FULL health potion") 
+		player.rpc("full_health")
 	super.consume_item()
 	
 	

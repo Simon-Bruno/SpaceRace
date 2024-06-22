@@ -7,10 +7,11 @@ var health_potion_value = 30
 func use():
 	var player = owned_node
 	if player:
-		player.increase_health(health_potion_value)
+		print("Player using health potion") 
+		player.rpc("increase_health", health_potion_value)
 	super.consume_item()
 	
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	super._process(delta)
