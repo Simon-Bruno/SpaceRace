@@ -228,14 +228,15 @@ func _on_respawn_immunity_timeout():
 	respawn_immunity = false
 
 
-# Resets the boost value to its standard value after the timer ended
-func _on_potion_timer_timeout():
-	strength = 1.0 # Reset the player's strength
-	print("Strength end ", strength)
-	$StrengthTimer.stop()
-
 # Resets the player's speed to its normal speed
 func _on_speed_timer_timeout():
 	speed_boost = 1.0 # Reset the player's speed
 	print("Speed end ", speed)
-	$SpeedTimer.stop()
+	$PlayerEffects/SpeedTimer.stop()
+
+
+# Resets the boost value to its standard value after the timer ended
+func _on_strength_timer_timeout():
+	strength = 1.0 # Reset the player's strength
+	print("Strength end ", strength)
+	$PlayerEffects/StrengthTimer.stop()

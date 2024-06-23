@@ -8,7 +8,8 @@ var duration = 10
 # Called when the player actually uses the item by pressing KEY 'Q'
 func use():
 	var player = owned_node
-	var timer = player.get_node("SpeedTimer")
+	var node = player.get_node("PlayerEffects")
+	var timer = node.get_node("SpeedTimer")
 	timer.start(duration) # Start timer for potion effect
 	if player:
 		player.speed_boost = speed_boost
