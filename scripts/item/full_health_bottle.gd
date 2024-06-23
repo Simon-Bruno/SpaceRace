@@ -1,10 +1,10 @@
 extends "res://scripts/item/item.gd"
 
+
 # Called when the player actually uses the item by pressing KEY 'Q'
 func use():
 	var player = owned_node
 	if player:
-		print("Player using FULL health potion") 
 		player.rpc("full_health")
 	super.consume_item()
 	
