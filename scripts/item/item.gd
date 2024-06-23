@@ -40,7 +40,7 @@ func _animate(delta):
 @rpc("any_peer", "call_local", "reliable")
 func delete():
 	if not owned_node:
-		queue_free() # TODO: Maybe removing this queue_free(), but need to test first
+		#queue_free()
 		return
 
 	var node = owned_node.get_node("PlayerItem")
@@ -50,9 +50,11 @@ func delete():
 # Ensure the item is correctly deleted from both the server and its clients
 func consume_item():
 	if multiplayer.is_server():
-		rpc("delete")
+		#rpc("delete")
+		delete.rpc()	
 	else:
-		rpc_id(1, "delete")
+		#rpc_id(1, "delete")
+		delete.rpc_id(1)		
 
 
 # Called when player consumes the item
@@ -64,11 +66,9 @@ func on_player_consume_potion():
 func _process(delta):
 	_animate(delta)
 	if owned_node and multiplayer.is_server():
-
 		var destination = owned_node.global_position
 		destination.y += owned_node.get_node("Pivot/Armature/Skeleton3D/MeshInstance3D").get_aabb().size.y
 
 		# Nodig voor het syncen
 		item_position = $RigidBody3D.global_position.lerp(destination, item_follow_speed * delta)
-
 		$RigidBody3D.global_position = item_position
