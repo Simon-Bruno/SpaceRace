@@ -39,12 +39,13 @@ func _animate(delta):
 # Deletes the item after consuming/using it
 @rpc("any_peer", "call_local", "reliable")
 func delete():
+	# Deletes the bomb when activated and thrown away
 	if not owned_node:
-		#queue_free()
+		queue_free()
 		return
 
 	var node = owned_node.get_node("PlayerItem")
-	node.holding = null # Player stops holding item / forgets item
+	node.holding = null # Player stops holding item
 	queue_free()
 
 # Ensure the item is correctly deleted from both the server and its clients
