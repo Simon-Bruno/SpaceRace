@@ -126,3 +126,6 @@ func _on_random_body_exited(body):
 		$Assets/Telepath/TeamX_text.text = str(random.size()) + "/4"
 		check_start_conditions()
 
+
+func _on_area_quit_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	Network._on_leave_button_pressed()

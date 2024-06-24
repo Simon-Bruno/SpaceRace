@@ -1,5 +1,8 @@
 extends GridMap
 
+# DO NOT SPAWN
+enum {PRESSUREPLATE=28}
+
 # Items without links
 enum {SMALLBOX=27, EMPTY=-1}
 enum {ENEMY=88, RANGEDENEMY=89, BOSS=91, SPAWNERMELEE=92, SPAWNERRANGED=93, WELDER=90, LASERTIMER=94}
@@ -54,11 +57,12 @@ var yellow = [LASERY, BUTTONY, DOORY, HOLEY, KEYY, MULTIPRESSUREY, SOLOPRESSUREY
 
 # Main function to be called
 func replace_entities(rooms : Array) -> void:
-	spawn_enemies()
-	spawn_lasers()
-	spawn_small_boxes()
+	spawn_items()
 	spawn_teleporters(rooms)
 	spawn_doors(rooms)
+	spawn_lasers(rooms)
+	replace_unused()
+
 
 # %%%%%%%%%%%%
 # % GENERAL %
@@ -100,6 +104,57 @@ func sort_on_items(a, b) -> bool:
 	if a[0] < b[0]:
 		return true
 	return false
+
+
+# %%%%%%%%%
+# % LASERS%
+# %%%%%%%%%
+
+# Handles all laser spawning
+func spawn_lasers(rooms : Array) -> void:
+	laser_timer()
+	colored_lasers()
+
+
+func laser_timer() -> void:
+	for timer in get_used_cells_by_item(LASERTIMER):
+		GlobalSpawner.spawn_laser(map_to_local(timer), find_laser_basis(timer), true)
+
+
+# Spawns a laser at all laser spawnpoints in the map.
+func colored_lasers() -> void:
+	var lasers = []
+	for type in [LASERB, LASERG, LASERO, LASERP, LASERR, LASERY]:
+		lasers += get_used_cells_by_item(type)
+
+	if lasers.size() == 0:
+		return
+
+	for laser in lasers:
+		GlobalSpawner.spawn_laser(map_to_local(laser), find_laser_basis(laser), false)
+
+
+func find_laser_basis(laser):
+	var orientations = [0, 16, 10, 22]
+	var new_orientations = [22, 0, 16, 10]
+	var orientation = get_cell_item_orientation(laser)
+	return get_basis_with_orthogonal_index(new_orientations[orientations.find(orientation)])
+
+
+# %%%%%%%%%%%%%%%%%%
+# % REPLACE UNUSED %
+# %%%%%%%%%%%%%%%%%%
+
+# Replaces all unused plates etc, and replaces them by dummy interactables.
+func replace_unused() -> void:
+	replace_plates()
+
+
+func replace_plates() -> void:
+	var plates = get_used_cells_by_item(PRESSUREPLATE)
+	for plate in plates:
+		var orientation = get_cell_item_orientation(plate)
+		connect_pressureplate(null, [PRESSUREPLATE, plate, orientation])
 
 
 # %%%%%%%%%
@@ -183,7 +238,7 @@ func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	location.y = 2
 	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
-	
+
 
 func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
@@ -198,6 +253,13 @@ func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 # % ALL ROOMS %
 # %%%%%%%%%%%%%
 
+
+func spawn_items() -> void:
+	spawn_enemies()
+	spawn_small_boxes()
+	spawn_keys()
+
+
 # Spawns a small box at all small box placeholders in the map. It then also removes the placeholder.
 func spawn_small_boxes() -> void:
 	var boxes = get_used_cells_by_item(SMALLBOX)
@@ -209,32 +271,29 @@ func spawn_small_boxes() -> void:
 # Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.
 func spawn_enemies() -> void:
 	var enemies = get_used_cells_by_item(ENEMY)
+	var ranged = get_used_cells_by_item(RANGEDENEMY)
 	var bosses = get_used_cells_by_item(BOSS)
-	
+
 	for item in enemies:
 		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
 		set_cell_item(item, EMPTY)
-	
+
+	for item in ranged:
+		GlobalSpawner.spawn_ranged_enemy(map_to_local(item))
+		set_cell_item(item, EMPTY)
+
 	for boss in bosses:
 		GlobalSpawner.spawn_boss(map_to_local(boss))
 		set_cell_item(boss, EMPTY)
 
 
-# Spawns a laser at all laser spawnpoints in the map.
-func spawn_lasers() -> void:
-	var lasers = []
-	for type in [LASERB, LASERG, LASERO, LASERP, LASERR, LASERY]:
-		lasers += get_used_cells_by_item(type)
-
-	if lasers.size() == 0:
-		return
-
-	for laser in lasers:
-		var orientations = [0, 16, 10, 22]
-		var new_orientations = [22, 0, 16, 10]
-		var orientation = get_cell_item_orientation(laser)
-		orientation = get_basis_with_orthogonal_index(new_orientations[orientations.find(orientation)])
-		GlobalSpawner.spawn_laser(map_to_local(laser), orientation, false)
+# Spawns a key at all key locations.
+func spawn_keys() -> void:
+	for key in keys:
+		var items = get_used_cells_by_item(key)
+		for item in items:
+			GlobalSpawner.spawn_item(map_to_local(item))
+			set_cell_item(item, EMPTY)
 
 
 # %%%%%%%%%%%%%%%
