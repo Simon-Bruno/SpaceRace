@@ -604,7 +604,7 @@ shape = SubResource("CylinderShape3D_66t8f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
 
 [node name="CollisionShapeQuit" type="CollisionShape3D" parent="AreaQuit"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 54.1706, 14.7313, 39.551)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 60.1966, 14.7313, 39.551)
 shape = SubResource("CylinderShape3D_66t8f")
 script = SubResource("GDScript_r0w0a")
 
