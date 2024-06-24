@@ -23,7 +23,7 @@ func spawn_broken_wall(pos, dir, interact, key):
 	if spawner:
 		var broken_wall = broken_wall_scene.instantiate()
 		broken_wall.position = pos
-		#broken_wall.basis	= dir
+		broken_wall.basis	= dir
 		broken_wall.interactable = interact
 		broken_wall.key = key
 		spawner.add_child(broken_wall, true)

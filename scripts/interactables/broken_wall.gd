@@ -7,6 +7,7 @@ var customRooms : GridMap = null
 var bodies_on_plate: Array = []
 var has_player = null
 var has_item = null
+var fixed = false
 
 # Called when broken wall is placed in world. Sets the mesh instance to broken.
 func _ready() -> void:
@@ -34,7 +35,8 @@ func _on_area_3d_body_entered(body):
 		has_player = true
 	if body is RigidBody3D: #controleert nog niet of het de specifieke key is.
 		has_item = true
-	if has_player and has_item:
+		key = body.get_parent()
+	if has_player and has_item and not fixed:
 		activate()
 
 func _on_area_3d_body_exited(body):
@@ -50,6 +52,7 @@ func activate():
 	interactable.activated()
 	key.delete.rpc()
 	update_mesh.rpc(customRooms.WALL)
+	fixed = true
 
 # Update mesh based on current state
 @rpc("authority", "call_local", "reliable")
