@@ -140,7 +140,7 @@ func spawn_boss(pos):
 		return boss
 	return null
 
-func spawn_laser(pos, dir, timer = false, activation = 1, hinder = false, jumpable=false):
+func spawn_laser(pos, dir, timer = false, activation = 1, hinder = false, jumpable=false, active = true):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
@@ -152,6 +152,7 @@ func spawn_laser(pos, dir, timer = false, activation = 1, hinder = false, jumpab
 		laser.basis	= dir
 		laser.timer_active = timer
 		laser.activation_count = activation
+		laser.active = active
 		spawner.add_child(laser, true)
 		if hinder:
 			laser.set_laser()

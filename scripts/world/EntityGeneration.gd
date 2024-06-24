@@ -58,10 +58,11 @@ var yellow = [LASERY, BUTTONY, DOORY, HOLEY, KEYY, MULTIPRESSUREY, SOLOPRESSUREY
 
 # Main function to be called
 func replace_entities(rooms : Array) -> void:
-	spawn_enemiess(rooms)
+	spawn_enemies_pressure_plates(rooms)
 	spawn_items()
 	spawn_teleporters(rooms)
 	spawn_doors(rooms)
+	spawn_lasers_buttons(rooms)
 	spawn_lasers(rooms)
 	replace_unused()
 
@@ -79,7 +80,8 @@ func corresponding_types(door : int) -> Array:
 		DOORP: return purple
 		DOORR: return red
 		DOORY: return yellow
-		_: get_tree().quit(); return []
+		_: push_error("undefined door")
+	return []
 
 # Matches a door with its color type
 func corresponding_types_enemy(enemy : int) -> Array:
@@ -90,7 +92,20 @@ func corresponding_types_enemy(enemy : int) -> Array:
 		ENEMYP: return purple
 		ENEMYR: return red
 		ENEMYY: return yellow
-		_: get_tree().quit(); return []
+		_: push_error("undefined enemy")
+	return []
+
+# Matches a door with its color type
+func corresponding_types_laser(laser : int) -> Array:
+	match laser:
+		LASERG: return green
+		LASERB: return blue
+		LASERO: return orange
+		LASERP: return purple
+		LASERR: return red
+		LASERY: return yellow
+		_: push_error("undefined laser")
+	return []
 
 # Tries to find an item in a certain room, and returns all instances.
 func find_in_room(items, room, mirrored):
@@ -122,10 +137,50 @@ func sort_on_items(a, b) -> bool:
 # % LASERS%
 # %%%%%%%%%
 
+# Checks each room seperately
+func spawn_lasers_buttons(rooms : Array) -> void:
+	for room in rooms:
+		spawn_lasers_room(room, false)
+		spawn_lasers_room(room, true)
+
+func spawn_lasers_room(room : Array, mirrored : bool) -> void:
+	#for item in find_in_room(lasers, room, mirrored):
+		#var corresponding = find_in_room(corresponding_types_laser(item[0]), room, mirrored)
+		#match_interactable_and_laser(item, corresponding, mirrored)
+	var lasers_dict = {}
+	for item in find_in_room(lasers, room, mirrored):
+		var laser_type = item[0]
+		if not lasers_dict.has(laser_type):
+			lasers_dict[laser_type] = []
+		lasers_dict[laser_type].append(item)
+
+	# Verbind elke groep lasers met de corresponderende interactables
+	for laser_type in lasers_dict.keys():
+		var corresponding = find_in_room(corresponding_types_laser(laser_type), room, mirrored)
+		for laser_item in lasers_dict[laser_type]:
+			match_interactable_and_laser(laser_item, corresponding, mirrored)
+
+func match_interactable_and_laser(item : Array, interactables : Array, mirrored : bool) -> void:
+	var location = map_to_local(item[1])
+
+	var total_interactions = interactables.size() - 1
+	for interactable in interactables:
+		if interactable[0] in solopressures:
+			total_interactions = 1
+
+	var laser = GlobalSpawner.spawn_laser(location, find_laser_basis(item[1]), false, total_interactions, false, false, false)
+	set_cell_item(location, EMPTY)
+	
+	for interactable in interactables:		
+		if interactable[0] in switcheson or interactable[0] in switchesoff:
+			connect_button(laser, interactable)
+		if interactable[0] in multipressures or interactable[0] in solopressures:
+			connect_pressureplate_laser(laser, interactable)
+
 # Handles all laser spawning
 func spawn_lasers(rooms : Array) -> void:
 	laser_timer()
-	colored_lasers()
+	#colored_lasers()
 
 
 func laser_timer() -> void:
@@ -252,9 +307,15 @@ func connect_button(door : StaticBody3D, interactable : Array) -> void:
 func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 2
-	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
+	var pressure_plate = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
 
+# Spawns a pressureplate on the correct location, and links it to a given laser.
+func connect_pressureplate_laser(laser, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 2
+	var pressure_plate = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), laser)
+	set_cell_item(interactable[1], EMPTY)
 
 func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
@@ -366,7 +427,7 @@ func spawn_teleporters_room(room : Array, mirrored : bool) -> void:
 # %%%%%%%%%%%%%%%
 
 # Checks each room seperately
-func spawn_enemiess(rooms : Array) -> void:
+func spawn_enemies_pressure_plates(rooms : Array) -> void:
 	for room in rooms:
 		spawn_enemies_room(room, false)
 		spawn_enemies_room(room, true)

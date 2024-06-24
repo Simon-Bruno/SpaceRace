@@ -24,6 +24,9 @@ var laser_off_duration = 3.0
 func _ready():
 	if timer_active:
 		laser_timer = laser_on_duration
+	if not active:
+		activation_count = 0
+		deactivated()
 
 func _on_area_3d_body_entered(body):
 	if body.is_in_group("Players"):
@@ -83,7 +86,6 @@ func _process(delta):
 		handle_timer(delta)
 
 	if target != null and active:
-		#target.die()
 		target.take_damage.rpc(target.name, 10000)
 
 	if not multiplayer.is_server():
