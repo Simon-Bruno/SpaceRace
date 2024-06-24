@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://8gurumik6vsg"]
+[gd_scene load_steps=8 format=3 uid="uid://c0ew5w5fd7jx6"]
 
-[ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_5v34t"]
+[ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_cdal3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mj71s"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(1, 0.5, 0, 1)
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
 
@@ -48,11 +48,11 @@ glow_levels/4 = 0.5
 glow_levels/5 = 0.0
 glow_blend_mode = 0
 
-[node name="Laser" type="Node3D"]
-script = ExtResource("1_5v34t")
+[node name="LaserLow" type="Node3D"]
+script = ExtResource("1_cdal3")
 
 [node name="Origin" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.2, 0)
 
 [node name="Beam" type="Node3D" parent="Origin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
