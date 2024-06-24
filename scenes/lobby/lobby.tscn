@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://bgvenhiau3fn0"]
+[gd_scene load_steps=101 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
@@ -40,6 +40,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bwqyxjs3frjr5" path="res://assets/lobby/ring_structure.obj" id="38_g6hox"]
 [ext_resource type="ArrayMesh" uid="uid://vth4dh3o6v0f" path="res://assets/lobby/mountain_v1.obj" id="38_qcs22"]
 [ext_resource type="ArrayMesh" uid="uid://dmyd7go4jr1m4" path="res://assets/lobby/mountain_v2.obj" id="39_2n1iu"]
+[ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="41_f8ypy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhsop"]
 bg_color = Color(0, 0, 0, 1)
@@ -3092,6 +3093,10 @@ mesh = ExtResource("39_2n1iu")
 [node name="MountainV34" type="MeshInstance3D" parent="."]
 transform = Transform3D(-10.5462, 0, 8.49672, 0, 4, 0, -16.9934, 0, -5.27312, 199.219, 2.99999, -198.346)
 mesh = ExtResource("39_2n1iu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("41_f8ypy")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_team1_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_team1_body_exited"]
