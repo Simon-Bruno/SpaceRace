@@ -5,8 +5,7 @@ extends CharacterBody3D
 @export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
-var points = 500
-@export var alive = true
+@export var alive = false
 var respawn_immunity: bool = false
 
 var walk_acceleration = 40
@@ -25,12 +24,12 @@ var AnimJump: bool = false
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
-var lobby_spawn = Vector3(0, 10, 20)
-var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
-
+var lobby_spawn = Vector3(0, 11, 20)
+var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)], 2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	alive = get_node_or_null("../../HUD") == null
 
 @rpc("authority", "call_local", "reliable")
 func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
@@ -44,6 +43,10 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 	walk_deceleration = new_accel * 1.2  
 
 func _ready():
+	var hud = get_node_or_null("../../HUD")
+	if hud:
+		hud.loaded.rpc()
+		
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		position = lobby_spawn
@@ -165,13 +168,20 @@ func _physics_process(delta):
 
 
 func _input(event):
-	if str(multiplayer.get_unique_id()) == name:
-		#TODO: Not working in lobby, not allowed. Use cooldown
-		if event.is_action_pressed("ability_1") and points > $Class.ability1_point_cost:
+	if not alive:
+		return 
+	var hudNode = get_node_or_null("../../HUD") 
+	if alive and str(multiplayer.get_unique_id()) == name and hudNode != null:
+		if not hudNode.abilitiesAvailable:
+			return
+		
+		if event.is_action_pressed("ability_1"):
 			$Class.ability1()
-		#TODO: Not working in lobby, not allowed. Use cooldown
-		if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
+			hudNode.useAbility(1)
+			
+		if event.is_action_pressed("ability_2"):
 			$Class.ability2()
+			hudNode.useAbility(2)
  
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer

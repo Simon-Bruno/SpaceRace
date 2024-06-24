@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bxnsgqthgkbxc"]
+[gd_scene load_steps=25 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
 [ext_resource type="Texture2D" uid="uid://blmiwj6vufprq" path="res://assets/characters/player_Player.png" id="2_j50l0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player/player_item.gd" id="3_yvrqa"]
 [ext_resource type="Script" path="res://scripts/characters/HpBar.gd" id="5_oaq0v"]
 [ext_resource type="PackedScene" uid="uid://b88dvh1fk5f62" path="res://scenes/weapons/fists.tscn" id="5_wd784"]
+[ext_resource type="PackedScene" uid="uid://byhpqtro72se3" path="res://scenes/classes/Scientist.tscn" id="7_svfam"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v5bfw"]
 properties/0/path = NodePath(".:position")
@@ -32,6 +33,15 @@ properties/6/replication_mode = 2
 properties/7/path = NodePath(".:alive")
 properties/7/spawn = true
 properties/7/replication_mode = 2
+properties/8/path = NodePath("Pivot:scale")
+properties/8/spawn = true
+properties/8/replication_mode = 2
+properties/9/path = NodePath("CollisionShape3D:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 2
+properties/10/path = NodePath("PlayerHitbox:scale")
+properties/10/spawn = true
+properties/10/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l85fr"]
 resource_name = "palette"
@@ -795,6 +805,8 @@ shape = SubResource("CylinderShape3D_sjmiw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.6, 2.08165e-12)
 billboard = 1
 texture = SubResource("ViewportTexture_iyg84")
+
+[node name="Class" parent="." instance=ExtResource("7_svfam")]
 
 [connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]
