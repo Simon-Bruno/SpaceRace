@@ -23,6 +23,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="StartRoom" type="Node3D" parent="."]
 transform = Transform3D(1.2363, 0, 0, 0, 1.2363, 0, 0, 0, 1.2363, 0, 0, 0)
+visible = false
 
 [node name="Statics" type="GridMap" parent="StartRoom"]
 mesh_library = ExtResource("1_pfhvf")
@@ -45,6 +46,7 @@ transform = Transform3D(1.11189, 0, 0, 0, 1.11189, 0, 0, 0, 1.11189, 0, 0, 0)
 visible = false
 
 [node name="Statics" type="GridMap" parent="Template"]
+mesh_library = ExtResource("1_pfhvf")
 cell_scale = 1.25
 data = {
 "cells": PackedInt32Array(131071, 0, 24)
@@ -52,7 +54,27 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Dynamics" type="GridMap" parent="Template"]
+mesh_library = ExtResource("1_pfhvf")
 cell_scale = 1.25
+
+[node name="keyTest" type="Node3D" parent="."]
+transform = Transform3D(1.2363, 0, 0, 0, 1.2363, 0, 0, 0, 1.2363, 0, 0, 0)
+
+[node name="Statics" type="GridMap" parent="keyTest"]
+mesh_library = ExtResource("1_pfhvf")
+cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(131071, 0, 24, 0, 0, 2, 1, 0, 2, 2, 0, 2, 3, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 2, 6, 1, 2, 6, 2, 2, 6, 3, 2, 6, 4, 2, 6, 5, 2, 6, 6, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 1, 7, 2, 2, 7, 2, 3, 7, 2, 4, 7, 2, 5, 7, 2, 6, 7, 2, 5, 6, 2, 5, 5, 2, 5, 4, 2, 5, 3, 2, 5, 2, 2, 5, 1, 2, 4, 1, 2, 3, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 1, 3, 2, 1, 4, 2, 1, 5, 2, 1, 6, 2, 2, 6, 2, 3, 6, 2, 4, 6, 2, 4, 5, 2, 4, 4, 2, 4, 3, 2, 4, 2, 2, 3, 2, 2, 2, 2, 2, 2, 3, 2, 2, 4, 2, 2, 5, 2, 3, 5, 2, 3, 4, 2, 3, 3, 2, 65543, 7, 23, 65542, 3, 1441801, 65536, 4, 1048585, 65542, 4, 1441802, 65536, 3, 1048586, 65542, 2, 1441803, 65542, 1, 1441803, 65541, 0, 11, 65540, 0, 11, 65539, 0, 11, 65538, 0, 11, 65537, 0, 11, 65536, 2, 1048587, 65536, 1, 1048587, 65536, 5, 1048587, 65536, 6, 1048587, 65537, 7, 655371, 65539, 7, 655371, 65540, 7, 655371, 65541, 7, 655371, 65542, 6, 1441803, 65542, 5, 1441803, 65542, 7, 655373, 65536, 7, 1048589, 65536, 0, 13, 65542, 0, 1441805)
+}
+metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="Dynamics" type="GridMap" parent="keyTest"]
+mesh_library = ExtResource("1_pfhvf")
+cell_scale = 1.25
+data = {
+"cells": PackedInt32Array(65542, 2, 1441888, 65537, 1, 1441842, 65542, 3, 1441830, 65537, 4, 1441842, 65539, 6, 1441842, 65541, 7, 1441842, 65540, 0, 96, 65536, 2, 1048672, 65540, 7, 655456, 65538, 7, 655404, 65537, 5, 655450)
+}
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Room0" type="Node3D" parent="."]
 visible = false

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/interactables/broken_wall.gd" id="1_w1hiq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jalvn"]
-size = Vector3(1.59238, 2.70372, 0.992767)
+size = Vector3(1.00155, 1.06094, 0.745407)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ad2up"]
 properties/0/path = NodePath(".:position")
@@ -25,20 +25,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81838, 0.811376)
 script = ExtResource("1_w1hiq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 mesh = ExtResource("1_txc2f")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00611877, 0.551659, -0.304519)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.0171742, 0.00686067, -0.149919)
 shape = SubResource("BoxShape3D_jalvn")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ad2up")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00611877, 0.00263977, -0.400421)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.00611877, 0.00263977, -0.400421)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
