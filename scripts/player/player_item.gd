@@ -1,6 +1,7 @@
 extends Node3D
 
 var holding = null
+const item_pop_velocity = 7
 
 # Find the closest item and return it
 func _find_best_candidate():
@@ -49,7 +50,7 @@ func _set_this_player_to_drop_item(id, item_path):
 		var item = get_node(item_path)
 		item.get_parent().owned = false
 		item.get_parent().owned_node = null
-		item.set_axis_velocity(Vector3.ZERO)
+		item.set_axis_velocity(Vector3(0, item_pop_velocity, 0))
 
 func _process(_delta):
 	if Input.is_action_just_pressed("interact"):
