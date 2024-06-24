@@ -29,7 +29,7 @@ func _hold_item(item):
 
 # Calls the "use" function of the item the player is holding
 func _use_item():
-	if holding:
+	if holding and is_instance_valid(holding):
 		var node = holding.get_parent()
 		if node.has_method("use"):
 			node.use()
@@ -48,8 +48,9 @@ func _set_this_player_to_hold_item(id, item_path):
 
 func _drop_item():
 	# Drop the item
-	_set_this_player_to_drop_item.rpc(multiplayer.get_unique_id(), holding.get_path())
-	holding = null
+	if holding and is_instance_valid(holding):
+		_set_this_player_to_drop_item.rpc(multiplayer.get_unique_id(), holding.get_path())
+		holding = null
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -65,7 +66,7 @@ func _process(_delta):
 		return
 
 	if Input.is_action_just_pressed("interact"):
-		if holding:
+		if holding and is_instance_valid(holding):
 			_drop_item()
 		else:
 			var candidate = _find_best_candidate()
@@ -75,4 +76,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("use_item"):
 		if not holding:
 			return
-		_use_item()
+		if holding and is_instance_valid(holding):
+			_use_item()
+		else:
+			print("Error: ITEM IS NULL")

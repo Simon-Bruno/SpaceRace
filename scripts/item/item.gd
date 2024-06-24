@@ -49,19 +49,18 @@ func _animate(delta):
 	var new_y = bob_offset + initial_position.y + bob_amplitude * sin(bob_time * bob_frequency * TAU)
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
 
-# Ensure the item is correctly deleted from both the server and its clients
+# Deletes the item after consuming/using it
 @rpc("any_peer", "call_local", "reliable")
 func delete():
 	if not multiplayer.is_server():
 		return
-		
+
 	# Deletes the bomb when activated and thrown away
 	if not owned_node:
 		queue_free()
 		return
 
 	var player = owned_node.get_node("PlayerItem")
-	print(" lfsejfskehf")
 	player._drop_item()
 	queue_free()
 
