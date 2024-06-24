@@ -119,7 +119,7 @@ func play_animation(anim_player, animation):
 		$Pivot/AnimationPlayer.play(animation)
 	elif anim_player == 2:  # anim speed 1.15 (default for walk)
 		$Pivot/AnimationPlayer2.play(animation)
-	else:
+	else:  # anim speed 1.25 (default for jump)
 		$Pivot/AnimationPlayer3.play(animation)
 
 
@@ -146,7 +146,6 @@ func anim_handler():
 	if Global.AttackAnim and not AnimDeath:
 		if not AnimPunching:
 			AnimPunching = true
-			print("a")
 			request_play_animation(0, "stop")
 			request_play_animation(1, "punch")
 			await get_tree().create_timer(1.1).timeout  # wait for anim
