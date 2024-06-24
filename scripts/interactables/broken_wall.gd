@@ -9,12 +9,12 @@ var has_player = null
 var has_item = null
 var fixed = false
 
-# Called when keyhole is placed in world. Sets the mesh instance.
+# Called when broken wall is placed in world. Sets the mesh instance to broken.
 func _ready() -> void:
 	var target_node_name = "WorldGeneration"
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
-	update_mesh.rpc(customRooms.KEYHOLEGREEN)
+	update_mesh.rpc(customRooms.HOLEGREEN)
 
 #Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
@@ -33,7 +33,7 @@ func _on_area_3d_body_entered(body):
 
 	if body.is_in_group("Players"):
 		has_player = true
-	if body is RigidBody3D:
+	if body is RigidBody3D: #controleert nog niet of het de specifieke key is.
 		has_item = true
 		key = body.get_parent()
 	if has_player and has_item and not fixed:
@@ -51,9 +51,10 @@ func _on_area_3d_body_exited(body):
 func activate():
 	interactable.activated()
 	key.delete.rpc()
+	update_mesh.rpc(customRooms.WALL)
 	fixed = true
 
-# Update keyhole mesh based on current state
+# Update mesh based on current state
 @rpc("authority", "call_local", "reliable")
 func update_mesh(state : int) -> void:
 	if customRooms:
