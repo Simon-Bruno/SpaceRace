@@ -20,6 +20,7 @@ var doors = [DOORB, DOORG, DOORO, DOORP, DOORR, DOORY]
 var bosses = [BOSSB, BOSSG, BOSSO, BOSSP, BOSSR, BOSSY]
 var enemies = [ENEMYB, ENEMYG, ENEMYO, ENEMYP, ENEMYR, ENEMYY]
 var ranged_enemies = [ENEMYRANGEDB, ENEMYRANGEDG, ENEMYRANGEDO, ENEMYRANGEDP, ENEMYRANGEDR, ENEMYRANGEDY]
+var holes = [HOLEB, HOLEG, HOLEO, HOLEP, HOLER, HOLEY]
 
 # Interactables
 enum {BUTTONB=32, BUTTONG=33, BUTTONO=34, BUTTONP=35, BUTTONR=36, BUTTONY=37}
@@ -201,6 +202,10 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 			connect_pressureplate(door, interactable)
 		if interactable[0] in bosses:
 			connect_boss(door, interactable)
+		if interactable[0] in keyholes:
+			connect_keyhole(door, interactable)
+		if interactable[0] in holes:
+			connect_holes(door, interactable)
 
 
 # Returns the locations of two doors dependent on the left door as input.
@@ -244,8 +249,21 @@ func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 2
 	var boss = GlobalSpawner.spawn_boss(location)
-	print(door)
 	boss.interactable_door = door
+	set_cell_item(interactable[1], EMPTY)
+	
+
+func connect_keyhole(door : StaticBody3D, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 3
+	var keyhole = GlobalSpawner.spawn_keyhole(location, get_basis_with_orthogonal_index(interactable[2]), door)
+	set_cell_item(interactable[1], EMPTY)
+	
+
+func connect_holes(door : StaticBody3D, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 3
+	var keyhole = GlobalSpawner.spawn_broken_wall(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
 
 
@@ -258,6 +276,7 @@ func spawn_items() -> void:
 	spawn_enemies()
 	spawn_small_boxes()
 	spawn_keys()
+	spawn_welders()
 
 
 # Spawns a small box at all small box placeholders in the map. It then also removes the placeholder.
@@ -294,6 +313,13 @@ func spawn_keys() -> void:
 		for item in items:
 			GlobalSpawner.spawn_item(map_to_local(item))
 			set_cell_item(item, EMPTY)
+			
+			
+func spawn_welders() -> void:
+	var items = get_used_cells_by_item(WELDER)
+	for item in items:
+		GlobalSpawner.spawn_item(map_to_local(item), true)
+		set_cell_item(item, EMPTY)
 
 
 # %%%%%%%%%%%%%%%
