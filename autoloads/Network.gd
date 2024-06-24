@@ -116,6 +116,7 @@ func go_to_lobby():
 
 
 func _on_leave_button_pressed():
+	Audiocontroller.play_menu_music()
 	var id = multiplayer.get_unique_id()
 	_on_player_disconnected(id)
 	multiplayer_peer.disconnect_peer(id, true)
