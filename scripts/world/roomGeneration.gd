@@ -10,7 +10,7 @@ enum {UP, LEFT, DOWN, RIGHT}
 
 var parser = preload("res://scripts/world/rms_parser.gd").new()
 
-var absolute_position = Vector3i(0, 0, 0)
+var absolute_position = Vector3(0, 0, 0)
 
 var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
@@ -22,7 +22,7 @@ func _ready():
 		var start : Vector3i = world.start_pos
 		var end : Vector3i = world.end_pos
 		var last_room : bool = world.last_room
-		absolute_position = world.absolute_position
+		absolute_position = Vector3(world.absolute_position)
 		var dir = DirAccess.open("res://files/random_map_scripts")
 		var filenames = []
 		if dir:
@@ -127,9 +127,9 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 		new_z += i
 	if not check_wall_placement(floor_plan, new_x - 1, new_z - 1):
 		return false
-	wall_block.position = Vector3(new_x, 2.5, new_z)
 	floor_plan[new_z - 1][new_x - 1] = WALL
-	GlobalSpawner.spawn_wall(wall_block, absolute_position + Vector3i(new_x, -0.5, new_z))
+	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -0.5, new_z))
+	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -0.5, -new_z))
 	return true
 
 # This function will try to fit a wall on the floor plan given the restrictions
@@ -238,8 +238,8 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 		return false
 	# Add the item and update the plan.
 	floor_plan[z - 1][x - 1] = ITEM
-	GlobalSpawner.spawn_item(absolute_position + Vector3i(x, 0, z))
-	GlobalSpawner.spawn_item(absolute_position + Vector3i(x, 0, -z))
+	GlobalSpawner.spawn_item(absolute_position + Vector3(x, 0, z))
+	GlobalSpawner.spawn_item(absolute_position + Vector3(x, 0, -z))
 	return true
 
 func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
@@ -251,8 +251,8 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 		return false
 
 	floor_plan[z - 1][x - 1] = BUFF
-	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, z))
-	GlobalSpawner.spawn_buff(absolute_position + Vector3i(x, 0, -z))
+	GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, z))
+	GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, -z))
 	return true
 
 func add_box(floor_plan, object, width, height, start):
@@ -264,8 +264,8 @@ func add_box(floor_plan, object, width, height, start):
 		return false
 
 	floor_plan[z - 1][x - 1] = BOX
-	GlobalSpawner.spawn_box(absolute_position + Vector3i(x, 0, z))
-	GlobalSpawner.spawn_box(absolute_position + Vector3i(x, 0, -z))
+	GlobalSpawner.spawn_box(absolute_position + Vector3(x, 0, z))
+	GlobalSpawner.spawn_box(absolute_position + Vector3(x, 0, -z))
 	return true
 
 func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
@@ -281,9 +281,9 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
 	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
-	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, 1)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, 1)
 	basis = Basis().rotated(Vector3(0, -1, 0), angle)
-	GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, 1)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, -z), basis, 1)
 	return true
 
 func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
@@ -316,8 +316,8 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 			continue
 
 		floor_plan[z - 1][x - 1] = BUTTON
-		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), laser, false)
-		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, -z), Basis().rotated(Vector3(0, -1, 0), deg_to_rad(180)), laser2, false)
+		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis(), laser, false)
+		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, -1, 0), deg_to_rad(180)), laser2, false)
 
 	return true
 
@@ -333,8 +333,8 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	floor_plan[z - 1][x - 1] = BUTTON
 	doors[0].deactivated()
 	doors[1].deactivated()
-	GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), doors[0], false)
-	GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), deg_to_rad(180)), doors[1], false)
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis(), doors[0], false)
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), deg_to_rad(180)), doors[1], false)
 	return true
 
 
@@ -440,13 +440,13 @@ func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height
 		x = position[0]
 		z = position[1]
 		if type == 'MELEE':
-			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 0, z) + absolute_position)
-			GlobalSpawner.spawn_melee_enemy(Vector3i(x, 0, -z) + absolute_position)
+			GlobalSpawner.spawn_melee_enemy(Vector3(x, 0, z) + absolute_position)
+			GlobalSpawner.spawn_melee_enemy(Vector3(x, 0, -z) + absolute_position)
 		elif type == 'RANGED':
 			# Pass for now, since the bullets of the ranged enemies are bugged.
 			continue
-			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 0, z) + absolute_position)
-			GlobalSpawner.spawn_ranged_enemy(Vector3i(x, 0, -z) + absolute_position)
+			GlobalSpawner.spawn_ranged_enemy(Vector3(x, 0, z) + absolute_position)
+			GlobalSpawner.spawn_ranged_enemy(Vector3(x, 0, -z) + absolute_position)
 
 	return positions != []
 
@@ -498,8 +498,8 @@ func generate_floor_plan(width : int, height : int) -> Array[Array]:
 	return floor_plan
 
 func spawn_dynamic_doors(end : Vector3i):
-	var door_pos_1 = Vector3i(end.x, -1, end.z + 3)
-	var door_pos_2 = Vector3i(door_pos_1)
+	var door_pos_1 = Vector3(end.x, -1, end.z + 3)
+	var door_pos_2 = Vector3(door_pos_1)
 	door_pos_2.z = -door_pos_2.z
 	var rotation = deg_to_rad(-90)
 	var door_1 = GlobalSpawner.spawn_door(absolute_position + door_pos_1, Basis().rotated(Vector3(0, 1, 0), rotation), 1)
@@ -520,15 +520,6 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		generate_path(floor_plan, width, height, start, end)
 	if world_dict.has('walls'):
 		add_walls(floor_plan, world_dict['walls'], width, height, start)
-	# Set the generate variable, so it will not recurse infinitely.
-	world.generate_room = false
-	# Only duplicate the walls.
-	var dup = self.duplicate()
-	# Set the x to be mirrored.
-	dup.scale.z = -1
-	self.get_parent().add_child(dup, true)
-	# Set the generate variable back, so the next will be filled.
-	world.generate_room = true
 	var doors = spawn_dynamic_doors(end)
 	if world_dict.has('objects'):
 		add_objects(floor_plan, world_dict['objects'], doors, width, height, start)
