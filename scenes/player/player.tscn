@@ -799,10 +799,10 @@ texture = SubResource("ViewportTexture_iyg84")
 [node name="PlayerEffects" type="Node3D" parent="."]
 
 [node name="StrengthTimer" type="Timer" parent="PlayerEffects"]
-wait_time = 3.0
+wait_time = 5.0
 
 [node name="SpeedTimer" type="Timer" parent="PlayerEffects"]
-wait_time = 3.0
+wait_time = 5.0
 
 [connection signal="body_entered" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="PlayerHitbox" to="PlayerCombat" method="_on_player_hitbox_body_exited"]

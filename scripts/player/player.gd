@@ -191,19 +191,18 @@ func take_damage(id, damage):
 		die()
 
 
-# Increases health/HP of the player
+# Increases health/HP of the player with a certain amount, can't go higher 
+# than Global.player_max_health
 @rpc("any_peer", "call_local", "reliable")
 func increase_health(value):
 	health = min(Global.player_max_health, health + value)
-	print("Increasing health to:", health)  # Debug statement
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 
-# Sets the health to full HP of player
+# Sets the player's health to full HP of player
 @rpc("any_peer", "call_local", "reliable")
 func full_health():
 	health = Global.player_max_health
-	print("Increasing health to:", health)  # Debug statement	
 	HpBar.value = Global.player_max_health
 
 
@@ -231,12 +230,10 @@ func _on_respawn_immunity_timeout():
 # Resets the player's speed to its normal speed
 func _on_speed_timer_timeout():
 	speed_boost = 1.0 # Reset the player's speed
-	print("Speed end ", speed)
 	$PlayerEffects/SpeedTimer.stop()
 
 
 # Resets the boost value to its standard value after the timer ended
 func _on_strength_timer_timeout():
 	strength = 1.0 # Reset the player's strength
-	print("Strength end ", strength)
 	$PlayerEffects/StrengthTimer.stop()

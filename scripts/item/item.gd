@@ -3,6 +3,8 @@ extends Node3D
 # make sure only one person holds the item
 @export var owned = false
 @export var owned_node : Node3D = null
+@export var owned_id : String = ""
+
 # how fast the item should follow the player
 var item_follow_speed = 15
 
@@ -37,8 +39,11 @@ func _animate(delta):
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
 
 # Deletes the item after consuming/using it
-@rpc("any_peer", "call_local", "reliable")
+@rpc("authority", "call_local", "reliable")
 func delete():
+	if not multiplayer.is_server():
+		return
+		
 	# Deletes the bomb when activated and thrown away
 	if not owned_node:
 		queue_free()
@@ -50,12 +55,7 @@ func delete():
 
 # Ensure the item is correctly deleted from both the server and its clients
 func consume_item():
-	if multiplayer.is_server():
-		#rpc("delete")
-		delete.rpc()	
-	else:
-		#rpc_id(1, "delete")
-		delete.rpc_id(1)		
+	delete.rpc()	
 
 
 # Called when player consumes the item
