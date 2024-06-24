@@ -22,6 +22,7 @@ var strength: float = 1.0
 # animation variable
 var AnimDeath: bool = false
 var AnimJump: bool = false
+var AnimPunching: bool = false
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
@@ -112,6 +113,7 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
+
 func play_animation(anim_player, animation):
 	if anim_player == 1:  # anim speed 1
 		$Pivot/AnimationPlayer.play(animation)
@@ -139,18 +141,28 @@ func sync_play_animation(anim_player, animation):
 
 
 func anim_handler():
-	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
-		request_play_animation(0, "stop")
-		request_play_animation(1, "jump")
-		AnimJump = true
-	else:
-		if velocity != Vector3.ZERO && velocity.y == 0:
-			if not $Pivot/AnimationPlayer.is_playing():
-				request_play_animation(2, "walk")
-		if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
+	if Global.AttackAnim and not AnimDeath:
+		if not AnimPunching:
+			AnimPunching = true
+			print("a")
 			request_play_animation(0, "stop")
-		if velocity.y == 0:
-			AnimJump = false
+			request_play_animation(1, "punch")
+			await get_tree().create_timer(1.1).timeout  # wait for anim
+			Global.AttackAnim = false
+			AnimPunching = false
+	else:
+		if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+			request_play_animation(0, "stop")
+			request_play_animation(1, "jump")
+			AnimJump = true
+		else:
+			if velocity != Vector3.ZERO && velocity.y == 0:
+				if not $Pivot/AnimationPlayer.is_playing():
+					request_play_animation(2, "walk")
+			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
+				request_play_animation(0, "stop")
+			if velocity.y == 0:
+				AnimJump = false
 
 
 func _physics_process(delta):

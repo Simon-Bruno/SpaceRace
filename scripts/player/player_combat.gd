@@ -9,6 +9,7 @@ func _input(event):
 	if str(multiplayer.get_unique_id()) == get_parent().name:
 		if event.is_action_pressed("attack") and able_to_attack and player_node.alive:
 			$Weapon.attack()
+			Global.AttackAnim = true
 			able_to_attack = false
 			$DealAttackTimer.start()
 
