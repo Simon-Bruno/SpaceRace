@@ -82,7 +82,7 @@ func _on_settings_button_pressed():
 	settings.visible = true
 
 
-func _on_settings_back_to_menu():
+func _on_settings_back_button_down():
 	$Holder.visible = true
 	settings.visible = false
 

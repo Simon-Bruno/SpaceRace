@@ -1,9 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dpvimj5wn8htd"]
 
 [ext_resource type="Script" path="res://scripts/settings/settings.gd" id="1_pugsf"]
+[ext_resource type="FontFile" uid="uid://dp0skd1skh5e7" path="res://assets/font/space_font.ttf" id="2_3jlno"]
 [ext_resource type="PackedScene" uid="uid://c7gby45kucwu1" path="res://scenes/settings/settings_tab_container.tscn" id="2_fcv6o"]
-
-[sub_resource type="SystemFont" id="SystemFont_kyaaw"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -32,8 +31,8 @@ theme_override_constants/separation = -48
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_kyaaw")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_3jlno")
+theme_override_font_sizes/font_size = 37
 text = "Settings
 "
 horizontal_alignment = 1
@@ -49,5 +48,5 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Back"
 
+[connection signal="back_button_down" from="." to="." method="_on_back_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_button_down"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
