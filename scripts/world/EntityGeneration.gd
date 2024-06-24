@@ -144,9 +144,6 @@ func spawn_lasers_buttons(rooms : Array) -> void:
 		spawn_lasers_room(room, true)
 
 func spawn_lasers_room(room : Array, mirrored : bool) -> void:
-	#for item in find_in_room(lasers, room, mirrored):
-		#var corresponding = find_in_room(corresponding_types_laser(item[0]), room, mirrored)
-		#match_interactable_and_laser(item, corresponding, mirrored)
 	var lasers_dict = {}
 	for item in find_in_room(lasers, room, mirrored):
 		var laser_type = item[0]
@@ -154,7 +151,7 @@ func spawn_lasers_room(room : Array, mirrored : bool) -> void:
 			lasers_dict[laser_type] = []
 		lasers_dict[laser_type].append(item)
 
-	# Verbind elke groep lasers met de corresponderende interactables
+	# Connect the laser groups with the interactables
 	for laser_type in lasers_dict.keys():
 		var corresponding = find_in_room(corresponding_types_laser(laser_type), room, mirrored)
 		for laser_item in lasers_dict[laser_type]:
@@ -171,9 +168,9 @@ func match_interactable_and_laser(item : Array, interactables : Array, mirrored 
 	var laser = GlobalSpawner.spawn_laser(location, find_laser_basis(item[1]), false, total_interactions, false, false, false)
 	set_cell_item(location, EMPTY)
 	
-	for interactable in interactables:		
+	for interactable in interactables:
 		if interactable[0] in switcheson or interactable[0] in switchesoff:
-			connect_button(laser, interactable)
+			connect_button_laser(laser, interactable)
 		if interactable[0] in multipressures or interactable[0] in solopressures:
 			connect_pressureplate_laser(laser, interactable)
 
@@ -302,6 +299,13 @@ func connect_button(door : StaticBody3D, interactable : Array) -> void:
 	var button = GlobalSpawner.spawn_button(location, get_basis_with_orthogonal_index(interactable[2]), door, inverted)
 	set_cell_item(interactable[1], EMPTY)
 
+
+func connect_button_laser(laser, interactable : Array) -> void:
+	var inverted = false if interactable[0] in switchesoff else true
+	var location = map_to_local(interactable[1])
+	location.y = 2
+	var button = GlobalSpawner.spawn_button(location, get_basis_with_orthogonal_index(interactable[2]), laser, inverted)
+	set_cell_item(interactable[1], EMPTY)
 
 # Spawns a pressureplate on the correct location, and links it to a given door.
 func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:

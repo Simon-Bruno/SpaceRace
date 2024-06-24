@@ -187,7 +187,6 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Laser1" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Laser1"]
 mesh_library = ExtResource("1_pfhvf")
@@ -201,7 +200,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 mesh_library = ExtResource("1_pfhvf")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65538, 0, 56, 65545, 0, 57, 65546, 3, 1441850, 65544, 9, 655419, 65540, 9, 655420, 65536, 6, 1048637, 65536, 0, 76, 65536, 8, 1048653, 65539, 0, 78, 65543, 0, 79, 65540, 0, 80, 65546, 5, 1441873, 65541, 5, 88)
+"cells": PackedInt32Array(65538, 0, 56, 65545, 0, 57, 65546, 3, 1441850, 65544, 9, 655419, 65540, 9, 655420, 65536, 6, 1048637, 65536, 0, 82, 65536, 8, 1048659, 65539, 0, 84, 65543, 0, 85, 65540, 0, 86, 65546, 5, 1441879, 65541, 5, 88)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
