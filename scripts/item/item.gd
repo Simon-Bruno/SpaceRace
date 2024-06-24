@@ -27,15 +27,6 @@ func _enter_tree():
 func _ready():
 	initial_position = $RigidBody3D/MeshOrigin.position
 	item_position = $RigidBody3D.global_position
-	update_mesh.rpc()
-
-# Update item mesh based on current state
-@rpc("authority", "call_local", "reliable")
-func update_mesh():
-	if welder:
-		$RigidBody3D/MeshOrigin/MeshInstance3D.mesh = load("res://assets/CustomBlocks/items/welder.obj")
-	else:
-		$RigidBody3D/MeshOrigin/MeshInstance3D.mesh = load("res://assets/CustomBlocks/items/key.obj")
 
 func _animate(delta):
 	"""Makes the item rotate and bob up and down"""
