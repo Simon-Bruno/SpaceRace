@@ -186,7 +186,6 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Plates3" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Plates3"]
 mesh_library = ExtResource("1_ju6h0")
@@ -632,6 +631,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Laser4" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="Laser4"]
 mesh_library = ExtResource("1_ju6h0")
