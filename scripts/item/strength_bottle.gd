@@ -13,7 +13,6 @@ func use():
 	timer.start(duration) # Start timer for potion effect
 	if player:
 		player.strength = strength_boost
-	print("Strength ", player.strength)
 	super.consume_item()
 
 

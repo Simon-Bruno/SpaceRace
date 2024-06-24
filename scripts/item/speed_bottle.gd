@@ -13,7 +13,6 @@ func use():
 	timer.start(duration) # Start timer for potion effect
 	if player:
 		player.speed_boost = speed_boost
-	print("SPEED ", player.speed)
 	super.consume_item()
 	
 	

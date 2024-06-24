@@ -185,8 +185,8 @@ func spawn_buff(pos):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
-	#var BUFFS = [strength_bottle_scene, speed_bottle_scene]	
+	#var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
+	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
 	if spawner:
 		var buff_scene = BUFFS[randi() % BUFFS.size()]
 		#var buff_scene = bomb_scene

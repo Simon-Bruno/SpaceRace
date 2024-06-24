@@ -1,34 +1,25 @@
 extends Node3D
 
-# dictionary as set using dummy  values
-var candidates = {}
 var holding = null
 
-func _on_area_3d_body_entered(body):
-	# Add item to candidate list
-	# null as dummy value
-	candidates[body] = null
-
-
-func _on_area_3d_body_exited(body):
-	# Remove item from candidate list
-	candidates.erase(body)
-
-
+# Find the closest item and return it
 func _find_best_candidate():
-	# Find the closest item and return it
+	var candidates = $DetectionArea.get_overlapping_bodies()
+
 	var smallest_distance = INF
 	var best_candidate = null
 
 	# find item with smallest distance
 	for candidate in candidates:
+		if candidate.get_parent().owned:
+			continue
+
 		var d = global_position.distance_to(candidate.global_position)
 		if d < smallest_distance:
 			smallest_distance = d
 			best_candidate = candidate
 
 	return best_candidate
-
 
 func _hold_item(item):
 	# Hold item
@@ -38,7 +29,7 @@ func _hold_item(item):
 
 # Calls the "use" function of the item the player is holding
 func _use_item():
-	if holding:
+	if holding and is_instance_valid(holding):
 		var node = holding.get_parent()
 		if node.has_method("use"):
 			node.use()
@@ -51,39 +42,41 @@ func _set_this_player_to_hold_item(id, item_path):
 		if item:
 			item.get_parent().owned = true
 			item.get_parent().owned_node = Network.get_player_node_by_id(id)
-			item.get_parent().owned_id = str(id)			
+			item.get_parent().owned_id = str(id)
 			Audiocontroller.play_item_pickup_sfx()
 
 
 func _drop_item():
 	# Drop the item
-	_set_this_player_to_drop_item.rpc(multiplayer.get_unique_id(), holding.get_path())
-	holding = null
+	if holding and is_instance_valid(holding):
+		_set_this_player_to_drop_item.rpc(multiplayer.get_unique_id(), holding.get_path())
+		holding = null
 
 
 @rpc("any_peer", "call_local", "reliable")
 func _set_this_player_to_drop_item(id, item_path):
 	if multiplayer.is_server():
 		var item = get_node(item_path)
-		if item:
-			item.get_parent().owned = false
-			item.get_parent().owned_node = null
-			item.get_parent().owned_id = ""
-
+		item.get_parent().owned = false
+		item.get_parent().owned_node = null
+		item.set_axis_velocity(Vector3.ZERO)
 
 func _process(_delta):
 	if get_parent().name != str(multiplayer.get_unique_id()):
-		return 
-		
+		return
+
 	if Input.is_action_just_pressed("interact"):
-		if holding:
+		if holding and is_instance_valid(holding):
 			_drop_item()
 		else:
 			var candidate = _find_best_candidate()
-			if candidate and not candidate.get_parent().owned:
+			if candidate:
 				_hold_item(candidate)
 
 	if Input.is_action_just_pressed("use_item"):
-		if not holding: 
+		if not holding:
 			return
-		_use_item()
+		if holding and is_instance_valid(holding):
+			_use_item()
+		else:
+			print("Error: ITEM IS NULL")

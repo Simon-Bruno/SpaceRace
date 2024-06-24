@@ -39,7 +39,7 @@ func _animate(delta):
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
 
 # Deletes the item after consuming/using it
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func delete():
 	if not multiplayer.is_server():
 		return
@@ -49,13 +49,24 @@ func delete():
 		queue_free()
 		return
 
-	var node = owned_node.get_node("PlayerItem")
-	node.holding = null # Player stops holding item
+	var player = owned_node.get_node("PlayerItem")
+	player._drop_item()
 	queue_free()
 
-# Ensure the item is correctly deleted from both the server and its clients
+
+# Called when client wants to consume item, in other words delete the item from world
+@rpc("any_peer", "call_local", "reliable")
+func request_server_delete_item():
+	if multiplayer.is_server():
+		delete.rpc()
+
+
+# Deletes the item after consuming/using it
 func consume_item():
-	delete.rpc()	
+	if multiplayer.is_server():
+		delete.rpc()
+	else:
+		request_server_delete_item.rpc()
 
 
 # Called when player consumes the item
