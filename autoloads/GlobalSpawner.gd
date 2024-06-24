@@ -22,7 +22,7 @@ var keyhole_scene = preload("res://scenes/interactables/keyhole.tscn")
 var jump_laser_scene = preload("res://scenes/interactables/laser_low.tscn")
 var broken_wall_scene = preload("res://scenes/interactables/broken_wall.tscn")
 
-func spawn_broken_wall(pos, dir, interact, key):
+func spawn_broken_wall(pos, dir, interact, key=null):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
@@ -36,7 +36,7 @@ func spawn_broken_wall(pos, dir, interact, key):
 		return broken_wall
 	return null
 
-func spawn_keyhole(pos, dir, interact, key):
+func spawn_keyhole(pos, dir, interact, key=null):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")

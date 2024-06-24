@@ -365,6 +365,22 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 		pos = object_placement(button_object, width, height, start)
 		x = pos[0]
 		z = pos[1]
+		
+		min_dist = 3
+		max_dist = 20
+
+		if z < min_dist:
+			z = 1
+			orientation = 270
+		elif x < min_dist:
+			x = 1
+			orientation = 0
+		elif width < max_dist:
+			x = width - 1
+			orientation = 180
+		elif height < max_dist:
+			z = height - 1
+			orientation = 90
 
 		if floor_plan[z - 1][x - 1]:
 			laser.activation_count -= 1
@@ -372,8 +388,9 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 			continue
 
 		floor_plan[z - 1][x - 1] = BUTTON
-		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis(), laser, false)
-		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, -1, 0), deg_to_rad(180)), laser2, false)
+		angle = deg_to_rad(orientation)
+		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis().rotated(Vector3(0, 1, 0), angle), laser, false)
+		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), -angle), laser2, false)
 
 	return true
 
@@ -382,10 +399,10 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
-	
+
 	if floor_plan[z - 1][x - 1]:
 		return false
-	
+
 	floor_plan[z - 1][x - 1] = BUTTON
 	doors[0].deactivated()
 	doors[1].deactivated()
