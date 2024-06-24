@@ -12,15 +12,6 @@ var parser = preload("res://scripts/world/rms_parser.gd").new()
 
 var absolute_position = Vector3i(0, 0, 0)
 
-var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
-var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var key_scene = preload("res://scenes/item/item.tscn")
-var bomb_scene = preload("res://scenes/item/bomb.tscn")
-var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
-var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
-var button_scene = preload("res://scenes/interactables/button.tscn")
-var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
-var door_scene = preload("res://scenes/interactables/door.tscn")
 var wall_scene = preload("res://scenes/world/intern_wall.tscn")
 
 
@@ -138,7 +129,7 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 		return false
 	wall_block.position = Vector3i(new_x, 3, new_z)
 	floor_plan[new_z - 1][new_x - 1] = WALL
-	add_child(wall_block, true)
+	GlobalSpawner.spawn_wall(wall_block, absolute_position + Vector3i(new_x, -0.5, new_z))
 	return true
 
 # This function will try to fit a wall on the floor plan given the restrictions
@@ -320,9 +311,9 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
 	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
-	var laser = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, object['set_activation'], true)
+	var laser = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, -z), basis, false, object['set_activation'], true)
 	basis = Basis().rotated(Vector3(0, -1, 0), angle)
-	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, object['set_activation'], true)
+	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3i(x, 0, z), basis, false, object['set_activation'], true)
 
 	for i in object['set_activation']:
 		var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
@@ -338,7 +329,7 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 		floor_plan[z - 1][x - 1] = BUTTON
 		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, z), Basis(), laser, false)
 		GlobalSpawner.spawn_button(absolute_position + Vector3i(x, -1, -z), Basis().rotated(Vector3(0, -1, 0), deg_to_rad(180)), laser2, false)
-	
+
 	return true
 
 
@@ -524,3 +515,4 @@ func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_fl
 		add_objects(floor_plan, world_dict['objects'], width, height, start)
 	if world_dict.has('enemies'):
 		add_mobs(floor_plan, world_dict['enemies'], width, height, start)
+

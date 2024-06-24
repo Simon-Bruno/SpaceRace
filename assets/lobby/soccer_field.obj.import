@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bh1emuoextnao"
+path="res://.godot/imported/soccer_field.obj-841c2d4d42e50ec1f0362c3e430d8861.mesh"
+
+[deps]
+
+files=["res://.godot/imported/soccer_field.obj-841c2d4d42e50ec1f0362c3e430d8861.mesh"]
+
+source_file="res://assets/lobby/soccer_field.obj"
+dest_files=["res://.godot/imported/soccer_field.obj-841c2d4d42e50ec1f0362c3e430d8861.mesh", "res://.godot/imported/soccer_field.obj-841c2d4d42e50ec1f0362c3e430d8861.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
