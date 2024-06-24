@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu32dudgpqo33"
-path.s3tc="res://.godot/imported/zombie_walk_attack2_Enemy.png-e1a48041da90be073e6b0541ee11791c.s3tc.ctex"
+uid="uid://doqnbn3qye1k7"
+path.s3tc="res://.godot/imported/enemy_zombie_Enemy.png-7be815880d29903bf786c9d423c963c9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/characters/zombie_walk_attack2_Enemy.png"
-dest_files=["res://.godot/imported/zombie_walk_attack2_Enemy.png-e1a48041da90be073e6b0541ee11791c.s3tc.ctex"]
+source_file="res://assets/characters/enemy_zombie_Enemy.png"
+dest_files=["res://.godot/imported/enemy_zombie_Enemy.png-7be815880d29903bf786c9d423c963c9.s3tc.ctex"]
 
 [params]
 

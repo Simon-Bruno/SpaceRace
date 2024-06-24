@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b5mivnpea34i"
-path="res://.godot/imported/zombie_walk_attack2.glb-579776b7efd217f34d2e2deaf44ff563.scn"
+uid="uid://dhvdibuxn22od"
+path="res://.godot/imported/enemy_zombie.glb-60c0d8acd2b2924ffff7f30d3563f74a.scn"
 
 [deps]
 
-source_file="res://assets/characters/zombie_walk_attack2.glb"
-dest_files=["res://.godot/imported/zombie_walk_attack2.glb-579776b7efd217f34d2e2deaf44ff563.scn"]
+source_file="res://assets/characters/enemy_zombie.glb"
+dest_files=["res://.godot/imported/enemy_zombie.glb-60c0d8acd2b2924ffff7f30d3563f74a.scn"]
 
 [params]
 

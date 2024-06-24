@@ -117,8 +117,10 @@ func check_distance(target_velocity):
 func play_animation(anim_player, animation):
 	if anim_player == 1:  # anim speed 1
 		$Pivot/AnimationPlayer.play(animation)
-	else:  # anim speed 1.15 (default for walk)
+	elif anim_player == 2:  # anim speed 1.15 (default for walk)
 		$Pivot/AnimationPlayer2.play(animation)
+	else:
+		$Pivot/AnimationPlayer3.play(animation)
 
 
 func stop_animations():
@@ -153,7 +155,7 @@ func anim_handler():
 	else:
 		if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
 			request_play_animation(0, "stop")
-			request_play_animation(1, "jump")
+			request_play_animation(3, "jump")
 			AnimJump = true
 		else:
 			if velocity != Vector3.ZERO && velocity.y == 0:
@@ -193,9 +195,10 @@ func take_damage(id, damage):
 		return 
 		
 	if !respawn_immunity and alive and getHitCooldown:
-		health = max(0, health - damage)
 		getHitCooldown = false
+		await get_tree().create_timer(0.7).timeout  # wait for anim interaction
 		$PlayerCombat/GetHitCooldown.start()
+		health = max(0, health - damage)
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive and not AnimDeath:

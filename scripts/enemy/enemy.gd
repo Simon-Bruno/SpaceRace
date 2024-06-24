@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var acceleration = 2
 @export var fall_acceleration = 60.0
 @export var stopping_distance = 1.5
+var rotation_speed: int = 7
 
 var knockback_strength = 15
 
@@ -19,6 +20,7 @@ var closest_target_node = null
 var nodes_in_area : Array = []
 
 var AttackAnim: bool = false
+var alive: bool = true
 var direction = Vector2.ZERO
 
 # Function to find the closest node from an array of nodes
@@ -48,30 +50,31 @@ func _process(delta):
 
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if !closest_target_node.respawn_immunity:
-			# play anim here
-			if not AttackAnim:
-				AttackAnim = 1
+			if not AttackAnim and alive:  # animation logic
+				AttackAnim = true
 				$enemy_textures/AnimationPlayer.stop()			
 				$enemy_textures/AnimationPlayer.play("zombie_attack")
-			await get_tree().create_timer(1.05).timeout  # wait for animation to finish
-			AttackAnim = 0
-			$enemy_textures/AnimationPlayer.stop()
-			if closest_target_node:  # make sure node still exists
-				closest_target_node.take_damage(closest_target_node.name, 20)
+				await get_tree().create_timer(1.05).timeout  # wait for animation to finish
+				if alive:
+					$enemy_textures/AnimationPlayer.stop()
+				if closest_target_node:  # make sure node still exists
+					if player_in_attack_zone:  # make sure player is still in range of attack
+						closest_target_node.take_damage(closest_target_node.name, 20)
+				AttackAnim = false
 
 	if closest_target_node:
 		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 		var target_direction_2d = Vector2(target_direction.x, target_direction.z).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-		direction = lerp(direction, target_direction_2d, 7.5 * delta)
-		if velocity.x > 0 or velocity.z > 0 and not AttackAnim:
+		direction = lerp(direction, target_direction_2d, rotation_speed * delta)
+		if velocity.x > 0 or velocity.z > 0 and not AttackAnim and alive:
 			$enemy_textures/AnimationPlayer.play("zombie_walk")
 		basis = $enemy_textures.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-		if not AttackAnim:
+		if not AttackAnim and alive:
 			$enemy_textures/AnimationPlayer.stop()
 
 	if health <= 0:
@@ -129,7 +132,6 @@ func take_damage(damage, player_pos):
 		return
 	#if source.is_in_group("Boss"):
 		#return
-	await get_tree().create_timer(0.7).timeout  # wait for anim interaction
 	health = max(0, health - damage)
 	#last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
@@ -144,7 +146,14 @@ func take_damage(damage, player_pos):
 func die():
 	if not multiplayer.is_server():
 		return
-	#if last_damaged_by.get_parent().is_in_group("Players"):
+	rotation_speed = 0
+	speed = 0
+	if alive:
+		alive = false
+		$enemy_textures/AnimationPlayer.stop()
+		$enemy_textures/AnimationPlayer.play("death")
+	await get_tree().create_timer(2).timeout  # wait for anim
+	#if last_damaged_by.get_parent().is_in_group("Players"):	
 		#last_damaged_by.get_parent().points += 5
 	queue_free()
 
