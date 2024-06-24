@@ -38,6 +38,7 @@ func set_action_name():
 		"open_chat":
 			label.text = "Open Chat"
 
+
 func set_text_for_key():
 	var action_events = InputMap.action_get_events(action_name)
 	var action_event = action_events[0]
@@ -58,7 +59,7 @@ func _on_button_toggled(toggled_on):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = true
 				i.set_process_unhandled_key_input(false)
-		#set_text_for_key()
+		set_text_for_key()
 
 
 func _unhandled_key_input(event):

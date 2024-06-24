@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccek02gtq5hdq"]
+
+[ext_resource type="ArrayMesh" uid="uid://dg3olwqx5k0lf" path="res://assets/CustomBlocks/colorCoded/holeGreen.obj" id="1_txc2f"]
+[ext_resource type="Script" path="res://scripts/interactables/broken_wall.gd" id="1_w1hiq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jalvn"]
+size = Vector3(1.59238, 2.70372, 0.992767)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ad2up"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("MeshInstance3D:skeleton")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b130w"]
+size = Vector3(1.592, 1.606, 0.30495)
+
+[node name="BrokenWall" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81838, 0.811376)
+script = ExtResource("1_w1hiq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_txc2f")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00611877, 0.551659, -0.304519)
+shape = SubResource("BoxShape3D_jalvn")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ad2up")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00611877, 0.00263977, -0.400421)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00436179, 0.00300002, -0.248829)
+shape = SubResource("BoxShape3D_b130w")
+
+[connection signal="body_entered" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_body_exited"]

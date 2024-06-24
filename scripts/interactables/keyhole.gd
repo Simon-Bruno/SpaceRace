@@ -7,6 +7,7 @@ var customRooms : GridMap = null
 var bodies_on_plate: Array = []
 var has_player = null
 var has_item = null
+var fixed = false
 
 # Called when keyhole is placed in world. Sets the mesh instance.
 func _ready() -> void:
@@ -34,7 +35,8 @@ func _on_area_3d_body_entered(body):
 		has_player = true
 	if body is RigidBody3D:
 		has_item = true
-	if has_player and has_item:
+		key = body.get_parent()
+	if has_player and has_item and not fixed:
 		activate()
 
 func _on_area_3d_body_exited(body):
@@ -49,6 +51,7 @@ func _on_area_3d_body_exited(body):
 func activate():
 	interactable.activated()
 	key.delete.rpc()
+	fixed = true
 
 # Update keyhole mesh based on current state
 @rpc("authority", "call_local", "reliable")
