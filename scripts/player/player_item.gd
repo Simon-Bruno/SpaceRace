@@ -1,34 +1,25 @@
 extends Node3D
 
-# dictionary as set using dummy  values
-var candidates = {}
 var holding = null
 
-func _on_area_3d_body_entered(body):
-	# Add item to candidate list
-	# null as dummy value
-	candidates[body] = null
-
-
-func _on_area_3d_body_exited(body):
-	# Remove item from candidate list
-	candidates.erase(body)
-
-
+# Find the closest item and return it
 func _find_best_candidate():
-	# Find the closest item and return it
+	var candidates = $DetectionArea.get_overlapping_bodies()
+	
 	var smallest_distance = INF
 	var best_candidate = null
 
 	# find item with smallest distance
 	for candidate in candidates:
+		if candidate.get_parent().owned:
+			continue
+			
 		var d = global_position.distance_to(candidate.global_position)
 		if d < smallest_distance:
 			smallest_distance = d
 			best_candidate = candidate
-
+		
 	return best_candidate
-
 
 func _hold_item(item):
 	# Hold item
@@ -58,6 +49,7 @@ func _set_this_player_to_drop_item(id, item_path):
 		var item = get_node(item_path)
 		item.get_parent().owned = false
 		item.get_parent().owned_node = null
+		item.set_axis_velocity(Vector3.ZERO)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("interact"):
@@ -65,7 +57,7 @@ func _process(_delta):
 			_drop_item()
 		else:
 			var candidate = _find_best_candidate()
-			if candidate and not candidate.get_parent().owned:
+			if candidate: 
 				_hold_item(candidate)
 
 	if Input.is_action_just_pressed("use_item"):
