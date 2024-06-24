@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhju3h4lm2kqc"]
-
-[ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_nd3gw"]
-
-[node name="Welder" instance=ExtResource("1_nd3gw")]
