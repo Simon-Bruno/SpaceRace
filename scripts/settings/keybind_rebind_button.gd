@@ -11,7 +11,6 @@ func _ready():
 	set_process_unhandled_key_input(false)
 	set_action_name()
 	set_text_for_key()
-	#if FileAccess.file_exists(SaveManager.SETTINGS_SAVE_PATH):
 	load_keybinds()
 
 

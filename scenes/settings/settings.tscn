@@ -48,4 +48,5 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Back"
 
+[connection signal="back_button_down" from="." to="." method="_on_back_button_down"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_button_down"]

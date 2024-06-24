@@ -10,6 +10,7 @@ signal back_button_down
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(false)
+	settings_tab_container.back.connect(_on_back_button_button_down)
 
 
 func _on_back_button_button_down():

@@ -1,8 +1,9 @@
 class_name SettingsTabContainer
 extends Control
 
-
+signal back
 @onready var tab_container = $TabContainer 
+
 
 func _process(_delta):
 	settings_menu_input()
@@ -20,3 +21,6 @@ func settings_menu_input() -> void:
 			tab_container.set_current_tab(0)
 			return
 		tab_container.set_current_tab(tab_container.current_tab + 1)
+
+	if Input.is_action_just_pressed("ui_cancel"):
+		back.emit()
