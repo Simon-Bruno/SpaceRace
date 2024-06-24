@@ -558,6 +558,7 @@ shape = SubResource("ConcavePolygonShape3D_cceer")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.764314, 0.644845, 0, -0.644845, 0.764314, -3.92735, 60.2119, 69.7497)
+current = true
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
