@@ -304,7 +304,7 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 				z = 1
 
 
-	if floor_plan[z -  1][x - 1] > PATH:
+	if floor_plan[z -  1][x - 1] > PATH or z == start.z:
 		return false
 
 	floor_plan[z - 1][x - 1] = LASER
@@ -349,8 +349,7 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 			270:
 				z = 1
 
-	if floor_plan[z - 1][x - 1] > PATH:
-		print('Nevermind')
+	if floor_plan[z - 1][x - 1] > PATH or z == start.z:
 		return false
 
 	# Spawn the laser
