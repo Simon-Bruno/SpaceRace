@@ -271,12 +271,17 @@ func spawn_small_boxes() -> void:
 # Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.
 func spawn_enemies() -> void:
 	var enemies = get_used_cells_by_item(ENEMY)
+	var ranged = get_used_cells_by_item(RANGEDENEMY)
 	var bosses = get_used_cells_by_item(BOSS)
-	
+
 	for item in enemies:
 		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
 		set_cell_item(item, EMPTY)
-	
+
+	for item in ranged:
+		GlobalSpawner.spawn_ranged_enemy(map_to_local(item))
+		set_cell_item(item, EMPTY)
+
 	for boss in bosses:
 		GlobalSpawner.spawn_boss(map_to_local(boss))
 		set_cell_item(boss, EMPTY)
@@ -285,7 +290,6 @@ func spawn_enemies() -> void:
 # Spawns a key at all key locations.
 func spawn_keys() -> void:
 	for key in keys:
-		print(key)
 		var items = get_used_cells_by_item(key)
 		for item in items:
 			GlobalSpawner.spawn_item(map_to_local(item))
