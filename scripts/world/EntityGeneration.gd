@@ -58,6 +58,7 @@ var yellow = [LASERY, BUTTONY, DOORY, HOLEY, KEYY, MULTIPRESSUREY, SOLOPRESSUREY
 
 # Main function to be called
 func replace_entities(rooms : Array) -> void:
+	spawn_enemiess(rooms)
 	spawn_items()
 	spawn_teleporters(rooms)
 	spawn_doors(rooms)
@@ -80,6 +81,16 @@ func corresponding_types(door : int) -> Array:
 		DOORY: return yellow
 		_: get_tree().quit(); return []
 
+# Matches a door with its color type
+func corresponding_types_enemy(enemy : int) -> Array:
+	match enemy:
+		ENEMYG: return green
+		ENEMYB: return blue
+		ENEMYO: return orange
+		ENEMYP: return purple
+		ENEMYR: return red
+		ENEMYY: return yellow
+		_: get_tree().quit(); return []
 
 # Tries to find an item in a certain room, and returns all instances.
 func find_in_room(items, room, mirrored):
@@ -350,6 +361,39 @@ func spawn_teleporters_room(room : Array, mirrored : bool) -> void:
 		set_cell_item(items[i][1], EMPTY)
 		set_cell_item(items[i + 1][1], EMPTY)
 
+# %%%%%%%%%%%%%%%
+# % ENEMIES %
+# %%%%%%%%%%%%%%%
+
+# Checks each room seperately
+func spawn_enemiess(rooms : Array) -> void:
+	for room in rooms:
+		spawn_enemies_room(room, false)
+		spawn_enemies_room(room, true)
+
+# Finds all different enemies in a room and the interactables that are linked to it. It then starts
+# the process of matching them.
+func spawn_enemies_room(room : Array, mirrored : bool) -> void:
+	for item in find_in_room(enemies, room, mirrored):
+		var corresponding = find_in_room(corresponding_types_enemy(item[0]), room, mirrored)
+		match_interactable_and_enemy(item, corresponding, mirrored)
+
+# This funcion matches all enemies with the appropriate pressure plates, and binds them to work as expected.
+func match_interactable_and_enemy(item : Array, interactables : Array, mirrored : bool) -> void:	
+	var total_interactions = interactables.size() - 1
+	for interactable in interactables:
+		if interactable[0] in solopressures:
+			total_interactions = 1
+	set_cell_item(item[1], EMPTY)
+
+	var enemy_location = map_to_local(item[1])
+
+	for interactable in interactables:
+		var location = map_to_local(interactable[1])
+		location.y = 2
+		if interactable[0] in solopressures:
+			GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), null, enemy_location)
+			set_cell_item(interactable[1], EMPTY)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
