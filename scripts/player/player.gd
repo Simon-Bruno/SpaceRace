@@ -131,7 +131,6 @@ func stop_animations():
 func request_play_animation(anim_player, animation):
 	rpc_id(0, "sync_play_animation", anim_player, animation)
 
-
 # send animation update to other clients
 @rpc("any_peer", "call_local", "reliable")
 func sync_play_animation(anim_player, animation):
