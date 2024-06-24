@@ -310,9 +310,9 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	floor_plan[z - 1][x - 1] = LASER
 	var angle = deg_to_rad(orientation)
 	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
-	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, 1)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, false, 1)
 	basis = Basis().rotated(Vector3(0, -1, 0), angle)
-	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, -z), basis, 1)
+	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, -z), basis, false, 1)
 	return true
 
 func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
