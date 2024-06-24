@@ -380,18 +380,14 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 		elif height < max_dist:
 			z = height - 1
 			orientation = 90
-		else:
-			print('random placement')
 
 		if floor_plan[z - 1][x - 1]:
 			laser.activation_count -= 1
 			laser2.activation_count -= 1
-			print('Never mind')
 			continue
 
 		floor_plan[z - 1][x - 1] = BUTTON
 		angle = deg_to_rad(orientation)
-		print(deg_to_rad(180))
 		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis().rotated(Vector3(0, 1, 0), angle), laser, false)
 		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), -angle), laser2, false)
 
