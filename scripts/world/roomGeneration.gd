@@ -365,8 +365,8 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 		x = pos[0]
 		z = pos[1]
 		
-		var min_dist = 3
-		var max_dist = 20
+		min_dist = 3
+		max_dist = 20
 
 		if z < min_dist:
 			z = 1
