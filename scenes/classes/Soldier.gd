@@ -9,8 +9,17 @@ var pistol = preload("res://scenes/weapons/pistol.tscn")
 var fists = preload("res://scenes/weapons/fists.tscn")
 
 var strength_debuff : float = 0.5
-var ability1_point_cost : int = 10
-var ability2_point_cost : int = 20
+
+var ability1_cooldown : int = 20
+var ability2_cooldown : int = 40
+
+var ability1_title : String = "Strength buff"
+var ability2_title : String = "Upgrade weapon"
+
+func _ready():
+	var hud = get_node_or_null("../../../HUD")
+	if hud:
+		hud.set_ability_info(ability1_title, ability2_title, ability1_cooldown, ability2_cooldown)
 
 func ability1():
 	print("ability 1 soldier")

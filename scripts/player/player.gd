@@ -5,8 +5,7 @@ extends CharacterBody3D
 @export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
-var points = 500
-@export var alive = true
+@export var alive = false
 var respawn_immunity: bool = false
 
 var walk_acceleration = 40
@@ -22,16 +21,15 @@ var strength: float = 1.0
 # animation variable
 var AnimDeath: bool = false
 var AnimJump: bool = false
-var AnimPunching: bool = false
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
-var lobby_spawn = Vector3(0, 10, 20)
-var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
-
+var lobby_spawn = Vector3(0, 11, 20)
+var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)], 2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	alive = get_node_or_null("../../HUD") == null
 
 @rpc("authority", "call_local", "reliable")
 func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
@@ -45,6 +43,10 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 	walk_deceleration = new_accel * 1.2  
 
 func _ready():
+	var hud = get_node_or_null("../../HUD")
+	if hud:
+		hud.loaded.rpc()
+		
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		position = lobby_spawn
@@ -113,14 +115,11 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
-
 func play_animation(anim_player, animation):
 	if anim_player == 1:  # anim speed 1
 		$Pivot/AnimationPlayer.play(animation)
-	elif anim_player == 2:  # anim speed 1.15 (default for walk)
+	else:  # anim speed 1.15 (default for walk)
 		$Pivot/AnimationPlayer2.play(animation)
-	else:  # anim speed 1.25 (default for jump)
-		$Pivot/AnimationPlayer3.play(animation)
 
 
 func stop_animations():
@@ -143,27 +142,18 @@ func sync_play_animation(anim_player, animation):
 
 
 func anim_handler():
-	if Global.AttackAnim and not AnimDeath:
-		if not AnimPunching:
-			AnimPunching = true
-			request_play_animation(0, "stop")
-			request_play_animation(1, "punch")
-			await get_tree().create_timer(1.1).timeout  # wait for anim
-			Global.AttackAnim = false
-			AnimPunching = false
+	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+		request_play_animation(0, "stop")
+		request_play_animation(1, "jump")
+		AnimJump = true
 	else:
-		if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+		if velocity != Vector3.ZERO && velocity.y == 0:
+			if not $Pivot/AnimationPlayer.is_playing():
+				request_play_animation(2, "walk")
+		if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
 			request_play_animation(0, "stop")
-			request_play_animation(3, "jump")
-			AnimJump = true
-		else:
-			if velocity != Vector3.ZERO && velocity.y == 0:
-				if not $Pivot/AnimationPlayer.is_playing():
-					request_play_animation(2, "walk")
-			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
-				request_play_animation(0, "stop")
-			if velocity.y == 0:
-				AnimJump = false
+		if velocity.y == 0:
+			AnimJump = false
 
 
 func _physics_process(delta):
@@ -178,13 +168,20 @@ func _physics_process(delta):
 
 
 func _input(event):
-	if str(multiplayer.get_unique_id()) == name:
-		#TODO: Not working in lobby, not allowed. Use cooldown
-		if event.is_action_pressed("ability_1") and points > $Class.ability1_point_cost:
+	if not alive:
+		return 
+	var hudNode = get_node_or_null("../../HUD") 
+	if alive and str(multiplayer.get_unique_id()) == name and hudNode != null:
+		if not hudNode.abilitiesAvailable:
+			return
+		
+		if event.is_action_pressed("ability_1"):
 			$Class.ability1()
-		#TODO: Not working in lobby, not allowed. Use cooldown
-		if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
+			hudNode.useAbility(1)
+			
+		if event.is_action_pressed("ability_2"):
 			$Class.ability2()
+			hudNode.useAbility(2)
  
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
@@ -194,10 +191,9 @@ func take_damage(id, damage):
 		return 
 		
 	if !respawn_immunity and alive and getHitCooldown:
-		getHitCooldown = false
-		await get_tree().create_timer(0.7).timeout  # wait for anim interaction
-		$PlayerCombat/GetHitCooldown.start()
 		health = max(0, health - damage)
+		getHitCooldown = false
+		$PlayerCombat/GetHitCooldown.start()
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive and not AnimDeath:
