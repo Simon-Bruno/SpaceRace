@@ -273,12 +273,40 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	var x = pos[0]
 	var z = pos[1]
 	const orientations = [0, 90, 180, 270]
+	var orientation = 0
 
-	if floor_plan[z -  1][x - 1] > PATH:
+	var min_dist = object['set_min_distance']
+	var max_dist = object['set_max_distance']
+
+	if z < min_dist:
+		z = 1
+		orientation = 270
+	elif x < min_dist:
+		x = 1
+		orientation = 0
+	elif width < max_dist:
+		x = width - 1
+		orientation = 180
+	elif height < max_dist:
+		z = height - 1
+		orientation = 90
+	else:
+		orientation = orientations[randi() % orientations.size()]
+		match orientation:
+			0:
+				x = 1
+			90:
+				z = height - 1
+			180:
+				x = width - 1
+			270:
+				z = 1
+
+
+	if floor_plan[z -  1][x - 1] > PATH or z == start.z:
 		return false
 
 	floor_plan[z - 1][x - 1] = LASER
-	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
 	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
 	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, false, 1)
@@ -291,17 +319,44 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 	var x = pos[0]
 	var z = pos[1]
 	const orientations = [0, 90, 180, 270]
+	var orientation = 0
 
-	if floor_plan[z - 1][x - 1] > PATH:
+	var min_dist = object['set_min_distance']
+	var max_dist = object['set_max_distance']
+
+	if z < min_dist:
+		z = 1
+		orientation = 270
+	elif x < min_dist:
+		x = 1
+		orientation = 0
+	elif width < max_dist:
+		x = width - 1
+		orientation = 180
+	elif height < max_dist:
+		z = height - 1
+		orientation = 90
+	else:
+		orientation = orientations[randi() % orientations.size()]
+		match orientation:
+			0:
+				x = 1
+			90:
+				z = height - 1
+			180:
+				x = width - 1
+			270:
+				z = 1
+
+	if floor_plan[z - 1][x - 1] > PATH or z == start.z:
 		return false
 
 	# Spawn the laser
 	floor_plan[z - 1][x - 1] = LASER
-	var orientation = orientations[randi() % orientations.size()]
 	var angle = deg_to_rad(orientation)
-	var basis = Basis().rotated(Vector3(0, 1, 0), angle)
+	var basis = Basis().rotated(Vector3(0, 1, 0), -angle)
 	var laser = GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, -z), basis, false, object['set_activation'], true, true)
-	basis = Basis().rotated(Vector3(0, -1, 0), angle)
+	basis = Basis().rotated(Vector3(0, -1, 0), -angle)
 	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, false, object['set_activation'], true, true)
 
 	for i in object['set_activation']:
