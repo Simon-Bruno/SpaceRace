@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://bgvenhiau3fn0"]
+[gd_scene load_steps=101 format=3 uid="uid://bgvenhiau3fn0"]
 
 [ext_resource type="Script" path="res://scripts/lobby/lobby.gd" id="1_a0um3"]
 [ext_resource type="Shader" path="res://assets/shaders/hologram.gdshader" id="2_5jcod"]
@@ -158,6 +158,24 @@ radius = 0.711841
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_66t8f"]
 radius = 0.702192
+
+[sub_resource type="GDScript" id="GDScript_r0w0a"]
+script/source = "extends CollisionShape3D
+
+var game_status = false # Is true when game is paused, otherwise false
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.visible = false
+	game_status = false
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _on_titlescreen_button_pressed():
+	Network._on_leave_button_pressed()
+	Audiocontroller.play_menu_music()
+	self.visible = false
+	game_status = false
+"
 
 [sub_resource type="Shader" id="Shader_vshyg"]
 code = "shader_type spatial;
@@ -588,6 +606,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
 [node name="CollisionShapeQuit" type="CollisionShape3D" parent="AreaQuit"]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 54.1706, 14.7313, 39.551)
 shape = SubResource("CylinderShape3D_66t8f")
+script = SubResource("GDScript_r0w0a")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/player.tscn")
@@ -3098,5 +3117,4 @@ mesh = ExtResource("39_2n1iu")
 [connection signal="body_exited" from="Area3D2" to="." method="_on_team2_body_exited"]
 [connection signal="body_entered" from="Area3D3" to="." method="_on_random_body_entered"]
 [connection signal="body_exited" from="Area3D3" to="." method="_on_random_body_exited"]
-[connection signal="body_entered" from="AreaQuit" to="." method="_on_random_body_entered"]
-[connection signal="body_exited" from="AreaQuit" to="." method="_on_random_body_exited"]
+[connection signal="area_shape_entered" from="AreaQuit" to="." method="_on_area_quit_area_shape_entered"]
