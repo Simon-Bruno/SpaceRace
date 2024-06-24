@@ -27,13 +27,13 @@ func make_storage_dict():
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
 		"fps_state": fps_state,
-		"keybinds": create_keybinds_dict()
+		"keybinds": make_keybinds_dict()
 	}
 
 	return settings_container_dict
 
 
-func create_keybinds_dict():
+func make_keybinds_dict():
 	var keybinds_container_dict = {
 		keybind_resource.MOVE_LEFT: keybind_resource.move_left_key,
 		keybind_resource.MOVE_RIGHT: keybind_resource.move_right_key,
@@ -46,6 +46,12 @@ func create_keybinds_dict():
 	}
 
 	return keybinds_container_dict
+
+
+func get_first():
+	if loaded_data == {}:
+		return true
+	return false
 
 
 func get_window_mode_index():
