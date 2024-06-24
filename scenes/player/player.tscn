@@ -655,21 +655,21 @@ bones/2/parent = 1
 bones/2/rest = Transform3D(0.324705, -0.912079, -0.250357, 0.908304, 0.226897, 0.351428, -0.263725, -0.341511, 0.902119, 2.468e-08, 0.624289, -9.31323e-09)
 bones/2/enabled = true
 bones/2/position = Vector3(2.468e-08, 0.624289, -9.31323e-09)
-bones/2/rotation = Quaternion(-0.245898, -0.0250034, 0.57049, 0.783231)
+bones/2/rotation = Quaternion(-0.221184, 0.00426687, 0.581059, 0.783218)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "chest.R"
 bones/3/parent = 0
 bones/3/rest = Transform3D(-0.0336709, 0.99943, 0.00251663, -0.99943, -0.033677, 0.00243286, 0.00251622, -0.00243328, 0.999994, -1.35333e-09, 0.502179, -2.39379e-08)
 bones/3/enabled = true
 bones/3/position = Vector3(-1.35333e-09, 0.502179, -2.39379e-08)
-bones/3/rotation = Quaternion(-0.00175016, 1.48192e-07, -0.718913, 0.695098)
+bones/3/rotation = Quaternion(-0.00175016, 1.4815e-07, -0.718913, 0.695098)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "arm.R"
 bones/4/parent = 3
 bones/4/rest = Transform3D(0.28593, 0.933849, 0.214871, -0.933849, 0.221272, 0.281006, 0.214872, -0.281005, 0.935343, -1.21072e-08, 0.705134, -1.21072e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(-1.21072e-08, 0.705134, -1.21072e-08)
-bones/4/rotation = Quaternion(-0.0953095, -0.099928, -0.61678, 0.774928)
+bones/4/rotation = Quaternion(-0.179802, -1.38294e-07, -0.597524, 0.781432)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "head"
 bones/5/parent = 0
@@ -697,7 +697,7 @@ bones/8/parent = 7
 bones/8/rest = Transform3D(0.985964, -0.113767, -0.122198, 0.126217, 0.0287924, 0.991585, -0.109292, -0.99309, 0.0427476, -5.04403e-09, 0.292336, 1.76078e-08)
 bones/8/enabled = true
 bones/8/position = Vector3(-5.04403e-09, 0.292336, 1.76078e-08)
-bones/8/rotation = Quaternion(-0.690827, 0.00921879, 0.0976489, 0.716336)
+bones/8/rotation = Quaternion(-0.691814, -0.00449873, 0.0836531, 0.7172)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "thigh.L"
 bones/9/parent = -1
@@ -711,7 +711,7 @@ bones/10/parent = 9
 bones/10/rest = Transform3D(0.983909, 0.1266, 0.126073, -0.1266, -0.00390696, 0.991946, 0.126073, -0.991946, 0.0121835, -3.67489e-09, 0.253242, -8.07631e-09)
 bones/10/enabled = true
 bones/10/position = Vector3(-3.67489e-09, 0.253242, -8.07631e-09)
-bones/10/rotation = Quaternion(-0.71413, 0.0919013, 0.00438191, 0.693941)
+bones/10/rotation = Quaternion(-0.702786, -1.02518e-08, -0.0896953, 0.705724)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "neutral_bone"
 bones/11/parent = -1
@@ -736,6 +736,12 @@ libraries = {
 "": SubResource("AnimationLibrary_j0dud")
 }
 speed_scale = 1.15
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="Pivot"]
+libraries = {
+"": SubResource("AnimationLibrary_j0dud")
+}
+speed_scale = 1.25
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)

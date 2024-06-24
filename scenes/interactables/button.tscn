@@ -25,7 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00952846, -0.0188922)
 script = ExtResource("1_rlorl")
 
 [node name="Button" type="Node3D" parent="."]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, -1.04221)
+transform = Transform3D(-5.46392e-08, 0, 1.25, 0, 1.25, 0, -1.25, 0, -5.46392e-08, -1.042, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="Button"]
 collision_layer = 4
