@@ -22,6 +22,7 @@ var strength: float = 1.0
 # animation variable
 var AnimDeath: bool = false
 var AnimJump: bool = false
+var AnimPunching: bool = false
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
@@ -112,11 +113,14 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 	return target_velocity.x
 
+
 func play_animation(anim_player, animation):
 	if anim_player == 1:  # anim speed 1
 		$Pivot/AnimationPlayer.play(animation)
-	else:  # anim speed 1.15 (default for walk)
+	elif anim_player == 2:  # anim speed 1.15 (default for walk)
 		$Pivot/AnimationPlayer2.play(animation)
+	else:  # anim speed 1.25 (default for jump)
+		$Pivot/AnimationPlayer3.play(animation)
 
 
 func stop_animations():
@@ -139,18 +143,27 @@ func sync_play_animation(anim_player, animation):
 
 
 func anim_handler():
-	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
-		request_play_animation(0, "stop")
-		request_play_animation(1, "jump")
-		AnimJump = true
-	else:
-		if velocity != Vector3.ZERO && velocity.y == 0:
-			if not $Pivot/AnimationPlayer.is_playing():
-				request_play_animation(2, "walk")
-		if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
+	if Global.AttackAnim and not AnimDeath:
+		if not AnimPunching:
+			AnimPunching = true
 			request_play_animation(0, "stop")
-		if velocity.y == 0:
-			AnimJump = false
+			request_play_animation(1, "punch")
+			await get_tree().create_timer(1.1).timeout  # wait for anim
+			Global.AttackAnim = false
+			AnimPunching = false
+	else:
+		if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+			request_play_animation(0, "stop")
+			request_play_animation(3, "jump")
+			AnimJump = true
+		else:
+			if velocity != Vector3.ZERO && velocity.y == 0:
+				if not $Pivot/AnimationPlayer.is_playing():
+					request_play_animation(2, "walk")
+			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
+				request_play_animation(0, "stop")
+			if velocity.y == 0:
+				AnimJump = false
 
 
 func _physics_process(delta):
@@ -181,9 +194,10 @@ func take_damage(id, damage):
 		return 
 		
 	if !respawn_immunity and alive and getHitCooldown:
-		health = max(0, health - damage)
 		getHitCooldown = false
+		await get_tree().create_timer(0.7).timeout  # wait for anim interaction
 		$PlayerCombat/GetHitCooldown.start()
+		health = max(0, health - damage)
 	HpBar.value = float(health) / Global.player_max_health * 100
 
 	if health <= 0 and alive and not AnimDeath:
