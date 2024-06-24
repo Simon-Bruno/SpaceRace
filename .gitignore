@@ -3,10 +3,10 @@
 .env.example
 .env.local
 .env.staging
-**/CustomBlocks.tres
-**/Customblocks.tres
-**/customblocks.tres
-**/customBlocks.tres
+**CustomBlocks.tres
+**Customblocks.tres
+**customblocks.tres
+**customBlocks.tres
 
 .tres
 **.DS_Store
