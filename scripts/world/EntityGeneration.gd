@@ -57,8 +57,7 @@ var yellow = [LASERY, BUTTONY, DOORY, HOLEY, KEYY, MULTIPRESSUREY, SOLOPRESSUREY
 
 # Main function to be called
 func replace_entities(rooms : Array) -> void:
-	spawn_enemies()
-	spawn_small_boxes()
+	spawn_items()
 	spawn_teleporters(rooms)
 	spawn_doors(rooms)
 	spawn_lasers(rooms)
@@ -254,6 +253,13 @@ func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 # % ALL ROOMS %
 # %%%%%%%%%%%%%
 
+
+func spawn_items() -> void:
+	spawn_enemies()
+	spawn_small_boxes()
+	spawn_keys()
+
+
 # Spawns a small box at all small box placeholders in the map. It then also removes the placeholder.
 func spawn_small_boxes() -> void:
 	var boxes = get_used_cells_by_item(SMALLBOX)
@@ -274,6 +280,16 @@ func spawn_enemies() -> void:
 	for boss in bosses:
 		GlobalSpawner.spawn_boss(map_to_local(boss))
 		set_cell_item(boss, EMPTY)
+
+
+# Spawns a key at all key locations.
+func spawn_keys() -> void:
+	for key in keys:
+		print(key)
+		var items = get_used_cells_by_item(key)
+		for item in items:
+			GlobalSpawner.spawn_item(map_to_local(item))
+			set_cell_item(item, EMPTY)
 
 
 # %%%%%%%%%%%%%%%
