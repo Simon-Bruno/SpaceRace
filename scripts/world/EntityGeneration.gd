@@ -57,15 +57,12 @@ func replace_entities(rooms : Array) -> void:
 	spawn_enemies()
 	spawn_lasers()
 	spawn_small_boxes()
+	spawn_teleporters(rooms)
 	spawn_doors(rooms)
 
-
-# Checks each room seperately
-func spawn_doors(rooms : Array) -> void:
-	for room in rooms:
-		spawn_doors_room(room, false)
-		spawn_doors_room(room, true)
-
+# %%%%%%%%%%%%
+# % GENERAL %
+# %%%%%%%%%%%%
 
 # Matches a door with its color type
 func corresponding_types(door : int) -> Array:
@@ -80,11 +77,17 @@ func corresponding_types(door : int) -> Array:
 
 
 # Tries to find an item in a certain room, and returns all instances.
-func find_in_room(items, width, height, start, zvalue):
+func find_in_room(items, room, mirrored):
+	var width = room[0]
+	var height = room[1]
+	var start = room[2]
+	
+	var zstart = 0 if mirrored == false else -height
+
 	var found = []
 	for x in width:
 		for z in height:
-			var location = Vector3i(x, 1, z) + Vector3i(start, 0, zvalue)
+			var location = Vector3i(x, 1, z) + Vector3i(start, 0, zstart)
 			var item = get_cell_item(location)
 			if item in items:
 				found.append([item, location, get_cell_item_orientation(location)])
@@ -92,23 +95,30 @@ func find_in_room(items, width, height, start, zvalue):
 	return found
 
 
-# Returns the locations of two doors dependent on the left door as input.
-func return_door_pair(location : Vector3i, direction : int, mirrored : bool) -> Array:
-	var new_location = Vector3i(0, 0, 0)
-	if mirrored:
-		match direction:
-			0: new_location = Vector3i(-1, 0, 0)
-			16: new_location = Vector3i(0, 0, 1)
-			10: new_location = Vector3i(1, 0, 0)
-			22: new_location = Vector3i(0, 0, -1)
-		return [location, location + new_location]
-	else:
-		match direction:
-			0: new_location = Vector3i(1, 0, 0)
-			16: new_location = Vector3i(0, 0, -1)
-			10: new_location = Vector3i(-1, 0, 0)
-			22: new_location = Vector3i(0, 0, 1)
-		return [location + new_location, location]
+# Sorts an array of items on the item value
+func sort_on_items(a, b) -> bool:
+	if a[0] < b[0]:
+		return true
+	return false
+
+
+# %%%%%%%%%
+# % DOORS %
+# %%%%%%%%%
+
+# Checks each room seperately
+func spawn_doors(rooms : Array) -> void:
+	for room in rooms:
+		spawn_doors_room(room, false)
+		spawn_doors_room(room, true)
+
+
+# Finds all different doors in a room and the interactables that are linked to it. It then starts
+# the process of matching them.
+func spawn_doors_room(room : Array, mirrored : bool) -> void:
+	for item in find_in_room(doors, room, mirrored):
+		var corresponding = find_in_room(corresponding_types(item[0]), room, mirrored)
+		match_interactable_and_door(item, corresponding, mirrored)
 
 
 # This funcion matches all doors with the appropriate buttons, and binds them to work as expected.
@@ -136,25 +146,25 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 			connect_pressureplate(door, interactable)
 		if interactable[0] in bosses:
 			connect_boss(door, interactable)
-			
 
 
-func connect_boss(door : StaticBody3D, interactable : Array) -> void:
-	var location = map_to_local(interactable[1])
-	location.y = 2
-	var boss = GlobalSpawner.spawn_boss(location)
-	print(door)
-	boss.interactable_door = door
-	set_cell_item(interactable[1], EMPTY)
-	
-	
-	
-# Spawns a pressureplate on the correct location, and links it to a given door.
-func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
-	var location = map_to_local(interactable[1])
-	location.y = 2
-	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door, null)
-	set_cell_item(interactable[1], EMPTY)
+# Returns the locations of two doors dependent on the left door as input.
+func return_door_pair(location : Vector3i, direction : int, mirrored : bool) -> Array:
+	var new_location = Vector3i(0, 0, 0)
+	if mirrored:
+		match direction:
+			0: new_location = Vector3i(-1, 0, 0)
+			16: new_location = Vector3i(0, 0, 1)
+			10: new_location = Vector3i(1, 0, 0)
+			22: new_location = Vector3i(0, 0, -1)
+		return [location, location + new_location]
+	else:
+		match direction:
+			0: new_location = Vector3i(1, 0, 0)
+			16: new_location = Vector3i(0, 0, -1)
+			10: new_location = Vector3i(-1, 0, 0)
+			22: new_location = Vector3i(0, 0, 1)
+		return [location + new_location, location]
 
 
 # Spawns a button on the correct location, and links it to a given door.
@@ -167,25 +177,26 @@ func connect_button(door : StaticBody3D, interactable : Array) -> void:
 	set_cell_item(interactable[1], EMPTY)
 
 
-# Finds all different doors in a room and the interactables that are linked to it. It then starts
-# the process of matching them.
-func spawn_doors_room(room : Array, mirrored : bool) -> void:
-	var width = room[0]
-	var height = room[1]
-	var start = room[2]
-	
-	var zstart = 0 if mirrored == false else -height
-	
+# Spawns a pressureplate on the correct location, and links it to a given door.
+func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 2
+	var button = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), door)
+	set_cell_item(interactable[1], EMPTY)
 	
 
-	# Find all door types.
-	var current = find_in_room(doors, width, height, start, zstart)
-	
-	# Find all items that correspond to the door
-	for item in current:
-		var corresponding = find_in_room(corresponding_types(item[0]), width, height, start, zstart)
-		match_interactable_and_door(item, corresponding, mirrored)
+func connect_boss(door : StaticBody3D, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 2
+	var boss = GlobalSpawner.spawn_boss(location)
+	print(door)
+	boss.interactable_door = door
+	set_cell_item(interactable[1], EMPTY)
 
+
+# %%%%%%%%%%%%%
+# % ALL ROOMS %
+# %%%%%%%%%%%%%
 
 # Spawns a small box at all small box placeholders in the map. It then also removes the placeholder.
 func spawn_small_boxes() -> void:
@@ -193,6 +204,20 @@ func spawn_small_boxes() -> void:
 	for box in boxes:
 		GlobalSpawner.spawn_box(map_to_local(box))
 		set_cell_item(box, EMPTY)
+
+
+# Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.
+func spawn_enemies() -> void:
+	var enemies = get_used_cells_by_item(ENEMY)
+	var bosses = get_used_cells_by_item(BOSS)
+	
+	for item in enemies:
+		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
+		set_cell_item(item, EMPTY)
+	
+	for boss in bosses:
+		GlobalSpawner.spawn_boss(map_to_local(boss))
+		set_cell_item(boss, EMPTY)
 
 
 # Spawns a laser at all laser spawnpoints in the map.
@@ -212,18 +237,33 @@ func spawn_lasers() -> void:
 		GlobalSpawner.spawn_laser(map_to_local(laser), orientation, false)
 
 
-# Spawns an enemy at all enemy placeholders in the map. It then also removes the placeholder.
-func spawn_enemies() -> void:
-	var enemies = get_used_cells_by_item(ENEMY)
-	var bosses = get_used_cells_by_item(BOSS)
-	
-	for item in enemies:
-		GlobalSpawner.spawn_melee_enemy(map_to_local(item))
-		set_cell_item(item, EMPTY)
-	
-	for boss in bosses:
-		GlobalSpawner.spawn_boss(map_to_local(boss))
-		set_cell_item(boss, EMPTY)
+# %%%%%%%%%%%%%%%
+# % TELEPORTERS %
+# %%%%%%%%%%%%%%%
+
+
+# Runs the teleporter spawning for all rooms
+func spawn_teleporters(rooms : Array) -> void:
+	for room in rooms:
+		spawn_teleporters_room(room, false)
+		spawn_teleporters_room(room, true)
+
+
+# Finds all teleporters in a given room and links them
+func spawn_teleporters_room(room : Array, mirrored : bool) -> void:
+	var items = find_in_room(teleporters, room, mirrored)
+	items.sort_custom(sort_on_items)
+	assert(items.size() % 2 == 0)
+	for i in range(0, items.size(), 2):
+		var location1 = map_to_local(items[i][1])
+		var basis1 = get_basis_with_orthogonal_index(items[i][2])
+		var location2 = map_to_local(items[i + 1][1])
+		var basis2 = get_basis_with_orthogonal_index(items[i + 1][2])
+		
+		GlobalSpawner.spawn_portal(location1, basis1, location2, basis2)
+		
+		set_cell_item(items[i][1], EMPTY)
+		set_cell_item(items[i + 1][1], EMPTY)
 
 
 # Called when the node enters the scene tree for the first time.

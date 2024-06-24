@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://8gurumik6vsg"]
 
-[ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_cdal3"]
+[ext_resource type="Script" path="res://scripts/interactables/laser.gd" id="1_5v34t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mj71s"]
 albedo_color = Color(1, 0, 0, 1)
@@ -15,7 +15,7 @@ size = Vector3(0.2, 0.2, 0.2)
 size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_37bc0"]
-size = Vector3(0.1, 0.6, 0.6)
+size = Vector3(0.1, 0.4, 0.4)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_trd18"]
 properties/0/path = NodePath("Origin/Beam:visible")
@@ -49,7 +49,7 @@ glow_levels/5 = 0.0
 glow_blend_mode = 0
 
 [node name="Laser" type="Node3D"]
-script = ExtResource("1_cdal3")
+script = ExtResource("1_5v34t")
 
 [node name="Origin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0, 0)

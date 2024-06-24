@@ -61,4 +61,4 @@ layout_mode = 1
 [connection signal="pressed" from="GridContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="GridContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="GridContainer/TitlescreenButton" to="." method="_on_titlescreen_button_pressed"]
-[connection signal="back_to_menu" from="Settings" to="." method="_on_settings_back_to_menu"]
+[connection signal="back_button_down" from="Settings" to="." method="_on_settings_back_button_down"]

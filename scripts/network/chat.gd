@@ -7,6 +7,8 @@ extends Control
 @onready var video_stream_player = $VideoStreamPlayer
 @onready var fps_meter = $FPS_Meter
 
+#var player_spawner_script = preload("res://scripts/player/player_spawner.gd").new()
+
 
 # Enable BBCode parsing and text selection
 func _ready():
@@ -138,7 +140,8 @@ func _on_message_input_gui_input(_event):
 func commands():
 	if leave_game() or easter_egg() or stop_easter_egg() \
 	or mute_master_command() or mute_music_command() or mute_sfx_command() \
-	or unmute_master_command() or unmute_music_command() or unmute_sfx_command():
+	or unmute_master_command() or unmute_music_command() or unmute_sfx_command() \
+	or respawn_command():
 		return true
 
 
@@ -207,6 +210,12 @@ func unmute_sfx_command():
 		Audiocontroller.unmute_sfx()
 		return true
 
+
+func respawn_command():
+	if message_input.text == "/respawn":
+		var player_spawner = get_node("/root/Main/SpawnedItems/World/PlayerSpawner")
+		player_spawner.respawn_player()
+		return true
 
 # Called when the message timer times out, hides the message display if the
 # input field is not focused
