@@ -32,12 +32,13 @@ sleeping = true
 lock_rotation = true
 
 [node name="SmallBox" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 0, 0.171361, 0)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0.171361, 0)
 material_override = SubResource("StandardMaterial3D_n0p66")
 mesh = ExtResource("2_gd7fc")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 shape = SubResource("BoxShape3D_1ld8i")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
