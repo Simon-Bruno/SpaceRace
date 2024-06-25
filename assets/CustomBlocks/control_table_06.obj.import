@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ufa6p2fyhl5s"
+path="res://.godot/imported/control_table_06.obj-e9c356af4ffe8fe96f999d24d023a362.mesh"
+
+[deps]
+
+files=["res://.godot/imported/control_table_06.obj-e9c356af4ffe8fe96f999d24d023a362.mesh"]
+
+source_file="res://assets/CustomBlocks/control_table_06.obj"
+dest_files=["res://.godot/imported/control_table_06.obj-e9c356af4ffe8fe96f999d24d023a362.mesh", "res://.godot/imported/control_table_06.obj-e9c356af4ffe8fe96f999d24d023a362.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

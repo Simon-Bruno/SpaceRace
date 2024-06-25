@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c5dq32amf1hbj"
+path="res://.godot/imported/control_table_radar2.obj-ba2b04d9244bbef613b2a3dde6bc808c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/control_table_radar2.obj-ba2b04d9244bbef613b2a3dde6bc808c.mesh"]
+
+source_file="res://assets/CustomBlocks/control_table_radar2.obj"
+dest_files=["res://.godot/imported/control_table_radar2.obj-ba2b04d9244bbef613b2a3dde6bc808c.mesh", "res://.godot/imported/control_table_radar2.obj-ba2b04d9244bbef613b2a3dde6bc808c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
