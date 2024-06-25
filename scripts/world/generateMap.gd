@@ -34,7 +34,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 1
+const CUSTOMROOMPERCENTAGE : float = 0.3
 
 # General room parameters
 const room_amount : int = 10
@@ -110,49 +110,31 @@ func build_map() -> void:
 
 	define_rooms()
 	var pairs : Array = get_custom_rooms()
-
 	draw_rooms()
+	
 	place_custom_room(pairs)
 	add_finish()
-
-
+	add_start()
+	
 	draw_paths()
-
 	draw_windows()
 	draw_walls()
-
+	
 	add_finish()
 	mirror_world()
 
 	convert_static_to_entities()
-	# Generate finish pressure plate:
-	#entityGeneration.replace_entities(rooms)
+
+
+func add_start():
+	write_room(rooms[0], 1, 0, true)
+	write_room(rooms[0], 1, 1, true)
 
 
 # Adds the pressureplate in the last room
 func add_finish():
-	# Get room dimensions:
-	var endroom_dimensions = roomLink.get_room_size(0, true)
-
-	# Get start positions of end room:
-	var start_pos = rooms[-1]
-
-	# startx prev room + width room
-	var endroom_startX = start_pos[2] + start_pos[0]
-
-	# layer is for static or dynamic gridmap
-	for layer in range(0, 2):
-		for x in range(0, max(endroom_dimensions[0], room_width+2)):
-			for z in range(0, max(endroom_dimensions[1], room_height+2)):
-				for y in range (0, 2):
-					# Add special endroom
-					var item = roomLink.get_room_item(Vector3i(x, y, z), 0, layer, true)
-					var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), 0, layer, true )
-
-					if layer == 0:
-						self.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
-					else:
-						entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(start_pos[2], 0, 0), item, orientation)
+	write_room(rooms[-1], 0, 0, true)
+	write_room(rooms[-1], 0, 1, true)
 
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
 	plate.position = map_to_local(Vector3i((start_pos[2]+18), 1, 0))
@@ -209,6 +191,11 @@ func get_custom_rooms() -> Array:
 	rooms[-1][0] = endroom[0]
 	rooms[-1][1] = endroom[1]
 	roomTypes[-1] = CUSTOM
+	
+	var startroom = roomLink.get_room_size(1, true)
+	rooms[0][0] = startroom[0]
+	rooms[0][1] = startroom[1]
+	roomTypes[0] = CUSTOM
 
 	reset_room_spacing()
 
@@ -224,12 +211,12 @@ func place_item(scene, orientation, location):
 	return item
 
 
-func write_room(orig : Array, new : int, layer : int) -> void:
-	for y in range(1, 4):
+func write_room(orig : Array, new : int, layer : int, special=false) -> void:
+	for y in range(0, 3):
 		for x in orig[0]:
 			for z in orig[1]:
-				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer, false)
-				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer, false)
+				var item = roomLink.get_room_item(Vector3i(x, y, z), new, layer, special)
+				var orientation = roomLink.get_room_item_orientation(Vector3i(x, y, z), new, layer, special)
 
 				if layer == 0:
 					self.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
@@ -240,7 +227,6 @@ func write_room(orig : Array, new : int, layer : int) -> void:
 # Function gets an Array containing the custom rooms that have been assigned,
 # and places their content on the correct location in the grid.
 func place_custom_room(pairs : Array) -> void:
-	var MAX_HEIGHT = 4
 	for pair in pairs:
 		var orig = rooms[pair[0]]
 		write_room(orig, pair[1], 0)
@@ -344,9 +330,6 @@ func define_rooms() -> void:
 		rooms.append([width, height, start, leftDoor, rightDoor])
 		roomTypes.append(pick_random_type())
 
-	roomTypes[0] = STARTROOM
-	roomTypes[-1] = CUSTOM
-
 
 # Draws the full floorplan by:
 # 1. Place first room of x * z size.
@@ -370,6 +353,7 @@ func draw_rooms() -> void:
 		if roomTypes[i] != CUSTOM:
 			fill_room(room)
 		else:
+			start = false
 			continue
 		# Place the corridors between the current and next room
 		if i == room_amount - 1:
@@ -409,15 +393,17 @@ func draw_paths() -> void:
 
 	right.sort_custom(sort_vector)
 	ends.sort_custom(sort_vector)
+
 	assert(right.size() == ends.size())
 	for i in range(right.size() - 1, -1, -1):
 		if get_cell_item_orientation(right[i]) != 22:
 			right.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-	#assert(right.size() == ends.size())
-	#for i in right.size():
-		#make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
+	assert(right.size() == ends.size())
+
+	for i in right.size():
+		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
 # Draws a 2 wide path between two given vectors, the given point will be the top
@@ -535,3 +521,6 @@ func draw_walls() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+
+

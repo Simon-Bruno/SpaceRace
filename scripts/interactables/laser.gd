@@ -39,7 +39,7 @@ func activated():
 		return
 
 	activation_count -= 1
-	if activation_count == 0:
+	if activation_count == 0 or timer_active:
 		active = true
 		ray.enabled = true
 		beam.visible = true
@@ -49,7 +49,7 @@ func deactivated():
 	if not multiplayer.is_server():
 		return
 	activation_count += 1
-	if activation_count == 1:
+	if activation_count == 1 or timer_active:
 		active = false
 		ray.enabled = false
 		beam.visible = false
@@ -83,7 +83,8 @@ func _process(delta):
 		handle_timer(delta)
 
 	if target != null and active:
-		target.die()
+		#target.die()
+		target.take_damage.rpc(target.name, 10000)
 
 	if not multiplayer.is_server():
 		return

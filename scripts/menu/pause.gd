@@ -39,7 +39,7 @@ func _on_settings_button_pressed():
 	settings.visible = true
 
 
-func _on_settings_back_to_menu():
+func _on_settings_back_button_down():
 	settings.visible = false
 
 
@@ -48,5 +48,3 @@ func _on_titlescreen_button_pressed():
 	Audiocontroller.play_menu_music()
 	self.visible = false
 	game_status = false
-
-
