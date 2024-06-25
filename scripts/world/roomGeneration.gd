@@ -33,6 +33,7 @@ func _ready():
 					filenames.append(file)
 				file = dir.get_next()
 		var filename = filenames[randi() % filenames.size()]
+		filename = "box.rms"
 		var world_dict : Dictionary = parser.parse_file("res://files/random_map_scripts/" +  filename)
 		fill_room(world_dict, start, end, last_room)
 
@@ -87,6 +88,7 @@ func wall_check(floor_plan: Array, x: int, z: int, max_x: int, max_z: int, orien
 func check_wall_placement(floor_plan: Array, x: int, z: int) -> bool:
 	var max_x: int = floor_plan[0].size()
 	var max_z: int = floor_plan.size()
+
 
 	if x < 0 or x >= max_x or z < 0 or z >= max_z:
 		return false
@@ -415,10 +417,7 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], doors : Arra
 		'ITEM':
 			return add_item(floor_plan, object, width, height, start)
 		'BUFF':
-			# TODO: This should work with a version of globalSpawner that
-			# knows how to spawn buffs. For now, we just return true.
-			# return add_buff(floor_plan, object, width, height, start)
-			return true
+			return add_buff(floor_plan, object, width, height, start)
 		'BOX':
 			return add_box(floor_plan, object, width, height, start)
 		'LASER':
