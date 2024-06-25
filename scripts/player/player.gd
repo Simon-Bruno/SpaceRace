@@ -12,6 +12,8 @@ var walk_acceleration = 40
 var walk_deceleration = 50
 var rotation_speed = 7.5
 
+var push_speed = 5
+
 var speed = 0
 var direction = Vector2.ZERO
 
@@ -155,8 +157,7 @@ func _move_object():
 		if not collider is RigidBody3D:
 			continue
 
-		# print("BOOOOM")
-		c.get_collider().set_axis_velocity( - c.get_normal() * 10)
+		c.get_collider().set_axis_velocity(-c.get_normal() * push_speed)
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
@@ -167,7 +168,8 @@ func _physics_process(delta):
 
 		if not alive: return
 
-		if move_and_slide():
+		var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		if move_and_slide() and current_direction != Vector2.ZERO:
 			_move_object()
 
 func _input(event):
