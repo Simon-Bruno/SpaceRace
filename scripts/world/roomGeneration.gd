@@ -33,6 +33,7 @@ func _ready():
 					filenames.append(file)
 				file = dir.get_next()
 		var filename = filenames[randi() % filenames.size()]
+		filename = "door_unlock.rms"
 		var world_dict : Dictionary = parser.parse_file("res://files/random_map_scripts/" +  filename)
 		fill_room(world_dict, start, end, last_room)
 
@@ -271,40 +272,12 @@ func add_box(floor_plan, object, width, height, start):
 
 func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
+	pos = attach_wall(object, pos, width, height)
 	var x = pos[0]
 	var z = pos[1]
-	const orientations = [0, 90, 180, 270]
-	var orientation = 0
+	var orientation = pos[2]
 
-	var min_dist = object['set_min_distance']
-	var max_dist = object['set_max_distance']
-
-	if z < min_dist:
-		z = 1
-		orientation = 270
-	elif x < min_dist:
-		x = 1
-		orientation = 0
-	elif width < max_dist:
-		x = width - 1
-		orientation = 180
-	elif height < max_dist:
-		z = height - 1
-		orientation = 90
-	else:
-		orientation = orientations[randi() % orientations.size()]
-		match orientation:
-			0:
-				x = 1
-			90:
-				z = height - 1
-			180:
-				x = width - 1
-			270:
-				z = 1
-
-
-	if floor_plan[z -  1][x - 1] > PATH or z == start.z:
+	if floor_plan[z -  1][x - 1] or z == start.z:
 		return false
 
 	floor_plan[z - 1][x - 1] = LASER
@@ -315,11 +288,10 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, -z), basis, false, 1)
 	return true
 
-func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
-	var pos = object_placement(object, width, height, start)
-	var x = pos[0]
-	var z = pos[1]
+func attach_wall(object : Dictionary, pos : Array, width : int, height : int) -> Array:
 	const orientations = [0, 90, 180, 270]
+	var x : int = pos[0] / 2 * 2 + 1
+	var z : int = pos[1] / 2 * 2 + 1
 	var orientation = 0
 
 	var min_dist = object['set_min_distance']
@@ -349,7 +321,16 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 			270:
 				z = 1
 
-	if floor_plan[z - 1][x - 1] > PATH or z == start.z:
+	return [x, z, orientation]
+
+func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+	var pos : Array = object_placement(object, width, height, start)
+	pos = attach_wall(object, pos, width, height)
+	var x = pos[0]
+	var z = pos[1]
+	var orientation = pos[2]
+
+	if floor_plan[z - 1][x - 1] or z == start.z:
 		return false
 
 	# Spawn the laser
@@ -360,27 +341,13 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 	basis = Basis().rotated(Vector3(0, -1, 0), -angle)
 	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, false, object['set_activation'], true, true)
 
+	var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
 	for i in object['set_activation']:
-		var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
 		pos = object_placement(button_object, width, height, start)
+		pos = attach_wall(button_object, pos, width, height)
 		x = pos[0]
 		z = pos[1]
-		
-		min_dist = 3
-		max_dist = 20
-
-		if z < min_dist:
-			z = 1
-			orientation = 270
-		elif x < min_dist:
-			x = 1
-			orientation = 0
-		elif width < max_dist:
-			x = width - 1
-			orientation = 180
-		elif height < max_dist:
-			z = height - 1
-			orientation = 90
+		orientation = pos[2]
 
 		if floor_plan[z - 1][x - 1]:
 			laser.activation_count -= 1
@@ -397,8 +364,10 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 
 func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, width : int, height : int, start : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
+	pos = attach_wall(object, pos, width, height)
 	var x = pos[0]
 	var z = pos[1]
+	var orientation = pos[2]
 
 	if floor_plan[z - 1][x - 1]:
 		return false
@@ -406,8 +375,9 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	floor_plan[z - 1][x - 1] = BUTTON
 	doors[0].deactivated()
 	doors[1].deactivated()
-	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis(), doors[0], false)
-	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), deg_to_rad(180)), doors[1], false)
+	var angle = deg_to_rad(orientation)
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis().rotated(Vector3(0, 1, 0), angle), doors[0], false)
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), -angle), doors[1], false)
 	return true
 
 
@@ -556,6 +526,11 @@ func generate_path(floor_plan : Array[Array], width : int, height : int, start :
 					continue
 				position.z += up_down
 		floor_plan[position.z][position.x] = PATH
+	
+	floor_plan[position.z - 2][position.x] = PATH
+	floor_plan[position.z - 1][position.x] = PATH
+	floor_plan[position.z + 1][position.x] = PATH
+	floor_plan[position.z + 2][position.x] = PATH
 
 
 # Generates a matrix of the size (width, height)

@@ -64,15 +64,6 @@ var room_variation_y : int = 1
 @export var absolute_position : Vector3i = Vector3i(0, 3, 0)
 
 
-var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
-var laser_scene = preload("res://scenes/interactables/laser.tscn")
-var item_scene = preload("res://scenes/item/item.tscn")
-var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
-var button_scene = preload("res://scenes/interactables/button.tscn")
-var pressure_plate_scene = preload("res://scenes/interactables/pressure_plate.tscn")
-var door_scene = preload("res://scenes/interactables/door.tscn")
-
-
 # Called when the object is created in the scene
 func _enter_tree():
 	if multiplayer.is_server():
