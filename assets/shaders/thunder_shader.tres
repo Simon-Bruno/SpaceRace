@@ -1,7 +1,10 @@
-[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://cmkeknttov3aq"]
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://cmkeknttov3aq"]
+
+[ext_resource type="Texture2D" uid="uid://dic5j3hd0j50t" path="res://assets/lobby/death_ray/thunder_texture.png" id="1_n5q3m"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8p3x6"]
 expanded_output_ports = [0]
+texture = ExtResource("1_n5q3m")
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_j1s5m"]
 

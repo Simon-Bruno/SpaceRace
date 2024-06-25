@@ -4,6 +4,11 @@ var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/key.tscn")
+var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
+var full_hp_bottle_scene = preload("res://scenes/item/full_health_bottle.tscn")
+var strength_bottle_scene = preload("res://scenes/item/strength_bottle.tscn")
+var speed_bottle_scene = preload("res://scenes/item/speed_bottle.tscn")
+var bomb_scene = preload("res://scenes/item/bomb.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")
@@ -12,8 +17,40 @@ var terminal_scene = preload("res://scenes/interactables/terminal.tscn")
 var portal_scene = preload("res://scenes/interactables/portal.tscn")
 var boss_scene = preload("res://scenes/characters/boss.tscn")
 var projectile_scene = preload("res://scenes/characters/ranged_enemy/projectile.tscn")
+var wall_scene = preload("res://scenes/world/intern_wall.tscn")
+var keyhole_scene = preload("res://scenes/interactables/keyhole.tscn")
+var jump_laser_scene = preload("res://scenes/interactables/laser_low.tscn")
+var broken_wall_scene = preload("res://scenes/interactables/broken_wall.tscn")
 
-func spawn_pressure_plate(pos, dir, interact):
+func spawn_broken_wall(pos, dir, interact, key=null):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
+	if spawner:
+		var broken_wall = broken_wall_scene.instantiate()
+		broken_wall.position = pos
+		broken_wall.basis	= dir
+		broken_wall.interactable = interact
+		broken_wall.key = key
+		spawner.add_child(broken_wall, true)
+		return broken_wall
+	return null
+
+func spawn_keyhole(pos, dir, interact, key=null):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
+	if spawner:
+		var keyhole = keyhole_scene.instantiate()
+		keyhole.position = pos
+		keyhole.basis	= dir
+		keyhole.interactable = interact
+		keyhole.key = key
+		spawner.add_child(keyhole, true)
+		return keyhole
+	return null
+
+func spawn_pressure_plate(pos, dir, interact=null, pos_enemy=null):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
@@ -22,6 +59,8 @@ func spawn_pressure_plate(pos, dir, interact):
 		plate.position = pos
 		plate.basis	= dir
 		plate.interactable = interact
+		if pos_enemy != null:
+			plate.enemy_pos = pos_enemy
 		spawner.add_child(plate, true)
 		return plate
 	return null
@@ -58,7 +97,6 @@ func spawn_button(pos, dir, interact, inverse):
 		return button
 	return null
 
-
 func spawn_door(pos, dir, activation):
 	if not multiplayer.is_server():
 		return
@@ -72,7 +110,6 @@ func spawn_door(pos, dir, activation):
 		return door
 	return null
 
-
 func spawn_melee_enemy(pos):
 	if not multiplayer.is_server():
 		return
@@ -82,7 +119,6 @@ func spawn_melee_enemy(pos):
 		enemy.position = pos
 		spawner.add_child(enemy, true)
 		return enemy
-
 
 func spawn_ranged_enemy(pos):
 	if not multiplayer.is_server():
@@ -101,20 +137,24 @@ func spawn_boss(pos):
 		var boss = boss_scene.instantiate()
 		boss.position = pos
 		spawner.add_child(boss, true)
+		return boss
+	return null
 
-
-func spawn_laser(pos, dir, activation = 1, hinder = false):
+func spawn_laser(pos, dir, timer = false, activation = 1, hinder = false, jumpable=false):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ProjectileSpawner")
 	if spawner:
 		var laser = laser_scene.instantiate()
+		if jumpable:
+			laser = jump_laser_scene.instantiate()
 		laser.position = pos
-		laser.basis = dir
+		laser.basis	= dir
+		laser.timer_active = timer
 		laser.activation_count = activation
-		laser.hinder = hinder
 		spawner.add_child(laser, true)
-		laser.set_laser()
+		if hinder:
+			laser.set_laser()
 		return laser
 	return null
 
@@ -127,6 +167,7 @@ func spawn_terminal(pos):
 		terminal.position = pos
 		#terminal.basis	= dir
 		spawner.add_child(terminal, true)
+		return terminal
 
 func spawn_box(pos):
 	if not multiplayer.is_server():
@@ -137,16 +178,38 @@ func spawn_box(pos):
 		item.position = pos
 		spawner.add_child(item, true)
 
+func spawn_wall(pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/WallSpawner")
+	if spawner:
+		var wall = wall_scene.instantiate()
+		wall.position = pos
+		spawner.add_child(wall, true)
 
-func spawn_item(pos):
+func spawn_item(pos, welder = false):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
 	if spawner:
 		var item = item_scene.instantiate()
 		item.position = pos
+		item.welder = welder
 		spawner.add_child(item, true)
+		return item
+	return null
 
+func spawn_buff(pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
+	#var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
+	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
+	if spawner:
+		var buff_scene = BUFFS[randi() % BUFFS.size()]
+		var buff = buff_scene.instantiate()
+		buff.position = pos
+		spawner.add_child(buff, true)
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):

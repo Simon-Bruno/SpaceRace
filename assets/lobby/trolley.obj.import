@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csvare1jfwx2k"
+path="res://.godot/imported/trolley.obj-7518f481c39d218e6024f29e3daa3fca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/trolley.obj-7518f481c39d218e6024f29e3daa3fca.mesh"]
+
+source_file="res://assets/lobby/trolley.obj"
+dest_files=["res://.godot/imported/trolley.obj-7518f481c39d218e6024f29e3daa3fca.mesh", "res://.godot/imported/trolley.obj-7518f481c39d218e6024f29e3daa3fca.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

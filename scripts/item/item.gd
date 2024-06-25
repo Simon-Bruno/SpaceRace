@@ -2,7 +2,9 @@ extends Node3D
 
 # make sure only one person holds the item
 @export var owned = false
-var owned_node : Node3D = null
+@export var owned_node : Node3D = null
+@export var owned_id : String = ""
+
 # how fast the item should follow the player
 var item_follow_speed = 15
 
@@ -16,6 +18,8 @@ var bob_time = 0.0
 @export var item_position : Vector3
 var initial_position = Vector3()
 
+@export var welder : bool = false
+
 func _enter_tree():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
@@ -26,24 +30,59 @@ func _ready():
 
 func _animate(delta):
 	"""Makes the item rotate and bob up and down"""
-	
+
 	# rotate by rotating the origin
 	$RigidBody3D/MeshOrigin.rotate_y(rotation_speed * delta)
-	
+
 	# bobbing by translating the origin
 	bob_time += delta
 	# TAU is 2*PI
 	var new_y = bob_offset + initial_position.y + bob_amplitude * sin(bob_time * bob_frequency * TAU)
 	$RigidBody3D/MeshOrigin.position = Vector3(initial_position.x, new_y, initial_position.z)
 
+# Deletes the item after consuming/using it
+@rpc("any_peer", "call_local", "reliable")
+func delete():
+	if not multiplayer.is_server():
+		return
+
+	# Deletes the bomb when activated and thrown away
+	if not owned_node:
+		queue_free()
+		return
+
+	var player = owned_node.get_node("PlayerItem")
+	player._drop_item()
+	queue_free()
+
+
+# Called when client wants to consume item, in other words delete the item from world
+@rpc("any_peer", "call_local", "reliable")
+func request_server_delete_item():
+	if multiplayer.is_server():
+		delete.rpc()
+
+
+# Deletes the item after consuming/using it
+func consume_item():
+	if multiplayer.is_server():
+		delete.rpc()
+	else:
+		request_server_delete_item.rpc()
+
+
+# Called when player consumes the item
+func on_player_consume_potion():
+	if owned_node:
+		consume_item()
+
+
 func _process(delta):
 	_animate(delta)
 	if owned_node and multiplayer.is_server():
-		
 		var destination = owned_node.global_position
-		destination.y += owned_node.get_node("Pivot/MeshInstance3D").get_aabb().size.y
-	
+		destination.y += owned_node.get_node("Pivot/Armature/Skeleton3D/MeshInstance3D").get_aabb().size.y
+
 		# Nodig voor het syncen
 		item_position = $RigidBody3D.global_position.lerp(destination, item_follow_speed * delta)
-
 		$RigidBody3D.global_position = item_position

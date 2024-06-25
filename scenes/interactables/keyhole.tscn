@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0seif0vxjwe5"]
+
+[ext_resource type="Script" path="res://scripts/interactables/keyhole.gd" id="1_hryjt"]
+[ext_resource type="ArrayMesh" uid="uid://cirqvh26xwxee" path="res://assets/CustomBlocks/colorCoded/keyholeGreen.obj" id="2_n51ek"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6lkek"]
+size = Vector3(0.77449, 1.22026, 0.641479)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hfm23"]
+properties/0/path = NodePath("../..:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("../..:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("../../MeshInstance3D:skeleton")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Keyhole" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.301739, 0.71311)
+script = ExtResource("1_hryjt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00670907, -0.122433)
+mesh = ExtResource("2_n51ek")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00266257, 0.311394, -0.379944)
+shape = SubResource("BoxShape3D_6lkek")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../Area3D/CollisionShape3D")
+replication_config = SubResource("SceneReplicationConfig_hfm23")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

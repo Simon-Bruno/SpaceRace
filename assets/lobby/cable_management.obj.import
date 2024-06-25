@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://elviofx8hwh3"
+path="res://.godot/imported/cable_management.obj-e1e1d9a924b1182f8e4022d90239fc45.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cable_management.obj-e1e1d9a924b1182f8e4022d90239fc45.mesh"]
+
+source_file="res://assets/lobby/cable_management.obj"
+dest_files=["res://.godot/imported/cable_management.obj-e1e1d9a924b1182f8e4022d90239fc45.mesh", "res://.godot/imported/cable_management.obj-e1e1d9a924b1182f8e4022d90239fc45.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

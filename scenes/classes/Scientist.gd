@@ -1,8 +1,22 @@
 extends Node
 
+@onready var player_node = get_parent()
+
 var ability1_point_cost : int = 10
 var ability2_point_cost : int = 20
 var healing_amount : int = 50
+
+var ability1_cooldown : int = 20
+var ability2_cooldown : int = 30
+
+var ability1_title : String = "Heal"
+var ability2_title : String = "Sabotage WIP"
+
+func _ready():
+	var hud = get_node_or_null("../../../HUD")
+	if hud:
+		hud.set_ability_info(ability1_title, ability2_title, ability1_cooldown, ability2_cooldown)
+
 
 func ability1() -> void:
 	print("ability 1 scientist")
