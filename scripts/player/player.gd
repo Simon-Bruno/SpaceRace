@@ -10,9 +10,10 @@ var respawn_immunity: bool = false
 
 var walk_acceleration = 40
 var walk_deceleration = 50
-var rotation_speed = 7.5
+var rotation_speed = 10
 
 var push_speed = 5
+var pull_speed = 2
 
 var speed = 0
 var direction = Vector2.ZERO
@@ -71,6 +72,10 @@ func _horizontal_movement(delta):
 		speed = min(walk_speed * speed_boost, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_speed * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
+		
+		# Push objects if trying to move
+		_push_objects()
+		
 
 	# decelerate
 	else:
@@ -150,14 +155,30 @@ func anim_handler():
 		if velocity.y == 0:
 			AnimJump = false
 
-func _move_object():
+func _push_objects():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var collider = c.get_collider()
-		if not collider is RigidBody3D:
+		if not collider.get_parent().is_in_group("Moveables"):
 			continue
-
-		c.get_collider().set_axis_velocity(-c.get_normal() * push_speed)
+						
+		collider.set_axis_velocity(-c.get_normal() * push_speed)
+		break
+		
+func _pull_objects():
+	var bodies = $PullArea.get_overlapping_bodies()
+	for body in bodies:
+		if not body.get_parent().is_in_group("Moveables"):
+			continue
+		
+		var pull_direction = (global_position - body.global_position).normalized()
+		var v = Vector3.ZERO
+		v.x = pull_direction.x * pull_speed
+		v.z = pull_direction.z * pull_speed
+		
+		body.set_axis_velocity(v)
+		
+	
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
@@ -166,11 +187,11 @@ func _physics_process(delta):
 		velocity = target_velocity
 		anim_handler()
 
-		if not alive: return
-
-		var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-		if move_and_slide() and current_direction != Vector2.ZERO:
-			_move_object()
+		if alive:
+			move_and_slide()
+		
+		if Input.is_action_pressed("pull"):
+			_pull_objects()
 
 func _input(event):
 	if not alive:
