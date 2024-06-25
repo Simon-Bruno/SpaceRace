@@ -1,91 +1,106 @@
 extends Control
 
 @onready var settings = $Settings
+@onready var username = $UsernameField
 
+@export var inputBackground : Texture2D
+@export var inputBackgroundInvalid : Texture2D
 
-func _ready():
-	multiplayer.connection_failed.connect(_on_connection_failed)
-	settings.visible = false
+func _play_button_pressed():
+	$StartMenu.visible = false
+	$PlayMenu.visible = true
+	
+func _back_button_pressed():
+	$PlayMenu.visible = false
+	$StartMenu.visible = true
 
+func set_input_invalid(field):
+	var original = field.get_theme_stylebox("normal")
+	var stylebox = StyleBoxTexture.new()
+	stylebox.texture = inputBackgroundInvalid
+	field.add_theme_stylebox_override("normal", stylebox)
+	await get_tree().create_timer(2).timeout
+	field.add_theme_stylebox_override("normal", original)
 
-func _on_connection_failed():
-	set_notification_and_show("Could not connect to the game", $Holder)
+func _join_button_pressed():
+	var username_val = username.text 
+	if username_val == "":
+		set_input_invalid(username)
+		return
+	
+	$JoinMenu.visible = true
+	username.visible = false
+	$PlayMenu.visible = false
 
+func _back_to_play_menu():
+	$JoinMenu.visible = false
+	$HostMenu.visible = false
+	$PlayMenu.visible = true
+	username.visible = true
 
 # Called when the node enters the scene tree for the first time.
 func _on_host_pressed():
-	var username = $Holder/UsernameField.text 
-	if username == "":
-		set_notification_and_show("You need to choose a username before you can host a game!", $Holder)
+	var username_val = username.text 
+	if username_val == "":
+		set_input_invalid(username)
 		return
 	
-	$Host.visible = true
-	$Holder.visible = false
+	$HostMenu.visible = true
+	username.visible = false
+	$PlayMenu.visible = false
 	
 func _on_host_menu_pressed():
-	var username = $Holder/UsernameField.text 
-	if username == "":
-		set_notification_and_show("You need to choose a username before you can host a game!", $Host)
+	var username_val = username.text 
+	if username_val == "":
+		set_input_invalid(username)
 		return
 	
-	Network.playername = username
+	Network.playername = username_val
 	
-	var port = $Host/Holder/Port.text
+	var port = $HostMenu/PortField.text
 	if port == "":
-		set_notification_and_show("You need to fill in a port!", $Host)
+		set_input_invalid($HostMenu/PortField)
 		return 
 		
 	var hosting = await Network._on_host_pressed(port)
 	if !hosting:
 		set_notification_and_show("Could not create game!", $Host)
 		
-	$Host.visible = false
-	$Holder.visible = true
-	
-func _on_join_pressed():
-	var username = $Holder/UsernameField.text 
-	if username == "":
-		set_notification_and_show("You need to choose a username before you can join a game!", $Holder)
-		return
-	
-	$Join.visible = true
-	$Holder.visible = false
+	_back_to_play_menu()
+	_back_button_pressed()
 	
 func _on_join_menu_pressed():
-	var username = $Holder/UsernameField.text 
-	if username == "":
-		set_notification_and_show("You need to choose a username before you can join a game!", $Join)
+	var username_val = username.text 
+	if username_val == "":
+		set_input_invalid(username)
 		return
 	
-	Network.playername = username
+	Network.playername = username_val
 	
-	var ip = $Join/Holder/IP.text
+	var ip = $JoinMenu/IpField.text
 	if ip == "": 
-		set_notification_and_show("You need to fill in an ip address!", $Join)
+		set_input_invalid($JoinMenu/IpField)
 		return 
 		
-	var port = $Join/Holder/Port.text
+	var port = $JoinMenu/PortField.text
 	if port == "":
-		set_notification_and_show("You need to fill in a port!",$Join)
+		set_input_invalid($JoinMenu/PortField)
 		return 
 
 	if !Network._on_join_pressed(ip, port):
 		set_notification_and_show("Could not join game", $Join)
 		
-	$Join.visible = false
-	$Holder.visible = true
-
+	_back_to_play_menu()
+	_back_button_pressed()
 
 func _on_settings_button_pressed():
-	$Holder.visible = false
+	$StartMenu.visible = false
 	settings.set_process(true)
 	settings.visible = true
 
-
 func _on_settings_back_button_down():
-	$Holder.visible = true
+	$StartMenu.visible = true
 	settings.visible = false
-
 
 var last_parent
 func set_notification_and_show(text, parent):
@@ -93,18 +108,6 @@ func set_notification_and_show(text, parent):
 	$DialogMessage.visible = true
 	parent.visible = false
 	last_parent = parent
-
-func _on_close_dialog_pressed():
-	$DialogMessage.visible = false
-	last_parent.visible = true
-	 
-func _on_close_host_button_pressed():
-	$Host.visible = false
-	$Holder.visible = true
-
-func _on_close_join_button_pressed():
-	$Join.visible = false
-	$Holder.visible = true
 
 func _on_quit_button_pressed():
 	get_tree().quit()
