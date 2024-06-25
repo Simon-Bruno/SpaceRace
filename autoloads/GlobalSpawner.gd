@@ -206,7 +206,8 @@ func spawn_buff(pos):
 	#var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
 	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
 	if spawner:
-		var buff_scene = BUFFS[randi() % BUFFS.size()]
+		#var buff_scene = BUFFS[randi() % BUFFS.size()]
+		var buff_scene = bomb_scene
 		var buff = buff_scene.instantiate()
 		buff.position = pos
 		spawner.add_child(buff, true)
