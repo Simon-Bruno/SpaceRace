@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dmgolorp3ofdv"
+path="res://.godot/imported/control_table_05.obj-e253d7f2d7c926508b43c1f79df88406.mesh"
+
+[deps]
+
+files=["res://.godot/imported/control_table_05.obj-e253d7f2d7c926508b43c1f79df88406.mesh"]
+
+source_file="res://assets/CustomBlocks/endroom/control_table_05.obj"
+dest_files=["res://.godot/imported/control_table_05.obj-e253d7f2d7c926508b43c1f79df88406.mesh", "res://.godot/imported/control_table_05.obj-e253d7f2d7c926508b43c1f79df88406.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -9,6 +9,7 @@
 albedo_texture = ExtResource("1_jg63i")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ld8i"]
+size = Vector3(1, 1.45898, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nudci"]
 properties/0/path = NodePath(".:position")
@@ -22,7 +23,7 @@ properties/1/replication_mode = 2
 metadata/_edit_group_ = true
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 8
 collision_mask = 11
 mass = 50.0
@@ -32,13 +33,13 @@ sleeping = true
 lock_rotation = true
 
 [node name="SmallBox" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.2, 0)
+transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 0, 0.2, 0)
 material_override = SubResource("StandardMaterial3D_n0p66")
 mesh = ExtResource("2_gd7fc")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270508, 0)
 shape = SubResource("BoxShape3D_1ld8i")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

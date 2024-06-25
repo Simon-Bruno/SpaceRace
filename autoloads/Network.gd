@@ -155,3 +155,12 @@ func _on_join_pressed(ip, port):
 
 func get_player_node_by_id(id):
 	return get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node(str(id))
+
+func get_other_team_ids(own_id: int) -> Array:
+	var team = player_teams[str(own_id)]
+	var other_ids = []
+	for id in player_teams.keys():
+		if team != player_teams[id]:
+			other_ids.append(str(id))
+	return other_ids
+	

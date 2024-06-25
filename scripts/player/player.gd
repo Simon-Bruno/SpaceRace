@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
-@export var walk_speed = 8
-@export var fall_acceleration = 30
-@export var jump_impulse = 8.5
+var walkspeed_multiplier : float = 1
+@export var walk_speed = 12
+@export var fall_acceleration = 60
+@export var jump_impulse = 20
 var getHitCooldown = true
 @export var health = Global.player_max_health
 @export var alive = false
@@ -68,20 +69,16 @@ func _horizontal_movement(delta):
 
 	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	if current_direction != Vector2.ZERO: # accelerate if moving
-		speed = min(walk_speed * speed_boost, speed + walk_acceleration * delta)
+	if current_direction != Vector2.ZERO:  # Accelerate if moving
+		speed = min(walk_speed * walkspeed_multiplier * speed_boost, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_speed * delta)
-		basis = $Pivot.basis.looking_at(Vector3(direction[0], 0, direction[1]))
-		
-		# Push objects if trying to move
+		basis = $Pivot.basis.looking_at(Vector3(direction.x, 0, direction.y))
 		_push_objects()
-		
 
-	# decelerate
-	else:
+	else:  # Decelerate
 		speed = max(0, speed - walk_deceleration * delta)
 
-	vel.x = direction.x * speed
+	vel.x = direction.x * speed 
 	vel.z = direction.y * speed * Network.inverted
 
 	return vel
