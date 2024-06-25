@@ -40,8 +40,8 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 	$PlayerHitbox.scale = new_scale
 	$CollisionShape3D.scale = new_scale
 	walk_speed = new_walk_speed
-	walk_acceleration = new_accel  
-	walk_deceleration = new_accel * 1.2  
+	walk_acceleration = new_accel
+	walk_deceleration = new_accel * 1.2
 
 func _ready():
 	$FloatingName.text = Network.playername
@@ -57,7 +57,7 @@ func _ready():
 func _horizontal_movement(delta):
 	if !alive:
 		return Vector3.ZERO
-	
+
 	var vel = Vector3.ZERO
 
 	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -84,6 +84,7 @@ func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+		Audiocontroller.play_jump_sfx()
 		vel.y = jump_impulse
 
 	if not is_on_floor():
@@ -159,7 +160,7 @@ func _physics_process(delta):
 		target_velocity.x = check_distance(target_velocity)
 		velocity = target_velocity
 		anim_handler()
-		
+
 		if alive:
 			move_and_slide()
 
@@ -172,14 +173,14 @@ func _input(event):
 		#TODO: Not working in lobby, not allowed. Use cooldown
 		if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
 			$Class.ability2()
- 
+
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(id, damage):
 	if str(id) != str(multiplayer.get_unique_id()):
-		return 
-		
+		return
+
 	if !respawn_immunity and alive and getHitCooldown:
 		health = max(0, health - damage)
 		getHitCooldown = false
@@ -196,11 +197,12 @@ func die():
 	var temp = walk_speed
 	walk_speed = 0
 	alive = false
-	
+
 	request_play_animation(1, "death")  # play anim
+	Audiocontroller.play_player_death()
 	await get_tree().create_timer(2).timeout  # wait for anim
 	get_parent().player_died(self)  # die
-	
+
 	# reset globals
 	AnimDeath = false
 	walk_speed = temp

@@ -141,7 +141,7 @@ func commands():
 	if leave_game() or easter_egg() or stop_easter_egg() \
 	or mute_master_command() or mute_music_command() or mute_sfx_command() \
 	or unmute_master_command() or unmute_music_command() or unmute_sfx_command() \
-	or respawn_command():
+	or respawn_command() or rizz_command():
 		return true
 
 
@@ -211,10 +211,16 @@ func unmute_sfx_command():
 		return true
 
 
+func rizz_command():
+	if message_input.text == "/rizz":
+		Audiocontroller.play_rizz_sfx()
+		return true
+
+
 func respawn_command():
 	if message_input.text == "/respawn":
-		var player_spawner = get_node("/root/Main/SpawnedItems/World/PlayerSpawner")
-		player_spawner.respawn_player()
+		#var player_spawner = get_node("/root/Main/SpawnedItems/World/PlayerSpawner")
+		#player_spawner.respawn_player()
 		return true
 
 # Called when the message timer times out, hides the message display if the

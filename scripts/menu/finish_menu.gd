@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	Audiocontroller.play_finish_menu_music()
 	print("\n\n looking at username is: "+ Network.playername)
 	var username = Network.playername
 	var pressure_plate_vals = get_parent()
@@ -43,6 +44,7 @@ func _on_play_again_pressed():
 # Go to menu
 func _on_menu_pressed():
 	Network._on_leave_button_pressed()
+	Audiocontroller.play_menu_music()
 
 # Quit
 func _on_quit_button_pressed():

@@ -33,6 +33,8 @@ func activated() -> void:
 		_set_door_mesh.rpc(customRooms.DOOROPENR, customRooms.DOOROPENL)
 		$CollisionShape3DL.call_deferred("set_disabled", true)
 		$CollisionShape3DR.call_deferred("set_disabled", true)
+	if not Input.is_action_just_pressed("StartGame"):
+		Audiocontroller.play_door_sfx()
 
 # Deactivates the door and closes it. Change in collision shape and meshinstance is changed to closed.
 func deactivated() -> void:
@@ -43,6 +45,9 @@ func deactivated() -> void:
 		$CollisionShape3DL.call_deferred("set_disabled", false)
 		$CollisionShape3DR.call_deferred("set_disabled", false)
 	activation_count += 1
+	if not Input.is_action_just_pressed("StartGame"):
+		Audiocontroller.play_door_sfx()
+
 
 # Helper function to set the door mesh
 @rpc("authority", "call_local", "reliable")
