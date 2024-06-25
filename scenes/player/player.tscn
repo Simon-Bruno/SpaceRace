@@ -625,7 +625,7 @@ viewport_path = NodePath("PlayerCombat/SubViewport")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2gkux"]
 height = 1.6
-radius = 1.0
+radius = 1.5
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 collision_layer = 2

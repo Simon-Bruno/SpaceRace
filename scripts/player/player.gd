@@ -12,8 +12,8 @@ var walk_acceleration = 40
 var walk_deceleration = 50
 var rotation_speed = 10
 
-var push_speed = 5
-var pull_speed = 2
+var pull_speed = 6
+var min_pull_dist = 1.8
 
 var speed = 0
 var direction = Vector2.ZERO
@@ -159,16 +159,18 @@ func _push_objects():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var collider = c.get_collider()
-		if not collider.get_parent().is_in_group("Moveables"):
+		if not collider is RigidBody3D or not collider.get_parent().is_in_group("Moveables")	:
 			continue
 						
-		collider.set_axis_velocity(-c.get_normal() * push_speed)
+		collider.set_axis_velocity((-c.get_normal() * walk_speed * speed_boost * 2.0) / 3.0)
 		break
 		
 func _pull_objects():
 	var bodies = $PullArea.get_overlapping_bodies()
 	for body in bodies:
-		if not body.get_parent().is_in_group("Moveables"):
+		print(global_transform.origin.distance_to(body.global_transform.origin))
+		if not body.get_parent().is_in_group("Moveables") \
+		or global_transform.origin.distance_to(body.global_transform.origin) < min_pull_dist:
 			continue
 		
 		var pull_direction = (global_position - body.global_position).normalized()
