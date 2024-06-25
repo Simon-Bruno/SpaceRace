@@ -5,8 +5,7 @@ static var END = 23
 
 @onready var customRooms = preload("res://scenes/world/customRooms.tscn").instantiate()
 
-# var rooms = ["bas-1", "bas-2", "bas-3", "bas-4", "bas-5", "bas-6", "bas-7", "bas-8", "bas-9", "bas-10", "bas-11", "bas-12" ]
-var rooms = ["bas-10"]
+var rooms = ["bas-1", "bas-2", "bas-3", "bas-4", "bas-5", "bas-6", "bas-7", "bas-8", "bas-9", "bas-10", "bas-11", "bas-12" ]
 var special_rooms = ["EndRoom", "StartRoom"]
 var roomNodes = []
 var special_roomNodes = []
