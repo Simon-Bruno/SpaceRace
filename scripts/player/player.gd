@@ -155,6 +155,16 @@ func anim_handler():
 		if velocity.y == 0:
 			AnimJump = false
 
+func _move_object():
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		var collider = c.get_collider()
+		if not collider is RigidBody3D:
+			continue
+		
+		print("BOOOOM")
+		c.get_collider().set_axis_velocity(-c.get_normal()*10)
+
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
@@ -163,8 +173,11 @@ func _physics_process(delta):
 		velocity = target_velocity
 		anim_handler()
 		
-		if alive:
-			move_and_slide()
+		if not alive: return
+		
+		if move_and_slide():
+			_move_object()
+			
 
 
 func _input(event):

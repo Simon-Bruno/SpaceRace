@@ -19,7 +19,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="MoveableObject" type="Node3D"]
+[node name="MoveableObject" type="Node3D" groups=["Moveables"]]
 metadata/_edit_group_ = true
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
