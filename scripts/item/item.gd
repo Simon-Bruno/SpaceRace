@@ -79,6 +79,7 @@ func on_player_consume_potion():
 
 func _process(delta):
 	_animate(delta)
+	
 	if owned_node and multiplayer.is_server():
 		var destination = owned_node.global_position
 		destination.y += owned_node.get_node("Pivot/Armature/Skeleton3D/MeshInstance3D").get_aabb().size.y
