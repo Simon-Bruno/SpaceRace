@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d0fiscm64glg8" path="res://assets/world/2Key.png" id="9_vfb8j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
-size = Vector3(1991.92, 1, 1000)
+size = Vector3(1000, 2, 1000)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r1nxi"]
 properties/0/path = NodePath(".:timer")
@@ -90,11 +90,10 @@ _spawnable_scenes = PackedStringArray("res://scenes/world/worldGeneration.tscn",
 spawn_path = NodePath("..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, -500)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 425.538, 2, 500)
 shape = SubResource("BoxShape3D_afshc")
 
 [node name="HUD" type="Node" parent="."]
