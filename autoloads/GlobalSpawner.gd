@@ -4,6 +4,11 @@ var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/key.tscn")
+var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
+var full_hp_bottle_scene = preload("res://scenes/item/full_health_bottle.tscn")
+var strength_bottle_scene = preload("res://scenes/item/strength_bottle.tscn")
+var speed_bottle_scene = preload("res://scenes/item/speed_bottle.tscn")
+var bomb_scene = preload("res://scenes/item/bomb.tscn")
 var box_scene = preload("res://scenes/interactables/moveable_object.tscn")
 var button_scene = preload("res://scenes/interactables/button.tscn")
 var door_scene = preload("res://scenes/interactables/door.tscn")
@@ -193,6 +198,18 @@ func spawn_item(pos, welder = false):
 		spawner.add_child(item, true)
 		return item
 	return null
+
+func spawn_buff(pos):
+	if not multiplayer.is_server():
+		return
+	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
+	#var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
+	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
+	if spawner:
+		var buff_scene = BUFFS[randi() % BUFFS.size()]
+		var buff = buff_scene.instantiate()
+		buff.position = pos
+		spawner.add_child(buff, true)
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
