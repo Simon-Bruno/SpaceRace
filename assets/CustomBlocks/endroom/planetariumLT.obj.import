@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdbpbppk17nm6"
+path="res://.godot/imported/planetariumLT.obj-16c21f5277cb2b6065013a3669a19c07.mesh"
+
+[deps]
+
+files=["res://.godot/imported/planetariumLT.obj-16c21f5277cb2b6065013a3669a19c07.mesh"]
+
+source_file="res://assets/CustomBlocks/endroom/planetariumLT.obj"
+dest_files=["res://.godot/imported/planetariumLT.obj-16c21f5277cb2b6065013a3669a19c07.mesh", "res://.godot/imported/planetariumLT.obj-16c21f5277cb2b6065013a3669a19c07.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
