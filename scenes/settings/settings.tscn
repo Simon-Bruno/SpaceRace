@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpvimj5wn8htd"]
+[gd_scene load_steps=7 format=3 uid="uid://dpvimj5wn8htd"]
 
 [ext_resource type="Script" path="res://scripts/settings/settings.gd" id="1_pugsf"]
 [ext_resource type="FontFile" uid="uid://dp0skd1skh5e7" path="res://assets/font/space_font.ttf" id="2_3jlno"]
 [ext_resource type="PackedScene" uid="uid://c7gby45kucwu1" path="res://scenes/settings/settings_tab_container.tscn" id="2_fcv6o"]
+[ext_resource type="FontFile" uid="uid://6utpau6lbihh" path="res://assets/fonts/MotionControl-Bold.otf" id="4_4jtds"]
+[ext_resource type="Texture2D" uid="uid://ip1xi5xnjir2" path="res://assets/menu/ButtonBackground.png" id="5_02sj2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bcsel"]
+texture = ExtResource("5_02sj2")
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -42,11 +47,19 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="."]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
+offset_left = 431.0
+offset_top = 589.0
+offset_right = 747.0
+offset_bottom = 649.0
+size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_4jtds")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_bcsel")
 text = "Back"
 
 [connection signal="back_button_down" from="." to="." method="_on_back_button_down"]
-[connection signal="button_down" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="button_down" from="BackButton" to="." method="_on_back_button_button_down"]
