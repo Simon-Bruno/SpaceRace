@@ -23,7 +23,7 @@ var laser_off_duration = 3.0
 
 func _ready():
 	if timer_active:
-		laser_timer = laser_on_duration
+		laser_timer = randf_range(1.0, 5.0)
 	if not active:
 		activation_count = 0
 		deactivated()
