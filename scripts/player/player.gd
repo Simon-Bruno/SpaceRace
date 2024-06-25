@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var walkspeed_multiplier : float = 1
+var walkspeed_multiplier : float = 1
 @export var walk_speed = 12
 @export var fall_acceleration = 60
 @export var jump_impulse = 20
@@ -54,14 +54,8 @@ func _horizontal_movement(delta):
 	else:  # Decelerate
 		speed = max(0, speed - walk_deceleration * delta)
 
-	vel.x = direction.x * speed
+	vel.x = direction.x * speed 
 	vel.z = direction.y * speed * Network.inverted
-
-	# Debugging prints
-	#print("Speed: ", speed)
-	print("Walk Speed Multiplier: ", walkspeed_multiplier)
-	#print("Direction: ", direction)
-	#print("Velocity: ", vel)
 
 	return vel
 
@@ -122,9 +116,9 @@ func _physics_process(delta):
 
 func _input(event):
 	if str(multiplayer.get_unique_id()) == name:
-		if event.is_action_pressed("ability_1") and points > $Class.ability1_point_cost:
+		if event.is_action_pressed("ability_1"):# and points > $Class.ability1_point_cost:
 			$Class.ability1()
-		if event.is_action_pressed("ability_2") and points > $Class.ability2_point_cost:
+		if event.is_action_pressed("ability_2"):# and points > $Class.ability2_point_cost:
 			$Class.ability2()
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
