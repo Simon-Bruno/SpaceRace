@@ -8,20 +8,19 @@ enum {EMPTY, PATH, WALL, BUTTON, ITEM, LASER, BUFF, ENEMY, BOX}
 
 enum {UP, LEFT, DOWN, RIGHT}
 
-var parser = preload("res://scripts/world/rms_parser.gd").new()
+var parser = preload ("res://scripts/world/rms_parser.gd").new()
 
 var absolute_position = Vector3(0, 0, 0)
 
-var wall_scene = preload("res://scenes/world/intern_wall.tscn")
-
+var wall_scene = preload ("res://scenes/world/intern_wall.tscn")
 
 func _ready():
 	if not multiplayer.is_server():
 		return
 	if world.generate_room:
-		var start : Vector3i = world.start_pos
-		var end : Vector3i = world.end_pos
-		var last_room : bool = world.last_room
+		var start: Vector3i = world.start_pos
+		var end: Vector3i = world.end_pos
+		var last_room: bool = world.last_room
 		absolute_position = Vector3(world.absolute_position)
 		var dir = DirAccess.open("res://files/random_map_scripts")
 		var filenames = []
@@ -33,8 +32,7 @@ func _ready():
 					filenames.append(file)
 				file = dir.get_next()
 		var filename = filenames[randi() % filenames.size()]
-		filename = "box.rms"
-		var world_dict : Dictionary = parser.parse_file("res://files/random_map_scripts/" +  filename)
+		var world_dict: Dictionary = parser.parse_file("res://files/random_map_scripts/" + filename)
 		fill_room(world_dict, start, end, last_room)
 
 # This function is a check for a range of 3 tiles on two tiles distance of the given
@@ -89,7 +87,6 @@ func check_wall_placement(floor_plan: Array, x: int, z: int) -> bool:
 	var max_x: int = floor_plan[0].size()
 	var max_z: int = floor_plan.size()
 
-
 	if x < 0 or x >= max_x or z < 0 or z >= max_z:
 		return false
 
@@ -139,20 +136,20 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 # If the operation is successful, the floor plan will be updated, but if not
 # a single tile of the wall can be placed, this function will not update the
 # floor plan, and will return false.
-func handle_wall(floor_plan : Array, wall : Dictionary, width : int, height: int, start : Vector3i) -> bool:
-	var placed : bool = false
-	var min_dist : int  = wall['set_min_distance']
-	var max_dist : int = wall['set_max_distance']
-	var length : int = wall['length']
-	var variation : int = wall['length_variation']
-	length += randi_range(-variation, variation)
+func handle_wall(floor_plan: Array, wall: Dictionary, width: int, height: int, start: Vector3i) -> bool:
+	var placed: bool = false
+	var min_dist: int = wall['set_min_distance']
+	var max_dist: int = wall['set_max_distance']
+	var length: int = wall['length']
+	var variation: int = wall['length_variation']
+	length += randi_range( - variation, variation)
 	var orientation = randi() % 2
-	var x : int = 0
-	var z : int = 0
-	var xmin : int = 0
-	var xmax : int = 0
-	var zmin : int = 0
-	var zmax : int = 0
+	var x: int = 0
+	var z: int = 0
+	var xmin: int = 0
+	var xmax: int = 0
+	var zmin: int = 0
+	var zmax: int = 0
 	if orientation == HORIZONTAL and width > length:
 		zmin = max(1, start[2] - max_dist)
 		zmax = min(height - 2, start[2] + max_dist)
@@ -182,7 +179,7 @@ func handle_wall(floor_plan : Array, wall : Dictionary, width : int, height: int
 
 	# Get a random x coordinate inside the bounds.
 	x = randi_range(xmin, xmax)
-	for i in range(-length / 2, length / 2):
+	for i in range( - length / 2, length / 2):
 		if place_wall(x, z, i, orientation, floor_plan):
 			placed = true
 	# If length / 2 == 0, the upper loop places nothing.
@@ -199,7 +196,7 @@ func wall_sort(wall_a, wall_b) -> bool:
 # This is a small function that relies on the helper functions to place the walls.
 # If the first try of placing a wall fails, it will give a second try,
 # but no more than 2.
-func add_walls(floor_plan : Array[Array], wall_list : Array, width : int, height : int, start : Vector3i) -> void:
+func add_walls(floor_plan: Array[Array], wall_list: Array, width: int, height: int, start: Vector3i) -> void:
 	wall_list.sort_custom(wall_sort)
 	for wall in wall_list:
 		if not handle_wall(floor_plan, wall, width, height, start):
@@ -208,9 +205,9 @@ func add_walls(floor_plan : Array[Array], wall_list : Array, width : int, height
 # This function will calculate a position (x, z) for the object to spawn. This
 # will consider the size of the room and object restrictions, but will not care
 # about other things in the room.
-func object_placement(object : Dictionary, width : int, height : int, start : Vector3i) -> Array:
-	var min_dist : int = object['set_min_distance']
-	var max_dist : int = object['set_max_distance']
+func object_placement(object: Dictionary, width: int, height: int, start: Vector3i) -> Array:
+	var min_dist: int = object['set_min_distance']
+	var max_dist: int = object['set_max_distance']
 	# Calculations to set the object between the minimum and maximum distance.
 	# Distances are the Chebyshev distance, where distance between 2 points
 	# is equal to the maximum of difference in x and y directions.
@@ -231,7 +228,7 @@ func object_placement(object : Dictionary, width : int, height : int, start : Ve
 # If the object could be placed successfully, the floor plan will be updated
 # and the function returns true. If the placement was unsuccessful, the floor
 # plan will be unaltered and the function will return false.
-func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height : int, start : Vector3i) -> bool:
+func add_item(floor_plan: Array[Array], object: Dictionary, width: int, height: int, start: Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
@@ -244,7 +241,7 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 	GlobalSpawner.spawn_item(absolute_position + Vector3(x, 0, -z))
 	return true
 
-func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+func add_buff(floor_plan: Array[Array], object: Dictionary, width: int, height: int, start: Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
@@ -270,7 +267,7 @@ func add_box(floor_plan, object, width, height, start):
 	GlobalSpawner.spawn_box(absolute_position + Vector3(x, 0, -z))
 	return true
 
-func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+func add_laser(floor_plan: Array[Array], object: Dictionary, width: int, height: int, start: Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
@@ -304,8 +301,7 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 			270:
 				z = 1
 
-
-	if floor_plan[z -  1][x - 1] > PATH or z == start.z:
+	if floor_plan[z - 1][x - 1] > PATH or z == start.z:
 		return false
 
 	floor_plan[z - 1][x - 1] = LASER
@@ -316,7 +312,7 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, -z), basis, false, 1)
 	return true
 
-func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
+func add_enemy_laser(floor_plan: Array[Array], object: Dictionary, width: int, height: int, start: Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
@@ -362,11 +358,11 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, false, object['set_activation'], true, true)
 
 	for i in object['set_activation']:
-		var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
+		var button_object = {'set_min_distance': 3, 'set_max_distance': 20}
 		pos = object_placement(button_object, width, height, start)
 		x = pos[0]
 		z = pos[1]
-		
+
 		min_dist = 3
 		max_dist = 20
 
@@ -395,8 +391,7 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 
 	return true
 
-
-func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, width : int, height : int, start : Vector3i) -> bool:
+func add_button(floor_plan: Array[Array], object: Dictionary, doors: Array, width: int, height: int, start: Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
@@ -411,8 +406,7 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), deg_to_rad(180)), doors[1], false)
 	return true
 
-
-func object_matcher(object : Dictionary, floor_plan : Array[Array], doors : Array, width : int, height : int, start: Vector3i) -> bool:
+func object_matcher(object: Dictionary, floor_plan: Array[Array], doors: Array, width: int, height: int, start: Vector3i) -> bool:
 	match object['type']:
 		'ITEM':
 			return add_item(floor_plan, object, width, height, start)
@@ -432,15 +426,15 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], doors : Arra
 
 # This function will eventually handle all the object placements. Currently it
 # only support items and it will handle objects that failed to place.
-func add_objects(floor_plan : Array[Array], objects_list : Array, doors : Array, width : int, height: int, start: Vector3i):
+func add_objects(floor_plan: Array[Array], objects_list: Array, doors: Array, width: int, height: int, start: Vector3i):
 	for object in objects_list:
 		if not object_matcher(object, floor_plan, doors, width, height, start):
 			# Try again if failed the first time.
 			object_matcher(object, floor_plan, doors, width, height, start)
 
-func enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, width : int, height : int, start : Vector3i) -> Array:
-	var min_dist : int = object['set_min_distance']
-	var max_dist : int = object['set_max_distance']
+func enemy_placement(floor_plan: Array[Array], object: Dictionary, radius: int, width: int, height: int, start: Vector3i) -> Array:
+	var min_dist: int = object['set_min_distance']
+	var max_dist: int = object['set_max_distance']
 	var buffer = radius + 1
 
 	var zmin = min(max(buffer, start[2] * 2 - max_dist), height - buffer)
@@ -456,16 +450,16 @@ func enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : in
 
 	return [x, z]
 
-func place_enemy_in_radius_tight(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
+func place_enemy_in_radius_tight(floor_plan: Array[Array], radius: int, x: int, z: int) -> Array:
 	for i in radius + 1:
 		for j in radius + 1:
 			if not floor_plan[z - 1 + j][x - 1 + i]:
 				return [x + i, z + j]
 	return []
 
-func place_enemy_in_radius_loose(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
-	var xs = range(-radius, radius + 1)
-	var ys = range(-radius, radius + 1)
+func place_enemy_in_radius_loose(floor_plan: Array[Array], radius: int, x: int, z: int) -> Array:
+	var xs = range( - radius, radius + 1)
+	var ys = range( - radius, radius + 1)
 	xs.shuffle()
 	ys.shuffle()
 	for i in xs:
@@ -474,7 +468,7 @@ func place_enemy_in_radius_loose(floor_plan : Array[Array], radius : int, x : in
 				return [x + i, z + j]
 	return []
 
-func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, x : int, z: int) -> Array:
+func generate_enemy_placement(floor_plan: Array[Array], object: Dictionary, radius: int, x: int, z: int) -> Array:
 	var number_enemies = object['set_group_size']
 	var positions = []
 	positions.resize(number_enemies)
@@ -498,8 +492,7 @@ func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, ra
 		floor_plan[new_z - 1][new_x - 1] = ENEMY
 	return positions
 
-
-func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i):
+func add_mob(floor_plan: Array[Array], object: Dictionary, width: int, height: int, start: Vector3i):
 	var radius = object['radius'] if object.has('radius') else 2
 	var pos = enemy_placement(floor_plan, object, radius, width, height, start)
 	var x = pos[0]
@@ -521,26 +514,24 @@ func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height
 
 	return positions != []
 
-
-func add_mobs(floor_plan : Array[Array], objects_list : Array, width : int, height : int, start : Vector3i):
+func add_mobs(floor_plan: Array[Array], objects_list: Array, width: int, height: int, start: Vector3i):
 	for object in objects_list:
 		if not add_mob(floor_plan, object, width, height, start):
 			# Try again if the first attempt failed.
 			add_mob(floor_plan, object, width, height, start)
 
-
 # This function will trace a shortest path from the start of the room to the
 # finish to assure the player not getting stuck. The path will be traced
 # inside the floor plan matrix where the path cells will have the value
 # PATH.
-func generate_path(floor_plan : Array[Array], width : int, height : int, start : Vector3i, end : Vector3i) -> void:
-	var position : Vector3i = start
+func generate_path(floor_plan: Array[Array], width: int, height: int, start: Vector3i, end: Vector3i) -> void:
+	var position: Vector3i = start
 	floor_plan[position.z - 2][position.x] = PATH
 	floor_plan[position.z - 1][position.x] = PATH
 	floor_plan[position.z][position.x] = PATH
 	floor_plan[position.z + 1][position.x] = PATH
 	floor_plan[position.z + 2][position.x] = PATH
-	var up_down : int = 1 if start.z < end.z else -1
+	var up_down: int = 1 if start.z < end.z else - 1
 	while position != end:
 		var new_direction = randi() % 2
 		match new_direction:
@@ -558,21 +549,20 @@ func generate_path(floor_plan : Array[Array], width : int, height : int, start :
 				position.z += up_down
 		floor_plan[position.z][position.x] = PATH
 
-
 # Generates a matrix of the size (width, height)
-func generate_floor_plan(width : int, height : int) -> Array[Array]:
-	var floor_plan : Array[Array] = []
+func generate_floor_plan(width: int, height: int) -> Array[Array]:
+	var floor_plan: Array[Array] = []
 	floor_plan.resize(height)
 	for i in height:
 		floor_plan[i].resize(width)
 		floor_plan[i].fill(0)
 	return floor_plan
 
-func spawn_dynamic_doors(end : Vector3i):
+func spawn_dynamic_doors(end: Vector3i):
 	var door_pos_1 = Vector3(end.x, -1, end.z + 3)
 	var door_pos_2 = Vector3(door_pos_1)
 	door_pos_2.z = -door_pos_2.z
-	var rotation = deg_to_rad(-90)
+	var rotation = deg_to_rad( - 90)
 	var door_1 = GlobalSpawner.spawn_door(absolute_position + door_pos_1, Basis().rotated(Vector3(0, 1, 0), rotation), 1)
 	door_1.activated()
 	var door_2 = GlobalSpawner.spawn_door(absolute_position + door_pos_2, Basis().rotated(Vector3(0, 1, 0), rotation), 1)
@@ -581,11 +571,11 @@ func spawn_dynamic_doors(end : Vector3i):
 
 # The main function of the script that will generate a room and duplicates
 # it for the enemy, so the entire room is just a single scene.
-func fill_room(world_dict: Dictionary, start : Vector3i, end : Vector3i, last_floor : bool) -> void:
+func fill_room(world_dict: Dictionary, start: Vector3i, end: Vector3i, last_floor: bool) -> void:
 	var room = world.room
-	var width : int = room[0] * 2
-	var height : int = room[1] * 2
-	var floor_plan : Array[Array] = generate_floor_plan(width, height)
+	var width: int = room[0] * 2
+	var height: int = room[1] * 2
+	var floor_plan: Array[Array] = generate_floor_plan(width, height)
 
 	if not last_floor:
 		generate_path(floor_plan, width, height, start, end)
