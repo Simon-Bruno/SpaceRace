@@ -31,10 +31,9 @@ var shooting = false
 var spin_speed = 180
 var charge_time = 2.0
 var charge_speed = 35
+
 @export var charge_duration = 2.0
-
 @onready var HpBar = $SubViewport/HpBar
-
 @onready var SpinTimer = $SpinTimer
 @onready var ChargeTimer = $ChargeTimer
 @onready var MeshInstance = $enemy_textures
@@ -77,7 +76,7 @@ func _process(delta):
 
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if not closest_target_node.respawn_immunity:
-			closest_target_node.take_damage(closest_target_node.name, 20)
+			closest_target_node.take_damage.rpc(closest_target_node.name, 20)
 
 	if health <= 0:
 		die()

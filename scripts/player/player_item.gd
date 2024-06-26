@@ -1,7 +1,7 @@
 extends Node3D
 
 var holding = null
-const item_pop_velocity = 7
+const item_pop_velocity = 1
 
 # Find the closest item and return it
 func _find_best_candidate():
@@ -12,7 +12,7 @@ func _find_best_candidate():
 
 	# find item with smallest distance
 	for candidate in candidates:
-		if candidate.get_parent().owned:
+		if candidate.get_parent().owned or candidate.global_transform.origin.z * Network.inverted < 0:
 			continue
 
 		var d = global_position.distance_to(candidate.global_position)
