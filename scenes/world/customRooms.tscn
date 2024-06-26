@@ -1,10 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qb2knk80py1o"]
 
-<<<<<<< HEAD
-[ext_resource type="MeshLibrary" path="res://assets/CustomBlocks/Customblocks.tres" id="1_ju6h0"]
-=======
 [ext_resource type="MeshLibrary" uid="uid://dbq2nwlqfgv1q" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_pfhvf"]
->>>>>>> main
 
 [node name="Custom Rooms" type="Node3D"]
 
@@ -655,6 +651,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Laser4" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="Laser4"]
 mesh_library = ExtResource("1_pfhvf")
@@ -842,8 +839,6 @@ data = {
 "cells": PackedInt32Array(65545, 0, 56, 65545, 4, 655463, 65539, 5, 655463, 65548, 4, 1441850, 65539, 4, 1441897, 65542, 5, 1441897, 65547, 1, 1441898, 65539, 3, 1441898, 65548, 2, 1441835, 65548, 3, 1441800, 65548, 5, 1441873, 65548, 6, 1441879, 65539, 2, 1441859, 65536, 6, 1441819, 65547, 6, 1441880)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
-<<<<<<< HEAD
-=======
 
 [node name="Portal5" type="Node3D" parent="."]
 visible = false
@@ -863,4 +858,3 @@ data = {
 "cells": PackedInt32Array(65537, 0, 94, 65540, 1, 1441830, 65540, 2, 1441800, 65540, 0, 1441888, 65536, 6, 1441842, 65539, 2, 1441819, 65542, 4, 1441852, 65542, 6, 1441838, 65539, 4, 1441882, 65545, 0, 1441897, 65543, 6, 1441897, 65545, 1, 1441898, 65546, 6, 655466, 65547, 4, 88, 65547, 2, 88)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
->>>>>>> main
