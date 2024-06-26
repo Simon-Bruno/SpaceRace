@@ -158,7 +158,6 @@ func sync_play_animation(anim_player, animation):
 		play_animation(anim_player, animation)
 
 
-
 func anim_handler():
 	if Global.AttackAnim and not AnimDeath:
 		if not AnimPunching:
@@ -176,7 +175,7 @@ func anim_handler():
 		else:
 			if velocity != Vector3.ZERO && velocity.y == 0:
 				if not ($Pivot/AnimationPlayer.is_playing() or $Pivot/AnimationPlayer2.is_playing()
-				or $Pivot/AnimationPlayer3.is_playing or $Pivot/AnimationPlayer4.is_playing()):
+				or $Pivot/AnimationPlayer3.is_playing()):
 					request_play_animation(4, "walk")
 			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
 				request_play_animation(0, "stop")
