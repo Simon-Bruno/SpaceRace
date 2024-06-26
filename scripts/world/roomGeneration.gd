@@ -205,17 +205,17 @@ func add_walls(floor_plan : Array[Array], wall_list : Array, width : int, height
 # This function will calculate a position (x, z) for the object to spawn. This
 # will consider the size of the room and object restrictions, but will not care
 # about other things in the room.
-func object_placement(object : Dictionary, width : int, height : int, start : Vector3i) -> Array:
+func object_placement(object : Dictionary, width : int, height : int, start : Vector3i, wall_avoidance : int = 1) -> Array:
 	var min_dist : int = object['set_min_distance']
 	var max_dist : int = object['set_max_distance']
 	# Calculations to set the object between the minimum and maximum distance.
 	# Distances are the Chebyshev distance, where distance between 2 points
 	# is equal to the maximum of difference in x and y directions.
-	var zmin = min(max(1, start[2] * 2 - max_dist), height - 1)
-	var zmax = min(height - 1, start[2] * 2 + max_dist)
+	var zmin = min(max(1, start[2] * 2 - max_dist), height - wall_avoidance)
+	var zmax = min(height - wall_avoidance, start[2] * 2 + max_dist)
 	var z = randi_range(zmin, zmax)
-	var xmin = 1
-	var xmax = min(width - 1, start[0] * 2 + max_dist)
+	var xmin = wall_avoidance
+	var xmax = min(width - wall_avoidance, start[0] * 2 + max_dist)
 	if abs(start[2] * 2 - z) < min_dist:
 		xmin = min(width - 1, start[0] * 2 + min_dist)
 	var x = randi_range(xmin, xmax)
@@ -303,7 +303,7 @@ func attach_wall(object : Dictionary, pos : Array, width : int, height : int) ->
 	return [x, z, orientation]
 
 func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i, end : Vector3i) -> bool:
-	var pos = object_placement(object, width, height, start)
+	var pos = object_placement(object, width, height, start, 3)
 	pos = attach_wall(object, pos, width, height)
 	var x = pos[0]
 	var z = pos[1]
@@ -321,13 +321,13 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	return true
 
 func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i, end : Vector3i) -> bool:
-	var pos : Array = object_placement(object, width, height, start)
+	var pos : Array = object_placement(object, width, height, start, 3)
 	pos = attach_wall(object, pos, width, height)
 	var x = pos[0]
 	var z = pos[1]
 	var orientation = pos[2]
 
-	if floor_plan[z - 1][x - 1] or (z >= start.z / 2 * 2 + 1 and z <= start.z / 2 * 2 + 3) or (z >= end.z / 2 * 2 + 1 and z <= end.z / 2 * 2 + 3):
+	if floor_plan[z - 1][x - 1] or (z >= start.z / 2 * 2 + 1 and z <= start.z / 2 * 2 + 3) or (z >= end.z / 2 * 2 + 3 and z <= end.z / 2 * 2 + 5):
 		return false
 
 	# Spawn the laser
@@ -346,7 +346,7 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 		z = pos[1]
 		orientation = pos[2]
 
-		if floor_plan[z - 1][x - 1] or (z >= start.z / 2 * 2 + 1 and z <= start.z / 2 * 2 + 3) or (z >= end.z / 2 * 2 + 1 and z <= end.z / 2 * 2 + 3):
+		if floor_plan[z - 1][x - 1] or (z >= start.z / 2 * 2 + 1 and z <= start.z / 2 * 2 + 3) or (z >= end.z / 2 * 2 + 1 and z <= end.z / 2 * 2 + 5):
 			laser.activation_count -= 1
 			laser2.activation_count -= 1
 			continue
@@ -360,7 +360,7 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 
 
 func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, width : int, height : int, start : Vector3i, end : Vector3i) -> bool:
-	var pos = object_placement(object, width, height, start)
+	var pos = object_placement(object, width, height, start, 3)
 	pos = attach_wall(object, pos, width, height)
 	var x = pos[0]
 	var z = pos[1]
@@ -400,9 +400,9 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], doors : Arra
 # only support items and it will handle objects that failed to place.
 func add_objects(floor_plan : Array[Array], objects_list : Array, doors : Array, width : int, height: int, start: Vector3i, end : Vector3i) -> void:
 	for object in objects_list:
-		if not object_matcher(object, floor_plan, doors, width, height, start, end):
-			# Try again if failed the first time.
-			object_matcher(object, floor_plan, doors, width, height, start, end)
+		for i in 5:
+			if object_matcher(object, floor_plan, doors, width, height, start, end):
+				break
 
 func enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, width : int, height : int, start : Vector3i) -> Array:
 	var min_dist : int = object['set_min_distance']
@@ -490,9 +490,9 @@ func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height
 
 func add_mobs(floor_plan : Array[Array], objects_list : Array, width : int, height : int, start : Vector3i) -> void:
 	for object in objects_list:
-		if not add_mob(floor_plan, object, width, height, start):
-			# Try again if the first attempt failed.
-			add_mob(floor_plan, object, width, height, start)
+		for i in 5:
+			if add_mob(floor_plan, object, width, height, start):
+				break
 
 
 # This function will trace a shortest path from the start of the room to the
@@ -523,11 +523,11 @@ func generate_path(floor_plan : Array[Array], width : int, height : int, start :
 					continue
 				position.z += up_down
 		floor_plan[position.z][position.x] = items.PATH
-	
-	floor_plan[position.z - 2][position.x] = items.PATH
-	floor_plan[position.z - 1][position.x] = items.PATH
-	floor_plan[position.z + 1][position.x] = items.PATH
-	floor_plan[position.z + 2][position.x] = items.PATH
+
+	floor_plan[position.z - 2][position.x - 1] = items.PATH
+	floor_plan[position.z - 1][position.x - 1] = items.PATH
+	floor_plan[position.z + 1][position.x - 1] = items.PATH
+	floor_plan[position.z + 2][position.x - 1] = items.PATH
 
 
 # Generates a matrix of the size (width, height)
