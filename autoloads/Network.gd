@@ -100,10 +100,11 @@ func _hard_reset_to_lobby():
 
 func _on_player_disconnected(id):
 	player_names.erase(id)
-	go_to_lobby()
 	player_disconnected.emit(id)
+	player_teams.clear()
+	go_to_lobby(id)
 	
-func go_to_lobby():
+func go_to_lobby(id):
 	if multiplayer.is_server():
 		var world = get_node_or_null("/root/Main/SpawnedItems/World")
 		if world != null:
@@ -113,12 +114,15 @@ func go_to_lobby():
 			get_node("/root/Main/SpawnedItems").add_child(loaded_world.instantiate())
 			for player_id in player_names.keys():
 				get_node("/root/Main/SpawnedItems/Lobby").lobby_add_player_character(player_id)
-
+		else:
+			get_node("/root/Main/SpawnedItems/Lobby").get_node(str(id)).queue_free()
 
 func _on_leave_button_pressed():
 	Audiocontroller.play_menu_music()
 	var id = multiplayer.get_unique_id()
-	_on_player_disconnected(id)
+	player_names.erase(id)
+	player_disconnected.emit(id)
+	player_teams.clear()
 	multiplayer_peer.disconnect_peer(id, true)
 	remove_multiplayer_peer()
 	multiplayer_peer.close()

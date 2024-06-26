@@ -1,7 +1,7 @@
 extends Node3D
 
 var holding = null
-const item_pop_velocity = 7
+const item_pop_velocity = 1
 
 # Find the closest item and return it
 func _find_best_candidate():

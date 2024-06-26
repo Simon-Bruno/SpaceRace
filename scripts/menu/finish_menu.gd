@@ -34,7 +34,7 @@ func set_notification_and_show(text, parent):
 # Go to lobby
 func _on_play_again_pressed():
 	if multiplayer.is_server():
-		Network.go_to_lobby()
+		Network.go_to_lobby(multiplayer.get_unique_id())
 	else: 
 		print("ask the host to let everybody go to lobby!")
 		set_notification_and_show("Ask the Host, to press the play again button\n 

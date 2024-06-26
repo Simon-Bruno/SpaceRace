@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-var walkspeed_multiplier : float = 1
-@export var walk_speed = 12
-@export var fall_acceleration = 60
-@export var jump_impulse = 20
+var walkspeed_multiplier: float = 1
+@export var walk_speed = 8
+@export var fall_acceleration = 10
+@export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
 @export var alive = false
@@ -13,8 +13,8 @@ var walk_acceleration = 40
 var walk_deceleration = 50
 var rotation_speed = 10
 
-var push_speed = 5
-var pull_speed = 2
+var push_pull_factor = 2.0 / 3.0
+var min_pull_dist = 1.5
 
 var speed = 0
 var direction = Vector2.ZERO
@@ -54,7 +54,9 @@ func _ready():
 
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
-		position = lobby_spawn
+		var players_joined = multiplayer.get_peers().size()
+		var spawn_margin = 5
+		position = lobby_spawn + Vector3(players_joined * spawn_margin, 0, 0)
 	elif multiplayer.get_peers().size() > 0 and Network.other_team_member_id != null:
 		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
@@ -69,16 +71,16 @@ func _horizontal_movement(delta):
 
 	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	if current_direction != Vector2.ZERO:  # Accelerate if moving
+	if current_direction != Vector2.ZERO: # Accelerate if moving
 		speed = min(walk_speed * walkspeed_multiplier * speed_boost, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_speed * delta)
 		basis = $Pivot.basis.looking_at(Vector3(direction.x, 0, direction.y))
 		_push_objects()
 
-	else:  # Decelerate
+	else: # Decelerate
 		speed = max(0, speed - walk_deceleration * delta)
 
-	vel.x = direction.x * speed 
+	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
 
 	return vel
@@ -156,26 +158,25 @@ func _push_objects():
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var collider = c.get_collider()
-		if not collider.get_parent().is_in_group("Moveables"):
+		if not collider is RigidBody3D or not collider.get_parent().is_in_group("Moveables"):
 			continue
-						
-		collider.set_axis_velocity(-c.get_normal() * push_speed)
+
+		collider.set_axis_velocity( - c.get_normal() * walk_speed * speed_boost * push_pull_factor)
 		break
-		
+
 func _pull_objects():
 	var bodies = $PullArea.get_overlapping_bodies()
 	for body in bodies:
-		if not body.get_parent().is_in_group("Moveables"):
+		if not body.get_parent().is_in_group("Moveables") \
+		or global_transform.origin.distance_to(body.global_transform.origin) < min_pull_dist:
 			continue
-		
+
 		var pull_direction = (global_position - body.global_position).normalized()
 		var v = Vector3.ZERO
-		v.x = pull_direction.x * pull_speed
-		v.z = pull_direction.z * pull_speed
-		
+		v.x = pull_direction.x * walk_speed * speed_boost * push_pull_factor
+		v.z = pull_direction.z * walk_speed * speed_boost * push_pull_factor
+
 		body.set_axis_velocity(v)
-		
-	
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
@@ -186,7 +187,7 @@ func _physics_process(delta):
 
 		if alive:
 			move_and_slide()
-		
+
 		if Input.is_action_pressed("pull"):
 			_pull_objects()
 
