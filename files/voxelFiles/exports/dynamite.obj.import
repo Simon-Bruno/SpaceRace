@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csbk4bhaf2vpb"
+path="res://.godot/imported/dynamite.obj-9ef40ba9e050b55d257495075605d201.mesh"
+
+[deps]
+
+files=["res://.godot/imported/dynamite.obj-9ef40ba9e050b55d257495075605d201.mesh"]
+
+source_file="res://files/voxelFiles/exports/dynamite.obj"
+dest_files=["res://.godot/imported/dynamite.obj-9ef40ba9e050b55d257495075605d201.mesh", "res://.godot/imported/dynamite.obj-9ef40ba9e050b55d257495075605d201.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

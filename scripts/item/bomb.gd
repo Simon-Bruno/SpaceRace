@@ -27,13 +27,13 @@ func _bomb_explode():
 		if target.has_method("take_damage"):
 			if target.is_in_group("Players"):
 				# id, damage
-				target.take_damage(target.name, bomb_damage)
+				target.take_damage.rpc(target.name, bomb_damage)
 			elif target.is_in_group("Enemies"):
 				# damage, player position
 				if player:
-					target.take_damage(bomb_damage, player.global_transform.origin)
+					target.take_damage.rpc(bomb_damage, player.global_transform.origin)
 			elif target.is_in_group("Boss"):
-				target.take_damage(bomb_damage, player.global_transform.origin)		
+				target.take_damage.rpc(bomb_damage, player.global_transform.origin)		
 	super.delete()
 
 

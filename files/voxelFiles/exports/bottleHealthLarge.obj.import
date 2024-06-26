@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cy3vjwr6oyllb"
+path="res://.godot/imported/bottleHealthLarge.obj-1f5df4a4bb5754d97a92c0b1af900b0b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bottleHealthLarge.obj-1f5df4a4bb5754d97a92c0b1af900b0b.mesh"]
+
+source_file="res://files/voxelFiles/exports/bottleHealthLarge.obj"
+dest_files=["res://.godot/imported/bottleHealthLarge.obj-1f5df4a4bb5754d97a92c0b1af900b0b.mesh", "res://.godot/imported/bottleHealthLarge.obj-1f5df4a4bb5754d97a92c0b1af900b0b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
