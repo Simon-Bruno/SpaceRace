@@ -6,7 +6,7 @@
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_mkhhn"]
 albedo_texture = ExtResource("2_fbkyf")
 
-[node name="Key" instance=ExtResource("1_en2nu")]
+[node name="Key" groups=["Key"] instance=ExtResource("1_en2nu")]
 
 [node name="RigidBody3D" parent="." index="0"]
 gravity_scale = 2.0

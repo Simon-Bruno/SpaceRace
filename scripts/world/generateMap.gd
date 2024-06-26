@@ -17,7 +17,8 @@ enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL
 	  TELEPORTERORANGE, TELEPORTERPURPLE, TELEPORTERRED, TELEPORTERYELLOW, TERMINALBLUE, TERMINALGREEN,
 	  TERMINALORANGE, TERMINALPURPLE, TERMINALRED, TERMINALYELLOW, BOSSBLUE, BOSSGREEN, BOSSORANGE,
 	  BOSSPURPLE, BOSSRED, BOSSYELLOW, ENEMYBLUE, ENEMYGREEN, ENEMYORANGE, ENEMYPURPLE, ENEMYRED, ENEMYYELLOW,
-	  ENEMYRANGEDBLUE, ENEMYRANGEDGREEN, ENEMYRANGEDORANGE, ENEMYRANGEDPURPLE, ENEMYRANGEDRED, EMPTY=-1}
+	  ENEMYRANGEDBLUE, ENEMYRANGEDGREEN, ENEMYRANGEDORANGE, ENEMYRANGEDPURPLE, ENEMYRANGEDRED, ENEMYRANGEDYELLOW,
+	  WALLBLOCK, WALLDOUBLE, WALLU, KEYIN, EMPTY=-1}
 
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
@@ -37,7 +38,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 const CUSTOMROOMPERCENTAGE : float = 1
 
 # General room parameters
-const room_amount : int = 3
+const room_amount : int = 4
 const room_width  : int = 10
 const room_height : int = 8
 const room_margin : int = 4
@@ -398,9 +399,11 @@ func draw_paths() -> void:
 			right.pop_at(i)
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
-	assert(right.size() == ends.size())
+	#assert(right.size() == ends.size())
+	
 
-	for i in right.size():
+	for i in right.size() if right.size() < ends.size() else ends.size():
+		
 		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
