@@ -3,7 +3,7 @@ extends Node3D
 @export var interactable : Node
 
 var customRooms : GridMap = null
-var fixed = false
+@export var fixed = false
 
 # Called when broken wall is placed in world. Sets the mesh instance to broken.
 func _ready() -> void:
@@ -24,9 +24,9 @@ func find_node_by_name(node: Node, target_name: String) -> Node:
 	return null
 
 func _on_area_3d_body_entered(body):
-	if not multiplayer.is_server() or not body.is_in_group("Players"):
+	if body.name != str(multiplayer.get_unique_id()) or not body.is_in_group("Players"):
 		return
-		
+
 	var item = body.get_node("PlayerItem").holding
 	if not item:
 		return
@@ -36,14 +36,20 @@ func _on_area_3d_body_entered(body):
 
 @rpc("any_peer", "call_local", "reliable")
 func activate(item):
-	if interactable != null:
+	if not multiplayer.is_server():
+		return
+	if interactable != null and not fixed:
 		interactable.activated()
-	item.get_parent().delete.rpc()
+		item.get_parent().consume_item()
+
 	update_mesh.rpc(customRooms.WALL)
 	fixed = true
 
 # Update mesh based on current state
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func update_mesh(state : int) -> void:
 	if customRooms:
 		$MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
+	for i in range(160):
+		print(i, customRooms.mesh_library.get_item_name(i))
+	print(customRooms.KEYIN)

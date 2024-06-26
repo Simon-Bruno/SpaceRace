@@ -196,10 +196,8 @@ func spawn_item(pos, welder = false):
 		if welder:
 			item = welder_scene.instantiate()
 			item.add_to_group("Welder")
-			print(item.is_in_group("Welder"))
 		else:
 			item.add_to_group("Key")
-			print(item.is_in_group("Key"))
 		item.position = pos
 		item.welder = welder
 		spawner.add_child(item, true)

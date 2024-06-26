@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qb2knk80py1o"]
 
-[ext_resource type="MeshLibrary" uid="uid://t387nwwmkalj" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_pfhvf"]
+[ext_resource type="MeshLibrary" uid="uid://b6y5ahoipe6kv" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_pfhvf"]
 
 [node name="Custom Rooms" type="Node3D"]
 
@@ -61,6 +61,7 @@ cell_scale = 1.25
 
 [node name="keyTest" type="Node3D" parent="."]
 transform = Transform3D(1.2363, 0, 0, 0, 1.2363, 0, 0, 0, 1.2363, 0, 0, 0)
+visible = false
 
 [node name="Statics" type="GridMap" parent="keyTest"]
 mesh_library = ExtResource("1_pfhvf")
