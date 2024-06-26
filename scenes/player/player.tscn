@@ -973,3 +973,5 @@ shape = SubResource("BoxShape3D_7ttun")
 [connection signal="timeout" from="PlayerCombat/RespawnImmunity" to="PlayerCombat" method="_on_respawn_immunity_timeout"]
 [connection signal="timeout" from="PlayerEffects/StrengthTimer" to="." method="_on_strength_timer_timeout"]
 [connection signal="timeout" from="PlayerEffects/SpeedTimer" to="." method="_on_speed_timer_timeout"]
+[connection signal="body_entered" from="PullArea" to="." method="_on_pull_area_body_entered"]
+[connection signal="body_exited" from="PullArea" to="." method="_on_pull_area_body_exited"]
