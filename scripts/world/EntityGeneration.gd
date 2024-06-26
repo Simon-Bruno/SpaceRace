@@ -208,7 +208,8 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 			connect_keyhole(door, interactable)
 		if interactable[0] in holes:
 			connect_holes(door, interactable)
-
+		if interactable[0] in terminals:
+			connect_terminal(door, interactable)
 
 # Returns the locations of two doors dependent on the left door as input.
 func return_door_pair(location : Vector3i, direction : int, mirrored : bool) -> Array:
@@ -267,7 +268,13 @@ func connect_holes(door : StaticBody3D, interactable : Array) -> void:
 	location.y = 3
 	var keyhole = GlobalSpawner.spawn_broken_wall(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
+	
 
+func connect_terminal(door : StaticBody3D, interactable : Array) -> void:
+	var location = map_to_local(interactable[1])
+	location.y = 3
+	var keyhole = GlobalSpawner.spawn_terminal(location, get_basis_with_orthogonal_index(interactable[2]), door)
+	set_cell_item(interactable[1], EMPTY)
 
 # %%%%%%%%%%%%%
 # % ALL ROOMS %
@@ -328,7 +335,6 @@ func spawn_welders() -> void:
 func spawn_potions() -> void:
 	for bottle in bottles:
 		var items = get_used_cells_by_item(bottle)
-		print(bottle)
 		for item in items:
 			match bottle:
 				BOTTLEHEALTHS: GlobalSpawner.spawn_buff(map_to_local(item), 0, false)
