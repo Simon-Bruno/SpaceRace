@@ -32,11 +32,8 @@ func _bomb_explode():
 				# damage, player position
 				if player:
 					target.take_damage(bomb_damage, player.global_transform.origin)
-				else:
-					print("Error: player is null during explosion")
-			#elif target.is_in_group("Boss"):
-				# TODO: Doesn't work for now, since the boss isn't available for testing yet
-				#target.take_damage(bomb_damage, player.global_transform.origin)		
+			elif target.is_in_group("Boss"):
+				target.take_damage(bomb_damage, player.global_transform.origin)		
 	super.delete()
 
 
