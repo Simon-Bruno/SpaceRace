@@ -210,7 +210,6 @@ func _input(event):
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(id, damage):
-	var uid = multiplayer.get_unique_id()
 	if str(id) != str(multiplayer.get_unique_id()):
 		return
 
