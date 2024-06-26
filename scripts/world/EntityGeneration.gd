@@ -144,18 +144,9 @@ func spawn_lasers_buttons(rooms : Array) -> void:
 		spawn_lasers_room(room, true)
 
 func spawn_lasers_room(room : Array, mirrored : bool) -> void:
-	var lasers_dict = {}
 	for item in find_in_room(lasers, room, mirrored):
-		var laser_type = item[0]
-		if not lasers_dict.has(laser_type):
-			lasers_dict[laser_type] = []
-		lasers_dict[laser_type].append(item)
-
-	# Connect the laser groups with the interactables
-	for laser_type in lasers_dict.keys():
-		var corresponding = find_in_room(corresponding_types_laser(laser_type), room, mirrored)
-		for laser_item in lasers_dict[laser_type]:
-			match_interactable_and_laser(laser_item, corresponding, mirrored)
+		var corresponding = find_in_room(corresponding_types_laser(item[0]), room, mirrored)
+		match_interactable_and_laser(item, corresponding, mirrored)
 
 func match_interactable_and_laser(item : Array, interactables : Array, mirrored : bool) -> void:
 	var location = map_to_local(item[1])
