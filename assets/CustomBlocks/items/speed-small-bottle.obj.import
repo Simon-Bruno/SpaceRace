@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://djfaow5uprv41"
+path="res://.godot/imported/speed-small-bottle.obj-b48ec6eec50202a65f1aa4a2a61f2061.mesh"
+
+[deps]
+
+files=["res://.godot/imported/speed-small-bottle.obj-b48ec6eec50202a65f1aa4a2a61f2061.mesh"]
+
+source_file="res://assets/CustomBlocks/items/speed-small-bottle.obj"
+dest_files=["res://.godot/imported/speed-small-bottle.obj-b48ec6eec50202a65f1aa4a2a61f2061.mesh", "res://.godot/imported/speed-small-bottle.obj-b48ec6eec50202a65f1aa4a2a61f2061.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

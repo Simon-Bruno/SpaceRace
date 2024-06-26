@@ -1,24 +1,53 @@
-[gd_scene load_steps=9 format=3 uid="uid://n62snpmyadi0"]
+[gd_scene load_steps=15 format=3 uid="uid://n62snpmyadi0"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_25n6l"]
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
 [ext_resource type="PackedScene" uid="uid://b47e0ly4dll8p" path="res://scenes/player/player_spawner.tscn" id="1_fahhe"]
 [ext_resource type="PackedScene" uid="uid://oad7sxk4eaw5" path="res://scenes/camera.tscn" id="2_x5d8x"]
 [ext_resource type="PackedScene" uid="uid://bjchbb8ua0ijg" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
+[ext_resource type="Script" path="res://scenes/HUD.gd" id="6_2sthd"]
 [ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="6_3shum"]
+[ext_resource type="FontFile" uid="uid://6utpau6lbihh" path="res://assets/fonts/MotionControl-Bold.otf" id="7_1h5a1"]
+[ext_resource type="Texture2D" uid="uid://djjewgs84auah" path="res://assets/world/1Key.png" id="8_hw5ie"]
+[ext_resource type="Texture2D" uid="uid://d0fiscm64glg8" path="res://assets/world/2Key.png" id="9_vfb8j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_afshc"]
 size = Vector3(1000, 2, 1000)
 
-[sub_resource type="Environment" id="Environment_wfjmj"]
-tonemap_mode = 2
-tonemap_exposure = 0.6
-fog_enabled = true
-fog_light_color = Color(0.28973, 0.316568, 0.358758, 1)
-fog_light_energy = 0.35
-fog_sun_scatter = 0.45
-fog_density = 0.008
-fog_sky_affect = 0.375
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r1nxi"]
+properties/0/path = NodePath(".:timer")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("PreGame/CountDown:text")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("InGame/Timer:text")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("PreGame:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("InGame:visible")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1c4a"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7nab"]
+bg_color = Color(1, 1, 0.0705882, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.8, 0.8, 0.8, 0)
 
 [node name="World" type="Node"]
 script = ExtResource("1_25n6l")
@@ -32,7 +61,7 @@ spawn_path = NodePath("..")
 [node name="ItemSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/interactables/moveable_object.tscn", "res://scenes/item/key.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/interactables/moveable_object.tscn", "res://scenes/item/key.tscn", "res://scenes/item/hp_bottle.tscn", "res://scenes/item/strength_bottle.tscn", "res://scenes/item/full_health_bottle.tscn", "res://scenes/item/bomb.tscn", "res://scenes/item/speed_bottle.tscn")
 spawn_path = NodePath("..")
 
 [node name="ProjectileSpawner" type="Node" parent="."]
@@ -50,13 +79,7 @@ spawn_path = NodePath("..")
 [node name="InteractableSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="InteractableSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/terminal.tscn", "res://scenes/interactables/door.tscn", "res://scenes/interactables/portal.tscn", "res://scenes/interactables/keyhole.tscn", "res://scenes/interactables/broken_wall.tscn")
-spawn_path = NodePath("..")
-
-[node name="WallSpawner" type="Node" parent="."]
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="WallSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/world/intern_wall.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/terminal.tscn", "res://scenes/interactables/door.tscn", "res://scenes/interactables/portal.tscn")
 spawn_path = NodePath("..")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
@@ -74,9 +97,114 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_afshc")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="Node" parent="."]
+script = ExtResource("6_2sthd")
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_3shum")]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="HUD"]
+replication_config = SubResource("SceneReplicationConfig_r1nxi")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wfjmj")
+[node name="PreGame" type="CanvasLayer" parent="HUD"]
+
+[node name="CountDown" type="Label" parent="HUD/PreGame"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -120.0
+offset_right = 315.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("7_1h5a1")
+theme_override_font_sizes/font_size = 150
+text = "GET READY!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="InGame" type="CanvasLayer" parent="HUD"]
+visible = false
+
+[node name="Timer" type="Label" parent="HUD/InGame"]
+offset_left = 944.0
+offset_top = 12.0
+offset_right = 1151.0
+offset_bottom = 113.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("7_1h5a1")
+theme_override_font_sizes/font_size = 100
+text = "0.02"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="Ability1Sprite" type="Sprite2D" parent="HUD/InGame"]
+position = Vector2(40, 429)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("8_hw5ie")
+
+[node name="Title" type="Label" parent="HUD/InGame/Ability1Sprite"]
+offset_left = 135.0
+offset_top = -80.0
+offset_right = 660.0
+offset_bottom = 81.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_1h5a1")
+theme_override_font_sizes/font_size = 80
+text = "Ability 1 title"
+vertical_alignment = 2
+clip_text = true
+uppercase = true
+
+[node name="Ability2Sprite" type="Sprite2D" parent="HUD/InGame"]
+position = Vector2(40, 479)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_vfb8j")
+
+[node name="Title" type="Label" parent="HUD/InGame/Ability2Sprite"]
+offset_left = 135.0
+offset_top = -80.0
+offset_right = 660.0
+offset_bottom = 81.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_1h5a1")
+theme_override_font_sizes/font_size = 80
+text = "Ability 2 title"
+vertical_alignment = 2
+clip_text = true
+uppercase = true
+
+[node name="AbilityBar" type="ProgressBar" parent="HUD/InGame"]
+offset_left = 12.0
+offset_top = 551.0
+offset_right = 228.0
+offset_bottom = 602.0
+theme_override_constants/outline_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_i1c4a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h7nab")
+value = 100.0
+show_percentage = false
+
+[node name="Title" type="Label" parent="HUD/InGame/AbilityBar"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -46.0
+offset_right = 249.0
+offset_bottom = -3.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_1h5a1")
+theme_override_font_sizes/font_size = 40
+text = "Ability cooldown"
+vertical_alignment = 2
+uppercase = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_3shum")]
+visible = false
