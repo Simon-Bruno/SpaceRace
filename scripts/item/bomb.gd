@@ -14,17 +14,20 @@ func _on_ready():
 func use():
 	var player = Network.get_player_node_by_id(owned_id)
 	player.get_node("PlayerItem")._drop_item()
-	# Start timer after pressing "Q" when holding the bomb item
-	timer.start()
-	# When bomb is used, show the area that it will impact
+	
+	# Set blast animation
 	blast_radius_visual.visible = true
 	
+	# Set velocity
 	var v = player.velocity
 	v.z *= Network.inverted
 	v.y = 10
 	$RigidBody3D.set_axis_velocity(v * 1.5)
-
-
+	
+	# Set timer if not running
+	if timer.is_stopped():
+		timer.start()
+	
 @rpc("any_peer", "call_local", "reliable")
 func _bomb_explode():
 	var player = Network.get_player_node_by_id(owned_id)
