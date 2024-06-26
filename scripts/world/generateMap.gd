@@ -140,6 +140,8 @@ func add_finish():
 
 # Calls the convert functionality and removes all static items that have overlap.
 func convert_static_to_entities() -> void:
+	if not multiplayer.is_server():
+		return
 	entityGeneration.replace_entities(rooms)
 
 
