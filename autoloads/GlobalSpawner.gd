@@ -199,14 +199,19 @@ func spawn_item(pos, welder = false):
 		return item
 	return null
 
-func spawn_buff(pos):
+func spawn_buff(pos, choice=0, random=true):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	#var BUFFS = [hp_bottle_scene, bomb_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
+	#var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene, bomb_scene]
 	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
 	if spawner:
-		var buff_scene = BUFFS[randi() % BUFFS.size()]
+		var buff_scene = null
+		if random:
+			buff_scene = BUFFS[randi() % BUFFS.size()]
+		else :
+			buff_scene = BUFFS[choice]
+
 		var buff = buff_scene.instantiate()
 		buff.position = pos
 		spawner.add_child(buff, true)

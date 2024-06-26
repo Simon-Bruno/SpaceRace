@@ -5,7 +5,7 @@ enum {PRESSUREPLATE=28}
 
 # Items without links
 enum {SMALLBOX=27, EMPTY=-1}
-enum {ENEMY=88, RANGEDENEMY=89, BOSS=91, SPAWNERMELEE=92, SPAWNERRANGED=93, WELDER=90, LASERTIMER=94}
+enum {ENEMY=88, RANGEDENEMY=89, BOSS=91, SPAWNERMELEE=92, SPAWNERRANGED=93, WELDER=90, LASERTIMER=94, DYNAMITE=143}
 
 # Items that respond to interactables.
 enum {LASERB=56, LASERG=57, LASERO=58, LASERP=59, LASERR=60, LASERY=61}
@@ -41,7 +41,9 @@ var terminals = [TERMINALB, TERMINALG, TERMINALO, TERMINALP, TERMINALR, TERMINAL
 
 # Items
 enum {KEYB=50, KEYG=51, KEYO=52, KEYP=53, KEYR=54, KEYY=55}
+enum {BOTTLEHEALTHL=136, BOTTLEHEALTHS=137, BOTTLEMONSTER=138, BOTTLERANDOM=139, BOTTLESMALL=140, BOTTLESPEED=141, BOTTLESTRENGTH=142}
 var keys = [KEYB, KEYG, KEYO, KEYP, KEYR, KEYY]
+var bottles = [BOTTLEHEALTHL, BOTTLEHEALTHS, BOTTLEMONSTER, BOTTLERANDOM, BOTTLESMALL, BOTTLESPEED, BOTTLESTRENGTH]
 
 # Misc
 enum {TELEPORTB=102, TELEPORTG=103, TELEPORTO=104, TELEPORTP=105, TELEPORTR=106, TELEPORTY=107}
@@ -277,6 +279,7 @@ func spawn_items() -> void:
 	spawn_small_boxes()
 	spawn_keys()
 	spawn_welders()
+	spawn_potions()
 
 
 # Spawns a small box at all small box placeholders in the map. It then also removes the placeholder.
@@ -313,13 +316,27 @@ func spawn_keys() -> void:
 		for item in items:
 			GlobalSpawner.spawn_item(map_to_local(item))
 			set_cell_item(item, EMPTY)
-			
-			
+
+
 func spawn_welders() -> void:
 	var items = get_used_cells_by_item(WELDER)
 	for item in items:
 		GlobalSpawner.spawn_item(map_to_local(item), true)
 		set_cell_item(item, EMPTY)
+
+
+func spawn_potions() -> void:
+	for bottle in bottles:
+		var items = get_used_cells_by_item(bottle)
+		print(bottle)
+		for item in items:
+			match bottle:
+				BOTTLEHEALTHS: GlobalSpawner.spawn_buff(map_to_local(item), 0, false)
+				BOTTLESTRENGTH: GlobalSpawner.spawn_buff(map_to_local(item), 1, false)
+				BOTTLEHEALTHL: GlobalSpawner.spawn_buff(map_to_local(item), 2, false)
+				BOTTLESPEED: GlobalSpawner.spawn_buff(map_to_local(item), 3, false)
+				BOTTLERANDOM: GlobalSpawner.spawn_buff(map_to_local(item), 0)
+			set_cell_item(item, EMPTY)
 
 
 # %%%%%%%%%%%%%%%
