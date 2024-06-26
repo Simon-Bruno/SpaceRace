@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://4k1f4flwet83"]
+[gd_scene load_steps=9 format=3 uid="uid://4k1f4flwet83"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_10o3y"]
 [ext_resource type="Script" path="res://scripts/item/bomb.gd" id="2_oyt1b"]
@@ -9,6 +9,11 @@
 albedo_texture = ExtResource("3_u6uvx")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_421or"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wacbw"]
+albedo_color = Color(1, 0, 0, 0.235294)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4exvo"]
 
 [node name="Bomb" instance=ExtResource("1_10o3y")]
 script = ExtResource("2_oyt1b")
@@ -26,8 +31,15 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Radius" index="0"]
-transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -0.0100164)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("SphereShape3D_421or")
+
+[node name="VisualBlastRadius" type="MeshInstance3D" parent="RigidBody3D/Radius" index="1"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wacbw")
+transparency = 1.0
+mesh = SubResource("SphereMesh_4exvo")
+skeleton = NodePath("../..")
 
 [node name="FuseTimer" type="Timer" parent="." index="1"]
 wait_time = 3.0
