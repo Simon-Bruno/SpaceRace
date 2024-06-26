@@ -136,7 +136,6 @@ func play_animation(anim_player, animation):
 	elif anim_player == 3:  # anim speed 1.25 (default for jump)
 		$Pivot/AnimationPlayer3.play(animation)
 	else:
-		print(animation)
 		$Pivot/AnimationPlayer4.play(animation)
 
 
