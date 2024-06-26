@@ -523,11 +523,11 @@ func generate_path(floor_plan : Array[Array], width : int, height : int, start :
 					continue
 				position.z += up_down
 		floor_plan[position.z][position.x] = items.PATH
-	
-	floor_plan[position.z - 2][position.x] = items.PATH
-	floor_plan[position.z - 1][position.x] = items.PATH
-	floor_plan[position.z + 1][position.x] = items.PATH
-	floor_plan[position.z + 2][position.x] = items.PATH
+
+	floor_plan[position.z - 2][position.x - 1] = items.PATH
+	floor_plan[position.z - 1][position.x - 1] = items.PATH
+	floor_plan[position.z + 1][position.x - 1] = items.PATH
+	floor_plan[position.z + 2][position.x - 1] = items.PATH
 
 
 # Generates a matrix of the size (width, height)
