@@ -88,6 +88,5 @@ func _process(delta):
 		item_position = $RigidBody3D.global_position.lerp(destination, item_follow_speed * delta)
 		$RigidBody3D.global_position = item_position
 		var player = owned_node.get_node("PlayerItem")
-		if !owned_node.alive:
-			if player.holding:
-				player._drop_item() # When the player dies and is holding an item, drop it
+		if !owned_node.alive and player.holding:
+			player._drop_item() # When the player dies and is holding an item, drop it

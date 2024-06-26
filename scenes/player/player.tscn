@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bxnsgqthgkbxc"]
+[gd_scene load_steps=28 format=3 uid="uid://bxnsgqthgkbxc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c8kx5"]
 [ext_resource type="Texture2D" uid="uid://blmiwj6vufprq" path="res://assets/characters/player_Player.png" id="2_j50l0"]
@@ -717,10 +717,6 @@ bg_color = Color(0, 0, 0, 0.501961)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxypm"]
 bg_color = Color(0.471704, 0.569977, 0.959633, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_frpe5"]
-font_size = 32
-font_color = Color(1, 0.0705882, 0.129412, 1)
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sjmiw"]
 height = 1.6
 radius = 1.0
@@ -882,21 +878,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_hxypm")
 value = 100.0
 show_percentage = false
 script = ExtResource("5_oaq0v")
-
-[node name="Label" type="Label" parent="PlayerCombat/SubViewport"]
-unique_name_in_owner = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-label_settings = SubResource("LabelSettings_frpe5")
 
 [node name="Weapon" parent="PlayerCombat" instance=ExtResource("5_wd784")]
 
