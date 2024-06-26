@@ -48,7 +48,7 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 	walk_speed = new_walk_speed
 	walk_acceleration = new_accel
 	walk_deceleration = new_accel * 1.2
-
+  
 
 func _ready():
 	var hud = get_node_or_null("../../HUD")
@@ -97,6 +97,7 @@ func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+		Audiocontroller.play_jump_sfx()
 		vel.y = jump_impulse
 	if not is_on_floor():
 		Global.on_floor = false
@@ -157,7 +158,6 @@ func sync_play_animation(anim_player, animation):
 		play_animation(anim_player, animation)
 
 
-
 func anim_handler():
 	if Global.AttackAnim and not AnimDeath:
 		if not AnimPunching:
@@ -175,7 +175,7 @@ func anim_handler():
 		else:
 			if velocity != Vector3.ZERO && velocity.y == 0:
 				if not ($Pivot/AnimationPlayer.is_playing() or $Pivot/AnimationPlayer2.is_playing()
-				or $Pivot/AnimationPlayer3.is_playing or $Pivot/AnimationPlayer4.is_playing()):
+				or $Pivot/AnimationPlayer3.is_playing()):
 					request_play_animation(4, "walk")
 			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
 				request_play_animation(0, "stop")
@@ -288,6 +288,7 @@ func die():
 	alive = false
 
 	request_play_animation(1, "death")  # play anim
+	Audiocontroller.play_player_death()
 	await get_tree().create_timer(2).timeout  # wait for anim
 	get_parent().player_died(self)  # die
 
