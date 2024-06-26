@@ -136,6 +136,7 @@ func play_animation(anim_player, animation):
 	elif anim_player == 3:  # anim speed 1.25 (default for jump)
 		$Pivot/AnimationPlayer3.play(animation)
 	else:
+		print(animation)
 		$Pivot/AnimationPlayer4.play(animation)
 
 
@@ -175,7 +176,7 @@ func anim_handler():
 		else:
 			if velocity != Vector3.ZERO && velocity.y == 0:
 				if not ($Pivot/AnimationPlayer.is_playing() or $Pivot/AnimationPlayer2.is_playing()
-				or $Pivot/AnimationPlayer3.is_playing or $Pivot/AnimationPlayer4.is_playing()):
+				or $Pivot/AnimationPlayer3.is_playing()):
 					request_play_animation(4, "walk")
 			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
 				request_play_animation(0, "stop")
