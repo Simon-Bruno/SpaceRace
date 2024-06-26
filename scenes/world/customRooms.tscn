@@ -3,7 +3,6 @@
 [ext_resource type="MeshLibrary" uid="uid://dbq2nwlqfgv1q" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_pfhvf"]
 
 [node name="Custom Rooms" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.999816, 0.0191625, 0, -0.0191625, 0.999816, 0, 0, 0)
 
 [node name="EndRoom" type="Node3D" parent="."]
 
