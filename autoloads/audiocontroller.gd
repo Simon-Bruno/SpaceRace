@@ -52,13 +52,6 @@ func play_music(music):
 	music_controller.stream = music
 	change_audio_bus_music_controller("Music")
 	music_controller.play()
-
-#func play_sfx(sfx, volume_db : float = 0):
-	#var sfx_controller = get_node(SFX_CONTROLLER_PATH)
-	#sfx_controller.stream = sfx
-	#sfx_controller.volume_db = volume_db
-	#change_audio_bus_sfx_controller("Sfx")
-	#sfx_controller.play()
 	
 func play_sfx(sfx, volume_db : float = 0):
 	var sfx_controller = AudioStreamPlayer.new()
