@@ -68,7 +68,7 @@ func _process(delta):
 			abilitiesAvailable = true
 	
 func useAbility(ability : int):
-	if not abilitiesAvailable:
+	if not abilitiesAvailable or Network.in_terminal:
 		return 
 	currentCooldown = ability1Cooldown if ability == 1 else ability2Cooldown
 	abilitiesAvailable = false
