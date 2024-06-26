@@ -61,7 +61,7 @@ func _process(delta):
 					$enemy_textures/AnimationPlayer.stop()
 				if closest_target_node:  # make sure node still exists
 					if player_in_attack_zone:  # make sure player is still in range of attack
-						closest_target_node.take_damage(closest_target_node.name, 20)
+						closest_target_node.take_damage.rpc(closest_target_node.name, 20)
 				AttackAnim = false
 
 	if closest_target_node:
@@ -71,7 +71,8 @@ func _process(delta):
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
 		direction = lerp(direction, target_direction_2d, rotation_speed * delta)
 		if velocity.x > 0 or velocity.z > 0 and not AttackAnim and alive:
-			$enemy_textures/AnimationPlayer.play("zombie_walk")
+			if not $enemy_textures/AnimationPlayer.is_playing():
+				$enemy_textures/AnimationPlayer.play("zombie_walk")
 		basis = $enemy_textures.basis.looking_at(Vector3(direction[0], 0, direction[1]))
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)

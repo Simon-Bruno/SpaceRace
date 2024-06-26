@@ -75,6 +75,7 @@ func _activate_switch():
 		handle_inverse_activation()
 	activate = true
 	update_mesh.rpc(customRooms.WALLSWITCHON)
+	Audiocontroller.play_button_sfx()
 
 # Deactivate the switch and call the interactable deactivation.
 func _deactivate_switch():
@@ -84,6 +85,7 @@ func _deactivate_switch():
 		handle_inverse_deactivation()
 	activate = false
 	update_mesh.rpc(customRooms.WALLSWITCHOFF)
+	Audiocontroller.play_button_sfx()
 
 # Handle activation logic in inverse mode
 func handle_inverse_activation() -> void:

@@ -1,8 +1,8 @@
 extends Control
 
 @onready var settings = $Settings
-
-var game_status = false # Is true when game is paused, otherwise false
+const CHAT_PATH = "/root/Main/SpawnedItems/World/Chat"
+const HUD_PATH = "/root/Main/SpawnedItems/World/HUD/InGame"
 
 
 func _ready():
@@ -12,7 +12,7 @@ func _ready():
 
 # Handles the ESC button event, to activate the pause menu
 func handle_esc_input():
-	if game_status:
+	if Global.in_pause:
 		_resume_game()
 	else:
 		_pause_game()
@@ -21,13 +21,26 @@ func handle_esc_input():
 # Will show the pause menu, while the game is still going
 func _pause_game():
 	self.visible = true
-	game_status = true
+	Global.in_pause = true
+	var chat = get_node_or_null(CHAT_PATH)
+	var hud = get_node_or_null(HUD_PATH)
+	if chat != null:
+		chat.visible = false
+	if hud != null:
+		hud.visible = false
+
 
 
 # Hides the pause menu
 func _resume_game():
 	self.visible = false
-	game_status = false
+	Global.in_pause = false
+	var chat = get_node_or_null(CHAT_PATH)
+	var hud = get_node_or_null(HUD_PATH)
+	if chat != null:
+		chat.visible = true
+	if hud != null:
+		hud.visible = true
 
 
 func _on_resume_button_pressed():
@@ -47,4 +60,4 @@ func _on_titlescreen_button_pressed():
 	Network._on_leave_button_pressed()
 	Audiocontroller.play_menu_music()
 	self.visible = false
-	game_status = false
+	Global.in_pause = false

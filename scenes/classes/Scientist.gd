@@ -39,3 +39,6 @@ func set_slowness_on_other_team(ids):
 func heal() -> void:
 	get_parent().health =  min(Global.player_max_health, get_parent().health + healing_amount)
 	get_parent().HpBar.value = get_parent().health
+	%Label.text = "+ health"
+	await get_tree().create_timer(1.0).timeout
+	%Label.text = ""
