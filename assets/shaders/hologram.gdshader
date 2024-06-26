@@ -30,6 +30,6 @@ void fragment(){
 	
 	// Increase the intensity by scaling the final alpha value
 	float m = f * n * l1 * l2;
-	ALPHA = m * 3.0; // Increase the alpha to make it less transparent (you can adjust the multiplier)
+	ALPHA = m * 1.0; // Increase the alpha to make it less transparent (you can adjust the multiplier)
 	ALBEDO = color * (_emission * 2.0); // Increase the emission for a more intense effect
 }
