@@ -93,6 +93,7 @@ func _vertical_movement(delta):
 		vel.y = jump_impulse
 
 	if not is_on_floor():
+		Global.on_floor = false
 		vel.y = velocity.y - (fall_acceleration * delta)
 
 	return vel
@@ -178,6 +179,15 @@ func _pull_objects():
 	
 
 func _physics_process(delta):
+	if is_on_floor():
+		Global.on_floor = true
+	if Global.in_pause or Global.in_chat:
+		if not is_on_floor():
+			velocity.y -= fall_acceleration * delta
+		velocity.x = 0  
+		velocity.z = 0  
+		move_and_slide()
+		return
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
 		var target_velocity = _player_movement(delta)
 		target_velocity.x = check_distance(target_velocity)
@@ -198,11 +208,11 @@ func _input(event):
 		if not hudNode.abilitiesAvailable:
 			return
 
-		if event.is_action_pressed("ability_1"):
+		if event.is_action_pressed("ability_1") and not Global.in_pause and not Global.in_chat:
 			$Class.ability1()
 			hudNode.useAbility(1)
 
-		if event.is_action_pressed("ability_2"):
+		if event.is_action_pressed("ability_2") and not Global.in_pause and not Global.in_chat:
 			$Class.ability2()
 			hudNode.useAbility(2)
 

@@ -18,7 +18,7 @@ func _ready():
 
 # This function handles different kinds of inputs given by the user
 func _input(event):
-	if Input.is_action_just_pressed("open_chat"):
+	if Input.is_action_just_pressed("open_chat") and not Global.in_pause and Global.on_floor:
 		message_input.grab_focus()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		message_input.release_focus()
@@ -108,8 +108,6 @@ func set_caret_pos():
 
 # Called when the message input field gets focus
 func _on_message_input_focus_entered():
-	#_on_in_chat(true)
-	#emit_in_chat(true)
 	Global.in_chat = true # To disable other actions when in chat #TODO remove
 	message_display.visible = true
 	message_input.set_max_length(1024)
@@ -213,8 +211,8 @@ func unmute_sfx_command():
 
 func respawn_command():
 	if message_input.text == "/respawn":
-		var player_spawner = get_node("/root/Main/SpawnedItems/World/PlayerSpawner")
-		player_spawner.respawn_player()
+		#var player_spawner = get_node("/root/Main/SpawnedItems/World/PlayerSpawner")
+		#player_spawner.respawn_player()
 		return true
 
 # Called when the message timer times out, hides the message display if the
