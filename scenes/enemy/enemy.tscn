@@ -459,6 +459,7 @@ bones/9/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 bones/9/scale = Vector3(1, 1, 1)
 
 [node name="Untitled" type="MeshInstance3D" parent="enemy_textures/Armature/Skeleton3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.858654, 0)
 mesh = SubResource("ArrayMesh_bxe5n")
 skin = SubResource("Skin_0pxhk")
 
