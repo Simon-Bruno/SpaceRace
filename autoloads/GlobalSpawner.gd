@@ -158,14 +158,15 @@ func spawn_laser(pos, dir, timer = false, activation = 1, hinder = false, jumpab
 		return laser
 	return null
 
-func spawn_terminal(pos):
+func spawn_terminal(pos, dir, activation=null):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
 	if spawner:
 		var terminal = terminal_scene.instantiate()
 		terminal.position = pos
-		#terminal.basis	= dir
+		terminal.basis = dir
+		terminal.interactable = activation
 		spawner.add_child(terminal, true)
 		return terminal
 
