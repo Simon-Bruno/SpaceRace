@@ -62,10 +62,10 @@ func button_clicked(val):
 	get_parent().get_parent().progress_updated(val == str(last_sum))	
 
 func _on_answer_1_pressed():
-	button_clicked.rpc($TextureRect/Answer1.text)
+	button_clicked.rpc($Answer1.text)
 
 func _on_answer_2_pressed():
-	button_clicked.rpc($TextureRect/Answer2.text)
+	button_clicked.rpc($Answer2.text)
 
 func _on_answer_3_pressed():
-	button_clicked.rpc($TextureRect/Answer3.text)
+	button_clicked.rpc($Answer3.text)

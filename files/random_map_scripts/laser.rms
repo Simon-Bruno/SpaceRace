@@ -1,0 +1,4220 @@
+<OBJECTS_GENERATION>
+create_object ENEMY_LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+    set_activation 3
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object LASER
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+

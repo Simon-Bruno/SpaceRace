@@ -61,7 +61,7 @@ spawn_path = NodePath("..")
 [node name="ItemSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/interactables/moveable_object.tscn", "res://scenes/item/key.tscn", "res://scenes/item/hp_bottle.tscn", "res://scenes/item/strength_bottle.tscn", "res://scenes/item/full_health_bottle.tscn", "res://scenes/item/bomb.tscn", "res://scenes/item/speed_bottle.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/interactables/moveable_object.tscn", "res://scenes/item/key.tscn", "res://scenes/item/hp_bottle.tscn", "res://scenes/item/strength_bottle.tscn", "res://scenes/item/full_health_bottle.tscn", "res://scenes/item/bomb.tscn", "res://scenes/item/speed_bottle.tscn", "res://scenes/item/welder.tscn")
 spawn_path = NodePath("..")
 
 [node name="ProjectileSpawner" type="Node" parent="."]
@@ -79,7 +79,7 @@ spawn_path = NodePath("..")
 [node name="InteractableSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="InteractableSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/terminal.tscn", "res://scenes/interactables/door.tscn", "res://scenes/interactables/portal.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/interactables/button.tscn", "res://scenes/interactables/pressure_plate.tscn", "res://scenes/interactables/terminal.tscn", "res://scenes/interactables/door.tscn", "res://scenes/interactables/portal.tscn", "res://scenes/interactables/broken_wall.tscn", "res://scenes/interactables/keyhole.tscn")
 spawn_path = NodePath("..")
 
 [node name="Chat" parent="." instance=ExtResource("1_anr7u")]
@@ -97,7 +97,7 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_afshc")
 
-[node name="HUD" type="Node" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("6_2sthd")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="HUD"]
