@@ -31,7 +31,7 @@ var AnimPunching: bool = false
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 11, 20)
-var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
+var game_spawn = {1: [Vector3(3, 3, 5), Vector3(3, 3, 11)],2: [Vector3(4, 3, -4), Vector3(4, 3, 10)]}
 
 
 func _enter_tree():
