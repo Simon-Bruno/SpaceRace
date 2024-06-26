@@ -12,10 +12,16 @@ func _on_ready():
 
 
 func use():
+	var player = self.owned_node
+	player.get_node("PlayerItem")._drop_item()
 	# Start timer after pressing "Q" when holding the bomb item
 	timer.start()
 	# When bomb is used, show the area that it will impact
 	blast_radius_visual.visible = true
+	
+	var v = player.velocity
+	v.y = 7
+	$RigidBody3D.set_axis_velocity(v * 2)
 
 
 @rpc("any_peer", "call_local", "reliable")

@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://4k1f4flwet83"]
+[gd_scene load_steps=10 format=3 uid="uid://4k1f4flwet83"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_10o3y"]
 [ext_resource type="Script" path="res://scripts/item/bomb.gd" id="2_oyt1b"]
 [ext_resource type="ArrayMesh" uid="uid://df0ib0ofm7dbm" path="res://assets/CustomBlocks/items/dynamite.obj" id="3_o4tgt"]
 [ext_resource type="Texture2D" uid="uid://blhtila7r7nu7" path="res://assets/CustomBlocks/items/dynamite.png" id="3_u6uvx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ay8i7"]
+friction = 0.2
+bounce = 0.7
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_cnjjc"]
 albedo_texture = ExtResource("3_u6uvx")
@@ -19,7 +23,7 @@ albedo_color = Color(1, 0, 0, 0.235294)
 script = ExtResource("2_oyt1b")
 
 [node name="RigidBody3D" parent="." index="0"]
-collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_ay8i7")
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
 transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0.0085088, -0.799201, -0.0010272)
