@@ -25,8 +25,7 @@ void fragment(){
 	l1 = mix(0.4,1.0,l1);
 	
 	vec2 uv2 = SCREEN_UV;
-	uv2.y -= TIME * 0.06;
-	vec2 igrid2 = floor(uv2*lines2);
+	uv2.y -= TIME * 0.06;	vec2 igrid2 = floor(uv2*lines2);
 	float l2 = random(igrid2.y);
 	l2 = step(0.2, l2);
 	l2 = mix(0.2, 1.0, l2);
