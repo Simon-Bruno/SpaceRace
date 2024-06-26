@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=195 format=3 uid="uid://cehfbggdu6pms"]
 
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
@@ -136,6 +136,15 @@
 [ext_resource type="ArrayMesh" uid="uid://c6l7lasebcp06" path="res://assets/CustomBlocks/walls/wallBlock.obj" id="134_7ej4c"]
 [ext_resource type="ArrayMesh" uid="uid://d356yk1f6airr" path="res://assets/CustomBlocks/walls/wallDouble.obj" id="135_iqehj"]
 [ext_resource type="ArrayMesh" uid="uid://cw3xx3anqsk7q" path="res://assets/CustomBlocks/walls/wallU.obj" id="136_e8k8j"]
+[ext_resource type="Texture2D" uid="uid://bm88ljhwmp8am" path="res://assets/CustomBlocks/texturesMilou/milouTextures.png" id="139_gmssk"]
+[ext_resource type="ArrayMesh" uid="uid://cxde5goxrdsid" path="res://assets/CustomBlocks/texturesMilou/bottleHealthLarge.obj" id="140_2f6de"]
+[ext_resource type="ArrayMesh" uid="uid://4x5mb42rhqng" path="res://assets/CustomBlocks/texturesMilou/bottleHealthSmall.obj" id="141_83on7"]
+[ext_resource type="ArrayMesh" uid="uid://d3lgqwget3mu1" path="res://assets/CustomBlocks/texturesMilou/bottleMonster.obj" id="142_j01if"]
+[ext_resource type="ArrayMesh" uid="uid://v44ig76m06tj" path="res://assets/CustomBlocks/texturesMilou/bottleRandom.obj" id="143_ua3pd"]
+[ext_resource type="ArrayMesh" uid="uid://b1projr4x1fcf" path="res://assets/CustomBlocks/texturesMilou/bottleSmall.obj" id="144_x47tq"]
+[ext_resource type="ArrayMesh" uid="uid://b214u71rtw5xg" path="res://assets/CustomBlocks/texturesMilou/bottleSpeedSmall.obj" id="145_rl150"]
+[ext_resource type="ArrayMesh" uid="uid://dd7c68sgj4eew" path="res://assets/CustomBlocks/texturesMilou/bottleStrengthSmall.obj" id="146_nersc"]
+[ext_resource type="ArrayMesh" uid="uid://dhbnylau7hpug" path="res://assets/CustomBlocks/texturesMilou/dynamite.obj" id="147_tfw84"]
 [ext_resource type="ArrayMesh" uid="uid://c5twhw5vagtxt" path="res://assets/CustomBlocks/items/key_in-0.obj" id="156_pshy5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
@@ -278,6 +287,9 @@ albedo_texture = ExtResource("1_c8374")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1v5f3"]
 size = Vector3(0.405029, 0.718506, 0.915222)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5tom"]
+albedo_texture = ExtResource("139_gmssk")
 
 [node name="Node3D" type="Node3D"]
 
@@ -1155,3 +1167,75 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0a2pj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KeyIn/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00891113, 0.0406494, -0.26944)
 shape = SubResource("BoxShape3D_1v5f3")
+
+[node name="BottleHealthLarge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30947, 0.0583029)
+
+[node name="BottleHealthLarge" type="MeshInstance3D" parent="BottleHealthLarge"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.95675, -0.30947, -0.138146)
+mesh = ExtResource("140_2f6de")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="BottleHealthSmall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95675, 0, -0.0798435)
+
+[node name="BottleHealthSmall" type="MeshInstance3D" parent="BottleHealthSmall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("141_83on7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="BottleMonster" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95675, 0, -0.0798435)
+
+[node name="BottleMonster" type="MeshInstance3D" parent="BottleMonster"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("142_j01if")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="BottleRandom" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95675, 0, -0.0798435)
+
+[node name="BottleRandom" type="MeshInstance3D" parent="BottleRandom"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("143_ua3pd")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="BottleSmall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9135, 0, -0.159687)
+
+[node name="BottleSmall" type="MeshInstance3D" parent="BottleSmall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.95675, 0, 0.0798435)
+mesh = ExtResource("144_x47tq")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="BottleSpeedSmall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9135, 0, -0.159687)
+
+[node name="BottleSpeedSmall" type="MeshInstance3D" parent="BottleSpeedSmall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.95675, 0, 0.0798435)
+mesh = ExtResource("145_rl150")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="BottleStrengthSmall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95675, 0, -0.0798435)
+
+[node name="BottleStrengthSmall" type="MeshInstance3D" parent="BottleStrengthSmall"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("146_nersc")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="Dynamite" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95675, 0, -0.0798435)
+
+[node name="Dynamite" type="MeshInstance3D" parent="Dynamite"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("147_tfw84")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
