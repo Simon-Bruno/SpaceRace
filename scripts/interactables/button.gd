@@ -15,6 +15,17 @@ func _ready() -> void:
 	update_mesh.rpc(customRooms.WALLSWITCHOFF)
 	if inverse:
 		handle_inverse_deactivation()
+	update_interact_key()
+
+func update_interact_key():
+	if InputMap.has_action("interact"):
+		var action_list = InputMap.get_actions()
+		for action in action_list:
+			if action == 'interact':
+				var event_list = InputMap.action_get_events(action)
+				for event in event_list:
+					var key = event.as_text()
+					$ButtonText/SubViewport2/Label.text = "Press " + key
 
 #Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
