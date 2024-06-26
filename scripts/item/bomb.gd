@@ -5,28 +5,31 @@ extends "res://scripts/item/item.gd"
 
 var bomb_damage = 50
 
-
-func _on_ready():
-	# Hide the blast radius in the beginning
-	blast_radius_visual.visible = false
-
+var vel_y = 10
+var vel_multiplier = 1.5
 
 func use():
 	var player = Network.get_player_node_by_id(owned_id)
 	player.get_node("PlayerItem")._drop_item()
 	
 	# Set blast animation
-	blast_radius_visual.visible = true
+	_ignite.rpc()
 	
 	# Set velocity
 	var v = player.velocity
 	v.z *= Network.inverted
-	v.y = 10
-	$RigidBody3D.set_axis_velocity(v * 1.5)
+	# Vertical velocity
+	v.y = vel_y
+	$RigidBody3D.set_axis_velocity(v * vel_multiplier)
 	
 	# Set timer if not running
 	if timer.is_stopped():
 		timer.start()
+	
+@rpc("any_peer", "call_local", "reliable")
+func _ignite():
+	blast_radius_visual.visible = true	
+	
 	
 @rpc("any_peer", "call_local", "reliable")
 func _bomb_explode():

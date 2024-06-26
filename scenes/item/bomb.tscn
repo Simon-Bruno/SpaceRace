@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4k1f4flwet83"]
+[gd_scene load_steps=11 format=3 uid="uid://4k1f4flwet83"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_10o3y"]
 [ext_resource type="Script" path="res://scripts/item/bomb.gd" id="2_oyt1b"]
@@ -15,9 +15,15 @@ albedo_texture = ExtResource("3_u6uvx")
 [sub_resource type="SphereShape3D" id="SphereShape3D_421or"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wacbw"]
+transparency = 1
 albedo_color = Color(1, 0, 0, 0.235294)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5eh8"]
+transparency = 1
+albedo_color = Color(0.40297, 0.0648362, 0, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_4exvo"]
+material = SubResource("StandardMaterial3D_p5eh8")
 
 [node name="Bomb" instance=ExtResource("1_10o3y")]
 script = ExtResource("2_oyt1b")
@@ -40,8 +46,8 @@ shape = SubResource("SphereShape3D_421or")
 
 [node name="VisualBlastRadius" type="MeshInstance3D" parent="RigidBody3D/Radius" index="1"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_wacbw")
-transparency = 1.0
 mesh = SubResource("SphereMesh_4exvo")
 skeleton = NodePath("../..")
 
