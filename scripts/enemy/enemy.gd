@@ -61,7 +61,7 @@ func _process(delta):
 					$enemy_textures/AnimationPlayer.stop()
 				if closest_target_node:  # make sure node still exists
 					if player_in_attack_zone:  # make sure player is still in range of attack
-						closest_target_node.take_damage(closest_target_node.name, 20)
+						closest_target_node.take_damage.rpc(closest_target_node.name, 20)
 				AttackAnim = false
 
 	if closest_target_node:
