@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://n62snpmyadi0"]
+[gd_scene load_steps=15 format=3 uid="uid://n62snpmyadi0"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_25n6l"]
 [ext_resource type="PackedScene" uid="uid://d3rv6ajd0fueq" path="res://scenes/network/chat.tscn" id="1_anr7u"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bjchbb8ua0ijg" path="res://scenes/enemy/enemy_spawner.tscn" id="3_bij7o"]
 [ext_resource type="Script" path="res://scenes/HUD.gd" id="6_2sthd"]
 [ext_resource type="PackedScene" uid="uid://bh4dikqsn7v43" path="res://scenes/menu/pause.tscn" id="6_3shum"]
+[ext_resource type="FontFile" uid="uid://6utpau6lbihh" path="res://assets/fonts/MotionControl-Bold.otf" id="7_1h5a1"]
 [ext_resource type="Texture2D" uid="uid://djjewgs84auah" path="res://assets/world/1Key.png" id="8_hw5ie"]
 [ext_resource type="Texture2D" uid="uid://d0fiscm64glg8" path="res://assets/world/2Key.png" id="9_vfb8j"]
 
@@ -119,6 +120,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("7_1h5a1")
 theme_override_font_sizes/font_size = 150
 text = "GET READY!"
 horizontal_alignment = 1
@@ -135,6 +137,7 @@ offset_right = 1151.0
 offset_bottom = 113.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("7_1h5a1")
 theme_override_font_sizes/font_size = 100
 text = "0.02"
 horizontal_alignment = 2
@@ -152,6 +155,7 @@ offset_right = 660.0
 offset_bottom = 81.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_1h5a1")
 theme_override_font_sizes/font_size = 80
 text = "Ability 1 title"
 vertical_alignment = 2
@@ -170,6 +174,7 @@ offset_right = 660.0
 offset_bottom = 81.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_1h5a1")
 theme_override_font_sizes/font_size = 80
 text = "Ability 2 title"
 vertical_alignment = 2
@@ -195,12 +200,11 @@ offset_right = 249.0
 offset_bottom = -3.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_1h5a1")
 theme_override_font_sizes/font_size = 40
 text = "Ability cooldown"
 vertical_alignment = 2
 uppercase = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="PauseMenu" parent="." instance=ExtResource("6_3shum")]
 visible = false
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_3shum")]

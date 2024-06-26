@@ -1,11 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7gby45kucwu1"]
+[gd_scene load_steps=14 format=3 uid="uid://c7gby45kucwu1"]
 
 [ext_resource type="Script" path="res://scripts/settings/settings_tab_container.gd" id="1_gjciu"]
 [ext_resource type="PackedScene" uid="uid://ujhcgcqdabo2" path="res://scenes/settings/window_mode_button.tscn" id="1_spgoq"]
+[ext_resource type="FontFile" uid="uid://6utpau6lbihh" path="res://assets/fonts/MotionControl-Bold.otf" id="2_0x3e5"]
+[ext_resource type="Texture2D" uid="uid://bciuub8d3mx4s" path="res://assets/menu/ButtonBackgroundDark.png" id="2_j258p"]
 [ext_resource type="PackedScene" uid="uid://bayqhaym7gnnb" path="res://scenes/settings/resolution_mode_button.tscn" id="2_lk0ev"]
 [ext_resource type="PackedScene" uid="uid://do81fkwqnn6en" path="res://scenes/settings/audio_slider_settings.tscn" id="3_smwpi"]
 [ext_resource type="PackedScene" uid="uid://nuobyggl5oge" path="res://scenes/settings/fps_mode_button.tscn" id="3_x4q1q"]
 [ext_resource type="PackedScene" uid="uid://dv00ksl0ghger" path="res://scenes/settings/keybind_rebind_button.tscn" id="6_8avhk"]
+
+[sub_resource type="Gradient" id="Gradient_it7lh"]
+colors = PackedColorArray(2.16588e-07, 0, 0.221716, 1, 0.683145, 0.287165, 9.62615e-08, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cvdqk"]
+gradient = SubResource("Gradient_it7lh")
+width = 58
+height = 58
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.196, 0.214)
+fill_to = Vector2(1.775, 1.605)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_imfw6"]
+texture = SubResource("GradientTexture2D_cvdqk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q7sj8"]
+texture = ExtResource("2_j258p")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7s54q"]
 
@@ -29,10 +49,13 @@ offset_right = -100.0
 offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_0x3e5")
+theme_override_styles/panel = SubResource("StyleBoxTexture_imfw6")
 tab_alignment = 1
 
 [node name="Graphics" type="TabBar" parent="TabContainer"]
 layout_mode = 2
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_q7sj8")
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
 layout_mode = 1
