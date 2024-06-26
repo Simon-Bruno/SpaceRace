@@ -161,6 +161,7 @@ value = 50.0
 show_percentage = false
 
 [node name="Terminal" type="TextureRect" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_4ek73")
 anchors_preset = 8
 anchor_left = 0.5
@@ -175,23 +176,29 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_c4tgd")
 
-[node name="Terminal" type="Node" parent="Terminal"]
+[node name="Terminal" type="Control" parent="Terminal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_hmbsv")
 
 [node name="Sum" type="Label" parent="Terminal/Terminal"]
-offset_left = 150.0
-offset_top = 121.0
-offset_right = 1020.0
-offset_bottom = 252.0
+offset_left = 11.0
+offset_top = 111.5
+offset_right = 881.0
+offset_bottom = 242.5
 label_settings = SubResource("LabelSettings_svmtp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Answer1" type="Button" parent="Terminal/Terminal"]
-offset_left = 356.0
-offset_top = 275.5
-offset_right = 469.0
-offset_bottom = 375.5
+offset_left = 239.5
+offset_top = 230.0
+offset_right = 352.5
+offset_bottom = 330.0
 shortcut = SubResource("Shortcut_oal2x")
 
 [node name="TextureRect" type="TextureRect" parent="Terminal/Terminal/Answer1"]
@@ -204,13 +211,14 @@ texture = ExtResource("5_hcg54")
 expand_mode = 1
 
 [node name="Answer2" type="Button" parent="Terminal/Terminal"]
-offset_left = 526.0
-offset_top = 275.5
-offset_right = 639.0
-offset_bottom = 379.5
+offset_left = 389.5
+offset_top = 230.0
+offset_right = 502.5
+offset_bottom = 334.0
 shortcut = SubResource("Shortcut_x35pw")
 
 [node name="TextureRect" type="TextureRect" parent="Terminal/Terminal/Answer2"]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 110.0
 offset_right = 80.0
@@ -219,13 +227,14 @@ texture = ExtResource("6_7qy07")
 expand_mode = 1
 
 [node name="Answer3" type="Button" parent="Terminal/Terminal"]
-offset_left = 706.0
-offset_top = 275.5
-offset_right = 819.0
-offset_bottom = 379.5
+offset_left = 539.5
+offset_top = 230.0
+offset_right = 652.5
+offset_bottom = 334.0
 shortcut = SubResource("Shortcut_j5jjq")
 
 [node name="TextureRect" type="TextureRect" parent="Terminal/Terminal/Answer3"]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 110.0
 offset_right = 80.0
@@ -275,6 +284,6 @@ replication_config = SubResource("SceneReplicationConfig_ade2m")
 
 [connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D2" to="." method="_on_area_3d_body_exited"]
-[connection signal="pressed" from="Terminal/Terminal/Answer1" to="." method="_on_answer_1_pressed"]
-[connection signal="pressed" from="Terminal/Terminal/Answer2" to="." method="_on_answer_2_pressed"]
-[connection signal="pressed" from="Terminal/Terminal/Answer3" to="." method="_on_answer_3_pressed"]
+[connection signal="pressed" from="Terminal/Terminal/Answer1" to="Terminal/Terminal" method="_on_answer_1_pressed"]
+[connection signal="pressed" from="Terminal/Terminal/Answer2" to="Terminal/Terminal" method="_on_answer_2_pressed"]
+[connection signal="pressed" from="Terminal/Terminal/Answer3" to="Terminal/Terminal" method="_on_answer_3_pressed"]

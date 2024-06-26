@@ -7,6 +7,8 @@ signal player_disconnected(peer_id)
 signal server_disconnected
 signal player_added(id)
 
+var in_terminal = false
+
 # Excluding host
 var max_client_connections = 3
 

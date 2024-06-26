@@ -27,12 +27,15 @@ func _process(delta):
 		if progress >= 100:
 			if not is_activated:
 				is_activated = true
+				$Terminal.visible = false
+				Network.in_terminal = false
+				get_node("/root/Main/SpawnedItems/World/HUD/InGame").visible = true
 				if interactable:
 					interactable.activated()
 
 	progress -= progress_down_speed * delta
 	if progress < 0:
-		progress = 0	
+		progress = 0
 	timer -= delta
 	if timer <= 0:
 		timer = timer_time
@@ -42,6 +45,7 @@ func _process(delta):
 	$Terminal/ScoreBar.value = progress / total_progress * 100
 
 func progress_updated(correct : bool):
+	print(correct)
 	if correct:
 		progress += progress_up_speed
 	else:
@@ -53,13 +57,17 @@ func progress_updated(correct : bool):
 	$Terminal/TimeBar.value = 100
 
 func _on_area_3d_body_entered(body):
-	if body.is_in_group("Players"):
+	if body.is_in_group("Players") and not is_activated:
 		playercount += 1;
 		if body.name == str(multiplayer.get_unique_id()):
 			$Terminal.visible = true
+			Network.in_terminal = true
+			get_node("/root/Main/SpawnedItems/World/HUD/InGame").visible = false
 
 func _on_area_3d_body_exited(body):
-	if body.is_in_group("Players"):
+	if body.is_in_group("Players") and not is_activated:
 		playercount -= 1;
 		if body.name == str(multiplayer.get_unique_id()):
 			$Terminal.visible = false
+			Network.in_terminal = false
+			get_node("/root/Main/SpawnedItems/World/HUD/InGame").visible = true
