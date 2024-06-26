@@ -139,7 +139,7 @@ func commands():
 	if leave_game() or easter_egg() or stop_easter_egg() \
 	or mute_master_command() or mute_music_command() or mute_sfx_command() \
 	or unmute_master_command() or unmute_music_command() or unmute_sfx_command() \
-	or respawn_command():
+	or respawn_command() or rizz_command():
 		return true
 
 
@@ -206,6 +206,12 @@ func mute_sfx_command():
 func unmute_sfx_command():
 	if message_input.text == "/unmute_sfx":
 		Audiocontroller.unmute_sfx()
+		return true
+
+
+func rizz_command():
+	if message_input.text == "/rizz":
+		Audiocontroller.play_rizz_sfx()
 		return true
 
 
