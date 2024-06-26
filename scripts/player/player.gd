@@ -45,6 +45,8 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 	$Pivot.scale = new_scale
 	$PlayerHitbox.scale = new_scale
 	$CollisionShape3D.scale = new_scale
+	$FloatingName.scale = new_scale
+	$FloatingName.position.y += 5.1
 	walk_speed = new_walk_speed
 	walk_acceleration = new_accel
 	walk_deceleration = new_accel * 1.2

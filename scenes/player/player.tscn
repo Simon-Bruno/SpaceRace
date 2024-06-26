@@ -42,6 +42,12 @@ properties/9/replication_mode = 2
 properties/10/path = NodePath("PlayerHitbox:scale")
 properties/10/spawn = true
 properties/10/replication_mode = 2
+properties/11/path = NodePath("FloatingName:scale")
+properties/11/spawn = true
+properties/11/replication_mode = 2
+properties/12/path = NodePath("FloatingName:position")
+properties/12/spawn = true
+properties/12/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l85fr"]
 resource_name = "palette"
@@ -740,6 +746,7 @@ script = ExtResource("1_c8kx5")
 replication_config = SubResource("SceneReplicationConfig_v5bfw")
 
 [node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="Armature" type="Node3D" parent="Pivot"]
 
