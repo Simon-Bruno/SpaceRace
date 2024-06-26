@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var interactable : Node
+
 var playercount : int = 0
 var total_progress : int = 100
 var progress : float = 0
@@ -7,7 +9,6 @@ var progress : float = 0
 var progress_up_speed : float = 15
 var progress_down_speed : float = 1.2
 
-var interactable 
 var is_activated : bool = false
 
 var timer_time : float = 3

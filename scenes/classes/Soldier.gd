@@ -38,6 +38,10 @@ func pistol_upgrade():
 	player_combat_node.add_child(new_pistol, true)
 	new_pistol.set_name("Weapon") 
 	
+	%Label.text = "+ pistol"
+	await get_tree().create_timer(1.0).timeout
+	%Label.text = ""
+	
 func _on_weapon_duration_timeout():
 	var weapon_node = player_node.get_node("PlayerCombat/Weapon")
 	
@@ -47,6 +51,9 @@ func _on_weapon_duration_timeout():
 func strength_buff():
 	player_node.strength += strength_debuff
 	strenthDurationTimer.start()
+	%Label.text = "+ strength"
+	await get_tree().create_timer(1.0).timeout
+	%Label.text = ""
 
 func _on_strength_duration_timeout():
 	player_node.strength -= strength_debuff

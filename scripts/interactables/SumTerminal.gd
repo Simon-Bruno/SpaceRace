@@ -1,4 +1,4 @@
-extends TextureRect
+extends Node
 
 func generate_new_screen():
 	generate_new_sum()
