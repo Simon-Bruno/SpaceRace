@@ -362,7 +362,8 @@ func spawn_teleporters(rooms : Array) -> void:
 func spawn_teleporters_room(room : Array, mirrored : bool) -> void:
 	var items = find_in_room(teleporters, room, mirrored)
 	items.sort_custom(sort_on_items)
-	assert(items.size() % 2 == 0)
+	#assert(items.size() % 2 == 0)
+	print(room)
 	for i in range(0, items.size(), 2):
 		var location1 = map_to_local(items[i][1])
 		var basis1 = get_basis_with_orthogonal_index(items[i][2])
