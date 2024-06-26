@@ -158,7 +158,6 @@ func sync_play_animation(anim_player, animation):
 		play_animation(anim_player, animation)
 
 
-
 func anim_handler():
 	if Global.AttackAnim and not AnimDeath:
 		if not AnimPunching:
