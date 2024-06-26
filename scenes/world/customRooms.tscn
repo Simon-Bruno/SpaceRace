@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qb2knk80py1o"]
 
-[ext_resource type="MeshLibrary" uid="uid://dujobde6gixip" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_pfhvf"]
+[ext_resource type="MeshLibrary" uid="uid://xqw14c2d05d3" path="res://assets/CustomBlocks/CustomBlocks.tres" id="1_pfhvf"]
 
 [node name="Custom Rooms" type="Node3D"]
 
