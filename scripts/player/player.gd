@@ -30,7 +30,7 @@ var AnimJump: bool = false
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
 var lobby_spawn = Vector3(0, 11, 20)
-var game_spawn = {1: [Vector3(10, 5, 5), Vector3(10, 5, 10)],2: [Vector3(10, 5, -5), Vector3(10, 5, -10)]}
+var game_spawn = {1: [Vector3(3, 3, 5), Vector3(3, 3, 11)],2: [Vector3(4, 3, -4), Vector3(4, 3, 10)]}
 
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
@@ -46,6 +46,10 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 	walk_speed = new_walk_speed
 	walk_acceleration = new_accel
 	walk_deceleration = new_accel * 1.2
+<<<<<<< fix/TerminalAndSpawning
+=======
+  
+>>>>>>> main
 
 func _ready():
 	var hud = get_node_or_null("../../HUD")
@@ -92,6 +96,7 @@ func _vertical_movement(delta):
 	var vel = Vector3.ZERO
 
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
+		Audiocontroller.play_jump_sfx()
 		vel.y = jump_impulse
 
 	if not is_on_floor():
@@ -252,9 +257,16 @@ func die():
 	walk_speed = 0
 	alive = false
 
+<<<<<<< fix/TerminalAndSpawning
 	request_play_animation(1, "death") # play anim
 	await get_tree().create_timer(2).timeout # wait for anim
 	get_parent().player_died(self) # die
+=======
+	request_play_animation(1, "death")  # play anim
+	Audiocontroller.play_player_death()
+	await get_tree().create_timer(2).timeout  # wait for anim
+	get_parent().player_died(self)  # die
+>>>>>>> main
 
 	# reset globals
 	AnimDeath = false

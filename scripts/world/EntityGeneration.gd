@@ -261,12 +261,13 @@ func connect_pressureplate(door : StaticBody3D, interactable : Array) -> void:
 
 
 func connect_boss(door : StaticBody3D, interactable : Array) -> void:
-	var location = map_to_local(interactable[1])
-	location.y = 2
-	var boss = GlobalSpawner.spawn_boss(location)
-	boss.interactable_door = door
+	#var location = map_to_local(interactable[1])
+	#location.y = 2
+	#var boss = GlobalSpawner.spawn_boss(location)
+	#boss.interactable_door = door
+
 	set_cell_item(interactable[1], EMPTY)
-	
+
 
 func connect_keyhole(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
