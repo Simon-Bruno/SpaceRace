@@ -400,10 +400,9 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], doors : Arra
 # only support items and it will handle objects that failed to place.
 func add_objects(floor_plan : Array[Array], objects_list : Array, doors : Array, width : int, height: int, start: Vector3i, end : Vector3i) -> void:
 	for object in objects_list:
-		for i in 30:
+		for i in 5:
 			if object_matcher(object, floor_plan, doors, width, height, start, end):
 				break
-			print("Not placed")
 
 func enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, width : int, height : int, start : Vector3i) -> Array:
 	var min_dist : int = object['set_min_distance']
