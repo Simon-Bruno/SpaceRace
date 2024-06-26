@@ -67,30 +67,8 @@ func play_sfx(sfx, volume_db : float = 0):
 	change_audio_bus_sfx_controller("Sfx", sfx_controller)
 	add_child(sfx_controller)
 	sfx_controller.play()
-	sfx_controller.finished.connect(_on_sfx_finished)
-
-#func play_sfx_3d(sfx, volume_db):
-	#var sfx_controller = AudioStreamPlayer3D.new()
-	#sfx_controller.stream = sfx
-	#sfx_controller.volume_db = volume_db
-	#change_audio_bus_sfx_controller("Sfx", sfx_controller)
-	#add_child(sfx_controller)
-	#sfx_controller.play()
-	#sfx_controller.finished.connect(test_for_now)
-
-#func test_for_now():
-	## TODO make dynamic
-	#get_child(0).queue_free()
-	#if get_child_count() > 10:
-		#for child in Audiocontroller.get_children():
-			#child.queue_free()
-
-func _on_sfx_finished():
-	# TODO make dynamic
-	get_child(0).queue_free()
-	if get_child_count() > 10:
-		for child in Audiocontroller.get_children():
-			child.queue_free()
+	await sfx_controller.finished
+	sfx_controller.queue_free()
 
 func play_menu_music():
 	play_music(menu_music)
