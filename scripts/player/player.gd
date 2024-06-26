@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 var walkspeed_multiplier: float = 1
 @export var walk_speed = 8
-@export var fall_acceleration = 30
+@export var fall_acceleration = 10
 @export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
@@ -14,7 +14,7 @@ var walk_deceleration = 50
 var rotation_speed = 10
 
 var push_pull_factor = 2.0 / 3.0
-var min_pull_dist = 1.8
+var min_pull_dist = 1.5
 
 var speed = 0
 var direction = Vector2.ZERO
