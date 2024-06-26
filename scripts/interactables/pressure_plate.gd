@@ -54,17 +54,21 @@ func handle_plate_activation(body) -> void:
 	if is_finish_plate and body.is_in_group('Players'):
 		winner_id = body.name.to_int()
 		finish = finish.instantiate()
+		Audiocontroller.play_pressure_plate_sfx()
 		add_child(finish)
 	else:
 		if interactable != null:
 			interactable.activated()
+			Audiocontroller.play_pressure_plate_sfx()
 		elif enemy_pos != null:
 			GlobalSpawner.spawn_melee_enemy(enemy_pos)
+			Audiocontroller.play_boss_spawn_minions_sfx()
 
 # Handle the deactivation logic when a body exits the pressure plate
 func handle_plate_deactivation() -> void:
 	if interactable != null:
 		interactable.deactivated()
+		Audiocontroller.play_pressure_plate_sfx()
 
 # Updates the pressureplate mesh according to the current state
 @rpc("authority", "call_local", "reliable")
