@@ -50,6 +50,3 @@ func activate(item):
 func update_mesh(state : int) -> void:
 	if customRooms:
 		$MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
-	for i in range(160):
-		print(i, customRooms.mesh_library.get_item_name(i))
-	print(customRooms.KEYIN)
