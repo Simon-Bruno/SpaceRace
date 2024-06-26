@@ -3,7 +3,7 @@ extends CharacterBody3D
 var walkspeed_multiplier: float = 1
 @export var walk_speed = 8
 @export var fall_acceleration = 30
-@export var jump_impulse = 8.5
+@export var jump_impulse = 20
 var getHitCooldown = true
 @export var health = Global.player_max_health
 @export var alive = false
@@ -245,10 +245,12 @@ func _input(event):
 		if event.is_action_pressed("ability_1") and not Global.in_pause and not Global.in_chat:
 			$Class.ability1()
 			hudNode.useAbility(1)
+			Audiocontroller.play_health_pickup_regen_sfx()
 
 		if event.is_action_pressed("ability_2") and not Global.in_pause and not Global.in_chat:
 			$Class.ability2()
 			hudNode.useAbility(2)
+			Audiocontroller.play_sabotaging_sfx()
 
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer

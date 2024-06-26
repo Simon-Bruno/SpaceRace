@@ -7,17 +7,15 @@ const MUSIC_SLIDER_PATH = "/root/Main/SpawnedItems/World/PauseMenu/Settings/Marg
 const SFX_SLIDER_PATH = "/root/Main/SpawnedItems/World/PauseMenu/Settings/MarginContainer/VBoxContainer/Settings_Tab_Container/TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer/Audio_Slider_Settings3/HBoxContainer/HSlider"
 
 # Music
-#var menu_music = preload("res://assets/audio/music/Galactic Groove (Menu).ogg")
-#var lobby_music = preload("res://assets/audio/music/Galactic Showdown (Lobby).ogg")
-#var game_music = preload("res://assets/audio/music/Galactic Battle (In Game).ogg")
-#var finish_menu_music = preload("res://assets/audio/music/finish_menu_audio.ogg")
 const FINISH_MENU_AUDIO = preload("res://assets/audio/music/finish_menu_audio.ogg")
 const GALACTIC_BATTLE__IN_GAME_ = preload("res://assets/audio/music/Galactic Battle (In Game).ogg")
 const GALACTIC_GROOVE__MENU_ = preload("res://assets/audio/music/Galactic Groove (Menu).ogg")
 const GALACTIC_SHOWDOWN__LOBBY_ = preload("res://assets/audio/music/Galactic Showdown (Lobby).ogg")
+
 # Sound effects
 const ABILITY_UP_1 = preload("res://assets/audio/sfx/ability_up1.ogg")
 const ABILITY_UP_2 = preload("res://assets/audio/sfx/ability_up2.ogg")
+const AIR_PUNCH = preload("res://assets/audio/sfx/air_punch.ogg")
 const ATTACK_FIST = preload("res://assets/audio/sfx/attack_fist.ogg")
 const A_BOX_BEING_PUSHED_A__1_ = preload("res://assets/audio/sfx/a_box_being_pushed_a (1).ogg")
 const A_BOX_BEING_PUSHED_A = preload("res://assets/audio/sfx/a_box_being_pushed_a.ogg")
@@ -29,7 +27,8 @@ const BOSS_SPAWN_MINIONS = preload("res://assets/audio/sfx/boss_spawn_minions.og
 const BUTTON = preload("res://assets/audio/sfx/button.ogg")
 const CHASE_MUSIC = preload("res://assets/audio/sfx/chase_music.ogg")
 const COUNTDOWN_1 = preload("res://assets/audio/sfx/countdown1.ogg")
-const COUNTDOWN_2 = preload("res://assets/audio/sfx/countdown2.ogg")
+const DEFEAT_1 = preload("res://assets/audio/sfx/defeat1.ogg")
+const DEFEAT_2 = preload("res://assets/audio/sfx/defeat2.ogg")
 const DOOR = preload("res://assets/audio/sfx/door.ogg")
 const ELECTRIC_RAY = preload("res://assets/audio/sfx/electric_ray.ogg")
 const ENEMY_TEAM_DEATH = preload("res://assets/audio/sfx/enemy_team_death.ogg")
@@ -37,30 +36,41 @@ const FAN = preload("res://assets/audio/sfx/fan.ogg")
 const GUN_RAY_BEAM = preload("res://assets/audio/sfx/gun_ray_beam.ogg")
 const HEALTH_FULL = preload("res://assets/audio/sfx/health_full.ogg")
 const HEALTH_PICKUP_REGEN = preload("res://assets/audio/sfx/health_pickup_regen.ogg")
+const IDLE_SPACESTATION_SO = preload("res://assets/audio/sfx/idle_spacestation_so.ogg")
 const ITEM_PICKUP = preload("res://assets/audio/sfx/item_pickup.ogg")
 const JUMP_ = preload("res://assets/audio/sfx/jump_.ogg")
 const KEY_IN_LOCK = preload("res://assets/audio/sfx/key_in_lock.ogg")
 const LASER_HIT_PLAYER = preload("res://assets/audio/sfx/laser_hit_player.ogg")
-const LEVER = preload("res://assets/audio/sfx/lever.ogg")
 const MOVING_WOOD = preload("res://assets/audio/sfx/moving_wood.ogg")
 const PICK_TEAM = preload("res://assets/audio/sfx/pick_team.ogg")
 const PLAYER_DEATH = preload("res://assets/audio/sfx/player_death.ogg")
+const PLAYER_RESPAWN = preload("res://assets/audio/sfx/player_respawn.ogg")
+const PLAYER_WALK_1 = preload("res://assets/audio/sfx/player_walk1.ogg")
+const PLAYER_WALK_2 = preload("res://assets/audio/sfx/player_walk2.ogg")
 const POTION_OPEN = preload("res://assets/audio/sfx/potion_open.ogg")
 const POTION_PICKUP = preload("res://assets/audio/sfx/potion_pickup.ogg")
-const PRESSURE_PLATE = preload("res://assets/audio/sfx/pressure_plate.ogg")
 const PRESSURE_PLATE_FIXED = preload("res://assets/audio/sfx/pressure_plate_fixed.ogg")
 const REGEN_OVER = preload("res://assets/audio/sfx/regen_over.ogg")
 const RIZZ = preload("res://assets/audio/sfx/rizz.ogg")
+const SABOTAGED = preload("res://assets/audio/sfx/sabotaged.ogg")
+const SABOTAGING = preload("res://assets/audio/sfx/sabotaging.ogg")
 const START_1 = preload("res://assets/audio/sfx/start1.ogg")
 const START_2 = preload("res://assets/audio/sfx/start2.ogg")
+const TEAMMATE_DEATH = preload("res://assets/audio/sfx/teammate_death.ogg")
 const TELEPORTATION = preload("res://assets/audio/sfx/teleportation.ogg")
 const TERMINAL = preload("res://assets/audio/sfx/terminal.ogg")
 const UI_PRESS = preload("res://assets/audio/sfx/ui_press.ogg")
-const UNPICK_TEAM = preload("res://assets/audio/sfx/unpick_team.ogg")
+const UNPICK_TEAM_FIXED = preload("res://assets/audio/sfx/unpick_team_fixed.ogg")
+const VICTORY_1 = preload("res://assets/audio/sfx/victory1.ogg")
+const VICTORY_2 = preload("res://assets/audio/sfx/victory2.ogg")
 const WALKING = preload("res://assets/audio/sfx/walking.ogg")
 const ZOMBIE_CHASING = preload("res://assets/audio/sfx/zombie_chasing.ogg")
+const ZOMBIE_DEATH = preload("res://assets/audio/sfx/zombie_death.ogg")
+const ZOMBIE_GETS_HIT_1 = preload("res://assets/audio/sfx/zombie_gets_hit1.ogg")
+const ZOMBIE_GETS_HIT_2 = preload("res://assets/audio/sfx/zombie_gets_hit2.ogg")
 const ZOMBIE_SPAWN = preload("res://assets/audio/sfx/zombie_spawn.ogg")
 const ZOMBIE_STOPS_CHASING = preload("res://assets/audio/sfx/zombie_stops_chasing.ogg")
+const ZOMBIE_WALK = preload("res://assets/audio/sfx/zombie_walk.ogg")
 
 # To keep track of h_slider values after being muted
 var cur_hslider_val_master: float
@@ -104,8 +114,17 @@ func play_ability_1_sfx(volume_db : float = 0.0):
 func play_ability_2_sfx(volume_db : float = 0.0):
 	play_sfx(ABILITY_UP_2, volume_db)
 
+func play_air_punch_sfx(volume_db : float = 0.0):
+	play_sfx(AIR_PUNCH, volume_db)
+
 func play_attack_fist_sfx(volume_db: float = 0.0):
 	play_sfx(ATTACK_FIST, volume_db)
+
+func play_a_box_being_pushed_1_sfx(volume_db: float = 0.0):
+	play_sfx(A_BOX_BEING_PUSHED_A, volume_db)
+
+func play_a_box_being_pushed_sfx(volume_db : float = 0.0):
+	play_sfx(A_BOX_BEING_PUSHED_A, volume_db)
 
 func play_bomb_explosion_sfx(volume_db: float = 0.0):
 	play_sfx(BOMB_EXPLOSION, volume_db)
@@ -125,11 +144,26 @@ func play_boss_spawn_minions_sfx(volume_db: float = 0.0):
 func play_button_sfx(volume_db: float = 0.0):
 	play_sfx(BUTTON, volume_db)
 
+func play_chase_sfx(volume_db: float = 0.0):
+	play_sfx(CHASE_MUSIC, volume_db)
+
+func play_countdown_sfx(volume_db: float = -15.0):
+	play_sfx(COUNTDOWN_1, volume_db)
+
+func play_defeat_1_sfx(volume_db: float = 0.0):
+	play_sfx(DEFEAT_1, volume_db)
+
+func play_defeat_2_sfx(volume_db: float = 0.0):
+	play_sfx(DEFEAT_2, volume_db)
+
 func play_door_sfx(volume_db: float = 10.0):
 	play_sfx(DOOR, volume_db)
 
 func play_electric_ray_sfx(volume_db: float = 0.0):
 	play_sfx(ELECTRIC_RAY, volume_db)
+
+func play_enemy_team_death_sfx(volume_db: float = 0.0):
+	play_sfx(ENEMY_TEAM_DEATH, volume_db)
 
 func play_fan_sfx(volume_db: float = 0.0):
 	play_sfx(FAN, volume_db)
@@ -137,8 +171,14 @@ func play_fan_sfx(volume_db: float = 0.0):
 func play_gun_ray_beam_sfx(volume_db: float = 0.0):
 	play_sfx(GUN_RAY_BEAM, volume_db)
 
+func play_health_full_sfx(volume_db: float = 0.0):
+	play_sfx(HEALTH_FULL, volume_db)
+
 func play_health_pickup_regen_sfx(volume_db: float = 0.0):
 	play_sfx(HEALTH_PICKUP_REGEN, volume_db)
+
+func play_idle_spacestation_sfx(volume_db: float = 0.0):
+	play_sfx(IDLE_SPACESTATION_SO, volume_db)
 
 func play_item_pickup_sfx(volume_db: float = -10.0):
 	play_sfx(ITEM_PICKUP, volume_db)
@@ -152,8 +192,23 @@ func play_key_in_lock_sfx(volume_db: float = 0.0):
 func play_laser_hit_player_sfx(volume_db: float = 0.0):
 	play_sfx(LASER_HIT_PLAYER, volume_db)
 
+func play_moving_wood_sfx(volume_db: float = 0.0):
+	play_sfx(MOVING_WOOD, volume_db)
+
+func play_pick_team_sfx(volume_db: float = 0.0):
+	play_sfx(PICK_TEAM, volume_db)
+
 func play_player_death(volume_db : float = 0.0):
 	play_sfx(PLAYER_DEATH, volume_db)
+
+func play_player_respawn(volume_db: float = 0.0):
+	play_sfx(PLAYER_RESPAWN, volume_db)
+
+func play_player_walk_1_sfx(volume_db: float = 0.0):
+	play_sfx(PLAYER_WALK_1, volume_db)
+
+func play_player_walk_2_sfx(volume_db: float = 0.0):
+	play_sfx(PLAYER_WALK_2, volume_db)
 
 func play_potion_open_sfx(volume_db: float = 0.0):
 	play_sfx(POTION_OPEN, volume_db)
@@ -162,10 +217,28 @@ func play_potion_pickup_sfx(volume_db: float = 0.0):
 	play_sfx(POTION_PICKUP, volume_db)
 
 func play_pressure_plate_sfx(volume_db: float = 0.0):
-	play_sfx(PRESSURE_PLATE, volume_db)
+	play_sfx(PRESSURE_PLATE_FIXED, volume_db)
+
+func play_regen_over_sfx(volume_db: float = 0.0):
+	play_sfx(REGEN_OVER, volume_db)
 
 func play_rizz_sfx(volume_db: float = 0.0):
 	play_sfx(RIZZ, volume_db)
+
+func play_sabotaged_sfx(volume_db: float = 0.0):
+	play_sfx(SABOTAGED, volume_db)
+
+func play_sabotaging_sfx(volume_db: float = 0.0):
+	play_sfx(SABOTAGING, volume_db)
+
+func play_start_1_sfx(volume_db: float = 0.0):
+	play_sfx(START_1, volume_db)
+
+func play_start_2_sfx(volume_db: float = 0.0):
+	play_sfx(START_2, volume_db)
+
+func play_teammate_death_sfx(volume_db: float = 0.0):
+	play_sfx(TEAMMATE_DEATH, volume_db)
 
 func play_teleportation_sfx(volume_db : float = 0.0):
 	play_sfx(TELEPORTATION, volume_db)
@@ -173,8 +246,38 @@ func play_teleportation_sfx(volume_db : float = 0.0):
 func play_ui_press_sfx(volume_db: float = 0.0):
 	play_sfx(UI_PRESS, volume_db)
 
+func play_unpick_team_sfx(volume_db: float = 0.0):
+	play_sfx(UNPICK_TEAM_FIXED, volume_db)
+
+func play_victory_1_sfx(volume_db: float = 0.0):
+	play_sfx(VICTORY_1, volume_db)
+
+func play_victory_2_sfx(volume_db: float = 0.0):
+	play_sfx(VICTORY_2, volume_db)
+
 func play_walking_sfx(volume_db: float = 0.0):
 	play_sfx(WALKING, volume_db)
+
+func play_zombie_chasing_sfx(volume_db: float = 0.0):
+	play_sfx(ZOMBIE_CHASING, volume_db)
+
+func play_zombie_death_sfx(volume_db: float = 0.0):
+	play_sfx(ZOMBIE_DEATH, volume_db)
+
+func play_zombie_gets_hit_1_sfx(volume_db: float = 0.0):
+	play_sfx(ZOMBIE_GETS_HIT_1, volume_db)
+
+func play_zombie_gets_hit_2_sfx(volume_db: float = 0.0):
+	play_sfx(ZOMBIE_GETS_HIT_2, volume_db)
+
+func play_zombie_spawn_sfx(volume_db: float = 0.0):
+	play_sfx(ZOMBIE_SPAWN, volume_db)
+
+func play_zombie_stops_chasing_sfx(volume_db: float = 0.0):
+	play_sfx(ZOMBIE_STOPS_CHASING, volume_db)
+
+func play_zombie_walk_sfx(volume_db: float = 0.0):
+	play_sfx(ZOMBIE_WALK, volume_db)
 
 func get_slider(path):
 	return get_node(path)
