@@ -66,6 +66,18 @@ func replace_entities(rooms : Array) -> void:
 	spawn_lasers(rooms)
 	replace_unused()
 
+func remove_all_placeholder():
+	var list = [88, 89, 91, 27, 92, 93, 90, 94, 143]
+	list.append_array(blue)
+	list.append_array(green)
+	list.append_array(orange)
+	list.append_array(purple)
+	list.append_array(red)
+	list.append_array(yellow)
+	list.append_array(teleporters)
+	for i in list:
+		for item in get_used_cells_by_item(i):
+			set_cell_item(item, EMPTY)
 
 # %%%%%%%%%%%%
 # % GENERAL %
@@ -272,7 +284,7 @@ func connect_holes(door : StaticBody3D, interactable : Array) -> void:
 
 func connect_terminal(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
-	location.y = 3
+	location.y = 2
 	var keyhole = GlobalSpawner.spawn_terminal(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
 
