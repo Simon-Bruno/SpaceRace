@@ -27,7 +27,7 @@ input_name = "color"
 default_input_values = [1, 0.0, 2, 1.0, 3, 0.0, 4, 0.7]
 
 [sub_resource type="Gradient" id="Gradient_0k37u"]
-offsets = PackedFloat32Array(0.183486, 0.729358)
+offsets = PackedFloat32Array(0.183486, 0.724138)
 colors = PackedColorArray(0.941176, 0.101961, 4, 1, 1, 2, 10, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wp8l4"]
@@ -120,4 +120,4 @@ nodes/fragment/8/node = SubResource("VisualShaderNodeRemap_lofk7")
 nodes/fragment/8/position = Vector2(120, 120)
 nodes/fragment/9/node = SubResource("VisualShaderNodeTexture_pihy5")
 nodes/fragment/9/position = Vector2(600, 80)
-nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 3, 2, 6, 0, 0, 1, 7, 1, 8, 0, 8, 0, 6, 0, 6, 0, 9, 0, 9, 0, 0, 0, 3, 0, 2, 0, 2, 1, 6, 2)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 3, 2, 6, 0, 0, 1, 7, 1, 8, 0, 8, 0, 6, 0, 6, 0, 9, 0, 3, 0, 2, 0, 2, 1, 6, 2, 9, 0, 0, 0)

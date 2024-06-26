@@ -1,12 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://4k1f4flwet83"]
+[gd_scene load_steps=9 format=3 uid="uid://4k1f4flwet83"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_10o3y"]
 [ext_resource type="Script" path="res://scripts/item/bomb.gd" id="2_oyt1b"]
-[ext_resource type="Texture2D" uid="uid://blhtila7r7nu7" path="res://assets/CustomBlocks/items/dynamite.png" id="3_q4uxs"]
-[ext_resource type="ArrayMesh" uid="uid://df0ib0ofm7dbm" path="res://assets/CustomBlocks/items/dynamite.obj" id="4_sfx00"]
+[ext_resource type="ArrayMesh" uid="uid://df0ib0ofm7dbm" path="res://assets/CustomBlocks/items/dynamite.obj" id="3_o4tgt"]
+[ext_resource type="Texture2D" uid="uid://blhtila7r7nu7" path="res://assets/CustomBlocks/items/dynamite.png" id="3_u6uvx"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_cnjjc"]
-albedo_texture = ExtResource("3_q4uxs")
+albedo_texture = ExtResource("3_u6uvx")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_421or"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wacbw"]
+albedo_color = Color(1, 0, 0, 0.235294)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4exvo"]
 
 [node name="Bomb" instance=ExtResource("1_10o3y")]
 script = ExtResource("2_oyt1b")
@@ -17,4 +24,25 @@ collision_mask = 3
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
 transform = Transform3D(0.283118, 0, 0, 0, 0.283118, 0, 0, 0, 0.283118, 0.0085088, -0.799201, -0.0010272)
 material_override = SubResource("ORMMaterial3D_cnjjc")
-mesh = ExtResource("4_sfx00")
+mesh = ExtResource("3_o4tgt")
+
+[node name="Radius" type="Area3D" parent="RigidBody3D" index="2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Radius" index="0"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("SphereShape3D_421or")
+
+[node name="VisualBlastRadius" type="MeshInstance3D" parent="RigidBody3D/Radius" index="1"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wacbw")
+transparency = 1.0
+mesh = SubResource("SphereMesh_4exvo")
+skeleton = NodePath("../..")
+
+[node name="FuseTimer" type="Timer" parent="." index="1"]
+wait_time = 3.0
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

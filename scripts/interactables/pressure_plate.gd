@@ -51,7 +51,7 @@ func _on_area_3d_body_exited(body) -> void:
 
 # Handle the activation logic when a body enters the pressure plate
 func handle_plate_activation(body) -> void:
-	if is_finish_plate:
+	if is_finish_plate and body.is_in_group('Players'):
 		winner_id = body.name.to_int()
 		finish = finish.instantiate()
 		Audiocontroller.play_pressure_plate_sfx()

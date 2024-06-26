@@ -3,9 +3,9 @@ extends Node
 # Paths
 const MUSIC_CONTROLLER_PATH = "/root/Main/MusicController"
 const SFX_CONTROLLER_PATH = "/root/Main/SfxController"
-const MASTER_SLIDER_PATH = "/root/Main/SpawnedItems/World/CanvasLayer/PauseMenu/Settings/MarginContainer/VBoxContainer/Settings_Tab_Container/TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer/Audio_Slider_Settings/HBoxContainer/HSlider"
-const MUSIC_SLIDER_PATH = "/root/Main/SpawnedItems/World/CanvasLayer/PauseMenu/Settings/MarginContainer/VBoxContainer/Settings_Tab_Container/TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer/Audio_Slider_Settings2/HBoxContainer/HSlider"
-const SFX_SLIDER_PATH = "/root/Main/SpawnedItems/World/CanvasLayer/PauseMenu/Settings/MarginContainer/VBoxContainer/Settings_Tab_Container/TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer/Audio_Slider_Settings3/HBoxContainer/HSlider"
+const MASTER_SLIDER_PATH = "/root/Main/SpawnedItems/World/PauseMenu/Settings/MarginContainer/VBoxContainer/Settings_Tab_Container/TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer/Audio_Slider_Settings/HBoxContainer/HSlider"
+const MUSIC_SLIDER_PATH = "/root/Main/SpawnedItems/World/PauseMenu/Settings/MarginContainer/VBoxContainer/Settings_Tab_Container/TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer/Audio_Slider_Settings2/HBoxContainer/HSlider"
+const SFX_SLIDER_PATH = "/root/Main/SpawnedItems/World/PauseMenu/Settings/MarginContainer/VBoxContainer/Settings_Tab_Container/TabContainer/Audio/MarginContainer/ScrollContainer/VBoxContainer/Audio_Slider_Settings3/HBoxContainer/HSlider"
 
 # Music
 var menu_music = preload("res://assets/audio/music/Galactic Groove (Menu).ogg")
