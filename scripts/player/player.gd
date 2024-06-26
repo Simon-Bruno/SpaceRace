@@ -53,7 +53,7 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 func _ready():
 	var hud = get_node_or_null("../../HUD")
 	if hud:
-		hud.loaded. rpc ()
+		hud.loaded.rpc()
 
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
@@ -215,8 +215,8 @@ func _physics_process(delta):
 	if Global.in_pause or Global.in_chat:
 		if not is_on_floor():
 			velocity.y -= fall_acceleration * delta
-		velocity.x = 0  
-		velocity.z = 0  
+		velocity.x = 0
+		velocity.z = 0
 		move_and_slide()
 		return
 	if $MultiplayerSynchronizer.is_multiplayer_authority() and not Global.in_chat:
