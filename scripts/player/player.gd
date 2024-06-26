@@ -1,10 +1,9 @@
 extends CharacterBody3D
 
 var walkspeed_multiplier: float = 1
-@export var walk_speed = 12
-@export var fall_acceleration = 50
-
-@export var jump_impulse = 15
+@export var walk_speed = 8
+@export var fall_acceleration = 30
+@export var jump_impulse = 8.5
 var getHitCooldown = true
 @export var health = Global.player_max_health
 @export var alive = false
@@ -133,8 +132,10 @@ func play_animation(anim_player, animation):
 		$Pivot/AnimationPlayer.play(animation)
 	elif anim_player == 2:  # anim speed 1.15 (default for walk)
 		$Pivot/AnimationPlayer2.play(animation)
-	else:  # anim speed 1.25 (default for jump)
+	elif anim_player == 3:  # anim speed 1.25 (default for jump)
 		$Pivot/AnimationPlayer3.play(animation)
+	else:
+		$Pivot/AnimationPlayer4.play(animation)
 
 
 func stop_animations():
@@ -173,8 +174,9 @@ func anim_handler():
 			AnimJump = true
 		else:
 			if velocity != Vector3.ZERO && velocity.y == 0:
-				if not $Pivot/AnimationPlayer.is_playing():
-					request_play_animation(2, "walk")
+				if not ($Pivot/AnimationPlayer.is_playing() or $Pivot/AnimationPlayer2.is_playing()
+				or $Pivot/AnimationPlayer3.is_playing or $Pivot/AnimationPlayer4.is_playing()):
+					request_play_animation(4, "walk")
 			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
 				request_play_animation(0, "stop")
 			if velocity.y == 0:
