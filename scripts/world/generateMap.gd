@@ -37,7 +37,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 const CUSTOMROOMPERCENTAGE : float = 0.3
 
 # General room parameters
-const room_amount : int = 10
+const room_amount : int = 3
 const room_width  : int = 10
 const room_height : int = 8
 const room_margin : int = 4
@@ -126,10 +126,14 @@ func add_start():
 func add_finish():
 	write_room(rooms[-1], 0, 0, true)
 	write_room(rooms[-1], 0, 1, true)
+	
+	var xlocation = rooms[-1][2]
 
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
-	plate.position = map_to_local(Vector3i((start_pos[2]+40), 1, 0))
+	plate.position = map_to_local(Vector3i((xlocation + 22), 0, 0))
 	plate.position.y = 2
+	plate.position.x += 1
+	plate.position.z -= 1
 	plate.is_finish_plate = true
 	add_child(plate, true)
 
