@@ -1,15 +1,11 @@
 extends Node3D
 
 @export var interactable : Node
-@export var key : Node
 
 var customRooms : GridMap = null
-var bodies_on_plate: Array = []
-var has_player = null
-var has_item = null
-var fixed = false
+@export var fixed = false
 
-# Called when keyhole is placed in world. Sets the mesh instance.
+# Called when broken wall is placed in world. Sets the mesh instance to broken.
 func _ready() -> void:
 	var target_node_name = "WorldGeneration"
 	var root_node = get_tree().root
@@ -28,33 +24,29 @@ func find_node_by_name(node: Node, target_name: String) -> Node:
 	return null
 
 func _on_area_3d_body_entered(body):
-	if not multiplayer.is_server():
+	if body.name != str(multiplayer.get_unique_id()) or not body.is_in_group("Players"):
 		return
 
-	if body.is_in_group("Players"):
-		has_player = true
-	if body is RigidBody3D:
-		has_item = true
-		key = body.get_parent()
-	if has_player and has_item and not fixed:
-		activate()
-
-func _on_area_3d_body_exited(body):
-	if not multiplayer.is_server():
+	var item = body.get_node("PlayerItem").holding
+	if not item:
 		return
 
-	if body.is_in_group("Players"):
-		has_player = false
-	if body is RigidBody3D:
-		has_item = false
+	if item.get_parent().is_in_group("Key"):
+		activate.rpc(item)
 
-func activate():
-	interactable.activated()
-	key.delete.rpc()
+@rpc("any_peer", "call_local", "reliable")
+func activate(item):
+	if not multiplayer.is_server():
+		return
+	if interactable != null and not fixed:
+		interactable.activated()
+		item.get_parent().consume_item()
+
+	update_mesh.rpc(customRooms.KEYIN)
 	fixed = true
 
-# Update keyhole mesh based on current state
-@rpc("authority", "call_local", "reliable")
+# Update mesh based on current state
+@rpc("any_peer", "call_local", "reliable")
 func update_mesh(state : int) -> void:
 	if customRooms:
 		$MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
