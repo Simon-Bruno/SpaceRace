@@ -101,7 +101,6 @@ text = "Quit"
 
 [node name="DialogMessage" type="Panel" parent="."]
 visible = false
-layout_mode = 0
 offset_left = 451.0
 offset_top = 240.0
 offset_right = 707.0
