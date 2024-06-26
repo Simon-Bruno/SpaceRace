@@ -12,7 +12,7 @@ func _on_ready():
 
 
 func use():
-	var player = self.owned_node
+	var player = Network.get_player_node_by_id(owned_id)
 	player.get_node("PlayerItem")._drop_item()
 	# Start timer after pressing "Q" when holding the bomb item
 	timer.start()
@@ -20,8 +20,9 @@ func use():
 	blast_radius_visual.visible = true
 	
 	var v = player.velocity
-	v.y = 7
-	$RigidBody3D.set_axis_velocity(v * 2)
+	v.z *= Network.inverted
+	v.y = 10
+	$RigidBody3D.set_axis_velocity(v * 1.5)
 
 
 @rpc("any_peer", "call_local", "reliable")
