@@ -4,6 +4,7 @@ var enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 var ranged_enemy_scene = preload("res://scenes/characters/ranged_enemy/ranged_enemy.tscn")
 var laser_scene = preload("res://scenes/interactables/laser.tscn")
 var item_scene = preload("res://scenes/item/key.tscn")
+var welder_scene = preload("res://scenes/item/welder.tscn")
 var hp_bottle_scene = preload("res://scenes/item/hp_bottle.tscn")
 var full_hp_bottle_scene = preload("res://scenes/item/full_health_bottle.tscn")
 var strength_bottle_scene = preload("res://scenes/item/strength_bottle.tscn")
@@ -22,7 +23,7 @@ var keyhole_scene = preload("res://scenes/interactables/keyhole.tscn")
 var jump_laser_scene = preload("res://scenes/interactables/laser_low.tscn")
 var broken_wall_scene = preload("res://scenes/interactables/broken_wall.tscn")
 
-func spawn_broken_wall(pos, dir, interact, key=null):
+func spawn_broken_wall(pos, dir, interact):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
@@ -31,12 +32,11 @@ func spawn_broken_wall(pos, dir, interact, key=null):
 		broken_wall.position = pos
 		broken_wall.basis	= dir
 		broken_wall.interactable = interact
-		broken_wall.key = key
 		spawner.add_child(broken_wall, true)
 		return broken_wall
 	return null
 
-func spawn_keyhole(pos, dir, interact, key=null):
+func spawn_keyhole(pos, dir, interact):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/InteractableSpawner")
@@ -45,7 +45,6 @@ func spawn_keyhole(pos, dir, interact, key=null):
 		keyhole.position = pos
 		keyhole.basis	= dir
 		keyhole.interactable = interact
-		keyhole.key = key
 		spawner.add_child(keyhole, true)
 		return keyhole
 	return null
@@ -194,6 +193,13 @@ func spawn_item(pos, welder = false):
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
 	if spawner:
 		var item = item_scene.instantiate()
+		if welder:
+			item = welder_scene.instantiate()
+			item.add_to_group("Welder")
+			print(item.is_in_group("Welder"))
+		else:
+			item.add_to_group("Key")
+			print(item.is_in_group("Key"))
 		item.position = pos
 		item.welder = welder
 		spawner.add_child(item, true)

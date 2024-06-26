@@ -7,7 +7,6 @@ var loaded_item = preload("res://scenes/item/item.tscn")
 func _ready():
 	if multiplayer.is_server():
 		var world = preload("res://scenes/world/worldGeneration.tscn").instantiate()
-		#print(world)
 		world.name = "world"
 		add_child(world)
 		# Spawn all connected player nodes

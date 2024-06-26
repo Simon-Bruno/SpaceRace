@@ -207,7 +207,6 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Repair1" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Repair1"]
 mesh_library = ExtResource("1_pfhvf")
@@ -221,7 +220,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 mesh_library = ExtResource("1_pfhvf")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65537, 4, 44, 65544, 6, 1441832, 65544, 7, 1441800, 65539, 1, 655405, 65542, 4, 1441838, 65539, 6, 1441842, 65537, 7, 1441843, 65537, 1, 1441844)
+"cells": PackedInt32Array(65537, 4, 46, 65544, 6, 1441832, 65544, 7, 1441800, 65539, 1, 655406, 65542, 4, 1441838, 65539, 6, 90, 65537, 7, 90, 65537, 1, 90)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
@@ -785,6 +784,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Plates7" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="Plates7"]
 mesh_library = ExtResource("1_pfhvf")

@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdag77v4o8a35"]
+[gd_scene load_steps=3 format=3 uid="uid://cdag77v4o8a35"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_0gyqt"]
+[ext_resource type="ArrayMesh" uid="uid://c43p7oi2s4b1n" path="res://assets/CustomBlocks/items/welder.obj" id="2_8bjfa"]
 
-[node name="Welder" instance=ExtResource("1_0gyqt")]
+[node name="Welder" groups=["Welder"] instance=ExtResource("1_0gyqt")]
+
+[node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
+mesh = ExtResource("2_8bjfa")

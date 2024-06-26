@@ -1,12 +1,8 @@
 extends Node3D
 
 @export var interactable : Node
-@export var key : Node
 
 var customRooms : GridMap = null
-var bodies_on_plate: Array = []
-var has_player = null
-var has_item = null
 var fixed = false
 
 # Called when keyhole is placed in world. Sets the mesh instance.
@@ -28,29 +24,21 @@ func find_node_by_name(node: Node, target_name: String) -> Node:
 	return null
 
 func _on_area_3d_body_entered(body):
-	if not multiplayer.is_server():
+	if not multiplayer.is_server() or not body.is_in_group("Players"):
+		return
+		
+	var item = body.get_node("PlayerItem").holding
+	if not item:
 		return
 
-	if body.is_in_group("Players"):
-		has_player = true
-	if body is RigidBody3D:
-		has_item = true
-		key = body.get_parent()
-	if has_player and has_item and not fixed:
-		activate()
+	if item.get_parent().is_in_group("Key"):
+		activate(item)
 
-func _on_area_3d_body_exited(body):
-	if not multiplayer.is_server():
-		return
 
-	if body.is_in_group("Players"):
-		has_player = false
-	if body is RigidBody3D:
-		has_item = false
-
-func activate():
+func activate(item):
 	interactable.activated()
-	key.delete.rpc()
+	item.get_parent().delete.rpc()
+	#update_mesh.rpc(customRooms.KEYFIXED)
 	fixed = true
 
 # Update keyhole mesh based on current state
