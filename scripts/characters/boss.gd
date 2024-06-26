@@ -31,10 +31,9 @@ var shooting = false
 var spin_speed = 180
 var charge_time = 2.0
 var charge_speed = 35
+
 @export var charge_duration = 2.0
-
 @onready var HpBar = $SubViewport/HpBar
-
 @onready var SpinTimer = $SpinTimer
 @onready var ChargeTimer = $ChargeTimer
 @onready var MeshInstance = $enemy_textures
