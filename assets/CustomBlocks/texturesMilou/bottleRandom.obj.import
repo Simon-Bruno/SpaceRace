@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://v44ig76m06tj"
+path="res://.godot/imported/bottleRandom.obj-c3bc3b33c35e155efe24dd665a518acd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bottleRandom.obj-c3bc3b33c35e155efe24dd665a518acd.mesh"]
+
+source_file="res://assets/CustomBlocks/texturesMilou/bottleRandom.obj"
+dest_files=["res://.godot/imported/bottleRandom.obj-c3bc3b33c35e155efe24dd665a518acd.mesh", "res://.godot/imported/bottleRandom.obj-c3bc3b33c35e155efe24dd665a518acd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
