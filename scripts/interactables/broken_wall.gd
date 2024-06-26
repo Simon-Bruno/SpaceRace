@@ -32,11 +32,12 @@ func _on_area_3d_body_entered(body):
 		return
 
 	if item.get_parent().is_in_group("Welder"):
-		activate(item)
+		activate.rpc(item)
 
-
+@rpc("any_peer", "call_local", "reliable")
 func activate(item):
-	interactable.activated()
+	if interactable != null:
+		interactable.activated()
 	item.get_parent().delete.rpc()
 	update_mesh.rpc(customRooms.WALL)
 	fixed = true
