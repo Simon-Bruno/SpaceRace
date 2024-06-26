@@ -2,7 +2,7 @@ class_name Settings
 extends Control
 
 
-@onready var back_button = $MarginContainer/VBoxContainer/BackButton
+@onready var back_button = $MarginContainer/BackButton
 @onready var settings_tab_container = $MarginContainer/VBoxContainer/Settings_Tab_Container
 
 signal back_button_down
