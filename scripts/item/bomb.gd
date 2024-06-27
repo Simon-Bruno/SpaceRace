@@ -6,7 +6,7 @@ extends "res://scripts/item/item.gd"
 var bomb_damage = 50
 
 var vel_y = 10
-var vel_multiplier = 1.5
+var vel_multiplier = 1.8
 
 func use():
 	var player = Network.get_player_node_by_id(owned_id)
@@ -15,16 +15,18 @@ func use():
 	# Set blast animation
 	_ignite.rpc()
 	
-	# Set velocity
-	var v = player.velocity
-	v.z *= Network.inverted
-	# Vertical velocity
-	v.y = vel_y
-	$RigidBody3D.set_axis_velocity(v * vel_multiplier)
-	
 	# Set timer if not running
 	if timer.is_stopped():
 		timer.start()
+
+	var v = player.velocity
+	v.y = vel_y
+	v *= vel_multiplier
+	_set_velocity_on_object.rpc($RigidBody3D.get_path(), v)
+	
+@rpc("any_peer", "call_local", "reliable")
+func _set_velocity_on_object(path, v):
+	get_node(path).set_axis_velocity(v)
 	
 @rpc("any_peer", "call_local", "reliable")
 func _ignite():

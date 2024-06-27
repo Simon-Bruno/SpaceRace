@@ -1469,6 +1469,7 @@ shape = SubResource("BoxShape3D_67aft")
 
 [node name="stack" type="StaticBody3D" parent="WallTransparant2"]
 collision_layer = 16
+collision_priority = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallTransparant2/stack"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35644, -0.743922)

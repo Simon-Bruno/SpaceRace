@@ -31,7 +31,7 @@ metadata/_edit_group_ = true
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 8
-collision_mask = 11
+collision_mask = 27
 mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_paq6p")
 gravity_scale = 4.0
