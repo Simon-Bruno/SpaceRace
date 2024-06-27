@@ -487,7 +487,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 mesh_library = ExtResource("1_pfhvf")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65544, 0, 103, 65543, 0, 74, 65541, 0, 88, 65545, 3, 1048664, 65542, 0, 1441835, 65541, 1, 102, 65541, 3, 102, 65537, 0, 95, 65540, 0, 113, 65540, 1, 655402)
+"cells": PackedInt32Array(65544, 0, 103, 65543, 0, 74, 65541, 0, 88, 65545, 3, 1048664, 65542, 0, 1441835, 65541, 1, 102, 65541, 3, 102, 65540, 0, 113, 65540, 1, 655402, 65537, 0, 103)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
@@ -513,7 +513,6 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="bas-6" type="Node3D" parent="."]
 transform = Transform3D(1.11189, 0, 0, 0, 1.11189, 0, 0, 0, 1.11189, 0, 0, 0)
-visible = false
 
 [node name="Statics" type="GridMap" parent="bas-6"]
 mesh_library = ExtResource("1_pfhvf")
@@ -527,7 +526,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 mesh_library = ExtResource("1_pfhvf")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65544, 0, 88, 65547, 5, 1441862, 65543, 5, 1441819, 65544, 5, 38, 65538, 4, 1441803, 65537, 5, 107, 65539, 5, 1441896, 65542, 4, 107, 65547, 0, 1441887, 65539, 4, 1441887, 65536, 4, 1441896)
+"cells": PackedInt32Array(65544, 0, 88, 65547, 5, 1441862, 65543, 5, 1441819, 65544, 5, 38, 65538, 4, 1441803, 65537, 5, 107, 65539, 5, 1441896, 65542, 4, 107, 65547, 0, 1441887, 65536, 4, 1441896, 65539, 4, 103)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
