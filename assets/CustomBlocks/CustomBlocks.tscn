@@ -540,7 +540,8 @@ shape = SubResource("BoxShape3D_edqki")
 
 [node name="WallSwitchOff" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75512, 0, 6.77439)
-mesh = ExtResource("79_4dj6a")
+visible = false
+mesh = ExtResource("82_6fudy")
 surface_material_override/0 = SubResource("StandardMaterial3D_5igbu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallSwitchOff"]

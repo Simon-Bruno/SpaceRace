@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bsyyqedsi8il8"]
 
 [ext_resource type="Script" path="res://scripts/interactables/button.gd" id="1_rlorl"]
-[ext_resource type="ArrayMesh" uid="uid://ccw74040hni0u" path="res://assets/CustomBlocks/walls/wallSwitchOff.obj" id="2_517h3"]
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_a28l1"]
+[ext_resource type="ArrayMesh" uid="uid://chh5kbs6nuulb" path="res://assets/CustomBlocks/colorCoded/switchOffRed.obj" id="3_w8xdg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr0lf"]
 size = Vector3(1.60342, 1.00027, 1.61121)
@@ -36,7 +36,7 @@ shape = SubResource("BoxShape3D_vr0lf")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815483, 0.86514)
 material_override = SubResource("StandardMaterial3D_p1ixk")
-mesh = ExtResource("2_517h3")
+mesh = ExtResource("3_w8xdg")
 skeleton = NodePath("")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
