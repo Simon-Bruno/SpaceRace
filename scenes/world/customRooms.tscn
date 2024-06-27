@@ -5,6 +5,7 @@
 [node name="Custom Rooms" type="Node3D"]
 
 [node name="EndRoom" type="Node3D" parent="."]
+visible = false
 
 [node name="Statics" type="GridMap" parent="EndRoom"]
 mesh_library = ExtResource("1_pfhvf")
