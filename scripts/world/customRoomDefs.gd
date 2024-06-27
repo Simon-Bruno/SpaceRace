@@ -5,8 +5,8 @@ static var END = 23
 
 @onready var customRooms = preload("res://scenes/world/customRooms.tscn").instantiate()
 
-#var rooms = ["bas-1", "bas-2", "bas-3", "bas-4", "bas-5", "bas-7", "bas-8", "bas-9", "bas-10", "bas-11", "bas-12" ]
-var rooms = ["Plates1", "Button1", "Maze1"]
+var rooms = ["Plates1", "Button1", "Plates2", "Maze1", "Maze2", "Laser1", "Repair1", "Plates3", "Laser2", "Button2", "Plates4", "Portal1", "Portal2", "Portal3", "Button3", "Maze3", "Laser3", "Laser4", "Repair2", "Maze4", "Maze5", "Maze6", "Plates5", "Plates6", "Plates7", "Plates8", "Portal4", "Portal5","bas-1", "bas-2", "bas-3", "bas-4", "bas-5", "bas-7", "bas-8", "bas-9", "bas-10", "bas-11", "bas-12"]
+
 var special_rooms = ["EndRoom", "StartRoom"]
 var roomNodes = []
 var special_roomNodes = []
@@ -42,9 +42,9 @@ func _ready():
 
 	for room in special_rooms:
 		special_roomNodes.append(customRooms.get_node(room))
-		
+
 	test_rooms()
-	
+
 
 # Tests rooms on most occurring problems.
 func test_rooms() -> void:
@@ -60,7 +60,7 @@ func check_teleporters(room) -> void:
 	var found = []
 	for teleporter in teleporters:
 		found += room.get_child(1).get_used_cells_by_item(teleporter)
-	
+
 	if found.size() % 2 != 0:
 		push_error("Room ", room.get_name(), " has uneven amount of teleporters. teleporters = ", found.size())
 		roomNodes.remove_at(roomNodes.find(room))
