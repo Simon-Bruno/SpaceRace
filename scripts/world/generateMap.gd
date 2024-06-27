@@ -18,7 +18,8 @@ enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL
 	  TERMINALORANGE, TERMINALPURPLE, TERMINALRED, TERMINALYELLOW, BOSSBLUE, BOSSGREEN, BOSSORANGE,
 	  BOSSPURPLE, BOSSRED, BOSSYELLOW, ENEMYBLUE, ENEMYGREEN, ENEMYORANGE, ENEMYPURPLE, ENEMYRED, ENEMYYELLOW,
 	  ENEMYRANGEDBLUE, ENEMYRANGEDGREEN, ENEMYRANGEDORANGE, ENEMYRANGEDPURPLE, ENEMYRANGEDRED, ENEMYRANGEDYELLOW,
-	  WALLBLOCK, WALLDOUBLE, WALLU, KEYIN, EMPTY=-1}
+	  WALLBLOCK, WALLDOUBLE, WALLU, KEYIN, BOTTLEHEALTHLARGE, BOTTLEHEALTHSMALL, BOTTLEMONSTER, BOTTLERANDOM, BOTTLESMALL,
+	  BOTTLESPEEDSMALL, BOTTLESTRENGTHSMALL, DYNAMITE, WALLTRANSPARANT, WALLTRANSPARANT2, EMPTY=-1}
 
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
@@ -35,7 +36,7 @@ const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOS
 							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE : float = 1
+const CUSTOMROOMPERCENTAGE : float = 0.5
 
 # General room parameters
 const room_amount : int = 4
@@ -103,20 +104,21 @@ func build_map() -> void:
 	define_rooms()
 	var pairs : Array = get_custom_rooms()
 	draw_rooms()
-	
+
 	place_custom_room(pairs)
 	add_finish()
 	add_start()
-	
+
 	draw_paths()
 	draw_windows()
 	draw_walls()
-	
+
 	add_finish()
 	mirror_world()
 
-	convert_static_to_entities()
+	transparant()
 
+	convert_static_to_entities()
 
 func add_start():
 	write_room(rooms[0], 1, 0, true)
@@ -127,7 +129,7 @@ func add_start():
 func add_finish():
 	write_room(rooms[-1], 0, 0, true)
 	write_room(rooms[-1], 0, 1, true)
-	
+
 	var xlocation = rooms[-1][2]
 
 	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
@@ -190,7 +192,7 @@ func get_custom_rooms() -> Array:
 	rooms[-1][0] = endroom[0]
 	rooms[-1][1] = endroom[1]
 	roomTypes[-1] = CUSTOM
-	
+
 	var startroom = roomLink.get_room_size(1, true)
 	rooms[0][0] = startroom[0]
 	rooms[0][1] = startroom[1]
@@ -261,6 +263,7 @@ func mirror_world() -> void:
 		item = new_item(item)
 
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
+
 		self.set_cell_item(new_location, item, orientation)
 
 	for x in entityGeneration.get_used_cells():
@@ -273,6 +276,15 @@ func mirror_world() -> void:
 		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		entityGeneration.set_cell_item(new_location, item, orientation)
 
+func transparant():
+	for x in self.get_used_cells():
+		var item = self.get_cell_item(x)
+		var orientation = self.get_cell_item_orientation(x)
+
+		if item == WALL and orientation == 10 and x[2] > 0:
+			self.set_cell_item(x, WALLTRANSPARANT, orientation)
+		elif item == WALL and orientation == 0 and x[2] < 0:
+			self.set_cell_item(x, WALLTRANSPARANT2, orientation)
 
 # Places a window on the given coords, except for when there already is an item.
 func place_window(location : Vector3i) -> void:
@@ -400,10 +412,10 @@ func draw_paths() -> void:
 		if get_cell_item_orientation(ends[i]) != 16:
 			ends.pop_at(i)
 	#assert(right.size() == ends.size())
-	
+
 
 	for i in right.size() if right.size() < ends.size() else ends.size():
-		
+
 		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
 
