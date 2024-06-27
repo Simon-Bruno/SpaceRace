@@ -71,19 +71,21 @@ func check_start_conditions():
 			start_timer.stop()
 			$Progressbar/SubViewport/ProgressBar.value = 0
 
-
+var spawned_players = 0
 func lobby_add_player_character(id):
 	player_id = id
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	add_child(character)
-	character.set_params_for_player.rpc(id, Vector3i(5, 5, 5), 30, 200)
-
+	character.set_params_for_player.rpc(id, Vector3i(5, 5, 5), 30, 200, spawned_players * 10)
+	spawned_players += 1
+	
 @rpc("authority", "call_local", "reliable")
 func _on_game_start(player_teams, player_names):
 	Network.player_teams = player_teams
 	Network.player_names = player_names
 	Audiocontroller.play_game_music()
+	Network.has_seen_end_screen.clear()
 	var myteam = player_teams[str(multiplayer.get_unique_id())]
 	for player_id in player_teams.keys():
 		if player_id == str(multiplayer.get_unique_id()):

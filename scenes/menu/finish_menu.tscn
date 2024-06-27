@@ -109,6 +109,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Winner1" type="Label" parent="WinnerLabel"]
+layout_mode = 0
 offset_top = 60.0
 offset_right = 800.0
 offset_bottom = 121.0
@@ -121,6 +122,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Winner2" type="Label" parent="WinnerLabel"]
+layout_mode = 0
 offset_top = 120.0
 offset_right = 800.0
 offset_bottom = 181.0
@@ -133,6 +135,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LoserLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = -183.0
 offset_top = 258.0
 offset_right = 617.0
@@ -147,6 +150,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Loser1" type="Label" parent="LoserLabel"]
+layout_mode = 0
 offset_top = 60.0
 offset_right = 800.0
 offset_bottom = 121.0
@@ -159,6 +163,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Loser2" type="Label" parent="LoserLabel"]
+layout_mode = 0
 offset_top = 120.0
 offset_right = 800.0
 offset_bottom = 181.0

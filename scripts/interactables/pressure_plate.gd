@@ -57,9 +57,13 @@ func _on_area_3d_body_exited(body) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func set_finish_screen(team):
+	if Network.has_seen_end_screen.has(multiplayer.get_unique_id()):
+		return
+	Network.has_seen_end_screen.append(multiplayer.get_unique_id())
+	
 	var spawned_finish = finish.instantiate()
 	
-	get_node("/root/Main/SpawnedItems").add_child(spawned_finish)
+	get_node("/root/Main/SpawnedItems").add_child(spawned_finish, true)
 	spawned_finish.old_teams = Network.player_teams
 	spawned_finish.other_team_member_id = Network.other_team_member_id
 	spawned_finish.win_team = team
@@ -67,10 +71,9 @@ func set_finish_screen(team):
 	spawned_finish.other_ids = Network.get_other_team_ids(multiplayer.get_unique_id())
 	
 	spawned_finish.set_screen()
-	if not multiplayer.is_server():
-		return
-		
-	Network.go_to_lobby(null)
+
+	if multiplayer.is_server():
+		Network.go_to_lobby(null)
 
 #func _input(event):
 	#if event is InputEventKey:

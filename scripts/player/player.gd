@@ -30,7 +30,7 @@ var AnimPunching: bool = false
 
 @onready var HpBar = $PlayerCombat/SubViewport/HpBar
 
-var lobby_spawn = Vector3(0, 11, 20)
+var lobby_spawn = Vector3(-20, 11, 20)
 var game_spawn = {1: [Vector3(3, 3, 5), Vector3(3, 3, 11)],2: [Vector3(3, 3, -5), Vector3(3, 3, -11)]}
 
 
@@ -39,7 +39,7 @@ func _enter_tree():
 	alive = get_node_or_null("../../HUD") == null
 
 @rpc("authority", "call_local", "reliable")
-func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
+func set_params_for_player(id, new_scale, new_walk_speed, new_accel, margin):
 	if str(id) != str(multiplayer.get_unique_id()):
 		return
 	$Pivot.scale = new_scale
@@ -50,7 +50,7 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 	walk_speed = new_walk_speed
 	walk_acceleration = new_accel
 	walk_deceleration = new_accel * 1.2
-  
+	position = lobby_spawn + Vector3(margin, 0, 0)
 
 func _ready():
 	var hud = get_node_or_null("../../HUD")
@@ -60,9 +60,7 @@ func _ready():
 
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
-		var players_joined = multiplayer.get_peers().size()
-		var spawn_margin = 5
-		position = lobby_spawn + Vector3(players_joined * spawn_margin, 0, 0)
+		return
 	elif multiplayer.get_peers().size() > 0 and Network.other_team_member_id != null:
 		var is_lower = 0 if multiplayer.get_unique_id() < int(Network.other_team_member_id) else 1
 		position = game_spawn[Network.player_teams[str(multiplayer.get_unique_id())]][is_lower]
