@@ -88,7 +88,7 @@ func check_wall_placement(floor_plan: Array, x: int, z: int) -> bool:
 	var max_z: int = floor_plan.size()
 
 
-	if x < 0 or x >= max_x or z < 0 or z >= max_z:
+	if x < 0 or x >= max_x - 1 or z < 0 or z >= max_z:
 		return false
 
 	if floor_plan[z][x]:
@@ -129,8 +129,8 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 		return false
 	floor_plan[new_z - 1][new_x - 1] = items.WALL
 	# TODO: Replace by actual walls which are currently broken
-	GlobalSpawner.spawn_box(absolute_position + Vector3(new_x, 2, new_z))
-	GlobalSpawner.spawn_box(absolute_position + Vector3(new_x, 2, -new_z))
+	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -1, new_z))
+	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -1, -new_z))
 	return true
 
 # This function will try to fit a wall on the floor plan given the restrictions
@@ -253,8 +253,10 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 		return false
 
 	floor_plan[z - 1][x - 1] = items.BUFF
-	GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, z))
-	GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, -z))
+	var buff : int = 0
+	buff = GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, z))
+	if buff != -1:
+		GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, -z), buff, false)
 	return true
 
 func add_box(floor_plan, object, width, height, start) -> bool:

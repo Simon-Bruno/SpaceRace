@@ -1,4 +1,4 @@
-[gd_scene load_steps=199 format=3 uid="uid://cehfbggdu6pms"]
+[gd_scene load_steps=201 format=3 uid="uid://cehfbggdu6pms"]
 
 [ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="1_c8374"]
 [ext_resource type="ArrayMesh" uid="uid://4g5okcm4kxgj" path="res://assets/CustomBlocks/floors/floor1-0.obj" id="2_ypwlb"]
@@ -7,9 +7,7 @@
 [ext_resource type="ArrayMesh" uid="uid://hx4fj6y6ov43" path="res://assets/CustomBlocks/floors/floor4-0.obj" id="5_3i472"]
 [ext_resource type="ArrayMesh" uid="uid://4wacjj0sbdcj" path="res://assets/CustomBlocks/floors/Floor5-0.obj" id="6_63nai"]
 [ext_resource type="ArrayMesh" uid="uid://cxxr8xwiv5k67" path="res://assets/CustomBlocks/floors/floorVent-0.obj" id="7_l5id4"]
-[ext_resource type="ArrayMesh" uid="uid://ccw74040hni0u" path="res://assets/CustomBlocks/walls/wallSwitchOff.obj" id="7_mp7k4"]
 [ext_resource type="ArrayMesh" uid="uid://c0pt3we810hih" path="res://assets/CustomBlocks/floors/floorWater-0.obj" id="8_0lb8y"]
-[ext_resource type="ArrayMesh" uid="uid://bt2pv70cfe85u" path="res://assets/CustomBlocks/walls/wallSwitchOn.obj" id="8_1lrnb"]
 [ext_resource type="ArrayMesh" uid="uid://dke68gwn616xq" path="res://assets/CustomBlocks/walls/wallButton.obj" id="9_7xk7a"]
 [ext_resource type="ArrayMesh" uid="uid://ccd0q27uv0njb" path="res://assets/CustomBlocks/doors/doorClosedL.obj" id="9_pp2xx"]
 [ext_resource type="ArrayMesh" uid="uid://b0qffqe60h7bs" path="res://assets/CustomBlocks/doors/doorClosedR.obj" id="10_5i0cv"]
@@ -144,7 +142,9 @@
 [ext_resource type="ArrayMesh" uid="uid://b1projr4x1fcf" path="res://assets/CustomBlocks/texturesMilou/bottleSmall.obj" id="144_x47tq"]
 [ext_resource type="ArrayMesh" uid="uid://b214u71rtw5xg" path="res://assets/CustomBlocks/texturesMilou/bottleSpeedSmall.obj" id="145_rl150"]
 [ext_resource type="ArrayMesh" uid="uid://dd7c68sgj4eew" path="res://assets/CustomBlocks/texturesMilou/bottleStrengthSmall.obj" id="146_nersc"]
+[ext_resource type="Shader" path="res://assets/CustomBlocks/transparant_walls.gdshader" id="147_4gg8g"]
 [ext_resource type="ArrayMesh" uid="uid://dhbnylau7hpug" path="res://assets/CustomBlocks/texturesMilou/dynamite.obj" id="147_tfw84"]
+[ext_resource type="Shader" path="res://assets/CustomBlocks/transparant_walls2.gdshader" id="148_jkvjv"]
 [ext_resource type="ArrayMesh" uid="uid://c5twhw5vagtxt" path="res://assets/CustomBlocks/items/key_in-0.obj" id="156_pshy5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0814s"]
@@ -303,6 +303,16 @@ size = Vector3(0.405029, 0.718506, 0.915222)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5tom"]
 albedo_texture = ExtResource("139_gmssk")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y6pb"]
+render_priority = 0
+shader = ExtResource("147_4gg8g")
+shader_parameter/albedo_texture = ExtResource("1_c8374")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drtcx"]
+render_priority = 0
+shader = ExtResource("148_jkvjv")
+shader_parameter/albedo_texture = ExtResource("1_c8374")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Floor1" type="MeshInstance3D" parent="."]
@@ -454,7 +464,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.749011)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallSwitchOff" type="MeshInstance3D" parent="."]
-mesh = ExtResource("7_mp7k4")
+mesh = ExtResource("79_4dj6a")
 surface_material_override/0 = SubResource("StandardMaterial3D_5igbu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallSwitchOff"]
@@ -464,7 +474,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.741809)
 shape = SubResource("BoxShape3D_67aft")
 
 [node name="WallSwitchOn" type="MeshInstance3D" parent="."]
-mesh = ExtResource("8_1lrnb")
+mesh = ExtResource("85_rw7ei")
 surface_material_override/0 = SubResource("StandardMaterial3D_40r6n")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallSwitchOn"]
@@ -1279,3 +1289,23 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = ExtResource("147_tfw84")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_d5tom")
+
+[node name="WallTransparant" type="MeshInstance3D" parent="."]
+mesh = ExtResource("16_kk65b")
+surface_material_override/0 = SubResource("ShaderMaterial_6y6pb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallTransparant"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallTransparant/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.742914)
+shape = SubResource("BoxShape3D_67aft")
+
+[node name="WallTransparant2" type="MeshInstance3D" parent="."]
+mesh = ExtResource("16_kk65b")
+surface_material_override/0 = SubResource("ShaderMaterial_drtcx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallTransparant2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallTransparant2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.742914)
+shape = SubResource("BoxShape3D_67aft")

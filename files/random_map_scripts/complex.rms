@@ -49,6 +49,20 @@ create_wall {
     length_variation 5
 }
 
+create_wall {
+    set_min_distance 16
+    set_max_distance 25
+    length 7
+    length_variation 5
+}
+
+create_wall {
+    set_min_distance 20
+    set_max_distance 25
+    length 5
+    length_variation 2
+}
+
 <OBJECTS_GENERATION>
 create_object BUTTON
 {
@@ -96,4 +110,25 @@ create_object BOX
 {
     set_min_distance 2
     set_max_distance 30
+}
+
+create_object BUFF
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object BUFF
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+<ENEMY_GENERATION>
+
+create_mob MELEE
+{
+    set_min_distance 8
+    set_max_distance 20
+    set_group_size 3
 }
