@@ -12,7 +12,7 @@ func _find_best_candidate():
 
 	# find item with smallest distance
 	for candidate in candidates:
-		if candidate.get_parent().owned or candidate.global_transform.origin.z * Network.inverted < 0:
+		if candidate.get_parent().owned:
 			continue
 
 		var d = global_position.distance_to(candidate.global_position)
@@ -27,8 +27,8 @@ func _hold_item(item):
 	_freeze.rpc(item.get_path(), true)
 	holding = item
 	_set_this_player_to_hold_item.rpc(multiplayer.get_unique_id(), item.get_path())
-	
-	
+
+
 @rpc("any_peer", "call_local", "reliable")
 func _freeze(path, f):
 	if multiplayer.is_server():
@@ -57,7 +57,7 @@ func _drop_item():
 	# Drop the item
 	if holding and is_instance_valid(holding):
 		_freeze.rpc(holding.get_path(), false)
-		
+
 		_set_this_player_to_drop_item.rpc(multiplayer.get_unique_id(), holding.get_path())
 		holding = null
 
@@ -87,5 +87,3 @@ func _process(_delta):
 			return
 		if holding and is_instance_valid(holding):
 			_use_item()
-		else:
-			print("Error: ITEM IS NULL")
