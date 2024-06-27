@@ -323,8 +323,9 @@ func die():
 
 	# reset globals
 	AnimDeath = false
-	walk_speed = temp
 	request_play_animation(0, "stop")
+	await get_tree().create_timer(1.2).timeout  # wait to respawn
+	walk_speed = temp
 
 
 func _on_respawn_immunity_timeout():
