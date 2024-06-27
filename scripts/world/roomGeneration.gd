@@ -31,6 +31,7 @@ func _ready():
 					filenames.append(file)
 				file = dir.get_next()
 		var filename = filenames[randi() % filenames.size()]
+		filename = "complex.rms"
 		var world_dict : Dictionary = parser.parse_file("res://files/random_map_scripts/" +  filename)
 		fill_room(world_dict, start, end, last_room)
 
@@ -127,8 +128,9 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 	if not check_wall_placement(floor_plan, new_x - 1, new_z - 1):
 		return false
 	floor_plan[new_z - 1][new_x - 1] = items.WALL
-	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -0.5, new_z))
-	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -0.5, -new_z))
+	# TODO: Replace by actual walls which are currently broken
+	GlobalSpawner.spawn_box(absolute_position + Vector3(new_x, 2, new_z))
+	GlobalSpawner.spawn_box(absolute_position + Vector3(new_x, 2, -new_z))
 	return true
 
 # This function will try to fit a wall on the floor plan given the restrictions
@@ -199,8 +201,9 @@ func wall_sort(wall_a, wall_b) -> bool:
 func add_walls(floor_plan : Array[Array], wall_list : Array, width : int, height : int, start : Vector3i) -> void:
 	wall_list.sort_custom(wall_sort)
 	for wall in wall_list:
-		if not handle_wall(floor_plan, wall, width, height, start):
-			handle_wall(floor_plan, wall, width, height, start)
+		for i in 10:
+			if handle_wall(floor_plan, wall, width, height, start):
+				break
 
 # This function will calculate a position (x, z) for the object to spawn. This
 # will consider the size of the room and object restrictions, but will not care
@@ -353,8 +356,9 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 
 		floor_plan[z - 1][x - 1] = items.BUTTON
 		angle = deg_to_rad(orientation)
-		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis().rotated(Vector3(0, 1, 0), angle), laser, false)
-		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), -angle), laser2, false)
+		var rotated_basis = Basis().rotated(Vector3(0, 1, 0), deg_to_rad(90))
+		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), rotated_basis.rotated(Vector3(0, 1, 0), angle), laser, false)
+		GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), rotated_basis.rotated(Vector3(0, 1, 0), -angle), laser2, false)
 
 	return true
 
@@ -373,8 +377,9 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	doors[0].deactivated()
 	doors[1].deactivated()
 	var angle = deg_to_rad(orientation)
-	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), Basis().rotated(Vector3(0, 1, 0), angle), doors[0], false)
-	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), Basis().rotated(Vector3(0, 1, 0), -angle), doors[1], false)
+	var rotated_basis = Basis().rotated(Vector3(0, 1, 0), deg_to_rad(90))
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, z), rotated_basis.rotated(Vector3(0, 1, 0), angle), doors[0], false)
+	GlobalSpawner.spawn_button(absolute_position + Vector3(x, -1, -z), rotated_basis.rotated(Vector3(0, 1, 0), -angle), doors[1], false)
 	return true
 
 
