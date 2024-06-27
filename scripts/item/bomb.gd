@@ -5,8 +5,8 @@ extends "res://scripts/item/item.gd"
 
 var bomb_damage = 50
 
-var vel_y = 8
-var vel_multiplier = 1.5
+var vel_y = 10
+var vel_multiplier = 1.8
 
 func use():
 	var player = Network.get_player_node_by_id(owned_id)

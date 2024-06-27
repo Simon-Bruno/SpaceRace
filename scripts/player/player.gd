@@ -111,6 +111,9 @@ func _vertical_movement(delta):
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
+	
+	if alive and global_position.y < -1:
+		global_position.y = 2
 
 	return h + v
 
