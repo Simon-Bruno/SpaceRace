@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmd1ukqi3i7ue"]
+[gd_scene load_steps=7 format=3 uid="uid://dmd1ukqi3i7ue"]
 
 [ext_resource type="Script" path="res://scripts/interactables/portal.gd" id="1_n1drk"]
 [ext_resource type="ArrayMesh" uid="uid://4srb48ud25u2" path="res://assets/CustomBlocks/placable/teleporter.obj" id="2_euq4q"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_jnsqu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gg1hi"]
 size = Vector3(1.4005, 0.786255, 1.40259)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6w7d"]
+albedo_texture = ExtResource("2_jnsqu")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lenfv"]
 properties/0/path = NodePath(".:position")
@@ -34,6 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00276947, -0.407654, 0.000
 shape = SubResource("BoxShape3D_gg1hi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Portal"]
+material_override = SubResource("StandardMaterial3D_n6w7d")
 mesh = ExtResource("2_euq4q")
 skeleton = NodePath("../..")
 
