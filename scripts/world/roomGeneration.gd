@@ -31,7 +31,6 @@ func _ready():
 					filenames.append(file)
 				file = dir.get_next()
 		var filename = filenames[randi() % filenames.size()]
-		filename = "hinder.rms"
 		var world_dict : Dictionary = parser.parse_file("res://files/random_map_scripts/" +  filename)
 		fill_room(world_dict, start, end, last_room)
 
