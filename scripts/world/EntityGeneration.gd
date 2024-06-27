@@ -165,43 +165,32 @@ func spawn_lasers_room(room : Array, mirrored : bool) -> void:
 
 func match_interactable_and_laser(item : Array, interactables : Array, mirrored : bool) -> void:
 	var location = map_to_local(item[1])
+	var activate = false
 
 	var total_interactions = interactables.size() - 1
 	for interactable in interactables:
 		if interactable[0] in solopressures:
 			total_interactions = 1
 
-	var laser = GlobalSpawner.spawn_laser(location, find_laser_basis(item[1]), false, total_interactions, false, false, false)
+	var laser = GlobalSpawner.spawn_laser(location, find_laser_basis(item[1]), false, total_interactions, false, false, true)
 	set_cell_item(location, EMPTY)
 	
 	for interactable in interactables:
 		if interactable[0] in switcheson or interactable[0] in switchesoff:
 			connect_button_laser(laser, interactable)
 		if interactable[0] in multipressures or interactable[0] in solopressures:
+			laser = GlobalSpawner.spawn_laser(location, find_laser_basis(item[1]), false, total_interactions, false, false, false)
 			connect_pressureplate_laser(laser, interactable)
+		
 
 # Handles all laser spawning
 func spawn_lasers(rooms : Array) -> void:
 	laser_timer()
-	#colored_lasers()
 
 
 func laser_timer() -> void:
 	for timer in get_used_cells_by_item(LASERTIMER):
 		GlobalSpawner.spawn_laser(map_to_local(timer), find_laser_basis(timer), true)
-
-
-# Spawns a laser at all laser spawnpoints in the map.
-func colored_lasers() -> void:
-	var lasers = []
-	for type in [LASERB, LASERG, LASERO, LASERP, LASERR, LASERY]:
-		lasers += get_used_cells_by_item(type)
-
-	if lasers.size() == 0:
-		return
-
-	for laser in lasers:
-		GlobalSpawner.spawn_laser(map_to_local(laser), find_laser_basis(laser), false)
 
 
 func find_laser_basis(laser):
@@ -308,7 +297,7 @@ func connect_button(door : StaticBody3D, interactable : Array) -> void:
 
 
 func connect_button_laser(laser, interactable : Array) -> void:
-	var inverted = false if interactable[0] in switchesoff else true
+	var inverted = true if interactable[0] in switchesoff else false
 	var location = map_to_local(interactable[1])
 	location.y = 2
 	var button = GlobalSpawner.spawn_button(location, get_basis_with_orthogonal_index(interactable[2]), laser, inverted)
