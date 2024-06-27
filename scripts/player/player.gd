@@ -144,6 +144,8 @@ func play_animation(anim_player, animation):
 func stop_animations():
 	$Pivot/AnimationPlayer.stop()
 	$Pivot/AnimationPlayer2.stop()
+	$Pivot/AnimationPlayer3.stop()
+	$Pivot/AnimationPlayer4.stop()
 
 
 # request other clients to play animation
@@ -177,7 +179,7 @@ func anim_handler():
 		else:
 			if velocity != Vector3.ZERO && velocity.y == 0:
 				if not ($Pivot/AnimationPlayer.is_playing() or $Pivot/AnimationPlayer2.is_playing()
-				or $Pivot/AnimationPlayer3.is_playing()):
+				or $Pivot/AnimationPlayer3.is_playing() or $Pivot/AnimationPlayer4.is_playing()):
 					request_play_animation(4, "walk")
 			if velocity == Vector3.ZERO and not AnimJump and not AnimDeath:
 				request_play_animation(0, "stop")
@@ -186,17 +188,27 @@ func anim_handler():
 
 
 func _push_objects():
+	if name != str(multiplayer.get_unique_id()):
+		return
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var collider = c.get_collider()
 		if not collider is RigidBody3D or not collider.get_parent().is_in_group("Moveables"):
 			continue
 
-		collider.set_axis_velocity( - c.get_normal() * walk_speed * speed_boost * push_pull_factor)
+		_set_velocity_on_object.rpc(collider.get_path(), \
+		 - c.get_normal() * walk_speed * speed_boost * push_pull_factor)
 		break
 
+@rpc("any_peer", "call_local", "reliable")
+func _set_velocity_on_object(path, velo):
+	if not multiplayer.is_server():
+		return
+	get_node(path).set_axis_velocity(velo)
 
 func _pull_objects():
+	if name != str(multiplayer.get_unique_id()):
+		return
 	var bodies = $PullArea.get_overlapping_bodies()
 	for body in bodies:
 		if not body.get_parent().is_in_group("Moveables") \
@@ -208,7 +220,22 @@ func _pull_objects():
 		v.x = pull_direction.x * walk_speed * speed_boost * push_pull_factor
 		v.z = pull_direction.z * walk_speed * speed_boost * push_pull_factor
 
-		body.set_axis_velocity(v)
+		_set_velocity_on_object.rpc(body.get_path(), v)
+
+func _on_pull_area_body_entered(body):
+	if name != str(multiplayer.get_unique_id()):
+		return
+	if not body.get_parent().is_in_group("Moveables") \
+		or global_transform.origin.distance_to(body.global_transform.origin) < min_pull_dist:
+			return
+	body.get_node("PullText").visible = true
+
+func _on_pull_area_body_exited(body):
+	if name != str(multiplayer.get_unique_id()):
+		return
+	if not body.get_parent().is_in_group("Moveables"):
+			return
+	body.get_node("PullText").visible = false
 
 
 func _physics_process(delta):
@@ -298,8 +325,9 @@ func die():
 
 	# reset globals
 	AnimDeath = false
-	walk_speed = temp
 	request_play_animation(0, "stop")
+	await get_tree().create_timer(1.2).timeout  # wait to respawn
+	walk_speed = temp
 
 
 func _on_respawn_immunity_timeout():

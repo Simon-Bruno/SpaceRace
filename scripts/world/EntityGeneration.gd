@@ -6,6 +6,7 @@ enum {PRESSUREPLATE=28}
 # Items without links
 enum {SMALLBOX=27, EMPTY=-1}
 enum {ENEMY=88, RANGEDENEMY=89, BOSS=91, SPAWNERMELEE=92, SPAWNERRANGED=93, WELDER=90, LASERTIMER=94, DYNAMITE=143}
+var misc = [ENEMY, RANGEDENEMY, BOSS, SPAWNERMELEE, SPAWNERRANGED, WELDER, LASERTIMER, DYNAMITE]
 
 # Items that respond to interactables.
 enum {LASERB=56, LASERG=57, LASERO=58, LASERP=59, LASERR=60, LASERY=61}
@@ -69,7 +70,7 @@ func replace_entities(rooms : Array) -> void:
 	replace_unused()
 
 func remove_all_placeholder():
-	var list = [88, 89, 91, 27, 92, 93, 90, 94, 143]
+	var list = misc
 	list.append_array(blue)
 	list.append_array(green)
 	list.append_array(orange)
@@ -441,8 +442,6 @@ func spawn_teleporters(rooms : Array) -> void:
 func spawn_teleporters_room(room : Array, mirrored : bool) -> void:
 	var items = find_in_room(teleporters, room, mirrored)
 	items.sort_custom(sort_on_items)
-	#assert(items.size() % 2 == 0)
-	print(room)
 	for i in range(0, items.size(), 2):
 		var location1 = map_to_local(items[i][1])
 		var basis1 = get_basis_with_orthogonal_index(items[i][2])
