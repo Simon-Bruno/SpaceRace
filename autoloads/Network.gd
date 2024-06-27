@@ -15,6 +15,8 @@ var max_client_connections = 3
 var loaded_world = preload("res://scenes/lobby/lobby.tscn")
 var loaded_menu = preload("res://scenes/menu/menu.tscn")
 
+const LOBBY_PATH = "/root/Main/SpawnedItems/Lobby"
+
 var inverted = 1
 var other_team_member_id = null
 var other_team_member_node = null
@@ -132,8 +134,10 @@ func _on_leave_button_pressed():
 	if world:
 		world.queue_free()
 	get_node("/root/Main/SpawnedItems").remove_child(world)
+	var lobby = get_node_or_null(LOBBY_PATH)
+	if lobby:
+		lobby.queue_free()
 	get_node("/root/Main/SpawnedItems").add_child(loaded_menu.instantiate())
-
 
 
 func _on_server_disconnected():
