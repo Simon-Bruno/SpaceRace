@@ -22,5 +22,5 @@ func settings_menu_input() -> void:
 			return
 		tab_container.set_current_tab(tab_container.current_tab + 1)
 
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") and get_parent().get_parent().get_parent().visible:
 		back.emit()

@@ -104,9 +104,9 @@ func _on_settings_back_button_down():
 
 var last_parent
 func set_notification_and_show(text, parent):
-	$DialogMessage/Text.text = text
-	$DialogMessage.visible = true
-	parent.visible = false
+	#$DialogMessage/Text.text = text
+	#$DialogMessage.visible = true
+	#parent.visible = false
 	last_parent = parent
 
 func _on_quit_button_pressed():
