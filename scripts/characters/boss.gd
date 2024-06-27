@@ -24,6 +24,9 @@ var nodes_in_area : Array = []
 
 @export var enemy_scene : PackedScene
 
+var AttackAnim: bool = false
+var alive: bool = true
+
 var spawn_thresholds = [0.75, 0.5, 0.25]
 var spawned_enemies = false
 var charging = false
@@ -36,7 +39,7 @@ var charge_speed = 35
 @onready var HpBar = $SubViewport/HpBar
 @onready var SpinTimer = $SpinTimer
 @onready var ChargeTimer = $ChargeTimer
-@onready var MeshInstance = $enemy_textures
+@onready var MeshInstance = $enemy_textures/Armature/Skeleton3D/Untitled
 
 enum State { IDLE, CHARGING, SPINNING }
 var original_albedo_color = Color(1.0, 1.0, 1.0, 1.0)
@@ -51,7 +54,7 @@ func _ready():
 		original_albedo_color = MeshInstance.material_override.albedo_color
 
 func reset_spin_timer():
-	SpinTimer.wait_time = 8.0 + randf() * 5.0
+	SpinTimer.wait_time = 8.0 + randf_range(0, 8)
 	SpinTimer.start()
 
 func _on_spin_timer_timeout():
@@ -60,7 +63,7 @@ func _on_spin_timer_timeout():
 	reset_spin_timer()
 
 func reset_charge_timer():
-	ChargeTimer.wait_time = 8.0 + randf() * 5.0
+	ChargeTimer.wait_time = 8.0 + randf_range(0, 8)
 	ChargeTimer.start()
 
 func _on_charge_timer_timeout():
@@ -77,7 +80,18 @@ func _process(delta):
 	if player_in_attack_zone and closest_target_node.get_node("./PlayerCombat/GetHitCooldown"):
 		if not closest_target_node.respawn_immunity:
 			closest_target_node.take_damage.rpc(closest_target_node.name, 20)
-
+			if not AttackAnim and alive:  # animation logic
+				AttackAnim = true
+				$enemy_textures/AnimationPlayer.stop()			
+				$enemy_textures/AnimationPlayer.play("zombie_attack")
+				await get_tree().create_timer(1.05).timeout  # wait for animation to finish
+				if alive:
+					$enemy_textures/AnimationPlayer.stop()
+				if closest_target_node:  # make sure node still exists
+					if player_in_attack_zone:  # make sure player is still in range of attack
+						closest_target_node.take_damage.rpc(closest_target_node.name, 20)
+				AttackAnim = false
+				
 	if health <= 0:
 		die()
 
@@ -102,14 +116,17 @@ func _physics_process(delta):
 		var target_direction = (closest_target_node.global_transform.origin - global_transform.origin).normalized()
 		velocity.x = lerp(velocity.x, target_direction.x * speed, acceleration * delta)
 		velocity.z = lerp(velocity.z, target_direction.z * speed, acceleration * delta)
-		
+		if velocity.x > 0 or velocity.z > 0 and not AttackAnim and alive:
+			if not $enemy_textures/AnimationPlayer.is_playing():
+				$enemy_textures/AnimationPlayer.play("zombie_walk")
 		var look_at_position = Vector3(target_position.x, global_transform.origin.y, target_position.z)
 		look_at(look_at_position)
 		rotate_y(PI)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
 		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
-
+		if not AttackAnim and alive:
+			$enemy_textures/AnimationPlayer.stop()
 	move_and_slide()
 
 func _on_detection_area_body_entered(body):
@@ -158,6 +175,9 @@ func die():
 	#TODO: Last damaged not working
 	#if last_damaged_by.is_in_group("Players"):
 		#last_damaged_by.points += 5
+	alive = false
+	$enemy_textures/AnimationPlayer.stop()
+	$enemy_textures/AnimationPlayer.play("death")
 	Audiocontroller.play_boss_roar_sfx()
 	queue_free()
 	
