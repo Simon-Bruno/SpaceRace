@@ -1,6 +1,16 @@
-[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=10 format=3 uid="uid://coe56ya7xmdq5"]
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=15 format=3 uid="uid://coe56ya7xmdq5"]
 
 [ext_resource type="Script" path="res://resources/settings/PlayerKeybindResource.gd" id="1_0cgf0"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_at8ta"]
+device = -1
+physical_keycode = 49
+unicode = 49
+
+[sub_resource type="InputEventKey" id="InputEventKey_rk64x"]
+device = -1
+physical_keycode = 50
+unicode = 50
 
 [sub_resource type="InputEventKey" id="InputEventKey_p1okg"]
 device = -1
@@ -37,9 +47,23 @@ device = -1
 physical_keycode = 68
 unicode = 100
 
+[sub_resource type="InputEventKey" id="InputEventKey_wv8f7"]
+device = -1
+physical_keycode = 71
+unicode = 103
+
 [sub_resource type="InputEventKey" id="InputEventKey_ilbaf"]
 device = -1
 physical_keycode = 4194309
+
+[sub_resource type="InputEventKey" id="InputEventKey_y2j8h"]
+device = -1
+physical_keycode = 4194325
+
+[sub_resource type="InputEventKey" id="InputEventKey_ovwe6"]
+device = -1
+physical_keycode = 81
+unicode = 113
 
 [resource]
 script = ExtResource("1_0cgf0")
@@ -51,3 +75,8 @@ DEFAULT_JUMP_KEY = SubResource("InputEventKey_6qn00")
 DEFAULT_INTERACT_KEY = SubResource("InputEventKey_cn0m7")
 DEFAULT_ATTACK_KEY = SubResource("InputEventKey_p1okg")
 DEFAULT_OPEN_CHAT_KEY = SubResource("InputEventKey_ilbaf")
+DEFAULT_OBJECT_KEY = SubResource("InputEventKey_wv8f7")
+DEFAULT_USE_ITEM_KEY = SubResource("InputEventKey_ovwe6")
+DEFAULT_ABILITY_1_KEY = SubResource("InputEventKey_at8ta")
+DEFAULT_ABILITY_2_KEY = SubResource("InputEventKey_rk64x")
+DEFAULT_PULL_KEY = SubResource("InputEventKey_y2j8h")
