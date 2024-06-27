@@ -84,7 +84,6 @@ func update_beam():
 func _process(delta):
 	if timer_active:
 		handle_timer(delta)
-
 	if target != null and active:
 		target.take_damage.rpc(target.name, 10000)
 

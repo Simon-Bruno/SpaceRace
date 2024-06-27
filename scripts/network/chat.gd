@@ -33,7 +33,11 @@ func _input(event):
 
 
 func _process(_delta):
-	fps_meter.text = "FPS: " + str(Engine.get_frames_per_second())
+	if SettingsContainer.get_fps_meter():
+		fps_meter.visible = true
+		fps_meter.text = "FPS: " + str(Engine.get_frames_per_second())
+	else:
+		fps_meter.visible = false
 
 
 # Handle send button pressed for chat functionality
@@ -108,7 +112,7 @@ func set_caret_pos():
 
 # Called when the message input field gets focus
 func _on_message_input_focus_entered():
-	Global.in_chat = true # To disable other actions when in chat #TODO remove
+	Global.in_chat = true 
 	message_display.visible = true
 	message_input.set_max_length(1024)
 	set_caret_pos()
@@ -119,9 +123,9 @@ func _on_message_input_focus_entered():
 func _on_message_input_focus_exited():
 	if message_input.get_rect().has_point(get_local_mouse_position()) and \
 	 message_input.has_focus():
-		Global.in_chat = true # TODO remove global
+		Global.in_chat = true
 	else:
-		Global.in_chat = false # TODO remove global
+		Global.in_chat = false
 		start_message_timer()
 
 
@@ -139,7 +143,7 @@ func commands():
 	if leave_game() or easter_egg() or stop_easter_egg() \
 	or mute_master_command() or mute_music_command() or mute_sfx_command() \
 	or unmute_master_command() or unmute_music_command() or unmute_sfx_command() \
-	or respawn_command() or rizz_command():
+	or rizz_command():
 		return true
 
 
@@ -214,12 +218,6 @@ func rizz_command():
 		Audiocontroller.play_rizz_sfx()
 		return true
 
-
-func respawn_command():
-	if message_input.text == "/respawn":
-		#var player_spawner = get_node("/root/Main/SpawnedItems/World/PlayerSpawner")
-		#player_spawner.respawn_player()
-		return true
 
 # Called when the message timer times out, hides the message display if the
 # input field is not focused

@@ -9,6 +9,7 @@ extends Control
 func _play_button_pressed():
 	$StartMenu.visible = false
 	$PlayMenu.visible = true
+	Audiocontroller.play_ui_press_sfx()
 	
 func _back_button_pressed():
 	$PlayMenu.visible = false
@@ -23,6 +24,7 @@ func set_input_invalid(field):
 	field.add_theme_stylebox_override("normal", original)
 
 func _join_button_pressed():
+	Audiocontroller.play_ui_press_sfx()
 	var username_val = username.text 
 	if username_val == "":
 		set_input_invalid(username)
@@ -37,9 +39,11 @@ func _back_to_play_menu():
 	$HostMenu.visible = false
 	$PlayMenu.visible = true
 	username.visible = true
+	Audiocontroller.play_ui_press_sfx()
 
 # Called when the node enters the scene tree for the first time.
 func _on_host_pressed():
+	Audiocontroller.play_ui_press_sfx()
 	var username_val = username.text 
 	if username_val == "":
 		set_input_invalid(username)
@@ -65,10 +69,10 @@ func _on_host_menu_pressed():
 	var hosting = await Network._on_host_pressed(port)
 	if !hosting:
 		set_notification_and_show("Could not create game!", $Host)
-		
+
 	_back_to_play_menu()
 	_back_button_pressed()
-	
+
 func _on_join_menu_pressed():
 	var username_val = username.text 
 	if username_val == "":
@@ -89,7 +93,7 @@ func _on_join_menu_pressed():
 
 	if !Network._on_join_pressed(ip, port):
 		set_notification_and_show("Could not join game", $Join)
-		
+	
 	_back_to_play_menu()
 	_back_button_pressed()
 
@@ -97,17 +101,20 @@ func _on_settings_button_pressed():
 	$StartMenu.visible = false
 	settings.set_process(true)
 	settings.visible = true
+	Audiocontroller.play_ui_press_sfx()
 
 func _on_settings_back_button_down():
 	$StartMenu.visible = true
 	settings.visible = false
 
+
 var last_parent
 func set_notification_and_show(text, parent):
-	$DialogMessage/Text.text = text
-	$DialogMessage.visible = true
-	parent.visible = false
+	#$DialogMessage/Text.text = text
+	#$DialogMessage.visible = true
+	#parent.visible = false
 	last_parent = parent
 
 func _on_quit_button_pressed():
+	Audiocontroller.play_ui_press_sfx()
 	get_tree().quit()
