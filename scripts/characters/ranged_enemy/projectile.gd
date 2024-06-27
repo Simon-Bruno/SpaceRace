@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @export var lifespan : float = 5.0
 @export var speed : float = 30.0
-@export var shooter: CharacterBody3D = null
+@export var shooter_is_player: bool = false
 var damage : int = 50
 var direction: Vector3
 
@@ -20,12 +20,12 @@ func _physics_process(delta):
 	var collision = move_and_collide(motion)
 
 	if collision:
-		if collision.get_collider().is_in_group("Boss") and shooter.is_in_group("Boss"):
+		if collision.get_collider().is_in_group("Boss") and not shooter_is_player:
 			return
 		if collision.get_collider().is_in_group("Players"):
 			collision.get_collider().take_damage.rpc(collision.get_collider().name, damage)
 		if collision.get_collider().is_in_group("Enemies"):
 			if collision.get_collider().has_method("take_damage"):
-				collision.get_collider().take_damage.rpc(damage, shooter.global_transform.origin)
+				collision.get_collider().take_damage.rpc(damage, global_transform.origin)
 		queue_free()
 

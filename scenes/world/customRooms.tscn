@@ -25,6 +25,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="StartRoom" type="Node3D" parent="."]
 transform = Transform3D(1.2363, 0, 0, 0, 1.2363, 0, 0, 0, 1.2363, 0, 0, 0)
+visible = false
 
 [node name="Statics" type="GridMap" parent="StartRoom"]
 mesh_library = ExtResource("1_pfhvf")
@@ -114,7 +115,6 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Button1" type="Node3D" parent="."]
-visible = false
 
 [node name="Statics" type="GridMap" parent="Button1"]
 mesh_library = ExtResource("1_pfhvf")
@@ -128,7 +128,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 mesh_library = ExtResource("1_pfhvf")
 cell_scale = 1.25
 data = {
-"cells": PackedInt32Array(65539, 1, 1441830, 65539, 2, 1441800, 65537, 0, 76, 65536, 6, 1048652, 65539, 5, 1441874, 65538, 7, 655442)
+"cells": PackedInt32Array(65539, 1, 1441830, 65537, 0, 76, 65536, 6, 1048652, 65539, 5, 1441874, 65538, 7, 655442)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 

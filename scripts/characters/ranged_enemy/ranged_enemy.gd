@@ -64,6 +64,7 @@ func fire_projectile():
 		get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 		projectile_instance.global_transform.origin = global_transform.origin + spawn_offset
 		projectile_instance.direction = direction_to_player
+		projectile_instance.shooter_is_player = false
 		
 func _on_detection_area_body_entered(body):
 	if not multiplayer.is_server():
