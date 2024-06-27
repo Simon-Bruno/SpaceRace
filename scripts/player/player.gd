@@ -80,7 +80,7 @@ func _horizontal_movement(delta):
 	if current_direction != Vector2.ZERO: # Accelerate if moving
 		speed = min(walk_speed * walkspeed_multiplier * speed_boost, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_speed * delta)
-		basis = $Pivot.basis.looking_at(Vector3(direction.x, 0, direction.y))
+		basis = $Pivot.basis.looking_at(Vector3(direction.x, 0, direction.y * Network.inverted))
 		_push_objects()
 
 
