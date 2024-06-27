@@ -43,10 +43,7 @@ func make_keybinds_dict():
 		keybind_resource.INTERACT: keybind_resource.interact_key,
 		keybind_resource.ATTACK: keybind_resource.attack_key,
 		keybind_resource.OPEN_CHAT: keybind_resource.open_chat_key,
-		keybind_resource.OBJECT: keybind_resource.object_key,
 		keybind_resource.USE_ITEM: keybind_resource.use_item_key,
-		keybind_resource.ABILITY_1: keybind_resource.ability_1_key,
-		keybind_resource.ABILITY_2: keybind_resource.ability_2_key,
 		keybind_resource.PULL: keybind_resource.pull_key
 	}
 
@@ -114,14 +111,8 @@ func get_keybind(action : String):
 				return keybind_resource.DEFAULT_ATTACK_KEY
 			keybind_resource.OPEN_CHAT:
 				return keybind_resource.DEFAULT_OPEN_CHAT_KEY
-			keybind_resource.OBJECT:
-				return keybind_resource.DEFAULT_OBJECT_KEY
 			keybind_resource.USE_ITEM:
 				return keybind_resource.DEFAULT_USE_ITEM_KEY
-			keybind_resource.ABILITY_1:
-				return keybind_resource.DEFAULT_ABILITY_1_KEY
-			keybind_resource.ABILITY_2:
-				return keybind_resource.DEFAULT_ABILITY_2_KEY
 			keybind_resource.PULL:
 				return keybind_resource.DEFAULT_PULL_KEY
 	else:
@@ -142,14 +133,8 @@ func get_keybind(action : String):
 				return keybind_resource.attack_key
 			keybind_resource.OPEN_CHAT:
 				return keybind_resource.open_chat_key
-			keybind_resource.OBJECT:
-				return keybind_resource.object_key
 			keybind_resource.USE_ITEM:
 				return keybind_resource.use_item_key
-			keybind_resource.ABILITY_1:
-				return keybind_resource.ability_1_key
-			keybind_resource.ABILITY_2:
-				return keybind_resource.ability_2_key
 			keybind_resource.PULL:
 				return keybind_resource.pull_key
 
@@ -196,14 +181,8 @@ func set_keybind(action : String, event):
 			keybind_resource.attack_key = event
 		keybind_resource.OPEN_CHAT:
 			keybind_resource.open_chat_key = event
-		keybind_resource.OBJECT:
-			keybind_resource.object_key = event
 		keybind_resource.USE_ITEM:
 			keybind_resource.use_item_key = event
-		keybind_resource.ABILITY_1:
-			keybind_resource.ability_1_key = event
-		keybind_resource.ABILITY_2:
-			keybind_resource.ability_2_key = event
 		keybind_resource.PULL:
 			keybind_resource.pull_key = event
 		
@@ -218,10 +197,7 @@ func on_keybinds_loaded(data : Dictionary):
 	var loaded_interact = InputEventKey.new()
 	var loaded_attack = InputEventKey.new()
 	var loaded_open_chat = InputEventKey.new()
-	var loaded_object = InputEventKey.new()
 	var loaded_use_item = InputEventKey.new()
-	var loaded_ability_1 = InputEventKey.new()
-	var loaded_ability_2 = InputEventKey.new()
 	var loaded_pull = InputEventKey.new()
 
 	loaded_move_left.set_physical_keycode(int(data.move_left))
@@ -232,10 +208,7 @@ func on_keybinds_loaded(data : Dictionary):
 	loaded_interact.set_physical_keycode(int(data.interact))
 	loaded_attack.set_physical_keycode(int(data.attack))
 	loaded_open_chat.set_physical_keycode(int(data.open_chat))
-	loaded_object.set_physical_keycode(int(data.object))
 	loaded_use_item.set_physical_keycode(int(data.use_item))
-	loaded_ability_1.set_physical_keycode(int(data.ability_1))
-	loaded_ability_2.set_physical_keycode(int(data.ability_2))
 	loaded_pull.set_physical_keycode(int(data.pull))
 	
 	keybind_resource.move_left_key = loaded_move_left
@@ -246,10 +219,7 @@ func on_keybinds_loaded(data : Dictionary):
 	keybind_resource.interact_key = loaded_interact
 	keybind_resource.attack_key = loaded_attack
 	keybind_resource.open_chat_key = loaded_open_chat
-	keybind_resource.object_key = loaded_object
 	keybind_resource.use_item_key = loaded_use_item
-	keybind_resource.ability_1_key = loaded_ability_1
-	keybind_resource.ability_2_key = loaded_ability_2
 	keybind_resource.pull_key = loaded_pull
 	
 

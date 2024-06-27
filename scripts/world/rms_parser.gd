@@ -48,6 +48,8 @@ func segment_to_dict(segment : String) -> Dictionary:
 		line = line.split(" ", false, 1)
 		if line[0] == "type":
 			dict["type"] = line[1]
+		elif line[0] == 'buff_type':
+			dict['buff_type'] = line[1]
 		elif len(line) > 1:
 			dict[line[0]] = int(line[1])
 		elif line[0] == "set_loose_grouping":
