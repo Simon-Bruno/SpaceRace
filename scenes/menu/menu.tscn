@@ -850,6 +850,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_ynktt")
 text = "Back"
 
 [node name="PlayMenu" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="JoinButton" type="Button" parent="PlayMenu"]
 offset_left = 14.0
@@ -885,7 +886,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_ynktt")
 text = "Back"
 
 [node name="StartMenu" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PlayButton" type="Button" parent="StartMenu"]
 offset_left = 14.0
