@@ -152,6 +152,8 @@ create_object ENEMY_LASER
     set_min_distance 8
     set_max_distance 10
     set_activation 10
+    set_button_min 3
+    set_button_max 15
 }
 
 create_object BUFF
