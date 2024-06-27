@@ -161,7 +161,7 @@ func take_damage(damage, player_origin):
 		#last_damaged_by = source
 		
 	HpBar.value = float(health) / max_health * 100
-		
+	Audiocontroller.play_boss_hurt_sfx()
 	if health <= 0:
 		die()
 
@@ -178,6 +178,7 @@ func die():
 	alive = false
 	$enemy_textures/AnimationPlayer.stop()
 	$enemy_textures/AnimationPlayer.play("death")
+	Audiocontroller.play_boss_roar_sfx()
 	queue_free()
 	
 	if interactable_door != null:
@@ -201,7 +202,8 @@ func spawn_enemies():
 			enemy.set_physics_process(true)
 			enemy.set_process(true)
 			enemy.call_deferred("chase_player", last_damaged_by)
-			enemy.add_to_group("Boss")
+      enemy.add_to_group("Boss")
+	Audiocontroller.play_boss_spawn_minions_sfx()
 
 func start_charge():
 	if not multiplayer.is_server():

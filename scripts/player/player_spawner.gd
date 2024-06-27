@@ -18,6 +18,7 @@ func player_died(player_to_die):
 	fall_acceleration = player_to_die.fall_acceleration	
 	player_to_die.fall_acceleration = 0
 	$RespawnTimer.start()
+	Audiocontroller.play_player_respawn_sfx()
 	dead_player = player_to_die
 
 func respawn_player():
@@ -26,7 +27,7 @@ func respawn_player():
 	player.get_node("PlayerCombat/SubViewport/HpBar").value = Global.player_max_health
 	player.alive = true
 	player.visible = true
-	player.global_position.y -= 198
+	player.global_position.y -= 199
 	player.fall_acceleration = fall_acceleration
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
 
