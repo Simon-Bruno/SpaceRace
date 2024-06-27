@@ -84,17 +84,17 @@ func _on_detection_area_body_exited(body):
 		nodes_in_area.erase(body)
 		
 # Used in player script when attacking an enemy, apply_damage_to_enemy
-func take_damage(damage, source):
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(damage, player_pos):
 	if not multiplayer.is_server():
 		return
 	health = max(0, health - damage)
-	last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
 		
 	if health <= 0:
 		die() 
 
-	var knockback_direction = (global_transform.origin - source.global_transform.origin).normalized()
+	var knockback_direction = (global_transform.origin - player_pos).normalized()
 	velocity.x += knockback_direction.x * knockback_strength
 	velocity.z += knockback_direction.z * knockback_strength
 
