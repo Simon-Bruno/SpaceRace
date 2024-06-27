@@ -146,4 +146,5 @@ func _on_random_body_exited(body):
 
 
 func _on_area_quit_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	Network._on_leave_button_pressed()
+	if not get_node_or_null("/root/Main/SpawnedItems/World"):
+		Network._on_leave_button_pressed()

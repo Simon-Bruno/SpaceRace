@@ -45,8 +45,13 @@ skeleton = NodePath("../WorldGeneration")
 script = ExtResource("4_hk2br")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.866026, -0.433013, 0.25, 0, 0.5, 0.866026, -0.5, -0.75, 0.433013, 0, 133, 0)
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 100, 0)
+layers = 3
 light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
 shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_reverse_cull_face = true
 shadow_blur = 0.0
+directional_shadow_mode = 0
 directional_shadow_fade_start = 0.0

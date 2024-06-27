@@ -51,7 +51,6 @@ properties/12/replication_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l85fr"]
 resource_name = "palette"
-cull_mode = 2
 albedo_texture = ExtResource("2_j50l0")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_387ij"]
