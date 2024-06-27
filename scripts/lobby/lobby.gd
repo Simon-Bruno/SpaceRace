@@ -1,7 +1,7 @@
 extends Node
 
 @onready var start_timer = Timer.new()
-@onready var pause_menu = $CanvasLayer/PauseMenu
+@onready var pause_menu = $PauseMenu
 @onready var quit_button_area = $AreaQuit
 
 
@@ -31,8 +31,7 @@ func _process(_delta):
 			$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
 	if Input.is_action_just_pressed("pause"):
 		pause_menu.handle_esc_input()
-
-
+		
 func _ready():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
