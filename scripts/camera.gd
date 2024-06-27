@@ -9,6 +9,7 @@ var other_player_id = null
 #camera interpolation speed
 var move_speed = 2
 
+@onready var light = $"../../world/DirectionalLight3D"
 # calculate how many players are in the team
 func get_player_count():
 	var playercount: int = 0
@@ -25,7 +26,7 @@ func get_player_count():
 	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
 		global_transform.origin = Vector3(0, 25, 0)
 		global_transform.basis = Basis.looking_at(Vector3(0, -9, 10))
-		$"../../world/DirectionalLight3D".rotation.y -= 180
+		light.rotation.y -= 180
 		Network.inverted = -1
 		var transform = global_transform
 		transform.basis.x = -transform.basis.x
