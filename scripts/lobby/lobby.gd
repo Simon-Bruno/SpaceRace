@@ -1,7 +1,7 @@
 extends Node
 
 @onready var start_timer = Timer.new()
-@onready var pause_menu = $CanvasLayer/PauseMenu
+@onready var pause_menu = $PauseMenu
 @onready var quit_button_area = $AreaQuit
 
 
