@@ -144,6 +144,8 @@ func play_animation(anim_player, animation):
 func stop_animations():
 	$Pivot/AnimationPlayer.stop()
 	$Pivot/AnimationPlayer2.stop()
+	$Pivot/AnimationPlayer3.stop()
+	$Pivot/AnimationPlayer4.stop()
 
 
 # request other clients to play animation
