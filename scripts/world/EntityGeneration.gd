@@ -331,7 +331,7 @@ func connect_pressureplate_laser(laser, interactable : Array) -> void:
 
 func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
-	location.y = 2
+	location.y = 4
 	var boss = GlobalSpawner.spawn_boss(location)
 	boss.interactable_door = door
 
