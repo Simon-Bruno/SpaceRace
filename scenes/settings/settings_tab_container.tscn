@@ -181,18 +181,6 @@ action_name = "attack"
 layout_mode = 2
 action_name = "open_chat"
 
-[node name="Keybind_Rebind_Button9" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_8avhk")]
-layout_mode = 2
-action_name = "object"
-
-[node name="Keybind_Rebind_Button10" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_8avhk")]
-layout_mode = 2
-action_name = "ability_1"
-
-[node name="Keybind_Rebind_Button11" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_8avhk")]
-layout_mode = 2
-action_name = "ability_2"
-
 [node name="Keybind_Rebind_Button12" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("6_8avhk")]
 layout_mode = 2
 action_name = "use_item"
