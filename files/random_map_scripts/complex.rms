@@ -1,0 +1,134 @@
+<WALL_SETUP>
+
+create_wall {
+    set_min_distance 5
+    set_max_distance 5
+    length 10
+    length_variation 2
+}
+
+create_wall {
+    set_min_distance 4
+    set_max_distance 6
+    length 3
+    length_variation 1
+}
+
+create_wall {
+    set_min_distance 4
+    set_max_distance 6
+    length 3
+    length_variation 1
+}
+
+create_wall {
+    set_min_distance 6
+    set_max_distance 10
+    length 6
+    length_variation 3
+}
+
+create_wall {
+    set_min_distance 10
+    set_max_distance 12
+    length 6
+    length_variation 2
+}
+
+create_wall {
+    set_min_distance 10
+    set_max_distance 15
+    length 10
+    length_variation 5
+}
+
+create_wall {
+    set_min_distance 12
+    set_max_distance 18
+    length 7
+    length_variation 5
+}
+
+create_wall {
+    set_min_distance 16
+    set_max_distance 25
+    length 7
+    length_variation 5
+}
+
+create_wall {
+    set_min_distance 20
+    set_max_distance 25
+    length 5
+    length_variation 2
+}
+
+<OBJECTS_GENERATION>
+create_object BUTTON
+{
+    set_min_distance 5
+    set_max_distance 7
+}
+
+create_object BUTTON
+{
+    set_min_distance 8
+    set_max_distance 12
+}
+
+create_object BUTTON
+{
+    set_min_distance 15
+    set_max_distance 20
+}
+
+create_object LASER
+{
+    set_min_distance 4
+    set_max_distance 8
+}
+
+create_object LASER
+{
+    set_min_distance 6
+    set_max_distance 10
+}
+
+create_object BOX
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object BOX
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object BOX
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object BUFF
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+create_object BUFF
+{
+    set_min_distance 2
+    set_max_distance 30
+}
+
+<ENEMY_GENERATION>
+
+create_mob MELEE
+{
+    set_min_distance 8
+    set_max_distance 20
+    set_group_size 3
+}

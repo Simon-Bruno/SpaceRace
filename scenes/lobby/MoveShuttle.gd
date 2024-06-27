@@ -22,7 +22,7 @@ func _process(delta):
 	speed += ACCELERATION * delta
 	
 	# Move the shuttle to the left
-	position += transform.basis * Vector3(-speed, speed/7, 0) * delta
+	position += transform.basis * Vector3(-speed/2, speed/30, 0) * delta
 	
 	# Check if the object has started moving
 	#if not has_started_moving and speed > 0:
