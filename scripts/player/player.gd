@@ -116,7 +116,6 @@ func _player_movement(delta):
 
 
 func check_distance(target_velocity):
-	print(global_transform.origin.y)
 	if Network.other_team_member_node != null:
 		var player_pos = global_transform.origin
 		var player2_pos = Network.other_team_member_node.global_transform.origin
