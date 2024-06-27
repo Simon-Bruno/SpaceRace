@@ -54,15 +54,12 @@ const REGEN_OVER = preload("res://assets/audio/sfx/regen_over.ogg")
 const RIZZ = preload("res://assets/audio/sfx/rizz.ogg")
 const SABOTAGED = preload("res://assets/audio/sfx/sabotaged.ogg")
 const SABOTAGING = preload("res://assets/audio/sfx/sabotaging.ogg")
-const START_1 = preload("res://assets/audio/sfx/start1.ogg")
-const START_2 = preload("res://assets/audio/sfx/start2.ogg")
 const TEAMMATE_DEATH = preload("res://assets/audio/sfx/teammate_death.ogg")
 const TELEPORTATION = preload("res://assets/audio/sfx/teleportation.ogg")
 const TERMINAL = preload("res://assets/audio/sfx/terminal.ogg")
 const UI_PRESS = preload("res://assets/audio/sfx/ui_press.ogg")
 const UNPICK_TEAM_FIXED = preload("res://assets/audio/sfx/unpick_team_fixed.ogg")
-const VICTORY_1 = preload("res://assets/audio/sfx/victory1.ogg")
-const VICTORY_2 = preload("res://assets/audio/sfx/victory2.ogg")
+const VICTORY = preload("res://assets/audio/sfx/victory2.ogg")
 const WALKING = preload("res://assets/audio/sfx/walking.ogg")
 const ZOMBIE_CHASING = preload("res://assets/audio/sfx/zombie_chasing.ogg")
 const ZOMBIE_DEATH = preload("res://assets/audio/sfx/zombie_death.ogg")
@@ -80,9 +77,10 @@ var cur_hslider_val_sfx: float
 func _ready():
 	play_menu_music()
 
-func play_music(music):
+func play_music(music, volume_db : float = 0.0):
 	var music_controller = get_node(MUSIC_CONTROLLER_PATH)
 	music_controller.stream = music
+	music_controller.volume_db = volume_db
 	change_audio_bus_music_controller("Music")
 	music_controller.play()
 	
@@ -96,17 +94,17 @@ func play_sfx(sfx, volume_db : float = 0):
 	await sfx_controller.finished
 	sfx_controller.queue_free()
 
-func play_menu_music():
-	play_music(GALACTIC_GROOVE__MENU_)
+func play_menu_music(volume_db : float = 0.0):
+	play_music(GALACTIC_GROOVE__MENU_, volume_db)
 
-func play_lobby_music():
-	play_music(GALACTIC_SHOWDOWN__LOBBY_)
+func play_lobby_music(volume_db : float = 0.0):
+	play_music(GALACTIC_SHOWDOWN__LOBBY_, volume_db)
 
-func play_game_music():
-	play_music(GALACTIC_BATTLE__IN_GAME_)
+func play_game_music(volume_db : float = 0.0):
+	play_music(GALACTIC_BATTLE__IN_GAME_, volume_db)
 
-func play_finish_menu_music():
-	play_music(FINISH_MENU_AUDIO)
+func play_finish_menu_music(volume_db : float = 15.0):
+	play_music(FINISH_MENU_AUDIO, volume_db)
 
 func play_ability_1_sfx(volume_db : float = 0.0):
 	play_sfx(ABILITY_UP_1, volume_db)
@@ -135,10 +133,10 @@ func play_bomb_ignition_sfx(volume_db: float = 0.0):
 func play_boss_hurt_sfx(volume_db: float = 0.0):
 	play_sfx(BOSS_HURT, volume_db)
 
-func play_boss_roar_sfx(volume_db: float = 0.0):
+func play_boss_roar_sfx(volume_db: float = -5.0):
 	play_sfx(BOSS_ROAR, volume_db)
 
-func play_boss_spawn_minions_sfx(volume_db: float = 0.0):
+func play_boss_spawn_minions_sfx(volume_db: float = -10.0):
 	play_sfx(BOSS_SPAWN_MINIONS, volume_db)
 
 func play_button_sfx(volume_db: float = 0.0):
@@ -198,10 +196,10 @@ func play_moving_wood_sfx(volume_db: float = 0.0):
 func play_pick_team_sfx(volume_db: float = 0.0):
 	play_sfx(PICK_TEAM, volume_db)
 
-func play_player_death(volume_db : float = 0.0):
+func play_player_death_sfx(volume_db : float = 0.0):
 	play_sfx(PLAYER_DEATH, volume_db)
 
-func play_player_respawn(volume_db: float = 0.0):
+func play_player_respawn_sfx(volume_db: float = 0.0):
 	play_sfx(PLAYER_RESPAWN, volume_db)
 
 func play_player_walk_1_sfx(volume_db: float = 0.0):
@@ -231,17 +229,14 @@ func play_sabotaged_sfx(volume_db: float = 0.0):
 func play_sabotaging_sfx(volume_db: float = 0.0):
 	play_sfx(SABOTAGING, volume_db)
 
-func play_start_1_sfx(volume_db: float = 0.0):
-	play_sfx(START_1, volume_db)
-
-func play_start_2_sfx(volume_db: float = 0.0):
-	play_sfx(START_2, volume_db)
-
 func play_teammate_death_sfx(volume_db: float = 0.0):
 	play_sfx(TEAMMATE_DEATH, volume_db)
 
 func play_teleportation_sfx(volume_db : float = 0.0):
 	play_sfx(TELEPORTATION, volume_db)
+
+func play_terminal_sfx(volume_db : float = 0.0):
+	play_sfx(TERMINAL, volume_db)
 
 func play_ui_press_sfx(volume_db: float = 0.0):
 	play_sfx(UI_PRESS, volume_db)
@@ -249,11 +244,8 @@ func play_ui_press_sfx(volume_db: float = 0.0):
 func play_unpick_team_sfx(volume_db: float = 0.0):
 	play_sfx(UNPICK_TEAM_FIXED, volume_db)
 
-func play_victory_1_sfx(volume_db: float = 0.0):
-	play_sfx(VICTORY_1, volume_db)
-
-func play_victory_2_sfx(volume_db: float = 0.0):
-	play_sfx(VICTORY_2, volume_db)
+func play_victory_sfx(volume_db: float = -5.0):
+	play_sfx(VICTORY, volume_db)
 
 func play_walking_sfx(volume_db: float = 0.0):
 	play_sfx(WALKING, volume_db)
