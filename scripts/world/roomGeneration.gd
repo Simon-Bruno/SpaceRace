@@ -250,6 +250,10 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
+	var buff = ""
+	var buff_id = -1
+	if object.has('buff_type'):
+		buff = object['buff_type']
 
 	if floor_plan[z - 1][x - 1] > items.PATH:
 		return false
