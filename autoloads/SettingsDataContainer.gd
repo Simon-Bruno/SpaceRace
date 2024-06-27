@@ -9,7 +9,7 @@ var resolution_mode_index : int = 0
 var master_volume : float = 0.0
 var music_volume : float = 0.0
 var sfx_volume : float = 0.0
-var fps_state : bool = false
+var fps_state : bool = true
 var loaded_data : Dictionary = {}
 
 

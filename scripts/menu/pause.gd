@@ -47,9 +47,11 @@ func _resume_game():
 
 func _on_resume_button_pressed():
 	_resume_game()
+	Audiocontroller.play_ui_press_sfx()
 
 
 func _on_settings_button_pressed():
+	Audiocontroller.play_ui_press_sfx()
 	settings.set_process(true)
 	settings.visible = true
 
@@ -61,6 +63,7 @@ func _on_settings_back_button_down():
 func _on_titlescreen_button_pressed():
 	Network._on_leave_button_pressed()
 	Audiocontroller.play_menu_music()
+	Audiocontroller.play_ui_press_sfx()
 	self.visible = false
 	Global.in_pause = false
 	var lobby = get_node_or_null(LOBBY_PATH)
