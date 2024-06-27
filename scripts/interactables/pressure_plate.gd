@@ -14,7 +14,8 @@ func _ready() -> void:
 	var target_node_name = "WorldGeneration"
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
-	update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
+	if multiplayer.is_server():
+		update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 
 #Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
