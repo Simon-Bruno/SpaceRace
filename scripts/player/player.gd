@@ -285,7 +285,6 @@ func _input(event):
 func take_damage(id, damage):
 	if str(id) != str(multiplayer.get_unique_id()):
 		return
-
 	if !respawn_immunity and alive and getHitCooldown:
 		health = max(0, health - damage)
 		getHitCooldown = false
@@ -326,7 +325,7 @@ func die():
 	# reset globals
 	AnimDeath = false
 	request_play_animation(0, "stop")
-	await get_tree().create_timer(1.2).timeout  # wait to respawn
+	await get_tree().create_timer(0.8).timeout  # wait to respawn
 	walk_speed = temp
 	
 	$PlayerItem._drop_item()

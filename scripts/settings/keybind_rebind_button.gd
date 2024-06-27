@@ -37,6 +37,16 @@ func set_action_name():
 			label.text = "Attack"
 		"open_chat":
 			label.text = "Open Chat"
+		"object":
+			label.text = "Object"
+		"ability_1":
+			label.text = "Ability 1"
+		"ability_2":
+			label.text = "Ability 2"
+		"use_item":
+			label.text = "Use Item"
+		"pull":
+			label.text = "Pull"
 
 
 func set_text_for_key():
