@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0seif0vxjwe5"]
+[gd_scene load_steps=7 format=3 uid="uid://b0seif0vxjwe5"]
 
 [ext_resource type="Script" path="res://scripts/interactables/keyhole.gd" id="1_hryjt"]
 [ext_resource type="ArrayMesh" uid="uid://cirqvh26xwxee" path="res://assets/CustomBlocks/colorCoded/keyholeGreen.obj" id="2_n51ek"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_xv5g7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvw3i"]
+albedo_texture = ExtResource("2_xv5g7")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6lkek"]
 size = Vector3(0.77449, 1.22026, 0.641479)
@@ -26,6 +30,7 @@ script = ExtResource("1_hryjt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00670907, -0.122433)
+material_override = SubResource("StandardMaterial3D_kvw3i")
 mesh = ExtResource("2_n51ek")
 
 [node name="Area3D" type="Area3D" parent="."]

@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://3w41m2g82qdm"]
+[gd_scene load_steps=7 format=3 uid="uid://3w41m2g82qdm"]
 
 [ext_resource type="Script" path="res://scripts/interactables/pressure_plate.gd" id="1_p0lul"]
 [ext_resource type="ArrayMesh" uid="uid://h7b6lfsliy2w" path="res://assets/CustomBlocks/placable/pressurePlateOff.obj" id="2_3y3ev"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="2_vt0lw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vs4r"]
+albedo_texture = ExtResource("2_vt0lw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vr0lf"]
 size = Vector3(1.19525, 0.516479, 1.1936)
@@ -19,6 +23,7 @@ transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PressurePlate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.802957, 0)
+material_override = SubResource("StandardMaterial3D_1vs4r")
 mesh = ExtResource("2_3y3ev")
 
 [node name="Area3D" type="Area3D" parent="PressurePlate"]

@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccek02gtq5hdq"]
+[gd_scene load_steps=8 format=3 uid="uid://ccek02gtq5hdq"]
 
 [ext_resource type="ArrayMesh" uid="uid://dg3olwqx5k0lf" path="res://assets/CustomBlocks/colorCoded/holeGreen.obj" id="1_txc2f"]
 [ext_resource type="Script" path="res://scripts/interactables/broken_wall.gd" id="1_w1hiq"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="3_5arej"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwt4t"]
+albedo_texture = ExtResource("3_5arej")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jalvn"]
 size = Vector3(1.00155, 1.06094, 0.745407)
@@ -26,6 +30,7 @@ script = ExtResource("1_w1hiq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_gwt4t")
 mesh = ExtResource("1_txc2f")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]

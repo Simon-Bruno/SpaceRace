@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdag77v4o8a35"]
+[gd_scene load_steps=5 format=3 uid="uid://cdag77v4o8a35"]
 
 [ext_resource type="PackedScene" uid="uid://bej2ury5pyyei" path="res://scenes/item/item.tscn" id="1_0gyqt"]
 [ext_resource type="ArrayMesh" uid="uid://c43p7oi2s4b1n" path="res://assets/CustomBlocks/items/welder.obj" id="2_8bjfa"]
+[ext_resource type="Texture2D" uid="uid://p18qpn0dl2yn" path="res://assets/CustomBlocks/textures.png" id="3_uxxel"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8wyg"]
+albedo_texture = ExtResource("3_uxxel")
 
 [node name="Welder" groups=["Welder"] instance=ExtResource("1_0gyqt")]
 
 [node name="MeshInstance3D" parent="RigidBody3D/MeshOrigin" index="0"]
+material_override = SubResource("StandardMaterial3D_y8wyg")
 mesh = ExtResource("2_8bjfa")
