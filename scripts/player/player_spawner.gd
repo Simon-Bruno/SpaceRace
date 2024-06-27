@@ -1,12 +1,10 @@
 extends Node
 
-
 func add_player_character(id):
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.add_to_group("Players")
 	character.name = str(id)
 	add_child(character)
-
 
 var dead_player = null
 var fall_acceleration = 0
@@ -27,9 +25,10 @@ func respawn_player():
 	player.get_node("PlayerCombat/SubViewport/HpBar").value = Global.player_max_health
 	player.alive = true
 	player.visible = true
-	player.global_position.y -= 199
+	player.global_position.y = 3.72094202041626
 	player.fall_acceleration = fall_acceleration
 	player.get_node("./PlayerCombat/RespawnImmunity").start()
+	player.respawn_immunity = true
 
 func _on_respawn_timer_timeout():
 	respawn_player()
