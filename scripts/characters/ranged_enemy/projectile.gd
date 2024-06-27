@@ -21,6 +21,7 @@ func _physics_process(delta):
 
 	if collision:
 		if collision.get_collider().is_in_group("Boss") and not shooter_is_player:
+			queue_free()
 			return
 		if collision.get_collider().is_in_group("Players"):
 			collision.get_collider().take_damage.rpc(collision.get_collider().name, damage)
