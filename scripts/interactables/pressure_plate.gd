@@ -18,6 +18,7 @@ func _ready() -> void:
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
 	if multiplayer.is_server():
+		await get_tree().create_timer(1.5).timeout
 		update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 
 #Search the gridmap of the world and returns it.

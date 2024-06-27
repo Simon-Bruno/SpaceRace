@@ -13,6 +13,7 @@ func _ready() -> void:
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
 	if multiplayer.is_server():
+		await get_tree().create_timer(1.5).timeout
 		update_mesh.rpc(customRooms.WALLSWITCHOFF)
 	if inverse:
 		handle_inverse_deactivation()
@@ -76,8 +77,8 @@ func _activate_switch():
 	else:
 		handle_inverse_activation()
 	activate = true
-	update_mesh.rpc(customRooms.WALLSWITCHON)
 	Audiocontroller.play_button_sfx()
+	update_mesh.rpc(customRooms.WALLSWITCHON)
 
 # Deactivate the switch and call the interactable deactivation.
 func _deactivate_switch():

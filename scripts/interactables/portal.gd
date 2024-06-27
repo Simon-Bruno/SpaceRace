@@ -9,9 +9,9 @@ func _ready():
 	var target_node_name = "WorldGeneration"
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
-	update_mesh(customRooms.TELEPORTER)
 	if multiplayer.is_server():
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1.5).timeout
+		update_mesh(customRooms.TELEPORTER)
 		set_interactable_on_clients.rpc(interactable.get_path())
 
 @rpc("authority", "call_remote", "reliable")
