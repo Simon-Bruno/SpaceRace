@@ -56,7 +56,7 @@ func _process(delta):
 				AttackAnim = true
 				$enemy_textures/AnimationPlayer.stop()			
 				$enemy_textures/AnimationPlayer.play("zombie_attack")
-				await get_tree().create_timer(1.05).timeout  # wait for animation to finish
+				await get_tree().create_timer(0.8).timeout  # wait for animation to finish
 				if alive:
 					$enemy_textures/AnimationPlayer.stop()
 				if closest_target_node:  # make sure node still exists

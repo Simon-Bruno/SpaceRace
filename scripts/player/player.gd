@@ -144,6 +144,8 @@ func play_animation(anim_player, animation):
 func stop_animations():
 	$Pivot/AnimationPlayer.stop()
 	$Pivot/AnimationPlayer2.stop()
+	$Pivot/AnimationPlayer3.stop()
+	$Pivot/AnimationPlayer4.stop()
 
 
 # request other clients to play animation
@@ -270,10 +272,12 @@ func _input(event):
 		if event.is_action_pressed("ability_1") and not Global.in_pause and not Global.in_chat:
 			$Class.ability1()
 			hudNode.useAbility(1)
+			Audiocontroller.play_health_pickup_regen_sfx()
 
 		if event.is_action_pressed("ability_2") and not Global.in_pause and not Global.in_chat:
 			$Class.ability2()
 			hudNode.useAbility(2)
+			Audiocontroller.play_sabotaging_sfx()
 
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
@@ -315,14 +319,15 @@ func die():
 	alive = false
 
 	request_play_animation(1, "death")  # play anim
-	Audiocontroller.play_player_death()
+	Audiocontroller.play_player_death_sfx()
 	await get_tree().create_timer(2).timeout  # wait for anim
 	get_parent().player_died(self)  # die
 
 	# reset globals
 	AnimDeath = false
-	walk_speed = temp
 	request_play_animation(0, "stop")
+	await get_tree().create_timer(1.2).timeout  # wait to respawn
+	walk_speed = temp
 
 
 func _on_respawn_immunity_timeout():

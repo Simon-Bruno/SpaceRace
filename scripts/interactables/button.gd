@@ -25,7 +25,8 @@ func update_interact_key():
 				var event_list = InputMap.action_get_events(action)
 				for event in event_list:
 					var key = event.as_text()
-					$ButtonText/SubViewport2/Label.text = "Press " + key
+					var first = key.find("(")
+					$ButtonText.text = "Press " + key.substr(0, first - 1)
 
 #Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
