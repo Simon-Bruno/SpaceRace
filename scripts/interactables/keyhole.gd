@@ -32,15 +32,15 @@ func _on_area_3d_body_entered(body):
 		return
 
 	if item.get_parent().is_in_group("Key"):
-		activate.rpc(item)
+		activate.rpc()
+		item.get_parent().consume_item()
 
 @rpc("any_peer", "call_local", "reliable")
-func activate(item):
+func activate():
 	if not multiplayer.is_server():
 		return
 	if interactable != null and not fixed:
 		interactable.activated()
-		item.get_parent().consume_item()
 
 	update_mesh.rpc(customRooms.KEYIN)
 	fixed = true
