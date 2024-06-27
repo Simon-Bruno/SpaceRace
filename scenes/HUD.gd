@@ -21,6 +21,9 @@ var abilitiesAvailable : bool = true
 
 var loaded_players = 0
 
+var sound_played = false
+
+
 @rpc("authority", "call_local", "reliable")
 func loaded():
 	loaded_players += 1
@@ -41,6 +44,9 @@ func _process(delta):
 		loaded_players = 0
 		return
 	elif not useTimer:
+		if not sound_played:
+			Audiocontroller.play_countdown_sfx()
+			sound_played = true
 		countdown -= delta
 		preGameCountDownLabel.text = "0%s" % [int(ceil(countdown))]
 		if countdown <= 0:

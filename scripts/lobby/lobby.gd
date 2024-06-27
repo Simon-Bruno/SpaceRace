@@ -92,36 +92,45 @@ func assign_teams():
 
 func _on_team1_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team1.has(body):
+		Audiocontroller.play_pick_team_sfx()
 		team1.append(body)
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 
 func _on_team1_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
+		if not Input.is_action_just_pressed("StartGame"):
+			Audiocontroller.play_unpick_team_sfx()
 		team1.erase(body)
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 
 func _on_team2_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team2.has(body):
+		Audiocontroller.play_pick_team_sfx()
 		team2.append(body)
 		$Assets/TeamB_plate2/TeamB_text.text = str(team2.size()) + "/2"
 		check_start_conditions()
 
 func _on_team2_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
+		if not Input.is_action_just_pressed("StartGame"):
+			Audiocontroller.play_unpick_team_sfx()
 		team2.erase(body)
 		$Assets/TeamB_plate2/TeamB_text.text = str(team2.size()) + "/2"
 		check_start_conditions()
 
 func _on_random_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not random.has(body):
+		Audiocontroller.play_pick_team_sfx()
 		random.append(body)
 		$Assets/Telepath/TeamX_text.text = str(random.size()) + "/4"
 		check_start_conditions()
 
 func _on_random_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
+		if not Input.is_action_just_pressed("StartGame"):
+			Audiocontroller.play_unpick_team_sfx()
 		random.erase(body)
 		$Assets/Telepath/TeamX_text.text = str(random.size()) + "/4"
 		check_start_conditions()

@@ -272,10 +272,12 @@ func _input(event):
 		if event.is_action_pressed("ability_1") and not Global.in_pause and not Global.in_chat:
 			$Class.ability1()
 			hudNode.useAbility(1)
+			Audiocontroller.play_health_pickup_regen_sfx()
 
 		if event.is_action_pressed("ability_2") and not Global.in_pause and not Global.in_chat:
 			$Class.ability2()
 			hudNode.useAbility(2)
+			Audiocontroller.play_sabotaging_sfx()
 
 
 # Lowers health by certain amount, cant go lower then 0. Starts hit cooldawn timer
@@ -317,7 +319,7 @@ func die():
 	alive = false
 
 	request_play_animation(1, "death")  # play anim
-	Audiocontroller.play_player_death()
+	Audiocontroller.play_player_death_sfx()
 	await get_tree().create_timer(2).timeout  # wait for anim
 	get_parent().player_died(self)  # die
 

@@ -16,3 +16,4 @@ func _on_back_button_button_down():
 	back_button_down.emit()
 	SettingsSignalBus.emit_settings_dictionary(SettingsContainer.make_storage_dict())
 	set_process(false)
+	Audiocontroller.play_ui_press_sfx()
