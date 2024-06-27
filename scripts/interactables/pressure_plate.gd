@@ -9,6 +9,9 @@ var customRooms : GridMap = null
 var bodies_on_plate: Array = []
 var finish = preload("res://scenes/menu/finish_menu.tscn")
 
+const CHAT_PATH = "/root/Main/SpawnedItems/World/Chat"
+const HUD_PATH = "/root/Main/SpawnedItems/World/HUD/InGame"
+
 # Called when button is placed in world. Sets the mesh instance to off.
 func _ready() -> void:
 	var target_node_name = "WorldGeneration"
@@ -56,6 +59,14 @@ func handle_plate_activation(body) -> void:
 		winner_id = body.name.to_int()
 		finish = finish.instantiate()
 		Audiocontroller.play_pressure_plate_sfx()
+		
+		var chat = get_node_or_null(CHAT_PATH)
+		var hud = get_node_or_null(HUD_PATH)
+		if chat != null:
+			chat.visible = false
+		if hud != null:
+			hud.visible = false
+
 		add_child(finish)
 	else:
 		if interactable != null:
