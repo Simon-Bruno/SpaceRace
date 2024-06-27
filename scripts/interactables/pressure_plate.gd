@@ -2,12 +2,13 @@ extends Node3D
 
 @export var interactable : Node
 @export var enemy_pos : Vector3i
-@export var winner_id : int
+var winner_team : int
 
 var is_finish_plate : bool = false
 var customRooms : GridMap = null
 var bodies_on_plate: Array = []
 var finish = preload("res://scenes/menu/finish_menu.tscn")
+var loaded_lobby = preload("res://scenes/lobby/lobby.tscn")
 
 const CHAT_PATH = "/root/Main/SpawnedItems/World/Chat"
 const HUD_PATH = "/root/Main/SpawnedItems/World/HUD/InGame"
@@ -54,21 +55,39 @@ func _on_area_3d_body_exited(body) -> void:
 			update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 			handle_plate_deactivation()
 
+@rpc("any_peer", "call_local", "reliable")
+func set_finish_screen(team):
+	var spawned_finish = finish.instantiate()
+	
+	get_node("/root/Main/SpawnedItems").add_child(spawned_finish)
+	spawned_finish.old_teams = Network.player_teams
+	spawned_finish.other_team_member_id = Network.other_team_member_id
+	spawned_finish.win_team = team
+	spawned_finish.time = get_node(HUD_PATH).get_parent().timer
+	spawned_finish.other_ids = Network.get_other_team_ids(multiplayer.get_unique_id())
+	
+	spawned_finish.set_screen()
+	if not multiplayer.is_server():
+		return
+		
+	Network.go_to_lobby(null)
+
+#func _input(event):
+	#if event is InputEventKey:
+		#if event.pressed and event.keycode == KEY_B:
+			#var body = Network.get_player_node_by_id(multiplayer.get_unique_id())
+			#var winner_team = Network.player_teams[body.name]
+			#Audiocontroller.play_pressure_plate_sfx()
+			#set_finish_screen.rpc(winner_team)
+
 # Handle the activation logic when a body enters the pressure plate
 func handle_plate_activation(body) -> void:
 	if is_finish_plate and body.is_in_group('Players'):
-		winner_id = body.name.to_int()
-		finish = finish.instantiate()
+		var winner_team = Network.player_teams[body.name]
 		Audiocontroller.play_pressure_plate_sfx()
+		set_finish_screen.rpc(winner_team)
 		
-		var chat = get_node_or_null(CHAT_PATH)
-		var hud = get_node_or_null(HUD_PATH)
-		if chat != null:
-			chat.visible = false
-		if hud != null:
-			hud.visible = false
 
-		add_child(finish)
 	else:
 		if interactable != null:
 			interactable.activated()

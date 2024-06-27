@@ -67,7 +67,7 @@ func _process(delta):
 		var minutes = floor(seconds / 60)
 		seconds = seconds % 60
 		seconds = "0%s" % [seconds] if seconds < 10 else str(seconds)
-		inGameTimerLabel.text = "%s.%s" % [minutes, seconds] if minutes > 0 else str(seconds)
+		inGameTimerLabel.text = "%s:%s" % [minutes, seconds] if minutes > 0 else str(seconds)
 	
 func useAbility(ability : int):
 	if not abilitiesAvailable or Network.in_terminal:
