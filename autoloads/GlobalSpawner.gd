@@ -210,6 +210,7 @@ func spawn_buff(pos, choice=0, random=true):
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
 	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene, bomb_scene]
+	#var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
 
 	if spawner:
 		var buff_scene = null
