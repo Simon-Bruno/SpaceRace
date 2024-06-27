@@ -24,53 +24,50 @@ enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
 
-@onready var roomLink : Node = get_node("../roomLink")
-@onready var entityGeneration : GridMap = get_node("../EntityGeneration")
+@onready var roomLink: Node = get_node("../roomLink")
+@onready var entityGeneration: GridMap = get_node("../EntityGeneration")
 
 # At what y level is the floor
-const HEIGHT : int = 0
-const ROTATIONS : Array = [0, 16, 10, 22]
+const HEIGHT: int = 0
+const ROTATIONS: Array = [0, 16, 10, 22]
 
 # Defines what blocks are associated together.
-const PAIRS : Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSEDL: DOORCLOSEDR,
-							DOORCLOSEDR:DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
+const PAIRS: Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSEDL: DOORCLOSEDR,
+							DOORCLOSEDR: DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
 const CUSTOMROOMPERCENTAGE : float = 0.5
 
 # General room parameters
-const room_amount : int = 4
-const room_width  : int = 10
-const room_height : int = 8
-const room_margin : int = 4
+const room_amount: int = 10
+const room_width: int = 10
+const room_height: int = 8
+const room_margin: int = 4
 
 # How much the room size can variate in increments of 2. e.g 10 with variation 1
 # can return 8, 10, or 12.
-var room_variation_x : int = 1
-var room_variation_y : int = 1
-
+var room_variation_x: int = 1
+var room_variation_y: int = 1
 
 # Stores the locations of the rooms. Each entry is: [width, height, startX, leftDoor, rightDoor]
-@export var rooms : Array = []
-@export var roomTypes : Array = []
-@export var room : Array = []
+@export var rooms: Array = []
+@export var roomTypes: Array = []
+@export var room: Array = []
 
 # Stores game seed, which will be randomized at start of game, can be set to
 # a custom value useing set_seed()
-@export var game_seed : int = 0
+@export var game_seed: int = 0
 
-@export var start_pos : Vector3i = Vector3i(0, 0, 0)
-@export var end_pos : Vector3i = Vector3i(0, 0, 0)
-@export var generate_room : bool = true
-@export var last_room : bool = false
-@export var absolute_position : Vector3i = Vector3i(0, 3, 0)
-
+@export var start_pos: Vector3i = Vector3i(0, 0, 0)
+@export var end_pos: Vector3i = Vector3i(0, 0, 0)
+@export var generate_room: bool = true
+@export var last_room: bool = false
+@export var absolute_position: Vector3i = Vector3i(0, 3, 0)
 
 # Called when the object is created in the scene
 func _enter_tree():
 	if multiplayer.is_server():
 		$"../MultiplayerSynchronizer".set_multiplayer_authority(multiplayer.get_unique_id())
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -80,7 +77,6 @@ func _ready() -> void:
 	else:
 		set_seed(game_seed)
 
-
 # Generates a news seed that is stored in the game_seed variable.
 func new_seed() -> void:
 	randomize()
@@ -88,12 +84,10 @@ func new_seed() -> void:
 	seed(random_seed)
 	game_seed = random_seed
 
-
 # Sets seed, and builds a new map based on that seed.
-func set_seed(given_seed : int) -> void:
+func set_seed(given_seed: int) -> void:
 	seed(given_seed)
 	build_map()
-
 
 # Main function that builds the map. Clears the map first to stop overlap.
 # TODO: Expand with all generation layers.
@@ -102,7 +96,7 @@ func build_map() -> void:
 	roomLink._ready()
 
 	define_rooms()
-	var pairs : Array = get_custom_rooms()
+	var pairs: Array = get_custom_rooms()
 	draw_rooms()
 
 	place_custom_room(pairs)
@@ -118,28 +112,24 @@ func build_map() -> void:
 
 	transparant()
 
-	convert_static_to_entities()
-
 func add_start():
 	write_room(rooms[0], 1, 0, true)
 	write_room(rooms[0], 1, 1, true)
 
-
 # Adds the pressureplate in the last room
 func add_finish():
-	write_room(rooms[-1], 0, 0, true)
-	write_room(rooms[-1], 0, 1, true)
+	write_room(rooms[ - 1], 0, 0, true)
+	write_room(rooms[ - 1], 0, 1, true)
 
-	var xlocation = rooms[-1][2]
+	var xlocation = rooms[- 1][2]
 
-	var plate = preload("res://scenes/interactables/pressure_plate.tscn").instantiate()
+	var plate = preload ("res://scenes/interactables/pressure_plate.tscn").instantiate()
 	plate.position = map_to_local(Vector3i((xlocation + 22), 0, 0))
 	plate.position.y = 2
 	plate.position.x += 1
 	plate.position.z -= 1
 	plate.is_finish_plate = true
 	add_child(plate, true)
-
 
 # Calls the convert functionality and removes all static items that have overlap.
 func convert_static_to_entities() -> void:
@@ -148,9 +138,8 @@ func convert_static_to_entities() -> void:
 		return
 	entityGeneration.replace_entities(rooms)
 
-
 # Randomly picks n unique indexes.
-func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
+func random_picks(total_picks: int, min_value: int, max_value: int) -> Array:
 	var all_options = []
 	for i in range(min_value, max_value):
 		all_options.append(i)
@@ -161,12 +150,10 @@ func random_picks(total_picks : int, min_value : int, max_value : int) -> Array:
 
 	return picks
 
-
 # Forces room margins.
 func reset_room_spacing() -> void:
 	for i in range(1, room_amount):
 		rooms[i][2] = rooms[i - 1][0] + rooms[i - 1][2] + room_margin
-
 
 # Randomly picks some rooms and corresponding custom rooms, edits the floorplan
 # and returns an array containing the pairs [original, new].
@@ -189,9 +176,9 @@ func get_custom_rooms() -> Array:
 		roomTypes[i[0]] = CUSTOM
 
 	var endroom = roomLink.get_room_size(0, true)
-	rooms[-1][0] = endroom[0]
-	rooms[-1][1] = endroom[1]
-	roomTypes[-1] = CUSTOM
+	rooms[- 1][0] = endroom[0]
+	rooms[- 1][1] = endroom[1]
+	roomTypes[- 1] = CUSTOM
 
 	var startroom = roomLink.get_room_size(1, true)
 	rooms[0][0] = startroom[0]
@@ -202,7 +189,6 @@ func get_custom_rooms() -> Array:
 
 	return pairs
 
-
 func place_item(scene, orientation, location):
 	var item = scene.instantiate()
 	item.position = location
@@ -211,8 +197,7 @@ func place_item(scene, orientation, location):
 	add_child(item, true)
 	return item
 
-
-func write_room(orig : Array, new : int, layer : int, special=false) -> void:
+func write_room(orig: Array, new: int, layer: int, special=false) -> void:
 	for y in range(0, 3):
 		for x in orig[0]:
 			for z in orig[1]:
@@ -224,18 +209,16 @@ func write_room(orig : Array, new : int, layer : int, special=false) -> void:
 				else:
 					entityGeneration.set_cell_item(Vector3i(x, y, z) + Vector3i(orig[2], 0, 0), item, orientation)
 
-
 # Function gets an Array containing the custom rooms that have been assigned,
 # and places their content on the correct location in the grid.
-func place_custom_room(pairs : Array) -> void:
+func place_custom_room(pairs: Array) -> void:
 	for pair in pairs:
 		var orig = rooms[pair[0]]
 		write_room(orig, pair[1], 0)
 		write_room(orig, pair[1], 1)
 
-
 # Rotates function to new
-static func new_orientation(item : int, orientation : int) -> int:
+static func new_orientation(item: int, orientation: int) -> int:
 	var new_rotation = []
 	match item:
 		WALLCORNER:
@@ -245,11 +228,9 @@ static func new_orientation(item : int, orientation : int) -> int:
 
 	return new_rotation[ROTATIONS.find(orientation)]
 
-
 # Checks if item needs to be switched. For multi item tiles.
-static func new_item(item : int) -> int:
+static func new_item(item: int) -> int:
 	return PAIRS[item] if PAIRS.has(item) else item
-
 
 # This function mirrors all item in the world and copies them to the -z axis.
 # It checks if an item needs to be rotated and, in case of a multi-block item,
@@ -262,8 +243,7 @@ func mirror_world() -> void:
 		orientation = new_orientation(item, orientation)
 		item = new_item(item)
 
-		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
-
+		var new_location = (x + Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		self.set_cell_item(new_location, item, orientation)
 
 	for x in entityGeneration.get_used_cells():
@@ -273,7 +253,7 @@ func mirror_world() -> void:
 		orientation = new_orientation(item, orientation)
 		item = new_item(item)
 
-		var new_location = (x +  Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
+		var new_location = (x + Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		entityGeneration.set_cell_item(new_location, item, orientation)
 
 func transparant():
@@ -287,13 +267,12 @@ func transparant():
 			self.set_cell_item(x, WALLTRANSPARANT2, orientation)
 
 # Places a window on the given coords, except for when there already is an item.
-func place_window(location : Vector3i) -> void:
-	if get_cell_item(location) != -1 or get_cell_item(location + Vector3i(1, 0, 0)) != -1:
+func place_window(location: Vector3i) -> void:
+	if get_cell_item(location) != - 1 or get_cell_item(location + Vector3i(1, 0, 0)) != - 1:
 		return
 
 	self.set_cell_item(location, WINDOWL)
 	self.set_cell_item(location + Vector3i(1, 0, 0), WINDOWR)
-
 
 # Draws windows with 2 normal walls in between and centers it on the middle of the wall.
 # Only works on the connecting walls.
@@ -306,9 +285,8 @@ func draw_windows() -> void:
 			start += 4
 			place_window(Vector3i(start, 1, 0))
 
-
 # Summs all x values in an array based on the rooms variable.
-static func sumXValues(the_rooms : Array) -> int:
+static func sumXValues(the_rooms: Array) -> int:
 	if the_rooms.is_empty():
 		return 0
 	var sum = 0
@@ -316,11 +294,9 @@ static func sumXValues(the_rooms : Array) -> int:
 		sum += i[0]
 	return sum
 
-
 func pick_random_type() -> int:
 	var types = [TYPE1, TYPE2, TYPE3, TYPE4, TYPE5]
 	return types[randi() % types.size()]
-
 
 # Builds the rooms e.g: width, height, startX
 func define_rooms() -> void:
@@ -340,7 +316,6 @@ func define_rooms() -> void:
 
 		rooms.append([width, height, start, leftDoor, rightDoor])
 		roomTypes.append(pick_random_type())
-
 
 # Draws the full floorplan by:
 # 1. Place first room of x * z size.
@@ -375,27 +350,21 @@ func draw_rooms() -> void:
 		place_doors(Vector3i(xstart, HEIGHT, leftDoor), Vector3i(xend, HEIGHT, rightDoor), start, last_room)
 		start = false
 
-
-
 func fill_room(room_dim: Array) -> void:
-	var room_scene = preload("res://scenes/world/roomGeneration.tscn").instantiate()
+	var room_scene = preload ("res://scenes/world/roomGeneration.tscn").instantiate()
 	room_scene.position = Vector3i(room_dim[2] * 2, 0, 0)
 	add_child(room_scene, true)
 
-
-
 # Places floor grid of x * z size based on room array
-func make_room(room : Array) -> void:
+func make_room(room: Array) -> void:
 	var start = Vector3i(room[2], 0, 0)
 	for h in room[1]:
 		for w in room[0]:
 			self.set_cell_item(start + Vector3i(w, HEIGHT, h), FLOOR1)
 
-
 # Sorts vectors on x axis.
-func sort_vector(a : Vector3i, b : Vector3i):
+func sort_vector(a: Vector3i, b: Vector3i):
 	return a.x < b.x
-
 
 # Draws paths between the doors.
 func draw_paths() -> void:
@@ -413,15 +382,13 @@ func draw_paths() -> void:
 			ends.pop_at(i)
 	#assert(right.size() == ends.size())
 
-
 	for i in right.size() if right.size() < ends.size() else ends.size():
 
 		make_path(right[i] - Vector3i(0, 1, 0), ends[i] - Vector3i(0, 1, 0))
 
-
 # Draws a 2 wide path between two given vectors, the given point will be the top
 # of the path.
-func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
+func make_path(start_location: Vector3i, end_location: Vector3i) -> void:
 	var relative_distance = end_location - start_location
 	var direction = 0 if relative_distance.z > 0 else 1
 
@@ -450,7 +417,7 @@ func make_path(start_location : Vector3i, end_location : Vector3i) -> void:
 		self.set_cell_item(start_location - Vector3i(0, 0, i) + Vector3i(vertical_start_main + 1, 0, 1), FLOOR1)
 
 # Places doors on random begin and end spots to make it possible to generate the paths later.
-func place_doors(start_location : Vector3i, end_location : Vector3i, start, end) -> void:
+func place_doors(start_location: Vector3i, end_location: Vector3i, start, end) -> void:
 	if not start:
 		self.set_cell_item(start_location + Vector3i(0, 1, 1), DOOROPENL, 16)
 		self.set_cell_item(start_location + Vector3i(0, 1, 0), DOOROPENR, 16)
@@ -465,9 +432,8 @@ func sum_array(array):
 		sum += element
 	return sum
 
-
 # Randomizes floor placement.
-func random_floor(floor : Vector3i) -> void:
+func random_floor(floor: Vector3i) -> void:
 	var walls = [FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5]
 	var special = [FLOORVENT, FLOORWATER]
 
@@ -485,11 +451,10 @@ func random_wall() -> int:
 		return walls[randi() % walls.size()]
 	return WALL
 
-
 # Draws all walls by finding all floors and check if a wall needs to be added.
 # It also randomised the floor grid.
 func draw_walls() -> void:
-	var neighbors = [Vector3i(0, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i(-1, 0, 0)]
+	var neighbors = [Vector3i(0, 0, -1), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i( - 1, 0, 0)]
 
 	# Defining the different floor layouts, and their corresponding orientation.
 	var walls = [[0, 1, 1, 1], [1, 0, 1, 1], [1, 1, 0, 1], [1, 1, 1, 0]]
@@ -504,7 +469,7 @@ func draw_walls() -> void:
 		var surround = []
 		for i in neighbors:
 			var neighbor = floor_item + i
-			surround.append((1 if self.get_cell_item(neighbor) != -1 else 0))
+			surround.append((1 if self.get_cell_item(neighbor) != - 1 else 0))
 
 		random_floor(floor_item)
 
@@ -512,7 +477,7 @@ func draw_walls() -> void:
 		var type = WALL
 
 		# Checks which type of wall, then finds the needed orientation.
-		if get_cell_item(floor_item + Vector3i(0, 1, 0)) != -1:
+		if get_cell_item(floor_item + Vector3i(0, 1, 0)) != - 1:
 			idx = -1
 		elif sum_array(surround) == 3:
 			idx = walls.find(surround)
@@ -523,17 +488,13 @@ func draw_walls() -> void:
 			type = WALLCORNER
 
 		# If unknown orientation, skip.
-		if idx == -1:
+		if idx == - 1:
 			continue
 
 		# Place wall.
 		var orientation = orientations[idx]
 		self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
-
-

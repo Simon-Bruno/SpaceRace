@@ -189,6 +189,7 @@ grow_vertical = 2
 script = ExtResource("5_hmbsv")
 
 [node name="Sum" type="Label" parent="Terminal/Terminal"]
+layout_mode = 0
 offset_left = 11.0
 offset_top = 111.5
 offset_right = 881.0
@@ -198,6 +199,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Answer1" type="Button" parent="Terminal/Terminal"]
+layout_mode = 0
 offset_left = 239.5
 offset_top = 230.0
 offset_right = 352.5
@@ -214,6 +216,7 @@ texture = ExtResource("5_hcg54")
 expand_mode = 1
 
 [node name="Answer2" type="Button" parent="Terminal/Terminal"]
+layout_mode = 0
 offset_left = 389.5
 offset_top = 230.0
 offset_right = 502.5
@@ -230,6 +233,7 @@ texture = ExtResource("6_7qy07")
 expand_mode = 1
 
 [node name="Answer3" type="Button" parent="Terminal/Terminal"]
+layout_mode = 0
 offset_left = 539.5
 offset_top = 230.0
 offset_right = 652.5
