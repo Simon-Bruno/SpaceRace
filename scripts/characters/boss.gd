@@ -181,6 +181,7 @@ func spawn_enemies():
 			enemy.set_physics_process(true)
 			enemy.set_process(true)
 			enemy.call_deferred("chase_player", last_damaged_by)
+			enemy.add_to_group("Boss")
 
 func start_charge():
 	if not multiplayer.is_server():
@@ -225,7 +226,7 @@ func handle_shooting_and_spinning(delta):
 		var spawn_offset = global_transform.basis.z.normalized() * 1.3
 		spawn_offset.y -= 0.5
 		var direction = global_transform.basis.z.normalized()
-		GlobalSpawner.spawn_projectile(transform_origin, spawn_offset, direction, self)
+		GlobalSpawner.spawn_projectile(transform_origin, spawn_offset, direction, false)
 
 func find_closest_player_in_range():
 	var min_distance = INF
