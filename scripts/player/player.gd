@@ -314,6 +314,8 @@ func full_health():
 
 
 func die():
+	$PlayerItem._drop_item()	
+	
 	# assign globals
 	AnimDeath = true
 	var temp = walk_speed
@@ -331,7 +333,6 @@ func die():
 	await get_tree().create_timer(0.8).timeout  # wait to respawn
 	walk_speed = temp
 	
-	$PlayerItem._drop_item()
 
 
 func _on_respawn_immunity_timeout():
