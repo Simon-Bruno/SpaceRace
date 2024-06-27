@@ -328,6 +328,8 @@ func die():
 	request_play_animation(0, "stop")
 	await get_tree().create_timer(1.2).timeout  # wait to respawn
 	walk_speed = temp
+	
+	$PlayerItem._drop_item()
 
 
 func _on_respawn_immunity_timeout():

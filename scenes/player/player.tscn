@@ -925,6 +925,7 @@ wait_time = 0.5
 wait_time = 0.5
 
 [node name="RespawnImmunity" type="Timer" parent="PlayerCombat"]
+wait_time = 0.25
 
 [node name="FloatingName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05026, 0)
