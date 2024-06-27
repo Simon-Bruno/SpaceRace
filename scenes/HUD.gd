@@ -24,7 +24,7 @@ var loaded_players = 0
 var sound_played = false
 
 
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func loaded():
 	loaded_players += 1
 
