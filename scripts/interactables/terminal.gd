@@ -61,6 +61,7 @@ func _on_area_3d_body_entered(body):
 		playercount += 1;
 		Audiocontroller.play_terminal_sfx()
 		if body.name == str(multiplayer.get_unique_id()):
+			print(body.name)
 			$Terminal.visible = true
 			Network.in_terminal = true
 			get_node("/root/Main/SpawnedItems/World/HUD/InGame").visible = false

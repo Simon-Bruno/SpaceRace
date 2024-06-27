@@ -78,6 +78,7 @@ func remove_all_placeholder():
 	list.append_array(red)
 	list.append_array(yellow)
 	list.append_array(teleporters)
+	list.append(SMALLBOX)
 	for i in list:
 		for item in get_used_cells_by_item(i):
 			set_cell_item(item, EMPTY)
@@ -319,7 +320,7 @@ func connect_pressureplate_laser(laser, interactable : Array) -> void:
 
 func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
-	location.y = 2
+	location.y = 4
 	var boss = GlobalSpawner.spawn_boss(location)
 	boss.interactable_door = door
 

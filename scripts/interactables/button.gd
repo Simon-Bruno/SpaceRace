@@ -12,7 +12,8 @@ func _ready() -> void:
 	var target_node_name = "WorldGeneration"
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
-	update_mesh.rpc(customRooms.WALLSWITCHOFF)
+	if multiplayer.is_server():
+		update_mesh.rpc(customRooms.WALLSWITCHOFF)
 	if inverse:
 		handle_inverse_deactivation()
 	update_interact_key()

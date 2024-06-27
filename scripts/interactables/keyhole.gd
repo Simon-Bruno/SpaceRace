@@ -10,7 +10,8 @@ func _ready() -> void:
 	var target_node_name = "WorldGeneration"
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
-	update_mesh.rpc(customRooms.KEYHOLEGREEN)
+	if multiplayer.is_server():
+		update_mesh.rpc(customRooms.KEYHOLEGREEN)
 
 #Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
@@ -32,21 +33,21 @@ func _on_area_3d_body_entered(body):
 		return
 
 	if item.get_parent().is_in_group("Key"):
-		activate.rpc(item)
+		activate.rpc()
+		item.get_parent().consume_item()
 
 @rpc("any_peer", "call_local", "reliable")
-func activate(item):
+func activate():
 	if not multiplayer.is_server():
 		return
 	if interactable != null and not fixed:
 		interactable.activated()
-		item.get_parent().consume_item()
 
 	update_mesh.rpc(customRooms.KEYIN)
 	fixed = true
 
 # Update mesh based on current state
-@rpc("any_peer", "call_local", "reliable")
+@rpc("authority", "call_local", "reliable")
 func update_mesh(state : int) -> void:
 	if customRooms:
 		$MeshInstance3D.mesh = customRooms.mesh_library.get_item_mesh(state)
