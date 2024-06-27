@@ -78,6 +78,7 @@ func remove_all_placeholder():
 	list.append_array(red)
 	list.append_array(yellow)
 	list.append_array(teleporters)
+	list.append(SMALLBOX)
 	for i in list:
 		for item in get_used_cells_by_item(i):
 			set_cell_item(item, EMPTY)
