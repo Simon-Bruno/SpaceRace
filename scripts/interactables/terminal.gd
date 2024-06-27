@@ -59,6 +59,7 @@ func progress_updated(correct : bool):
 func _on_area_3d_body_entered(body):
 	if body.is_in_group("Players") and not is_activated:
 		playercount += 1;
+		Audiocontroller.play_terminal_sfx()
 		if body.name == str(multiplayer.get_unique_id()):
 			$Terminal.visible = true
 			Network.in_terminal = true

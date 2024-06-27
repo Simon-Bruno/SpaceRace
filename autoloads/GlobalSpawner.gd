@@ -209,8 +209,8 @@ func spawn_buff(pos, choice=0, random=true):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
-	#var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene, bomb_scene]
-	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
+	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene, bomb_scene]
+	#var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene]
 
 	if spawner:
 		var buff_scene = null
@@ -232,4 +232,4 @@ func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
 	get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 	projectile_instance.global_transform.origin = transform_origin + spawn_offset
 	projectile_instance.direction = direction
-	projectile_instance.shooter = shooter
+	projectile_instance.shooter_is_player = shooter
