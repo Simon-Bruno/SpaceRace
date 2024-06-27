@@ -67,7 +67,7 @@ spawn_path = NodePath("..")
 [node name="ProjectileSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ProjectileSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn", "res://scenes/interactables/laser.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn", "res://scenes/interactables/laser.tscn", "res://scenes/interactables/laser_low.tscn")
 spawn_path = NodePath("..")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_bij7o")]
@@ -134,6 +134,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="InGame" type="CanvasLayer" parent="HUD"]
+visible = false
 
 [node name="Timer" type="Label" parent="HUD/InGame"]
 offset_left = 944.0
@@ -144,7 +145,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("7_1h5a1")
 theme_override_font_sizes/font_size = 100
-text = "0.02"
+text = "00"
 horizontal_alignment = 2
 clip_text = true
 
