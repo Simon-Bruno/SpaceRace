@@ -1,7 +1,7 @@
 extends Node3D
 
 var holding = null
-const item_pop_velocity = 1
+const item_pop_velocity = 5
 
 # Find the closest item and return it
 func _find_best_candidate():
@@ -24,9 +24,15 @@ func _find_best_candidate():
 
 func _hold_item(item):
 	# Hold item
+	_freeze.rpc(item.get_path(), true)
 	holding = item
 	_set_this_player_to_hold_item.rpc(multiplayer.get_unique_id(), item.get_path())
-
+	
+	
+@rpc("any_peer", "call_local", "reliable")
+func _freeze(path, f):
+	if multiplayer.is_server():
+		get_node(path).freeze = f
 
 # Calls the "use" function of the item the player is holding
 func _use_item():
@@ -50,6 +56,8 @@ func _set_this_player_to_hold_item(id, item_path):
 func _drop_item():
 	# Drop the item
 	if holding and is_instance_valid(holding):
+		_freeze.rpc(holding.get_path(), false)
+		
 		_set_this_player_to_drop_item.rpc(multiplayer.get_unique_id(), holding.get_path())
 		holding = null
 
