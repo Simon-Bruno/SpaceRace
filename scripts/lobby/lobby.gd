@@ -16,10 +16,6 @@ var waittime = 3.0
 #percentage waittime (waittime - start_timer.time_left) / waittime * 100
 func _process(_delta):
 	if multiplayer.is_server():
-		if Input.is_action_just_pressed("StartGame"):
-			if random.size() == multiplayer.get_peers().size() + 1 or \
-			team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
-				_on_start_timer_timeout()
 		if not start_timer.is_stopped():
 			$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
 	if Input.is_action_just_pressed("pause"):
