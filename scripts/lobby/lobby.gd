@@ -1,7 +1,7 @@
 extends Node
 
 @onready var start_timer = Timer.new()
-@onready var pause_menu = $PauseMenu
+@onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var quit_button_area = $AreaQuit
 
 
@@ -16,10 +16,6 @@ var waittime = 3.0
 #percentage waittime (waittime - start_timer.time_left) / waittime * 100
 func _process(_delta):
 	if multiplayer.is_server():
-		if Input.is_action_just_pressed("StartGame"):
-			if random.size() == multiplayer.get_peers().size() + 1 or \
-			team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
-				_on_start_timer_timeout()
 		if not start_timer.is_stopped():
 			$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
 	if Input.is_action_just_pressed("pause"):
@@ -92,36 +88,45 @@ func assign_teams():
 
 func _on_team1_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team1.has(body):
+		Audiocontroller.play_pick_team_sfx()
 		team1.append(body)
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 
 func _on_team1_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
+		if not Input.is_action_just_pressed("StartGame"):
+			Audiocontroller.play_unpick_team_sfx()
 		team1.erase(body)
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 
 func _on_team2_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team2.has(body):
+		Audiocontroller.play_pick_team_sfx()
 		team2.append(body)
 		$Assets/TeamB_plate2/TeamB_text.text = str(team2.size()) + "/2"
 		check_start_conditions()
 
 func _on_team2_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
+		if not Input.is_action_just_pressed("StartGame"):
+			Audiocontroller.play_unpick_team_sfx()
 		team2.erase(body)
 		$Assets/TeamB_plate2/TeamB_text.text = str(team2.size()) + "/2"
 		check_start_conditions()
 
 func _on_random_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not random.has(body):
+		Audiocontroller.play_pick_team_sfx()
 		random.append(body)
 		$Assets/Telepath/TeamX_text.text = str(random.size()) + "/4"
 		check_start_conditions()
 
 func _on_random_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
+		if not Input.is_action_just_pressed("StartGame"):
+			Audiocontroller.play_unpick_team_sfx()
 		random.erase(body)
 		$Assets/Telepath/TeamX_text.text = str(random.size()) + "/4"
 		check_start_conditions()

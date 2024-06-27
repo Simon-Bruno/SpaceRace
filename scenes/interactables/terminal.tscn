@@ -19,9 +19,17 @@ albedo_texture = ExtResource("2_4hhsl")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07vqa"]
 bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6jur"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ek73"]
 

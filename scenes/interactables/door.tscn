@@ -51,6 +51,9 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath("CollisionShape3DR:disabled")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath(".:scale")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [node name="Door" type="StaticBody3D"]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)

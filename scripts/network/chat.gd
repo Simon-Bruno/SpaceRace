@@ -33,7 +33,11 @@ func _input(event):
 
 
 func _process(_delta):
-	fps_meter.text = "FPS: " + str(Engine.get_frames_per_second())
+	if SettingsContainer.get_fps_meter():
+		fps_meter.visible = true
+		fps_meter.text = "FPS: " + str(Engine.get_frames_per_second())
+	else:
+		fps_meter.visible = false
 
 
 # Handle send button pressed for chat functionality
