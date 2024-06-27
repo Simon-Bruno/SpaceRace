@@ -52,11 +52,6 @@ func _ready():
 	
 	if MeshInstance.material_override is StandardMaterial3D:
 		original_albedo_color = MeshInstance.material_override.albedo_color
-
-	set_physics_process(false)
-	set_process(false)
-	SpinTimer.stop()
-	ChargeTimer.stop()
 func reset_spin_timer():
 	SpinTimer.wait_time = 8.0 + randf_range(0, 8)
 	SpinTimer.start()
