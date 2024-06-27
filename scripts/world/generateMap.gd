@@ -18,7 +18,8 @@ enum {FLOOR1, FLOOR2, FLOOR3, FLOOR4, FLOOR5, FLOORVENT, FLOORWATER, DOORCLOSEDL
 	  TERMINALORANGE, TERMINALPURPLE, TERMINALRED, TERMINALYELLOW, BOSSBLUE, BOSSGREEN, BOSSORANGE,
 	  BOSSPURPLE, BOSSRED, BOSSYELLOW, ENEMYBLUE, ENEMYGREEN, ENEMYORANGE, ENEMYPURPLE, ENEMYRED, ENEMYYELLOW,
 	  ENEMYRANGEDBLUE, ENEMYRANGEDGREEN, ENEMYRANGEDORANGE, ENEMYRANGEDPURPLE, ENEMYRANGEDRED, ENEMYRANGEDYELLOW,
-	  WALLBLOCK, WALLDOUBLE, WALLU, KEYIN, EMPTY = -1}
+	  WALLBLOCK, WALLDOUBLE, WALLU, KEYIN, BOTTLEHEALTHLARGE, BOTTLEHEALTHSMALL, BOTTLEMONSTER, BOTTLERANDOM, BOTTLESMALL,
+	  BOTTLESPEEDSMALL, BOTTLESTRENGTHSMALL, DYNAMITE, WALLTRANSPARANT, WALLTRANSPARANT2, EMPTY=-1}
 
 # The room types.
 enum {CUSTOM, STARTROOM, ENDROOM, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5}
@@ -35,7 +36,7 @@ const PAIRS: Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSE
 							DOORCLOSEDR: DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE: float = 0
+const CUSTOMROOMPERCENTAGE : float = 0.5
 
 # General room parameters
 const room_amount: int = 10
@@ -109,7 +110,7 @@ func build_map() -> void:
 	add_finish()
 	mirror_world()
 
-	convert_static_to_entities()
+	transparant()
 
 func add_start():
 	write_room(rooms[0], 1, 0, true)
@@ -254,6 +255,16 @@ func mirror_world() -> void:
 
 		var new_location = (x + Vector3i(0, 0, 1)) * Vector3i(1, 1, -1)
 		entityGeneration.set_cell_item(new_location, item, orientation)
+
+func transparant():
+	for x in self.get_used_cells():
+		var item = self.get_cell_item(x)
+		var orientation = self.get_cell_item_orientation(x)
+
+		if item == WALL and orientation == 10 and x[2] > 0:
+			self.set_cell_item(x, WALLTRANSPARANT, orientation)
+		elif item == WALL and orientation == 0 and x[2] < 0:
+			self.set_cell_item(x, WALLTRANSPARANT2, orientation)
 
 # Places a window on the given coords, except for when there already is an item.
 func place_window(location: Vector3i) -> void:
