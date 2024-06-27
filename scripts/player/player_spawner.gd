@@ -16,6 +16,7 @@ func player_died(player_to_die):
 	fall_acceleration = player_to_die.fall_acceleration	
 	player_to_die.fall_acceleration = 0
 	$RespawnTimer.start()
+	Audiocontroller.play_player_respawn_sfx()
 	dead_player = player_to_die
 
 func respawn_player():

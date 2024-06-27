@@ -13,12 +13,15 @@ func _ready():
 		if your_id == (winner_id) or Network.other_team_member_id.to_int() == (winner_id):
 			var label_node = get_node("VBoxContainer/Label")
 			label_node.text = str(username + "\nYou won!")
+			Audiocontroller.play_victory_sfx()
 	elif your_id == (winner_id): 
 		var label_node = get_node("VBoxContainer/Label")
 		label_node.text = str(username + "\nYou won!")
+		Audiocontroller.play_victory_sfx()
 	else:
 		var label_node = get_node("VBoxContainer/Label")
 		label_node.text = str(username + "\nYou lost!")
+		Audiocontroller.play_defeat_1_sfx()
 
 # Copied from menu.gd
 var last_parent
@@ -36,6 +39,8 @@ func set_notification_and_show(text, parent):
 func _on_play_again_pressed():
 	if multiplayer.is_server():
 		Network.go_to_lobby(multiplayer.get_unique_id())
+		Audiocontroller.play_lobby_music()
+		Audiocontroller.play_ui_press_sfx()
 	else: 
 		print("ask the host to let everybody go to lobby!")
 		set_notification_and_show("Ask the Host, to press the play again button\n 
@@ -45,7 +50,9 @@ func _on_play_again_pressed():
 func _on_menu_pressed():
 	Network._on_leave_button_pressed()
 	Audiocontroller.play_menu_music()
+	Audiocontroller.play_ui_press_sfx()
 
 # Quit
 func _on_quit_button_pressed():
+	Audiocontroller.play_ui_press_sfx()
 	get_tree().quit()

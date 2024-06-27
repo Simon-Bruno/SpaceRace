@@ -111,6 +111,7 @@ func build_map() -> void:
 	mirror_world()
 
 	transparant()
+	convert_static_to_entities()
 
 func add_start():
 	write_room(rooms[0], 1, 0, true)
