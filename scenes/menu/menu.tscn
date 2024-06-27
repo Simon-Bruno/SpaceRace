@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_5vnje"]
 [ext_resource type="Texture2D" uid="uid://dk03unnxe7bji" path="res://assets/menu/ButtonBackgroundDarkInvalid.png" id="3_4l2kt"]
 [ext_resource type="PackedScene" uid="uid://dpvimj5wn8htd" path="res://scenes/settings/settings.tscn" id="3_obvc5"]
-[ext_resource type="MeshLibrary" uid="uid://ddiugrn0mrsje" path="res://assets/CustomBlocks/CustomBlocks.tres" id="4_1mr1n"]
+[ext_resource type="MeshLibrary" uid="uid://dbq2nwlqfgv1q" path="res://assets/CustomBlocks/CustomBlocks.tres" id="4_1mr1n"]
 [ext_resource type="FontFile" uid="uid://6utpau6lbihh" path="res://assets/fonts/MotionControl-Bold.otf" id="4_svujk"]
 [ext_resource type="Texture2D" uid="uid://ip1xi5xnjir2" path="res://assets/menu/ButtonBackground.png" id="5_a3a3v"]
 [ext_resource type="Script" path="res://scenes/menu/MenuPlayer.gd" id="5_gcdh0"]
@@ -764,14 +764,10 @@ max_length = 15
 visible = false
 
 [node name="Hostbutton" type="Button" parent="HostMenu"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -242.0
-offset_right = 399.0
-offset_bottom = -156.0
-grow_vertical = 0
+offset_left = 18.0
+offset_top = 404.0
+offset_right = 402.0
+offset_bottom = 490.0
 theme_override_fonts/font = ExtResource("4_svujk")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/normal = SubResource("StyleBoxTexture_jqpdp")
@@ -806,14 +802,10 @@ text = "Back"
 visible = false
 
 [node name="Joinbutton" type="Button" parent="JoinMenu"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -335.0
-offset_right = 399.0
-offset_bottom = -249.0
-grow_vertical = 0
+offset_left = 14.0
+offset_top = 312.0
+offset_right = 398.0
+offset_bottom = 398.0
 theme_override_fonts/font = ExtResource("4_svujk")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/normal = SubResource("StyleBoxTexture_jqpdp")
@@ -858,17 +850,12 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_ynktt")
 text = "Back"
 
 [node name="PlayMenu" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="JoinButton" type="Button" parent="PlayMenu"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -242.0
-offset_right = 399.0
-offset_bottom = -156.0
-grow_vertical = 0
+offset_left = 14.0
+offset_top = 404.0
+offset_right = 398.0
+offset_bottom = 490.0
 theme_override_fonts/font = ExtResource("4_svujk")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/normal = SubResource("StyleBoxTexture_jqpdp")
@@ -898,16 +885,13 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_ynktt")
 text = "Back"
 
 [node name="StartMenu" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PlayButton" type="Button" parent="StartMenu"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -242.0
-offset_right = 399.0
-offset_bottom = -156.0
-grow_vertical = 0
+offset_left = 14.0
+offset_top = 405.0
+offset_right = 398.0
+offset_bottom = 491.0
 theme_override_fonts/font = ExtResource("4_svujk")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/normal = SubResource("StyleBoxTexture_jqpdp")
