@@ -25,7 +25,7 @@ func get_player_count():
 	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
 		global_transform.origin = Vector3(0, 25, 0)
 		global_transform.basis = Basis.looking_at(Vector3(0, -9, 10))
-		$"../../world/DirectionalLight3D".rotation.y -= 180
+		$"../../world/DirectionalLight3D"	.rotation.y -= 180
 		Network.inverted = -1
 		var transform = global_transform
 		transform.basis.x = -transform.basis.x

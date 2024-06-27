@@ -572,7 +572,6 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="bas-9" type="Node3D" parent="."]
 transform = Transform3D(1.11189, 0, 0, 0, 1.11189, 0, 0, 0, 1.11189, 0, 0, 0)
-visible = false
 
 [node name="Statics" type="GridMap" parent="bas-9"]
 mesh_library = ExtResource("1_6nodh")
