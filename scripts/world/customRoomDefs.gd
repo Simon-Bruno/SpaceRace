@@ -75,8 +75,3 @@ func check_doors(room) -> void:
 	if left.size() != 2 or right.size() != 2:
 		push_error("Room ", room.get_name(), " has non-matching doors. left = ", left.size(), " right = ", right.size())
 		roomNodes.remove_at(roomNodes.find(room))
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

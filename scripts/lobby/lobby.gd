@@ -5,7 +5,7 @@ extends Node
 @onready var quit_button_area = $AreaQuit
 
 
-var world = preload("res://scenes/world.tscn")
+var world = "res://scenes/world.tscn"
 
 var team1 = []
 var team2 = []
@@ -33,6 +33,7 @@ func _process(_delta):
 		pause_menu.handle_esc_input()
 		
 func _ready():
+	ResourceLoader.load_threaded_request(world)
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 		Network.player_added.connect(lobby_add_player_character)
@@ -57,7 +58,8 @@ func _on_start_timer_timeout():
 	
 	Audiocontroller.play_teleportation_sfx()
 	_on_game_start.rpc(Network.player_teams, Network.player_names)
-	get_parent().add_child(world.instantiate())
+	var loaded_world = ResourceLoader.load_threaded_get(world)
+	get_parent().add_child(loaded_world.instantiate())
 	queue_free()
 
 func check_start_conditions():

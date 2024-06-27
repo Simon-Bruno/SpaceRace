@@ -21,7 +21,7 @@ func set_interactable_on_clients(path):
 # Detect when body entered the area
 func _on_area_3d_body_entered(body) -> void:
 	if body.is_in_group("Players") and str(multiplayer.get_unique_id()) == body.name \
-	  and player == null:
+	  and not player and interactable:
 		player = body
 		body.position = interactable.position
 		interactable.player = body

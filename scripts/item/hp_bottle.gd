@@ -9,8 +9,3 @@ func use():
 	if player:
 		player.rpc("increase_health", health_potion_value)
 	super.consume_item()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	super._process(delta)

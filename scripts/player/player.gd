@@ -54,7 +54,8 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel):
 
 func _ready():
 	var hud = get_node_or_null("../../HUD")
-	if hud:
+	if hud and name == str(multiplayer.get_unique_id()):
+		await get_tree().create_timer(3.0).timeout
 		hud.loaded.rpc()
 
 	$FloatingName.text = Network.playername

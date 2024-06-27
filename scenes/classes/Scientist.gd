@@ -9,8 +9,8 @@ var healing_amount : int = 50
 var ability1_cooldown : int = 20
 var ability2_cooldown : int = 30
 
-var ability1_title : String = "Heal"
-var ability2_title : String = "Sabotage WIP"
+var ability1_title : String = "Heal yourself"
+var ability2_title : String = "Slow opponents"
 
 func _ready():
 	var hud = get_node_or_null("../../../HUD")

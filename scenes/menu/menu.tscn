@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_5vnje"]
 [ext_resource type="Texture2D" uid="uid://dk03unnxe7bji" path="res://assets/menu/ButtonBackgroundDarkInvalid.png" id="3_4l2kt"]
 [ext_resource type="PackedScene" uid="uid://dpvimj5wn8htd" path="res://scenes/settings/settings.tscn" id="3_obvc5"]
-[ext_resource type="MeshLibrary" uid="uid://dbq2nwlqfgv1q" path="res://assets/CustomBlocks/CustomBlocks.tres" id="4_1mr1n"]
+[ext_resource type="MeshLibrary" uid="uid://xqw14c2d05d3" path="res://assets/CustomBlocks/CustomBlocks.tres" id="4_1mr1n"]
 [ext_resource type="FontFile" uid="uid://6utpau6lbihh" path="res://assets/fonts/MotionControl-Bold.otf" id="4_svujk"]
 [ext_resource type="Texture2D" uid="uid://ip1xi5xnjir2" path="res://assets/menu/ButtonBackground.png" id="5_a3a3v"]
 [ext_resource type="Script" path="res://scenes/menu/MenuPlayer.gd" id="5_gcdh0"]
