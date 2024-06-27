@@ -31,6 +31,7 @@ func _ready():
 					filenames.append(file)
 				file = dir.get_next()
 		var filename = filenames[randi() % filenames.size()]
+		filename = "hinder.rms"
 		var world_dict : Dictionary = parser.parse_file("res://files/random_map_scripts/" +  filename)
 		fill_room(world_dict, start, end, last_room)
 
@@ -83,11 +84,11 @@ func wall_check(floor_plan: Array, x: int, z: int, max_x: int, max_z: int, orien
 # this function return true.
 # This function does not check if there exists a route from start to finish.
 func check_wall_placement(floor_plan: Array, x: int, z: int) -> bool:
-	var max_x: int = floor_plan[0].size()
-	var max_z: int = floor_plan.size()
+	var max_x: int = floor_plan[0].size() - 1
+	var max_z: int = floor_plan.size() - 1
 
 
-	if x < 0 or x >= max_x - 1 or z < 0 or z >= max_z:
+	if x < 0 or x >= max_x or z < 0 or z >= max_z:
 		return false
 
 	if floor_plan[z][x]:
@@ -127,6 +128,10 @@ func place_wall(x: int, z: int, i: int, orientation: int, floor_plan: Array) -> 
 	if not check_wall_placement(floor_plan, new_x - 1, new_z - 1):
 		return false
 	floor_plan[new_z - 1][new_x - 1] = items.WALL
+	# Make sure there is not a complete block of walls along the horizontal axis.
+	if floor_plan[new_z - 1].all(func(e): return e == items.WALL):
+		floor_plan[new_z - 1][new_x - 1] = items.EMPTY
+		return false
 	# TODO: Replace by actual walls which are currently broken
 	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -1, new_z))
 	GlobalSpawner.spawn_wall(absolute_position + Vector3(new_x, -1, -new_z))
@@ -151,7 +156,7 @@ func handle_wall(floor_plan : Array, wall : Dictionary, width : int, height: int
 	var xmax : int = 0
 	var zmin : int = 0
 	var zmax : int = 0
-	if orientation == HORIZONTAL and width > length:
+	if orientation == HORIZONTAL and width - 3 > length:
 		zmin = max(1, start[2] - max_dist)
 		zmax = min(height - 2, start[2] + max_dist)
 		z = randi_range(zmin, zmax)
@@ -162,7 +167,7 @@ func handle_wall(floor_plan : Array, wall : Dictionary, width : int, height: int
 			xmin = start[0] + min_dist
 
 		xmax = min(width - length / 2 - 2, start[0] + max_dist)
-	elif height > length:
+	elif height - 3  > length:
 		zmin = max(length / 2, start[2] - max_dist)
 		zmax = min(height - length / 2, start[2] + max_dist)
 		z = randi_range(zmin, zmax)
@@ -247,13 +252,29 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
 	var z = pos[1]
+	var buff_id = -1
+	var buff = null
+	if object.has('buff_type'):
+		buff = object['buff_type']
 
 	if floor_plan[z - 1][x - 1] > items.PATH:
 		return false
 
 	floor_plan[z - 1][x - 1] = items.BUFF
-	var buff : int = 0
-	buff = GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, z))
+	match buff:
+		'bomb':
+			buff_id = 5
+		'hp':
+			buff_id = 0
+		'hp_full':
+			buff_id = 2
+		'strength':
+			buff_id = 1
+		'speed':
+			buff_id = 3
+		_:
+			buff = -1
+	buff = GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, z), buff, buff_id == -1)
 	if buff != -1:
 		GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, -z), buff, false)
 	return true
@@ -342,7 +363,7 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 	basis = Basis().rotated(Vector3(0, -1, 0), -angle)
 	var laser2 = GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, z), basis, false, object['set_activation'], true, true)
 
-	var button_object = {'set_min_distance' : 3, 'set_max_distance' : 20}
+	var button_object = {'set_min_distance' : object['set_button_min'], 'set_max_distance' :  object['set_button_min']}
 	for i in object['set_activation']:
 		pos = object_placement(button_object, width, height, start)
 		pos = attach_wall(button_object, pos, width, height)
@@ -371,7 +392,7 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	var z = pos[1]
 	var orientation = pos[2]
 
-	if floor_plan[z - 1][x - 1] or (z >= start.z / 2 * 2 + 1 and z <= start.z / 2 * 2 + 3) or (z >= end.z / 2 * 2 + 1 and z <= end.z / 2 * 2 + 3):
+	if floor_plan[z - 1][x - 1] or (z >= start.z / 2 * 2 + 1 and z <= start.z / 2 * 2 + 3) or (z >= end.z / 2 * 2 + 1 and z <= end.z / 2 * 2 + 5):
 		return false
 
 	floor_plan[z - 1][x - 1] = items.BUTTON
