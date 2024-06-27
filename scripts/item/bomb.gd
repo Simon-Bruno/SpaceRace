@@ -5,7 +5,7 @@ extends "res://scripts/item/item.gd"
 
 var bomb_damage = 50
 
-var vel_y = 10
+var vel_y = 8
 var vel_multiplier = 1.5
 
 func use():
