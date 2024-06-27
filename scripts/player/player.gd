@@ -319,7 +319,7 @@ func die():
 	alive = false
 
 	request_play_animation(1, "death")  # play anim
-	Audiocontroller.play_player_death()
+	Audiocontroller.play_player_death_sfx()
 	await get_tree().create_timer(2).timeout  # wait for anim
 	get_parent().player_died(self)  # die
 
