@@ -182,8 +182,8 @@ func spawn_enemies():
 			enemy.set_physics_process(true)
 			enemy.set_process(true)
 			enemy.call_deferred("chase_player", last_damaged_by)
-      enemy.add_to_group("Boss")
-	Audiocontroller.play_boss_spawn_minions_sfx()
+			enemy.add_to_group("Boss")
+		Audiocontroller.play_boss_spawn_minions_sfx()
 
 func start_charge():
 	if not multiplayer.is_server():
