@@ -215,13 +215,14 @@ func spawn_buff(pos, choice=0, random=true):
 	if spawner:
 		var buff_scene = null
 		if random:
-			buff_scene = BUFFS[randi() % BUFFS.size()]
-		else :
-			buff_scene = BUFFS[choice]
+			choice = randi() % BUFFS.size()
+		buff_scene = BUFFS[choice]
 
 		var buff = buff_scene.instantiate()
 		buff.position = pos
 		spawner.add_child(buff, true)
+		return choice
+	return -1
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile(transform_origin, spawn_offset, direction, shooter):
