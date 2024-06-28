@@ -71,10 +71,15 @@ func new_timestamp():
 
 # Remote procedure call (RPC) for sending messages between players
 @rpc("any_peer", "call_local")
-func msg_rpc(sender, message):	
+func msg_rpc(sender, message):
+	# Get the player's team by looking into the dictionaries
 	var peer_id = _get_key(sender)
 	var team = Network.player_teams[peer_id]
+
+	# Add the timestamp to the label
 	message_display.append_text(str(new_timestamp()))
+
+	# Give the player the correspchatonding label according to their team
 	if str(team) == "1":
 		var colored_sender_id = "[color=red]" + str(team) + " - " + str(sender) + "[/color]"
 		message_display.append_text(" " + colored_sender_id + ": " + message + "\n")
@@ -89,7 +94,7 @@ func msg_rpc(sender, message):
 	start_message_timer()
 
 
-# Returns the corresponding peer id given a name
+# Returns the corresponding peer id given a player name
 func _get_key(sender):
 	var players = Network.player_names
 	for key in players.keys():
@@ -101,7 +106,7 @@ func _get_key(sender):
 # To handle when text is submitted with the enter key
 func _on_message_input_text_submitted(_new_text):
 	_on_send_pressed()
-	
+
 
 # This function sets the caret to the correct position based on the length of
 # the input
@@ -112,7 +117,7 @@ func set_caret_pos():
 
 # Called when the message input field gets focus
 func _on_message_input_focus_entered():
-	Global.in_chat = true 
+	Global.in_chat = true
 	message_display.visible = true
 	message_input.set_max_length(1024)
 	set_caret_pos()
