@@ -9,7 +9,7 @@ const ACCELERATION = 5.0
 @onready var mesh = $"../SpaceshuttleV2"
 @onready var portal_effect = $"../Assets/floors/VFX_PORTAL_ENTRANCE/EntrancePortal"
 
-# Flag to check if the object has started moving,
+# Flag to check if the object has started moving.
 var has_started_moving = false
 
 # Called when the node enters the scene tree for the first time.
