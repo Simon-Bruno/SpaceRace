@@ -22,12 +22,12 @@ func get_player_count():
 		player2 = get_node("/root/Main/SpawnedItems/World/PlayerSpawner").get_node_or_null(str(Network.other_team_member_id))
 		Network.other_team_member_node = player2
 	
-	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
+	if not multiplayer.get_peers().size() == 0 and Network.inverted == 1 and Network.player_teams.has(str(multiplayer.get_unique_id())) and Network.player_teams[str(multiplayer.get_unique_id())] == 2:
 		global_transform.origin = Vector3(0, 20, 0)
 		rotate_y(PI)
 		var light = $"../../world/DirectionalLight3D"
 		if not light:
-			return
+			return 0
 		light.rotate_y(PI)
 		#var transform = light.global_transform
 		#transform.basis.x = -transform.basis.x
