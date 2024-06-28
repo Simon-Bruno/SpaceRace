@@ -29,9 +29,6 @@ func get_player_count():
 		light.rotate_y(PI)
 		global_transform.origin = Vector3(0, 20, 0)
 		rotate_y(PI)
-		#var transform = light.global_transform
-		#transform.basis.x = -transform.basis.x
-		#light.global_transform = transform
 		Network.inverted = -1
 		var transform = global_transform
 		transform.basis.x = -transform.basis.x
