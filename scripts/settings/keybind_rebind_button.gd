@@ -15,10 +15,12 @@ func _ready():
 
 
 func load_keybinds():
+	# Load data if it exists
 	rebind_action_key(SettingsContainer.get_keybind(action_name))
 
 
 func set_action_name():
+	# Set the action name to the label
 	label.text = "Unassigned"
 	match action_name:
 		"move_forward":
@@ -44,6 +46,7 @@ func set_action_name():
 
 
 func set_text_for_key():
+	# Set the on-screen text for the keybind
 	var action_events = InputMap.action_get_events(action_name)
 	var action_event = action_events[0]
 	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
@@ -51,6 +54,7 @@ func set_text_for_key():
 
 
 func _on_button_toggled(toggled_on):
+	# If the button is toggled on, set the text to "Press any key" and start processing input
 	if toggled_on:
 		button.text = "Press any key"
 		set_process_unhandled_key_input(toggled_on)
@@ -58,6 +62,7 @@ func _on_button_toggled(toggled_on):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = false
 				i.set_process_unhandled_key_input(false)
+	# If the button is toggled off, set the text for the keybind
 	else:
 		for i in get_tree().get_nodes_in_group("keybind_button"):
 			if i.action_name != self.action_name:
@@ -72,9 +77,9 @@ func _unhandled_key_input(event):
 
 
 func rebind_action_key(event):
-	InputMap.action_erase_events(action_name)
-	InputMap.action_add_event(action_name, event)
-	SettingsContainer.set_keybind(action_name, event)
-	set_process_unhandled_key_input(false)
+	InputMap.action_erase_events(action_name) # Remove the old keybind
+	InputMap.action_add_event(action_name, event) # Add the new keybind
+	SettingsContainer.set_keybind(action_name, event) # Save the new keybind
+	set_process_unhandled_key_input(false) # Stop processing input
 	set_text_for_key()
 	set_action_name()

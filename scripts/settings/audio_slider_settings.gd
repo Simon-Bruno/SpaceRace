@@ -11,6 +11,7 @@ var bus_index : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_bus_name_by_index()
+	# Load data if it exists
 	if FileAccess.file_exists(SaveManager.SETTINGS_SAVE_PATH) and not SettingsContainer.get_first():
 		load_data()
 	set_name_label_text()
@@ -28,15 +29,15 @@ func load_data():
 
 
 func set_name_label_text():
-	audio_name_lbl.text = str(bus_name) + " Volume"
+	audio_name_lbl.text = str(bus_name) + " Volume" # Set the name label text
 
 
 func set_audio_num_label_text():
-	audio_num_lbl.text = str(h_slider.value * 100) + "%"
+	audio_num_lbl.text = str(h_slider.value * 100) + "%" # Set the audio number label text
 
 
 func get_bus_name_by_index():
-	bus_index = AudioServer.get_bus_index(bus_name)
+	bus_index = AudioServer.get_bus_index(bus_name) # Get the bus index based on the bus name
 
 
 func set_slider_value():
@@ -45,6 +46,7 @@ func set_slider_value():
 
 
 func _on_h_slider_value_changed(value):
+	# Set the volume based on the slider value
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	set_audio_num_label_text()
 	match bus_index:
