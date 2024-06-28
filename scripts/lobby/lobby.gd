@@ -1,36 +1,27 @@
 extends Node
 
+# Load the timer, pause menu, quit, and world scenes in the lobby.
 @onready var start_timer = Timer.new()
 @onready var pause_menu = $PauseMenu
 @onready var quit_button_area = $AreaQuit
 
-
 var world = "res://scenes/world.tscn"
 
+# Using arrays for the teams to keep track of game selections.
 var team1 = []
 var team2 = []
 var random = []
 var player_id = null
 
+# Define progressbar load time.
 var waittime = 3.0
-#percentage waittime (waittime - start_timer.time_left) / waittime * 100
+
 func _process(_delta):
 	if multiplayer.is_server():
 		if not start_timer.is_stopped():
 			$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
 	if Input.is_action_just_pressed("pause"):
 		pause_menu.handle_esc_input()
-
-#func _process(_delta):
-	#if multiplayer.is_server():
-		#if Input.is_action_just_pressed("StartGame"):
-			#if random.size() == multiplayer.get_peers().size() + 1 or \
-			#team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
-				#_on_start_timer_timeout()
-		#if not start_timer.is_stopped():
-			#$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
-	#if Input.is_action_just_pressed("pause"):
-		#pause_menu.handle_esc_input()
 		
 func _ready():
 	ResourceLoader.load_threaded_request(world)
@@ -38,7 +29,8 @@ func _ready():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 		Network.player_added.connect(lobby_add_player_character)
 		init_timer()
-		
+
+# Initialize timer.
 func init_timer():
 		add_child(start_timer)
 		start_timer.stop()
@@ -62,6 +54,9 @@ func _on_start_timer_timeout():
 	get_parent().add_child(loaded_world.instantiate())
 	queue_free()
 
+# This function consists of the conditions that determines the start game logic.
+# Case 1: two players on team1 plate AND two players on team2 plate.
+# Case 2: four platers on random plate.
 func check_start_conditions():
 	if (team1.size() == 2 and team2.size() == 2) or random.size() == 4:
 		if start_timer.is_stopped():
@@ -72,6 +67,8 @@ func check_start_conditions():
 			$Progressbar/SubViewport/ProgressBar.value = 0
 
 var spawned_players = 0
+# This function appends a player to the lobby by preloading the player renders
+# on a predefined confinement.
 func lobby_add_player_character(id):
 	player_id = id
 	var character = preload("res://scenes/player/player.tscn").instantiate()
@@ -79,7 +76,7 @@ func lobby_add_player_character(id):
 	add_child(character)
 	character.set_params_for_player.rpc(id, Vector3i(5, 5, 5), 30, 200, spawned_players * 10)
 	spawned_players += 1
-	
+
 @rpc("authority", "call_local", "reliable")
 func _on_game_start(player_teams, player_names):
 	Network.player_teams = player_teams
@@ -93,6 +90,9 @@ func _on_game_start(player_teams, player_names):
 		if Network.player_teams[player_id] == myteam:
 			Network.other_team_member_id = player_id
 
+# This function generates a random team made of four players that were
+# standing on the random plate in the renders. No probabilistic or deterministic
+# operations have been applied to the randomness.
 func assign_teams():
 	random.shuffle()
 	for i in range(random.size()):
@@ -101,6 +101,7 @@ func assign_teams():
 		else:
 			team2.append(random[i])
 
+# Keeps track of the bodies entering the team2 (right plate) plate.
 func _on_team1_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team1.has(body):
 		Audiocontroller.play_pick_team_sfx()
@@ -108,6 +109,7 @@ func _on_team1_body_entered(body):
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 
+# Keeps track of the bodies exiting the team2 (right plate) plate.
 func _on_team1_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
 		if not Input.is_action_just_pressed("StartGame"):
@@ -116,6 +118,7 @@ func _on_team1_body_exited(body):
 		$Assets/TeamA_plate3/TeamA_text.text = str(team1.size()) + "/2"
 		check_start_conditions()
 
+# Keeps track of the bodies entering the team2 (right plate) plate.
 func _on_team2_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not team2.has(body):
 		Audiocontroller.play_pick_team_sfx()
@@ -123,6 +126,7 @@ func _on_team2_body_entered(body):
 		$Assets/TeamB_plate2/TeamB_text.text = str(team2.size()) + "/2"
 		check_start_conditions()
 
+# Keeps track of the bodies exiting the team2 (right plate) plate.
 func _on_team2_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
 		if not Input.is_action_just_pressed("StartGame"):
@@ -131,6 +135,9 @@ func _on_team2_body_exited(body):
 		$Assets/TeamB_plate2/TeamB_text.text = str(team2.size()) + "/2"
 		check_start_conditions()
 
+# This function keeps track if any player has entered the random game selection plate.
+# Recall from the renders that there need to be at least four players on the plate
+# until the load bar fills up entirely before the lobby transitions to the game.
 func _on_random_body_entered(body):
 	if multiplayer.is_server() and body is CharacterBody3D and not random.has(body):
 		Audiocontroller.play_pick_team_sfx()
@@ -138,6 +145,11 @@ func _on_random_body_entered(body):
 		$Assets/Telepath/TeamX_text.text = str(random.size()) + "/4"
 		check_start_conditions()
 
+# This function keeps track if any players has exited the random game selection plate.
+# Like wise from the function named on_random_body_entered, the lobby only transitions
+# when there are exactly four players on the plate. Some audio que's have been added
+# to enhance both entering and exiting feedback.
+# Some audio que's have been added to enhance both entering and exiting feedback.
 func _on_random_body_exited(body):
 	if multiplayer.is_server() and body is CharacterBody3D:
 		if not Input.is_action_just_pressed("StartGame"):
@@ -146,7 +158,7 @@ func _on_random_body_exited(body):
 		$Assets/Telepath/TeamX_text.text = str(random.size()) + "/4"
 		check_start_conditions()
 
-
+# Quit lobby when collision body of any players enters the exit portal object.
 func _on_area_quit_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if not get_node_or_null("/root/Main/SpawnedItems/World"):
 		Network._on_leave_button_pressed()
