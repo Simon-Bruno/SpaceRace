@@ -26,6 +26,8 @@ func get_player_count():
 		global_transform.origin = Vector3(0, 20, 0)
 		rotate_y(PI)
 		var light = $"../../world/DirectionalLight3D"
+		if not light:
+			return
 		light.rotate_y(PI)
 		#var transform = light.global_transform
 		#transform.basis.x = -transform.basis.x
