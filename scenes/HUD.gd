@@ -37,13 +37,18 @@ func start_game():
 		player.alive = true
 
 func _process(delta):
+	if not abilitiesAvailable:
+		progress += delta
+		abilityBar.value = progress / currentCooldown * 100
+		if progress >= currentCooldown:
+			abilityBar.value = 100
+			progress = 0
+			abilitiesAvailable = true
+	
 	if not multiplayer.is_server(): 
 		return
-	if not useTimer and multiplayer.get_peers().size() == loaded_players:
-		await get_tree().create_timer(2.0).timeout
-		loaded_players = 0
-		return
-	elif not useTimer:
+		
+	if not useTimer and multiplayer.get_peers().size() + 1 == loaded_players:
 		if not sound_played:
 			Audiocontroller.play_countdown_sfx()
 			sound_played = true
@@ -62,16 +67,7 @@ func _process(delta):
 		var minutes = floor(seconds / 60)
 		seconds = seconds % 60
 		seconds = "0%s" % [seconds] if seconds < 10 else str(seconds)
-		inGameTimerLabel.text = "%s.%s" % [minutes, seconds] if minutes > 0 else str(seconds)
-		
-		
-	if not abilitiesAvailable:
-		progress += delta
-		abilityBar.value = progress / currentCooldown * 100
-		if progress >= currentCooldown:
-			abilityBar.value = 100
-			progress = 0
-			abilitiesAvailable = true
+		inGameTimerLabel.text = "%s:%s" % [minutes, seconds] if minutes > 0 else str(seconds)
 	
 func useAbility(ability : int):
 	if not abilitiesAvailable or Network.in_terminal:

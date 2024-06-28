@@ -7,8 +7,4 @@ func use():
 	if player:
 		player.rpc("full_health")
 	super.consume_item()
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	super._process(delta)
+

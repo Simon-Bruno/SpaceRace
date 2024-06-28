@@ -5,7 +5,7 @@ extends Node
 @onready var quit_button_area = $AreaQuit
 
 
-var world = preload("res://scenes/world.tscn")
+var world = "res://scenes/world.tscn"
 
 var team1 = []
 var team2 = []
@@ -14,25 +14,26 @@ var player_id = null
 
 var waittime = 3.0
 #percentage waittime (waittime - start_timer.time_left) / waittime * 100
-#func _process(_delta):
-	#if multiplayer.is_server():
-		#if not start_timer.is_stopped():
-			#$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
-	#if Input.is_action_just_pressed("pause"):
-		#pause_menu.handle_esc_input()
-
 func _process(_delta):
 	if multiplayer.is_server():
-		if Input.is_action_just_pressed("StartGame"):
-			if random.size() == multiplayer.get_peers().size() + 1 or \
-			team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
-				_on_start_timer_timeout()
 		if not start_timer.is_stopped():
 			$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
 	if Input.is_action_just_pressed("pause"):
 		pause_menu.handle_esc_input()
+
+#func _process(_delta):
+	#if multiplayer.is_server():
+		#if Input.is_action_just_pressed("StartGame"):
+			#if random.size() == multiplayer.get_peers().size() + 1 or \
+			#team1.size() + team2.size() == multiplayer.get_peers().size() + 1:
+				#_on_start_timer_timeout()
+		#if not start_timer.is_stopped():
+			#$Progressbar/SubViewport/ProgressBar.value = (waittime - start_timer.time_left) / waittime * 100
+	#if Input.is_action_just_pressed("pause"):
+		#pause_menu.handle_esc_input()
 		
 func _ready():
+	ResourceLoader.load_threaded_request(world)
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 		Network.player_added.connect(lobby_add_player_character)
@@ -57,7 +58,8 @@ func _on_start_timer_timeout():
 	
 	Audiocontroller.play_teleportation_sfx()
 	_on_game_start.rpc(Network.player_teams, Network.player_names)
-	get_parent().add_child(world.instantiate())
+	var loaded_world = ResourceLoader.load_threaded_get(world)
+	get_parent().add_child(loaded_world.instantiate())
 	queue_free()
 
 func check_start_conditions():
@@ -69,19 +71,21 @@ func check_start_conditions():
 			start_timer.stop()
 			$Progressbar/SubViewport/ProgressBar.value = 0
 
-
+var spawned_players = 0
 func lobby_add_player_character(id):
 	player_id = id
 	var character = preload("res://scenes/player/player.tscn").instantiate()
 	character.name = str(id)
 	add_child(character)
-	character.set_params_for_player.rpc(id, Vector3i(5, 5, 5), 30, 200)
-
+	character.set_params_for_player.rpc(id, Vector3i(5, 5, 5), 30, 200, spawned_players * 10)
+	spawned_players += 1
+	
 @rpc("authority", "call_local", "reliable")
 func _on_game_start(player_teams, player_names):
 	Network.player_teams = player_teams
 	Network.player_names = player_names
 	Audiocontroller.play_game_music()
+	Network.has_seen_end_screen.clear()
 	var myteam = player_teams[str(multiplayer.get_unique_id())]
 	for player_id in player_teams.keys():
 		if player_id == str(multiplayer.get_unique_id()):
@@ -144,4 +148,5 @@ func _on_random_body_exited(body):
 
 
 func _on_area_quit_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	Network._on_leave_button_pressed()
+	if not get_node_or_null("/root/Main/SpawnedItems/World"):
+		Network._on_leave_button_pressed()

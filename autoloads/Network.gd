@@ -29,6 +29,8 @@ var player_teams = {}
 var players_connected = 0
 var player_names = {}
 
+var has_seen_end_screen = []
+
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)

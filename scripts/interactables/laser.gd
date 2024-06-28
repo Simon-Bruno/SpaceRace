@@ -22,6 +22,8 @@ var laser_off_duration = 3.0
 @onready var beam_size = $Origin/Beam/DamageArea/CollisionShape3D.shape.get_size().x
 
 func _ready():
+	if not multiplayer.is_server():
+		return
 	if timer_active:
 		laser_timer = randf_range(1.0, 5.0)
 	if not active:
@@ -82,7 +84,7 @@ func update_beam():
 		beam.scale.x = beam_init_scale.x * dist
 
 func _process(delta):
-	if timer_active:
+	if timer_active and multiplayer.is_server():
 		handle_timer(delta)
 	if target != null and active:
 		target.take_damage.rpc(target.name, 10000)

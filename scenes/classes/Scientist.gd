@@ -9,8 +9,8 @@ var healing_amount : int = 50
 var ability1_cooldown : int = 20
 var ability2_cooldown : int = 30
 
-var ability1_title : String = "Heal"
-var ability2_title : String = "Sabotage WIP"
+var ability1_title : String = "Heal yourself"
+var ability2_title : String = "Slow opponents"
 
 func _ready():
 	var hud = get_node_or_null("../../../HUD")
@@ -32,8 +32,8 @@ func slow_enemies() -> void:
 @rpc("any_peer", "call_local", "reliable")
 func set_slowness_on_other_team(ids):
 	if ids.has(str(multiplayer.get_unique_id())):
-		Network.get_player_node_by_id(multiplayer.get_unique_id()).walkspeed_multiplier = 0.1
-		await get_tree().create_timer(10).timeout
+		Network.get_player_node_by_id(multiplayer.get_unique_id()).walkspeed_multiplier = 0.2
+		await get_tree().create_timer(6).timeout
 		Network.get_player_node_by_id(multiplayer.get_unique_id()).walkspeed_multiplier = 1
 
 func heal() -> void:

@@ -11,6 +11,7 @@ func _ready() -> void:
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
 	if multiplayer.is_server():
+		await get_tree().create_timer(1.5).timeout
 		update_mesh.rpc(customRooms.HOLEGREEN)
 
 #Search the gridmap of the world and returns it.
@@ -43,8 +44,8 @@ func activate():
 	if interactable != null and not fixed:
 		interactable.activated()
 
-	update_mesh.rpc(customRooms.WALL)
 	fixed = true
+	update_mesh.rpc(customRooms.WALL)
 
 # Update mesh based on current state
 @rpc("authority", "call_local", "reliable")

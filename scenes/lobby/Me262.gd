@@ -6,7 +6,7 @@ var speed = 0.0
 # Acceleration rate (units per second squared)
 const ACCELERATION = 5.0
 
-@onready var mesh = $SpaceshuttleV2
+@onready var mesh = $"../SpaceshuttleV2"
 @onready var portal_effect = $"../Assets/floors/VFX_PORTAL_ENTRANCE/EntrancePortal"
 
 # Flag to check if the object has started moving

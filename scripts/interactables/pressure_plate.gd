@@ -2,12 +2,16 @@ extends Node3D
 
 @export var interactable : Node
 @export var enemy_pos : Vector3i
-@export var winner_id : int
+var winner_team : int
 
 var is_finish_plate : bool = false
 var customRooms : GridMap = null
 var bodies_on_plate: Array = []
 var finish = preload("res://scenes/menu/finish_menu.tscn")
+var loaded_lobby = preload("res://scenes/lobby/lobby.tscn")
+
+const CHAT_PATH = "/root/Main/SpawnedItems/World/Chat"
+const HUD_PATH = "/root/Main/SpawnedItems/World/HUD/InGame"
 
 # Called when button is placed in world. Sets the mesh instance to off.
 func _ready() -> void:
@@ -15,6 +19,7 @@ func _ready() -> void:
 	var root_node = get_tree().root
 	customRooms = find_node_by_name(root_node, target_node_name)
 	if multiplayer.is_server():
+		await get_tree().create_timer(1.5).timeout
 		update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 
 #Search the gridmap of the world and returns it.
@@ -41,7 +46,7 @@ func _on_area_3d_body_entered(body) -> void:
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body) -> void:
-	if not multiplayer.is_server():
+	if not multiplayer or not multiplayer.is_server():
 		return
 
 	if body.is_in_group("Players") or body is RigidBody3D:
@@ -50,13 +55,42 @@ func _on_area_3d_body_exited(body) -> void:
 			update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 			handle_plate_deactivation()
 
+@rpc("any_peer", "call_local", "reliable")
+func set_finish_screen(team):
+	if Network.has_seen_end_screen.has(multiplayer.get_unique_id()):
+		return
+	Network.has_seen_end_screen.append(multiplayer.get_unique_id())
+	
+	var spawned_finish = finish.instantiate()
+	
+	get_node("/root/Main/SpawnedItems").add_child(spawned_finish, true)
+	spawned_finish.old_teams = Network.player_teams
+	spawned_finish.other_team_member_id = Network.other_team_member_id
+	spawned_finish.win_team = team
+	spawned_finish.time = get_node(HUD_PATH).get_parent().timer
+	spawned_finish.other_ids = Network.get_other_team_ids(multiplayer.get_unique_id())
+	
+	spawned_finish.set_screen()
+
+	if multiplayer.is_server():
+		Network.go_to_lobby(null)
+
+#func _input(event):
+	#if event is InputEventKey:
+		#if event.pressed and event.keycode == KEY_B:
+			#var body = Network.get_player_node_by_id(multiplayer.get_unique_id())
+			#var winner_team = Network.player_teams[body.name]
+			#Audiocontroller.play_pressure_plate_sfx()
+			#set_finish_screen.rpc(winner_team)
+
 # Handle the activation logic when a body enters the pressure plate
 func handle_plate_activation(body) -> void:
 	if is_finish_plate and body.is_in_group('Players'):
-		winner_id = body.name.to_int()
-		finish = finish.instantiate()
+		var winner_team = Network.player_teams[body.name]
 		Audiocontroller.play_pressure_plate_sfx()
-		add_child(finish)
+		set_finish_screen.rpc(winner_team)
+		
+
 	else:
 		if interactable != null:
 			interactable.activated()

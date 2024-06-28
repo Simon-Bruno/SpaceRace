@@ -52,11 +52,6 @@ func _ready():
 	
 	if MeshInstance.material_override is StandardMaterial3D:
 		original_albedo_color = MeshInstance.material_override.albedo_color
-
-	set_physics_process(false)
-	set_process(false)
-	SpinTimer.stop()
-	ChargeTimer.stop()
 func reset_spin_timer():
 	SpinTimer.wait_time = 8.0 + randf_range(0, 8)
 	SpinTimer.start()
@@ -135,8 +130,6 @@ func _physics_process(delta):
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
-		set_physics_process(true)
-		set_process(true)
 		SpinTimer.start()
 		ChargeTimer.start()
 

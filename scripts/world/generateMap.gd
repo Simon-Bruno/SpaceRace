@@ -36,10 +36,10 @@ const PAIRS: Dictionary = {DOOROPENL: DOOROPENR, DOOROPENR: DOOROPENL, DOORCLOSE
 							DOORCLOSEDR: DOORCLOSEDL, WINDOWR: WINDOWL, WINDOWL: WINDOWR}
 
 # What percentage of the rooms should be custom.
-const CUSTOMROOMPERCENTAGE: float = 0.65
+const CUSTOMROOMPERCENTAGE: float = 0.6
 
 # General room parameters
-const room_amount: int = 8
+const room_amount: int = 6
 const room_width: int = 10
 const room_height: int = 8
 const room_margin: int = 4
@@ -495,7 +495,3 @@ func draw_walls() -> void:
 		# Place wall.
 		var orientation = orientations[idx]
 		self.set_cell_item(floor_item + Vector3i(0, 1, 0), type, orientation)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass

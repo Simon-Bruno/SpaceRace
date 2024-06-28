@@ -67,7 +67,7 @@ spawn_path = NodePath("..")
 [node name="ProjectileSpawner" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ProjectileSpawner"]
-_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn", "res://scenes/interactables/laser.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/characters/ranged_enemy/projectile.tscn", "res://scenes/interactables/laser.tscn", "res://scenes/interactables/laser_low.tscn")
 spawn_path = NodePath("..")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_bij7o")]
@@ -145,7 +145,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("7_1h5a1")
 theme_override_font_sizes/font_size = 100
-text = "0.02"
+text = "00"
 horizontal_alignment = 2
 clip_text = true
 
@@ -157,12 +157,12 @@ texture = ExtResource("8_hw5ie")
 [node name="Title" type="Label" parent="HUD/InGame/Ability1Sprite"]
 offset_left = 135.0
 offset_top = -80.0
-offset_right = 660.0
+offset_right = 1100.0
 offset_bottom = 81.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 50
 theme_override_fonts/font = ExtResource("7_1h5a1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 100
 text = "Ability 1 title"
 vertical_alignment = 2
 clip_text = true
@@ -176,12 +176,12 @@ texture = ExtResource("9_vfb8j")
 [node name="Title" type="Label" parent="HUD/InGame/Ability2Sprite"]
 offset_left = 135.0
 offset_top = -80.0
-offset_right = 660.0
+offset_right = 1090.0
 offset_bottom = 81.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 50
 theme_override_fonts/font = ExtResource("7_1h5a1")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 100
 text = "Ability 2 title"
 vertical_alignment = 2
 clip_text = true

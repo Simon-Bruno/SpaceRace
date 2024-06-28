@@ -1,10 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://y44y1wmnacy2"]
+[gd_scene load_steps=12 format=3 uid="uid://y44y1wmnacy2"]
 
 [ext_resource type="Script" path="res://scripts/menu/finish_menu.gd" id="1_w7f6y"]
 [ext_resource type="Texture2D" uid="uid://bis8yamj1e4iv" path="res://assets/menu/BackgroundImage.png" id="2_gp8ye"]
+[ext_resource type="FontFile" uid="uid://6utpau6lbihh" path="res://assets/fonts/MotionControl-Bold.otf" id="3_glkue"]
+[ext_resource type="Texture2D" uid="uid://ip1xi5xnjir2" path="res://assets/menu/ButtonBackground.png" id="4_qvahr"]
+[ext_resource type="Texture2D" uid="uid://bciuub8d3mx4s" path="res://assets/menu/ButtonBackgroundDark.png" id="5_qjn2p"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_wnixh"]
-font_size = 40
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7fajb"]
+texture = ExtResource("4_qvahr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bcwea"]
+texture = ExtResource("5_qjn2p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wpfqd"]
+texture = ExtResource("4_qvahr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ysxjv"]
+texture = ExtResource("5_qjn2p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1s2i"]
+texture = ExtResource("4_qvahr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g0wl5"]
+texture = ExtResource("5_qjn2p")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -24,124 +42,165 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_gp8ye")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = 20.0
-offset_right = 400.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.3
-anchor_right = 0.5
-anchor_bottom = 0.3
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_wnixh")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_wnixh")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-modulate = Color(0.99558, 0.99558, 0.99558, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.85
-anchor_right = 0.5
-anchor_bottom = 0.85
-offset_left = -200.0
-offset_top = -100.0
-offset_right = 200.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Holder" type="VBoxContainer" parent="MarginContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="HostButton" type="Button" parent="MarginContainer2/Holder"]
+[node name="HostButton" type="Button" parent="Buttons"]
 custom_minimum_size = Vector2(200, 0)
 layout_direction = 1
 layout_mode = 2
+offset_left = 860.0
+offset_top = 390.0
+offset_right = 1110.0
+offset_bottom = 460.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_7fajb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bcwea")
 text = "Play again"
 
-[node name="JoinButton" type="Button" parent="MarginContainer2/Holder"]
+[node name="JoinButton" type="Button" parent="Buttons"]
 layout_mode = 2
+offset_left = 860.0
+offset_top = 475.0
+offset_right = 1110.0
+offset_bottom = 545.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_wpfqd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ysxjv")
 text = "Menu"
 
-[node name="QuitButton" type="Button" parent="MarginContainer2/Holder"]
+[node name="QuitButton" type="Button" parent="Buttons"]
 layout_mode = 2
+offset_left = 860.0
+offset_top = 560.0
+offset_right = 1110.0
+offset_bottom = 630.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_h1s2i")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g0wl5")
 text = "Quit"
 
-[node name="DialogMessage" type="Panel" parent="."]
-visible = false
+[node name="WinnerLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -178.0
+offset_top = 19.0
+offset_right = 622.0
+offset_bottom = 80.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 60
+text = "WINNERS"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Winner1" type="Label" parent="WinnerLabel"]
 layout_mode = 0
-offset_left = 451.0
-offset_top = 240.0
-offset_right = 707.0
-offset_bottom = 417.0
+offset_top = 60.0
+offset_right = 800.0
+offset_bottom = 121.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 40
+text = "WINNERS"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="DialogMessage"]
+[node name="Winner2" type="Label" parent="WinnerLabel"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 9.0
-offset_right = 50.0
-offset_bottom = 32.0
-text = "Error"
+offset_top = 120.0
+offset_right = 800.0
+offset_bottom = 181.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 40
+text = "WINNERS"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Text" type="Label" parent="DialogMessage"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 47.0
-offset_right = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Cant join game because of ooopsie"
-autowrap_mode = 2
+[node name="LoserLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -183.0
+offset_top = 258.0
+offset_right = 617.0
+offset_bottom = 319.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 50
+text = "Losers"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
-[node name="Button" type="Button" parent="DialogMessage"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -34.0
-offset_top = 7.0
-offset_right = -7.0
-offset_bottom = 38.0
-grow_horizontal = 0
-text = "X"
+[node name="Loser1" type="Label" parent="LoserLabel"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 800.0
+offset_bottom = 121.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 35
+text = "losers"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="pressed" from="MarginContainer2/Holder/HostButton" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="MarginContainer2/Holder/HostButton" to="." method="_on_play_again_pressed"]
-[connection signal="pressed" from="MarginContainer2/Holder/JoinButton" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="MarginContainer2/Holder/JoinButton" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="MarginContainer2/Holder/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="Loser2" type="Label" parent="LoserLabel"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 800.0
+offset_bottom = 181.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 35
+text = "losers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 869.0
+offset_top = 19.0
+offset_right = 1094.0
+offset_bottom = 77.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 50
+text = "Total time"
+
+[node name="TimeLabel" type="Label" parent="TimerTitle"]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 38.0
+offset_right = 206.0
+offset_bottom = 146.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("3_glkue")
+theme_override_font_sizes/font_size = 65
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Buttons/HostButton" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="Buttons/JoinButton" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
