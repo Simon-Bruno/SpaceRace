@@ -46,7 +46,7 @@ func _on_area_3d_body_entered(body) -> void:
 
 # Detect when body exited the area
 func _on_area_3d_body_exited(body) -> void:
-	if not multiplayer.is_server():
+	if not multiplayer or not multiplayer.is_server():
 		return
 
 	if body.is_in_group("Players") or body is RigidBody3D:
