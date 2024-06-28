@@ -7,16 +7,18 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	check_button.toggled.connect(on_fps_toggled)
+	# Load data if it exists
 	if FileAccess.file_exists(SaveManager.SETTINGS_SAVE_PATH) and not SettingsContainer.get_first():
 		load_data()
 
 
 func load_data():
+	# Check if the fps meter is on or off
 	if SettingsContainer.get_fps_meter():
 		check_button.button_pressed = true
 	else:
 		check_button.button_pressed = false
-
+	# Set the label text
 	on_fps_toggled(SettingsContainer.get_fps_meter())
 
 

@@ -1,7 +1,7 @@
-# Space Race: A 2v2 Dungeon Race Game
+# Space Race: A 2v2 Space-Themed Puzzle Race Game
 
 ## Overview
-Welcome to **Space Race**, an 2v2 linear puzzle race game created as a project for the Project Software Engineering course at the UvA. Players are grouped into teams of two and race through a series of dungeons, overcoming obstacles, hindering the other team and solving puzzles to reach the end of the dungeon before the opposing team.
+Welcome to **Space Race**, a 2v2 space-themed puzzle race game for the Project Software Engineering course at UvA. Teams solve puzzles quickly while sabotaging opponents. Collaborate, strategize, and race to the finish!
 
 ## Collaborators
 The game is developed by a team of students (Name, UvA student number):
@@ -20,20 +20,26 @@ The game is developed by a team of students (Name, UvA student number):
 - Milou (14375915)
 
 ## Game Description
-Space Race combines racing with the element of dungeon crawling. Each team of two players must navigate through dungeons filled with traps, enemies, and puzzles. Cooperation and strategy are key to overcoming these challenges and outpacing/hindering the opposing team.
+Space Race is a game where players cooperate to solve puzzles quickly while also sabotaging the other team. Work together to progress, but use clever tactics to hinder your opponents. Be the first team to reach the control room!
 
 ## Features
-- **2v2 Team Gameplay**: Compete in teams of two against another team.
-- **Dynamic Dungeons**: Each dungeon is uniquely proceduraly generated with various obstacles and puzzles.
-- **Cooperative Strategy**: Players must work together to solve puzzles and defeat enemies.
-- **Competitive Racing**: The first team to reach the finish line wins the race.
+- **2v2 Team Gameplay**: Compete in teams of two against another team
+- **Dynamic Rooms**: Rooms dynamically generated with various obstacles and puzzles
+- **Custom Rooms**: Manually created rooms with handcrafted exciting puzzles
+- **Cooperative Strategy**: Players must work together to solve puzzles and defeat enemies
+- **Sabotaging Opponents**: Players can sabotage the other team through skills and interactables
+- **Competitive Racing**: The first team to reach the finish line wins the race
 
 ## Installation
 To install and play Space Race, follow these steps:
 
+Either download the newest release from the releases tab in this github project. 
+
+**Or**:
+
 1. Clone the repository:
    ```sh
-   git clone git@github.com:Simon-Bruno/PSE2024.git
+   git clone git@github.com:Simon-Bruno/SpaceRace.git
    ```
 2. Open the project in Godot:
    - Launch the Godot Engine.
@@ -43,7 +49,7 @@ To install and play Space Race, follow these steps:
    - In Godot, click on the "Play" button to start the game.
 
 ## How to Play
-1. **Starting the Game**: Launch the game and create or join a lobby with your teammate.
+1. **Starting the Game**: Launch the game and create or join a lobby with three other players. Customize your input keys through the settings page.
 2. **Navigating the Dungeon**: Use the WASD keys to move your character. Interact with objects and solve puzzles to progress through the dungeon.
 3. **Winning the Race**: The first team to reach the end of the dungeon wins the race. Communicate and coordinate with your teammate to overcome challenges efficiently.
 

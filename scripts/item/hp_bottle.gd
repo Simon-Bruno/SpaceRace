@@ -1,5 +1,8 @@
 extends "res://scripts/item/item.gd"
 
+# This code is used to increase the health of player by a certain value.
+
+# Health increase
 var health_potion_value = 30
 
 

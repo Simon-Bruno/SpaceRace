@@ -78,21 +78,22 @@ func _ready():
 	play_menu_music()
 
 func play_music(music, volume_db : float = 0.0):
-	var music_controller = get_node(MUSIC_CONTROLLER_PATH)
-	music_controller.stream = music
-	music_controller.volume_db = volume_db
-	change_audio_bus_music_controller("Music")
-	music_controller.play()
+	var music_controller = get_node(MUSIC_CONTROLLER_PATH) # Get the music controller
+	music_controller.stream = music # Set the stream to the music
+	music_controller.volume_db = volume_db # Set the volume_db to the volume_db
+	change_audio_bus_music_controller("Music") # Change the audio bus to the music controller
+	music_controller.play() # Play the music
 
+# Dynamically play sound effects
 func play_Sfx(sfx, volume_db : float = 0):
-	var sfx_controller = AudioStreamPlayer.new()
-	sfx_controller.stream = sfx
-	sfx_controller.volume_db = volume_db
-	change_audio_bus_sfx_controller("Sfx", sfx_controller)
-	add_child(sfx_controller)
-	sfx_controller.play()
-	await sfx_controller.finished
-	sfx_controller.queue_free()
+	var sfx_controller = AudioStreamPlayer.new() # Create a new AudioStreamPlayer
+	sfx_controller.stream = sfx # Set the stream to the sfx
+	sfx_controller.volume_db = volume_db # Set the volume_db to the volume_db
+	change_audio_bus_sfx_controller("Sfx", sfx_controller) # Change the audio bus to the sfx controller
+	add_child(sfx_controller) # Add the sfx controller as a child
+	sfx_controller.play() # Play the sfx
+	await sfx_controller.finished # Wait for the sfx to finish playing
+	sfx_controller.queue_free() # Free the sfx controller
 
 func play_menu_music(volume_db : float = 0.0):
 	play_music(GALACTIC_GROOVE__MENU_, volume_db)

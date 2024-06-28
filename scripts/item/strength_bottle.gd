@@ -6,6 +6,7 @@ var duration = 10
 
 
 # Called when the player actually uses the item by pressing KEY 'Q'
+# Sets the damage of a player to a factor of 2 for a duration of 10 seconds.
 func use():
 	var player = Network.get_player_node_by_id(owned_id)
 	var node = player.get_node("PlayerEffects")
