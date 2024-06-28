@@ -1,7 +1,7 @@
 # Space Race: A 2v2 Dungeon Race Game
 
 ## Overview
-Welcome to **Space Race**, an 2v2 linear dungeon race game created as a project for the Project Software Engineering course at the UvA. Players are grouped into teams of two and race through a series of dungeons, overcoming obstacles, hindering the other team and solving puzzles to reach the end of the dungeon before the opposing team.
+Welcome to **Space Race**, an 2v2 linear puzzle race game created as a project for the Project Software Engineering course at the UvA. Players are grouped into teams of two and race through a series of dungeons, overcoming obstacles, hindering the other team and solving puzzles to reach the end of the dungeon before the opposing team.
 
 ## Collaborators
 The game is developed by a team of students (Name, UvA student number):
