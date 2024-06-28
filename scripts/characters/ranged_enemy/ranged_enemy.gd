@@ -88,8 +88,9 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	if not multiplayer.is_server():
 		return
+		
+	# check if the body is a player
 	if body.is_in_group("Players"):
-		#print("Out of range")
 		if body == closest_target_node:
 			closest_target_node = null
 		nodes_in_area.erase(body)
@@ -105,6 +106,7 @@ func take_damage(damage, player_pos):
 	if health <= 0:
 		die() 
 
+	#knockback handling
 	var knockback_direction = (global_transform.origin - player_pos).normalized()
 	velocity.x += knockback_direction.x * knockback_strength
 	velocity.z += knockback_direction.z * knockback_strength
