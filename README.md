@@ -1,4 +1,4 @@
-# Space Race: A 2v2 Dungeon Race Game
+# Space Race: A 2v2 Space-Themed Puzzle Race Game
 
 ## Overview
 Welcome to **Space Race**, a 2v2 space-themed puzzle race game for the Project Software Engineering course at UvA. Teams solve puzzles quickly while sabotaging opponents. Collaborate, strategize, and race to the finish!
