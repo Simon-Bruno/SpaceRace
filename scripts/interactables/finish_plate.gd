@@ -1,4 +1,4 @@
-# This code is not used
+# Archived file, not used anymore
 
 extends Node
 

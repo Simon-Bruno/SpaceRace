@@ -109,13 +109,13 @@ func _vertical_movement(delta):
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
-	
+
 	if alive and global_position.y < -1:
 		global_position.y = 2
 
 	return h + v
 
-
+# Checks the distance between the two team players and returns it.
 func check_distance(target_velocity):
 	if Network.other_team_member_node != null:  # null check
 		# acquire team's positions
@@ -333,7 +333,7 @@ func die():
 	request_play_animation(0, "stop")
 	await get_tree().create_timer(0.8).timeout  # wait to respawn
 	walk_speed = temp
-	
+
 	$PlayerItem._drop_item()
 
 
