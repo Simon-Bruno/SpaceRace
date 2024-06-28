@@ -36,6 +36,7 @@ func parse_file(filepath : String) -> Dictionary:
 			enemies_parser(section, dict['enemies'])
 	return dict
 
+# This function will transform a segment of string to a dictionary.
 func segment_to_dict(segment : String) -> Dictionary:
 	var dict = {}
 	if not segment.begins_with("{"):
@@ -56,6 +57,7 @@ func segment_to_dict(segment : String) -> Dictionary:
 			dict['loose_grouping'] = true
 	return dict
 
+# This function will parse the WALL_SETUP section in the RMS file.
 func wall_parser(section: String, wall_dict : Array) -> void:
 	var walls = section.split("create_wall")
 	for i in walls.size():
@@ -65,6 +67,7 @@ func wall_parser(section: String, wall_dict : Array) -> void:
 			continue
 		wall_dict.append(parsed_wall)
 
+# This function will parse the OBJECT_GENERATION in the RMS file.
 func object_parser(section: String, object_dict : Array) -> void:
 	var objects = section.split('create_object')
 	for i in objects.size():
@@ -86,6 +89,7 @@ func object_parser(section: String, object_dict : Array) -> void:
 		# Set the object in the dictionary of objects
 		object_dict.append(parsed_object)
 
+# This function will parse the ENEMY_GENERATION section in the RMS file.
 func enemies_parser(section : String, enemy_dict : Array) -> void:
 	var mobs = section.split('create_mob')
 	for i in mobs.size():

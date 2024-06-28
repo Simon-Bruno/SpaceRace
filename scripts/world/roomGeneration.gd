@@ -246,6 +246,10 @@ func add_item(floor_plan : Array[Array], object : Dictionary, width: int, height
 	GlobalSpawner.spawn_item(absolute_position + Vector3(x, 0, -z))
 	return true
 
+# This function will handle the adding of a buff. It expects the floor_plan,
+# a dictionary containing the arguments for the placement and typing.
+# If the object has a buff_type, it will convert the given string to the
+# correct integer that the GlobalSpawner expects.
 func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
@@ -272,11 +276,14 @@ func add_buff(floor_plan : Array[Array], object : Dictionary, width : int, heigh
 			buff_id = 3
 		_:
 			buff = -1
+
 	buff = GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, z), buff, buff_id == -1)
 	if buff != -1:
 		GlobalSpawner.spawn_buff(absolute_position + Vector3(x, 0, -z), buff, false)
 	return true
 
+# This function will handle the placement of boxes. It expects the floor_plan
+# and a dictionary containing the arguments for the placement of the box.
 func add_box(floor_plan, object, width, height, start) -> bool:
 	var pos = object_placement(object, width, height, start)
 	var x = pos[0]
@@ -290,8 +297,11 @@ func add_box(floor_plan, object, width, height, start) -> bool:
 	GlobalSpawner.spawn_box(absolute_position + Vector3(x, 0, -z))
 	return true
 
+# This function will attach the given object to a nearby wall. This is used
+# for the placements of the buttons and both types of lasers.
 func attach_wall(object : Dictionary, pos : Array, width : int, height : int) -> Array:
 	const orientations = [0, 90, 180, 270]
+	# Convert the given x and z positions to be in the middle of the wall tiles.
 	var x : int = pos[0] / 2 * 2 + 1
 	var z : int = pos[1] / 2 * 2 + 1
 	var orientation = 0
@@ -325,6 +335,10 @@ func attach_wall(object : Dictionary, pos : Array, width : int, height : int) ->
 
 	return [x, z, orientation]
 
+# This function will handle the placement of lasers. It relies on the attach_wall
+# function to spawn the lasers attached to the sides of the room. It needs
+# the position of the right door to avoid placing it in the door, rendering
+# the room uncompletable.
 func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i, end : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start, 3)
 	pos = attach_wall(object, pos, width, height)
@@ -343,6 +357,10 @@ func add_laser(floor_plan : Array[Array], object : Dictionary, width : int, heig
 	GlobalSpawner.spawn_laser(absolute_position + Vector3(x, 0, -z), basis, false, 1, false, true)
 	return true
 
+# This function places the enemy lasers. Firstly, it places the laser based on the
+# given arguments. Then it tries to place as many buttons as specified by the
+# set_activation. If it fails to place the button, it will reduce the activation
+# count of the laser. This might result in lasers that cannot be turned on.
 func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i, end : Vector3i) -> bool:
 	var pos : Array = object_placement(object, width, height, start, 3)
 	pos = attach_wall(object, pos, width, height)
@@ -382,7 +400,10 @@ func add_enemy_laser(floor_plan : Array[Array], object : Dictionary, width : int
 
 	return true
 
-
+# This function will handle the placement and linking of buttons. By default,
+# this function will link the button to the door. This function relies on the
+# attach_wall function to place the button on the nearest wall. It also needs
+# the position of the final door to stay away from it.
 func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, width : int, height : int, start : Vector3i, end : Vector3i) -> bool:
 	var pos = object_placement(object, width, height, start, 3)
 	pos = attach_wall(object, pos, width, height)
@@ -403,6 +424,10 @@ func add_button(floor_plan : Array[Array], object : Dictionary, doors : Array, w
 	return true
 
 
+# This function will handle the object placements. This will call the correct
+# add function to handle the actual placement of the given item. If the item
+# type is not known, it will return an error, but this should not happen if
+# the RMS file follows the template.
 func object_matcher(object : Dictionary, floor_plan : Array[Array], doors : Array, width : int, height : int, start: Vector3i, end : Vector3i) -> bool:
 	match object['type']:
 		'ITEM':
@@ -421,14 +446,17 @@ func object_matcher(object : Dictionary, floor_plan : Array[Array], doors : Arra
 			print('The object ', object['type'], ' is not a supported object')
 			return true
 
-# This function will eventually handle all the object placements. Currently it
-# only support items and it will handle objects that failed to place.
+# This function will eventually handle all the object placements.
+# It will handle objects that failed to place by trying again. If it fails too
+# often, it will give up on trying and place another object.
 func add_objects(floor_plan : Array[Array], objects_list : Array, doors : Array, width : int, height: int, start: Vector3i, end : Vector3i) -> void:
 	for object in objects_list:
 		for i in 5:
 			if object_matcher(object, floor_plan, doors, width, height, start, end):
 				break
 
+# This function will handle the placements of a single enemy. It returns
+# the x and z coordinate of the placed enemy.
 func enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, width : int, height : int, start : Vector3i) -> Array:
 	var min_dist : int = object['set_min_distance']
 	var max_dist : int = object['set_max_distance']
@@ -447,6 +475,7 @@ func enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : in
 
 	return [x, z]
 
+# This function will tightly place the enemies.
 func place_enemy_in_radius_tight(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
 	for i in radius + 1:
 		for j in radius + 1:
@@ -454,6 +483,7 @@ func place_enemy_in_radius_tight(floor_plan : Array[Array], radius : int, x : in
 				return [x + i, z + j]
 	return []
 
+# this function will loosely place the enemies inside the given radius.
 func place_enemy_in_radius_loose(floor_plan : Array[Array], radius : int, x : int, z : int) -> Array:
 	var xs = range(-radius, radius + 1)
 	var ys = range(-radius, radius + 1)
@@ -465,6 +495,9 @@ func place_enemy_in_radius_loose(floor_plan : Array[Array], radius : int, x : in
 				return [x + i, z + j]
 	return []
 
+# This function will handle the placement of a group of enemies, if a single
+# enemy failed, it will return an empty array. Otherwise, it will return
+# the positions where enemies can be spawned.
 func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, radius : int, x : int, z: int) -> Array:
 	var number_enemies = object['set_group_size']
 	var positions = []
@@ -489,7 +522,8 @@ func generate_enemy_placement(floor_plan : Array[Array], object : Dictionary, ra
 		floor_plan[new_z - 1][new_x - 1] = items.ENEMY
 	return positions
 
-
+# This function handles the placement of a group of enemies. It will return true
+# if the placement went correctly, otherwise false.
 func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height : int, start : Vector3i) -> bool:
 	var radius = object['radius'] if object.has('radius') else 2
 	var pos = enemy_placement(floor_plan, object, radius, width, height, start)
@@ -512,7 +546,9 @@ func add_mob(floor_plan : Array[Array], object : Dictionary, width : int, height
 
 	return positions != []
 
-
+# This function will handle the placements of all the enemies. If the placement
+# of a group of enemies failed, it will try up to 5 times, otherwise it gives
+# up on the group.
 func add_mobs(floor_plan : Array[Array], objects_list : Array, width : int, height : int, start : Vector3i) -> void:
 	for object in objects_list:
 		for i in 5:
@@ -564,6 +600,7 @@ func generate_floor_plan(width : int, height : int) -> Array[Array]:
 		floor_plan[i].fill(0)
 	return floor_plan
 
+# This function will spawn the doors dynamically, so buttons can be linked.
 func spawn_dynamic_doors(end : Vector3i) -> Array:
 	var door_pos_1 = Vector3(end.x, -1, end.z + 3)
 	var door_pos_2 = Vector3(door_pos_1)
