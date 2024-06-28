@@ -34,10 +34,12 @@ var lobby_spawn = Vector3(-20, 11, 20)
 var game_spawn = {1: [Vector3(3, 3, 5), Vector3(3, 3, 11)],2: [Vector3(3, 3, -5), Vector3(3, 3, -11)]}
 
 
+# this functions gets called only once when the node gets added to the scene tree
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	alive = get_node_or_null("../../HUD") == null
 
+# this functions sets the paramaters for the player on all peers connected to the host
 @rpc("authority", "call_local", "reliable")
 func set_params_for_player(id, new_scale, new_walk_speed, new_accel, margin):
 	if str(id) != str(multiplayer.get_unique_id()):
@@ -52,12 +54,15 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel, margin):
 	walk_deceleration = new_accel * 1.2
 	position = lobby_spawn + Vector3(margin, 0, 0)
 
+# this function only gets called once when the node enters the scene tree
 func _ready():
+	# Load the HUD
 	var hud = get_node_or_null("../../HUD")
 	if hud and name == str(multiplayer.get_unique_id()):
 		await get_tree().create_timer(3.0).timeout
 		hud.loaded.rpc()
-
+		
+	# spawn the player in the right location depending on the team sizes and players.
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		return
@@ -69,12 +74,13 @@ func _ready():
 
 
 func _horizontal_movement(delta):
+	# if the palyer is dead make the player not able to move.
 	if !alive:
 		return Vector3.ZERO
 
+	# movement
 	var vel = Vector3.ZERO
 	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-
 	if current_direction != Vector2.ZERO: # Accelerate if moving
 		speed = min(walk_speed * walkspeed_multiplier * speed_boost, speed + walk_acceleration * delta)
 		direction = lerp(direction, current_direction, rotation_speed * delta)
@@ -87,18 +93,20 @@ func _horizontal_movement(delta):
 
 	vel.x = direction.x * speed
 	vel.z = direction.y * speed * Network.inverted
-
 	return vel
 
 
 func _vertical_movement(delta):
+	# if the player is dead make the player not able to move
 	if !alive:
 		return Vector3.ZERO
 	var vel = Vector3.ZERO
-
+	
+	# jump logic
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
 		Audiocontroller.play_jump_sfx()
 		vel.y = jump_impulse
+	# dont allow the player to move in the air.
 	if not is_on_floor():
 		Global.on_floor = false
 		vel.y = velocity.y - (fall_acceleration * delta)
@@ -109,13 +117,14 @@ func _vertical_movement(delta):
 func _player_movement(delta):
 	var h = _horizontal_movement(delta)
 	var v = _vertical_movement(delta)
-
+	
 	if alive and global_position.y < -1:
 		global_position.y = 2
 
 	return h + v
 
-# Checks the distance between the two team players and returns it.
+
+# this functions doesnt allow the player to get too far from its teammate.
 func check_distance(target_velocity):
 	if Network.other_team_member_node != null:  # null check
 		# acquire team's positions
@@ -130,7 +139,6 @@ func check_distance(target_velocity):
 				target_velocity.x = 0
 
 	return target_velocity.x
-
 
 func play_animation(anim_player, animation):
 	if anim_player == 1:  # anim speed 1
@@ -190,6 +198,7 @@ func anim_handler():
 
 
 func _push_objects():
+	# only allow the peers to push objects on their own controlled player node
 	if name != str(multiplayer.get_unique_id()):
 		return
 	for i in get_slide_collision_count():
@@ -226,7 +235,7 @@ func _pull_objects():
 
 		_set_velocity_on_object.rpc(body.get_path(), v)
 
-
+# this function only gets called when a body enters the area connected to the player
 func _on_pull_area_body_entered(body):
 	if name != str(multiplayer.get_unique_id()):
 		return
@@ -235,7 +244,7 @@ func _on_pull_area_body_entered(body):
 			return
 	body.get_node("PullText").visible = true
 
-
+# this function only gets called when a body leaves the area connected to the player
 func _on_pull_area_body_exited(body):
 	if name != str(multiplayer.get_unique_id()):
 		return
@@ -243,7 +252,7 @@ func _on_pull_area_body_exited(body):
 			return
 	body.get_node("PullText").visible = false
 
-
+# This functions gets called every frame
 func _physics_process(delta):
 	if is_on_floor():
 		Global.on_floor = true
@@ -260,6 +269,7 @@ func _physics_process(delta):
 		velocity = target_velocity
 		anim_handler()
 
+		# only allow all velocity and physics changes if the player is actually alive.
 		if alive:
 			move_and_slide()
 
@@ -275,11 +285,13 @@ func _input(event):
 		if not hudNode.abilitiesAvailable:
 			return
 
+		#ability1
 		if event.is_action_pressed("ability_1") and not Global.in_pause and not Global.in_chat:
 			$Class.ability1()
 			hudNode.useAbility(1)
 			Audiocontroller.play_health_pickup_regen_sfx()
 
+		#ability2
 		if event.is_action_pressed("ability_2") and not Global.in_pause and not Global.in_chat:
 			$Class.ability2()
 			hudNode.useAbility(2)
@@ -333,10 +345,11 @@ func die():
 	request_play_animation(0, "stop")
 	await get_tree().create_timer(0.8).timeout  # wait to respawn
 	walk_speed = temp
-
+	
 	$PlayerItem._drop_item()
 
 
+# this function only gets called when the respawn immunity timer reaches it end.
 func _on_respawn_immunity_timeout():
 	respawn_immunity = false
 
