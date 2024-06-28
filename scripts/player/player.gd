@@ -166,7 +166,7 @@ func sync_play_animation(anim_player, animation):
 
 func anim_handler():
 	if Global.AttackAnim and not AnimDeath:  # prioritise death anim
-		if not AnimPunching:  # if not alreadyy in a punching animation
+		if not AnimPunching:  # if not already in a punching animation
 			AnimPunching = true
 			request_play_animation(0, "stop")
 			request_play_animation(1, "punch")
