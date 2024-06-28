@@ -16,9 +16,10 @@ func _physics_process(delta):
 		
 	var motion = direction * speed * delta
 	motion.y = 0  # Prevent downward motion
-
 	var collision = move_and_collide(motion)
 
+	# since projectiles can get fired from both bosses, enemies and players checks are required
+	# to define which source can damage which target.
 	if collision:
 		if collision.get_collider().is_in_group("Boss") and not shooter_is_player:
 			queue_free()
@@ -29,4 +30,3 @@ func _physics_process(delta):
 			if collision.get_collider().has_method("take_damage"):
 				collision.get_collider().take_damage.rpc(damage, global_transform.origin)
 		queue_free()
-
