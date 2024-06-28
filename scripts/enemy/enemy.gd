@@ -113,8 +113,6 @@ func _on_detection_area_body_entered(body):
 		nodes_in_area.append(body)
 		set_physics_process(true)
 		set_process(true)
-		#print("body entered: ", body)
-		#print("array:", nodes_in_area)
 
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("Players"):
@@ -138,10 +136,7 @@ func _on_enemy_hitbox_body_exited(body):
 func take_damage(damage, player_pos):
 	if not multiplayer.is_server():
 		return
-	#if source.is_in_group("Boss"):
-		#return
 	health = max(0, health - damage)
-	#last_damaged_by = source
 	HpBar.value = float(health) / max_health * 100
 
 	if health <= 0:
@@ -161,8 +156,6 @@ func die():
 		$enemy_textures/AnimationPlayer.stop()
 		$enemy_textures/AnimationPlayer.play("death")
 	await get_tree().create_timer(2).timeout  # wait for anim
-	#if last_damaged_by.get_parent().is_in_group("Players"):	
-		#last_damaged_by.get_parent().points += 5
 	queue_free()
 
 func chase_player(body):

@@ -18,6 +18,7 @@ var DISPLAY_RESOLUTION_Y_VALUES : Array = []
 func _ready():
 	create_display_arr()
 	add_resolution_items()
+	# Load data if it exists
 	if FileAccess.file_exists(SaveManager.SETTINGS_SAVE_PATH) and not SettingsContainer.get_first():
 		load_data()
 	else:
@@ -30,20 +31,22 @@ func load_data():
 
 
 func create_display_arr():
+	# Create separate arrays for x and y values
 	for i in range(len(DISPLAY_RESOLUTION_VALUES)):
 		DISPLAY_RESOLUTION_X_VALUES.append(DISPLAY_RESOLUTION_VALUES[i][0])
 		DISPLAY_RESOLUTION_Y_VALUES.append(DISPLAY_RESOLUTION_VALUES[i][1])
 
 
 func add_resolution_items():
+	# Add resolution items to the option button
 	for resolution_size_text in RESOLUTION_DICTIONARY:
 		option_button.add_item(resolution_size_text)
 
 
 func _on_option_button_item_selected(index):
 	SettingsSignalBus.emit_on_resolution_mode_selected(index)
-	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
-	option_button.select(index)
+	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index]) # Set the window size based on the resolution mode
+	option_button.select(index) # Select the resolution mode
 	centre_window()
 
 
@@ -53,6 +56,7 @@ func select_current_display_resolution():
 	var index_with_keys = DISPLAY_RESOLUTION_KEYS.find(curr_resolution_str)
 	var index_with_xvalues = DISPLAY_RESOLUTION_X_VALUES.find(curr_resolution[0])
 	var index_with_yvalues = DISPLAY_RESOLUTION_Y_VALUES.find(curr_resolution[1])
+	# Select the resolution mode based on keys or x and y values
 	if index_with_keys != -1:
 		_on_option_button_item_selected(index_with_keys)
 	elif index_with_xvalues != -1:
@@ -62,6 +66,7 @@ func select_current_display_resolution():
 
 
 func centre_window():
+	# Centre the window on the screen
 	var centre_screen = DisplayServer.screen_get_position() + DisplayServer.screen_get_size() / 2
 	var window_size = get_window().get_size_with_decorations()
-	get_window().set_position(centre_screen - window_size / 2)
+	get_window().set_position(centre_screen - window_size / 2) # Set the window position to the centre of the screen
