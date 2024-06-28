@@ -7,6 +7,7 @@ var winner_team : int
 var is_finish_plate : bool = false
 var customRooms : GridMap = null
 var bodies_on_plate: Array = []
+
 var finish = preload("res://scenes/menu/finish_menu.tscn")
 var loaded_lobby = preload("res://scenes/lobby/lobby.tscn")
 
@@ -33,7 +34,7 @@ func find_node_by_name(node: Node, target_name: String) -> Node:
 			return found_node
 	return null
 
-# Detect when body entered the area
+# Detect when a body has entered the area of the pressure plate
 func _on_area_3d_body_entered(body) -> void:
 	if not multiplayer.is_server():
 		return
@@ -44,7 +45,7 @@ func _on_area_3d_body_entered(body) -> void:
 			handle_plate_activation(body)
 		bodies_on_plate.append(body)
 
-# Detect when body exited the area
+# Detect when body has exited the area of the pressure plate
 func _on_area_3d_body_exited(body) -> void:
 	if not multiplayer or not multiplayer.is_server():
 		return
@@ -55,14 +56,17 @@ func _on_area_3d_body_exited(body) -> void:
 			update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 			handle_plate_deactivation()
 
+# Logic for handling the finish of game.
 @rpc("any_peer", "call_local", "reliable")
 func set_finish_screen(team):
 	if Network.has_seen_end_screen.has(multiplayer.get_unique_id()):
 		return
 	Network.has_seen_end_screen.append(multiplayer.get_unique_id())
 	
+	# Load in finish scene
 	var spawned_finish = finish.instantiate()
 	
+	# Look up which players won and which player losed.
 	get_node("/root/Main/SpawnedItems").add_child(spawned_finish, true)
 	spawned_finish.old_teams = Network.player_teams
 	spawned_finish.other_team_member_id = Network.other_team_member_id
@@ -85,12 +89,13 @@ func set_finish_screen(team):
 
 # Handle the activation logic when a body enters the pressure plate
 func handle_plate_activation(body) -> void:
+	# logic for finish_plate in endroom
 	if is_finish_plate and body.is_in_group('Players'):
 		var winner_team = Network.player_teams[body.name]
 		Audiocontroller.play_pressure_plate_sfx()
 		set_finish_screen.rpc(winner_team)
 		
-
+	# logic other pressure plates
 	else:
 		if interactable != null:
 			interactable.activated()
