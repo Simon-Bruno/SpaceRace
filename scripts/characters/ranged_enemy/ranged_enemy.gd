@@ -26,6 +26,7 @@ var time_since_last_fire = 0.0
 func find_closest_player_in_range(nodes_array: Array):
 	var min_distance = INF
 	
+	# for every node in the area compare the distance to the previous closest target node
 	for node in nodes_in_area:
 		var distance = (self.global_transform.origin - node.global_transform.origin).length()
 		if distance < min_distance:
@@ -35,20 +36,24 @@ func find_closest_player_in_range(nodes_array: Array):
 
 @onready var HpBar = $SubViewport/HpBar
 
+# this function only gets called once when the node enters the scene tree.
 func _enter_tree():
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 
+# this function gets called for every frame.
 func _process(delta):
 	if not multiplayer.is_server():
 		return
 	find_closest_player_in_range(nodes_in_area)
 	time_since_last_fire += delta
+	
+	# if the enemy is able to shoot and there is a enemy to shoot at then fire.
 	if player_in_attack_zone and time_since_last_fire >= fire_cooldown:
 		fire_projectile()
 		time_since_last_fire = 0.0 
 	
-
+# this function gets called for every frame.
 func _physics_process(delta):
 	if not multiplayer.is_server():
 		return
@@ -57,6 +62,8 @@ func _physics_process(delta):
 		move_and_slide()
 
 func fire_projectile():
+	
+	# only shoot when there is a node to target and make sure this code is only run on the 
 	if closest_target_node and multiplayer.is_server():
 		var projectile_instance = projectile_scene.instantiate()
 		var direction_to_player = (closest_target_node.global_position - global_position).normalized()
@@ -66,13 +73,17 @@ func fire_projectile():
 		projectile_instance.direction = direction_to_player
 		projectile_instance.shooter_is_player = false
 		
+# this function gets called only when a body enters the ranged enemies detection area.
 func _on_detection_area_body_entered(body):
 	if not multiplayer.is_server():
 		return
+		
+	# check if the body is a player.
 	if body.is_in_group("Players"):
 		nodes_in_area.append(body)
 		player_in_attack_zone = true
 		fire_projectile()
+
 
 func _on_detection_area_body_exited(body):
 	if not multiplayer.is_server():
