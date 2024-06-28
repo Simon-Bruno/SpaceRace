@@ -1,10 +1,12 @@
 extends Node
 
+# Generates the new screen with sum of the terminal.
 func generate_new_screen():
 	generate_new_sum()
 
 var last_sum
 
+# Generates the new sum for the terminal. It also makes the answer options.
 func generate_new_sum():
 	var num1 = randi_range(10, 200)
 	var num2 = randi_range(10, 200)
@@ -13,10 +15,10 @@ func generate_new_sum():
 		var sum = num1 + num2
 		var option1 = sum
 		while option1 == sum:
-			option1 = randi_range(sum - 20, sum + 20) 
+			option1 = randi_range(sum - 20, sum + 20)
 		var option2 = sum
 		while option2 == sum or option2 == option1:
-			option2 = randi_range(sum - 20, sum + 20) 
+			option2 = randi_range(sum - 20, sum + 20)
 		var options = [sum, option1, option2]
 		options.shuffle()
 		$Answer1.text = str(options[0])
@@ -24,14 +26,15 @@ func generate_new_sum():
 		$Answer3.text = str(options[2])
 		$Sum.text = str(num1) + " + " + str(num2)
 		last_sum = sum
+
 	if operator == 1:
 		var sum = num1 * num2
 		var option1 = sum
 		while option1 == sum:
-			option1 = randi_range(sum - 20, sum + 20) 
+			option1 = randi_range(sum - 20, sum + 20)
 		var option2 = sum
 		while option2 == sum or option2 == option1:
-			option2 = randi_range(sum - 20, sum + 20) 
+			option2 = randi_range(sum - 20, sum + 20)
 		var options = [sum, option1, option2]
 		options.shuffle()
 		$Answer1.text = str(options[0])
@@ -39,14 +42,15 @@ func generate_new_sum():
 		$Answer3.text = str(options[2])
 		$Sum.text = str(num1) + " * " + str(num2)
 		last_sum = sum
+
 	if operator == 2:
 		var sum = num1 - num2
 		var option1 = sum
 		while option1 == sum:
-			option1 = randi_range(sum - 20, sum + 20) 
+			option1 = randi_range(sum - 20, sum + 20)
 		var option2 = sum
 		while option2 == sum or option2 == option1:
-			option2 = randi_range(sum - 20, sum + 20) 
+			option2 = randi_range(sum - 20, sum + 20)
 		var options = [sum, option1, option2]
 		options.shuffle()
 		$Answer1.text = str(options[0])
@@ -55,17 +59,21 @@ func generate_new_sum():
 		$Sum.text = str(num1) + " - " + str(num2)
 		last_sum = sum
 
+# Updates the progress according to the button clicked by the player.
 @rpc("any_peer", "call_local", "reliable")
 func button_clicked(val):
 	if not multiplayer.is_server():
-		return 
-	get_parent().get_parent().progress_updated(val == str(last_sum))	
+		return
+	get_parent().get_parent().progress_updated(val == str(last_sum))
 
+# Called when the first answer is pressed
 func _on_answer_1_pressed():
 	button_clicked.rpc($Answer1.text)
 
+# Called when the second answer is pressed
 func _on_answer_2_pressed():
 	button_clicked.rpc($Answer2.text)
 
+# Called when the third answer is pressed
 func _on_answer_3_pressed():
 	button_clicked.rpc($Answer3.text)

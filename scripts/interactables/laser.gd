@@ -21,6 +21,7 @@ var laser_off_duration = 3.0
 @onready var beam_init_scale = beam.scale
 @onready var beam_size = $Origin/Beam/DamageArea/CollisionShape3D.shape.get_size().x
 
+# Function is called when the laser is placed in the room. If the timer needs to be started it starts it.
 func _ready():
 	if not multiplayer.is_server():
 		return
@@ -30,14 +31,17 @@ func _ready():
 		activation_count = 0
 		deactivated()
 
+# Detect when body entered the area and sets the target to the player in the area.
 func _on_area_3d_body_entered(body):
 	if body.is_in_group("Players"):
 		target = body
 
+# # Detect when body exited the area and sets the target to null.
 func _on_area_3d_body_exited(body):
 	if body.is_in_group("Players"):
 		target = null
 
+# Activates the laser. it is shown in the world and the player can get damage.
 @rpc("any_peer", "call_local", "reliable")
 func activated():
 	if not multiplayer.is_server():
@@ -49,6 +53,7 @@ func activated():
 		ray.enabled = true
 		beam.visible = true
 
+# Deactivates the laser. It is not shown in the world and the player doesn't get damage of it.
 @rpc("any_peer", "call_local", "reliable")
 func deactivated():
 	if not multiplayer.is_server():
@@ -83,6 +88,7 @@ func update_beam():
 		beam.position.x = beam_init_pos.x * dist
 		beam.scale.x = beam_init_scale.x * dist
 
+# Function is called every frame to apply damage to the player or handles the timer countdown.
 func _process(delta):
 	if timer_active and multiplayer.is_server():
 		handle_timer(delta)

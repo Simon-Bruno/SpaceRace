@@ -33,7 +33,7 @@ func find_node_by_name(node: Node, target_name: String) -> Node:
 			return found_node
 	return null
 
-# Detect when body entered the area
+# Detect when body entered the area. Activates the linked interactable
 func _on_area_3d_body_entered(body) -> void:
 	if not multiplayer.is_server():
 		return
@@ -44,7 +44,7 @@ func _on_area_3d_body_entered(body) -> void:
 			handle_plate_activation(body)
 		bodies_on_plate.append(body)
 
-# Detect when body exited the area
+# Detect when body exited the area. Deactivates the linked interactable.
 func _on_area_3d_body_exited(body) -> void:
 	if not multiplayer or not multiplayer.is_server():
 		return
@@ -55,33 +55,26 @@ func _on_area_3d_body_exited(body) -> void:
 			update_mesh.rpc(customRooms.PRESSUREPLATEOFF)
 			handle_plate_deactivation()
 
+# Function is called when the pressureplate is the finish pressure plate. Calls the finish screen for all the players.
 @rpc("any_peer", "call_local", "reliable")
 func set_finish_screen(team):
 	if Network.has_seen_end_screen.has(multiplayer.get_unique_id()):
 		return
 	Network.has_seen_end_screen.append(multiplayer.get_unique_id())
-	
+
 	var spawned_finish = finish.instantiate()
-	
+
 	get_node("/root/Main/SpawnedItems").add_child(spawned_finish, true)
 	spawned_finish.old_teams = Network.player_teams
 	spawned_finish.other_team_member_id = Network.other_team_member_id
 	spawned_finish.win_team = team
 	spawned_finish.time = get_node(HUD_PATH).get_parent().timer
 	spawned_finish.other_ids = Network.get_other_team_ids(multiplayer.get_unique_id())
-	
+
 	spawned_finish.set_screen()
 
 	if multiplayer.is_server():
 		Network.go_to_lobby(null)
-
-#func _input(event):
-	#if event is InputEventKey:
-		#if event.pressed and event.keycode == KEY_B:
-			#var body = Network.get_player_node_by_id(multiplayer.get_unique_id())
-			#var winner_team = Network.player_teams[body.name]
-			#Audiocontroller.play_pressure_plate_sfx()
-			#set_finish_screen.rpc(winner_team)
 
 # Handle the activation logic when a body enters the pressure plate
 func handle_plate_activation(body) -> void:
@@ -89,7 +82,7 @@ func handle_plate_activation(body) -> void:
 		var winner_team = Network.player_teams[body.name]
 		Audiocontroller.play_pressure_plate_sfx()
 		set_finish_screen.rpc(winner_team)
-		
+
 
 	else:
 		if interactable != null:
