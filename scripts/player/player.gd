@@ -30,7 +30,6 @@ var direction = Vector2.ZERO
 # Max distance between players
 var max_dist: float = 25.0
 
-# Animation variablea
 var AnimDeath: bool = false
 var AnimJump: bool = false
 var AnimPunching: bool = false
@@ -40,10 +39,12 @@ var AnimPunching: bool = false
 var lobby_spawn = Vector3( - 20, 11, 20)
 var game_spawn = {1: [Vector3(3, 3, 5), Vector3(3, 3, 11)],2: [Vector3(3, 3, -5), Vector3(3, 3, -11)]}
 
+# this functions gets called only once when the node gets added to the scene tree
 func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	alive = get_node_or_null("../../HUD") == null
 
+# this functions sets the paramaters for the player on all peers connected to the host
 @rpc("authority", "call_local", "reliable")
 func set_params_for_player(id, new_scale, new_walk_speed, new_accel, margin):
 	if str(id) != str(multiplayer.get_unique_id()):
@@ -58,12 +59,15 @@ func set_params_for_player(id, new_scale, new_walk_speed, new_accel, margin):
 	walk_deceleration = new_accel * 1.2
 	position = lobby_spawn + Vector3(margin, 0, 0)
 
+# this function only gets called once when the node enters the scene tree
 func _ready():
+	# Load the HUD
 	var hud = get_node_or_null("../../HUD")
 	if hud and name == str(multiplayer.get_unique_id()):
 		await get_tree().create_timer(3.0).timeout
 		hud.loaded.rpc()
 
+	# spawn the player in the right location depending on the team sizes and players.
 	$FloatingName.text = Network.playername
 	if Network.player_teams.size() == 0:
 		return
@@ -79,8 +83,8 @@ func _horizontal_movement(delta):
 	if !alive:
 		return Vector3.ZERO
 
+	# movement
 	var vel = Vector3.ZERO
-
 	var current_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
 	# Accelerate if moving
@@ -103,7 +107,6 @@ func _horizontal_movement(delta):
 	vel.x = direction.x * speed
 	# Invert the velocity for the mirrored team
 	vel.z = direction.y * speed * Network.inverted
-
 	return vel
 
 # Calculates the new vertical velocity and returns a Vector3.
@@ -118,7 +121,7 @@ func _vertical_movement(delta):
 	if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
 		Audiocontroller.play_jump_sfx()
 		vel.y = jump_impulse
-
+	# dont allow the player to move in the air.
 	if not is_on_floor():
 		Global.on_floor = false
 		vel.y = velocity.y - (fall_acceleration * delta)
@@ -138,7 +141,8 @@ func _player_movement(delta):
 	return h + v
 
 func check_distance(target_velocity):
-	if Network.other_team_member_node != null:
+	if Network.other_team_member_node != null: # null check
+		# acquire team's positions
 		var player_pos = global_transform.origin
 		var player2_pos = Network.other_team_member_node.global_transform.origin
 
@@ -154,14 +158,14 @@ func check_distance(target_velocity):
 func play_animation(anim_player, animation):
 	if anim_player == 1: # anim speed 1
 		$Pivot/AnimationPlayer.play(animation)
-	elif anim_player == 2: # anim speed 1.15 (default for walk)
+	elif anim_player == 2: # anim speed 1.15 (default for walk speed 7)
 		$Pivot/AnimationPlayer2.play(animation)
 	elif anim_player == 3: # anim speed 1.25 (default for jump)
 		$Pivot/AnimationPlayer3.play(animation)
-	else:
+	else: # anim speed  1.285 (default for walk speed 9)
 		$Pivot/AnimationPlayer4.play(animation)
 
-func stop_animations():
+func stop_animations(): # stop all animation players
 	$Pivot/AnimationPlayer.stop()
 	$Pivot/AnimationPlayer2.stop()
 	$Pivot/AnimationPlayer3.stop()
@@ -180,15 +184,15 @@ func sync_play_animation(anim_player, animation):
 		play_animation(anim_player, animation)
 
 func anim_handler():
-	if Global.AttackAnim and not AnimDeath:
-		if not AnimPunching:
+	if Global.AttackAnim and not AnimDeath: # prioritise death anim
+		if not AnimPunching: # if not already in a punching animation
 			AnimPunching = true
 			request_play_animation(0, "stop")
 			request_play_animation(1, "punch")
 			await get_tree().create_timer(1.1).timeout # wait for anim
 			Global.AttackAnim = false
 			AnimPunching = false
-	else:
+	else: # if not attacking
 		if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
 			request_play_animation(0, "stop")
 			request_play_animation(3, "jump")
@@ -205,6 +209,7 @@ func anim_handler():
 
 # Applies velocity to moveable objects when the player collides with them.
 func _push_objects():
+	# only allow the peers to push objects on their own controlled player node
 	if name != str(multiplayer.get_unique_id()):
 		return
 
@@ -218,11 +223,10 @@ func _push_objects():
 			continue
 
 		# Set new velocity on the server
-		_set_velocity_on_object.rpc(collider.get_path(), \
+		_set_velocity_on_object. rpc (collider.get_path(), \
 		 - c.get_normal() * walk_speed * speed_boost * push_pull_factor)
 		break
 
-# Calculate the new velocity on the server.
 @rpc("any_peer", "call_local", "reliable")
 func _set_velocity_on_object(path, velo):
 	if not multiplayer.is_server():
@@ -251,6 +255,7 @@ func _pull_objects():
 
 		_set_velocity_on_object.rpc(body.get_path(), v)
 
+# this function only gets called when a body enters the area connected to the player
 # Displays an interaction indicator text
 func _on_pull_area_body_entered(body):
 	if name != str(multiplayer.get_unique_id()):
@@ -260,6 +265,7 @@ func _on_pull_area_body_entered(body):
 			return
 	body.get_node("PullText").visible = true
 
+# this function only gets called when a body leaves the area connected to the player
 # Removes an interaction indicator text
 func _on_pull_area_body_exited(body):
 	if name != str(multiplayer.get_unique_id()):
@@ -284,6 +290,7 @@ func _physics_process(delta):
 		velocity = target_velocity
 		anim_handler()
 
+		# only allow all velocity and physics changes if the player is actually alive.
 		if alive:
 			move_and_slide()
 
@@ -298,11 +305,13 @@ func _input(event):
 		if not hudNode.abilitiesAvailable:
 			return
 
+		#ability1
 		if event.is_action_pressed("ability_1") and not Global.in_pause and not Global.in_chat:
 			$Class.ability1()
 			hudNode.useAbility(1)
 			Audiocontroller.play_health_pickup_regen_sfx()
 
+		#ability2
 		if event.is_action_pressed("ability_2") and not Global.in_pause and not Global.in_chat:
 			$Class.ability2()
 			hudNode.useAbility(2)
@@ -355,6 +364,7 @@ func die():
 
 	$PlayerItem._drop_item()
 
+# this function only gets called when the respawn immunity timer reaches it end.
 func _on_respawn_immunity_timeout():
 	respawn_immunity = false
 

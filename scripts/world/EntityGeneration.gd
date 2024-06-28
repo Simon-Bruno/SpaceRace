@@ -99,7 +99,7 @@ func corresponding_types(door : int) -> Array:
 		_: push_error("undefined door")
 	return []
 
-# Matches a door with its color type
+# Matches a enemy with its color type
 func corresponding_types_enemy(enemy : int) -> Array:
 	match enemy:
 		ENEMYG: return green
@@ -111,7 +111,7 @@ func corresponding_types_enemy(enemy : int) -> Array:
 		_: push_error("undefined enemy")
 	return []
 
-# Matches a door with its color type
+# Matches a laser with its color type
 func corresponding_types_laser(laser : int) -> Array:
 	match laser:
 		LASERG: return green
@@ -128,7 +128,7 @@ func find_in_room(items, room, mirrored):
 	var width = room[0]
 	var height = room[1]
 	var start = room[2]
-	
+
 	var zstart = 0 if mirrored == false else -height
 
 	var found = []
@@ -159,11 +159,13 @@ func spawn_lasers_buttons(rooms : Array) -> void:
 		spawn_lasers_room(room, false)
 		spawn_lasers_room(room, true)
 
+# Searches the lasers in the room and finds the corresponding interactables
 func spawn_lasers_room(room : Array, mirrored : bool) -> void:
 	for item in find_in_room(lasers, room, mirrored):
 		var corresponding = find_in_room(corresponding_types_laser(item[0]), room, mirrored)
 		match_interactable_and_laser(item, corresponding, mirrored)
 
+# Matches the interactable and the laser in the room.
 func match_interactable_and_laser(item : Array, interactables : Array, mirrored : bool) -> void:
 	var location = map_to_local(item[1])
 	var activate = false
@@ -175,25 +177,25 @@ func match_interactable_and_laser(item : Array, interactables : Array, mirrored 
 
 	var laser = GlobalSpawner.spawn_laser(location, find_laser_basis(item[1]), false, total_interactions, false, false, true)
 	set_cell_item(location, EMPTY)
-	
+
 	for interactable in interactables:
 		if interactable[0] in switcheson or interactable[0] in switchesoff:
 			connect_button_laser(laser, interactable)
 		if interactable[0] in multipressures or interactable[0] in solopressures:
 			laser = GlobalSpawner.spawn_laser(location, find_laser_basis(item[1]), false, total_interactions, false, false, false)
 			connect_pressureplate_laser(laser, interactable)
-		
+
 
 # Handles all laser spawning
 func spawn_lasers(rooms : Array) -> void:
 	laser_timer()
 
-
+# Places a laser with a timer in the room
 func laser_timer() -> void:
 	for timer in get_used_cells_by_item(LASERTIMER):
 		GlobalSpawner.spawn_laser(map_to_local(timer), find_laser_basis(timer), true)
 
-
+# Finds the basis of the laser and returns this.
 func find_laser_basis(laser):
 	var orientations = [0, 16, 10, 22]
 	var new_orientations = [22, 0, 16, 10]
@@ -241,20 +243,20 @@ func match_interactable_and_door(item : Array, interactables : Array, mirrored :
 	var locations = return_door_pair(item[1], item[2], mirrored)
 	var actual_location = (map_to_local(locations[0]) + map_to_local(locations[1])) / 2
 	actual_location.y = 2
-	
+
 	var total_interactions = interactables.size() - 1
 	for interactable in interactables:
 		if interactable[0] in solopressures:
 			total_interactions = 1
-	
+
 	var door = GlobalSpawner.spawn_door(actual_location, get_basis_with_orthogonal_index(item[2]), total_interactions)
 	set_cell_item(locations[0], EMPTY)
 	set_cell_item(locations[1], EMPTY)
-	
+
 	for interactable in interactables:
 		if interactable == item:
 			continue
-		
+
 		if interactable[0] in switcheson or interactable[0] in switchesoff:
 			connect_button(door, interactable)
 		if interactable[0] in multipressures or interactable[0] in solopressures:
@@ -288,7 +290,6 @@ func return_door_pair(location : Vector3i, direction : int, mirrored : bool) -> 
 
 
 # Spawns a button on the correct location, and links it to a given door.
-# TODO: Inverted and non-inverted switches conflict and dont work as expected.
 func connect_button(door : StaticBody3D, interactable : Array) -> void:
 	var inverted = false if interactable[0] in switchesoff else true
 	var location = map_to_local(interactable[1])
@@ -296,7 +297,7 @@ func connect_button(door : StaticBody3D, interactable : Array) -> void:
 	var button = GlobalSpawner.spawn_button(location, get_basis_with_orthogonal_index(interactable[2]), door, inverted)
 	set_cell_item(interactable[1], EMPTY)
 
-
+# Spawns a button on the correct location, and links it to the given laser.
 func connect_button_laser(laser, interactable : Array) -> void:
 	var inverted = true if interactable[0] in switchesoff else false
 	var location = map_to_local(interactable[1])
@@ -318,6 +319,7 @@ func connect_pressureplate_laser(laser, interactable : Array) -> void:
 	var pressure_plate = GlobalSpawner.spawn_pressure_plate(location, get_basis_with_orthogonal_index(interactable[2]), laser)
 	set_cell_item(interactable[1], EMPTY)
 
+# Spawns the boss on the correct location, and links it to a given door.
 func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 4
@@ -326,21 +328,21 @@ func connect_boss(door : StaticBody3D, interactable : Array) -> void:
 
 	set_cell_item(interactable[1], EMPTY)
 
-
+# Spawns the keyhole on the correct location, and links it to a given interactable.
 func connect_keyhole(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 3
 	var keyhole = GlobalSpawner.spawn_keyhole(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
-	
 
+# Spawns the broken walls on the correct location, and links it to a given interactable.
 func connect_holes(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 3
 	var keyhole = GlobalSpawner.spawn_broken_wall(location, get_basis_with_orthogonal_index(interactable[2]), door)
 	set_cell_item(interactable[1], EMPTY)
-	
 
+# Spawns the terminal on the correct location, and links it to a given interactable.
 func connect_terminal(door : StaticBody3D, interactable : Array) -> void:
 	var location = map_to_local(interactable[1])
 	location.y = 2
@@ -395,14 +397,14 @@ func spawn_keys() -> void:
 			GlobalSpawner.spawn_item(map_to_local(item))
 			set_cell_item(item, EMPTY)
 
-
+# Spawns a welder at all welder locations.
 func spawn_welders() -> void:
 	var items = get_used_cells_by_item(WELDER)
 	for item in items:
 		GlobalSpawner.spawn_item(map_to_local(item), true)
 		set_cell_item(item, EMPTY)
 
-
+# Spawns a potion at all potion locations.
 func spawn_potions() -> void:
 	for bottle in bottles:
 		var items = get_used_cells_by_item(bottle)
@@ -437,9 +439,9 @@ func spawn_teleporters_room(room : Array, mirrored : bool) -> void:
 		var basis1 = get_basis_with_orthogonal_index(items[i][2])
 		var location2 = map_to_local(items[i + 1][1])
 		var basis2 = get_basis_with_orthogonal_index(items[i + 1][2])
-		
+
 		GlobalSpawner.spawn_portal(location1, basis1, location2, basis2)
-		
+
 		set_cell_item(items[i][1], EMPTY)
 		set_cell_item(items[i + 1][1], EMPTY)
 
@@ -461,7 +463,7 @@ func spawn_enemies_room(room : Array, mirrored : bool) -> void:
 		match_interactable_and_enemy(item, corresponding, mirrored)
 
 # This funcion matches all enemies with the appropriate pressure plates, and binds them to work as expected.
-func match_interactable_and_enemy(item : Array, interactables : Array, mirrored : bool) -> void:	
+func match_interactable_and_enemy(item : Array, interactables : Array, mirrored : bool) -> void:
 	var total_interactions = interactables.size() - 1
 	for interactable in interactables:
 		if interactable[0] in solopressures:

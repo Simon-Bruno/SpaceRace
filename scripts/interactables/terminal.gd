@@ -16,10 +16,13 @@ var timer : float
 
 var last_sum : int = 0
 
+# Called when the terminal is placed in the room.
 func _ready():
 	timer = timer_time
 	$Terminal/Terminal.generate_new_screen()
 
+# Function is called every frame. Checks if the terminal is completed, then the terminal is closed.
+# Otherwise the progress and timer is updated.
 func _process(delta):
 	if not multiplayer.is_server() or is_activated:
 		return
@@ -44,6 +47,7 @@ func _process(delta):
 	$SubViewport/ProgressBar.value = progress / total_progress * 100
 	$Terminal/ScoreBar.value = progress / total_progress * 100
 
+# Updates the progress the player makes in the terminal
 func progress_updated(correct : bool):
 	print(correct)
 	if correct:
@@ -56,6 +60,7 @@ func progress_updated(correct : bool):
 	timer = timer_time
 	$Terminal/TimeBar.value = 100
 
+# Detect when body entered the area and shows the terminal
 func _on_area_3d_body_entered(body):
 	if body.is_in_group("Players") and not is_activated:
 		playercount += 1;
@@ -66,6 +71,7 @@ func _on_area_3d_body_entered(body):
 			Network.in_terminal = true
 			get_node("/root/Main/SpawnedItems/World/HUD/InGame").visible = false
 
+# Detect when body exited the area and hides the terminal
 func _on_area_3d_body_exited(body):
 	if body.is_in_group("Players") and not is_activated:
 		playercount -= 1;

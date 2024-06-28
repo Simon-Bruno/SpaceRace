@@ -13,11 +13,13 @@ func attack():
 		var spawn_offset = direction_to_shoot * 1
 		spawn_projectile_for_me.rpc(global_transform.origin, spawn_offset, direction_to_shoot)
 	
+# This function gets called on every peer to make sure the projectile is synchronized across all peers.
 @rpc("any_peer", "call_local", "reliable")
 func spawn_projectile_for_me(transform_origin, spawn_offset, direction):
 	if not multiplayer.is_server():
 		return
 		
+	# spawn the projectile
 	var projectile_instance = projectile_scene.instantiate()
 	get_node("/root/Main/SpawnedItems/World/ProjectileSpawner").add_child(projectile_instance, true)
 	projectile_instance.global_transform.origin = transform_origin + spawn_offset

@@ -15,7 +15,7 @@ func _ready() -> void:
 		await get_tree().create_timer(1.5).timeout
 		_set_door_mesh.rpc(customRooms.DOORCLOSEDR, customRooms.DOORCLOSEDL)
 
-#Search the gridmap of the world and returns it.
+# Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
 	if node.name == target_name:
 		return node

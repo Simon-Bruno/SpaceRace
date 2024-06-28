@@ -14,7 +14,7 @@ func _ready() -> void:
 		await get_tree().create_timer(1.5).timeout
 		update_mesh.rpc(customRooms.KEYHOLEGREEN)
 
-#Search the gridmap of the world and returns it.
+# Search the gridmap of the world and returns it.
 func find_node_by_name(node: Node, target_name: String) -> Node:
 	if node.name == target_name:
 		return node
@@ -25,6 +25,7 @@ func find_node_by_name(node: Node, target_name: String) -> Node:
 			return found_node
 	return null
 
+# Detect when body entered the area and checks if the player holds the key
 func _on_area_3d_body_entered(body):
 	if body.name != str(multiplayer.get_unique_id()) or not body.is_in_group("Players"):
 		return
@@ -37,6 +38,7 @@ func _on_area_3d_body_entered(body):
 		activate.rpc()
 		item.get_parent().consume_item()
 
+# Activates the keyhole, changes the mesh instance and marks it as used
 @rpc("any_peer", "call_local", "reliable")
 func activate():
 	if not multiplayer.is_server():

@@ -19,6 +19,7 @@ func _ready() -> void:
 		handle_inverse_deactivation()
 	update_interact_key()
 
+# Updates the label of the button text to the key bind to the interact action
 func update_interact_key():
 	if InputMap.has_action("interact"):
 		var action_list = InputMap.get_actions()
@@ -47,6 +48,7 @@ func _input(event):
 		if player != null:
 			_interact_pressed_on_button.rpc()
 
+# Function is called when the interact key is pressed
 @rpc("any_peer", "call_local", "reliable")
 func _interact_pressed_on_button():
 	if not multiplayer.is_server() or not interactable:
@@ -56,14 +58,14 @@ func _interact_pressed_on_button():
 	else:
 		_deactivate_switch()
 
-# Detect when body entered the area
+# Detect when body entered the area and show text
 func _on_area_3d_body_entered(body) -> void:
 	if body.is_in_group("Players") \
 	and body.name == str(multiplayer.get_unique_id()):
 		$ButtonText.show()
 		player = body
 
-# Detect when body exited the area
+# Detect when body exited the area and hide text
 func _on_area_3d_body_exited(body) -> void:
 	if $ButtonText.visible and body.is_in_group("Players") \
 	and body.name == str(multiplayer.get_unique_id()):
