@@ -205,11 +205,14 @@ func spawn_item(pos, welder = false):
 		return item
 	return null
 
+# This function spawns a rondom buff (bomb or potion) and makes sure it is synchronised correctly.
 func spawn_buff(pos, choice=0, random=true):
 	if not multiplayer.is_server():
 		return
 	var spawner = get_node_or_null("/root/Main/SpawnedItems/World/ItemSpawner")
+	# List of all buffs
 	var BUFFS = [hp_bottle_scene, strength_bottle_scene, full_hp_bottle_scene, speed_bottle_scene, bomb_scene]
+	# Choose random buff and spawn it in:
 	if spawner:
 		var buff_scene = null
 		if random:

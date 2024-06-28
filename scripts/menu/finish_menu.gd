@@ -6,9 +6,11 @@ var win_team = null
 var time = null
 var other_ids = null
 
+# Code used to spawn finish screen correctly.
 func set_screen():
+	# play finish music
 	Audiocontroller.play_finish_menu_music()
-	
+	# Set text to which player won and which player losed.
 	if old_teams[str(multiplayer.get_unique_id())] == win_team:
 		$WinnerLabel/Winner1.text = Network.player_names[multiplayer.get_unique_id()]
 		$WinnerLabel/Winner2.text = Network.player_names[other_team_member_id.to_int()]
@@ -22,6 +24,7 @@ func set_screen():
 		$LoserLabel/Loser2.text = Network.player_names[other_team_member_id.to_int()]
 		Audiocontroller.play_defeat_1_sfx()
 	
+	# Show timer of finish screen.
 	var seconds = int(floor(time))
 	var minutes = floor(seconds / 60)
 	seconds = seconds % 60

@@ -23,7 +23,7 @@ var max_dist: float = 25.0 # max distance between players
 
 var strength: float = 1.0
 var speed_boost: float = 1.0
-# animation variable
+# animation variables
 var AnimDeath: bool = false
 var AnimJump: bool = false
 var AnimPunching: bool = false
@@ -126,7 +126,8 @@ func _player_movement(delta):
 
 # this functions doesnt allow the player to get too far from its teammate.
 func check_distance(target_velocity):
-	if Network.other_team_member_node != null:
+	if Network.other_team_member_node != null:  # null check
+		# acquire team's positions
 		var player_pos = global_transform.origin
 		var player2_pos = Network.other_team_member_node.global_transform.origin
 
@@ -142,15 +143,15 @@ func check_distance(target_velocity):
 func play_animation(anim_player, animation):
 	if anim_player == 1:  # anim speed 1
 		$Pivot/AnimationPlayer.play(animation)
-	elif anim_player == 2:  # anim speed 1.15 (default for walk)
+	elif anim_player == 2:  # anim speed 1.15 (default for walk speed 7)
 		$Pivot/AnimationPlayer2.play(animation)
 	elif anim_player == 3:  # anim speed 1.25 (default for jump)
 		$Pivot/AnimationPlayer3.play(animation)
-	else:
+	else:  # anim speed  1.285 (default for walk speed 9)
 		$Pivot/AnimationPlayer4.play(animation)
 
 
-func stop_animations():
+func stop_animations():  # stop all animation players
 	$Pivot/AnimationPlayer.stop()
 	$Pivot/AnimationPlayer2.stop()
 	$Pivot/AnimationPlayer3.stop()
@@ -159,7 +160,7 @@ func stop_animations():
 
 # request other clients to play animation
 func request_play_animation(anim_player, animation):
-	rpc_id(0, "sync_play_animation", anim_player, animation)
+	rpc_id(0, "sync_play_animation", anim_player, animation)  # sync anims across clients
 
 
 # send animation update to other clients
@@ -172,20 +173,20 @@ func sync_play_animation(anim_player, animation):
 
 
 func anim_handler():
-	if Global.AttackAnim and not AnimDeath:
-		if not AnimPunching:
+	if Global.AttackAnim and not AnimDeath:  # prioritise death anim
+		if not AnimPunching:  # if not already in a punching animation
 			AnimPunching = true
 			request_play_animation(0, "stop")
 			request_play_animation(1, "punch")
 			await get_tree().create_timer(1.1).timeout  # wait for anim
 			Global.AttackAnim = false
 			AnimPunching = false
-	else:
+	else:  # if not attacking
 		if is_on_floor() and Input.is_action_just_pressed("jump") and not AnimDeath:
 			request_play_animation(0, "stop")
 			request_play_animation(3, "jump")
 			AnimJump = true
-		else:
+		else:  # if not attacking or jumping
 			if velocity != Vector3.ZERO && velocity.y == 0:
 				if not ($Pivot/AnimationPlayer.is_playing() or $Pivot/AnimationPlayer2.is_playing()
 				or $Pivot/AnimationPlayer3.is_playing() or $Pivot/AnimationPlayer4.is_playing()):
@@ -210,11 +211,13 @@ func _push_objects():
 		 - c.get_normal() * walk_speed * speed_boost * push_pull_factor)
 		break
 
+
 @rpc("any_peer", "call_local", "reliable")
 func _set_velocity_on_object(path, velo):
 	if not multiplayer.is_server():
 		return
 	get_node(path).set_axis_velocity(velo)
+
 
 func _pull_objects():
 	if name != str(multiplayer.get_unique_id()):
