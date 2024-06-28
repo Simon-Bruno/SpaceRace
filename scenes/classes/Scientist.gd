@@ -12,7 +12,9 @@ var ability2_cooldown : int = 30
 var ability1_title : String = "Heal yourself"
 var ability2_title : String = "Slow opponents"
 
+# This functions gets called once when the node enters the scene tree
 func _ready():
+	# load the HUD
 	var hud = get_node_or_null("../../../HUD")
 	if hud:
 		hud.set_ability_info(ability1_title, ability2_title, ability1_cooldown, ability2_cooldown)
@@ -31,14 +33,18 @@ func slow_enemies() -> void:
 	
 @rpc("any_peer", "call_local", "reliable")
 func set_slowness_on_other_team(ids):
+	# only execute the code when the node is equal to the actual peer running the code
 	if ids.has(str(multiplayer.get_unique_id())):
 		Network.get_player_node_by_id(multiplayer.get_unique_id()).walkspeed_multiplier = 0.2
-		await get_tree().create_timer(6).timeout
+		await get_tree().create_timer(6).timeout # slow duration
 		Network.get_player_node_by_id(multiplayer.get_unique_id()).walkspeed_multiplier = 1
 
 func heal() -> void:
+	# make sure the health cant go above the Global.player_max_health
 	get_parent().health =  min(Global.player_max_health, get_parent().health + healing_amount)
 	get_parent().HpBar.value = get_parent().health
+	
+	# Display ability message
 	%Label.text = "+ health"
 	await get_tree().create_timer(1.0).timeout
 	%Label.text = ""
